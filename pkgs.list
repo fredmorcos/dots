@@ -47,6 +47,7 @@ cloc
 cmake
 cmus
 colordiff
+colorgcc
 compton
 cpio
 crda
@@ -105,6 +106,7 @@ gst-transcoder
 gst-validate
 gstreamer-vaapi
 gtk-engine-murrine
+gtkglext
 gucharmap
 gv
 gvfs-mtp
@@ -126,8 +128,10 @@ intel-media-driver
 intel-ucode
 iotop
 iputils
+ispc
 ispell
 iucode-tool
+iverilog
 iwd
 jfsutils
 kitty
@@ -139,6 +143,7 @@ lhasa
 libdvdcss
 libgsf
 libiscsi
+libmaa
 libmythes
 libnsutils
 liboggz
@@ -211,6 +216,7 @@ parallel
 patch
 patchelf
 pavucontrol
+pavucontrol-qt
 pbzip2
 perl-image-exiftool
 perl-locale-gettext
@@ -252,7 +258,9 @@ rustup
 s-nail
 sbsigntools
 screen
+sdl2_gfx
 seahorse
+shedskin
 simplescreenrecorder
 sleuthkit
 slimmy-xfwm-theme-git
@@ -268,6 +276,7 @@ sysprof
 sysstat
 systemd-sysvcompat
 tarsnap
+tcc
 tcpdump
 texlive-bibtexextra
 texlive-fontsextra

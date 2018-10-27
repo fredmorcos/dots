@@ -1,8 +1,6 @@
 [Unit]
 Description=NetworkManager Applet
 After=NetworkManager.service
-Requires=NetworkManager.service
-Wants=NetworkManager.service
 
 [Service]
 ExecStart=/usr/bin/nm-applet
