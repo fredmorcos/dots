@@ -1,0 +1,371 @@
+;;; package -- Summary
+;;; Commentary:
+;;; Code:
+
+;; silence advice warnings
+(setq ad-redefinition-action 'accept)
+
+;; don't lookup version control information
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+(custom-set-faces '(default ((t (:height 105)))))
+(toggle-frame-maximized)
+(set-face-attribute 'mode-line-inactive nil
+                    :box '(:line-width 1 :color "grey75"))
+(set-face-attribute 'mode-line-highlight nil
+                    :box '(:line-width 1 :color "steel blue"))
+(set-face-attribute 'mode-line nil :box '(:line-width 1 :color "grey70"))
+(set-face-attribute 'cursor nil :background "steel blue")
+(set-face-attribute 'show-paren-match nil :background "light steel blue")
+(set-face-attribute 'tooltip nil :box '(:line-width 1 :color "cornflower blue"))
+(defalias 'yes-or-no-p 'y-or-n-p)
+(windmove-default-keybindings)
+
+;; garbage collector
+(defconst gc-thresh 10000)
+(custom-set-variables
+ '(gc-cons-percentage 50.0)
+ '(gc-cons-threshold gc-thresh))
+(add-hook 'focus-out-hook #'garbage-collect)
+(add-hook 'minibuffer-setup-hook
+          #'(lambda () (setq gc-cons-threshold most-positive-fixnum)))
+(add-hook 'minibuffer-exit-hook
+          #'(lambda () (setq gc-cons-threshold gc-thresh)))
+
+;; disable proxy for local access
+(defvar url-proxy-services)
+(setq url-proxy-services '(("no_proxy" . "127.0.0.1")))
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents (package-refresh-contents))
+(dolist (package '(org htmlize iedit which-key auctex helm helm-gtags company
+                       flycheck flycheck-pos-tip anaconda-mode company-anaconda
+                       py-isort clang-format))
+  (unless (package-installed-p package) (package-install package)))
+
+(add-hook 'focus-out-hook #'garbage-collect)
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
+;; (add-hook 'text-mode-hook #'flyspell-mode)
+;; (add-hook 'text-mode-hook #'auto-fill-mode)
+(add-hook 'text-mode-hook #'text-mode-hook-identify)
+;; (add-hook 'prog-mode-hook #'linum-mode)
+(add-hook 'prog-mode-hook #'whitespace-mode)
+(add-hook 'prog-mode-hook #'flycheck-mode)
+(add-hook 'prog-mode-hook #'company-mode)
+(add-hook 'prog-mode-hook #'show-paren-mode)
+;; (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(add-hook 'prog-mode-hook #'eldoc-mode)
+(add-hook 'dired-mode-hook #'auto-revert-mode)
+(add-hook 'dired-mode-hook #'dired-async-mode)
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+(add-hook 'doc-view-mode-hook #'auto-revert-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-pos-tip-mode)
+(add-hook 'org-mode-hook #'flyspell-mode)
+(add-hook 'org-mode-hook #'auto-fill-mode)
+;; (add-hook 'latex-mode-hook #'linum-mode)
+(add-hook 'font-lock-mode #'jit-lock-mode)
+
+;; make script files executable after saving
+(add-hook
+ 'after-save-hook
+ #'executable-make-buffer-file-executable-if-script-p)
+
+;; run shell from dired
+(add-hook 'dired-mode-hook
+          #'(lambda ()
+              (local-set-key
+               [f5]
+               #'(lambda () (interactive)
+                   (term "/bin/bash")))))
+
+;; kill shell buffer when it exits with ctrl-d
+(add-hook
+ 'term-mode-hook
+ #'(lambda ()
+     (advice-add
+      'term-handle-exit
+      :after #'(lambda (&rest args)
+                 (when (null (get-buffer-process (current-buffer)))
+                   (kill-buffer (current-buffer)))))))
+
+(add-to-list 'auto-mode-alist '("\\emacs\\'" . emacs-lisp-mode))
+
+;; pet-mode
+(add-to-list
+ 'auto-mode-alist
+ '("\\.pet\\'" .
+   (lambda ()
+     (fset 'tabulate-exp
+           [?\C-a ?\C-s ?2 ?0 ?1 return C-left tab
+                  C-right C-right C-right C-right
+                  ?\C-d tab C-right ?\C-d tab down ?\C-a])
+     (fset 'replicate-exp
+           [up ?\C-  down ?\M-w ?\C-y up ?\C-a ?\C-s ?  return
+               ?\M-d ?\M-d ?\M-d f2 ?\C-e down])
+     (local-set-key (kbd "C-c C-c") 'tabulate-exp)
+     (local-set-key [f2] #'(lambda () (interactive)
+                             (insert (format-time-string "%Y-%m-%d"))))
+     (local-set-key [f5] 'replicate-exp))))
+
+(require 'saveplace)
+(which-key-mode)
+
+(defconst emacs-temp-dir          (concat temporary-file-directory "/emacs/"))
+(defconst emacs-autosaves-dir     (concat emacs-temp-dir "autosaves"))
+(defconst emacs-backups-dir       (concat emacs-temp-dir "backups"))
+(defconst emacs-places-file       (concat user-emacs-directory "places"))
+(defconst emacs-recentf-file      (concat user-emacs-directory "recentf"))
+(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
+(defconst emacs-backups-pattern   (concat emacs-backups-dir   "/"))
+
+(make-directory emacs-autosaves-dir t)
+(make-directory emacs-backups-dir   t)
+
+(custom-set-variables
+ ;; interface
+ '(font-use-system-font t)
+ '(blink-cursor-mode nil)
+ '(tool-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(inhibit-startup-screen t)
+ '(inhibit-startup-message t)
+ '(inhibit-startup-buffer-menu t)
+ '(initial-scratch-message nil)
+ '(inhibit-startup-echo-area-message t)
+ '(column-number-mode t)
+ ;; '(blink-matching-delay 0.5)
+ ;; '(lazy-highlight-initial-delay 0.5)
+ ;; '(show-paren-delay 0.2)
+ '(size-indication-mode t)
+ '(windmove-wrap-around t)
+ '(ring-bell-function 'ignore)
+ ;; '(redisplay-dont-pause nil)
+ '(jit-lock-chunk-size 5000)
+ '(jit-lock-stealth-fontify 1)
+ '(jit-lock-context-time 1)
+ '(jit-lock-contextually t)
+ '(jit-lock-context-fontify t)
+ ;; backups
+ '(savehist-mode t)
+ '(save-place t)
+ '(save-place-file emacs-places-file)
+ '(recentf-mode t)
+ '(recentf-save-file emacs-recentf-file)
+ '(auto-save-mode t)
+ '(auto-save-file-name-transforms
+   `((".*" ,emacs-autosaves-pattern t)))
+ '(backup-directory-alist
+   `((".*" . ,emacs-backups-pattern)))
+ '(backup-inhibited nil)
+ '(history-delete-duplicates t)
+ '(history-length 30)
+ '(delete-old-versions t)
+ '(make-backup-files t)
+ '(vc-make-backup-files t)
+ ;; file encoding
+ '(coding-system-for-read 'utf-8-unix)
+ '(coding-system-for-write 'utf-8-unix)
+ ;; indentation
+ '(indent-tabs-mode nil)
+ '(standard-indent 2)
+ '(electric-indent-mode t)
+ '(default-justification 'full)
+ '(fill-column 70)
+ ;; whitespace
+ '(show-trailing-whitespace t)
+ '(whitespace-action '(cleanup))
+ '(whitespace-style
+   '(face tabs lines-tail trailing space-before-tab
+          indentation empty space-after-tab))
+ '(mode-require-final-newline 'visit-save)
+ '(require-final-newline 'visit-save)
+ ;; comments
+ '(comment-column 40)
+ '(comment-inline-offset 1)
+ '(comment-empty-lines nil)
+ '(comment-multi-line t)
+ '(comment-padding 1)
+ '(comment-auto-fill-only-comments t)
+ '(comment-style 'extra-line)
+ '(comment-fill-column 70)
+ ;; line numbers
+ ;; '(linum-format " %3d ")
+ ;; '(linum-delay t)
+ ;; spell checking
+ '(ispell-program-name "hunspell")
+ ;; '(flyspell-delay 2)
+ ;; scrolling
+ ;; '(scroll-margin 3)
+ '(scroll-conservatively 101)
+ ;; auto revert
+ '(auto-revert-interval 2)
+ ;; dired
+ '(dired-listing-switches "-alh --group-directories-first")
+ '(dired-use-ls-dired t)
+ '(dired-omit-files "^\\...+$")
+ ;; doc-view
+ '(doc-view-continuous t)
+ '(doc-view-resolution 200)
+ '(doc-view-scale-internally nil)
+ ;; gud-mode and gdb
+ '(gdb-many-windows t)
+ '(gdb-show-main t)
+ '(gud-tooltip-mode t)
+ ;; tags
+ '(tags-revert-without-query t)
+ ;; compilation
+ '(compilation-always-kill t)
+ '(compilation-read-command nil)
+ '(compilation-scroll-output 'first-error)
+ '(compile-command "make")
+ ;; c-mode
+ '(c-cleanup-list
+   '(brace-else-brace
+     brace-elseif-brace
+     brace-catch-brace
+     scope-operator
+     compact-empty-funcall
+     comment-close-slash))
+ '(c-macro-shrink-window-flag t)
+ '(Man-width 80)
+ '(helm-gtags-auto-update t)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-fuzzy-match t)
+ '(helm-gtags-update-interval-seconds nil)
+ ;; python
+ '(python-indent-guess-indent-offset nil)
+ '(python-indent-offset 4)
+ '(python-skeleton-autoinsert t)
+ '(python-shell-interpreter-args "-i -W once")
+ ;; completion
+ '(company-tooltip-align-annotations t)
+ ;; '(company-tooltip-idle-delay 0.5)
+ ;; '(company-idle-delay 0.5)
+ '(company-minimum-prefix-length 1)
+ '(dynamic-completion-mode t)
+ '(company-disabled-backends '(company-semantic))
+ ;; tool-tips
+ '(tooltip-hide-delay 20)
+ '(x-gtk-use-system-tooltips nil)
+ ;; flycheck
+ '(flycheck-disabled-checkers '(python-flake8 python-pylint))
+ '(flycheck-pos-tip-timeout 20)
+ '(flycheck-mode-line nil)
+ ;; filling
+ '(colon-double-space t)
+ '(sentence-end-double-space t)
+ ;; eldoc
+ '(eldoc-print-after-edit t)
+ ;; org
+ '(org-src-fontify-natively t)
+ '(org-src-preserve-indentation t)
+ '(org-html-html5-fancy t)
+ '(org-confirm-babel-evaluate nil))
+
+;; c-mode and c++-mode
+(defun c-mode-common-setup ()
+  "Setup C/C++ programming mode."
+  (abbrev-mode -1)
+  (which-key-mode -1)
+  (eldoc-mode -1)
+  (local-set-key [f1] #'manual-entry)
+  (local-set-key [f2] #'ff-find-other-file)
+  (local-set-key [f6] #'helm-gtags-select)
+  (local-set-key [f7] #'run-make)
+  (local-set-key [f8] #'close-compilation-buffer)
+  (helm-gtags-mode)
+  (let ((cflags (makefile-get-cflags)))
+    (when cflags
+      (defvar company-clang-arguments)
+      (defvar flycheck-clang-args)
+      (setq-local company-clang-arguments cflags)
+      (setq-local flycheck-clang-args cflags)))
+  (cond
+   ((eq major-mode 'c-mode)
+    (custom-set-variables '(flycheck-clang-language-standard "c99")))
+   ((eq major-mode 'c++-mode)
+    (custom-set-variables '(flycheck-clang-language-standard "c++11"))
+    (add-hook 'before-save-hook #'clang-format-buffer nil t))))
+
+(defun run-make ()
+  "Run make for the current buffer."
+  (interactive)
+  (cond ((eq major-mode 'c-mode)
+         (compile (concat "make clean && make cppcheck && "
+                          "make clean && make && "
+                          "make clean && make CC=clang && "
+                          "make clean && make RELEASE=yes && "
+                          "make clean && make CC=clang RELEASE=yes && "
+                          "make clean && scan-build make && "
+                          "make clean && scan-build make CC=clang && "
+                          "make clean")))
+        ((eq major-mode 'c++-mode)
+         (compile (concat "make clean && make cppcheck && "
+                          "make clean && make && "
+                          "make clean && make CXX=clang++ && "
+                          "make clean && make RELEASE=yes && "
+                          "make clean && make CXX=clang++ RELEASE=yes && "
+                          "make clean && scan-build make && "
+                          "make clean && scan-build make CXX=clang++ && "
+                          "make clean")))))
+
+(defun close-compilation-buffer ()
+  "Close the make compilation buffer."
+  (interactive)
+  (let ((win (get-buffer-window "*compilation*")))
+    (kill-buffer "*compilation*")
+    (let ((buf (window-buffer win)))
+      (if (string-prefix-p "*" (buffer-name buf))
+          (delete-window win)))))
+
+(defun find-makefile ()
+  "Find Makefile from current buffer's C/C++ file's directory."
+  (when buffer-file-name
+    (let ((dir (locate-dominating-file buffer-file-name "Makefile")))
+      (when dir (concat (file-name-as-directory dir) "Makefile")))))
+
+(defun makefile-get-cflags ()
+  "Gets CFLAGS from the Makefile into a list of strings."
+  (let ((makefile (find-makefile)))
+    (when makefile
+      (let* ((cmd (make-get-cflags-cmd makefile))
+             (cflags (substring (shell-command-to-string cmd) 0 -1)))
+        (split-string cflags)))))
+
+(defun make-get-cflags-cmd (makefile-name)
+  "Get show-cflags command with proper CC/CXX based on MAKEFILE-NAME."
+  (cond ((eq major-mode 'c-mode)
+         (concat "make -f " makefile-name " show-cflags CC=clang"))
+        ((eq major-mode 'c++-mode)
+         (concat "make -f " makefile-name " show-cflags CXX=clang++"))))
+
+(add-hook 'c-mode-common-hook #'c-mode-common-setup)
+
+;; python
+(defun python-setup ()
+  "Setup Python programming."
+  (defvar company-backends)
+  (add-to-list 'company-backends '(company-anaconda :with company-capf))
+  (add-hook 'before-save-hook 'py-isort-before-save nil t))
+
+(add-hook 'python-mode-hook #'anaconda-eldoc-mode)
+(add-hook 'python-mode-hook #'anaconda-mode)
+(add-hook 'python-mode-hook #'python-setup)
+
+;; org
+(defun org-mode-setup ()
+  "Setup org mode."
+  (declare-function org-babel-execute-src-block-maybe "org-babel.el")
+  (local-set-key (kbd "C-c C-x") #'org-babel-execute-src-block-maybe)
+  (require 'ob-python)
+  (declare-function org-indent-mode "org-indent.el")
+  (org-indent-mode)
+  (org-babel-do-load-languages
+   'org-babel-load-language
+   '((python . t))))
+
+(add-hook 'org-mode-hook #'org-mode-setup)
+
+;;; .emacs ends here

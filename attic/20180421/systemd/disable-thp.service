@@ -1,0 +1,8 @@
+[Unit]
+Description=Disable Transparent Huge Tables
+
+[Service]
+ExecStart=/usr/bin/sh -c 'echo madvise > /sys/kernel/mm/transparent_hugepage/enabled'
+
+[Install]
+WantedBy=basic.target

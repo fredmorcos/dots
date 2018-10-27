@@ -1,0 +1,69 @@
+[tags]
+        [default_tag]
+             name             = "new tag"
+             mwfact           = 0.5
+             nmaster          = 1
+             layout           = "tile"
+             resizehint       = false
+             infobar_position = "top"
+             split            = false
+        [/default_tag]
+
+        # whether client_next on the last tag will send you on the first
+        # and client_prev on the first tag will send you on the last one
+        tag_round      = false
+
+        # Going twice on the same tag will bring you back on the previous one
+        tag_auto_prev  = true
+
+        occupied_bg    = "#333333"
+        occupied_fg    = "#FFFFFF"
+        sel_bg         = "#AAAAAA"
+        sel_fg         = "#000000"
+        urgent_bg      = "#CCCCCC"
+        urgent_fg      = "#000000"
+
+        # If true, number of the tag will be used for name
+        name_count     = false
+        #default_name   = "new tag" # deprecated, use [default_tag] instead
+        #default_layout = "tile_right" # deprecated, use [default_tag] instead
+
+        expose_name    = "EXPOSE"
+        expose_layout  = "tile_left"
+
+        # Border around the tag buttons.
+        border = false
+
+        # Hide empty tags in tag list
+        autohide = false
+
+        # Mouse buttons action on tag.
+        mouse_button_tag_sel       = "1"
+        mouse_button_tag_transfert = "2"
+        mouse_button_tag_add       = "3"
+        mouse_button_tag_next      = "4"
+        mouse_button_tag_prev      = "5"
+
+        # [tag]
+        #         name             = "www"
+        #         screen           = 0
+        #         mwfact           = 0.65
+        #         nmaster          = 1
+        #         layout           = "tile_right"
+        #         resizehint       = false
+        #         infobar_position = "top"
+        #         above_fc         = false
+        #         split            = false
+        #         #[mouse] [/mouse] Possible multi mouse section
+        # [/tag]
+
+	[tag] name = "1" [/tag]
+	[tag] name = "2" [/tag]
+        [tag] name = "3" [/tag]
+        [tag] name = "4" [/tag]
+        [tag] name = "5" [/tag]
+        [tag] name = "6" [/tag]
+	[tag] name = "7" [/tag]
+	[tag] name = "8" [/tag]
+	[tag] name = "9" [/tag]
+[/tags]

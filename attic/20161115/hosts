@@ -1,0 +1,12 @@
+#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>	<hostname.domain.org>	<hostname>
+127.0.0.1     localhost.localdomain localhost floron axon
+::1           localhost.localdomain localhost ip6-localhost ip6-loopback floron axon
+ff02::1       ip6-allnodes
+ff02::2       ip6-allrouters
+
+192.168.0.1   router
+192.168.0.104 neuron

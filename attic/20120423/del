@@ -1,0 +1,4 @@
+#!/bin/bash
+# mv files to trash instead of rm'ing them
+
+mv "$@" ~/.local/share/Trash/files

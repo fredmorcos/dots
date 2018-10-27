@@ -1,0 +1,32 @@
+alignment top_left
+double_buffer yes
+gap_x 5
+gap_y 5
+font -*-liberation mono-medium-r-*-*-*-*-*-*-*-*-*-*
+xftfont liberation mono:size=9
+use_xft yes
+format_human_readable yes
+
+TEXT
+$nodename - $sysname $kernel on $machine
+uptime $uptime
+
+SYS $hr
+
+CPU $freq_g GHz $cpu%
+RAM ${membar 6}
+SWP ${swapbar 6}
+
+FS $hr
+
+ / ${fs_bar 6 /}
+ /home ${fs_bar 6 /home}
+ /mult ${fs_bar 6 /mult}
+
+NET $hr
+
+TOP $hr
+
+Name              PID    CPU%   MEM%
+${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}

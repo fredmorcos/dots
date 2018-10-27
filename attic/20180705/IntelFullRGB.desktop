@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=IntelFullRGB
+Comment=Set Intel video driver to broadcast full RGB support to HDMI
+Exec=xrandr --output HDMI1 --set "Broadcast RGB" "Full"
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
+

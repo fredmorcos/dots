@@ -1,0 +1,11 @@
+out_to_console yes
+out_to_x no
+short_units yes
+update_interval 5
+total_run_times 0
+uppercase no
+cpu_avg_samples 1
+net_avg_samples 1
+
+TEXT
+\\#8888FF\ [CPU ${freq_g 0}GHz ${cpu cpu0}%]\\#88FF88\ [MEM ${mem} ${swap}]\\#88FF88\ [TEMP ${execi 10 sensors | sed -nre 's/^.+?:\s+\+([0-9]+)\.[0-9]+°C.*$/\1°C/p' | tr '\n' ' ' | sed -e 's/\ $//'}]\\#8888FF\ [VOL ${execi 5 amixer get Master | sed -nre 's/^.+\[([0-9]+%)\].*$/\1/p' | tr '\n' ' ' | sed -e 's/ $//'}]\\#FFFFFF\ [${time %a, %d %b %H:%M}, ${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LOWL temperature}°C]

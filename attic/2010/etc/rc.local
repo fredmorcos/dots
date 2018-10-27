@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user startup script.
+#
+echo "Setting preferences from rc.local..."
+export INTEL_BATCH=1
+echo 1 > /proc/acpi/video/C085/DOS
+ifconfig eth1 hw ether 00:17:A5:E1:17:D5
+# hdparm -B 255 -S 60 /dev/sda
+
+# /usr/sbin/iwpriv eth0 set_power 5
+# iwconfig eth0 power
+
+# echo 1 > /sys/devices/system/cpu/sched_mc_power_savings
+# echo 1 > /sys/devices/system/cpu/sched_smt_power_savings
+
+read KEY

@@ -1,0 +1,32 @@
+. ~/.bash_colors
+. ~/.bash_aliases
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+PROMPT_COMMAND='RET=$?;'
+RETURN_VALUE='$(echo $RET)'
+
+if [ -n "$SSH_CLIENT" ]; then
+	PS1="[\[$Red\]SSH:\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\] $RETURN_VALUE] "
+else
+	PS1="[\[$Red\]\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\] $RETURN_VALUE] "
+fi
+
+export PATH="/opt/haskell/bin:/opt/cabal/bin:$HOME/.cabal/bin:$HOME/bin:$HOME/opt/bin:/usr/local/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/opt/lib:$LD_LIBRARY_PATH:/usr/local/lib"
+export MANPATH="$HOME/opt/man:$MANPATH:/usr/local/man"
+export PKG_CONFIG_PATH="$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig"
+
+export EDITOR=emacs
+export HISTCONTROL=ignoreboth
+
+alias skype="LIBV4LCONTROL_FLAGS=3 LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype"
+
+alias ls="ls -lh --color=auto --group-directories-first"
+alias lla="ls -la"
+alias grep="grep --color=auto"
+
+export KDE_IS_PRELINKED=1
+export KDE_MALLOC=1
+export KDE_NOUNLOAD=1

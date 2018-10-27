@@ -1,0 +1,169 @@
+#!/bin/sh
+
+set -o posix
+# set -o errexit
+set -o nounset
+set -o pipefail
+# set -o xtrace
+
+HNAME=$(hostname)
+echo "Status: Hostname $HNAME"
+
+XPATH=$(realpath "$0")
+echo "Status: Path $XPATH"
+
+DPATH=$(dirname "$XPATH")
+echo "Status: Dir $DPATH"
+
+onroot () {
+  if [ "$(echo "$1" | cut -c -6)" = "/home/" ]; then
+    return 10
+  else
+    return 11
+  fi
+}
+
+dosudo () {
+  onroot "$2"
+
+  if [ $? = 11 ]; then
+    $SHELL -c "sudo $1 $2"
+  else
+    $SHELL -c "$1 $2"
+  fi
+}
+
+cmerge () {
+  SRC="$1"                              # source
+  HSRC="$SRC.$HNAME"                    # host-specific source
+  DST="$2"                              # destination
+
+  if [ -f "$SRC" ]; then
+    # common
+    # echo "Status: Found $PSRC -> $DST"
+    SRC="$SRC"
+  elif [ -f "$HSRC" ]; then
+    # host-specific
+    # echo "Status: Found $PHSRC -> $DST"
+    SRC="$HSRC"
+  else
+    echo "Might-Skip:"
+    echo "  $DPATH/$SRC does not exist"
+    echo "  $DPATH/$HSRC does not exist"
+
+    if [ -f "$DST" ]; then
+      echo "Not-Skip: $DST -> {$HSRC}"
+      cp -i "$DST" "$DPATH/$HSRC"
+    else
+      echo "Skip: File $DST does not exist either"
+    fi
+
+    return
+  fi
+
+  if [ -e "$DST" ]; then
+    if [ -f "$DST" ]; then
+      if diff "$DPATH/$SRC" "$DST" 1>/dev/null 2>&1 ; then
+	echo "Skip: {$SRC} === $DST"
+      else
+	echo "Merge: {$SRC} != $DST"
+	dosudo "vim -f -d $DPATH/$SRC" "$DST"
+      fi
+    else
+      echo "Error: $DST exists but is not a file"
+      exit 1
+    fi
+  else
+    DSTDIRNAME=$(dirname "$DST")
+    echo "Create: $DSTDIRNAME"
+    dosudo "mkdir -p" "$DSTDIRNAME"
+    echo "Copy: {$SRC} -> $DST"
+    dosudo "cp -i $DPATH/$SRC" "$DST"
+  fi
+}
+
+for i in keyboards.xml pointers.xml \
+         xfce4-desktop.xml xfce4-keyboard-shortcuts.xml \
+         xfce4-notifyd.xml xfce4-panel.xml \
+         xfce4-session.xml xfwm4.xml xsettings.xml ; do
+  cmerge xfce4/$i ~/.config/xfce4/xfconf/xfce-perchannel-xml/$i
+done
+
+cmerge autostart/xintelrgb.desktop ~/.config/autostart/xintelrgb.desktop
+cmerge autostart/xnocaps.desktop   ~/.config/autostart/xnocaps.desktop
+
+cmerge pulse/default.pa  ~/.config/pulse/default.pa
+cmerge pulse/daemon.conf ~/.config/pulse/daemon.conf
+
+cmerge bashrc            ~/.bashrc
+cmerge compton.conf      ~/.config/compton.conf
+cmerge compton.service   ~/.config/systemd/user/compton.service
+cmerge dmrc              ~/.dmrc
+cmerge emacs/emacs.el    ~/.emacs
+cmerge fonts.conf        ~/.config/fontconfig/fonts.conf
+cmerge gitconfig         ~/.gitconfig
+cmerge htoprc            ~/.config/htop/htoprc
+cmerge hunspell_en_US    ~/.hunspell_en_US
+cmerge kitty.conf        ~/.config/kitty/kitty.conf
+cmerge nm-applet.service ~/.config/systemd/user/nm-applet.service
+cmerge redshift.conf     ~/.config/redshift.conf
+cmerge vimrc             ~/.vimrc
+cmerge youtube-dl.conf   ~/.config/youtube-dl/config
+
+cmerge loader/loader.conf /boot/loader/loader.conf
+cmerge loader/arch.conf   /boot/loader/entries/arch.conf
+
+cmerge systemd/coredump.conf      /etc/systemd/coredump.conf
+cmerge systemd/lxdm-override.conf /etc/systemd/system/lxdm.service.d/override.conf
+
+cmerge fstab           /etc/fstab
+cmerge hostname        /etc/hostname
+cmerge hosts           /etc/hosts
+cmerge locale.conf     /etc/locale.conf
+cmerge lxdm.conf       /etc/lxdm/lxdm.conf
+cmerge makepkg.conf    /etc/makepkg.conf
+cmerge mkinitcpio.conf /etc/mkinitcpio.conf
+cmerge modprobe.conf   /etc/modprobe.d/modprobe.conf
+cmerge pacman.conf     /etc/pacman.conf
+cmerge sysctl.conf     /etc/sysctl.d/sysctl.conf
+
+if [ -f /etc/os-release ]; then
+  if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
+    pkgs_tmp_file=$(mktemp)
+    pacman -Qtte | awk '{ print $1 }' > "$pkgs_tmp_file"
+    cmerge pkgs.list "$pkgs_tmp_file"
+
+    pkgs_install=""
+
+    while read -r pkg ; do
+      if ! grep "$pkg" "$pkgs_tmp_file" 1>/dev/null 2>&1 ; then
+        echo "Install: $pkg"
+        pkgs_install="$pkg $pkgs_install"
+      fi
+    done < "pkgs.list"
+
+    pkgs_remove=""
+
+    while read -r pkg ; do
+      if ! grep "$pkg" "pkgs.list" 1>/dev/null 2>&1 ; then
+        echo "Remove: $pkg"
+        pkgs_remove="$pkg $pkgs_remove"
+      fi
+    done < "$pkgs_tmp_file"
+
+    rm "$pkgs_tmp_file"
+
+    if [ "$pkgs_remove" != "" ]; then
+      echo "Remove Packages:"
+      $SHELL -c "sudo pacman -Rcsn $pkgs_remove"
+    fi
+
+    echo "Update System"
+    $SHELL -c "yay"
+
+    if [ "$pkgs_install" != "" ]; then
+      echo "Install Packages:"
+      $SHELL -c "sudo pacman -S --needed $pkgs_install"
+    fi
+  fi
+fi

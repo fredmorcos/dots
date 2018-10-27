@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# RSYNC Flags --partial --delete -E --chmod= --chown= -p -R -r -l -t -m
+
+DIR_NAME=`dirname $0`
+SYNC="rsync -rhH --preallocate --progress" # --dry-run"
+
+LAPTOP_CONF_DIR="/home/fred/Archive/Conf/Local/"
+LAPTOP_CHATS_DIR="/home/fred/Documents/Chat/`date +%G%m%d`/"
+RPI_CONF_DIR="/home/fred/Archive/Conf/RPI/"
+
+# Make sure target directories are created
+if ! mkdir -p $LAPTOP_CONF_DIR $LAPTOP_CHATS_DIR $RPI_CONF_DIR; then
+    echo "Could not create one or more backup target directories"
+    exit 1
+fi
+
+# Backup configs and chats
+SYNCA="$SYNC -apRL --chmod=a-x"
+
+$SYNCA --files-from="$DIR_NAME/files-laptop-conf" / $LAPTOP_CONF_DIR
+$SYNCA --files-from="$DIR_NAME/files-laptop-chat" / $LAPTOP_CHATS_DIR
+$SYNCA --files-from="$DIR_NAME/files-rpi-conf"    fred@neuron:/ $RPI_CONF_DIR
+
+# Backup home and media dirs
+ssh neuron sudo systemctl start rsyncd
+sleep 2
+
+SYNCB="$SYNC -l --delete"
+
+$SYNCB --files-from="$DIR_NAME/files-laptop-home"  /home/fred "neuron::Fred"
+$SYNCB --files-from="$DIR_NAME/files-laptop-media" / "neuron::Common/"
+
+ssh neuron sudo systemctl stop rsyncd
+
+# Backup other stuff
+ssh neuron sudo rsync -ruhL -pEog --info=progress2 --partial --delete --preallocate /media/External2/Home/hilda/ /media/External/HildaBackupBackup/
+
+# Fix permissions on target
+ssh neuron sudo /media/External2/fix-permissions

@@ -1,0 +1,70 @@
+set nocompatible
+" colorscheme desert
+
+set tabstop=4       " Number of spaces that a <Tab> in the file counts for.
+                    " Number of "visual" spaces per tab.
+ 
+set shiftwidth=2    " Number of spaces to use for each step of (auto)indent.
+
+set softtabstop=2   " Number of spaces in tabs when editing
+                    " This is the actual number of spaces used for a tab.
+ 
+set expandtab       " Use the appropriate number of spaces to insert a <Tab>.
+                    " Spaces are used in indents with the '>' and '<' commands
+                    " and when 'autoindent' is on. To insert a real tab when
+                    " 'expandtab' is on, use CTRL-V <Tab>.
+ 
+set smarttab        " When on, a <Tab> in front of a line inserts blanks
+                    " according to 'shiftwidth'. 'tabstop' is used in other
+                    " places. A <BS> will delete a 'shiftwidth' worth of space
+                    " at the start of the line.
+
+set number          " Show line numbers.
+set relativenumber  " Show the line numbers relative to the current position.
+set showcmd         " Show the last command entered in the bottom right.
+set cursorline      " Highlight the current line.
+set wildmenu        " Show an autocompletion bar at the bottom.
+set lazyredraw      " Maybe not a really good idea?
+set showmatch       " Highlight matching parens and braces.
+set hlsearch        " Highlight search matches.
+set incsearch       " Search as characters are entered.
+set ignorecase
+set smartcase
+set autoindent
+set ruler
+" set spell
+
+set foldenable          " Enable folding.
+set foldlevelstart=10   " Open most folds by default.
+set foldnestmax=10      " Guard against too many nested folds.
+set foldmethod=indent   " Fold based on indentation level.
+
+" SPC opens and closes folds.
+nnoremap <space> za
+
+" turn off search highlight with ,SPC
+nnoremap <leader><space> :nohlsearch<CR>
+
+filetype plugin indent on
+filetype indent on
+syntax on
+syntax enable
+
+" colorscheme badwolf
+" colorscheme molokai
+
+" Disable cursor blinking in GVim
+set guicursor+=a:blinkon0
+set guifont=Monospace\ 11
+
+" When opening a file, return to the last cursor position in that file
+:au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+set backup
+set backupdir=/tmp
+set directory=/tmp
+set writebackup
+
+set modelines=1   " Enable modeline support to change vim settings on a per-file basis.
+
+" vim:foldmethod=marker:foldlevel=0

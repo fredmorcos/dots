@@ -1,0 +1,58 @@
+#
+# /home/fred/.nvidia-settings-rc
+#
+# Configuration file for nvidia-settings - the NVIDIA X Server Settings utility
+# Generated on Tue Dec 31 11:53:12 2013
+#
+
+# ConfigProperties:
+
+RcFileLocale = C
+ToolTips = Yes
+DisplayStatusBar = Yes
+SliderTextEntries = Yes
+IncludeDisplayNameInConfigFile = No
+ShowQuitDialog = No
+UpdateRulesOnProfileNameChange = Yes
+Timer = Memory_Used_(GPU_0),Yes,3000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
+
+# Attributes:
+
+0/SyncToVBlank=1
+0/LogAniso=0
+0/FSAA=0
+0/TextureSharpen=0
+0/TextureClamping=1
+0/FXAA=1
+0/AllowFlipping=1
+0/FSAAAppControlled=0
+0/LogAnisoAppControlled=0
+0/OpenGLImageSettings=3
+0/FSAAAppEnhanced=0
+0/XVideoSyncToDisplayID=LVDS-0
+[DPY:VGA-0]/Dithering=0
+[DPY:VGA-0]/DitheringMode=0
+[DPY:VGA-0]/DitheringDepth=0
+[DPY:VGA-0]/SynchronousPaletteUpdates=0
+[DPY:LVDS-0]/RedBrightness=0.000000
+[DPY:LVDS-0]/GreenBrightness=0.000000
+[DPY:LVDS-0]/BlueBrightness=0.000000
+[DPY:LVDS-0]/RedContrast=0.000000
+[DPY:LVDS-0]/GreenContrast=0.000000
+[DPY:LVDS-0]/BlueContrast=0.000000
+[DPY:LVDS-0]/RedGamma=1.000000
+[DPY:LVDS-0]/GreenGamma=1.000000
+[DPY:LVDS-0]/BlueGamma=1.000000
+[DPY:LVDS-0]/Dithering=0
+[DPY:LVDS-0]/DitheringMode=0
+[DPY:LVDS-0]/DitheringDepth=0
+[DPY:LVDS-0]/DigitalVibrance=0
+[DPY:LVDS-0]/ColorSpace=0
+[DPY:LVDS-0]/ColorRange=0
+[DPY:LVDS-0]/SynchronousPaletteUpdates=0
+[DPY:HDMI-0]/Dithering=0
+[DPY:HDMI-0]/DitheringMode=0
+[DPY:HDMI-0]/DitheringDepth=0
+[DPY:HDMI-0]/SynchronousPaletteUpdates=0

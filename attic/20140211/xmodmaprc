@@ -1,0 +1,4 @@
+remove control = Control_L
+remove mod1 = Alt_L
+add control = Alt_L
+add mod1 = Control_L

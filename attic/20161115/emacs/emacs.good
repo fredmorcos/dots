@@ -1,0 +1,548 @@
+;;; package -- Summary
+;;; Commentary:
+;;; Code:
+
+;; Silence advice warnings
+(setq ad-redefinition-action 'accept)
+
+;; Small perf improvement
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+;; Make script files executable after saving
+(add-hook
+ 'after-save-hook
+ #'executable-make-buffer-file-executable-if-script-p)
+
+;;; User interface
+;; (load-theme 'leuven)
+(custom-set-faces '(default ((t (:height 105)))))
+(toggle-frame-maximized)
+(defalias 'yes-or-no-p 'y-or-n-p)
+(windmove-default-keybindings)
+(custom-set-variables
+ '(toggle-use-system-font t)
+ '(blink-cursor-mode nil)
+ ;; '(cursor-type '(bar . 3))
+ ;; '(tooltip-mode nil)
+ '(tool-bar-mode nil)
+ '(menu-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(inhibit-startup-screen t)
+ '(inhibit-startup-message t)
+ '(initial-scratch-message nil)
+ '(ring-bell-function 'ignore)
+ '(column-number-mode t)
+ '(global-hl-line-mode t))
+
+;;; Garbage collection
+;; (custom-set-variables
+;;  '(gc-cons-percentage 10.0)
+;;  '(gc-cons-threshold 800000))
+(add-hook 'focus-out-hook #'garbage-collect)
+(add-hook
+ 'minibuffer-setup-hook
+ #'(lambda ()
+     (custom-set-variables
+      '(gc-cons-threshold most-positive-fixnum))))
+(add-hook
+ 'minibuffer-exit-hook
+ #'(lambda ()
+     (custom-set-variables
+      '(gc-cons-threshold 800000))))
+
+;; System packages: global htmlize-git  minted pymacs python-autopep8 python-epc
+;;   python-isort    python-pysmell     python-jedi    python-pyflakes    flake8
+;;   python-pygments  python-pylint python-pysmell  python-rope ditaa  ditaa-eps
+;;   haskell-quickcheck  ghc ghc-mod  c2hs  haskell-cpphs stylish-haskell  hlint
+;;   hdevtools   cabal-install  haddock   alex   happy  haskell-hunit   hasktags
+;;   haskell-transformers-base haskell-transformers-compat hayoo hoogle luacheck
+;;   python-pycodestyle autopep8 bashate checkbashisms shellcheck smlnj
+
+;;; Packaging
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents (package-refresh-contents))
+(dolist (package '(org which-key diminish bind-key auto-compile avy iedit
+                       smartparens paredit helm helm-gtags auctex magit
+                       projectile helm-projectile irony irony-eldoc helm-ghc
+                       company flycheck flycheck-irony company-irony
+                       company-irony-c-headers haskell-mode company-ghc
+                       jedi py-autopep8 py-isort py-yapf color-moccur
+                       helm-c-moccur json-mode clang-format bash-completion
+                       flycheck-bashate flycheck-checkbashisms sml-mode
+                       flycheck-ghcmod dired+ dired-details dired-details+
+                       geiser nlinum smooth-scrolling smooth-scroll))
+  (unless (package-installed-p package) (package-install package)))
+
+;;; bind-key
+;; (require 'bind-key)
+
+;;; Remember file positions, history, backups, autosaves
+(require 'saveplace)
+(defconst emacs-autosaves-dir     (concat user-emacs-directory "autosaves"))
+(defconst emacs-backups-dir       (concat user-emacs-directory "backups"))
+(defconst emacs-places-file       (concat user-emacs-directory "places"))
+(defconst emacs-recentf-file      (concat user-emacs-directory "recentf"))
+(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
+(defconst emacs-backups-pattern   (concat emacs-backups-dir   "/"))
+(make-directory emacs-autosaves-dir t)
+(make-directory emacs-backups-dir   t)
+(custom-set-variables
+ ;; '(auto-save-default nil)
+ ;; '(make-backup-files nil)
+ '(savehist-mode t)
+ '(save-place t)
+ '(save-place-file emacs-places-file)
+ '(recentf-mode t)
+ '(recentf-save-file emacs-recentf-file)
+ '(auto-save-file-name-transforms
+   `((".*" ,emacs-autosaves-pattern t)))
+ '(backup-directory-alist
+   `((".*" . ,emacs-backups-pattern)))
+ '(history-delete-duplicates t)
+ '(history-length 30))
+
+;;; Whitespace coloring and cleanup
+(custom-set-variables '(whitespace-global-modes
+                        '(not dired-mode json-mode doc-view-mode comint-mode
+                              interactive-haskell-mode inferior-python-mode
+                              term-mode wdired-mode inferior-sml-mode))
+                      '(global-whitespace-newline-mode nil)
+                      '(show-trailing-whitespace t)
+                      '(whitespace-action '(cleanup))
+                      '(whitespace-style
+                        '(face tabs lines-tail trailing space-before-tab
+                               indentation empty space-after-tab)))
+(add-hook 'after-init-hook  #'global-whitespace-mode)
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
+
+;;; Indentation and spacing
+(custom-set-variables '(indent-tabs-mode nil)
+                      '(standard-indent 2)
+                      '(electric-indent-mode t)
+                      '(default-justification 'full)
+                      '(mode-require-final-newline 'visit-save)
+                      '(require-final-newline 'visit-save)
+                      '(fill-column 80))
+
+;;; Comments
+(custom-set-variables '(comment-column 40)
+                      '(comment-inline-offset 3)
+                      '(comment-empty-lines t)
+                      '(comment-multi-line t)
+                      '(comment-padding 1)
+                      ;; '(comment-auto-fill-only-comments t)
+                      '(comment-style 'extra-line))
+
+;;; Line numbers
+;; (custom-set-variables '(global-linum-mode t)
+;;                       '(linum-format " %4d ")
+;;                       '(linum-eager t)
+;;                       '(linum-delay nil))
+(custom-set-variables '(global-nlinum-mode t)
+                      '(nlinum-format " %d "))
+
+;;; Spell checking
+(custom-set-variables '(ispell-program-name "hunspell")
+                      '(flyspell-delay 1))
+
+;;; Minibuffer
+(custom-set-variables '(minibuffer-prompt-properties
+                        '(read-only t face minibuffer-prompt))
+                      '(minibuffer-eldef-shorten-default t)
+                      '(read-buffer-completion-ignore-case t)
+                      '(read-file-name-completion-ignore-case t))
+
+;;; Compilation buffer
+(custom-set-variables '(compilation-always-kill t)
+                      '(compilation-read-command nil)
+                      '(compilation-scroll-output 'first-error)
+                      '(compile-command "make"))
+
+;;; Which-key
+(which-key-mode)
+(diminish 'which-key-mode)
+
+;;; Semantic Mode
+(semantic-mode)
+
+;;; Scrolling
+(custom-set-variables '(smooth-scrolling-mode t)
+                      '(smooth-scroll-margin 3)
+                      '(scroll-margin 3)
+                      '(scroll-conservatively 101)
+                      '(scroll-preserve-screen-position t)
+                      '(scroll-step 1)
+                      '(hscroll-step 1)
+                      '(auto-window-vscroll nil))
+
+;;; Moccur
+(require 'color-moccur)
+(add-to-list 'dmoccur-exclusion-mask "\\GPATH$")
+(add-to-list 'dmoccur-exclusion-mask "\\GTAGS$")
+(add-to-list 'dmoccur-exclusion-mask "\\GRTAGS$")
+(add-to-list 'dmoccur-exclusion-mask "\\bkd$")
+(add-to-list 'dmoccur-exclusion-mask "\\bkc$")
+(add-to-list 'dmoccur-exclusion-mask "\\rfpf$")
+(add-to-list 'dmoccur-exclusion-mask "\\LICENSE$")
+(add-to-list 'dmoccur-exclusion-mask "\\README$")
+(add-to-list 'dmoccur-exclusion-mask "\\TODO$")
+(add-to-list 'dmoccur-exclusion-mask "\\Makefile$")
+(add-to-list 'dmoccur-exclusion-mask "\\.so$")
+(add-to-list 'dmoccur-exclusion-mask "\\compile_commands.json$")
+
+;;; Avy
+(avy-setup-default)
+(global-set-key (kbd "C-:") #'avy-goto-char)
+(global-set-key (kbd "C-'") #'avy-goto-char-2)
+(diminish 'avy-mode)
+
+;;; Smartparens
+(custom-set-variables '(sp-show-pair-from-inside t))
+(show-smartparens-global-mode)
+
+;;; Paredit
+(custom-set-default 'paredit-lighter " PE")
+
+;;; Emacs Lisp
+;; (require 'auto-compile)
+(add-hook 'emacs-lisp-mode-hook #'auto-compile-on-load-mode)
+(add-hook 'emacs-lisp-mode-hook #'auto-compile-on-save-mode)
+(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+(add-to-list 'auto-mode-alist '("\\emacs\\'" . emacs-lisp-mode))
+
+;;; Geiser
+(custom-set-variables '(geiser-default-implementation "racket"))
+
+;;; Abbrev
+(diminish 'abbrev-mode)
+
+;;; Pet
+(add-to-list
+ 'auto-mode-alist
+ '("\\.pet\\'" .
+   (lambda ()
+     (fset 'tabulate-exp
+           [?\C-a ?\C-s ?2 ?0 ?1 return C-left tab
+                  C-right C-right C-right C-right
+                  ?\C-d tab C-right ?\C-d tab down ?\C-a])
+     (fset 'replicate-exp
+           [up ?\C-  down ?\M-w ?\C-y up ?\C-a ?\C-s ?  return
+               ?\M-d ?\M-d ?\M-d f2 ?\C-e down])
+     (local-set-key (kbd "C-c C-c") 'tabulate-exp)
+     (local-set-key [f2] #'(lambda () (interactive)
+                             (insert (format-time-string "%Y-%m-%d"))))
+     (local-set-key [f5] 'replicate-exp))))
+
+;;; Auto Revert
+(custom-set-default 'auto-revert-mode-text " AR")
+(custom-set-default 'global-auto-mode-revert-text " GAR")
+(custom-set-variables '(auto-revert-interval 2))
+
+;;; Dired
+(add-hook 'dired-mode-hook #'auto-revert-mode)
+(add-hook 'dired-mode-hook #'dired-async-mode)
+(add-hook 'dired-mode-hook #'dired-omit-mode)
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+(add-hook 'dired-mode-hook
+          #'(lambda () (local-set-key
+                        [f5]
+                        #'(lambda () (interactive)
+                            (term "/bin/bash")))))
+(custom-set-variables '(dired-listing-switches "-alh --group-directories-first")
+                      '(dired-use-ls-dired t)
+                      '(image-dired-append-when-browsing t)
+                      '(dired-omit-files "^\\...+$"))
+
+;;; Term
+(add-hook
+ 'term-mode-hook
+ #'(lambda () (advice-add
+               'term-handle-exit
+               :after #'(lambda (&rest args)
+                          (when (null (get-buffer-process (current-buffer)))
+                            (kill-buffer (current-buffer)))))))
+
+;;; Doc View
+(add-hook 'doc-view-mode-hook #'auto-revert-mode)
+(add-hook 'doc-view-mode-hook #'(lambda ()
+                                  (nlinum-mode -1)
+                                  (linum-mode  -1)))
+(custom-set-variables '(doc-view-continuous t)
+                      '(doc-view-resolution 200)
+                      '(doc-view-scale-internally nil))
+
+;;; GUD (Emacs GDB)
+(custom-set-variables '(gdb-many-windows t)
+                      '(gdb-show-main t))
+
+;;; Eldoc
+(custom-set-default 'eldoc-minor-mode-string " ED")
+(custom-set-variables '(eldoc-echo-area-use-multiline-p t))
+
+;;; ETags
+(custom-set-variables '(tags-revert-without-query t))
+
+;;; Helm
+(custom-set-default 'helm-gtags-mode-name " HGT")
+(helm-mode)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(custom-set-variables
+ '(helm-mode-fuzzy-match t)
+ '(helm-completion-in-region-fuzzy-match t)
+ '(helm-autoresize-mode 1))
+
+;;; Magit
+(global-set-key (kbd "C-x g")   #'magit-status)
+(global-set-key (kbd "C-x M-g") #'magit-dispatch-popup)
+
+;;; Projectile
+(add-hook 'projectile-mode-hook #'helm-projectile-on)
+;; (custom-set-variables '(projectile-global-mode t))
+(custom-set-default
+ 'projectile-mode-line
+ '(:eval (if (file-remote-p default-directory) " Prj"
+           (format " Prj[%s]" (projectile-project-name)))))
+
+;;; Flycheck
+(require 'flycheck)
+(custom-set-default 'flycheck-mode-line-prefix "FC")
+(custom-set-variables '(global-flycheck-mode t)
+                      '(flycheck-display-errors-delay 0.2)
+                      '(flycheck-idle-change-delay 0.1)
+                      '(flycheck-global-modes '(not org-mode makefile-mode
+                                                    inferior-python-mode
+                                                    interactive-haskell-mode)))
+
+;;; Irony
+(custom-set-default 'irony-lighter " IY")
+(add-hook 'irony-mode-hook
+          #'(lambda ()
+              (add-to-list 'flycheck-disabled-checkers 'c/c++-gcc)
+              (add-to-list 'flycheck-disabled-checkers 'c/c++-clang)
+              (defvar irony-mode-map)
+              (define-key irony-mode-map [remap completion-at-point]
+                'irony-completion-at-point-async)
+              (define-key irony-mode-map [remap complete-symbol]
+                'irony-completion-at-point-async)
+              (defvar company-backends)
+              (eval-after-load 'company
+                '(add-to-list 'company-backends 'company-irony))
+              (eval-after-load 'company
+                '(add-to-list 'company-backends 'company-irony-c-headers))
+              (eval-after-load 'flycheck
+                '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup nil t))
+              (eval-after-load 'flycheck-irony
+                '(flycheck-add-next-checker 'irony '(t . c/c++-cppcheck)))
+              (defalias 'remove-if-not 'cl-remove-if-not)
+              (irony-eldoc)
+              (irony-cdb-autosetup-compile-options)
+              (custom-set-variables '(company-irony-ignore-case t))))
+
+;;; Company
+(custom-set-default 'company-lighter-base "CMP")
+(custom-set-variables '(company-global-modes
+                        '(not fundamental-mode shell-mode text-mode
+                              pascal-mode dired-mode org-mode doc-view-mode
+                              makefile-mode python-mode inferior-python-mode))
+                      '(company-idle-delay 0.4)
+                      '(company-minimum-prefix-length 2)
+                      '(global-company-mode t))
+
+;;; Shell script mode
+(eval-after-load 'flycheck
+  '(progn (require 'flycheck-bashate)
+          (require 'flycheck-checkbashisms)
+          (flycheck-bashate-setup)
+          (flycheck-checkbashisms-setup)))
+(add-hook
+ 'shell-script-mode
+ #'(lambda ()
+     (flycheck-add-next-checker
+      'sh-shellcheck '(t . flycheck-bashate))
+     (flycheck-add-next-checker
+      'flycheck-bashate '(t . flycheck-checkbashisms))))
+
+;;; C
+(custom-set-default 'cwarn-mode-text " CW")
+(defun c/c++-mode-setup (std)
+  "Setup C/C++ development mode.  STD is the language standard."
+  (local-set-key [f1] 'manual-entry)
+  (local-set-key [f2] 'ff-find-other-file)
+  (local-set-key [f6] 'helm-gtags-select)
+  (local-set-key
+   [f7] #'(lambda () (interactive)
+            (compile (string-join
+                      (list "make clean && make cppcheck &&"
+                            "make clean && make &&"
+                            "make clean && make CC=clang &&"
+                            "make clean && make RELEASE=yes &&"
+                            "make clean && make CC=clang RELEASE=yes &&"
+                            "make clean && scan-build make &&"
+                            "make clean && scan-build make CC=clang &&"
+                            "make clean" nil) " "))))
+  (local-set-key
+   [f8] #'(lambda () (interactive)
+            (let ((win (get-buffer-window "*compilation*")))
+              (kill-buffer "*compilation*")
+              (let ((buf (window-buffer win)))
+                (if (string-prefix-p "*" (buffer-name buf))
+                    (delete-window win))))))
+  (helm-gtags-mode)
+  (irony-mode)
+  ;; (ggtags-mode)
+  ;; (projectile-mode)
+  ;; (eldoc-mode)
+  ;; (defvar company-backends)
+  ;; (add-to-list 'company-backends 'company-c-headers)
+  ;; (flycheck-add-next-checker 'c/c++-gcc '(t . c/c++-cppcheck))
+  ;; (flycheck-add-next-checker 'c/c++-cppcheck '(t . c/c++-
+  (make-local-variable 'fill-column)
+  (custom-set-variables
+   '(fill-column 55)
+   '(comment-auto-fill-only-comments t)
+   '(Man-width 80)
+   '(c-block-comment-prefix "* ")
+   '(c-cleanup-list
+     '(brace-else-brace
+       brace-elseif-brace
+       scope-operator
+       compact-empty-funcall
+       comment-close-slash))
+   '(c-doc-comment-style '((c-mode . javadoc)))
+   '(which-function-mode t)
+   '(global-cwarn-mode t)
+   '(cwarn-configuration '((c-mode t)))
+   '(flycheck-clang-pedantic t)
+   '(flycheck-gcc-pedantic t)
+   '(flycheck-clang-language-standard std)
+   '(flycheck-gcc-language-standard std)
+   '(flycheck-cppcheck-checks
+     '("style" "warning" "information" "performance"
+       "portability" "missingInclude" "all"))
+   '(flycheck-cppcheck-standards `("posix" ,std))
+   '(flycheck-cppcheck-suppressions
+     '("missingIncludeSystem" "unusedFunction"
+       "unmatchedSuppression" "readdirCalled"))
+   '(helm-gtags-auto-update t)
+   '(helm-gtags-ignore-case t)))
+(add-hook 'c-mode-hook #'(lambda () (c/c++-mode-setup "c99")))
+(add-hook 'c++-mode-hook
+          #'(lambda ()
+              (add-hook 'before-save-hook #'clang-format-buffer nil t)
+              (c/c++-mode-setup "c++11")))
+
+;;; Haskell
+(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+(add-hook
+ 'haskell-mode-hook
+ #'(lambda ()
+     (defvar haskell-mode-map)
+     (define-key haskell-mode-map (kbd "<f8>") 'haskell-navigate-imports)
+     ;; (require 'haskell-interactive-mode)
+     ;; (require 'haskell-process)
+     ;; (interactive-haskell-mode)
+     ;; (flyspell-prog-mode)
+     ;; (ghc-init)
+     ;; (defvar company-backends)
+     ;; (add-to-list 'company-backends 'company-ghc)
+     (add-hook 'before-save-hook #'haskell-mode-format-imports)
+     (custom-set-variables
+      '(haskell-interactive-popup-errors nil)
+      ;; '(haskell-process-log t)
+      '(haskell-process-auto-import-loaded-modules t)
+      '(haskell-process-suggest-restart t)
+      '(haskell-process-suggest-imports t)
+      '(haskell-process-suggest-haskell-docs-imports t)
+      '(haskell-process-suggest-remove-import t)
+      '(haskell-process-suggest-remove-import-lines t)
+      '(haskell-process-suggest-hoogle-imports t)
+      ;; '(haskell-process-suggest-hayoo-imports t)
+      '(haskell-process-use-presentation-mode t)
+      ;; '(haskell-stylish-on-save t)
+      ;; '(haskell-tags-on-save t)
+      '(haskell-doc-show-global-types t)
+      '(flycheck-ghc-args '("-W" "-Wall")))))
+
+;;; Org
+(add-hook
+ 'org-mode-hook
+ #'(lambda ()
+     (require 'ox-latex)
+     (require 'ox-html)
+     (require 'ox-man)
+     (declare-function org-indent-mode "org-indent" (&optional arg))
+     (org-indent-mode)
+     (auto-fill-mode)
+     (flyspell-mode)
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((C . t) (scheme . t) (ditaa . t)))
+     (local-set-key [f6] 'org-latex-export-to-pdf)
+     (defvar org-latex-packages-alist)
+     (add-to-list 'org-latex-packages-alist '("newfloat" "minted"))
+     (setq-default org-latex-listings 'minted)
+     (setq-default org-latex-pdf-process
+                   `(,(string-join (list "pdflatex -shell-escape"
+                                         "-interaction nonstopmode"
+                                         "-output-directory %o %f" nil) " ")
+                     ,(string-join (list "pdflatex -shell-escape"
+                                         "-interaction nonstopmode"
+                                         "-output-directory %o %f" nil) " ")
+                     ,(string-join (list "pdflatex -shell-escape"
+                                         "-interaction nonstopmode"
+                                         "-output-directory %o %f" nil) " ")))
+     (custom-set-faces
+      '(org-document-title
+        ((t (:family "Sans Serif" :height 1.2 :weight bold
+                     :foreground "black"))))
+      '(org-level-1
+        ((t (:height 1.1 :weight bold :foreground "#3C3C3C"
+                     :background "#F0F0F0" :overline "#A7A7A7")))))
+     (custom-set-variables
+      '(org-latex-minted-options
+        '(("frame" "lines") ("linenos" "true") ("mathescape" "true")
+          ("breaklines" "true") ("style" "xcode")))
+      '(org-latex-default-packages-alist
+        '(("AUTO" "inputenc" t) ("T1" "fontenc" t)  ("" "fixltx2e" nil)
+          ("" "graphicx" t)     ("" "grffile" t)    ("" "longtable" nil)
+          ("" "wrapfig" nil)    ("" "rotating" nil) ("normalem" "ulem" t)
+          ("" "amsmath" t)      ("" "textcomp" t)   ("" "amssymb" t)
+          ("" "capt-of" nil)    ("" "hyperref" nil)
+          ("margin=0.5in" "geometry" t)))
+      '(org-startup-with-latex-preview t)
+      '(org-html-html5-fancy t)
+      '(org-confirm-babel-evaluate nil)
+      '(org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar")
+      '(org-ditaa-eps-jar-path "/usr/share/java/ditaa-eps/DitaaEps.jar"))))
+
+;;; Python
+(add-hook
+ 'python-mode-hook
+ #'(lambda ()
+     (defadvice ac-activate-completing-map (before disable-ws-and-fc activate)
+       "Disable WS and FC before AC completion."
+       (global-whitespace-mode -1)
+       (flycheck-mode -1))
+     (defadvice ac-deactivate-completing-map (after enable-ws-and-fc activate)
+       "Enable WS and FC after AC completion."
+       (global-whitespace-mode 1)
+       (flycheck-mode 1))
+     (run-python "python")
+     (py-autopep8-enable-on-save)
+     (py-yapf-enable-on-save)
+     (add-hook 'before-save-hook 'py-isort-before-save nil t)
+     (flycheck-add-next-checker 'python-flake8 '(t . python-pycompile))
+     (flycheck-add-next-checker 'python-pycompile '(t . python-pylint))
+     (setq-default ac-use-fuzzy t)
+     (setq-default ac-max-width 40)
+     (setq-default popup-use-optimized-column-computation nil)
+     (setq-default jedi:complete-on-dot t)
+     (setq-default jedi:setup-keys t);
+     (setq-default jedi:tooltip-method nil)
+     (jedi:setup)))
+
+(provide 'emacs)
+;;; .emacs ends here

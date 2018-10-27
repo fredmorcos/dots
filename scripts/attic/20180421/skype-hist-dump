@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -o posix
+set -o errexit
+set -o nounset
+set -o pipefail
+
+sqlite3 "$1" "select author,from_dispname,datetime(timestamp,'unixepoch') as date, dialog_partner,body_xml from Messages order by timestamp;"

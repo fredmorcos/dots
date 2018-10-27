@@ -1,0 +1,15 @@
+root = /home/fred
+root = socket://neuron:3333//media/External2/Common/
+
+force = /home/fred
+
+path = Media
+path = Misc
+path = Music
+path = Music.New
+path = Music.Other
+path = Pictures
+
+perms = 0
+dontchmod = true
+

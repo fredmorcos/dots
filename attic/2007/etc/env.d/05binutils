@@ -1,0 +1,3 @@
+MANPATH=/usr/share/binutils-data/i686-pc-linux-gnu/2.17.50.0.16/man
+INFOPATH=/usr/share/binutils-data/i686-pc-linux-gnu/2.17.50.0.16/info
+LDPATH=/usr/i686-pc-linux-gnu/lib

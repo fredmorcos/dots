@@ -1,0 +1,8 @@
+[Unit]
+Description=Optimize pacman database
+
+[Service]
+ExecStart=/bin/pacman-optimize
+
+[Install]
+WantedBy=basic.target

@@ -1,0 +1,130 @@
+;; System packages: global htmlize-git minted pymacs python-autopep8
+;;   python-epc python-isort python-pysmell python-jedi
+;;   python-pyflakes flake8 python-pygments python-pylint
+;;   python-pysmell python-rope ditaa ditaa-eps haskell-quickcheck ghc
+;;   ghc-mod c2hs haskell-cpphs stylish-haskell hindent hlint
+;;   hdevtools cabal-install haddock alex happy haskell-hunit hasktags
+;;   haskell-transformers-base haskell-transformers-compat hayoo
+;;   hoogle luacheck
+
+(defvar my-packages
+  '(use-package  org
+                flycheck-irony irony-eldoc company-irony
+                company-irony-c-headers jedi py-autopep8
+                py-isort py-yapf haskell-mode company-ghc))
+
+(defun python-mode-setup ()
+  "Setup Python mode."
+
+  (defadvice ac-activate-completing-map (before disable-ws-and-fc activate)
+    "Disable WS and FC before AC completion."
+    (global-whitespace-mode -1)
+    (flycheck-mode -1))
+
+  (defadvice ac-deactivate-completing-map (after enable-ws-and-fc activate)
+    "Enable WS and FC after AC completion."
+    (global-whitespace-mode 1)
+    (flycheck-mode 1))
+
+  (run-python "python")
+  (py-autopep8-enable-on-save)
+  (py-yapf-enable-on-save)
+  (add-hook 'before-save-hook 'py-isort-before-save)
+  (flycheck-add-next-checker 'python-flake8 '(t . python-pycompile))
+  (flycheck-add-next-checker 'python-pycompile '(t . python-pylint))
+  (setq-default ac-use-fuzzy t)
+  (setq-default ac-max-width 40)
+  (setq-default popup-use-optimized-column-computation nil)
+  (setq-default jedi:complete-on-dot t)
+  (setq-default jedi:setup-keys t);
+  (setq-default jedi:tooltip-method nil)
+  (jedi:setup))
+
+(defun org-mode-setup ()
+  "Setup org for literate programming."
+  (require 'ox-latex)
+  (require 'ox-html)
+  (require 'ox-man)
+
+  (declare-function org-indent-mode "org-indent" (&optional arg))
+  (org-indent-mode)
+  (auto-fill-mode)
+  (flyspell-mode)
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t) (scheme . t) (ditaa . t)))
+
+  (local-set-key [f6] 'org-latex-export-to-pdf)
+
+  (defvar org-latex-packages-alist)
+  (add-to-list 'org-latex-packages-alist '("newfloat" "minted"))
+  (setq-default org-latex-listings 'minted)
+  (setq-default org-latex-pdf-process
+                `(,(string-join (list "pdflatex -shell-escape"
+                                      "-interaction nonstopmode"
+                                      "-output-directory %o %f" nil) " ")
+                  ,(string-join (list "pdflatex -shell-escape"
+                                      "-interaction nonstopmode"
+                                      "-output-directory %o %f" nil) " ")
+                  ,(string-join (list "pdflatex -shell-escape"
+                                      "-interaction nonstopmode"
+                                      "-output-directory %o %f" nil) " ")))
+
+  (custom-set-faces
+   '(org-document-title
+     ((t (:family "Sans Serif" :height 1.2 :weight bold
+                  :foreground "black"))))
+   '(org-level-1
+     ((t (:height 1.1 :weight bold :foreground "#3C3C3C"
+                  :background "#F0F0F0" :overline "#A7A7A7")))))
+  (custom-set-variables
+   '(org-latex-minted-options
+     '(("frame" "lines") ("linenos" "true") ("mathescape" "true")
+       ("breaklines" "true") ("style" "xcode")))
+   '(org-latex-default-packages-alist
+     '(("AUTO" "inputenc" t) ("T1" "fontenc" t)  ("" "fixltx2e" nil)
+       ("" "graphicx" t)     ("" "grffile" t)    ("" "longtable" nil)
+       ("" "wrapfig" nil)    ("" "rotating" nil) ("normalem" "ulem" t)
+       ("" "amsmath" t)      ("" "textcomp" t)   ("" "amssymb" t)
+       ("" "capt-of" nil)    ("" "hyperref" nil)
+       ("margin=0.5in" "geometry" t)))
+   '(org-startup-with-latex-preview t)
+   '(org-html-html5-fancy t)
+   '(org-confirm-babel-evaluate nil)
+   '(org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0_9.jar")
+   '(org-ditaa-eps-jar-path "/usr/share/java/ditaa-eps/DitaaEps.jar")))
+
+(defun haskell-mode-setup ()
+  "Mode setup for Haskell."
+  (defvar haskell-mode-map)
+  (define-key haskell-mode-map (kbd "<f8>") 'haskell-navigate-imports)
+  (require 'haskell-interactive-mode)
+  (require 'haskell-process)
+  (interactive-haskell-mode)
+  (flyspell-prog-mode)
+  (ghc-init)
+  (defvar company-backends)
+  (add-to-list 'company-backends 'company-ghc)
+  (custom-set-variables
+   '(haskell-process-log t)
+   '(haskell-process-auto-import-loaded-modules t)
+   '(haskell-process-suggest-restart t)
+   '(haskell-process-suggest-imports t)
+   '(haskell-process-suggest-haskell-docs-imports t)
+   '(haskell-process-suggest-remove-import t)
+   '(haskell-process-suggest-remove-import-lines t)
+   '(haskell-process-suggest-hoogle-imports t)
+   ;; '(haskell-process-suggest-hayoo-imports t)
+   '(haskell-process-use-presentation-mode t)
+   '(haskell-stylish-on-save t)
+   ;; '(haskell-tags-on-save t)
+   '(haskell-doc-show-global-types t)
+   '(flycheck-ghc-args '("-W" "-Wall"))))
+
+(add-hook 'org-mode-hook      #'org-mode-setup)
+(add-hook 'python-mode-hook     #'python-mode-setup)
+(add-hook 'haskell-mode-hook    #'haskell-mode-setup)
+
+(custom-set-variables
+ '(tags-revert-without-query t))

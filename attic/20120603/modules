@@ -1,0 +1,2 @@
+SUSPEND_MODULES="uhci_hcd xhci_hcd ehci_hcd button"
+HIBERNATE_MODE="shutdown"

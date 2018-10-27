@@ -1,0 +1,14 @@
+[Unit]
+After=dev-mapper-HomeA.device dev-mapper-HomeB.device
+Before=dev-md-HomeRAID.device
+Description=Mount Home RAID
+DefaultDependencies=no
+
+[Service]
+# Type=oneshot
+# RemainAfterExit=yes
+ExecStart=-/usr/sbin/mdadm --assemble --scan
+ExecStop=-/usr/sbin/mdadm --stop --scan
+
+[Install]
+WantedBy=sysinit.target

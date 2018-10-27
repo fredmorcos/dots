@@ -1,0 +1,34 @@
+#!/sbin/runscript
+# Copyright 1999-2007 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	need localmount
+}
+
+start() {
+	ebegin "Enabling numlock on ttys"
+	local dev
+	[[ -d /dev/vc ]] \
+		&& dev=/dev/vc/ \
+		|| dev=/dev/tty
+	for tty in $(seq 1 "${RC_TTY_NUMBER}") ; do
+		setleds -D +num < ${dev}${tty} &> /dev/null
+	done
+	eend $? "Failed to enable numlock"
+}
+
+stop() {
+	ebegin "Disabling numlock on ttys"
+	local dev
+	[[ -d /dev/vc ]] \
+		&& dev=/dev/vc/ \
+		|| dev=/dev/tty
+	for tty in $(seq 1 "${RC_TTY_NUMBER}") ; do
+		setleds -D -num < ${dev}${tty} &> /dev/null
+	done
+	eend $? "Failed to disable numlock"
+}
+
+
+# vim:ts=4

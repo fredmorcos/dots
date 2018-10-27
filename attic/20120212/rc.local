@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user startup script.
+#
+
+iecset audio on &>/tmp/iecset_log
+/usr/bin/powersave disable &>> /tmp/powersave_log
+
+read KEY

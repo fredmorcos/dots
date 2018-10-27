@@ -1,0 +1,22 @@
+# ipv6.disable=1 maxcpus=1 hpet=force pcie_ports=native pcie_aspm=force
+# i915.i915_enable_rc6=1 i915.i915_enable_fbc=1 logo.nologo rootdelay=2
+# pci=nomsi,noaer quiet fastboot
+
+timeout   1
+default   0
+color light-blue/black black/light-blue
+
+title  Arch Linux
+root   (hd0,1)
+kernel /boot/vmlinuz-linux root=/dev/sda2 ro vga=0x360 pcie_aspm=force
+initrd /boot/initramfs-linux.img
+
+title  Arch Linux Fallback
+root   (hd0,1)
+kernel /boot/vmlinuz-linux root=/dev/sda2 ro
+initrd /boot/initramfs-linux-fallback.img
+
+title Windows
+rootnoverify (hd0,0)
+makeactive
+chainloader +1

@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+
+directories="Documents Private"
+passwd_file="$HOME/Workspace/private/encfs-passwd"
+encfs_cmd="encfs -S"
+
+if [ "$1" = "unmount" ]; then
+    for i in $directories; do
+        curdir="$HOME/$i"
+
+        if [ -d $curdir ]; then
+            echo "Unmounting $curdir"
+            /usr/bin/fusermount -u "$curdir"
+        fi
+    done
+
+    exit 0
+fi
+
+# Check whether password file exists and fail if it does not
+if [ -e $passwd_file ]; then
+    echo "Found password file $passwd_file"
+else
+    echo "Could not find password file $passwd_file"
+    exit 1
+fi
+
+# Go over each directory specified
+for i in $directories; do
+    curdir="$HOME/$i"
+
+    # Check whether directory.enc analogue exists
+    if [ -d "$curdir.enc" ]; then
+
+        # Check whether  mountpoint directory  exists and if  not then
+        # create it
+        if [ -d $curdir ]; then
+            echo "$curdir already exists"
+        else
+            echo "$curdir does not exist, creating it"
+            mkdir $curdir
+        fi
+
+        echo "Mounting $curdir.enc to $curdir"
+        $encfs_cmd $curdir.enc $curdir < $passwd_file
+    else
+        echo "$curdir.enc does not exist"
+    fi
+done

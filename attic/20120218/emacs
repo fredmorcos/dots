@@ -1,0 +1,242 @@
+;; Set the default font
+;; (add-to-list 'default-frame-alist 
+;; 	     '(font . "Envy Code R:size=13:antialias=false"))
+(add-to-list 'default-frame-alist 
+	     '(font . "Liberation Mono:size=13:antialias=true"))
+
+;; Load color themes
+;; (require 'color-theme)
+
+;; Load the Zenburn color theme
+;; (require 'zenburn)
+;; (zenburn)
+
+;; Add user and system-wide elisp library directories
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/haskell-mode")
+
+(require 'battery)
+(display-battery-mode)
+
+;; CEDET
+;; (load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.elc")
+
+;; (require 'semanticdb)
+;; (require 'semantic-ia)
+;; (require 'semantic-gcc)
+
+;; (global-ede-mode 1)			;; Project management
+;; (global-srecode-minor-mode 1)
+;; (global-semanticdb-minor-mode 1)	;; Semantic db
+
+;; (semantic-add-system-include "/usr/include" 'cc-mode)
+
+;; (semantic-load-enable-minimum-features)
+;; (semantic-load-enable-code-helpers)
+;; (semantic-load-enable-gaudy-code-helpers)
+;; (semantic-load-enable-excessive-code-helpers)
+;; (semantic-load-enable-semantic-debugging-helpers)
+
+;; (semantic-load-enable-primary-exuberent-ctags-support)
+;; (semanticdb-enable-exuberent-ctags 'c-mode)
+
+;; (defun update-ctags-db ()
+;;   (interactive)
+;;   (semanticdb-create-ebrowse-database "/usr/include")
+;;   (semanticdb-create-cscope-database))
+
+;; (define-key ctl-x-map "vu" 'update-ctags-db) ;; Update ctags db
+
+;; (defun my-c-mode-cedet-hook ()
+;;   (local-set-key "." 'semantic-complete-self-insert)
+;;   (local-set-key ">" 'semantic-complete-self-insert))
+;; (add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
+
+;; Load modes for filetypes
+(setq auto-mode-alist (append '(("/*.\.upc$"  . c-mode))
+			      '(("/*.\.cilk$" . c-mode))
+			      '(("/*.\.py$"   . python-mode))
+			      '(("/PKGBUILD$" . pkgbuild-mode))
+			      '(("\\.gp$"     . gnuplot-mode))
+			      '(("\.lua$"     . lua-mode))
+			      '(("/*.\.hs$"   . haskell-mode))
+			      '(("/*.\.js$"   . js-mode))
+			      '(("/*.\.json$" . js-mode))
+			      '(("\\.org$"    . org-mode))
+			      auto-mode-alist))
+
+(which-function-mode 1)
+
+;; Haskell
+(autoload 'haskell-mode "haskell-mode.el" "Haskell mode." t)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+;; LaTeX
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
+
+(add-hook 'latex-mode-hook 'visual-line-mode)
+(add-hook 'latex-mode-hook 'flyspell-mode)
+(add-hook 'latex-mode-hook 'latex-math-mode)
+(add-hook 'latex-mode-hook 'turn-on-reftex)
+(add-hook 'latex-math-mode 'turn-on-auto-fill)
+
+(add-hook 'latex-mode-hook
+	  (lambda () (local-set-key (kbd "C-c p") 'backward-paragraph)))
+(add-hook 'latex-mode-hook
+	  (lambda () (local-set-key (kbd "C-c n") 'forward-paragraph)))
+
+(setq-default tex-master nil)
+
+(setq tex-auto-save t)
+(setq tex-parse-self t)
+(setq reftex-plug-into-auctex t)
+(setq tex-pdf-mode t)
+
+;; JavaScript
+;; (load-file "/usr/share/emacs/site-lisp/js2.elc")
+
+;; Verilog
+(setq verilog-auto-newline nil)
+
+;; C
+(add-hook 'c-mode-common-hook
+	  (lambda () (local-set-key (kbd "C-x /")
+				    'ff-find-other-file)))
+
+;; GNUplot
+;; (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+;; (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
+
+;; Python
+(autoload 'python-mode "python-mode.el" "Python mode." t)
+(setq py-shell-name "ipython")
+
+;; Archlinux PKGBUILD
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+
+;; Org
+;; (require 'org-install)
+;; (define-key global-map "\C-cl" 'org-store-link)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (setq org-log-done t)
+
+;; Auto-fill
+;; (add-hook 'org-mode-hook 'turn-on-auto-fill)  ;; in Org mode
+(add-hook 'text-mode-hook 'turn-on-auto-fill) ;; In Text mode
+
+;; Dired
+;; allow dired to be able to delete or copy a whole dir.
+;; “always” means no asking. “top” means ask once.
+;; Any other symbol means ask each and every time for a dir and subdir.
+(setq dired-recursive-copies (quote always))
+(setq dired-recursive-deletes (quote top))
+
+;; Timeclock
+;; (require 'timeclock)
+;; (define-key ctl-x-map "ti" 'timeclock-in)
+;; (define-key ctl-x-map "to" 'timeclock-out)
+;; (define-key ctl-x-map "tc" 'timeclock-change)
+;; (define-key ctl-x-map "tr" 'timeclock-reread-log)
+;; (define-key ctl-x-map "tu" 'timeclock-update-modeline)
+;; (define-key ctl-x-map "tw" 'timeclock-when-to-leave-string)
+;; (timeclock-modeline-display)
+;; (add-hook 'kill-emacs-query-functions 'timeclock-query-out)
+
+;; Bookmarks
+;; (set-register
+;;  ?p '(file . ""))
+
+;; Easy window movement with M-{left,right,up,down}
+(windmove-default-keybindings 'meta)
+(setq windmove-wrap-around t)
+
+;; UI and other tweaks
+(savehist-mode 1)                  ;; Enable saving minibuffer history
+(setq tab-always-indent 'complete) ;; Smart tabs
+(delete-selection-mode t)          ;; Delete selection
+(setq skeleton-pair t)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(blink-cursor-mode (- (*) (*) (*))) ;; Turn off cursor blink
+(fset 'yes-or-no-p 'y-or-n-p)	    ;; Use 'y' and 'n'
+(column-number-mode 1)              ;; Column in modeline
+(setq linum-format " %4d ")         ;; Line number format
+(global-linum-mode 1)               ;; Show line numbers
+
+(setq
+ auto-save-default nil
+ backup-inhibited t
+ inhibit-startup-message t
+ echo-keystrokes 0.1
+ require-final-newline t
+ ;; redisplay-dont-pause t
+ scroll-margin 1
+ scroll-step 1
+ scroll-conservatively 5
+ scroll-preserve-screen-position 1
+ gc-cons-percentage 0.3
+ print-gensym t
+ print-circle t)
+
+(defun run-pdf-viewer ()
+  (interactive)
+  (shell-command "evince main.pdf &"))
+
+(defun compile-with-make-clean ()
+  (interactive)
+  (shell-command "xterm -e make veryclean"))
+
+(defun compile-with-make ()
+  (interactive)
+  (shell-command "xterm -e make"))
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+;; (defun duplicate-line ()
+;;   (interactive)
+;;   (beginning-of-line)
+;;   (let ((b (point)))
+;;     (end-of-line)
+;;     (copy-region-as-kill b (point)))
+;;   (beginning-of-line 2)
+;;   (open-line 1)
+;;   (yank)
+;;   (back-to-indentation))
+
+;; Key bindings
+(global-set-key (kbd "C-x p") 'run-pdf-viewer)
+(global-set-key (kbd "C-x c") 'compile-with-make)
+(global-set-key (kbd "C-x x") 'compile-with-make-clean)
+
+(global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "M-<up>")   'move-line-up)
+
+;; Duplicate line with C-c d
+;; (global-set-key (kbd "C-c d") "\C-a\C- \C-n\M-w\C-y")
+;; (global-set-key (kbd "C-c d") 'duplicate-line)
+(global-set-key (kbd "C-c d") (kbd "C-a C-@ C-e M-w RET C-y"))
+
+;; Add newlines before and after current line
+;; Useful for LaTeX \item lines
+(global-set-key (kbd "C-;") (kbd "C-a RET C-e C-o"))

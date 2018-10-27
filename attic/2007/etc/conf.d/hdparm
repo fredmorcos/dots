@@ -1,0 +1,17 @@
+# /etc/conf.d/hdparm: config file for /etc/init.d/hdparm
+
+# You can either set hdparm arguments for each drive using hdX_args,
+# discX_args, cdromX_args and genericX_args, e.g.
+#
+# hda_args="-d1 -X66"
+# disc1_args="-d1"
+# cdrom0_args="-d1"
+
+# or you can set options for all PATA drives
+pata_all_args="-d1"
+
+# or you can set options for all SATA drives
+sata_all_args=""
+
+# or, you can set hdparm options for all drives
+all_args="-d 1 -A 1 -m 16 -u 1 -a 64"

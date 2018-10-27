@@ -1,0 +1,51 @@
+[begin] (FluxBox)
+	[submenu] (XFce4)
+		[exec] (XFce settings manager) {/usr/X11R6/bin/xfce-setting-show}
+	[end]
+	[submenu] (Console)
+		[submenu] (Editors)
+			[exec] (VIM) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/vim}
+		[end]
+		[submenu] (Internet)
+			[exec] (Irssi) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/irssi}
+			[exec] (Lynx) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/lynx}
+		[end]
+		[submenu] (Shells)
+			[exec] (Python) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/python}
+			[exec] (Lua) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/lua}
+			[exec] (Tclsh) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/tclsh}
+			[exec] (Wish) {/usr/X11R6/bin/wish}
+		[end]
+		[submenu] (Multimedia)
+			[exec] (ALSA mixer) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/alsamixer}
+		[end]
+		[exec] (Info) {/usr/X11R6/bin/xterm -e /usr/X11R6/bin/info}
+	[end]
+	[submenu] (System utils)
+		[exec] (XAPM) {/usr/X11R6/bin/xapm}
+	[end]
+	[submenu] (Terminals)
+		[exec] (Xterm) {/usr/X11R6/bin/xterm}
+	[end]
+	[submenu] (Shells)
+		[exec] (Wish) {/usr/X11R6/bin/wish}
+	[end]
+	[submenu] (User utils)
+		[exec] (fbRun) {/usr/X11R6/bin/fbrun}
+	[end]
+	[submenu] (X11)
+		[exec] (Xterm) {/usr/X11R6/bin/xterm}
+		[exec] (Xclock) {/usr/X11R6/bin/xclock}
+	[end]
+	[submenu] (FluxBox system)
+		[workspaces] (Workspaces)
+		[submenu] (Styles)
+			[stylesmenu] (FluxBox styles) {/usr/X11R6/share/fluxbox/styles}
+			[stylesdir] (~/.fluxbox/styles)
+		[end]
+		[config] (Configure)
+		[reconfig] (Reload configuration)
+		[restart] (Restart)
+	[end]
+	[exit] (Exit)
+[end]

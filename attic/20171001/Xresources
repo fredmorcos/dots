@@ -1,0 +1,13 @@
+Xft.autohint: 0
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.antialias: 1
+Xft.lcdfilter: lcddefault
+Xft.dpi: 96
+
+rofi.modi:         ssh,window,drun,run
+rofi.sidebar-mode: true
+rofi.terminal:     xfce4-terminal
+rofi.ssh-client:   ssh
+rofi.ssh-command:  {terminal} -e "{ssh-client} {host}"

@@ -1,0 +1,69 @@
+! rxvt settings
+rxvt*urlLauncher:	 /usr/bin/firefox
+!rxvt*underlineurls:	 true
+!rxvt*dynamiccolors:	 true
+!rxvt*depth:		 16
+!rxvt*saveLines:	 200
+
+!rxvt*scrollBar:	 false
+!rxvt*scrollstyle:	 plain
+!rxvt*thickness:	 5
+!rxvt*scrollTtyOutput:	 false
+!rxvt*scrollTtyKeypress: true
+!rxvt*secondaryScroll:	 true
+
+!rxvt*loginshell:	 false
+!rxvt*font:		 xft:Liberation Mono:size=12:antialias=true
+rxvt*font:		 -*-liberation mono-medium-r-*-*-12-*-*-*-*-*-*-*
+!rxvt*buffered:		 false
+
+! urxvt colors
+rxvt*background:	 #222222
+rxvt*foreground:	 #cccccc
+
+! Tango Color Palette
+! black
+*color0:                 #000000
+*color8:                 #666666
+! red
+*color1:		 #CC0000
+*color9:		 #EF2929
+! green
+*color2:                 #73D216
+*color10:                #4E9A06
+! yellow
+*color3:                 #FCE94F
+*color11:                #EDD400
+! blue
+*color4:		 #3465A4
+*color12:		 #729FCF
+! magenta
+*color5:                 #AD7FA8
+*color13:                #AD7FA8
+! cyan
+*color6:                 #3465A4
+*color14:                #729FCF
+! white
+*color7:                 #FFFFFF
+*color15:                #FFFFFF
+
+! *scrollBar: false
+*saveLines: 10000
+! Rxvt*background: #efefef
+! Rxvt*foreground: #444444
+! Rxvt*color0:  #000000 ! black
+! Rxvt*color1:  #a40000 ! dark red
+! Rxvt*color2:  #4e9a06 ! dark green
+! Rxvt*color3:  #c4a000 ! dark yellow
+! Rxvt*color4:  #3465a4 ! dark blue
+! Rxvt*color5:  #5c3566 ! dark magenta
+! Rxvt*color6:  #e9b96e ! dark cyan
+! Rxvt*color7:  #babdb6 ! dark grey
+! Rxvt*color8:  #d3d7cf ! light grey
+! Rxvt*color9:  #cc0000 ! light red
+! Rxvt*color10: #73d216 ! light green
+! Rxvt*color11: #edd400 ! light yellow
+! Rxvt*color12: #729fcf ! light blue
+! Rxvt*color13: #75507b ! light magenta
+! Rxvt*color14: #ad7fa8 ! light cyan
+! Rxvt*color15: #ffffff ! white

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=/home/fnm/opt/thunderbird/thunderbird %u
+Name=Thunderbird
+Comment=Thunderbird Mail Client
+Icon=/home/fnm/opt/thunderbird/icon.png

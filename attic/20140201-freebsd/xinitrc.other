@@ -1,0 +1,6 @@
+/usr/local/bin/VBoxClient --clipboard
+/usr/local/bin/VBoxClient --display
+/usr/local/bin/VBoxClient --seamless
+exec /usr/local/bin/i3
+# exec /usr/local/bin/enlightenment_start
+# exec /usr/local/bin/mcwm

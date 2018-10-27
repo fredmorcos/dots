@@ -1,0 +1,144 @@
+set $mod Mod4
+font -*-liberation sans-medium-r-*-*-9-*-*-*-*-*-*-*
+floating_modifier $mod
+
+workspace_bar no
+
+# rules for special windows
+for_window [class="Popup"] floating enable
+for_window [class="qemu"]  floating enable
+# for_window [class="Firefox"] border 1pixel
+for_window [class="Skype"] floating enable
+for_window [class="Pidgin"] floating enable
+# new_window 1pixel
+
+# Notifications
+for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="Xfce4-notifyd"] border none
+for_window [class="Xfce4-notifyd"] unfocus
+
+# workspace navigation
+bindsym $mod+Control+Left workspace prev
+bindsym $mod+Control+Right workspace next
+
+# urxvtc -e | sakura -x -> for executing
+# urxvtc -hold | sakura -h -> for holding
+
+# start apps
+bindsym $mod+Control+a exec urxvtc -e alsamixer
+bindsym $mod+Control+c exec urxvtc -hold -e cal -3m
+bindsym $mod+Control+e exec claws-mail
+bindsym $mod+Control+f exec urxvtc -e newsbeuter
+bindsym $mod+Control+l exec i3lock -c 000000
+bindsym $mod+Control+m exec urxvtc -e htop
+# bindsym $mod+Control+n exec notify-send "`conky -i 1 -c ~/.i3/conky`"
+bindsym $mod+Control+p exec pidgin
+bindsym $mod+Control+r exec urxvtc -e cmus
+bindsym $mod+Control+s exec skype
+bindsym $mod+Control+t exec urxvtc
+bindsym $mod+Control+w exec firefox
+bindsym $mod+Control+x exec xchat
+
+bindsym $mod+Control+Shift+r exec sudo reboot
+bindsym $mod+Control+Shift+p exec sudo poweroff
+bindsym $mod+Control+Shift+u exec urxvtc -hold -e yaourt -Syu
+
+bindsym XF86AudioRaiseVolume exec amixer set Master 2%+ unmute
+bindsym XF86AudioLowerVolume exec amixer set Master 2%- unmute
+bindsym XF86AudioMute exec amixer set Master toggle
+
+# bindsym Print exec scrot -s
+bindsym Print exec scrot -d 1
+
+# kill focused window
+bindsym $mod+Shift+z kill
+
+# start dmenu (a program launcher)
+bindsym $mod+F2 exec dmenu_run -i -p '>' -nb black -nf white -fn "-*-liberation mono-medium-r-normal-*-12-*-96-96-*-*-*-*"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, default)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout default
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+# bindcode $mod+d focus child
+bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+exclam move workspace 1
+bindsym $mod+Shift+at move workspace 2
+bindsym $mod+Shift+numbersign move workspace 3
+bindsym $mod+Shift+dollar move workspace 4
+bindsym $mod+Shift+percent move workspace 5
+bindsym $mod+Shift+asciicircum move workspace 6
+bindsym $mod+Shift+ampersand move workspace 7
+bindsym $mod+Shift+asterisk move workspace 8
+bindsym $mod+Shift+parenleft move workspace 9
+bindsym $mod+Shift+parenright move workspace 10
+
+bindsym $mod+Shift+C reload
+bindsym $mod+Shift+R restart
+bindsym $mod+Shift+E exit
+
+mode "resize" {
+bindsym Left resize grow   left 5 px
+bindsym Down resize grow   down 5 px
+bindsym Up resize grow   up 5 px
+bindsym Right resize grow   right 5 px
+
+# back to normal: Enter or Escape
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bar {
+}
+
+# exec i3bar -c "conky -c ~/.i3/conky" -m -f "-*-liberation mono-medium-r-normal-*-12-*-96-96-*-*-*-*" --color-active-ws-bg "#285577" --color-inactive-ws-bg "#222222" --color-urgent-ws-bg "#2877AA" --color-focus-ws-bg "#287788"
+
+# exec i3status -c ~/.i3/status | while :; do read i3statusline; conkyline=`conky -i 2 -c ~/.i3/conkybar | tail -n 1`; echo "$i3statusline | $conkyline"; done | i3bar -dtop -f "-*-liberation mono-medium-r-normal-*-12-*-96-96-*-*-*-*" --color-active-ws-bg "#285577" --color-inactive-ws-bg "#222222" --color-urgent-ws-bg "#2877AA" --color-focus-ws-bg "#287788"
+# exec i3status -c ~/.i3/status | i3bar -dtop -f "-*-liberation mono-medium-r-normal-*-12-*-96-96-*-*-*-*" --color-active-ws-bg "#285577" --color-inactive-ws-bg "#222222" --color-urgent-ws-bg "#2877AA" --color-focus-ws-bg "#287788"

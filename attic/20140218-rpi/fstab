@@ -1,0 +1,9 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>                   <dir>                 <type><options>         <d><p>
+/dev/mmcblk0p1                    /boot                 vfat  defaults           0  0
+/dev/sda                          /media/external       ext4  defaults           0  2
+/media/external/System/var        /var                  none  bind               0  0
+# /media/external/System/swap.img none                  swap  defaults           0  0
+# tmpfs                           /var/cache/pacman/pkg tmpfs defaults,mode=755  0  0

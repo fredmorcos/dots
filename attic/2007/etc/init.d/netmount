@@ -1,0 +1,100 @@
+#!/sbin/runscript
+# Copyright 1999-2007 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+# Since NFS is so common and it's possible to mount it without needing
+# any additional daemon overhead, we'll account for it here.
+
+depend() {
+	# We list so many filesystems here so that people can do "use netmount"
+	# in their init.d scripts and not worry about random net filesystem scripts.
+	local myneed="" myuse=""
+	local nfs_mounts=$(awk '!/^[[:space:]]*#/ && ($3=="nfs" || $3=="nfs4") && $4 !~ /\<(noauto|nolock)\>/ { print $0 }' /etc/fstab)
+	if [[ -n ${nfs_mounts} ]] ; then
+		myneed="${myneed} portmap"
+	else
+		myuse="${myuse} portmap"
+	fi
+	need net ${myneed}
+	use afs-client amd autofs nfs nfsmount ${myuse}
+}
+
+remove_net_fs() {
+	local fs
+	rcfilesystems=" ${rcfilesystems} "
+	for fs in "$@" ; do
+		rcfilesystems=${rcfilesystems// ${fs} / }
+	done
+	rcfilesystems=${rcfilesystems# } # remove front and
+	rcfilesystems=${rcfilesystems% } #   back spaces
+}
+
+start() {
+	local rcfilesystems=${NET_FS_LIST}
+
+	# If the nfsmount script took care of the nfs filesystems,
+	# then there's no point in trying them twice
+	if service_started nfsmount ; then
+		remove_net_fs nfs nfs4
+	else
+		# Only try to mount NFS filesystems if portmap was started.
+		# This is to fix "hang" problems for new users who do not
+		# add portmap to the default runlevel.
+		local nfs_mounts=$(awk '!/^[[:space:]]*#/ && ($3=="nfs" || $3=="nfs4") && $4 !~ /\<(noauto|nolock)\>/ { print $0 }' /etc/fstab)
+		if ! service_started portmap && [[ -n ${nfs_mounts} ]] ; then
+			remove_net_fs nfs nfs4
+		fi
+	fi
+
+	rcfilesystems=${rcfilesystems// /,}   # convert to comma-separated
+
+	ebegin "Mounting network filesystems"
+	mount -at ${rcfilesystems}
+	ewend $? "Could not mount all network filesystems!"
+
+	return 0
+}
+
+stop() {
+	local rcfilesystems=${NET_FS_LIST}
+
+	rcfilesystems=${rcfilesystems// /,}   # convert to comma-separated
+
+	ebegin "Unmounting network filesystems"
+	[[ -z $(umount -art ${rcfilesystems} 2>&1) ]]
+	eend $? "Failed to simply unmount filesystems"
+	[[ $? == 0 ]] && return 0
+
+	# `umount -a` will fail if the filesystems are in use.
+	# Here we use fuser to kill off processes that are using 
+	# the filesystems so that we can unmount properly.
+	# We will gradually use harsher kill signals so that the 
+	# processes know we aren't screwing around here ;).
+	declare -a siglist=( "TERM" "KILL" "KILL" )
+	local retry=0
+	local remaining="go"
+
+	while [[ -n ${remaining} && ${retry} -lt 3 ]] ; do
+		# Populate $remaining with a newline-delimited list of network 
+		# filesystems.  Mount points have spaces swapped for '\040' (see 
+		# fstab(5)) so we have to translate them back to spaces.
+		remaining="$(awk '$3 ~ /'${NET_FS_LIST// /|}'/ { if ($2 != "/") print $2 }' /proc/mounts | sort -r)"
+		# Since we have to worry about the spaces being quoted properly, 
+		# we'll use `set --` and then "$@" to get the correct result.
+		IFS=$'\n'
+		set -- ${remaining//\\040/ }
+		unset IFS
+		[[ -z ${remaining} ]] && break
+
+		# try to unmount again
+		ebegin $'\t'"Unmounting network filesystems (retry #$((retry+1)))"
+		/bin/fuser -s -k -${siglist[$((retry++))]} -m "$@"
+		sleep 5
+		umount "$@" &>/dev/null
+		eend $? $'\t'"Failed to unmount filesystems"
+	done
+
+	return 0
+}
+
+# vim:ts=4

@@ -1,0 +1,9 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <fs>     <dir> <type> <options>       <dp>
+/dev/sda1  /boot vfat   defaults,rw     0 0
+/dev/md3   /     ext4   defaults,rw     0 1
+/dev/md4   /home ext4   defaults,rw     0 2
+/dev/sda2  none  swap   defaults,pri=1  0 0
+/dev/sdb2  none  swap   defaults,pri=1  0 0

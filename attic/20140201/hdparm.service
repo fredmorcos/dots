@@ -1,0 +1,13 @@
+[Unit]
+Description=Reduce HDD power management
+# After=suspend.target
+
+[Service]
+# Type=simple
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/sbin/hdparm -B 255 -S 255 /dev/sda /dev/sdb
+
+[Install]
+WantedBy=basic.target
+WantedBy=suspend.target

@@ -1,0 +1,43 @@
+Section "ServerLayout"
+	Identifier "X Server"
+	Option "StandbyTime" "10"
+	Option "SuspendTime" "20"
+	Option "OffTime" "30"
+	Option "BlankTime" "30"
+EndSection
+
+Section "Device"
+	Identifier "NVIDIADevice"
+	Driver     "nvidia"
+	Option     "OnDemandVBlankInterrupts" "1"
+	Option     "DamageEvents" "1"
+	Option	   "TripleBuffer" "1"
+
+	# Force Powermizer to a certain level at all times
+	# level 0x1=highest
+	# level 0x2=med
+	# level 0x3=lowest
+
+	# AC settings:
+	# Option "RegistryDwords" "PowerMizerLevelAC=0x3"
+	# Battery settings:
+	# Option "RegistryDwords" "PowerMizerLevel=0x3"
+
+	Option "RegistryDwords" "PerfLevelSrc=0x3333"
+	Option "NoLogo" "1"
+	Option "UseEvents" "1"
+EndSection
+
+# Section "Device"
+# 	Identifier "NVIDIADevice"
+# 	Driver     "nouveau"
+# 	Option     "GLXVBlank" "True"
+# EndSection
+
+Section "Extensions"
+    Option "Composite" "Disable"
+EndSection
+
+Section "ServerFlags"
+	Option	"IgnoreABI" "True"
+EndSection

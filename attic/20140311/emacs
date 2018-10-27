@@ -1,0 +1,39 @@
+(custom-set-faces
+ '(default ((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 128 :width normal)))))
+
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("marmalade" . "http://marmalade-repo.org/packages/")
+ '("melpa" . "http://melpa.milkbox.net/packages/"))
+;; (package-initialize)
+
+(autoload 'ghc-init "ghc" nil t)
+
+(custom-set-variables
+ '(blink-cursor-mode nil)
+ '(global-linum-mode t)
+ '(column-number-mode t)
+ '(global-flycheck-mode t)
+ ;; '(haskell-doc-chop-off-context nil)
+ ;; '(haskell-doc-show-global-types t)
+ '(haskell-font-lock-symbols (quote unicode))
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation
+			     turn-on-eldoc-mode
+			     turn-on-haskell-doc-mode
+			     turn-on-haskell-decl-scan
+			     ghc-init
+			     flycheck-mode)))
+ ;; '(haskell-stylish-on-save t)
+ '(haskell-tags-on-save t)
+ ;; '(hs-checkers-replace-with-suggestions t)
+ '(haskell-indent-offset 2)
+ '(menu-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(scroll-conservatively 101)
+ '(inhibit-startup-screen t))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f5] 'blink-matching-open)
+(global-set-key [f2] 'flycheck-mode)

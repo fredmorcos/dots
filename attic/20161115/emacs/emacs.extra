@@ -1,0 +1,100 @@
+;; geiser rust-mode racer rustfmt company-racer
+;; sly sly-company sly-macrostep sly-quicklisp
+;; lua-mode company-lua
+;; ggtags
+
+;; rust cargo rustfmt racer
+;;
+;; git clone -b 1.7.0 https://github.com/rust-lang/rust.git
+
+(defun rtags-setup ()
+  "Setup for rtags."
+  (defvar rtags-autostart-diagnostics)
+  (setq rtags-autostart-diagnostics t)
+  (rtags-diagnostics)
+  (defvar rtags-completions-enabled)
+  (setq rtags-completions-enabled t)
+  (defvar company-backends)
+  (push 'company-rtags company-backends)
+  (defvar c-mode-base-map)
+  (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
+  (require 'flycheck-rtags)
+  (flycheck-select-checker 'rtags)
+  (setq-local flycheck-highlighting-mode nil)
+  (setq-local flycheck-check-syntax-automatically nil))
+
+(add-hook 'c-mode-hook #'rtags-start-process-unless-running)
+(add-hook 'c-mode-hook #'rtags-enable-standard-keybindings)
+(add-hook 'c-mode-hook #'rtags-setup)
+
+(defun lua-mode-setup ()
+  "Setup for lua-mode."
+  (defvar company-backends)
+  (add-to-list 'company-backends 'company-lua)
+  (flycheck-add-next-checker 'lua '(t . luacheck))
+  (custom-set-variables
+   '(company-lua-interpreter 'lua53)))
+
+(add-hook 'lua-mode-hook        #'lua-mode-setup)
+
+(defvar inferior-lisp-program)
+(setq inferior-lisp-program "ecl")
+(add-hook 'sly-inferior-process-start-hook
+          (lambda ()
+            (message "INFERIOR PROCESS START")))
+(add-hook 'sly-mode-hook
+          (lambda ()
+            (require 'sly-autoloads)
+            (add-to-list 'sly-contribs 'sly-fancy)))
+(add-hook 'sly-mrepl-hook
+          (lambda ()
+            (paredit-mode)))
+(add-hook 'sly-mrepl-mode-hook
+          (lambda ()
+            (message "SLY MREPL MODE")))
+
+(defun scheme-mode-setup ()
+  "Setup geiser and other for Scheme."
+  (require 'geiser)
+  (menu-bar-mode)
+  (paredit-mode)
+  (custom-set-variables
+   '(gaiser-mode-auto-p t)
+   '(geiser-mode-start-repl-p t)
+   '(geiser-mode-smart-tab-p t)
+   '(geiser-active-implementations '(chicken))
+   '(geiser-implementations-alist '(((regexp "\\.scm$") chicken))))
+  (turn-on-geiser-mode))
+
+(defun rust-mode-setup ()
+  "Mode setup for Rust."
+  (rust-enable-format-on-save)
+  (custom-set-variables
+   '(racer-cmd "racer")
+   '(racer-rust-src-path "/home/fred/Workspace/rust/src")
+   '(rust-indent-offset 2))
+
+  (racer-mode)
+  (racer-activate)
+  (racer-turn-on-eldoc)
+  (flycheck-rust-setup)
+
+  (defvar company-backends)
+  (add-to-list 'company-backends 'company-racer)
+  (local-set-key (kbd "TAB") #'company-indent-or-complete-common)
+  (setq-default company-tooltip-align-annotations t))
+
+(defun ponylang-mode-setup ()
+  "Setup function for ponylang-mode."
+  (add-to-list 'load-path "~/.emacs.d/elpa/flycheck-pony")
+  (require 'flycheck-pony)
+  (custom-set-variables
+   '(tab-width 2)))
+
+(add-hook 'scheme-mode-hook     #'scheme-mode-setup)
+(add-hook 'rust-mode-hook       #'rust-mode-setup)
+(add-hook 'ponylang-mode-hook   #'ponylang-mode-setup)
+
+(helm-mode)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c C-m") 'helm-M-x)

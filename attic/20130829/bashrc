@@ -1,0 +1,24 @@
+[[ $- != *i* ]] && return
+
+# alias skype="LIBV4LCONTROL_FLAGS=3 LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype"
+
+# export PATH=$HOME/.cabal/bin:$HOME/bin:$HOME/Projects/play-2.1.0:$PATH
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.cabal/lib
+
+export PATH=$PATH:~/.cabal/bin:~/bin/copy
+
+alias cdpet='cd ~/Workspace/Projects/pet/'
+alias cdsysman='cd ~/Workspace/Projects/sysman/'
+
+alias hddmount='sudo mount -o rw,noatime,norelatime,users,noauto'
+alias hddunmount='sudo umount'
+
+# function multmount () {
+#     sudo cryptsetup luksOpen /dev/sdb Multimedia
+#     hddmount /dev/mapper/Multimedia /Multimedia
+# }
+
+# function multumount () {
+#     hddumount /Multimedia
+#     sudo cryptsetup luksClose Multimedia
+# }

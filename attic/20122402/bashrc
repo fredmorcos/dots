@@ -1,0 +1,29 @@
+#
+# ~/.bashrc
+#
+
+. ~/.bash_colors
+. ~/.bash_aliases
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export PATH=/usr/local/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export EDITOR=emacs
+
+alias ls="ls -lh --color=auto --group-directories-first"
+alias grep="grep --color=auto"
+alias pinstall="sudo pacman -S --needed "
+alias premove="sudo pacman -Rcsn "
+
+PROMPT_COMMAND='RET=$?;'
+RETURN_VALUE='$(echo $RET)'
+
+if [ -n "$SSH_CLIENT" ]; then
+	PS1="[\[$Red\]SSH:\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\] $RETURN_VALUE] "
+else
+	PS1="[\[$Red\]\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\] $RETURN_VALUE] "
+fi
+
+# PS1='[\u@\h \W]\$ '

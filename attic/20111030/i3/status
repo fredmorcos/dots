@@ -1,0 +1,32 @@
+general {
+ output_format = none
+ interval = 60
+}
+
+order  = "ethernet eth0"
+order += "wireless wlan0"
+order += "battery 0"
+order += "load"
+order += "time"
+
+ethernet eth0 {
+ format_up = "LAN %ip"
+ format_down = "LAN down"
+}
+
+wireless wlan0 {
+ format_up = "WLAN (%quality at %essid) %ip"
+ format_down = "WLAN down"
+}
+
+battery 0 {
+ format = "BAT %status %percentage %remaining"
+}
+
+time {
+ format = "%a, %d %b (%m) %H:%M"
+}
+
+load {
+ format = "%5min %15min"
+}

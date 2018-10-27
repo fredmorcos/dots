@@ -1,0 +1,14 @@
+Server = http://ftp5.gwdg.de/pub/linux/archlinux/$repo/os/$arch
+Server = http://mirror.lnx.sk/pub/linux/archlinux/$repo/os/$arch
+Server = http://archlinux.mirror.dkm.cz/pub/archlinux/$repo/os/$arch
+Server = http://archlinux.limun.org/$repo/os/$arch
+Server = http://mirror.de.leaseweb.net/archlinux/$repo/os/$arch
+Server = http://mirror.selfnet.de/archlinux/$repo/os/$arch
+Server = http://ftp.hosteurope.de/mirror/ftp.archlinux.org/$repo/os/$arch
+Server = http://artfiles.org/archlinux.org/$repo/os/$arch
+Server = http://mirrors.n-ix.net/archlinux/$repo/os/$arch
+Server = http://archlinux.puzzle.ch/$repo/os/$arch
+Server = http://mirrors.prometeus.net/archlinux/$repo/os/$arch
+
+# Mirror selected during installation
+Server = http://ftp5.gwdg.de/pub/linux/archlinux/$repo/os/$arch

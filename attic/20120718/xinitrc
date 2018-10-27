@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# ~/.xinitrc
+#
+# Executed by startx (run your window manager from here)
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
+xset +dpms
+xset dpms 600 900 1200
+xset r rate 300 35
+
+slock &
+nvidia-settings -a InitialPixmapPlacement=2
+nvidia-settings --load-config-only
+
+pnmixer &
+exec i3

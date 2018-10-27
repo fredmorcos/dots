@@ -1,0 +1,76 @@
+theme = "slick"
+icons = "awesome"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GiB"
+interval = 20
+warning = 5.0
+alert = 2.0
+
+[[block]]
+block = "disk_space"
+path = "/home"
+alias = "/home"
+info_type = "available"
+unit = "GiB"
+interval = 20
+warning = 5.0
+alert = 2.0
+
+# [[block]]
+# block = "focused_window"
+# max_width = 21
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mug}GB ({Mup}%)"
+format_swap = "{Sug}GB ({Sup}%)"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{MUg}GB ({MUp}%)"
+format_swap = "{SUg}GB ({SUp}%)"
+
+[[block]]
+block = "temperature"
+interval = 10
+collapsed = false
+
+[[block]]
+block = "cpu"
+interval = 5
+
+[[block]]
+block = "xrandr"
+interval = 2
+icons = true
+resolution = true
+
+[[block]]
+block = "net"
+device = "ens5"
+interval = 2
+graph_up = false
+graph_down = false
+
+[[block]]
+block = "net"
+device = "wls1"
+interval = 2
+graph_up = false
+graph_down = false
+
+[[block]]
+block = "sound"
+interval = 2
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %Y-%m-%d %R"

@@ -1,0 +1,13 @@
+Section "Module"
+    Load  "synaptics"
+    Load  "glx"
+    Load  "dri"
+    Load  "ddc"
+    Load  "dbe"
+    Load  "extmod"
+    Load  "bitmap"
+    Load  "type1"
+    Load  "freetype"
+    Load  "record"
+EndSection
+

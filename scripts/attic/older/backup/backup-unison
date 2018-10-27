@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Exit script if any command fails
+set -e
+
+UNISON_SERV='unison -socket 3333'
+
+echo "==> Backing up laptop configuration files and chatlogs"
+unison laptop
+unison chats
+
+echo "==> Starting unison server on RPI"
+ssh neuron $UNISON_SERV &
+sleep 2
+
+echo "==> Backing up RPI configuration files"
+unison rpi
+
+echo "==> Backing up Home directory to RPI"
+unison home -killserver
+
+echo "ssh neuron \"sudo -u kodi $UNISON_SERV\""
+exit 24
+
+echo "==> Starting unison server as user kodi on RPI"
+ssh neuron "sudo -u kodi $UNISON_SERV" &
+sleep 2
+
+echo "==> Backing up Media directory to RPI"
+unison media -killserver
+
+echo "==> Starting unison server as root on RPI"
+ssh neuron "sudo $UNISON_SERV" &
+sleep 2
+
+echo "==> Backing up .unison directories from RPI"
+unison unisonconf -killserver

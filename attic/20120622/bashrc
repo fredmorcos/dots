@@ -1,0 +1,31 @@
+#
+# ~/.bashrc
+#
+
+. /etc/profile
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+shopt -s autocd cdspell checkhash checkjobs checkwinsize cmdhist dirspell histappend hostcomplete progcomp
+
+case "$TERM" in
+	xterm*) TERM=xterm-256color
+	;;
+	linux*) TERM=linux-16color
+	;;
+esac
+
+export PATH=$HOME/usr/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
+
+export EDITOR=emacs
+
+PROMPT_COMMAND='RET=$?;'
+RETVAL='$(echo $RET)'
+PS1="[\u@\h][\j $RETVAL][\W]\$ "
+
+if [ -n "$SSH_CLIENT" ]; then
+	PS1='[SSH]$PS1'
+fi
+

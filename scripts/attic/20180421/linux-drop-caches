@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo -n "Dropping pagecache, dentries and inode caches... "
+echo 3 > /proc/sys/vm/drop_caches
+sync
+echo "DONE"

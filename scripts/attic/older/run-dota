@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+sudo cpupower -c all frequency-set -g performance
+pacmd set-source-volume 1 50000
+# nvidia-settings -a SyncToVBlank=0
+
+nvidia-settings &>/dev/null
+
+steam steam://rungameid/570 &>/dev/null
+
+nvidia-settings &>/dev/null
+
+# nvidia-settings -a SyncToVBlank=1
+pacmd set-source-volume 1 0
+sudo cpupower -c all frequency-set -g ondemand

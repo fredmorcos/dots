@@ -1,0 +1,31 @@
+* {
+    -GtkToolbar-internal-padding: 1;
+}
+
+.toolbar {
+    padding: 1;
+}
+
+.primary-toolbar.toolbar {
+    padding: 1;
+}
+
+.menubar {
+    background-image: none;
+}
+
+.scrollbar {
+    -GtkScrollbar-has-backward-stepper: no;
+    -GtkScrollbar-has-forward-stepper: no;
+    -GtkScrollbar-has-secondary-backward-stepper: no;
+    -GtkScrollbar-has-secondary-forward-stepper: no;
+    -GtkRange-slider-width: 8;
+    -GtkRange-stepper-spacing: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.scrollbar.slider,
+.scrollbar.button {
+    border-radius: 2;
+}
+

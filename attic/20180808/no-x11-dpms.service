@@ -1,0 +1,10 @@
+[Unit]
+Description=Disable X11 DPMS
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/xset -dpms
+Type=oneshot
+
+[Install]
+WantedBy=default.target

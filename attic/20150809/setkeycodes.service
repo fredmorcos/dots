@@ -1,0 +1,10 @@
+[Unit]
+Description=Load Keycodes at Bootup
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/setkeycodes 0x3a 29 0x1d 56 0x38 29
+
+[Install]
+WantedBy=basic.target

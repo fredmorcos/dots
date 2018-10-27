@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Type=Application
+Exec=nvidia-settings -l
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=NVIDIA Config Load
+Name=NVIDIA Config Load
+Comment[en_US]=Load NVIDIA settings at startup
+Comment=Load NVIDIA settings at startup

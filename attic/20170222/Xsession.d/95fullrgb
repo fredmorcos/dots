@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ "$(/usr/bin/xrandr -q --prop | grep 'Broadcast RGB: Full' | wc -l)" = "0" ] ; then
+   /usr/bin/xrandr --output HDMI3 --set "Broadcast RGB" "Full"
+fi

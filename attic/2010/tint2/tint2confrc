@@ -1,0 +1,6 @@
+#---------------------------------------------
+# TINT2CONF CONFIG FILE
+default_theme = (null)
+width = 300
+height = 400
+

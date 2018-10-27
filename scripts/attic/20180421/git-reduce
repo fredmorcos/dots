@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo -n "--> Git repository size before reduction: "
+du -sh .git
+
+echo "--v"
+git reflog expire --all --expire=now
+git gc --aggressive --prune=now
+echo "--^"
+
+echo -n "--> Git repository size after reduction: "
+du -sh .git
+

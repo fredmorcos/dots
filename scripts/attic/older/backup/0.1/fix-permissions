@@ -1,0 +1,56 @@
+#!/bin/bash
+
+common_dir="/media/External/Common"
+common2_dir="/media/External2/Common"
+home_dir="/media/External2/Home"
+hilda_home_backup_dir="/media/External/HildaBackupBackup"
+
+# --------- Common stuff starts here
+
+echo "fixing ownership on $common_dir $common2_dir"
+chown -R kodi:users $common_dir $common2_dir
+
+echo "fixing dir permissions on $common_dir $common2_dir"
+find $common_dir $common2_dir -type d -print0 | \
+    xargs -0 chmod ug+rwx,o+rx,o-w
+
+echo "fixing file permissions on $common_dir $common2_dir"
+find $common_dir $common2_dir -type f -print0 | \
+    xargs -0 chmod ug+rw,o+r,ugo-x,o-w
+
+echo "fixing access permissions on $common_dir $common2_dir itself only"
+chmod ugo+rwx $common_dir $common2_dir
+
+# --------- Home stuff starts here
+
+echo "fixing ownership on $home_dir/fred"
+chown -R fred:users "$home_dir/fred"
+
+echo "fixing ownership on $home_dir/hilda"
+chown -R hilda:users "$home_dir/hilda"
+
+echo "fixing dir permissions on $home_dir"
+find $home_dir -type d -print0 | \
+    xargs -0 chmod u+rwx,go-rwx
+
+echo "fixing file permissions on $home_dir"
+find $home_dir -type f -print0 | \
+    xargs -0 chmod u+rw,go-rwx
+
+echo "fixing access permissions on $home_dir itself only"
+chmod ugo+rwx $home_dir
+
+# ---------- HildaBackupBackup stuff starts here
+
+echo "fixing ownership on $hilda_home_backup_dir"
+chown -R hilda:users "$hilda_home_backup_dir"
+
+echo "fixing dir permissions on $hilda_home_backup_dir"
+find $hilda_home_backup_dir -type d -print0 | \
+    xargs -0 chmod u+rwx,go-rwx
+
+echo "fixing file permissions on $hilda_home_backup_dir"
+find $hilda_home_backup_dir -type f -print0 | \
+    xargs -0 chmod u+rw,go-rwx
+
+sync

@@ -1,0 +1,11 @@
+#
+# /etc/fstab: static file system information
+#
+# <file system>            <dir>            <type> <options>           <dp>
+/dev/mmcblk0p1             /boot            vfat   defaults,noatime    0 0
+/dev/mmcblk0p5             /                ext4   remount,rw,noatime  0 1
+/dev/mmcblk0p6             none             swap   defaults            0 0
+/dev/sdb                   /media/External  ext4   rw,noatime          0 2
+/media/External/System/var /var             none   bind                0 0
+/dev/sda1                  /media/External2 ext4   rw,noatime          0 2
+/media/External2/Home      /home            none   bind                0 0

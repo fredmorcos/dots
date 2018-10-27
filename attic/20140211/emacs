@@ -1,0 +1,98 @@
+;; Font
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "CosmicSansNeueMono" :foundry "unknown" :slant normal :weight normal :height 118 :width normal)))))
+
+;; Mode Variables
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-auto-show-menu t)
+ '(ac-auto-start t)
+ '(ac-quick-help-delay 0.1)
+ '(blink-cursor-mode nil)
+ '(c-backslash-column 80)
+ '(c-backslash-max-column 80)
+ '(c-basic-offset 2)
+ '(c-block-comment-prefix "* ")
+ '(c-cleanup-list (quote (brace-else-brace brace-elseif-brace compact-empty-funcall comment-close-slash)))
+ '(c-default-style (quote ((other . "gnu"))))
+ '(c-label-minimum-indentation 1)
+ '(column-number-mode t)
+ '(compilation-always-kill t)
+ '(compilation-auto-jump-to-first-error t)
+ '(electric-indent-mode t)
+ '(flycheck-display-errors-delay 0.1)
+ '(flyspell-delay 1)
+ '(global-cwarn-mode t)
+ ;; '(global-flycheck-mode t nil (flycheck))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(global-semantic-highlight-func-mode t)
+ '(global-semantic-show-unmatched-syntax-mode t)
+ '(global-whitespace-mode t)
+ '(global-whitespace-newline-mode nil)
+ '(haskell-indent-offset 2)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation turn-on-eldoc-mode turn-on-haskell-doc-mode turn-on-haskell-decl-scan)))
+ '(haskell-stylish-on-save t)
+ '(haskell-tags-on-save t)
+ '(history-delete-duplicates t)
+ '(history-length 100)
+ '(hs-checkers-replace-with-suggestions t)
+ '(icomplete-compute-delay 0.1)
+ '(icomplete-mode t)
+ '(ido-mode (quote both) nil (ido))
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(linum-format " %d ")
+ '(menu-bar-mode nil)
+ '(minibuffer-auto-raise t)
+ '(minibuffer-prompt-properties (quote (read-only t point-entered minibuffer-avoid-prompt face minibuffer-prompt)))
+ '(next-error-highlight 2)
+ '(next-error-highlight-no-select 2)
+ '(next-error-recenter (quote (4)))
+ '(read-file-name-completion-ignore-case t)
+ '(savehist-mode t)
+ '(scroll-bar-mode nil)
+ '(semantic-default-submodes (quote (global-semantic-highlight-func-mode global-semantic-idle-completions-mode global-semantic-idle-scheduler-mode global-semanticdb-minor-mode global-semantic-idle-local-symbol-highlight-mode global-semantic-show-unmatched-syntax-mode)))
+ '(semantic-mode t)
+ '(sh-indentation 2)
+ '(show-trailing-whitespace t)
+ '(tool-bar-mode nil)
+ '(which-function-mode t)
+ '(whitespace-action (quote (cleanup)))
+ '(whitespace-style (quote (face tabs lines-tail trailing space-before-tab indentation empty space-after-tab))))
+
+;; Misc.
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f5] 'blink-matching-open)
+(global-set-key [f2] 'flymake-haskell-multi-load)
+(windmove-default-keybindings)
+
+;; Package Management
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("marmalade" . "http://marmalade-repo.org/packages/")
+ '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
+
+(require 'yasnippet)
+(yas-reload-all)
+
+(load (expand-file-name "~/.emacs.d/elpa/flycheck-0.15/flycheck.el"))
+(load (expand-file-name "~/.emacs.d/elpa/auto-complete-1.4/auto-complete.el"))
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+(add-hook 'c-mode-hook 'flymake-mode)
+(add-hook 'prog-mode-hook '(lambda () (yas-minor-mode)))
+
+(add-hook 'before-save-hook 'whitespace-cleanup)

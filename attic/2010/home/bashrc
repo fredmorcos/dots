@@ -1,0 +1,15 @@
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+alias ls='ls --color=auto'
+# PS1='[\u@\h \W]\$ '
+PS1='\[\e[1;32m\][\u \W]\$\[\e[0m\] '
+
+export GNOME_DISABLE_CRASH_DIALOG=1
+export MOZ_DISABLE_PANGO=1
+export PYTHONDOCS=/usr/share/doc/python/html/
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.6/site-packages/
+export PATH=/usr/local/bin:/opt/dropbox/bin:$PATH
+export EDITOR=vim
+alias grep='grep --color=always'
+alias upgrade='yaourt -Syu'

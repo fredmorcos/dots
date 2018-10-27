@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -o posix
+set -o errexit
+set -o nounset
+set -o pipefail
+
+RSYNC_CMD="rsync -ahH --delete --progress --xattrs --acls $@"
+
+echo "RSYNC Command: $RSYNC_CMD"
+
+HOME=/home/fred
+HDD=/run/media/fred/MyFiles
+
+bk_cmd () {
+  echo -n "  >>> $1 --> $2: "
+  $RSYNC_CMD "$1" "$2"
+  echo ""
+}
+
+bk_cmd "$HOME/CommonDocs/"             "$HDD/CommonDocs/"
+bk_cmd "$HOME/Music/"                  "$HDD/Common/Music/"
+bk_cmd "$HOME/Music.New/"              "$HDD/Common/Music.New/"
+
+bk_cmd "$HOME/Documents/"              "$HDD/FredLaptop/Documents/"
+bk_cmd "$HOME/Downloads/"              "$HDD/FredLaptop/Downloads/"
+bk_cmd "$HOME/VPN/"                    "$HDD/FredLaptop/VPN/"
+bk_cmd "$HOME/Workspace/"              "$HDD/FredLaptop/Workspace/"
+
+bk_cmd "$HOME/.cert/"                  "$HDD/FredLaptop/DotConfigs/dot.cert/"
+bk_cmd "$HOME/.config/"                "$HDD/FredLaptop/DotConfigs/dot.config/"
+bk_cmd "$HOME/.gnupg/"                 "$HDD/FredLaptop/DotConfigs/dot.gnupg/"
+bk_cmd "$HOME/.ssh/"                   "$HDD/FredLaptop/DotConfigs/dot.ssh/"
+
+bk_cmd "$HDD/Common/Media/"            "common@synapse:Media/"
+bk_cmd "$HDD/Common/Music/"            "common@synapse:Music/"
+bk_cmd "$HDD/Common/Music.New/"        "common@synapse:Music.New/"
+bk_cmd "$HDD/Common/Pictures/"         "common@synapse:Pictures/"
+
+bk_cmd "$HDD/Fred/People/"             "fred@synapse:People/"
+
+bk_cmd "$HDD/FredLaptop/Documents/"    "fred@synapse:Documents/"
+bk_cmd "$HDD/FredLaptop/DotConfigs/"   "fred@synapse:DotConfigs/"
+bk_cmd "$HDD/FredLaptop/Downloads/"    "fred@synapse:Downloads/"
+bk_cmd "$HDD/FredLaptop/VPN/"          "fred@synapse:VPN/"
+bk_cmd "$HDD/FredLaptop/Workspace/"    "fred@synapse:Workspace/"
+
+bk_cmd "hilda@synapse:/home/hilda/"    "$HDD/Hilda/"

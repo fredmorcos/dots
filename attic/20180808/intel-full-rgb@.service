@@ -1,0 +1,10 @@
+[Unit]
+Description=Set Intel video driver to broadcast full RGB support to HDMI - Intel sucks so hard they cant color
+After=display-manager.service
+
+[Service]
+ExecStart=-/usr/bin/xrandr --output %i --set "Broadcast RGB" "Full"
+Type=oneshot
+
+[Install]
+WantedBy=default.target

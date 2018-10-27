@@ -1,0 +1,7 @@
+gtk-icon-sizes = "gtk-small-toolbar=16,16:gtk-button=16,16:gtk-dialog=32,32:gtk-large-toolbar=16,16:panel-menu=16,16:gtk-menu=16,16"
+gtk-enable-event-sounds = 0
+gtk-enable-animations = 0
+gtk-auto-mnemonics = 1
+gtk-menu-popdown-delay = 0
+gtk-menu-popup-delay = 0
+gtk-toolbar-stype = GTK_TOOLBAR_ICONS

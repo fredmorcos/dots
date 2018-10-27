@@ -1,0 +1,23 @@
+# sync machines
+
+function downsync () {
+    if [ "$#" -eq 0 ]
+    then
+	echo "No machine hostname supplied" 1>&2
+	return 1
+    fi
+
+    local rsync_cmd="rsync -varXgtzh --compress-level=9 --specials --delete --progress"
+    cd ~
+}
+
+function upsync () {
+    if [ "$#" -eq 0 ]
+    then
+	echo "No machine hostname supplied" 1>&2
+	return 1
+    fi
+
+    local rsync_cmd="rsync -varXgtzh --compress-level=9 --specials --delete --progress"
+    cd ~
+}

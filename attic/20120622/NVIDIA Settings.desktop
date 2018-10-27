@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=NVIDIA Settings
+Comment=Load NVIDIA Settings at Startup
+Exec=nvidia-settings --load-config-only
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
+

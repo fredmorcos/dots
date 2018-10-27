@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Icon=system-file-manager
+Name=File Manager Daemon
+GenericName=File Manager
+Comment=PCManFM Daemon
+Categories=System;FileTools;FileManager;Utility;Core;GTK;
+Exec=ionice -c 3 pcmanfm -d
+StartupNotify=false
+Terminal=false
+MimeType=inode/directory;
+Hidden=false

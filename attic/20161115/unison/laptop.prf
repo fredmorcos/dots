@@ -1,0 +1,47 @@
+root = /
+root = /home/fred/Archive/Conf/Laptop/
+
+force = /
+
+path = boot/loader
+path = etc/lightdm/lightdm.conf
+path = etc/modules-load.d
+path = etc/pacman.d/mirrorlist
+path = etc/profile.d/mozilla-common.sh
+path = etc/profile.d/path.sh
+path = etc/sysctl.d
+path = etc/systemd/coredump.conf.d
+path = etc/systemd/system/updatedb.timer.d
+path = etc/systemd/system/hdparm.service
+path = etc/systemd/coredump.conf
+path = etc/systemd/journald.conf
+path = etc/X11/XvMCConfig
+path = etc/bash.bashrc
+path = etc/crypttab
+path = etc/fstab
+path = etc/hostname
+path = etc/locale.conf
+path = etc/makepkg.conf
+path = etc/mdadm.conf
+path = etc/mkinitcpio.conf
+path = etc/pacman.conf
+path = etc/resolvconf.conf
+path = etc/vimrc
+path = etc/yaourtrc
+path = home/fred/.config/autostart
+path = home/fred/.config/beets/config.yaml
+path = home/fred/.config/fontconfig/fonts.conf
+path = home/fred/.config/MusicBrainz/Picard.conf
+path = home/fred/.config/aurvote
+path = home/fred/.getmail/getmailrc
+path = home/fred/.ssh
+path = home/fred/.emacs
+path = home/fred/.face.jpg
+path = home/fred/.gitconfig
+path = home/fred/.netrc
+path = home/fred/.nvidia-settings-rc
+path = home/fred/.tmux.conf
+path = home/fred/.Xresources
+
+follow = BelowPath home
+

@@ -1,0 +1,8 @@
+[Unit]
+Description=Purge unneeded locales
+
+[Service]
+ExecStart=/bin/localepurge
+
+[Install]
+WantedBy=basic.target

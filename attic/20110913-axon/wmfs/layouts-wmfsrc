@@ -1,0 +1,37 @@
+[layouts]
+        fg = "#FFFFFF"
+        bg = "#000000"
+
+        # Border around the layout button.
+        border = false
+
+        # Value menu or switch.
+        system = "menu"
+
+        # Keep layout geo for free layout
+        keep_layout_geo = false
+
+        # Enable split mode with client_resize_<direction>
+        cfactor_enable_split = true
+
+        # Symbol displayed for the selected layout in the list
+        selected_layout_symbol = "*"
+
+        # Width of layout button
+        # layout_button_width = x
+
+        # Tiling layouts.
+        [layout] type = "tile_right"         symbol = "R"  [/layout]
+        [layout] type = "tile_left"          symbol = "L"  [/layout]
+        [layout] type = "tile_top"           symbol = "T"  [/layout]
+        [layout] type = "tile_bottom"        symbol = "B"  [/layout]
+        [layout] type = "tile_grid"          symbol = "H"  [/layout]
+        [layout] type = "tile_grid_vertical" symbol = "V"  [/layout]
+        [layout] type = "mirror_vertical"    symbol = "MV" [/layout]
+        [layout] type = "mirror_horizontal"  symbol = "MH" [/layout]
+
+        # Other layouts.
+        [layout] type = "max"   symbol = "MAX"  [/layout]
+        [layout] type = "free"  symbol = "FREE" [/layout]
+
+[/layouts]

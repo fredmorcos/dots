@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<settings>
+  <store name="com.yworks.yfx.GlobalProperties">
+    <entry name="antialiasing" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="maxUndoDepth" type="java.lang.Integer">
+      <value>20</value>
+      <defaultValue>40</defaultValue>
+    </entry>
+    <entry name="locale" type="java.util.Locale">
+      <value>en</value>
+      <defaultValue>en</defaultValue>
+    </entry>
+  </store>
+  <store name="com.yworks.yfx.yfiles.YFilesModule">
+    <entry name="useCenteredPorts" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="createDefaultNodeLabel" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="snapping.edge.edge" type="java.lang.Integer">
+      <value>20</value>
+      <defaultValue>20</defaultValue>
+    </entry>
+    <entry name="snapping.node.node" type="java.lang.Integer">
+      <value>30</value>
+      <defaultValue>30</defaultValue>
+    </entry>
+    <entry name="snapping.color" type="java.awt.Color">
+      <value>#c0c0c0</value>
+      <defaultValue>#c0c0c0</defaultValue>
+    </entry>
+    <entry name="arrowClip" type="java.lang.Integer">
+      <value>0</value>
+      <defaultValue>0</defaultValue>
+    </entry>
+    <entry name="removeInnerBends" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="editLabelOnCreateEdge" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="snapping.mpm.edge.distance" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="createNodeOnClick" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="animatedZooming" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="detailsThreshold" type="java.lang.Double">
+      <value>0.3</value>
+      <defaultValue>0.3</defaultValue>
+    </entry>
+    <entry name="selectElementOnDrop" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="backgroundColor" type="java.awt.Color">
+      <value>#ffffff</value>
+      <defaultValue>#ffffff</defaultValue>
+    </entry>
+    <entry name="adjustNodeSizeToLabel" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="showModulesDialogs" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="gridColor" type="java.awt.Color">
+      <value>#808080</value>
+      <defaultValue>#808080</defaultValue>
+    </entry>
+    <entry name="bridgeScaling" type="y.view.BridgeCalculator">
+      <value>5</value>
+      <defaultValue>5</defaultValue>
+    </entry>
+    <entry name="showScrollbarsInEditMode" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="morphLayouts" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="paintNodesOverEdges" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="bridgeStyle" type="y.view.BridgeCalculator">
+      <value>2</value>
+    </entry>
+    <entry name="showGrid" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="editLabelOnCreateNode" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="backgroundMode" type="java.lang.Byte">
+      <value>4</value>
+      <defaultValue>4</defaultValue>
+    </entry>
+    <entry name="snapping.node.edge" type="java.lang.Integer">
+      <value>20</value>
+      <defaultValue>20</defaultValue>
+    </entry>
+    <entry name="maxDynamicPaletteEntries" type="java.lang.Integer">
+      <value>100</value>
+      <defaultValue>30</defaultValue>
+    </entry>
+    <entry name="useOrthogonalEdgeMode" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="gridSpacing" type="java.lang.Integer">
+      <value>30</value>
+      <defaultValue>30</defaultValue>
+    </entry>
+    <entry name="gridType" type="java.lang.String">
+      <value>POINTS</value>
+      <defaultValue>POINTS</defaultValue>
+    </entry>
+    <entry name="bridgeCrossing" type="y.view.BridgeCalculator">
+      <value>7</value>
+      <defaultValue>7</defaultValue>
+    </entry>
+    <entry name="snapping.enabled" type="java.lang.Boolean">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+  </store>
+  <store name="com.yworks.yfx.YEd">
+    <entry name="checkVersionOnStartup" type="java.lang.Boolean">
+      <value>false</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+  </store>
+  <store name="com.yworks.yfx.io.IoSupport">
+    <entry name="lastDirectory" type="java.io.File">
+      <value>/personal/reading-courses/presentations</value>
+      <defaultValue>/home/fred</defaultValue>
+    </entry>
+    <store name="lastFilterIndex">
+      <entry name="export" type="java.lang.Integer">
+        <value>2</value>
+        <defaultValue>2</defaultValue>
+      </entry>
+      <entry name="save" type="java.lang.Integer">
+        <value>0</value>
+        <defaultValue>0</defaultValue>
+      </entry>
+    </store>
+  </store>
+  <store name="com.yworks.yfx.DialogManager">
+    <store name="docked">
+      <entry name="y.module.SmartOrganicLayoutModule" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="EPS_OUTPUT" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="y.module.DirectedOrthogonalLayoutModule" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="y.module.OrthogonalLayoutModule" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="y.module.IncrementalHierarchicLayoutModule" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="y.module.TreeLayoutModule" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="y.module.OrthogonalEdgeRouterModule" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+      <entry name="Preferences" type="java.lang.Boolean">
+        <value>false</value>
+        <defaultValue>false</defaultValue>
+      </entry>
+    </store>
+  </store>
+  <store name="INCREMENTAL_HIERARCHIC">
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.MINIMUM_EDGE_DISTANCE" type="java.lang.String">
+      <value>30.0</value>
+      <defaultValue>15.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.SELECTED_ELEMENTS_INCREMENTALLY" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.NODE_TO_EDGE_DISTANCE" type="java.lang.String">
+      <value>100.0</value>
+      <defaultValue>15.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.LAYOUT_COMPONENTS_SEPARATELY" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.MINIMUM_EDGE_LENGTH" type="java.lang.String">
+      <value>20.0</value>
+      <defaultValue>20.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.MAXIMAL_DURATION" type="java.lang.String">
+      <value>30</value>
+      <defaultValue>10</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.HALO" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.MINIMUM_SIZE" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.MINIMUM_SLOPE" type="java.lang.String">
+      <value>0.25</value>
+      <defaultValue>0.25</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.AUTOMATIC_EDGE_GROUPING_ENABLED" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.BACKLOOP_ROUTING" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.MINIMUM_LAYER_DISTANCE" type="java.lang.String">
+      <value>10.0</value>
+      <defaultValue>10.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.LABELING.EDGE_LABEL_MODEL" type="java.lang.String">
+      <value>EDGE_LABEL_MODEL_BEST</value>
+      <defaultValue>EDGE_LABEL_MODEL_BEST</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.MINIMUM_LAST_SEGMENT_LENGTH" type="java.lang.String">
+      <value>20.0</value>
+      <defaultValue>15.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.PC_OPTIMIZATION_ENABLED" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.LAYER_ALIGNMENT" type="java.lang.String">
+      <value>CENTER</value>
+      <defaultValue>CENTER</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GROUPING.GROUP_LAYERING_STRATEGY" type="java.lang.String">
+      <value>RECURSIVE_LAYERING</value>
+      <defaultValue>GLOBAL_LAYERING</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.USE_DRAWING_AS_SKETCH" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.NODE_TO_NODE_DISTANCE" type="java.lang.String">
+      <value>40.0</value>
+      <defaultValue>30.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.SYMMETRIC_PLACEMENT" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.ORIENTATION" type="java.lang.String">
+      <value>LEFT_TO_RIGHT</value>
+      <defaultValue>TOP_TO_BOTTOM</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GROUPING.GROUP_HORIZONTAL_COMPACTION" type="java.lang.String">
+      <value>GROUP_HORIZONTAL_COMPACTION_MAX</value>
+      <defaultValue>GROUP_HORIZONTAL_COMPACTION_MAX</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GROUPING.GROUP_ALIGNMENT" type="java.lang.String">
+      <value>GROUP_ALIGN_TOP</value>
+      <defaultValue>GROUP_ALIGN_TOP</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.MAXIMUM_SIZE" type="java.lang.String">
+      <value>1000.0</value>
+      <defaultValue>1000.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.SWIMLANES.USE_ORDER_FROM_SKETCH" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.SCALE" type="java.lang.String">
+      <value>1.0</value>
+      <defaultValue>1.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.SWIMLANES.SWIMLANE_SPACING" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.RANKING_POLICY" type="java.lang.String">
+      <value>HIERARCHICAL_OPTIMAL</value>
+      <defaultValue>HIERARCHICAL_OPTIMAL</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GENERAL.EDGE_TO_EDGE_DISTANCE" type="java.lang.String">
+      <value>30.0</value>
+      <defaultValue>15.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.LABELING.EDGE_LABELING" type="java.lang.String">
+      <value>EDGE_LABELING_NONE</value>
+      <defaultValue>EDGE_LABELING_NONE</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.LABELING.CONSIDER_NODE_LABELS" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.GROUPING.GROUP_ENABLE_COMPACTION" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.EDGE_ROUTING" type="java.lang.String">
+      <value>EDGE_ROUTING_ORTHOGONAL</value>
+      <defaultValue>EDGE_ROUTING_ORTHOGONAL</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.RANKS.COMPONENT_ARRANGEMENT_POLICY" type="java.lang.String">
+      <value>POLICY_TOPMOST</value>
+      <defaultValue>POLICY_TOPMOST</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.EDGE_SETTINGS.MINIMUM_FIRST_SEGMENT_LENGTH" type="java.lang.String">
+      <value>20.0</value>
+      <defaultValue>10.0</defaultValue>
+    </entry>
+    <entry name="INCREMENTAL_HIERARCHIC.SWIMLANES.TREAT_ROOT_GROUPS_AS_SWIMLANES" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+  </store>
+  <store name="ORTHOGONAL_EDGE_ROUTER">
+    <entry name="ORTHOGONAL_EDGE_ROUTER.REROUTING_ENABLED" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.CONSIDER_NODE_LABELS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.MINIMUM_DISTANCE_TO_EDGE" type="java.lang.String">
+      <value>4</value>
+      <defaultValue>4</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.ROUTE_ON_GRID" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.CROSSING_COST" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.MONOTONIC_RESTRICTON" type="java.lang.String">
+      <value>MONOTONIC_NONE</value>
+      <defaultValue>MONOTONIC_NONE</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.GRID_SPACING" type="java.lang.String">
+      <value>2</value>
+      <defaultValue>2</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.USE_CUSTOM_MINIMUM_DISTANCE_TO_NODE" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.SPACE_DRIVEN_VS_CENTER_DRIVEN_SEARCH" type="java.lang.String">
+      <value>0.5</value>
+      <defaultValue>0.5</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.CUSTOM_MINIMUM_DISTANCE_TO_NODE" type="java.lang.String">
+      <value>0</value>
+      <defaultValue>0</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.LOCAL_CROSSING_MINIMIZATION" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.SCOPE" type="java.lang.String">
+      <value>ALL_EDGES</value>
+      <defaultValue>ALL_EDGES</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_EDGE_ROUTER.ENFORCE_MONOTONIC_RESTRICTIONS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+  </store>
+  <store name="DIRECTED_ORTHOGONAL_LAYOUTER">
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.TARGET_ARROW" type="java.lang.String">
+      <value>1</value>
+      <defaultValue>1</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LABELING.EDGE_LABELING" type="java.lang.String">
+      <value>NONE</value>
+      <defaultValue>NONE</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.ORIENTATION" type="java.lang.String">
+      <value>TOP_TO_BOTTOM</value>
+      <defaultValue>TOP_TO_BOTTOM</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.USE_EXISTING_DRAWING_AS_SKETCH" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.USE_AS_CRITERIA" type="java.lang.String">
+      <value>LINE_COLOR</value>
+      <defaultValue>LINE_COLOR</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.LINE_COLOR" type="java.lang.String">
+      <value>#ff0000</value>
+      <defaultValue>#ff0000</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LABELING.CONSIDER_NODE_LABELS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.GRID" type="java.lang.String">
+      <value>25</value>
+      <defaultValue>25</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LABELING.EDGE_LABEL_MODEL" type="java.lang.String">
+      <value>BEST</value>
+      <defaultValue>BEST</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.LINE_TYPE" type="java.lang.String">
+      <value>1</value>
+      <defaultValue>1</defaultValue>
+    </entry>
+    <entry name="DIRECTED_ORTHOGONAL_LAYOUTER.LAYOUT.AUTO_GROUP_DIRECTED_EDGES" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+  </store>
+  <store name="SMARTORGANIC">
+    <entry name="SMARTORGANIC.VISUAL.MINIMAL_NODE_DISTANCE" type="java.lang.String">
+      <value>20.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.AUTO_CLUSTERING_QUALITY" type="java.lang.String">
+      <value>0.5</value>
+      <defaultValue>0.5</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.AVOID_NODE_EDGE_OVERLAPS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CIRC_CAGE_USE_VIEW" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_Y" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.ELLIPTICAL_CAGE_HEIGHT" type="java.lang.String">
+      <value>1000.0</value>
+      <defaultValue>1000.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_CENTER_Y" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_WIDTH" type="java.lang.String">
+      <value>1000.0</value>
+      <defaultValue>1000.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.ALLOW_NODE_OVERLAPS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.ELL_CAGE_USE_VIEW" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.ELLIPTICAL_CAGE_Y" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.COMPACTNESS" type="java.lang.String">
+      <value>0.5</value>
+      <defaultValue>0.5</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.RECT_CAGE_USE_VIEW" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.SCOPE" type="java.lang.String">
+      <value>ALL</value>
+      <defaultValue>ALL</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.AR_CAGE_USE_VIEW" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_CENTER_X" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.ELLIPTICAL_CAGE_X" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_X" type="java.lang.String">
+      <value>0.0</value>
+      <defaultValue>0.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.USE_AUTO_CLUSTERING" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.ELLIPTICAL_CAGE_WIDTH" type="java.lang.String">
+      <value>1000.0</value>
+      <defaultValue>1000.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_RADIUS" type="java.lang.String">
+      <value>1000.0</value>
+      <defaultValue>1000.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.GROUPING.GROUP_LAYOUT_POLICY" type="java.lang.String">
+      <value>IGNORE_GROUPS</value>
+      <defaultValue>LAYOUT_GROUPS</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_RATIO" type="java.lang.String">
+      <value>1.0</value>
+      <defaultValue>1.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.ALGORITHM.ACTIVATE_DETERMINISTIC_MODE" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.PREFERRED_EDGE_LENGTH" type="java.lang.String">
+      <value>40</value>
+      <defaultValue>40</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.RESTRICT_OUTPUT" type="java.lang.String">
+      <value>OUTPUT_CIRCULAR_CAGE</value>
+      <defaultValue>NONE</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.RESTRICTIONS.CAGE_HEIGHT" type="java.lang.String">
+      <value>1000.0</value>
+      <defaultValue>1000.0</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.ALGORITHM.QUALITY_TIME_RATIO" type="java.lang.String">
+      <value>1.0</value>
+      <defaultValue>0.6</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.VISUAL.CONSIDER_NODE_LABELS" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="SMARTORGANIC.ALGORITHM.MAXIMAL_DURATION" type="java.lang.String">
+      <value>30</value>
+      <defaultValue>30</defaultValue>
+    </entry>
+  </store>
+  <store name="TREE">
+    <entry name="TREE.DIRECTED.PORT_STYLE" type="java.lang.String">
+      <value>NODE_CENTER</value>
+      <defaultValue>NODE_CENTER</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.ALLOW_OVERLAPS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.MINIMAL_NODE_DISTANCE" type="java.lang.String">
+      <value>20</value>
+      <defaultValue>20</defaultValue>
+    </entry>
+    <entry name="TREE.GENERAL.ROUTING_STYLE_FOR_NON_TREE_EDGES" type="java.lang.String">
+      <value>ROUTE_ORGANIC</value>
+      <defaultValue>ROUTE_ORGANIC</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.FROM_SKETCH" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.MINIMAL_EDGE_LENGTH" type="java.lang.String">
+      <value>40</value>
+      <defaultValue>40</defaultValue>
+    </entry>
+    <entry name="TREE.GENERAL.ALLOW_NON_TREES" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.LEAF_LAYOUT_POLICY" type="java.lang.String">
+      <value>SIBLINGS_ON_SAME_LAYER_STYLE</value>
+      <defaultValue>SIBLINGS_ON_SAME_LAYER_STYLE</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.MINIMAL_LAYER_DISTANCE" type="java.lang.String">
+      <value>40</value>
+      <defaultValue>40</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.ROOT_NODE_POLICY" type="java.lang.String">
+      <value>DIRECTED_ROOT</value>
+      <defaultValue>DIRECTED_ROOT</defaultValue>
+    </entry>
+    <entry name="TREE.AR.BEND_DISTANCE" type="java.lang.String">
+      <value>20</value>
+      <defaultValue>20</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.ENFORCE_GLOBAL_LAYERING" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.HV.VERTICAL_SPACE" type="java.lang.String">
+      <value>10</value>
+      <defaultValue>10</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.ORTHOGONAL_EDGE_ROUTING" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.AR.HORIZONTAL_SPACE" type="java.lang.String">
+      <value>10</value>
+      <defaultValue>10</defaultValue>
+    </entry>
+    <entry name="TREE.AR.USE_VIEW_ASPECT_RATIO" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.COMPACTNESS_FACTOR" type="java.lang.String">
+      <value>0.5</value>
+      <defaultValue>0.5</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.VERTICAL_ALIGNMENT" type="java.lang.String">
+      <value>0.5</value>
+      <defaultValue>0.5</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.PREFERRED_CHILD_WEDGE" type="java.lang.String">
+      <value>340</value>
+      <defaultValue>340</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.ORIENTATION" type="java.lang.String">
+      <value>TOP_TO_BOTTOM</value>
+      <defaultValue>TOP_TO_BOTTOM</defaultValue>
+    </entry>
+    <entry name="TREE.AR.VERTICAL_SPACE" type="java.lang.String">
+      <value>10</value>
+      <defaultValue>10</defaultValue>
+    </entry>
+    <entry name="TREE.BALLOON.PREFERRED_ROOT_WEDGE" type="java.lang.String">
+      <value>360</value>
+      <defaultValue>360</defaultValue>
+    </entry>
+    <entry name="TREE.HV.HORIZONTAL_SPACE" type="java.lang.String">
+      <value>10</value>
+      <defaultValue>10</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.INTEGRATED_EDGE_LABELING" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.INTEGRATED_NODE_LABELING" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.AR.ASPECT_RATIO" type="java.lang.String">
+      <value>1.41</value>
+      <defaultValue>1.41</defaultValue>
+    </entry>
+    <entry name="TREE.GENERAL.ACT_ON_SELECTION_ONLY" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="TREE.GENERAL.LAYOUT_STYLE" type="java.lang.String">
+      <value>DIRECTED</value>
+      <defaultValue>DIRECTED</defaultValue>
+    </entry>
+    <entry name="TREE.DIRECTED.BUS_ALIGNMENT" type="java.lang.String">
+      <value>0.5</value>
+      <defaultValue>0.5</defaultValue>
+    </entry>
+  </store>
+  <store name="ORTHOGONAL_LAYOUTER">
+    <entry name="ORTHOGONAL_LAYOUTER.LABELING.EDGE_LABELING" type="java.lang.String">
+      <value>NONE</value>
+      <defaultValue>NONE</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.USE_RANDOMIZATION" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.LENGTH_REDUCTION" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.GRID" type="java.lang.String">
+      <value>25</value>
+      <defaultValue>25</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.PERCEIVED_BENDS_POSTPROCESSING" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.SELECTED_ELEMENTS_INCREMENTALLY" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LABELING.EDGE_LABEL_MODEL" type="java.lang.String">
+      <value>BEST</value>
+      <defaultValue>BEST</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.CROSSING_POSTPROCESSING" type="java.lang.String">
+      <value>true</value>
+      <defaultValue>true</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.STYLE" type="java.lang.String">
+      <value>NORMAL</value>
+      <defaultValue>NORMAL</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.GROUPING.GROUP_LAYOUT_QUALITY" type="java.lang.String">
+      <value>1.0</value>
+      <defaultValue>1.0</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.GROUPING.GROUP_LAYOUT_POLICY" type="java.lang.String">
+      <value>LAYOUT_GROUPS</value>
+      <defaultValue>LAYOUT_GROUPS</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LABELING.CONSIDER_NODE_LABELS" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.USE_FACE_MAXIMIZATION" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+    <entry name="ORTHOGONAL_LAYOUTER.LAYOUT.USE_EXISTING_DRAWING_AS_SKETCH" type="java.lang.String">
+      <value>false</value>
+      <defaultValue>false</defaultValue>
+    </entry>
+  </store>
+</settings>

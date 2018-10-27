@@ -1,0 +1,25 @@
+root = socket://neuron:3333//
+root = /home/fred/Archive/Conf/RPI/
+
+force = socket://neuron:3333//
+
+path = boot/cmdline.txt
+path = boot/config.txt
+path = etc/iptables
+path = etc/modules-load.d
+path = etc/ssh/sshd_config
+path = etc/sysctl.d
+path = etc/systemd/coredump.conf
+path = etc/systemd/journald.conf
+path = etc/systemd/system/hdparm.service
+path = etc/bash.bashrc
+path = etc/fstab
+path = etc/hostname
+path = etc/pacman.conf
+path = etc/rsyncd.conf
+path = etc/vsftpd.conf
+path = etc/vsftpd.userlist
+path = etc/yaourtrc
+path = home/fred/.ssh
+path = media/External2/fix-permissions
+

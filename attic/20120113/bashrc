@@ -1,0 +1,48 @@
+. ~/.bash_colors
+. ~/.bash_aliases
+
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+PS1="[\[$Red\]\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\]] "
+
+export PATH="$HOME/opt/bin:$PATH:/usr/local/bin"
+export LD_LIBRARY_PATH="$HOME/opt/lib:$LD_LIBRARY_PATH:/usr/local/lib"
+export MANPATH="$HOME/opt/man:$MANPATH:/usr/local/man"
+export PKG_CONFIG_PATH="$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig"
+
+export BROWSER=firefox
+export EDITOR=emacs
+export VISUAL=$EDITOR
+export COLORTERM=yes
+export SHELL=/bin/bash
+export MOZ_GLX_IGNORE_BLACKLIST=1
+export MOZ_DISABLE_PANGO=1
+export GDK_USE_XFT=0
+export QT_XFT=false
+export HISTCONTROL=ignoreboth
+
+alias pinstall="yaourt -S"
+alias premove="yaourt -Rcsn"
+alias pupgrade="yaourt -Syu"
+
+alias ls="ls -lh --color=auto --group-directories-first"
+alias ll="ls -l"
+alias la="ls -a"
+alias lla="ls -la"
+alias grep="grep --color=auto"
+
+# web aliases
+# alias -s org=$BROWSER
+# alias -s com=$BROWSER
+# alias -s net=$BROWSER
+# alias -s c=$EDITOR
+# alias -s h=$EDITOR
+
+# helios sync
+HELIOS="fmorcos@helios.ica.jku.at"
+alias rsync_cmd="rsync -varXgtzh --compress-level=9 --specials --delete --progress"
+alias ds_helios="cd ~ && rsync_cmd $HELIOS:~/work workspace"
+alias us_helios="cd ~ && rsync_cmd workspace/work $HELIOS:~/"
+
+# 

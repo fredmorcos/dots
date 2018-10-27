@@ -1,0 +1,10 @@
+xft.antialias: true
+xft.autohint:  false
+xft.dpi:       96
+xft.hinting:   true
+xft.hintstyle: hintfull
+xft.lcdfilter: lcddefault
+xft.rgba:      rgb
+
+xcursor.theme: Neutral
+xcursor.size:  22

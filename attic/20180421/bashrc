@@ -1,0 +1,100 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
+
+# PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+
+# c_green='\[\e[32m\]'
+# c_clear='\[\e[0m\]'
+# PS1='[\j][$?] \W \$ '
+# PS1="$c_green>$c_clear$PS1"
+# export PS1
+
+# PS1='[\u@\h \W]\$ '
+# PS1="\[\e[7;34m\]\w\[\e[0m\] ❱  "
+PS1="\[\e[7;34m\]\w\[\e[0m\] >  "
+
+LANG=en_US.UTF-8
+LC_COLLATE=C
+EDITOR=emacs
+HISTCONTROL="$HISTCONTROL ignoredups erasedups:ignoreboth"
+TERM=xterm-256color
+
+export LANG LC_COLLATE EDITOR HISTCONTROL TERM
+
+eval "$(dircolors)"
+
+shopt -s autocd cdspell cmdhist dirspell histappend
+set -o noclobber
+
+alias grep='grep --color'
+alias ls='exa'
+# alias ls='ls --color=auto'
+alias ll='ls -lghH --group-directories-first --git -@'
+alias la='ll -a'
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
+alias up='yaourt -Syua'
+alias upall='up --devel --noconfirm'
+alias dired='emacs -nw .'
+alias em=emacs
+alias e=emacs
+alias ip='ip -c'
+
+alias neuron_systemctl='ssh neuron sudo systemctl'
+alias neuron_reboot='neuron_systemctl reboot'
+alias neuron_poweroff='neuron_systemctl poweroff'
+alias neuron_rsyncd_start='neuron_systemctl start rsyncd'
+alias neuron_rsyncd_stop='neuron_systemctl stop rsyncd'
+alias neuron_kodi_restart='neuron_systemctl restart kodi'
+alias neuron_kodi_stop='neuron_systemctl stop kodi polkit upower avahi-dnsconfd avahi-daemon.service'
+
+alias dlsub='subdl -i --output="%m.%L.%S"'
+alias yt480="youtube-dl -f '[height<=480]'"
+alias yt720="youtube-dl -f '[height<=720]'"
+
+weather() {
+    curl "http://wttr.in/$1"
+}
+
+alias weatherlz='weather Linz'
+
+alias cpupower_cmd='sudo cpupower -c all frequency-set -g'
+alias cpupowersave='cpupower_cmd powersave'
+alias cpupowerperf='cpupower_cmd performance'
+alias cpupowerdyn='cpupower_cmd ondemand'
+
+alias diskoff='udisksctl power-off --block-device'
+alias x11rec='cnee --record --mouse -sk q -t 2 -o'
+alias x11play='cnee --replay -sk q -f'
+
+# alias gitsub='git submodule foreach --recursive git'
+
+gitall() {
+  for i in *; do
+    if [ -e "$i/.git" ] || [ -d "$i/.git" ]; then
+      cd "$i" || exit
+      echo ">>> git $*: $i"
+      git "$@"
+      cd .. || exit
+    fi
+  done
+}
+
+alias gitallstatus='gitall status -s'
+alias gitallpp='gitall pull -q && gitall push -q'
+
+alias find-archives='find . -iname "*.rar*" -or -iname "*.tar" -or -iname "*.tar.*" -or -iname "*.zip*" -or -iname "*.7z*" -or -iname "*.tpz"'
+alias find-lossless-music='find . -iname "*.wav*" -or -iname "*.flac*" -or -iname "*.m4a*" -or -iname "*.m4v*" -or -iname "*.wma*"'
+alias find-lossless-video='find . -iname "*.avi*"'
+# shellcheck disable=SC2142
+alias find-junk-files='find . -iname "\~\$*" -or -iname "*thumbs.db*" -or -iname ".DS*"'
+

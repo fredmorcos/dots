@@ -1,0 +1,38 @@
+gtk-theme-name                   = "Clearlooks"
+gtk-font-name                    = "Liberation Sans 9"
+gtk-icon-sizes                   = "panel=16,16:panel-menu=16,16:gtk-menu=16,16:gtk-button=16,16:gtk-small-toolbar=16,16:gtk-large-toolbar=16,16:gtk-dnd=16,16:gtk-dialog=64,64"
+gtk-fallback-icon-theme          = "tango"
+gtk-auto-mnemonics               = 1
+gtk-button-images                = 0
+gtk-cursor-blink                 = 0
+gtk-enable-animations            = 0
+gtk-enable-event-sounds          = 0
+gtk-enable-input-feedback-sounds = 0
+gtk-error-bell                   = 0
+gtk-icon-theme-name              = "tango"
+gtk-menu-images                  = 0
+gtk-menu-popdown-delay           = 0
+gtk-menu-popup-delay             = 0
+gtk-recent-files-limit           = 2
+gtk-sound-theme-name             = NULL
+gtk-toolbar-icon-size            = GTK_ICON_SIZE_SMALL_TOOLBAR
+gtk-toolbar-style                = GTK_TOOLBAR_ICONS
+
+gtk-xft-antialias 		 = 1
+gtk-xft-dpi 			 = 96
+gtk-xft-hinting 		 = 1
+gtk-xft-hintstyle 		 = "hintfull"
+gtk-xft-rgba 			 = "rgb"
+
+# gtk-timeout-expand       	 = 100
+# gtk-timeout-initial      	 = 50
+# gtk-timeout-repeat 		 = 5
+
+style "scrollbar-arrows" {
+	GtkScrollbar::has-backward-stepper           = 0
+	GtkScrollbar::has-forward-stepper            = 0
+	GtkScrollbar::has-secondary-backward-stepper = 0
+	GtkScrollbar::has-secondary-forward-stepper  = 0
+	GtkScrollbar::slider-width                   = 8
+}
+class "GtkScrollbar" style "scrollbar-arrows"

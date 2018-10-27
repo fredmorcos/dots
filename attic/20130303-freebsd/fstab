@@ -1,0 +1,5 @@
+# Device	Mountpoint	FStype	Options	    Dump	Pass#
+/dev/ada0p2	/		ufs	rw,noatime  1 1
+/dev/ada0p3.eli /usr/home       ufs     rw,noatime  1 2
+linproc         /compat/linux/proc      linprocfs       rw 0 0
+/dev/ada0p4     none            swap    sw              0 0

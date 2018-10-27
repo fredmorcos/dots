@@ -1,0 +1,47 @@
+"exo-open --launch WebBrowser"
+  Control+Alt+Mod2 + w
+
+"emacs"
+  Control+Alt+Mod2 + e
+
+"xfce4-terminal"
+  Control+Alt+Mod2 + t
+
+"exo-open --launch FileManager"
+  Control+Alt+Mod2 + h
+
+"i3lock -c 000000"
+  Mod2+Mod4 + l
+
+"pidgin"
+  Control+Alt+Mod2 + p
+
+"skype"
+  Control+Alt+Mod2 + s
+
+"pavucontrol"
+  Control+Alt+Mod2 + o
+
+"rofi -show window"
+  Mod2+Mod4 + w
+
+"rofi -show run"
+  Mod2+Mod4 + r
+
+"rofi -show drun"
+  Mod2+Mod4 + d
+
+"xfce4-appfinder"
+  Alt+Mod2 + F2
+
+"xfce4-popup-whiskermenu"
+  Alt+Mod2 + F1
+
+"xfce4-screenshooter -f"
+  Mod2 + Print
+
+"xfce4-screenshooter -w"
+  Alt+Mod2 + Print
+
+"xfce4-display-settings --minimal"
+  Mod2+Mod4 + p

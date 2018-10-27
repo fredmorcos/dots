@@ -1,0 +1,45 @@
+;; package management
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("melpa"     . "http://melpa.milkbox.net/packages/")
+ '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; auto-completion
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; snippets
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; variable name refactoring
+(require 'iedit)
+
+;; on the fly gcc/clang/cppcheck checking
+(require 'flycheck)
+(add-hook 'c-mode-hook 'flycheck-mode)
+
+;; c header completion
+(defun my:ac-c-header-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"/home/fnm/pet"))
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+(custom-set-variables
+ '(blink-cursor-mode nil)
+ '(c-backslash-column 79)
+ '(c-backslash-max-column 80)
+ '(column-number-mode t)
+ '(global-linum-mode 1)
+ '(inhibit-startup-screen t)
+ '(menu-bar-mode nil)
+ '(scroll-bar-mode nil)
+ '(scroll-conservatively 101)
+ '(tool-bar-mode nil))
+
+(custom-set-faces
+ '(default ((t (:family "Inconsolata" :foundry "unknown" :slant normal :weight normal :height 128 :width normal)))))

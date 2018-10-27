@@ -1,0 +1,14 @@
+#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>	<hostname.domain.org>		<hostname>
+127.0.0.1	localhost.localdomain		localhost axon
+::1		localhost.localdomain		localhost
+
+140.78.198.104	lilly.edvz.uni-linz.ac.at	lilli
+140.78.170.100  alex.jku.austriangrid.at	alex
+140.78.198.116	virtu.edvz.uni-linz.ac.at	virtu
+140.78.104.6    helios.ica.jku.at           	helios
+
+# End of file

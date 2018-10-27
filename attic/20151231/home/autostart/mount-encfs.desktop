@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=mount-encfs
+Comment=Mount EncFS Directories
+Exec=/home/fred/Workspace/archive/Scripts/System/mount-home-encfs
+Hidden=false
+X-GNOME-Autostart-enabled=true

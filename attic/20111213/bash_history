@@ -1,0 +1,1000 @@
+git add -p
+git commit -m "Change output of average values to align with per-thread values"
+git add -p
+git commit -m "Improve run script"
+emacs run.sh 
+ls
+git add -p
+git commit -m "Improve values in run script"
+./run.sh 
+cat run.sh 
+make run-transpose UPC_THREADS=2 MAT_W=100 MAT_H=100 ILS=BS JLS=BS GILS=10 GJLS=10 \
+make run-transpose UPC_THREADS=2 MAT_W=100 MAT_H=100 ILS=BS JLS=BS GILS=10 GJLS=10 SHOW_MAT=no DO_CHECK=yes METHOD=simple-test BS=MAT_W/NT
+make run-transpose UPC_THREADS=2 MAT_W=100 MAT_H=100 ILS=BS JLS=BS GILS=10 GJLS=10 SHOW_MAT=no DO_CHECK=yes METHOD=simple-for BS=MAT_W/NT
+make run-transpose UPC_THREADS=2 MAT_W=100 MAT_H=100 ILS=BS JLS=BS GILS=10 GJLS=10 SHOW_MAT=no DO_CHECK=yes METHOD=space-partition BS=MAT_W/NT
+make clean && make run-transpose UPC_THREADS=2 MAT_W=100 MAT_H=100 ILS=BS JLS=BS GILS=10 GJLS=10 SHOW_MAT=no DO_CHECK=yes METHOD=space-partition BS=MAT_W/NT
+emacs run.sh 
+./run.sh 
+ls
+make clean
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+ls
+make clean
+ls
+./run.sh 
+emacs run.sh 
+./run.sh 
+ls
+make clean
+./run.sh 
+ls
+make clean
+git add -p
+ls
+git commit -m "Add unroll loops to makefile"
+git add -p
+git commit -m "Define MAX macro"
+git add -p
+git commit -m "Cleanup transpose_oopl_co functions"
+git add -p
+git commit -m "Rewrite a more flexible and cleaner info reporting"
+git add -p
+git commit -m "Improve the run script"
+emacs run.sh 
+emacs ../transpose-bulk-transfer/upc-transpose.upc 
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+emacs ../transpose-bulk-transfer/upc-transpose.upc 
+emacs Makefile 
+emacs run.sh 
+emacs ../transpose-bulk-transfer/upc-transpose.upc 
+cd transpose
+emacs main.upc 
+emacs main.
+emacs main.upc 
+ls
+make clean
+git add -p
+git commit -m "Add a MIN macro and use it to calc UPC_ILS and UPC_JLS"
+git add -p
+git commit -m "Add bulk-transfer-async"
+git add -p
+git commit -m "Fix bug with calculating average gswaps per second"
+git add -p
+git commit -m "Factorize the grep regexp into grep_expr in run.sh"
+git add -v ./
+ls
+emacs main.upc 
+emacs ~/.emacs
+emacs main.upc 
+cd vector-addition
+ls
+make clean
+ls
+emacs main.upc 
+cd vector-addition
+ls
+emacs run.sh 
+cd vector-addition
+ls
+./run.sh 
+s
+ls
+make clean
+ls
+hvlt_load
+ls
+./run.sh 
+cat run.sh | xclip
+cat run.sh 
+./run.sh 
+man gcc
+emacs Makefile 
+./run.sh 
+cat Makefile | grep BS
+./run.sh 
+emacs Mak
+emacs Makefile 
+./run.sh 
+which bash
+./run.sh 
+emacs Makefile 
+./run.sh 
+emacs Makefile 
+./run.sh 
+emacs Makefile 
+./run.sh 
+emacs Makefile 
+./run.sh 
+ls
+make clean
+ls
+./run.sh > results/results2.txt
+make clean
+ls
+emacs results/results2.txt 
+./run.sh 
+cat run.sh 
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+make clean
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+emacs Makefile 
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+make clean
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+make clean
+emacs Makefile 
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+emacs Makefile 
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+emacs Makefile 
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+emacs Makefile 
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS=\(VEC_LEN/NT\)+1
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+make run-vector-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+make clean && make run-vector-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+make clean && make run-vector-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=yes DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+make clean && make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+bc
+cd vector-addition/results/
+ls
+emacs results-local-for.txt 
+cd vector-addition
+ls
+make clean && make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1"
+make clean && make run-vector-addition UPC_THREADS=20 VEC_LEN=1000000 SHOW_VEC=no DO_CHECK=yes METHOD=BLOCK_TRAVERSAL_FOR_SPLIT BS="\(VEC_LEN/NT\)+1" > foo.txt
+emacs foo.txt 
+rm foo.txt 
+make clean
+ls
+cd results/
+ls
+cd ..
+./run.sh > results/results3.txt
+rm results/results3.txt 
+./run.sh > results/results3.txt
+make clean
+ls
+rm results/results3.txt 
+make clean
+./run.sh > results/results3.txt
+ls
+emacs results/results3.txt 
+cd vector-addition
+ls
+emacs main.upc 
+emacs run.sh 
+man watch
+man tail
+tail -f results/results3.txt 
+emacs main.upc 
+cd transposer
+cd transpose
+cd ../vector-addition
+ls
+emacs run.sh 
+./run.sh 
+make clean
+ls
+./run.sh > results/results-local-for.txt
+emacs results/results-local-for.txt 
+emacs results/results2.txt 
+emacs results/results3.txt 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+cd transpose
+cd ../vector-addition
+ls
+rm core 
+ls
+emacs run.sh 
+ks
+ls
+./run.sh > results/results-table.txt
+cd transpose
+ls
+cd ../vector-addition
+ls
+make clean
+ls
+emacs main.upc 
+tail -f results/results-table.txt 
+emacs results/results-table.txt 
+cd vector-addition
+ls
+emacs results/comparison.txt
+cd vector-addition
+ls
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+emacs results/comparison.txt 
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+emacs results/comparison.txt 
+ls
+cd results/
+ls
+emacs comparison.txt 
+mv comparison.txt comparison-old.txt 
+ls
+emacs comparison-old.txt 
+ls
+emacs comparison-old.txt 
+cp comparison-old.txt comparison.txt 
+emacs comparison.txt 
+hvlt_load
+emacs comparison.txt 
+tail -f new-results-comparison.txt 
+cd vector-addition/results/
+ls
+emacs comparison.txt 
+cd vector-addition
+ls
+emacs main.upc 
+ls
+make clean
+ls
+emacs Makefile 
+git add -p
+ls
+make clena
+make clean
+ls
+cp main.upc main-matrix.upc
+ls
+emacs main-matrix.upc 
+emacs main.upc 
+cd transpose
+cd ..
+ls
+cd vector-addition
+ls
+make clean
+ls
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+cat run.sh 
+ls
+make clean
+ls
+make run-vector-addition UPC_THREADS=1 VEC_LEN=10 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+ls
+cp run.sh run-mat.sh
+emacs run-mat.sh 
+./run-mat.sh 
+cat run-mat.sh 
+emacs Makefile 
+ls
+./run-mat.sh 
+cat run-mat.sh 
+make run-matrix-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+ls
+make clean
+make run-matrix-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+make clean
+make run-vector-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+ls
+make clean
+ls
+hvlt_load 
+make run-matrix-addition UPC_THREADS=2 VEC_LEN=10 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+make run-matrix-addition UPC_THREADS=2 VEC_LEN=5 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+make clean && make run-matrix-addition UPC_THREADS=2 VEC_LEN=5 SHOW_VEC=yes DO_CHECK=yes METHOD=TEST BS=1
+emacs run-mat.sh 
+./run-mat.sh 
+emacs main.upc 
+emacs run.sh 
+emacs ../transpose-bulk-transfer/upc-transpose.upc 
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+emacs run.sh 
+./run-mat.sh 
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+./run-mat.sh 
+emacs run-mat.sh 
+./run-mat.sh 
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+./run-mat.sh 
+ls
+make clean
+ls
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+emacs ./run-mat.sh 
+./run-mat.sh 
+emacs ../transpose-upc-mem-tests/upc-transpose.upc 
+ls
+make clean
+ls
+emacs Makefile 
+ls
+make clean
+ls
+emacs main,
+emacs main.upc 
+ls
+emacs Makefile 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+ls
+make clean
+ls
+rm core 
+ls
+make clean
+ls
+./run.sh > results/new-results-comparison.txt
+emacs run.sh 
+./run.sh > results/new-results-comparison.txt
+emacs run.sh 
+./run
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+cd vector-addition
+ls
+cd results/
+ls
+emacs comparison.txt 
+cd ..
+ls
+scp -r vector-addition fmorcos@helios.ica.jku.at:~/.
+cd vector-addition
+ls
+cat results/comparison.txt 
+emacs Makefile 
+make main.upc.trans.c BS=1 METHOD=FORALL_AFFINITY
+mv main.upc.trans.c forall_affinity_bs1.c
+make main.upc.trans.c BS=N/NT METHOD=FORALL_AFFINITY
+car run.sh 
+cat run.sh 
+make main.upc.trans.c METHOD=FORALL_AFFINITY VEC_LEN=1000000 UPC_THREADS=4 BS=VEC_LEN/NT
+rm main.upc.trans.c 
+make main.upc.trans.c METHOD=FORALL_AFFINITY VEC_LEN=1000000 UPC_THREADS=4 BS=VEC_LEN/NT
+mv main.upc.trans.c forall_affinity_bs_n_nt.c
+rm forall_affinity_bs1.c 
+make main.upc.trans.c METHOD=FORALL_AFFINITY VEC_LEN=1000000 UPC_THREADS=4 BS=1
+mv main.upc.trans.c forall_affinity_bs_1.c
+make main.upc.trans.c METHOD=FOR_BLOCKS_TRAVERSAL VEC_LEN=1000000 UPC_THREADS=4 BS=1
+mv main.upc.trans.c for_blocks_traversal_bs_1.c
+make main.upc.trans.c METHOD=FOR_BLOCKS_TRAVERSAL VEC_LEN=1000000 UPC_THREADS=4 BS=VEC_LEN/NT
+mv main.upc.trans.c for_blocks_traversal_bs_n_nt.c
+ls
+emacs Makefile 
+ls
+cd vector-addition
+ls
+cat results/comparison.txt 
+cd vector-addition
+ls
+cd ../
+ls
+ls opt/
+cd src/berkeley_upc-2.12.2/
+ls
+grep -R UPCR_ADD_SHARED .
+grep -R UPCR_ADD_PSHARED .
+emacs upcr_postinclude/upcr_proxy
+grep -R upcr_add_pshared1 .
+grep -R _upcr_add_pshared1 .
+cd vector-addition
+ls
+make clean
+ls
+emacs forall_affinity_bs_1.c 
+cd vector-addition
+ls
+emacs forall_affinity_bs_n_nt.c 
+ls
+cd vector-addition
+ls
+cd results/
+ls
+emacs comparison
+emacs comparison.txt 
+cd vector-addition
+ls
+emacs main.upc 
+cd vector-addition
+ls
+make clean
+ls
+emacs results/comparison.txt 
+cd vector-addition
+ls
+emacs forall_affinity_bs_n_nt.c 
+cd vector-addition
+ls
+emacs forall_affinity_bs_1.c 
+cd vector-addition
+emacs main.upc 
+cd vector-addition
+emacs run.sh 
+./run
+./run.sh 
+emacs run.sh 
+./run
+./run.sh 
+make main.upc.trans.c BS=1 METHOD=FOR_BLOCKS_TRAVERSAL VEC_LEN=1000000 UPC_THREADS=4
+mv main.upc.trans.c for_blocks_traversal_bs_1.c
+make main.upc.trans.c BS=VEC_LEN/NT METHOD=FOR_BLOCKS_TRAVERSAL VEC_LEN=1000000 UPC_THREADS=4
+mv main.upc.trans.c for_blocks_traversal_bs_n_nt.c
+ls
+emacs for_blocks_traversal_bs_1.c 
+vector-addition
+cd vector-addition
+ls
+emacs forall_affinity_bs_1.c forall_affinity_bs_n_nt.c 
+ls
+make main.upc.trans.c METHOD=FORALL_AFFINITY VEC_LEN=1000000 UPC_THREADS=4 BS=2
+mv main.upc.trans.c forall_affinity_bs_2.c
+emacs forall_affinity_bs_2.c 
+cd vector-addition
+ls
+emacs results/comparison.txt 
+ls
+emacs main.upc 
+cd vector-addition
+ls
+cd vector-addition
+ls
+emacs results/comparison.txt 
+ls
+cd vector-addition
+ls
+cd vector-addition
+ls
+emacs main.upc 
+ls
+make clean
+ls
+rm forall_affinity_bs_*
+ls
+rm for_blocks_traversal_bs_*
+ls
+ls results/
+emacs run.sh 
+cd ..
+ls
+ls build/
+ls helios/
+rmdir helios/
+ls
+ls build/
+ls mt2/
+ls opt/
+ls opt/bin/
+xxd --help
+ls
+ls opt/
+ls src/
+ls
+ls usr/
+ls usr/bin/
+ls
+cd build/sandbox-upc-2.12.2/
+ls
+cd ..
+ls
+cd vector-addition
+ls
+emacs main.upc 
+ls
+emacs main.upc 
+ls
+cd results/
+ls
+emacs comparison.txt 
+emacs vector-addition/results/results-2011-09-20.txt 
+ls
+cd vector-addition/c-trans/
+ls
+emacs FORALL_ITERATION_1.c 
+ls
+emacs FORALL_ITERATION_2.c 
+emacs FORALL_ITERATION_VEC_LEN_NT.c 
+ls
+emacs FORALL_AFFINITY_1.c 
+emacs FORALL_PARTITIONED_
+emacs FORALL_PARTITIONED_1.c 
+emacs FORALL_PARTITIONED_2.c 
+emacs FORALL_PARTITIONED_1.c 
+emacs FOR_BLOCKS_TRAVERSAL_1.c 
+emacs FOR_PARTITIONED_VEC_LEN_NT.c 
+emacs FOR_SINGLE_ELEMENT_BLOCKS_1.c 
+ls
+emacs run.sh 
+./run.sh 
+hvlt_load
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+./run.sh 
+emacs Makefile 
+man escputil 
+man esc-m 
+which esc-m 
+pacman -Qo /usr/bin/esc-m 
+man replace 
+man 3 replace_panel 
+man 1 replace 
+echo ${"foobar
+echo ${"foobar"#"foo"}
+echo ${foobar#foo}
+echo ${foobar/foo/bar}
+man expr 
+ss="foobar"
+echo ${ss/foo/bar}
+ss="foo/bar"
+echo $ss
+echo ${ss/\//bar}
+echo $ss
+echo ${ss/\//_}
+cat results/comparison.txt 
+./run.sh 
+ls
+make clean
+ls
+rm SINGLE_THREAD_*
+ls
+./run.sh > results/results-2011-09-20.txt
+ls
+mkdir c-trans
+ls
+mv SINGLE_THREAD_* c-trans/.
+ls
+mv FOR* c-trans/.
+ls
+mv LOCAL_BLOCKS_* c-trans/.
+ls
+make clean
+ls
+pwd
+cd c-trans/
+ls
+cd ..
+ls
+cd results/
+ls
+emacs results-2011-09-20.txt 
+ls
+cd ..
+ls
+cd c-trans/
+ls
+emacs ../results/comparison.txt 
+cd ..
+emacs run.sh 
+./run.sh 
+emacs main.upc 
+./run.sh 
+emacs main.upc 
+./run.sh 
+emacs run.sh 
+ls
+emacs main.upc 
+./run.sh 
+emacs main.upc 
+emacs run.sh 
+./run.sh 
+ls
+ls
+cd ..
+ls
+cd vector-addition
+ls
+ls
+cd results/
+ls
+tail -n 5 results-2011-09-20.txt 
+man tail
+tail -f results-2011-09-20.txt 
+ls ..
+cd vector-addition/c-trans/
+ls
+cd vector-addition/
+ls
+cd results/
+ls
+emacs results-2011-09-20.txt 
+cd ..
+emacs main.upc 
+cd vector-addition
+man watch
+man tail
+tail -f forall_partitioned_results.txt 
+rm forall_partitioned_results.txt 
+tail -f forall_partitioned_results.txt 
+emacs forall_partitioned_results.txt 
+tail -f forall_partitioned_results.txt 
+emacs forall_partitioned_results.txt 
+rm forall_partitioned_results.txt 
+ls
+cd vector-addition
+ls
+emacs main.upc 
+cd vector-addition
+ls
+emacs run.sh 
+./run.sh 
+./run.sh > forall_partitioned_results.txt
+emacs run.sh 
+./run.sh > forall_partitioned_results.txt
+emacs run.sh 
+./run.sh > forall_partitioned_results.txt
+./run.sh 
+ls
+make clean
+emacs run.sh 
+./run.sh 
+emacs main.upc 
+emacs run.sh 
+./run.sh 
+mkdir upc-arith-test
+cd upc-arith-test/
+ls
+scp fmorcos@helios.ica.jku.at:~/arith-test.c .
+ls
+mv arith-test.c  arith-test.upc
+ls
+cp ../vector-addition/{Makefile,run.sh} .
+ls
+emacs Makefile 
+emacs run.sh 
+./run.sh 
+emacs arith-test
+emacs arith-test.upc 
+./run.sh 
+emacs arith-test.upc 
+cd ../vector-addition
+ls
+emacs main.upc 
+emacs run.sh 
+./run.sh 
+emacs run.sh 
+emacs Makefile 
+./run.sh 
+ls
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+man upcc
+emacs main.upc 
+./run
+./run.sh 
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+ls
+mv FORALL_PARTITIONED_VEC_LEN_NT_250000.c 
+mv FORALL_PARTITIONED_VEC_LEN_NT.c FORALL_PARTITIONED_VEC_LEN_NT_BS250000.c 
+emacs main.upc 
+./run.sh 
+ls
+mv FORALL_PARTITIONED_VEC_LEN_NT.c FORALL_PARTITIONED_VEC_LEN_NT_iBS4000000.c
+./run.sh 
+cd vector-addition
+ls
+emacs run.sh 
+./run.sh 
+emacs main.upc 
+emacs run.sh 
+emacs main.upc 
+cd vector-addition
+ls
+emacs FORALL_PARTITIONED_VEC_LEN_NT_iBS4000000.c 
+./run
+./run.sh 
+ls
+emacs main.upc 
+./run.sh 
+emacs main.upc 
+./run
+./run.sh 
+emacs main.upc 
+./run.sh 
+emacs main.upc 
+emacs addition-split.c 
+emacs main.upc 
+cd vector-addition
+ls
+emacs main.upc 
+ls
+emacs main.upc 
+emacs run.sh 
+ls
+emacs main.upc 
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+man upcc
+upcc --help
+emacs run.sh 
+emacs Makefile 
+ls
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+emacs Makefile 
+ls
+./run
+./run.sh 
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+ls
+emacs run.sh 
+ls
+emacs FORALL_PARTITIONED_1.c 
+emacs FORALL_PARTITIONED_2.c 
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+emacs run.sh 
+emacs FORALL_PARTITIONED_1.c 
+emacs FORALL_PARTITIONED_2.c 
+ls
+emacs Makefile 
+cd vector-addition/results/
+ls
+tail -f results-2011-09-29.txt 
+cd vector-addition
+ls
+./run.sh 
+upcc --help
+./run.sh 
+./run.sh | less
+upcc --help
+ls
+emacs run.sh 
+./run.sh > results/results-2011-09-29.txt 
+rm results/results-2011-09-29.txt 
+ls
+hvlt_load
+cd vector-addition
+ls
+tail -f results/results-2011-09-29.txt 
+cd vector-addition
+ls
+./run.sh > results/results-2011-09-29.txt
+cd vector-addition
+ls
+emacs results/results-2011-09-29.txt 
+cd vector-addition
+ls
+mv SINGLE_THREAD_* c-trans/.
+mv FOR* c-trans/.
+ls
+mv LOCAL_BLOCKS_* c-trans/.
+ls
+emacs main.upc 
+cd vector-addition
+ls
+emacs run.sh 
+./run.sh 
+emacs FORALL_ITERATION_SPLIT_1.c FORALL_ITERATION_SPLIT_2.c 
+cd vector-addition
+ls
+emacs main.upc 
+emacs run.sh 
+ls
+emacs run.sh 
+emacs main.upc 
+cd vector-addition
+ls
+emacs FORALL_ITERATION_SPLIT_VEC_LEN_NT.c 
+emacs run.sh 
+./run.sh 
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+./run.sh 
+emacs FORALL_PARTITIONED_\(VEC_LEN_NT\).c
+emacs FORALL_PARTITIONED_\\(VEC_LEN_NT\\).c
+emacs FORALL_PARTITIONED_\\\(VEC_LEN_NT\\\).c
+ls
+rm FORALL_*
+ls
+./run.sh 
+ls
+rm FORALL_PARTITIONED_*
+ls
+rm main.upc.trans.c 
+ls
+emacs main.upc 
+ls
+./run.sh 
+ls
+rm FORALL_PARTITIONED_* main.upc.trans.c 
+ls
+./run.sh 
+ls
+rm FORALL_PARTITIONED_* main.upc.trans.c 
+ls
+./run.sh 
+ls
+rm FORALL_PARTITIONED_* main.upc.trans.c 
+./run.sh 
+rm FORALL_PARTITIONED_* main.upc.trans.c 
+./run.sh 
+ls
+rm FORALL_PARTITIONED_*
+ls
+./run.sh 
+ls
+rm FORALL_PARTITIONED_*
+ls
+./run.sh 
+ls
+rm FORALL_PARTITIONED_*
+./run.sh 
+ls
+emacs FORALL_PARTITIONED_VEC_LEN_NT.c 
+ls
+rm FORALL_PARTITIONED_*
+ls
+./run.sh 
+cd vector-addition
+ls
+emacs results/results-2011-09-29.txt 
+cd vector-addition
+ls
+./run.sh 
+cd mpolak/mt2/
+ls
+emacs Makefile 
+ls
+mkdir mpolak-mt
+ls
+mv mpolak-mt/ mpolak
+ls
+cd mpolak/
+ls
+scp -r fmorcos@helios:/home/fmorcos/research/archive/mpolak-home-dir/k333770/mt .
+scp -r fmorcos@helios.ica.jku.at:/home/fmorcos/research/archive/mpolak-home-dir/k333770/mt .
+ls
+cd mt/
+ls
+emacs do.sh
+emacs do.sh~ 
+ls
+./mt
+cd ..
+mv mt/ mt1
+ls
+scp -r fmorcos@helios.ica.jku.at:/home/fmorcos/research/archive/mpolak-home-dir/k333770/kernels/mt mt2
+ls
+cd mt2/
+ls
+./dospeedupplot.sh 
+emacs dospeedupplot.sh 
+ls
+make
+ls
+cd BigJanResults/
+ls
+cd .
+cd ..
+ls
+./do.sh 
+ls
+emacs do.sh 
+cd mpolak/mt2/
+ls
+./do.sh 
+ls
+emacs mt-3cbuf-cilk+.upc 
+./do.sh 
+./do.sh > fred-results-20111031.txt
+emacs fred-results-20111031.txt 
+grep -iR "mt-2cbuf-cilk+:" .
+emacs fred-results-20111031.txt 
+rm fred-results-20111031.txt 
+ls
+./do.sh &>fred-results-20111031.txt
+cd mpolak/mt2/
+ls
+emacs fred-results-20111031.gp
+tail -f fred-results-20111031.txt 
+cd mpolak/mt2/
+ls
+emacs mt-2cbuf-cilk+.upc 
+cd mpolak/mt2/
+tail -f fred-results-20111122.txt 
+ls
+cd mpolak/
+ls
+cd mt1
+ls
+cd ..
+cd mt2/
+ls
+cat fred-results-20111031.gp 
+ls
+grep -iR mpi .
+grep --color=auto -iR mpi .
+emacs do.sh 
+./do.sh 
+./do.sh &>fred-results-20111122.txt
+cd mpolak/
+ls
+cd mt2/
+ls
+emacs fred-results-20111031.txt 
+emacs fred-results-20111122.txt 
+emacs fred-results-20111031.
+emacs fred-results-20111031.txt 
+pwd
+ls
+cd mpolak/
+ls
+cd mt1/
+ls
+cd ../mt2/
+ls
+cd mpolak/mt2/
+ls
+grep -iR openmp .
+grep -iRn openmp .
+emacs Makefile 
+grep -Rn MLIBS .
+emacs Makefile 
+emacs do.sh 
+grep -iRn mtsingle .
+emacs dosinglethreaded.sh 
+emacs mt.c
+./dosinglethreaded.sh 
+ls
+emacs dosinglethreaded.sh 
+emacs Makefile 
+ls
+cat dosinglethreaded.sh 
+make -s LS=3 MATSIZE=23170 PSQRT=1 BSIZE=1 mtcilk++
+ls
+emacs dosinglethreaded.sh 
+emacs Makefile 
+make -s LS=3 MATSIZE=23170 PSQRT=1 BSIZE=1 mtcilk++
+emacs Makefile 
+make -s LS=3 MATSIZE=23170 PSQRT=1 BSIZE=1 mtcilk++
+emacs Makefile 
+pwd
+emacs Makefile 
+./dosinglethreaded.sh 
+./dosinglethreaded.sh > fred-results-20111207-singlethreaded.txt 
+cat fred-results-20111207-singlethreaded.txt 
+cd ../mt1/
+ls
+cd ..
+ls
+cd mt2/
+ls
+cd ..
+ls
+cd mt2/
+ls
+cd mkl/
+ls
+emacs mklmt.
+emacs mklmt.c 
+emacs mklmt.in 
+emacs mklmt.c 
+ls
+cd ..
+ls
+cd oop/
+ls
+cd ..
+ls

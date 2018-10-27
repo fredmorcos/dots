@@ -1,0 +1,18 @@
+sleep 10
+
+xrdb -merge /home/fred/.Xresources
+i3lock -c 000000 &
+
+# compton &
+/usr/bin/xset -dpms &
+setxkbmap -option 'ctrl:nocaps' &
+xbindkeys &
+redshift-gtk &
+firefox-beta &
+
+nvdock &
+steam-native -silent &
+
+xfce4-terminal &
+emacs &
+

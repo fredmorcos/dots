@@ -1,0 +1,9 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>  <dir>  <type> <options>                     <dp>
+/dev/md/RootRAID /      ext4   rw,noatime,stripe=256         0 1
+/dev/md/HomeRAID /home  ext4   rw,noatime,stripe=256         0 2
+/dev/sda1        /boot  vfat   rw,noatime,errors=remount-ro  0 2
+/dev/md/SwapRAID none   swap   defaults                      0 0
+

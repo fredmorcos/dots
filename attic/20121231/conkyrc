@@ -1,0 +1,69 @@
+use_xft no
+# xftfont Liberation Mono:size=9
+
+font 9x9
+
+short_units yes
+
+update_interval 5
+total_run_times 0
+
+own_window no
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+double_buffer yes
+
+minimum_size 220 50
+maximum_width 500
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+default_color white
+default_shade_color black
+default_outline_color black
+
+alignment top_left
+
+gap_x 10
+gap_y 10
+
+no_buffers yes
+
+uppercase no
+
+cpu_avg_samples 1
+net_avg_samples 1
+
+default_bar_size 80 10
+
+TEXT
+${machine} ${kernel} ${uptime_short}${alignr}${loadavg 2}
+${time %A, %d %B %I:%M %p}${alignr}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LOWL temperature}C
+${voffset 10}${font Liberation Mono:Bold:size=9}SYS$font ${stippled_hr 1}${voffset 10}
+CPU ${cpubar cpu0} ${cpu cpu0}% ${alignr}${freq_g 0}GHz
+RAM ${membar} ${mem} ${alignr}${memmax}
+SWP ${swapbar} ${swap} ${alignr}${swapmax}
+
+HD  ${fs_bar /}${alignr}root
+HD  ${fs_bar /personal}${alignr}personal
+HD  ${fs_bar /multimedia}${alignr}multimedia
+
+BAT ${battery_bar} ${battery_time}${alignr} ${battery_short}
+TMP ${alignr}${hwmon temp 1}C
+${voffset 10}${font Liberation Mono:Bold:size=9}TOP$font ${stippled_hr 1}${voffset 10}
+CPU ${top name 1}
+IO  ${top_io name 1}
+MEM ${top_mem name 1}
+${voffset 10}${font Liberation Mono:Bold:size=9}TIM$font ${stippled_hr 1}${voffset 10}
+LIN ${execi 60 TZ=Europe/Vienna date "+%I:%M %p"}
+TOR ${execi 60 TZ=America/Toronto date "+%I:%M %p"}
+CLJ ${execi 60 TZ=Europe/Bucharest date "+%I:%M %p"}
+CAI ${execi 60 TZ=Africa/Cairo date "+%I:%M %p"}
+PAR ${execi 60 TZ=Europe/Paris date "+%I:%M %p"}
+${voffset 10}${font Liberation Mono:Bold:size=9}CAL$font ${stippled_hr 1}${voffset 10}
+${execpi 1000 DAT=`date +%_d`; cal -m | sed s/"\(^\|[^0-9]\)$DAT"'\b'/'\1${color orange}${font Liberation Mono:Bold:size=9}'"$DAT"'$font$color'/}

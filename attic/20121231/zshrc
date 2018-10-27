@@ -1,0 +1,117 @@
+zmodload zsh/complist
+autoload -Uz compinit && compinit
+autoload -U bashcompinit && bashcompinit
+
+zstyle :compinstall filename '/home/fred/.zshrc'
+
+autoload -U promptinit && promptinit
+autoload -U colors && colors
+
+setopt promptsubst nohup auto_cd auto_pushd correct # menucomplete interactivecomments autolist
+# setopt auto_cd auto_pushd correct
+
+PROMPT='[%{$fg[red]%}%m%{$reset_color%}:%{$fg[yellow]%}%1~%{$reset_color%}] '
+RPROMPT='[%{$fg[red]%}$(git branch 2>/dev/null | grep -i \* | sed -e "s/\* //")%{$reset_color%}][%{$fg[yellow]%}%?%{$reset_color%}][%{$fg[red]%}%t%{$reset_color%} ]'
+
+PATH="$HOME/opt/bin:$PATH:/usr/local/bin"
+LD_LIBRARY_PATH="$HOME/opt/lib:$LD_LIBRARY_PATH:/usr/local/lib"
+MANPATH="$HOME/opt/man:$MANPATH:/usr/local/man"
+
+EDITOR='emacs -nw'
+COLORTERM='yes'
+# TERM='xterm'
+BROWSER='firefox'
+MOZ_GLX_IGNORE_BLACKLIST=1
+MOZ_DISABLE_PANGO=1
+GDK_USE_XFT=0
+QT_XFT=false
+
+alias pinstall='yaourt -S'
+alias premove='yaourt -Rcsn'
+alias pupgrade='sudo yaourt -Syu'
+alias grep='grep --color=auto'
+alias ls='ls -lh --color=auto --group-directories-first'
+alias emacs='emacs -nw'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+
+# web aliases
+alias -s org=$BROWSER
+alias -s com=$BROWSER
+alias -s net=$BROWSER
+
+alias -s c=$EDITOR
+alias -s h=$EDITOR
+
+HISTFILE=~/.histfile
+HISTSIZE=100
+SAVEHIST=100
+
+bindkey -e
+
+# bindkey ";5D"   backward-word           # C-Left
+# bindkey ";5C"   forward-word            # C-Right
+# bindkey "^[OH"  beginning-of-line       # Home
+# bindkey "^[OF"  end-of-line             # End
+
+bindkey   "^[Od"  backward-word           # C-Left
+bindkey   "^[Oc"  forward-word            # C-Righ
+bindkey   "\e[3~" delete-char             # Del
+bindkey   "\e[5~" history-search-backward # PgUp
+bindkey   "\e[6~" history-search-forward  # PgDown
+bindkey   "\e[7~" beginning-of-line       # Home
+bindkey   "\e[8~" end-of-line             # End
+
+# ssh into clusters
+alias lilli_ssh='ssh k339970@lilli.edvz.uni-linz.ac.at'
+alias helios_ssh='ssh fmorcos@helios.ica.jku.at'
+
+# work sync
+WORK='fmorcos@helios.ica.jku.at'
+alias work_rsync='rsync -varXgtzh --compress-level=9 --specials --delete'
+alias dsw='cd /personal && work_rsync $WORK:~/work workspace'
+alias usw='cd /personal && work_rsync workspace/work $WORK:~/'
+
+_force_rehash() {
+    (( CURRENT == 1 )) && rehash
+    return 1
+}
+
+# completion in the middle of a line
+bindkey '^i' expand-or-complete-prefix
+
+# use cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# use menus for everything
+zstyle ':completion:*:*:*:*' menu yes select
+zstyle ':completion:*:*:*' force-list always
+
+# completer
+zstyle ':completion:*' completer _expand _force_rehash _complete _ignored
+
+# special dirs
+zstyle ':completion:*' special-dirs true
+
+# # fuzzy matching of completions when mistyped
+# zstyle ':completion:*' completer _complete _match _approximate
+# zstyle ':completion:*:match:*' original only
+# zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# # tab completion for PID
+# zstyle ':completion:*:*:kill:*' menu yes select
+# zstyle ':completion:*:kill:*' force-list always
+
+# # pacman
+# zstyle ':completion:*:*:pacman:*' menu yes select
+# zstyle ':completion:*:pacman:*' force-list always
+
+# # killall
+# zstyle ':completion:*:*:killall:*' menu yes select
+# zstyle ':completion:*:killall:*' force-list always
+
+# # git
+# zstyle ':completion:*:*:git:*' menu yes select
+# zstyle ':completion:*:git:*' force-list always

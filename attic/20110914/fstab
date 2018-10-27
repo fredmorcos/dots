@@ -1,0 +1,19 @@
+# 
+# /etc/fstab: static file system information
+#
+# <fs>	  <dir>		 <type> <options>										      <dump> <pass>
+devpts    /dev/pts		 devpts defaults            						       			      0      0
+shm       /dev/shm		 tmpfs  nodev,nosuid        						       			      0      0
+
+tmpfs 	  /tmp			 tmpfs  defaults,noatime,norelatime,nodiratime,nodev,nosuid,mode=1777 				      0      0
+tmpfs 	  /var/cache/pacman/pkg tmpfs  defaults,noatime,norelatime,nodiratime,nodev,nosuid,mode=1777,size=3G 				      0      0
+tmpfs 	  /var/lock		 tmpfs  defaults,noatime,norelatime,nodiratime,nodev,nosuid,noexec,mode=1777,size=20m		      0      0
+# tmpfs 	   /var/log		 tmpfs  defaults,noatime,norelatime,nodiratime,nodev,nosuid,noexec,mode=0755,size=20m 		      0      0
+tmpfs 	  /var/run		 tmpfs  defaults,noatime,norelatime,nodiratime,nodev,nosuid,noexec,mode=0755,size=20m 		      0      0
+
+/dev/sda6 swap			 swap   defaults										      0      0
+/dev/sda5 /			 ext4   defaults,noatime,norelatime,nodiratime,nobarrier,commit=600,errors=remount-ro,data=writeback  0      1
+/dev/sda7 /personal		 ext4   defaults,noatime,norelatime,nodiratime,nobarrier,commit=600,errors=remount-ro,data=writeback  0      1
+# /dev/sdb1  /multimedia		 ext4   defaults,noatime,norelatime,nodiratime,nobarrier,commit=600,errors=remount-ro,data=writeback  0      1
+
+/dev/sdc1 /media/usb1		 ntfs-3g defaults,noauto		0 1

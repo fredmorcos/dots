@@ -1,0 +1,313 @@
+;;; package -- Summary
+;;; Commentary:
+;;; Code:
+
+;;; Silence advice warnings
+;; (setq ad-redefinition-action 'accept)
+
+;;; Global stuff
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+;;; Packaging
+(defun pack (install? diminish? am-alist name mode hook setup &optional init)
+  (defun not-nil (x) (not (equal x nil)))
+  (if (and install? (not (package-installed-p name))) (package-install name))
+  (if (not-nil init) (funcall init))
+  (if (and diminish? (not-nil mode)) (diminish mode))
+  (if (and (not-nil setup) (not-nil hook)) (add-hook hook setup))
+  (if (not-nil am-alist)
+      (if (stringp am-alist)
+          (if (and (equal mode nil) (not-nil setup))
+              (add-to-list 'auto-mode-alist `(,am-alist . ,setup))
+            (add-to-list 'auto-mode-alist `(,am-alist . ,mode)))
+        (add-to-list 'auto-mode-alist `,am-alist))))
+
+(pack nil nil nil 'ui nil nil nil
+      #'(lambda ()
+          (custom-set-faces '(default ((t (:height 105 :family "Monospace")))))
+          (toggle-frame-maximized)
+          ;; (load-theme 'leuven)
+          (defalias 'yes-or-no-p 'y-or-n-p)
+          (custom-set-variables
+           '(blink-cursor-mode nil)
+           '(tool-bar-mode nil)
+           ;; '(tooltip-mode nil)
+           ;; '(cursor-type '(bar . 3))
+           '(scroll-bar-mode nil)
+           '(scroll-conservatively 101)
+           '(scroll-step 1)
+           '(menu-bar-mode nil)
+           '(smooth-scroll-margin 3)
+           '(inhibit-startup-screen t)
+           '(inhibit-startup-message t)
+           '(initial-scratch-message nil)
+           '(hscroll-step 1)
+           '(column-number-mode t)
+           '(global-hl-line-mode t))))
+
+(pack nil nil nil 'package nil nil nil
+      #'(lambda ()
+          (require 'package)
+          (add-to-list
+           'package-archives
+           '("melpa" . "http://melpa.org/packages/") t)
+          (package-initialize)
+          (unless package-archive-contents
+            (package-refresh-contents))))
+
+(pack t nil nil 'diminish nil nil nil)
+(pack t nil nil 'bind-key nil nil nil #'(lambda () (require 'bind-key)))
+(pack t nil nil 'auto-compile nil nil nil)
+
+(pack nil nil nil 'backups-autosaves-placements nil nil nil
+      #'(lambda ()
+          (require 'saveplace)
+          (defconst emacs-autosaves-dir (concat user-emacs-directory "autosaves"))
+          (defconst emacs-backups-dir   (concat user-emacs-directory "backups"))
+          (defconst emacs-places-file   (concat user-emacs-directory "places"))
+          (defconst emacs-recentf-file  (concat user-emacs-directory "recentf"))
+          (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
+          (defconst emacs-backups-pattern   (concat emacs-backups-dir   "/"))
+          (make-directory emacs-autosaves-dir t)
+          (make-directory emacs-backups-dir   t)
+          (custom-set-variables
+           '(savehist-mode t)
+           '(save-place t)
+           '(save-place-file emacs-places-file)
+           '(recentf-mode t)
+           '(recentf-save-file emacs-recentf-file)
+           '(auto-save-file-name-transforms `((".*" ,emacs-autosaves-pattern t)))
+           '(backup-directory-alist `((".*" . ,emacs-backups-pattern)))
+           '(history-delete-duplicates t)
+           '(history-length 30))))
+
+(pack nil nil nil 'windmove nil nil nil #'windmove-default-keybindings)
+
+(pack nil nil nil 'whitespace nil 'after-init-hook #'global-whitespace-mode
+      #'(lambda () (custom-set-variables
+                    '(whitespace-global-modes
+                      '(not dired-mode json-mode doc-view-mode
+                            interactive-haskell-mode))
+                    '(global-whitespace-mode t)
+                    '(global-whitespace-newline-mode nil)
+                    '(show-trailing-whitespace t)
+                    '(whitespace-action '(cleanup))
+                    '(whitespace-style
+                      '(face tabs lines-tail trailing space-before-tab
+                             indentation empty space-after-tab)))))
+
+(pack nil nil nil 'identation-spacing nil
+      'before-save-hook #'delete-trailing-whitespace
+      #'(lambda () (custom-set-variables
+                    '(indent-tabs-mode nil)
+                    '(standard-indent 2)
+                    '(electric-indent-mode t)
+                    '(default-justification 'full)
+                    '(mode-require-final-newline 'visit-save)
+                    '(require-final-newline 'visit-save))))
+
+(pack nil nil nil 'comments nil nil
+      #'(lambda () (custom-set-variables
+                    ;; '(comment-auto-fill-only-comments t)
+                    '(comment-column 40)
+                    '(comment-inline-offset 3)
+                    '(comment-empty-lines t)
+                    '(comment-multi-line t)
+                    '(comment-padding 1)
+                    '(comment-style 'extra-line))))
+
+(pack nil nil nil 'linum nil nil nil
+      #'(lambda () (custom-set-variables
+                    '(global-linum-mode t)
+                    '(linum-format " %4d ")
+                    '(linum-eager nil)
+                    '(linum-delay t))))
+
+(pack nil nil nil 'spell nil nil nil
+      #'(lambda () (custom-set-variables
+                    '(ispell-program-name "hunspell")
+                    '(flyspell-delay 1))))
+
+(pack nil nil nil 'minibuffer nil nil nil
+      #'(lambda ()
+          (custom-set-variables
+           '(minibuffer-prompt-properties '(read-only t face minibuffer-prompt))
+           '(minibuffer-eldef-shorten-default t)
+           '(read-buffer-completion-ignore-case t)
+           '(read-file-name-completion-ignore-case t))))
+
+(pack nil nil nil 'compile nil nil nil
+      #'(lambda () (custom-set-variables
+                    '(compilation-always-kill t)
+                    '(compilation-read-command nil)
+                    '(compilation-scroll-output 'first-error)
+                    '(compile-command "make"))))
+
+;; (pack nil nil nil 'garbage-collector nil 'focus-out-hook #'garbage-collect
+;;       #'(lambda () (custom-set-variables
+;;                     '(gc-cons-percentage 10.0)
+;;                     '(gc-cons-threshold 8000000))))
+
+(pack t t nil 'which-key 'which-key-mode nil nil
+      #'(lambda () (custom-set-variables
+                    '(which-key-mode t))))
+
+(pack t t nil 'avy nil nil nil
+      #'(lambda ()
+          (avy-setup-default)
+          (global-set-key (kbd "C-:") 'avy-goto-char)
+          (global-set-key (kbd "C-'") 'avy-goto-char-2)))
+
+(pack t t nil 'smartparens nil nil nil
+      #'(lambda ()
+          (show-smartparens-global-mode)
+          (custom-set-variables
+           '(sp-show-pair-from-inside t))))
+
+(pack nil nil "\\.pet\\'" 'pet nil nil
+      #'(lambda ()
+          (fset 'tabulate-exp
+                [?\C-a ?\C-s ?2 ?0 ?1 return C-left tab
+                       C-right C-right C-right C-right
+                       ?\C-d tab C-right ?\C-d tab down ?\C-a])
+          (fset 'replicate-exp
+                [up ?\C-  down ?\M-w ?\C-y up ?\C-a ?\C-s ?  return
+                    ?\M-d ?\M-d ?\M-d f2 ?\C-e down])
+          (local-set-key (kbd "C-c C-c") 'tabulate-exp)
+          (local-set-key [f2] '(lambda ()
+                                 (interactive)
+                                 (insert (format-time-string "%Y-%m-%d"))))
+          (local-set-key [f5] 'replicate-exp)))
+
+(pack t nil nil 'paredit nil nil nil
+      #'(lambda () (custom-set-default 'paredit-lighter " PE")))
+
+(pack nil nil "\\emacs\\'" 'emacs-lisp 'emacs-lisp-mode 'emacs-lisp-mode-hook
+      #'(lambda ()
+          (require 'auto-compile)
+          (auto-compile-on-load-mode)
+          (auto-compile-on-save-mode)
+          (paredit-mode)))
+
+(pack nil nil nil 'dired 'dired-mode 'dired-mode-hook
+      #'(lambda ()
+          (auto-revert-mode)
+          (local-set-key [f5] '(lambda () (interactive) (term "/bin/bash")))
+          (custom-set-variables
+           '(dired-async-mode t)
+           '(dired-listing-switches "-alh --group-directories-first")
+           '(dired-use-ls-dired t)
+           '(image-dired-append-when-browsing t))))
+
+(pack nil nil nil 'term 'term-mode 'term-mode-hook
+      #'(lambda ()
+          (defun handle-exit (&rest args)
+            (when (null (get-buffer-process (current-buffer)))
+              (kill-buffer (current-buffer))))
+          (advice-add 'term-handle-exit :after 'handle-exit)))
+
+(pack t nil nil 'helm nil nil nil)
+
+(pack t nil nil 'helm-gtags nil nil nil
+      #'(lambda () (custom-set-default 'helm-gtags-mode-name " HGT")))
+
+;; (pack t nil nil 'helm-projectile nil nil nil)
+
+;; (pack t nil nil 'projectile 'projectile-mode
+;;       'projectile-mode-hook #'helm-projectile-on
+;;       #'(lambda ()
+;;           (custom-set-default
+;;            'projectile-mode-line
+;;            '(:eval (if (file-remote-p default-directory) " Prj"
+;;                      (format " Prj[%s]" (projectile-project-name)))))
+;;           (custom-set-variables '(projectile-global-mode t))))
+
+(pack nil nil nil 'doc-view 'doc-view-mode 'doc-view-mode-hook
+      #'(lambda ()
+          (auto-revert-mode)
+          (linum-mode -1)
+          (custom-set-variables
+           '(doc-view-continuous t)
+           '(doc-view-resolution 200)
+           '(doc-view-scale-internally nil))))
+
+(pack nil nil nil 'gud 'gud-mode 'dug-mode-hook
+      #'(lambda ()
+          (defvar gdb-many-windows)
+          (defvar gdb-show-main)
+          (setq gdb-many-windows t)
+          (setq gdb-show-main t)))
+
+(pack nil nil nil 'eldoc nil nil nil
+      #'(lambda () (custom-set-default 'eldoc-minor-mode-string " ED")))
+
+(pack t nil nil 'iedit nil nil nil)
+(pack t nil nil 'auctex nil nil nil)
+
+(pack t nil nil 'magit nil nil nil
+      #'(lambda ()
+          (global-set-key (kbd "C-x g") 'magit-status)
+          (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)))
+
+(pack t nil nil 'flycheck 'flycheck-mode 'flycheck-mode-hook
+      #'(lambda () (custom-set-variables
+                    '(flycheck-display-errors-delay 0.2)
+                    '(flycheck-idle-change-delay 0.1)
+                    '(flycheck-global-modes '(not org-mode))))
+      #'(lambda ()
+          (require 'flycheck)
+          (custom-set-default 'flycheck-mode-line-prefix "FC")
+          (custom-set-variables '(global-flycheck-mode t))))
+
+(pack nil nil nil 'c-mode 'c-mode 'c-mode-hook
+      #'(lambda ()
+          (defun compile-with-make ()
+            "Build project using make with cc/clang/scan-build."
+            (interactive)
+            (defvar string-join)
+            (compile (string-join (list "make clean && make &&"
+                                        "make clean && CC=clang make &&"
+                                        "make clean && scan-build make &&"
+                                        "make clean" nil) " ")))
+          (defun compile-close-window ()
+            "Closes the *compilation* window."
+            (interactive)
+            (let ((win (get-buffer-window "*compilation*")))
+              (kill-buffer "*compilation*")
+              (let ((buf (window-buffer win)))
+                (if (string-prefix-p "*" (buffer-name buf))
+                    (delete-window win)))))
+          (local-set-key [f1] 'manual-entry)
+          (local-set-key [f2] 'ff-find-other-file)
+          (local-set-key [f6] 'helm-gtags-select)
+          (local-set-key [f7] 'compile-with-make)
+          (local-set-key [f8] 'compile-close-window)
+          (custom-set-variables
+           '(Man-width 80)
+           '(c-block-comment-prefix "* ")
+           '(c-cleanup-list
+             '(brace-else-brace
+               brace-elseif-brace
+               scope-operator
+               compact-empty-funcall
+               comment-close-slash))
+           '(c-doc-comment-style '((c-mode . javadoc)))
+           '(which-function-mode t)
+           '(global-cwarn-mode t)
+           '(cwarn-configuration '((c-mode t) (c++-mode t)))
+           '(flycheck-clang-pedantic t)
+           '(flycheck-gcc-pedantic t)
+           '(flycheck-clang-language-standard "c99")
+           '(flycheck-gcc-language-standard "c99")
+           '(flycheck-cppcheck-checks
+             '("style" "warning" "information" "performance"
+               "portability" "missingInclude" "all"))
+           '(flycheck-cppcheck-standards '("posix" "c99"))
+           '(flycheck-cppcheck-suppressions
+             '("missingIncludeSystem" "unusedFunction"
+               "unmatchedSuppression" "readdirCalled"))
+           '(helm-gtags-auto-update t)
+           '(helm-gtags-ignore-case t))))
+
+(provide 'emacs)
+;;; emacs ends here

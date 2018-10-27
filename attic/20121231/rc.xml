@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_config xmlns="http://openbox.org/3.4/rc">
+  <!-- <placement> -->
+  <!--   <policy>Smart</policy> -->
+  <!--   <center>yes</center> -->
+  <!--   <monitor>Active</monitor> -->
+  <!--   <primaryMonitor>Active</primaryMonitor> -->
+  <!-- </placement> -->
+
+  <theme>
+    <name>clearlooks-flat</name>
+    <titleLayout>L</titleLayout><animateIconify>no</animateIconify>
+
+    <font place="ActiveWindow">
+      <name>Liberation Sans</name><size>9</size><weight>Bold</weight><slant>Normal</slant>
+    </font>
+    <font place="InactiveWindow">
+      <name>Liberation Sans</name><size>9</size><weight>Bold</weight><slant>Normal</slant>
+    </font>
+    <font place="MenuHeader">
+      <name>Liberation Sans</name><size>9</size><weight>Normal</weight><slant>Normal</slant>
+    </font>
+    <font place="MenuItem">
+      <name>Liberation Sans</name><size>9</size><weight>Normal</weight><slant>Normal</slant>
+    </font>
+    <font place="OnScreenDisplay">
+      <name>Liberation Sans</name><size>9</size><weight>Bold</weight><slant>Normal</slant>
+    </font>
+  </theme>
+
+  <desktops><number>4</number><firstdesk>1</firstdesk><popupTime>250</popupTime></desktops>
+
+  <keyboard>
+    <chainQuitKey>C-g</chainQuitKey>
+
+    <keybind key="C-A-Left">
+      <action name="DesktopLeft"><dialog>no</dialog><wrap>no</wrap></action>
+    </keybind>
+    <keybind key="C-A-Right">
+      <action name="DesktopRight"><dialog>no</dialog><wrap>no</wrap></action>
+    </keybind>
+    <keybind key="S-A-Left">
+      <action name="SendToDesktopLeft"><dialog>no</dialog><wrap>no</wrap></action>
+    </keybind>
+    <keybind key="S-A-Right">
+      <action name="SendToDesktopRight"><dialog>no</dialog><wrap>no</wrap></action>
+    </keybind>
+
+    <keybind key="A-F10"> <action name="ToggleMaximizeFull"/> </keybind>
+    <keybind key="C-A-d"> <action name="ToggleShowDesktop"/>  </keybind>
+    <keybind key="A-F4">  <action name="Close"/>              </keybind>
+    <keybind key="A-Tab"> <action name="NextWindow"/>         </keybind>
+
+    <keybind key="C-W-Right">
+      <action name="MoveResizeTo"><monitor>next</monitor></action>
+    </keybind>
+    <keybind key="C-W-Left">
+      <action name="MoveResizeTo"><monitor>prev</monitor></action>
+    </keybind>
+
+    <keybind key="W-Left">
+      <keybind key="Left">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh left</command></action>
+      </keybind>
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topleft</command></action>
+      </keybind>
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomleft</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-Right">
+      <keybind key="Right">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh right</command></action>
+      </keybind>
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topright</command></action>
+      </keybind>
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomright</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-Up">
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh top</command></action>
+      </keybind>
+      <keybind key="Left">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topleft</command></action>
+      </keybind>
+      <keybind key="Right">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topright</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-Down">
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottom</command></action>
+      </keybind>
+      <keybind key="Left">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomleft</command></action>
+      </keybind>
+      <keybind key="Right">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomright</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-A-Left">
+      <keybind key="Left">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh left3</command></action>
+      </keybind>
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topleft3</command></action>
+      </keybind>
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomleft3</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-A-Right">
+      <keybind key="Right">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh right3</command></action>
+      </keybind>
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topright3</command></action>
+      </keybind>
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomright3</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-A-Up">
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topmiddle3</command></action>
+      </keybind>
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh middle3</command></action>
+      </keybind>
+      <keybind key="Left">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topleft3</command></action>
+      </keybind>
+      <keybind key="Right">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh topright3</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="W-A-Down">
+      <keybind key="Down">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottommiddle3</command></action>
+      </keybind>
+      <keybind key="Up">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh middle3</command></action>
+      </keybind>
+      <keybind key="Left">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomleft3</command></action>
+      </keybind>
+      <keybind key="Right">
+	<action name="Execute"><command>~/.config/openbox/tiling.sh bottomright3</command></action>
+      </keybind>
+    </keybind>
+
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute"><command>amixer set Master 1%+ unmute</command></action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute"><command>amixer set Master 1%- unmute</command></action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute"><command>amixer set Master toggle</command></action>
+    </keybind>
+    <keybind key="C-A-S-r">
+      <action name="Execute"><command>sudo reboot</command></action>
+    </keybind>
+    <keybind key="C-A-S-p">
+      <action name="Execute"><command>sudo poweroff</command></action>
+    </keybind>
+    <keybind key="C-A-S-u">
+      <action name="Execute"><command>urxvt -e yaourt -Syu</command></action>
+    </keybind>
+    <keybind key="C-A-t">
+      <action name="Execute"><command>urxvt -cd /personal</command></action>
+    </keybind>
+    <keybind key="C-A-v">
+      <action name="Execute"><command>terminator -m</command></action>
+    </keybind>
+    <keybind key="C-A-r">
+      <action name="Execute"><command>deadbeef</command></action>
+    </keybind>
+    <keybind key="C-A-f">
+      <action name="Execute"><command>urxvt -e newsbeuter</command></action>
+    </keybind>
+    <keybind key="A-F2">
+      <action name="Execute"><command>dmenu_run</command></action>
+    </keybind>
+    <keybind key="C-A-p">
+      <action name="Execute"><command>pidgin</command></action>
+    </keybind>
+    <keybind key="C-A-s">
+      <action name="Execute"><command>skype</command></action>
+    </keybind>
+    <keybind key="C-A-w">
+      <action name="Execute"><command>firefox</command></action>
+    </keybind>
+    <keybind key="C-A-l">
+      <action name="Execute"><command>i3lock -c 000000</command></action>
+    </keybind>
+    <keybind key="C-A-e">
+      <action name="Execute"><command>claws-mail</command></action>
+    </keybind>
+    <keybind key="Print">
+      <action name="Execute"><command>~/.config/openbox/take-screenshot.sh</command></action>
+    </keybind>
+    <keybind key="A-Print">
+      <action name="Execute"><command>~/.config/openbox/take-window-screenshot.sh</command></action>
+    </keybind>
+    <keybind key="C-A-k">
+      <action name="Execute"><command>xfe /multimedia</command></action>
+    </keybind>
+    <keybind key="C-A-j">
+      <action name="Execute"><command>xfe /personal</command></action>
+    </keybind>
+    <keybind key="C-A-h">
+      <action name="Execute"><command>xfe</command></action>
+    </keybind>
+
+    <keybind key="C-A-x">
+      <action name="Execute">
+        <command>xchat</command>
+      </action>
+    </keybind>
+  </keyboard>
+
+  <applications>
+    <!-- <application class="*"> -->
+    <!--   <decor>no</decor> -->
+    <!-- </application> -->
+    <!-- <application name="firefox-bin" class="Firefox-bin" role="browser" type="normal"> -->
+    <!--   <maximized>yes</maximized> -->
+    <!-- </application> -->
+    <application name="qbittorrent" class="Qbittorrent" type="normal">
+      <maximized>yes</maximized>
+    </application>
+    <!-- <application name="terminal" class="Terminal" type="normal"> -->
+    <!--   <decor>no</decor> -->
+    <!-- </application> -->
+    <application class="URxvt" name="urxvt" type="normal"><maximized>yes</maximized></application>
+  </applications>
+
+  <!-- <menu> -->
+  <!--   <file>menu.xml</file> -->
+  <!--   <middle>no</middle> -->
+  <!--   <applicationIcons>yes</applicationIcons> -->
+  <!-- </menu> -->
+
+  <mouse>
+    <context name="Frame">
+      <mousebind button="A-Left" action="Drag"><action name="Move"/></mousebind>
+      <mousebind button="A-Right" action="Drag"><action name="Resize"/></mousebind>
+    </context>
+
+    <context name="Titlebar">
+      <mousebind button="Left" action="DoubleClick"><action name="ToggleMaximizeFull"/></mousebind>
+      <mousebind button="Left" action="Press"><action name="Focus"/><action name="Raise"/></mousebind>
+      <mousebind button="Left" action="Drag"><action name="Move"/></mousebind>
+    </context>
+
+    <context name="Client">
+      <mousebind button="Left" action="Press"><action name="Focus"/><action name="Raise"/></mousebind>
+    </context>
+
+    <context name="Root">
+      <mousebind button="Middle" action="Press">
+	<action name="ShowMenu"><menu>client-list-combined-menu</menu></action>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu"><menu>root-menu</menu></action>
+      </mousebind>
+    </context>
+  </mouse>
+</openbox_config>

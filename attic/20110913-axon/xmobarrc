@@ -1,0 +1,18 @@
+Config { font = "xft:Liberation Mono:size=9:antialias=false",
+       , bgColor = "black"
+       , fgColor = "white"
+       , position = Bottom
+       , commands = [ Run MultiCpu ["-t", "cpu <total>"] 10
+                    , Run Memory ["-t", "mem <used>/<total> <usedratio>%"] 10
+                    , Run Swap ["-t", "swp <usedratio>%"] 50
+                    -- , Run Network "eth0" ["-t", "<dev> <rx>/<tx>"] 300
+                    , Run Wireless "wlan0" ["-t", "wlan0 (<essid>, <quality>)"] 300
+                    , Run ThermalZone 0 [] 50
+		    -- , Run CoreTemp ["-t", "<core0>|<core1>|<core2>|<core3>"] 300
+                    -- , Run Volume "default" "Master" ["-t", "vol <volume>% <status>"] 100
+                    , Run BatteryP ["BAT0"] ["-f", "AC0/online", "-t", "bat <left>% <timeleft> <acstatus>"] 600
+                    , Run Date "%a %b %_d %H:%M" "date" 600
+                    , Run Weather "LOWL" ["-t", "<tempC>C"] 36000
+                    ]
+       , template = "<fc=#4444FF>%multicpu% | %thermal0%</fc> | <fc=#44FF44>%memory% | %swap%</fc> | <fc=#4444FF>%wlan0wi%</fc> | <fc=#FF4444>%battery%</fc> | <fc=#AAAAAA>Linz %date%, %LOWL%</fc>"
+       }

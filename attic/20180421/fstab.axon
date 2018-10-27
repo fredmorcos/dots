@@ -1,0 +1,9 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <fs>    <dir> <type> <options>                       <dp>
+/dev/sda1 /boot	vfat   rw,noatime                      0 3
+/dev/md3  /     ext4   rw,noatime,stripe=256,commit=60 0 1
+/dev/md4  /home	ext4   rw,noatime,stripe=256,commit=60 0 2
+/dev/sda2 none	swap   defaults,pri=1                  0 0
+/dev/sdb2 none	swap   defaults,pri=1                  0 0

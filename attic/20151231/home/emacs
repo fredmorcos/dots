@@ -1,0 +1,187 @@
+;;; package -- Summary
+;;; Commentary:
+;;; Code:
+
+(toggle-frame-maximized)
+
+(load-theme 'leuven)
+
+(require 'package)
+;; (add-to-list
+;;  'package-archives
+;;  '("melpa" . "http://melpa.milkbox.net/packages/")
+;; (add-to-list
+;;  'package-archives
+;;  '("melpa" . "https://melpa.org/packages/"))
+(add-to-list
+ 'package-archives
+ '("melpa-stable" . "http://stable.melpa.org/packages/"))
+;; (add-to-list
+;;  'package-archives
+;;  '("marmalade" . "https://marmalade-repo.org/packages/"))
+(package-initialize)
+
+(require 'whitespace)
+(require 'subr-x)
+(require 'flycheck)
+(require 'company)
+
+(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'after-init-hook 'global-whitespace-mode)
+(add-hook 'after-init-hook 'global-flycheck-mode)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Haskell stuff
+;; (add-hook 'haskell-mode-hook 'turn-on-hi2)
+;; (add-hook 'haskell-mode-hook #'hindent-mode)
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+
+;; (eval-after-load 'haskell-mode
+;;   '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
+
+(require 'ghc)
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(setq ghc-ghc-options '("-Wall" "-i/home/fnm/Workspace/projects/libvcard/"))
+(setq ghc-display-error 'minibuffer)
+
+(add-to-list 'company-backends 'company-ghc)
+
+(require 'flycheck-haskell)
+(add-hook 'flycheck-mode-hook 'flycheck-haskell-configure)
+
+;; (require 'company-ghci)
+;; (push 'company-ghci company-backends)
+;; (add-hook 'haskell-mode-hook 'company-mode)
+;; (add-hook 'haskell-interactive-mode-hook 'company-mode)
+;; (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+
+;; End of Haskell stuff
+
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key [f5] 'blink-matching-open)
+(global-set-key [f1] 'manual-entry)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(defconst pkg-config-call
+  "pkg-config --cflags talloc")
+
+(defconst include-list
+  (string-join
+   (list (shell-command-to-string pkg-config-call)
+         "-I/home/fnm/Workspace/archive/Examples/C/net"
+         "-I/home/fnm/Workspace/projects/libvcard"
+         ;; "-I/home/fnm/Workspace/projects/jov/src"
+         ;; "-I/home/fnm/Workspace/projects/mediacenter/src"
+         ;; "-I/home/fnm/Workspace/projects/pet"
+         ;; "-I/home/fnm/Workspace/projects/libomdb"
+         ;; "-I/home/fnm/Workspace/carp/src"
+         ;; "-I/home/fnm/Workspace/carp/deps"
+         ) " "))
+
+(defconst flycheck-include-paths
+  (split-string
+   (replace-regexp-in-string
+    "\n" "" (replace-regexp-in-string
+             " -I" " " include-list)) " " t))
+
+(defconst company-clang-includes
+  (split-string
+   (replace-regexp-in-string
+    "\n" "" include-list) " " t))
+
+(defconst compiler-warnings
+  (quote ("all" "extra" "write-strings" "pointer-arith"
+          "bad-function-cast" "pedantic" "sign-conversion"
+          "conversion" "uninitialized" "incompatible-pointer-types"
+          "unused-value")))
+
+(defconst compiler-params-string
+  (quote
+   ("-std=c11 -Wall -W -Wextra -Wwrite-strings -Wpointer-arith -Wbad-function-cast -pedantic -Wsign-conversion -Wconversion -Wincompatible-pointer-types -Wuninitialized -Wunused-value")))
+
+(when (fboundp 'windmove-default-keybindings) (windmove-default-keybindings))
+
+(custom-set-variables
+ '(Man-width 80)
+ '(blink-cursor-mode nil)
+ '(c-block-comment-prefix "* ")
+ '(c-cleanup-list
+   (quote
+    (brace-else-brace brace-elseif-brace scope-operator
+                      compact-empty-funcall comment-close-slash)))
+ '(c-doc-comment-style (quote ((c-mode . javadoc))))
+ '(column-number-mode t)
+ '(comment-column 45)
+ '(comment-empty-lines t)
+ '(comment-multi-line t)
+ '(comment-padding 1)
+ '(comment-style (quote extra-line))
+ '(company-clang-arguments company-clang-includes)
+ '(company-ghc-show-info t)
+ '(company-global-modes
+   (quote
+    (not fundamental-mode shell-mode text-mode erlang-shell-mode)))
+ '(company-idle-delay 0.3)
+ '(company-minimum-prefix-length 2)
+ '(cursor-type (quote (bar . 3)))
+ '(default-justification (quote full))
+ '(electric-indent-mode t)
+ '(flycheck-clang-include-path flycheck-include-paths)
+ '(flycheck-clang-language-standard "c11")
+ '(flycheck-clang-warnings compiler-warnings)
+ '(flycheck-cppcheck-checks (quote ("style" "warning" "information")))
+ '(flycheck-display-errors-delay 0.3)
+ '(flycheck-gcc-include-path flycheck-include-paths)
+ '(flycheck-gcc-language-standard "c11")
+ '(flycheck-gcc-warnings compiler-warnings)
+ '(flycheck-ghc-args (quote ("-Wall" "--make")))
+ '(flycheck-idle-change-delay 0.1)
+ '(flyspell-delay 1)
+ '(global-company-mode t)
+ '(global-flycheck-mode t nil (flycheck))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(global-whitespace-mode t)
+ '(global-whitespace-newline-mode nil)
+ '(haskell-notify-p t)
+ '(haskell-process-args-ghci (quote ("-ferror-spans" "-Wall")))
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote ghci))
+ '(haskell-stylish-on-save nil)
+ '(haskell-tags-on-save nil)
+ '(history-delete-duplicates t)
+ '(history-length 20)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
+ '(irony-additional-clang-options compiler-params-string)
+ '(linum-format " %d ")
+ '(menu-bar-mode nil)
+ '(mode-require-final-newline (quote visit-save))
+ '(recentf-mode t)
+ '(recentf-save-file "~/.emacs.d/recentf")
+ '(require-final-newline (quote visit-save))
+ '(rust-indent-offset 2)
+ '(savehist-mode t)
+ '(scroll-bar-mode nil)
+ '(scroll-conservatively 101)
+ '(show-trailing-whitespace t)
+ '(standard-indent 2)
+ '(tool-bar-mode nil)
+ '(whitespace-action (quote (cleanup)))
+ '(whitespace-style
+   (quote
+    (face tabs lines-tail trailing space-before-tab
+          indentation empty space-after-tab)))
+ '(woman-locale "en_US.UTF-8"))
+
+(provide 'emacs)
+;;; emacs ends here

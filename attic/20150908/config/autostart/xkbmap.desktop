@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=xkbmap
+Comment=Set xkbmap bindings
+Exec=/usr/bin/setxkbmap -option ctrl:nocaps
+Categories=Application;System;
+Hidden=true
+

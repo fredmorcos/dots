@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=xrdb
+Comment=Load Xrdb Settings
+Exec=/usr/bin/xrdb -merge ~/.Xresources
+Hidden=false
+X-GNOME-Autostart-enabled=true

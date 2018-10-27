@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -o posix
+set -o errexit
+set -o nounset
+set -o pipefail
+
+ssh neuron sudo systemctl start rsyncd
+
+sleep 1
+
+run_rsync () {
+  echo ">>> $1 --> $2"
+  rsync -ahH --delete --progress --xattrs --acls \
+        /home/fred/"$1" \
+        neuron::"$2"/
+}
+
+for i in Media Music Music.New Pictures; do
+  run_rsync "$i" "FilesCommon"
+done
+
+for i in Documents Downloads GMail HLaptop People Phone Workspace; do
+  run_rsync "$i" "Fred"
+done
+
+for i in .config .getmail .gnupg .ssh; do
+  run_rsync "$i" "Fred"
+done
+
+exec ssh neuron sudo systemctl stop rsyncd

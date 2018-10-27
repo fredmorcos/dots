@@ -1,0 +1,10 @@
+[Unit]
+Description=Disable X11 Caps Lock
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/setxkbmap -option 'ctrl:nocaps'
+Type=oneshot
+
+[Install]
+WantedBy=default.target

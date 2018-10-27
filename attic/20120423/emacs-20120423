@@ -1,0 +1,211 @@
+;; Add user and system-wide elisp library directories
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/haskell-mode")
+
+;; Set the default font
+(add-to-list 'default-frame-alist 
+	     '(font . "Liberation Mono:size=12:antialias=true"))
+
+;; Load modes for filetypes
+(setq auto-mode-alist (append '(("/*.\.upc$"  . c-mode))
+			      '(("/*.\.cilk$" . c-mode))
+			      '(("/*.\.py$"   . python-mode))
+			      '(("/PKGBUILD$" . pkgbuild-mode))
+			      '(("\\.gp$"     . gnuplot-mode))
+			      '(("\.lua$"     . lua-mode))
+			      '(("/*.\.hs$"   . haskell-mode))
+			      '(("/*.\.js$"   . js-mode))
+			      '(("/*.\.json$" . js-mode))
+			      '(("\\.org$"    . org-mode))
+			      auto-mode-alist))
+
+;;--------------------------------------------------------------------
+;; Lines enabling gnuplot-mode
+
+;; move the files gnuplot.el to someplace in your lisp load-path or
+;; use a line like
+;;  (setq load-path (append (list "/path/to/gnuplot") load-path))
+
+;; these lines enable the use of gnuplot mode
+  (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+  (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
+
+;; this line automatically causes all files with the .gp extension to
+;; be loaded into gnuplot mode
+  (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
+
+;; This line binds the function-9 key so that it opens a buffer into
+;; gnuplot mode 
+  (global-set-key [(f9)] 'gnuplot-make-buffer)
+
+;; end of line for gnuplot-mode
+;;--------------------------------------------------------------------
+
+;; Haskell
+(autoload 'haskell-mode "haskell-mode.el" "Haskell mode." t)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+;; LaTeX
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
+
+(add-hook 'latex-mode-hook 'visual-line-mode)
+(add-hook 'latex-mode-hook 'flyspell-mode)
+(add-hook 'latex-mode-hook 'latex-math-mode)
+(add-hook 'latex-mode-hook 'turn-on-reftex)
+(add-hook 'latex-math-mode 'turn-on-auto-fill)
+
+(add-hook 'latex-mode-hook
+	  (lambda () (local-set-key (kbd "C-c p") 'backward-paragraph)))
+(add-hook 'latex-mode-hook
+	  (lambda () (local-set-key (kbd "C-c n") 'forward-paragraph)))
+
+(setq-default tex-master nil)
+
+(setq tex-auto-save t)
+(setq tex-parse-self t)
+(setq reftex-plug-into-auctex t)
+(setq tex-pdf-mode t)
+
+;; JavaScript
+;; (load-file "/usr/share/emacs/site-lisp/js2.elc")
+
+;; Verilog
+(setq verilog-auto-newline nil)
+
+;; C
+(add-hook 'c-mode-common-hook
+	  (lambda () (local-set-key (kbd "C-x /")
+				    'ff-find-other-file)))
+
+;; GNUplot
+;; (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+;; (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
+
+;; Python
+(autoload 'python-mode "python-mode.el" "Python mode." t)
+;; (setq py-shell-name "ipython")
+(setq-default indent-tabs-mode nil)
+
+;; Archlinux PKGBUILD
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+
+;; Auto-fill
+;; (add-hook 'org-mode-hook 'turn-on-auto-fill)  ;; in Org mode
+(add-hook 'text-mode-hook 'turn-on-auto-fill) ;; In Text mode
+(global-set-key "\C-ca" 'org-agenda)
+
+;; Dired
+;; allow dired to be able to delete or copy a whole dir.
+;; “always” means no asking. “top” means ask once.
+;; Any other symbol means ask each and every time for a dir and subdir.
+(setq dired-recursive-copies (quote always))
+(setq dired-recursive-deletes (quote top))
+
+;; Bookmarks
+;; (set-register
+;;  ?p '(file . ""))
+
+;; Easy window movement with M-{left,right,up,down}
+(windmove-default-keybindings 'meta)
+(setq windmove-wrap-around t)
+
+;; UI and other tweaks
+(savehist-mode 1)                  ;; Enable saving minibuffer history
+(setq tab-always-indent 'complete) ;; Smart tabs
+(delete-selection-mode t)          ;; Delete selection
+(setq skeleton-pair t)
+;; (toggle-scroll-bar -1)
+;; (tool-bar-mode -1)
+;; (menu-bar-mode -1)
+(tool-bar-mode nil)
+(menu-bar-mode nil)
+;; (blink-cursor-mode (- (*) (*) (*))) ;; Turn off cursor blink
+(fset 'yes-or-no-p 'y-or-n-p)	    ;; Use 'y' and 'n'
+(column-number-mode t)              ;; Column in modeline
+(setq linum-format " %4d ")         ;; Line number format
+(global-linum-mode 1)               ;; Show line numbers
+(which-function-mode 1)
+(show-paren-mode t)
+;; (require 'battery)                  ;; Enable battery
+(display-battery-mode t)
+(display-time-mode t)
+(scroll-bar-mode nil)
+(size-indication-mode t)
+
+(setq
+ auto-save-default nil
+ backup-inhibited t
+ inhibit-startup-message t
+ echo-keystrokes 0.1
+ require-final-newline t
+ ;; redisplay-dont-pause t
+ scroll-margin 1
+ scroll-step 1
+ scroll-conservatively 5
+ scroll-preserve-screen-position 1
+ gc-cons-percentage 0.3
+ print-gensym t
+ print-circle t)
+
+(defun run-pdf-viewer ()
+  (interactive)
+  (shell-command "evince main.pdf &"))
+
+(defun compile-with-make-clean ()
+  (interactive)
+  (shell-command "xterm -e make veryclean"))
+
+(defun compile-with-make ()
+  (interactive)
+  (shell-command "xterm -e make"))
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+;; Key bindings
+(global-set-key (kbd "C-x p") 'run-pdf-viewer)
+(global-set-key (kbd "C-x c") 'compile-with-make)
+(global-set-key (kbd "C-x x") 'compile-with-make-clean)
+
+(global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "M-<up>")   'move-line-up)
+
+;; Duplicate line with C-c d
+;; (global-set-key (kbd "C-c d") "\C-a\C- \C-n\M-w\C-y")
+;; (global-set-key (kbd "C-c d") 'duplicate-line)
+(global-set-key (kbd "C-c d") (kbd "C-a C-@ C-e M-w RET C-y"))
+
+;; Add newlines before and after current line
+;; Useful for LaTeX \item lines
+(global-set-key (kbd "C-;") (kbd "C-a RET C-e C-o"))
+
+(custom-set-variables
+ '(org-agenda-files (quote ("~/personal/todo.org")))
+ '(blink-cursor-mode nil)
+)
+
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )

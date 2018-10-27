@@ -1,0 +1,15 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=Compton
+Comment=Compton Compositing Manager
+# Exec=compton -CGb --backend glx --glx-no-stencil --glx-no-rebind-pixmap --unredir-if-possible --paint-on-overlay -D 5
+# Exec=compton -CG
+# Exec=compton --backend glx --vsync opengl-swc --xrender-sync-fence -D 5
+# Exec=compton --backend glx --vsync opengl --refresh-rate 60 -D 3
+Exec=compton --backend xrender --vsync none --refresh-rate 60 -CG --no-fading-openclose --no-fading-destroyed-argb --sw-opti --xrender-sync --unredir-if-possible --paint-on-overlay
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0.mine" &
+
+nvidia-settings --assign="XVideoTextureSyncToVBlank=1" --assign="SyncToVBlank=1" &
+# xrandr --output VGA1 --mode 1680x1050 --right-of HDMI2 &
+
+wicd-gtk &
+# tint2 &
+# conky &
+xflux -l 48.18 -g 14.18 &
+xset r rate 200 30 &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+eval $(cat ~/.fehbg) &
+xrdb -load ~/.Xresources &
+
+xsetroot -cursor_name left_ptr &
+xmobar &
+trayer --widthtype request --SetDockType true --SetPartialStrut true --edge bottom --align right --height 18 --transparent true --tint 0 &
+# exec openbox
+xmonad

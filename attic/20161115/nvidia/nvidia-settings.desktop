@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=nvidia-settings
+Comment=Load NVIDIA X Settings
+Exec=/usr/bin/nvidia-settings --load-config-only
+Exec=/usr/bin/nvidia-settings -a InitialPixmapPlacement=0
+Hidden=false
+X-GNOME-Autostart-enabled=true

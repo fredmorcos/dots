@@ -1,0 +1,39 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export PATH=$HOME/opt/bin:$HOME/.cabal/bin:/usr/local/bin:$PATH
+# export PATH=/opt/android-sdk/platform-tools/:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+export GEGL_USE_OPENCL=yes
+
+export EDITOR=emacs
+export HISTCONTROL=ignoreboth
+
+alias cpugov="cpupower -c all frequency-info | grep -i \"current cpu\""
+alias skype="LIBV4LCONTROL_FLAGS=3 LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype"
+
+alias ls="ls -lh --color=auto --group-directories-first"
+alias grep="grep --color=auto"
+
+. ~/.bash_colors
+# . ~/.bash_aliases
+
+PROMPT_COMMAND='RET=$?;'
+RETVAL='$(echo $RET)'
+
+PS="[\[$Yellow\]\u\[$Color_Off\]@\[$Red\]\h\[$Color_Off\]][\[$Green\]\j $RETVAL\[$Color_Off\]][\[$Yellow\]\W\[$Color_Off\]]\$ "
+# PS="[\[$Yellow\]\u\[$Color_Off\]@\[$Red\]\h\[$Color_Off\] \[$Green\]\j\[$Color_Off\] \[$Green\]$RETVAL\[$Color_Off\] \[$Yellow\]\W\[$Color_Off\]]\$ "
+
+if [ -n "$SSH_CLIENT" ]; then
+	PS1="\[$Red\]SSH\[$Color_Off\]:$PS"
+else
+	PS1=$PS
+fi
+
+PS1="\[\033[G\]$PS1"
+# PS1='[\u@\h \W]\$ '

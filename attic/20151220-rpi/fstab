@@ -1,0 +1,9 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>                                        <dir>                <t>  <options>                                                                     <dp>
+/dev/mmcblk0p2                                         /                    ext2 defaults,noatime                                                              0 1
+/dev/mmcblk0p1                                         /boot                vfat defaults                                                                      0 0
+/dev/mmcblk0p3                                         none                 swap defaults                                                                      0 0
+/dev/disk/by-uuid/c43543b2-070c-4159-8d04-94866cc952b3 /media/ExternalFiles ext4 defaults,noatime,nofail,noauto,x-systemd.automount,x-systemd.device-timeout=9 0 2
+/dev/disk/by-uuid/50c9e0f1-a20a-477f-bc5a-f73304177563 /media/ExternalMedia ext4 defaults,noatime,nofail,noauto,x-systemd.automount,x-systemd.device-timeout=9 0 2

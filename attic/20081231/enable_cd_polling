@@ -1,0 +1,1 @@
+hal-disable-polling --device /dev/scd0 --enable-polling

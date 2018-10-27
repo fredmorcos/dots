@@ -1,0 +1,9 @@
+browser "firefox %u"
+auto-reload yes
+# cache-file /tmp/newsbeutercache.db
+cookie-cache "~/.newsbeuter/cookies.txt"
+history-limit 10
+keep-articles-days 10
+max-items 10
+reload-threads 5
+show-read-articles no

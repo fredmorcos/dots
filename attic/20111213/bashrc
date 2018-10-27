@@ -1,0 +1,2 @@
+alias ls='ls -l --color=auto'
+source ~/usr/bin/setup.sh

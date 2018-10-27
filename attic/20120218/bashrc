@@ -1,0 +1,28 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export EDITOR=emacs
+export HISTCONTROL=ignoreboth
+
+alias skype="LIBV4LCONTROL_FLAGS=3 LD_PRELOAD=/usr/lib32/libv4l/v4l1compat.so skype"
+
+alias ls="ls -lh --color=auto --group-directories-first"
+alias grep="grep --color=auto"
+
+. ~/.bash_colors
+. ~/.bash_aliases
+
+PROMPT_COMMAND='RET=$?;'
+RETURN_VALUE='$(echo $RET)'
+
+if [ -n "$SSH_CLIENT" ]; then
+	PS1="[\[$Red\]SSH:\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\] $RETURN_VALUE] "
+else
+	PS1="[\[$Red\]\h\[$Color_Off\]:\[$Yellow\]\W\[$Color_Off\] $RETURN_VALUE] "
+fi
+
+# PS1='[\u@\h \W]\$ '

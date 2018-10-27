@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+	<menu id="apps-office-menu" label="Office">
+		<item label="LyX">
+			<action name="Execute">
+				<execute>
+					lyx
+				</execute>
+			</action>
+		</item>
+	</menu>
+	<menu id="apps-accessories-menu" label="Accessories">
+		<item label="Dictionary">
+			<action name="Execute">
+				<command>
+					gnome-dictionary
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Disk Space Checker">
+			<action name="Execute">
+				<command>
+					baobab
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Calculator">
+			<action name="Execute">
+				<command>
+					gnome-calculator
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Leafpad">
+			<action name="Execute">
+				<command>
+					leafpad
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Character Map">
+			<action name="Execute">
+				<command>
+					gucharmap
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+	</menu>
+	<menu id="apps-internet-menu" label="Internet">
+		<item label="QBittorrent">
+			<action name="Execute">
+				<execute>
+					qbittorrent
+				</execute>
+			</action>
+		</item>
+	</menu>
+	<menu id="apps-virtualization-menu" label="Virtualization">
+		<item label="Virtual Box">
+			<action name="Execute">
+				<execute>
+					VirtualBox
+				</execute>
+			</action>
+		</item>
+	</menu>
+	<menu id="apps-graphics-menu" label="Graphics">
+		<item label="Kino">
+			<action name="Execute">
+				<command>
+					kino
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Gimp">
+			<action name="Execute">
+				<command>
+					gimp
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Inkscape">
+			<action name="Execute">
+				<command>
+					inkscape
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+	</menu>
+	<menu id="apps-programming-menu" label="Programming">
+		<item label="Geany">
+			<action name="Execute">
+				<execute>
+					geany
+				</execute>
+			</action>
+		</item>
+		<item label="Qt Creator">
+			<action name="Execute">
+				<execute>
+					qtcreator
+				</execute>
+			</action>
+		</item>
+		<item label="Qt Assistant">
+			<action name="Execute">
+				<execute>
+					assistant
+				</execute>
+			</action>
+		</item>
+		<item label="Qt Designer">
+			<action name="Execute">
+				<execute>
+					designer
+				</execute>
+			</action>
+		</item>
+	</menu>
+
+	<menu id="pipe-weather" label="Weather - Cairo" execute="python ~/.config/openbox/gweather.py cairo en"/>
+	<menu id="pipe-weather2" label="Weather - Linz" execute="python ~/.config/openbox/gweather.py linz en"/>
+
+	<menu id="system-menu" label="System">
+		<item label="Configuration Manager">
+			<action name="Execute">
+				<command>
+					obconf
+				</command>
+				<startupnotify>
+					<enabled>
+						yes
+					</enabled>
+				</startupnotify>
+			</action>
+		</item>
+		<item label="Reconfigure Openbox">
+			<action name="Reconfigure"/>
+		</item>
+		<item label="Exit Openbox">
+			<action name="Exit">
+				<prompt>
+					yes
+				</prompt>
+			</action>
+		</item>
+	</menu>
+	<menu id="root-menu" label="menu">
+		<separator label="Applications"/>
+		<menu id="apps-accessories-menu"/>
+		<menu id="apps-graphics-menu"/>
+		<menu id="apps-office-menu"/>
+		<menu id="apps-internet-menu"/>
+		<menu id="apps-virtualization-menu"/>
+		<menu id="apps-programming-menu"/>
+		<separator label="Weather"/>
+		<menu id="pipe-weather"/>
+		<menu id="pipe-weather2"/>
+		<separator label="System"/>
+		<menu id="system-menu"/>
+		<separator label="Leave"/>
+		<item label="Log Out">
+			<action name="SessionLogout">
+				<prompt>
+					yes
+				</prompt>
+			</action>
+		</item>
+		<item label="Suspend">
+			<action name="Execute">
+				<execute>
+					gksu pm-suspend
+				</execute>
+			</action>
+		</item>
+		<item label="Reboot">
+			<action name="Execute">
+				<execute>
+					gksu reboot
+				</execute>
+			</action>
+		</item>
+		<item label="Shutdown">
+			<action name="Execute">
+				<execute>
+					gksu poweroff
+				</execute>
+			</action>
+		</item>
+	</menu>
+</openbox_menu>

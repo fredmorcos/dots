@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fontconfig SYSTEM "../fonts.dtd">
+<!-- Thanks: http://eev.ee/blog/2015/05/20/i-stared-into-the-fontconfig-and-the-fontconfig-stared-back-at-me/ -->
+<fontconfig>
+
+	<match target="font">
+		<edit mode="assign" name="lcdfilter"><const>lcddefault</const></edit>
+		<edit mode="assign" name="rgba"><const>rgb</const></edit>
+		<edit mode="assign" name="antialias"><bool>true</bool></edit>
+		<edit mode="assign" name="hinting"><bool>false</bool></edit> <!-- true causes skipped letters with new dri/mesa/etc.! -->
+		<edit mode="assign" name="hintstyle"><const>hintslight</const></edit>
+		<edit mode="assign" name="embeddedbitmap"><bool>false</bool></edit>
+	</match>
+
+	<!-- Don't autohint bold fonts... Although I haven't turned on autohint at all -->
+	<match target="font">
+		<test compare="more" name="weight"><const>medium</const></test>
+		<edit mode="assign" name="autohint"><bool>false</bool></edit>
+	</match>
+
+	<!-- Don't autobold mono fonts -->
+	<match target="font">
+		<test compare="eq" name="spacing"><const>mono</const></test>
+		<edit mode="assign" name="embolden"><bool>false</bool></edit>
+	</match>
+
+	<!-- Defaults -->
+	<alias>
+		<family>sans-serif</family>
+		<prefer>
+			<family>Emoji One Color</family>
+			<family>Roboto</family>
+			<family>Fira Sans</family>
+			<family>PT Sans</family>
+			<family>Noto Sans</family>
+			<family>Source Han Sans JP</family>
+		</prefer>
+	</alias>
+	<alias>
+		<family>serif</family>
+		<prefer>
+			<family>Emoji One Color</family>
+			<family>PT Serif</family>
+			<family>Noto Serif</family>
+			<family>IPAMincho</family>
+		</prefer>
+	</alias>
+	<alias>
+		<family>monospace</family>
+		<prefer>
+			<family>Fira Mono</family>
+			<family>Source Code Pro</family>
+			<family>DejaVu Sans Mono</family>
+			<family>Emoji One Color</family>
+		</prefer>
+	</alias>
+	<alias>
+		<family>dos</family>
+		<prefer>
+			<family>Px437 ATI 8x16</family>
+			<family>Less Perfect DOS VGA</family>
+			<family>PxPlus IBM VGA8</family>
+			<family>PT Mono</family>
+			<family>DejaVu Sans Mono</family>
+			<family>Emoji One Color</family>
+		</prefer>
+	</alias>
+	<alias>
+		<family>cursive</family>
+		<prefer>
+			<family>Emoji One Color</family>
+			<family>Comic Neue</family>
+		</prefer>
+	</alias>
+
+	<!-- Prevent DOS fonts from being bolded. Yeah, seriously, by setting it to heavy, not thin. -->
+	<match target="font">
+		<test name="family"><string>Px437 ATI 8x16</string></test>
+		<edit mode="assign" name="weight"><const>heavy</const></edit>
+	</match>
+	<match target="font">
+		<test name="family"><string>Less Perfect DOS VGA</string></test>
+		<edit mode="assign" name="weight"><const>heavy</const></edit>
+	</match>
+	<match target="font">
+		<test name="family"><string>PxPlus IBM VGA8</string></test>
+		<edit mode="assign" name="weight"><const>heavy</const></edit>
+	</match>
+
+	<!-- Monospace fonts are monospace -->
+	<alias>
+		<family>Fira Mono</family>
+		<default><family>monospace</family></default>
+	</alias>
+	<alias>
+		<family>Source Code Pro</family>
+		<default><family>monospace</family></default>
+	</alias>
+
+	<!-- Fix fonts marked as both sans-serif and monospace -->
+	<match>
+		<test compare="eq" name="family">
+			<string>sans-serif</string>
+		</test>
+		<test compare="eq" name="family">
+			<string>monospace</string>
+		</test>
+		<edit mode="delete" name="family"/>
+	</match>
+	<!-- Fix fonts marked as both sans-serif and cursive -->
+	<match>
+		<test compare="eq" name="family">
+			<string>sans-serif</string>
+		</test>
+		<test compare="eq" name="family">
+			<string>cursive</string>
+		</test>
+		<edit mode="delete" name="family"/>
+	</match>
+
+	<!-- No bitmaps! -->
+	<selectfont>
+		<rejectfont><pattern><patelt name="scalable"><bool>false</bool></patelt></pattern></rejectfont>
+	</selectfont>
+
+	<!-- Better sans-serif font! -->
+	<match target="pattern">
+		<test qual="any" name="family"><string>Arial</string></test>
+		<edit mode="assign" binding="same" name="family"><string>Fira Sans</string></edit>
+	</match>
+
+	<!-- Better serif font! -->
+	<match target="pattern">
+		<test qual="any" name="family"><string>Times New Roman</string></test>
+		<edit mode="assign" binding="same" name="family"><string>PT Serif</string></edit>
+	</match>
+
+	<!-- Better monospace font! -->
+	<match target="pattern">
+		<test qual="any" name="family"><string>Courier</string></test>
+		<edit mode="assign" binding="same" name="family"><string>Fira Mono</string></edit>
+	</match>
+	<match target="pattern">
+		<test qual="any" name="family"><string>Consolas</string></test>
+		<edit mode="assign" binding="same" name="family"><string>Fira Mono</string></edit>
+	</match>
+
+	<!-- Because someone WILL fucking specify these in a font-family CSS property -->
+	<match target="pattern">
+		<test qual="any" name="family"><string>Symbola</string></test>
+		<edit mode="assign" binding="same" name="family"><string>Emoji One Color</string></edit>
+	</match>
+	<match target="pattern">
+		<test qual="any" name="family"><string>Noto Emoji</string></test>
+		<edit mode="assign" binding="same" name="family"><string>Emoji One Color</string></edit>
+	</match>
+
+	<!-- Don't antialias Chicago! -->
+	<match target="pattern">
+		<test qual="any" name="family"><string>ChicagoFLF</string></test>
+		<edit mode="assign" name="antialias"><bool>false</bool></edit>
+	</match>
+
+	<!-- Fix Comic Neue! (Is this still necessary?) -->
+	<match>
+		<test name="lang" compare="contains"><string>en</string></test>
+		<test name="family"><string>cursive</string></test>
+		<edit name="lang" mode="delete_all"></edit>
+		<edit name="family" mode="prepend"><string>Comic Neue</string></edit>
+	</match>
+	<alias>
+		<family>Comic Neue</family>
+		<default><family>cursive</family></default>
+	</alias>
+
+	<!-- TeX Live dirs -->
+	<dir>/usr/local/share/texmf-dist/fonts/opentype</dir>
+	<dir>/usr/local/share/texmf-dist/fonts/freetype</dir>
+
+</fontconfig>

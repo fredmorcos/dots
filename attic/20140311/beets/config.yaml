@@ -1,0 +1,8 @@
+directory: ~/Music
+library: ~/Music/Database.blb
+
+plugins: fetchart lyrics lastgenre chroma fromfilename
+
+import:
+  move: yes
+  log: ~/.config/beets/imported.log

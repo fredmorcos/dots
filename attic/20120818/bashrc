@@ -1,0 +1,12 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# PS1='[\u@\h \W]\$ '
+
+export EDITOR=emacs
+
+alias mounthilda='sudo mount /dev/sdc1 /media/hilda-portable'

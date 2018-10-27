@@ -1,0 +1,54 @@
+(add-to-list 'load-path "~/.emacs.d/")
+
+(setq scroll-conservatively 1)
+
+(setq auto-mode-alist (append '(("/*.\.cilk$" . c-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("/*.\.upc$" . c-mode)) auto-mode-alist))
+(add-hook 'c-mode-common-hook
+	  (lambda() 
+	    (local-set-key  (kbd "C-x /") 'ff-find-other-file)))
+
+(autoload 'python-mode "python-mode.el" "Python mode." t)
+(setq auto-mode-alist (append '(("/*.\.py$" . python-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("/*.\.json$" . js-mode)) auto-mode-alist))
+
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+
+;; turn off ui elements
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
+;; make line numbers look better
+(setq linum-format " %d ")
+(global-linum-mode 1)
+(column-number-mode 1)
+;; turn off welcome screen
+(setq inhibit-startup-message t)
+;; disable backup
+(setq backup-inhibited t)
+;; disable auto save
+(setq auto-save-default nil)
+;; turn off cursor blink
+(blink-cursor-mode (- (*) (*) (*)))
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key [\M-down] 'move-line-down)
+(global-set-key [\M-up] 'move-line-up)
+(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")

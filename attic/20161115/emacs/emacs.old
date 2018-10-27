@@ -1,0 +1,130 @@
+;; ===== Automatically load abbreviations table =====
+
+
+(set-scroll-bar-mode 'right)	
+
+;; Note that emacs chooses, by default, the filename
+;; "~/.abbrev_defs", so don't try to be too clever
+;; by changing its name
+;;(setq-default abbrev-mode t)
+;;(read-abbrev-file "~/.abbrev_defs")
+;;(setq save-abbrevs t)
+
+;; ===== Turn on Auto Fill mode automatically in all modes =====
+
+;; Auto-fill-mode the the automatic wrapping of lines and insertion of
+;; newlines when the cursor goes over the column limit.
+
+;; This should actually turn on auto-fill-mode by default in all major
+;; modes. The other way to do this is to turn on the fill for specific modes
+;; via hooks.
+(setq auto-fill-mode 1)
+
+
+;;(defadvice erase-buffer (around erase-buffer-noop)
+;;  "make erase-buffer do nothing")
+
+(defadvice shell-command (around shell-command-unique-buffer activate compile)
+  (if (or current-prefix-arg 
+          (not (string-match "[ \t]*&[ \t]*\\'" command)) ;; background
+          (bufferp output-buffer) 
+          (stringp output-buffer))
+      ad-do-it ;; no behavior change
+
+    ;; else we need to set up buffer
+    (let* ((command-buffer-name 
+            (format "*background: %s*" 
+                    (substring command 0 (match-beginning 0))))
+           (command-buffer (get-buffer command-buffer-name)))
+
+      (when command-buffer
+        ;; if the buffer exists, reuse it, or rename it if it's still in use
+        (cond ((get-buffer-process command-buffer)
+               (set-buffer command-buffer)
+               (rename-uniquely))
+              ('t 
+               (kill-buffer command-buffer))))
+      (setq output-buffer command-buffer-name)
+
+;;      ;; insert command at top of buffer
+      (switch-to-buffer-other-window output-buffer)
+      (insert "Running command: " command 
+              "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n")
+  		(run-at-time 0.5 nil 'delete-windows-on output-buffer)
+     
+ 
+      ;; temporarily blow away erase-buffer while doing it, to avoid
+      ;; erasing the above
+      (ad-activate-regexp "erase-buffer-noop")
+      ad-do-it
+      (ad-deactivate-regexp "erase-buffer-noop"))))
+
+
+;; set delete mode(keys: bksp del) on
+(delete-selection-mode t)
+
+(defun my-open-func ()
+  "This function opens a pdf viewer."
+  (interactive)
+  (shell-command (format "okular %s.pdf &" (file-name-sans-extension (buffer-file-name)))))
+
+
+;; Compilation
+(setq compilation-scroll-output 1) ;; automatically scroll the compilation window
+(setq compilation-window-height 10) ;; Set the compilation window height...
+(setq compilation-finish-function ;; Auto-dismiss compilation buffer...
+      (lambda (buf str)
+        (if (string-match "exited abnormally" str)
+            (message "compilation errors, press F6 to visit")
+          ; no errors, make the compilation window go away after 2.5 sec
+          (run-at-time 1.0 nil 'delete-windows-on buf)
+          (message "No compilation errors!"))))
+
+(require 'cl) ; If you don't have it already
+(defun* get-closest-pathname (&optional (file "Makefile"))
+  "This function walks up the current path until it finds Makefile and then returns the path to it."
+  (let ((root (expand-file-name "/")))
+    (expand-file-name file
+              (loop
+            for d = default-directory then (expand-file-name ".." d)
+            if (file-exists-p (expand-file-name file d))
+            return d
+            if (equal d root)
+           return nil))))
+
+(defun my-compile-func ()
+  "This function does a compile."
+  (interactive)
+  (compile (format "make -C %s" (file-name-directory (get-closest-pathname)))))
+
+(defun my-compile-clean-func ()
+  "This function does a clean compile."
+  (interactive)
+  (compile (format "make -C %s veryclean" (file-name-directory (get-closest-pathname
+)))))
+
+
+;; set global keys
+(global-set-key (kbd "C-f") 'isearch-forward)
+(global-set-key [(control shift o)] 'split-window-vertically)
+(global-set-key [(control shift e)] 'split-window-horizontally)
+;;(global-set-key [(control d)] 'delete-window)
+(global-set-key (kbd "C-M-k") 'my-compile-func)
+(global-set-key (kbd "C-M-c") 'my-compile-clean-func)
+(global-set-key (kbd "C-M-x") 'shell)
+(global-set-key (kbd "C-M-o") 'my-open-func)
+
+;;(put 'downcase-region 'disabled nil)
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
+ '(verilog-auto-newline nil))
+;;(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+;; )

@@ -1,0 +1,44 @@
+autoload -U compinit colors
+compinit
+colors
+
+zstyle ':completion:*' menu select add-space list-colors
+
+setopt completealiases
+setopt nohup
+setopt autoparamslash
+setopt correct
+setopt listrowsfirst
+
+unsetopt autoremoveslash
+
+PROMPT="[%B%3~%b]%{$fg[green]%}%B%#%b "
+RPROMPT='[%B%?%b]'
+
+alias ls="ls --color=auto"
+alias ll="ls -lh --group-directories-first"
+alias la="ll -A"
+alias mv="mv -i"
+alias grep="grep --color=auto"
+alias em="emacs"
+
+export EDITOR=emacs
+
+export PATH=$HOME/bin:$HOME/.cabal/bin:/opt/android-sdk/platform-tools/:$PATH
+
+if [[ "$(hostname)" == "archvm" ]]; then
+    export http_proxy="http://proxy:911/"
+    export https_proxy="http://proxy:911/"
+fi
+
+bindkey "^[OH"    beginning-of-line
+bindkey "^[OF"    end-of-line
+bindkey "^[[2~"   overwrite-mode
+bindkey "^[[3~"   delete-char
+bindkey "^[[A"    up-line-or-history
+bindkey "^[[B"    down-line-or-history
+bindkey "^[[D"    backward-char
+bindkey "^[[C"    forward-char
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+

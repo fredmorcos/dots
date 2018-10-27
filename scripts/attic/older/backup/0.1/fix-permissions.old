@@ -1,0 +1,48 @@
+#!/bin/bash
+
+dir="/media/External/Common"
+
+echo "fixing ownership on $dir"
+chown -R kodi:users $dir
+
+echo "fixing dir permissions on $dir"
+find $dir -type d -print0 | xargs -0 chmod ug+rwx,o+rx,o-w
+
+echo "fixing file permissions on $dir"
+find $dir -type f -print0 | xargs -0 chmod ug+rw,o+r,ugo-x,o-w
+
+echo "fixing access permissions on $dir itself only"
+chmod ugo+rwx $dir
+
+dir="/media/External2/Common"
+
+echo "fixing ownership on $dir"
+chown -R kodi:users $dir
+
+echo "fixing dir permissions on $dir"
+find $dir -type d -print0 | xargs -0 chmod ug+rwx,o+rx,o-w
+
+echo "fixing file permissions on $dir"
+find $dir -type f -print0 | xargs -0 chmod ug+rw,o+r,ugo-x,o-w
+
+echo "fixing access permissions on $dir itself only"
+chmod ugo+rwx $dir
+
+dir="/media/External2/Home"
+
+echo "fixing ownership on $dir/fred"
+chown -R fred:users "$dir/fred"
+
+echo "fixing ownership on $dir/hilda"
+chown -R hilda:users "$dir/hilda"
+
+echo "fixing dir permissions on $dir"
+find $dir -type d -print0 | xargs -0 chmod u+rwx,go-rwx
+
+echo "fixing file permissions on $dir"
+find $dir -type f -print0 | xargs -0 chmod u+rw,go-rwx
+
+echo "fixing access permissions on $dir itself only"
+chmod ugo+rwx $dir
+
+sync

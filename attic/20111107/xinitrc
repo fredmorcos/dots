@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Load dbus for the X11 session
+dbus_file="/etc/X11/xinit/xinitrc.d/30-dbus"
+[ -x "$f" ] && . "$f"
+
+# Set the env-var for the Gtk theme (Skype and Qt apps)
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0.mine"
+
+# Load NVIDIA settings
+# nvidia-settings --load-config-only
+
+# Adjust the monitor resolutions and positions
+xrandr --output VGA1 --mode 1680x1050 --right-of HDMI2
+
+# Set the wallpaper
+feh --bg-scale wallpapers/texture2.jpg
+
+# Load Xresources (fonts, colors, etc...) for X11 apps
+xrdb -merge ~/.Xresources
+
+# Keyboard typing speed and delay
+xset r rate 200 30
+
+# Set the cursor icon when over the desktop
+xsetroot -cursor_name left_ptr
+
+# Start the terminal daemon
+urxvtd -q -f -o
+
+# Start the notification system
+dunst -fn "-*-liberation mono-medium-r-normal-*-12-*-96-96-*-*-*-*" \
+      -nb "#285577" -nf white -mod mod4 -key c -to 5 &
+
+# Finally load the window manager
+exec i3

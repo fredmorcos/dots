@@ -1,0 +1,106 @@
+;;; package -- Summary
+
+;;; Commentary:
+
+;;; Code:
+
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("melpa"     . "http://melpa.milkbox.net/packages/")
+ '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; auto-completion
+;; (require 'auto-complete)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+
+;; (require 'rust-mode)
+
+;; snippets
+;; (require 'yasnippet)
+;; (yas-global-mode 1)
+
+;; variable name refactoring
+;; (require 'iedit)
+
+;; on the fly gcc/clang/cppcheck checking
+(require 'flycheck)
+;; (add-hook 'rust-mode-hook 'flycheck-mode)
+;; (add-hook 'c-mode-hook 'flycheck-mode)
+;; (add-hook 'haskell-mode-hook 'flycheck-mode)
+
+;; c header completion
+;; (defun my:ac-c-header-init ()
+;;   (require 'auto-complete-c-headers)
+;;   (add-to-list 'ac-sources 'ac-source-c-headers)
+;;   (add-to-list 'achead:include-directories
+;;                '("/home/fnm/pet"
+;;                  "/usr/include/glib-2.0"
+;;                  "/usr/include/glib-2.0/glib")))
+;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+;; (autoload 'ghc-init "ghc" nil t)
+
+;; (semantic-mode 1)
+;; (defun my:add-sem-to-ac ()
+;;   (add-to-list 'ac-sources 'ac-source-semantic))
+;; (add-hook 'c-mode-common-hook 'my:add-sem-to-ac)
+;; (global-ede-mode 1)
+;; (ede-cpp-root-project "pet-c" :file "~/pet-c/main.c"
+;;                       :include-path '("../pet-c"))
+;; (global-semantic-idle-scheduler-mode 1)
+
+(custom-set-variables
+ '(blink-cursor-mode nil)
+ '(c-backslash-column 80)
+ '(c-backslash-max-column 80)
+ '(c-basic-offset 2)
+ '(c-block-comment-prefix "* ")
+ '(c-label-minimum-indentation 1)
+ '(column-number-mode t)
+ '(flycheck-cppcheck-checks (quote ("style" "all")))
+ '(flycheck-display-errors-delay 0.5)
+ '(flycheck-idle-change-delay 0.5)
+ '(font-use-system-font t)
+ '(global-flycheck-mode t nil (flycheck))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(global-whitespace-mode t)
+ '(global-whitespace-newline-mode nil)
+ ;; '(haskell-doc-show-global-types t)
+ ;; '(haskell-indent-offset 2)
+ ;; '(haskell-mode-hook (quote (turn-on-haskell-decl-scan
+ ;;                             turn-on-haskell-doc
+ ;;                             turn-on-haskell-indent
+ ;;                             flycheck-mode)) t)
+ ;; '(haskell-stylish-on-save t)
+ ;; '(haskell-tags-on-save t)
+ '(history-delete-duplicates t)
+ '(history-length 100)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
+ '(linum-format " %d ")
+ '(mode-require-final-newline (quote visit-save))
+ '(recentf-mode t)
+ '(recentf-save-file "~/.emacs.d/recentf")
+ '(require-final-newline (quote visit-save))
+ '(rust-indent-offset 2)
+ '(savehist-mode t)
+ '(scroll-bar-mode nil)
+ '(scroll-conservatively 101)
+ '(menu-bar-mode nil)
+ '(show-trailing-whitespace t)
+ '(tool-bar-mode nil)
+ '(whitespace-action (quote (cleanup)))
+ '(whitespace-style (quote (face tabs lines-tail trailing
+                                 space-before-tab indentation
+                                 empty space-after-tab))))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f5] 'blink-matching-open)
+
+(provide '.emacs)
+;;; .emacs ends here

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+RSYNC_CMD="rsync -rhu --delete -P --preallocate"
+TARGET_DIR="/run/media/fred/External 2/"
+
+if ! which rsync &>/dev/null; then
+    echo "Cannot find rsync" 1>&2
+    exit 1
+fi
+
+
+echo "rsync cmd = $RSYNC_CMD"
+
+if [[ -d $TARGET_DIR ]]; then
+    dir=$TARGET_DIR
+    echo "Going to sync locally to $dir"
+
+#    if ! $RSYNC_CMD --exclude "dev" --exclude "mnt" --exclude "opt" --exclude "proc" --exclude "root" --exclude "run" --exclude "srv" --exclude "sys" --exclude "tmp" --exclude "usr" --exclude "var" --exclude "bin" --exclude "lib" --exclude "lib64" --exclude "lost+found" --exclude "sbin" "/" "$dir/"; then
+#        echo "Could not sync to $dir" 1>&2
+#        exit 1
+#    fi
+    if ! $RSYNC_CMD "/home/fred/" "$dir/home/fred/"; then
+        echo "Could not sync to $dir/home/fred/" 1>&2
+        exit 1
+    fi
+fi

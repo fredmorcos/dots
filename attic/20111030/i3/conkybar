@@ -1,0 +1,11 @@
+out_to_console yes
+out_to_x no
+short_units yes
+update_interval 1
+total_run_times 0
+uppercase no
+cpu_avg_samples 1
+net_avg_samples 1
+
+TEXT
+WEA ${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LOWL temperature}°C

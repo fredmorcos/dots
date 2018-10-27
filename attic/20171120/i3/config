@@ -1,0 +1,109 @@
+set $mod Mod4
+set $alt Mod1
+
+font pango:Sans Bold 8
+
+hide_edge_borders both
+focus_follows_mouse no
+workspace_auto_back_and_forth yes
+
+# start dmenu (a program launcher)
+bindsym $alt+F3 exec dmenu_run
+bindsym $alt+F2 exec --no-startup-id i3-dmenu-desktop
+
+bindsym $mod+d exec rofi -show drun
+bindsym $mod+r exec rofi -show run
+bindsym $mod+w exec rofi -show windowcd
+
+bindsym $alt+Control+t exec xfce4-terminal
+bindsym $alt+Control+w exec firefox
+bindsym $alt+Control+h exec pcmanfm
+bindsym $alt+Control+e exec emacs
+bindsym $alt+Control+o exec pavucontrol
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+
+# toggle tiling/floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling/floating windows
+bindsym $mod+space focus mode_toggle
+
+bindsym button1 floating toggle
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym $alt+F4      kill
+
+# Select window
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Move window
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+Shift+c reload       # reload config file
+bindsym $mod+Shift+r restart      # restart i3
+
+for_window [class="mpv"] floating enable
+
+exec i3lock -c 000000
+exec nvidia-settings -a SyncToVBlank=0
+exec setxkbmap -option 'ctrl:nocaps'
+exec xset -dpms
+# exec xrdb -merge ~/.Xresources
+exec pcmanfm -d
+
+bar {
+  font pango:Mono, Icons 9
+  position top
+  status_command i3status-rs ~/.config/i3/config.toml
+  colors {
+    separator #666666
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff
+    active_workspace #333333 #333333 #ffffff
+    inactive_workspace #333333 #333333 #888888
+    urgent_workspace #2f343a #900000 #ffffff
+  }
+}

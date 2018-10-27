@@ -1,0 +1,9 @@
+Xft.autohint: 0
+Xft.hinting: 1
+Xft.hintstyle: hintmedium
+Xft.antialias: 1
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.dpi: 108
+Xft.embeddedbitmap: false
+Emacs.font: Iosevka Term-12:autohint=false:hinting=true:hintstyle=2:antialias=true

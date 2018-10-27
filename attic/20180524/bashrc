@@ -1,0 +1,64 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
+
+PS1="\[\e[7;34m\]\w\[\e[0m\] >  "
+HISTCONTROL="$HISTCONTROL ignoredups erasedups:ignoreboth"
+
+PATH="$HOME/Workspace/dotfiles/scripts:$PATH"
+PATH="$HOME/Documents/Workspace/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
+
+export PATH HISTCONTROL
+
+eval "$(dircolors)"
+
+shopt -s autocd cdspell cmdhist dirspell histappend
+set -o noclobber
+
+alias grep='grep --color'
+alias ls='exa'
+alias ll='ls -lghH --group-directories-first --git -@'
+alias la='ll -a'
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
+alias up='sudo pacman -Syu'
+alias dired='emacs -nw .'
+alias em=emacs
+alias e=emacs
+alias ip='ip -c'
+
+alias neuron_systemctl='ssh neuron sudo systemctl'
+alias neuron_reboot='neuron_systemctl reboot'
+alias neuron_poweroff='neuron_systemctl poweroff'
+alias neuron_rsyncd_start='neuron_systemctl start rsyncd'
+alias neuron_rsyncd_stop='neuron_systemctl stop rsyncd'
+alias neuron_kodi_restart='neuron_systemctl restart kodi'
+alias neuron_kodi_stop='neuron_systemctl stop kodi polkit upower avahi-dnsconfd avahi-daemon.service'
+
+alias dlsub='subdl -i --output="%m.%L.%S"'
+alias yt480="youtube-dl -f '[height<=480]'"
+alias yt720="youtube-dl -f '[height<=720]'"
+
+gitall() {
+  for i in *; do
+    if [ -e "$i/.git" ] || [ -d "$i/.git" ]; then
+      cd "$i" || exit
+      echo ">>> git $*: $i"
+      git "$@"
+      cd .. || exit
+    fi
+  done
+}
+
+alias gitallstatus='gitall status -s'
+alias gitallpp='gitall pull -q && gitall push -q'
+

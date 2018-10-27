@@ -1,0 +1,46 @@
+#
+# /home/fmorcos/.nvidia-settings-rc
+#
+# Configuration file for nvidia-settings - the NVIDIA X Server Settings utility
+# Generated on Sun Aug  4 15:35:16 2013
+#
+
+# ConfigProperties:
+
+RcFileLocale = C
+ToolTips = Yes
+DisplayStatusBar = Yes
+SliderTextEntries = Yes
+IncludeDisplayNameInConfigFile = No
+ShowQuitDialog = No
+UpdateRulesOnProfileNameChange = Yes
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
+Timer = Memory_Used_(GPU_0),Yes,3000
+
+# Attributes:
+
+0/SyncToVBlank=1
+0/LogAniso=0
+0/FSAA=0
+0/TextureSharpen=0
+0/TextureClamping=1
+0/FXAA=0
+0/AllowFlipping=1
+0/FSAAAppControlled=1
+0/LogAnisoAppControlled=1
+0/OpenGLImageSettings=1
+0/FSAAAppEnhanced=0
+0/DigitalVibrance[DFP-0]=0
+0/ColorSpace[DFP-0]=0
+0/ColorRange[DFP-0]=0
+0/XVideoSyncToDisplay=65536
+axon:0[dpy:1]/RedBrightness=0.000000
+axon:0[dpy:1]/GreenBrightness=0.000000
+axon:0[dpy:1]/BlueBrightness=0.000000
+axon:0[dpy:1]/RedContrast=0.000000
+axon:0[dpy:1]/GreenContrast=0.000000
+axon:0[dpy:1]/BlueContrast=0.000000
+axon:0[dpy:1]/RedGamma=1.000000
+axon:0[dpy:1]/GreenGamma=1.000000
+axon:0[dpy:1]/BlueGamma=1.000000

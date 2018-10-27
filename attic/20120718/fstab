@@ -1,0 +1,13 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+tmpfs /tmp tmpfs nodev,nosuid 0 0
+
+LABEL=home /home ext4 defaults,noatime,norelatime              0 1
+LABEL=root /     ext4 defaults,noatime,norelatime              0 1
+# LABEL=mult /mult ext4 defaults,noatime,norelatime,noauto,users 0 1
+
+/swapfile none swap defaults 0 0
+
+

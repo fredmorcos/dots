@@ -1,0 +1,39 @@
+;; Font
+(custom-set-faces
+ '(default ((t (:family "Dejavu Sans Mono"
+		:foundry "unknown"
+		:slant normal
+		:weight normal
+		:height 90
+		:width normal)))))
+
+;; Theme
+(load-theme 'tango-dark)
+
+;; Some customizations
+(custom-set-variables
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(display-battery-mode t)
+ '(display-time-mode t)
+ '(show-paren-mode t)
+ '(size-indication-mode t)
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(menu-bar-mode nil)
+ '(global-linum-mode t)
+ '(save-hist-mode t)
+ '(linum-format " %d ")
+ '(backup-inhibited t)
+ '(auto-save-default nil)
+ '(inhibit-startup-message t)
+ '(echo-keystrokes 0.1)
+ '(require-final-newline t)
+ '(scroll-conservatively 101)
+ '(cursor-type 'bar)
+ '(text-mode-hook '(turn-on-auto-fill text-mode-hook-identify))
+ '(package-archives '(("marmalade" . "http://marmalade-repo.org/packages/")
+		      ("gnu" . "http://elpa.gnu.org/packages/")))
+)
+
+(fset 'yes-or-no-p 'y-or-n-p)

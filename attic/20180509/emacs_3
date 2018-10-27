@@ -1,0 +1,104 @@
+;;; package -- summary
+;;; Commentary:
+;;; Code:
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(company-tooltip-align-annotations t)
+ '(counsel-mode t)
+ '(custom-enabled-themes (quote (tango-dark)))
+ '(fill-column 90)
+ '(flyspell-delay 0.2)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-buffer-menu t)
+ '(inhibit-startup-screen t)
+ '(ivy--regex-ignore-order t)
+ '(ivy-action-wrap t)
+ '(ivy-count-format "")
+ '(ivy-extra-directories (quote nil))
+ '(ivy-initial-inputs-alist nil t)
+ '(ivy-mode t)
+ '(ivy-use-selectable-prompt t)
+ '(ivy-use-virtual-buffers t)
+ '(ivy-wrap t)
+ '(markdown-command "pandoc")
+ '(org-cycle-separator-lines -1)
+ '(org-indent-indentation-per-level 4)
+ '(org-startup-folded nil)
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa-stable" . "http://stable.melpa.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (flycheck magit which-key counsel flx smex swiper ivy cargo racer rust-mode company markdown-mode)))
+ '(racer-rust-src-path
+   "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
+ '(rust-indent-offset 2)
+ '(save-place t)
+ '(save-place-mode t)
+ '(scroll-conservatively 4)
+ '(show-paren-mode t)
+ '(size-indication-mode t)
+ ;; '(split-height-threshold 200)
+ ;; '(split-width-threshold 20)
+ '(standard-indent 2)
+ '(tab-width 2)
+ '(tool-bar-mode nil)
+ '(which-key-mode t))
+
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
+
+(add-hook 'flyspell-mode-hook 'flyspell-buffer)
+
+(add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'rust-mode-hook 'racer-mode)
+(add-hook 'racer-mode-hook 'company-mode)
+(add-hook 'racer-mode-hook 'eldoc-mode)
+(add-hook 'rust-mode-hook 'cargo-minor-mode)
+(add-hook 'markdown-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+(add-hook 'emacs-lisp-mode-hook 'checkdoc-minor-mode)
+(add-hook 'prog-mode-hook 'show-paren-mode)
+(add-hook
+ 'prog-mode-hook
+ (lambda ()
+   (add-hook 'before-save-hook 'delete-trailing-whitespace t t)))
+(add-hook
+ 'ivy-mode-hook
+ (lambda ()
+   (eval-when-compile (defvar ivy-minibuffer-map))
+   (define-key ivy-minibuffer-map (kbd "RET") 'ivy-alt-done)))
+
+(fset 'yes-or-no-p 'y-or-n-p)
+(windmove-default-keybindings)
+
+(global-set-key (kbd "C-s") 'swiper)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Inconsolata" :foundry "CYRE" :slant normal :weight normal :height 120 :width normal))))
+ '(company-tooltip ((t (:background "dark orange" :foreground "black"))))
+ '(company-tooltip-common ((t (:foreground "brown")))))
+
+(provide 'emacs)
+;;; .emacs ends here

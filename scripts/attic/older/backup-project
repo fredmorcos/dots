@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+if [ ! $1 ]; then
+    echo "Please provide a directory to backup"
+    echo "./backup_project.sh <directory>"
+    exit 1
+fi
+
+if [ -d $1 ]; then
+    echo "Backing up $1"
+    echo "  Archiving and compressing $1 to $1.tar.xz"
+    tar acf "$1.tar.xz" "$1"
+    echo "  Encrypting $1.tar.xz to $1.tar.xz.gpg"
+    gpg2 --symmetric "$1.tar.xz"
+    echo "  Deleting stale file $1.tar.xz"
+    rm -f "$1.tar.xz"
+else
+    echo "Please pass 1 directory argument to archive and encrypt"
+    echo "./backup_project.sh <directory-name>"
+fi

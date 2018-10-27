@@ -1,0 +1,226 @@
+#!/bin/bash
+
+# Command line configuration options
+if [ -z "$EMAIL" ]; then
+    EMAIL=no
+fi
+
+if [ -z "$CONFIGS" ]; then
+    CONFIGS=no
+fi
+
+if [ -z "$CHAT" ]; then
+    CHAT=no
+fi
+
+if [ -z "$DRY" ]; then
+    DRY=no
+fi
+
+if [ -z "$VERBOSE" ]; then
+    VERBOSE=no
+fi
+
+# Check if rsync is available
+RSYNC=`which rsync`
+
+if [ ! $RSYNC ]; then
+    echo "Rsync is not available"
+    HAVE_RSYNC=no
+else
+    echo "Rsync is available"
+    HAVE_RSYNC=yes
+fi
+
+# Check if rpi (neuron) is online
+if ! ping -c 1 neuron &>/dev/null; then
+    echo "Neuron is not online"
+    RPI_ONLINE=no
+else
+    echo "Neuron is online"
+    RPI_ONLINE=yes
+fi
+
+# Check if /home/fred/Documents is mounted
+UNMOUNT_DOCUMENTS=no
+
+if ! mount | grep "encfs on /home/fred/Documents" &>/dev/null; then
+    echo "/home/fred/Documents is not mounted, going to mount it"
+    UNMOUNT_DOCUMENTS=yes
+    mount-home-encfs
+else
+    echo "/home/fred/Documents already mounted"
+fi
+
+# Fetch a backup of gmail inbox
+GETMAIL=`which getmail 2>/dev/null`
+
+if [ -z "$GETMAIL" ]; then
+    echo "Getmail is not available"
+else
+    if [ "$EMAIL" == "no" ]; then
+        echo "Getmail disabled"
+    else
+        echo "Running getmail ($GETMAIL)"
+        if ! $GETMAIL; then
+            echo "Could not run getmail"
+        fi
+    fi
+fi
+
+# Make backups of laptop and rpi config files along with chat logs
+CONFIG_BACKUP_DIR="/home/fred/Archive/SystemConfigsBackup"
+LAPTOP_CONFIG_BACKUP=$CONFIG_BACKUP_DIR/"laptop-`date +%G%m%d`"
+RPI_CONFIG_BACKUP=$CONFIG_BACKUP_DIR/"rpi-`date +%G%m%d`"
+CHATLOGS_BACKUP="/home/fred/Documents/ChatLogsBackup/`date +%G%m%d`"
+
+LAPTOP_FILES=`cat /home/fred/Workspace/bin/list-laptop-files`
+RPI_FILES=`cat /home/fred/Workspace/bin/list-rpi-files`
+CHATLOGS_FILES=`cat /home/fred/Workspace/bin/list-chat-logs`
+
+RSYNC_LOG="/home/fred/Workspace/bin/log-rpi-rsync"
+
+# Delete rsync log
+if [ -f "$RSYNC_LOG" ]; then
+    rm $RSYNC_LOG
+fi
+
+if [ "$CONFIGS" == "yes" ]; then
+    # Make sure that CONFIG_BACKUP_DIR exists
+    if [ -d $CONFIG_BACKUP_DIR ]; then
+        false
+    else
+        mkdir -p $CONFIG_BACKUP_DIR
+    fi
+fi
+
+if [ "$CHAT" == "yes" ]; then
+    # Make sure that the ChatLogsBackup sub-directory exists
+    mkdir -p $CHATLOGS_BACKUP
+fi
+
+if [ "$HAVE_RSYNC" == "yes" ]; then
+    if [ "$CONFIGS" == "yes" ]; then
+        echo "Backing up laptop config files to $LAPTOP_CONFIG_BACKUP"
+        for file in $LAPTOP_FILES; do
+            if ! $RSYNC -rRL $file $LAPTOP_CONFIG_BACKUP/; then
+                echo "Failed to backup $file"
+                exit 1
+            fi
+        done
+
+        if [ "$NEURON_ONLINE" == "yes" ]; then
+            echo "Backing up rpi config files to $RPI_CONFIG_BACKUP"
+            for file in $RPI_FILES; do
+                if $RSYNC -rRL fred@neuron:$file $RPI_CONFIG_BACKUP/ &>> \
+                          $RSYNC_LOG; then
+                    echo "Failed to backup fred@neuron:$file"
+                    exit 1
+                fi
+            done
+        fi
+    fi
+
+    if [ "$CHAT" == "yes" ]; then
+        echo "Backing up chat logs"
+        for file in $CHATLOGS_FILES; do
+            if ! $RSYNC -rRL $file $CHATLOGS_BACKUP/; then
+                echo "Failed to backup chat log $file"
+                exit 1
+            fi
+        done
+    fi
+fi
+
+# Make sure we umount /home/fred/Documents if we mounted it
+if [ "$UNMOUNT_DOCUMENTS" == "yes" ]; then
+    echo "/home/fred/Documents was mounted by us, unmounting"
+    mount-home-encfs unmount
+fi
+
+# Make backup of home and media files
+HOME_DIRS=`cat /home/fred/Workspace/bin/list-home-dirs`
+MEDIA_DIRS=`cat /home/fred/Workspace/bin/list-media-dirs`
+
+RSYNC_FLAGS="-rhuL --partial --delete --preallocate"
+
+if [ "$VERBOSE" == "no" ]; then
+    RSYNC_FLAGS="$RSYNC_FLAGS --info=progress2"
+else
+    RSYNC_FLAGS="$RSYNC_FLAGS --progress"
+fi
+
+if [ "$DRY" == "yes" ]; then
+    RSYNC_FLAGS="$RSYNC_FLAGS --dry-run"
+fi
+
+if [ -d "/run/media/fred/External2" ]; then
+    echo "External2 is mounted, local sync"
+    STOP_RSYNCD=no
+
+    dst_base_dir="/run/media/fred/External2"
+    dst_home_dir="$dst_base_dir/Home/fred"
+    dst_common_dir="$dst_base_dir/Common"
+elif [ "$RPI_ONLINE" == "yes" ]; then
+    # Sync remotely
+    echo "Starting rsyncd on rpi, remote sync"
+    ssh neuron sudo systemctl start rsyncd
+    echo "Waiting for 2 seconds..."
+    sleep 2
+    STOP_RSYNCD=yes
+
+    dst_base_dir="neuron"
+    dst_home_dir="$dst_base_dir::Fred"
+    dst_common_dir="$dst_base_dir::Common"
+else
+    echo "Cannot find External2 anywhere"
+    exit 1
+fi
+
+echo "Sync home directory files"
+for i in $HOME_DIRS; do
+    src="$HOME/$i/"
+    dst="$dst_home_dir/$i/"
+
+    echo -n "$src --> $dst : "
+    sleep 1
+    if ! $RSYNC $RSYNC_FLAGS $src $dst; then
+        echo "Could not sync $src to $dst"
+        exit 1
+    fi
+done
+
+echo "Sync media directories"
+for i in $MEDIA_DIRS; do
+    src="$HOME/$i/"
+    dst="$dst_common_dir/$i/"
+
+    echo -n "$src --> $dst : "
+    sleep 1
+    if ! $RSYNC $RSYNC_FLAGS $src $dst; then
+        echo "Could not sync $src to $dst"
+        exit 1
+    fi
+done
+
+if [ "$RPI_ONLINE" == "yes" ]; then
+    echo "Backing up Hilda's home backup..."
+    ssh neuron sudo rsync -ruhL -pEog --info=progress2 --partial --delete --preallocate /media/External2/Home/hilda/ /media/External/HildaBackupBackup/
+
+    echo "Fixing permissions..."
+    ssh neuron sudo /media/External2/fix-permissions
+
+    echo "RPI pacman-optimize"
+    ssh neuron sudo pacman-optimize
+fi
+
+echo "Local pacman-optimize"
+sudo pacman-optimize
+
+if [ "$STOP_RSYNCD" == "yes" ]; then
+    ssh neuron sudo systemctl stop rsyncd
+    echo "Rsyncd on rpi stopped"
+fi
+
+echo "Syncing to disks"
+sync

@@ -1,0 +1,83 @@
+#!/bin/sh
+
+RSYNC_CMD="rsync -rhu --delete -P --preallocate"
+
+if ! which rsync &>/dev/null; then
+    echo "Cannot find rsync" 1>&2
+    exit 1
+fi
+
+echo "home directory = $HOME"
+echo "rsync cmd = $RSYNC_CMD"
+echo "----"
+
+if [[ -d "/run/media/fred/External" ]]; then
+    base_dir="/run/media/fred/External"
+    common_dir="$base_dir/Common"
+    fred_dir="$base_dir/Home/fred"
+    echo "Going to sync locally to $dir"
+elif ! ping -c 1 neuron &>/dev/null; then
+    echo "Neuron is not online" 1>&2
+    echo "Cannot sync locally nor remotely" 1>&2
+    exit 1
+else
+    echo "Neuron is online"
+    # dir="neuron:/media/External"
+    base_dir="neuron"
+    common_dir="$base_dir::Common"
+    fred_dir="$base_dir::Fred"
+    echo "Going to sync remotely to $dir"
+fi
+
+echo "----"
+
+# echo "Getting mail..."
+# if ! which getmail &>/dev/null; then
+#     echo "Cannot find getmail." 1>&2
+#     exit 1
+# fi
+# getmail
+
+for i in $(ls "$HOME/Media/"); do
+    echo "Sync $HOME/Media/$i/  -->  $common_dir/$i/"
+    if ! $RSYNC_CMD "$HOME/Media/$i/" "$common_dir/$i/"; then
+        echo "Could not sync $i" 1>&2
+        exit 1
+    fi
+done
+
+for i in Music Music.New Pictures; do
+    echo "Sync $HOME/$i/  -->  $common_dir/$i/"
+    if ! $RSYNC_CMD "$HOME/$i/" "$common_dir/$i/"; then
+        echo "Could not sync $i" 1>&2
+        exit 1
+    fi
+done
+
+for i in Archive Documents Downloads Misc Private Tubes Unknown Videos Workspace; do
+    echo "Sync $HOME/$i/  -->  $fred_dir/$i/"
+    if ! $RSYNC_CMD "$HOME/$i/" "$fred_dir/$i/"; then
+        echo "Could not sync $i" 1>&2
+        exit 1
+    fi
+done
+
+for i in /etc/profile.d/path.sh /etc/bash.bashrc /etc/makepkg.conf /etc/mkinitcpio.conf /etc/systemd/system/hdparm.service /etc/systemd/system/home.mount.d/10-order.conf /etc/systemd/system/systemd-cryptsetup@HomeA.service.d/10-order.conf /etc/pacman.conf /etc/hosts /etc/vimrc /etc/pacman.d/mirrorlist /etc/mdadm.conf /etc/locale.conf /home/fred/.gitconfig /home/fred/.emacs /home/fred/.nvidia-settings-rc /home/fred/.sbclrc /home/fred/.face.jpg /home/fred/.bashrc; do
+    if [ -e "$i" ]; then
+        echo "Sync $i --> $fred_dir/SystemConfigs/$i"
+        if ! $RSYNC_CMD "$i" "$fred_dir/SystemConfigs/$i"; then
+            echo "Could not sync $i" 1>&2
+            exit 1
+        fi
+    fi
+done
+
+for i in /etc/sysctl.d /etc/modules-load.d /home/fred/.config /home/fred/.Skype /home/fred/.ssh /home/fred/.getmail /home/fred/.purple /home/fred/.mozilla /home/fred/.xchat2; do
+    if [ -e "$i" ]; then
+        echo "Sync $i/ --> $fred_dir/SystemConfigs/$i/"
+        if ! $RSYNC_CMD "$i/" "$fred_dir/SystemConfigs/$i/"; then
+            echo "Could not sync $i" 1>&2
+            exit 1
+        fi
+    fi
+done

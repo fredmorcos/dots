@@ -1,0 +1,13 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>		<dump>	<pass>
+/dev/sda1	/boot	vfat	rw,noatime		0	2
+LABEL=root	/	ext4	rw,noatime,stripe=256	0	1
+LABEL=home	/home	ext4	rw,noatime,stripe=256	0	2
+LABEL=swap	none	swap	defaults		0	0
+
+# /dev/sda1 UUID=D86A-FB85
+# /dev/md127 UUID=f939e5fe-ed78-48b3-bc73-f815c5d776e5
+# /dev/md126 UUID=a7f628e8-2cba-46e6-8acd-b6604f65bceb
+# /dev/md125 UUID=6b4b7e4f-7ea0-463b-9346-8e8feeb5e03c

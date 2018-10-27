@@ -1,0 +1,24 @@
+[Steam]
+row=5
+col=0
+
+[640 GB Encrypted]
+row=4
+col=0
+
+[Windows]
+row=3
+col=0
+
+[Trash]
+row=2
+col=0
+
+[File System]
+row=1
+col=0
+
+[Home]
+row=0
+col=0
+

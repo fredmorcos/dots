@@ -1,0 +1,9 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	 <dir>	<type>	<options>	<dump>	<pass>
+/dev/sda2        /      ext4    rw,noatime      0 1
+/dev/sda1        /boot  vfat    rw,noatime      0 2
+/dev/mapper/Home /home  ext4    rw,noatime      0 2
+/dev/sda3        none   swap    defaults  	0 0
+

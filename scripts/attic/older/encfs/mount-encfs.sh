@@ -1,0 +1,69 @@
+#!/usr/bin/env sh
+
+directories="foo bar"
+passwd_file="$HOME/Workspace/mount-encfs-passwd"
+encfs_cmd="encfs -S"
+encfs_lazy_cmd="--idle=10 --ondemand --delaymount"
+
+seahorse_askpass="/usr/lib/seahorse/seahorse-ssh-askpass"
+ssh_askpass="/usr/lib/ssh/ssh-askpass"
+
+if [ "$1" = "unmount" ]; then
+    for i in $directories; do
+        curdir="$HOME/$i"
+
+        if [ -d $curdir ]; then
+            echo "Unmounting $curdir"
+            /usr/bin/fusermount -u "$curdir"
+        fi
+    done
+
+    exit 0
+fi
+
+# Check  for  different  askpass   implementations  and  use  them  if
+# available  and  possible,  otherwise  fallback  to  not  using  lazy
+# mounting. Also only use lazy mounting if a DISPLAY is set.
+if [ $DISPLAY ]; then
+    if [ -x $seahorse_askpass ]; then
+        encfs_cmd="$encfs_cmd $encfs_lazy_cmd --extpass=$seahorse_askpass"
+    else
+        if [ -x $ssh_askpass ]; then
+            encfs_cmd="$encfs_cmd $encfs_lazy_cmd --extpass=$ssh_askpass"
+        fi
+    fi
+fi
+
+# Print the encfs command used
+echo "$encfs_cmd"
+
+# Check whether password file exists and fail if it does not
+if [ -e $passwd_file ]; then
+    echo "Found password file $passwd_file"
+else
+    echo "Could not find password file $passwd_file"
+    exit 1
+fi
+
+# Go over each directory specified
+for i in $directories; do
+    curdir="$HOME/$i"
+
+    # Check whether directory.enc analogue exists
+    if [ -d "$curdir.enc" ]; then
+
+        # Check whether  mountpoint directory  exists and if  not then
+        # create it
+        if [ -d $curdir ]; then
+            echo "$curdir already exists"
+        else
+            echo "$curdir does not exist, creating it"
+            mkdir $curdir
+        fi
+
+        echo "Mounting $curdir.enc to $curdir"
+        $encfs_cmd $curdir.enc $curdir < $passwd_file
+    else
+        echo "$curdir.enc does not exist"
+    fi
+done

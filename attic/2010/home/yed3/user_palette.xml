@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <!--Created by yFiles for Java 2.7-->
+  <key for="graphml" id="d0" yfiles.type="resources"/>
+  <key attr.name="yfiles.node.repository.name" attr.type="string" for="node" id="d1"/>
+  <key attr.name="url" attr.type="string" for="node" id="d2"/>
+  <key attr.name="description" attr.type="string" for="node" id="d3"/>
+  <key for="node" id="d4" yfiles.type="nodegraphics"/>
+  <key attr.name="yfiles.edge.repository.name" attr.type="string" for="edge" id="d5"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d6"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d7"/>
+  <key for="edge" id="d8" yfiles.type="edgegraphics"/>
+  <graph edgedefault="directed" id="G"/>
+  <data key="d0">
+    <y:Resources/>
+  </data>
+</graphml>

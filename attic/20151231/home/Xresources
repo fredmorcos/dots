@@ -1,0 +1,12 @@
+! Emacs.FontBackend: xft
+! Emacs.font: Monaco-11
+Emacs.font: Fantasque Sans Mono-12
+! Emacs.autohint: true
+! Xft.embolden: true
+! Xft.hinting: false
+! Xft.hintstyle: hintnone
+! Xft.antialias: 0
+! Xft.lcdfilter: none
+! Xft.rgba: none
+Xft.autohint: 1
+! Xft.dpi: 120

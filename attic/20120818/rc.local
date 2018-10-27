@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user start-up script.
+#
+
+hdparm -S 255 -B 255 /dev/sda &>/tmp/hdparm-sda.log
+hdparm -S 255 -B 255 /dev/sdb &>/tmp/hdparm-sdb.log
+

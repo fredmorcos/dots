@@ -1,0 +1,63 @@
+# sync machines
+
+function downsync () {
+    if [ "$#" -eq 0 ]
+    then
+        echo "No machine hostname supplied" 1>&2
+	echo "syntax: downsync <hostname>" 1>&2
+        return 1
+    fi
+
+    echo "Down-syncing $1"
+    local rsync_cmd="rsync -arXgtzh --compress-level=9 --specials --delete --progress --exclude=.kde4 --exclude=.mozilla --exclude=.thunderbird --exclude=.local --exclude=.cabal --exclude=.ccache --exclude=.Skype --exclude=build --exclude=.macromedia --exclude=.ghc --exclude=.cache --exclude=.gimp-2.7 --exclude=vm --exclude=.speech-dispatcher --exclude=.semanticdb --exclude=.thumbnails --exclude=.config --exclude=alex-nosync"
+    $rsync_cmd $1:~/. ~/$1
+}
+
+function upsync () {
+    if [ "$#" -eq 0 ]
+    then
+        echo "No machine hostname supplied" 1>&2
+	echo "syntax: upsync <hostname>" 1>&2
+        return 1
+    fi
+
+    echo "Up-syncing $1"
+    local rsync_cmd="rsync -arXgtzh --compress-level=9 --specials --delete --progress --exclude=.kde4 --exclude=.mozilla --exclude=.thunderbird --exclude=.local --exclude=.cabal --exclude=.ccache --exclude=.Skype --exclude=build --exclude=.macromedia --exclude=.ghc --exclude=.cache --exclude=.gimp-2.7 --exclude=vm --exclude=.speech-dispatcher --exclude=.semanticdb --exclude=.thumbnails --exclude=.config --exclude=alex-nosync"
+    $rsync_cmd ~/$1/. $1:~/
+}
+
+function configsync () {
+    if [ "$#" -lt 2 ]
+    then
+	echo "No config-list file or machine hostname given" 1>&2
+	echo "syntax: configsync <config-list file> <hostname>" 1>&2
+	return 1
+    fi
+
+    local IFS="
+"
+
+    for i in $(cat $1);
+    do
+	firstchar=${i:0:1}
+	tmp=`mktemp`
+
+	if [[ "$firstchar" == "/" ]]; then
+	    scp "root@$2:$i" "$tmp" > /dev/null
+	    diff "$i" "$tmp" > /dev/null
+	    if [[ "$?" != "0" ]]; then
+    		sudo vim -d "$i" "scp://root@$2/$i"
+	    fi
+	elif [[ "$firstchar" == "~" ]]; then
+	    scp "fmorcos@$2:$i" "$tmp" > /dev/null
+	    diff "$HOME/${i:1}" "$tmp" > /dev/null
+	    if [[ "$?" != "0" ]]; then
+    		vim -d "$HOME/${i:1}" "scp://fmorcos@$2/$i"
+	    fi
+	elif [[ "$firstchar" == "#" ]]; then
+    	    echo "skip"
+	fi
+
+	rm "$tmp"
+    done
+}

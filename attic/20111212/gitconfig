@@ -1,0 +1,9 @@
+[user]
+	name = Fred Morcos
+	email = fred.morcos@gmail.com
+[color]
+	ui = true
+[core]
+	editor = emacs
+[merge]
+	tool = vimdiff

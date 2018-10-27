@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -o posix
+# set -o errexit
+set -o nounset
+set -o pipefail
+set -o xtrace
+
+# Load kernel modules
+/usr/bin/modprobe vboxsf
+/usr/bin/modprobe vboxvideo
+/usr/bin/modprobe vboxguest
+
+# Find out desired hostname
+HOSTNAME=`/usr/bin/hostname`
+
+if [ "$HOSTNAME" == "floron" ]; do
+  # Check filesystems
+  /usr/bin/fsck.vfat /dev/sda2
+  /usr/bin/fsck.ext4 /dev/sda3
+
+  # Mount filesystems
+  /usr/bin/mount -t ext4  /dev/sda3 /     -o remount,rw,noatime
+  /usr/bin/mount -t vfat  /dev/sda1 /boot -o rw
+
+  /usr/bin/mount -t tmpfs none      /tmp
+  /usr/bin/mount --bind   /tmp.disk /tmp
+
+  /usr/bin/swapon /dev/sda2
+fi
+
+# TODO Set hostname
+
+/bin/sh

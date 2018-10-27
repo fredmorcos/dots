@@ -1,0 +1,107 @@
+# Set modifier key to Super
+set $mod Mod4
+
+# Set window title font
+# font pango:terminus-14
+font -*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*
+
+# Use Mouse+$mod to drag windows
+floating_modifier $mod
+
+# Application key bindings
+bindsym $mod+t      exec terminology
+bindsym $mod+w      exec firefox
+bindsym $mod+Insert exec dmenu_run
+bindsym $mod+d      exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+e      exec emacs
+
+# Close window
+# bindsym $mod+Shift+q kill
+bindsym $mod+End kill
+
+# Navigate windows
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# Split horizontally or vertically
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Put window or container in fullscreen
+bindsym $mod+Home fullscreen
+
+# Change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacking
+# bindsym $mod+. layout tabbed
+# bindsym $mod+e layout toggle split
+
+# Toggle tiling and floating for a window or container
+bindsym $mod+Delete floating toggle
+
+# Change focus between tiling and floating windows
+bindsym $mod+Shift+Delete focus mode_toggle
+
+# Move to the parent and child container
+bindsym $mod+PageUp   focus parent
+bindsym $mod+PageDown focus child
+
+# Switch workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Move window or container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Reload configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 in place
+bindsym $mod+Shift+r restart
+
+# Exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize window
+mode "resize" {
+        bindsym Left  resize shrink width  10 px or 10 ppt
+        bindsym Up    resize grow   height 10 px or 10 ppt
+        bindsym Down  resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow   width  10 px or 10 ppt
+
+        # Exit resize mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Enter resize mode
+bindsym $mod+r mode "resize"
+
+# Start i3bar
+bar {
+        status_command i3status
+}

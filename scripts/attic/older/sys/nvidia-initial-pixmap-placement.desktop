@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Fix NVIDIA initial pixmap placement bug with Gnome Shell
+Terminal=false
+Name=NVIDIA Initial Pixmap Placement
+Exec=nvidia-settings -a InitialPixmapPlacement=0
+Type=Application
+Icon=/usr/share/pixmaps/nvidia-settings.png
+Categories=System;

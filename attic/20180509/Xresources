@@ -1,0 +1,38 @@
+Xft.autohint: 0
+Xft.dpi: 96
+Xft.lcdfilter: lcddefault
+
+! Emacs.font: Monaco-12:antialias=true:hinting=true:autohint=false:hintstyle=2
+
+URxvt.buffered: false
+URxvt.scrollBar: false
+URxvt.saveLines: 10000
+URxvt.meta8: false
+URxvt.cursorBlink: false
+URxvt.tripleclickwords: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt*skipBuiltinGlyphs: false
+URxvt.font: xft:Monospace:size=11
+
+URxvt.foreground: #073642
+URxvt.background: #fdf6e3
+URxvt.color0:  #073642
+URxvt.color1:  #dc322f
+URxvt.color2:  #859900
+URxvt.color3:  #b58900
+URxvt.color4:  #268bd2
+URxvt.color5:  #d33682
+URxvt.color6:  #2aa198
+URxvt.color7:  #eee8d5
+URxvt.color8:  #002b36
+URxvt.color9:  #cb4b16
+URxvt.color10: #586e75
+URxvt.color11: #657b83
+URxvt.color12: #839496
+URxvt.color13: #6c71c4
+URxvt.color14: #93a1a1
+URxvt.color15: #fdf6e3

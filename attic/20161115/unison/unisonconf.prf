@@ -1,0 +1,8 @@
+root = socket://neuron:3333//
+root = /home/fred/Archive/Conf/RPI-Unison/
+
+force = socket://neuron:3333//
+
+path = var/lib/kodi/.unison
+path = home/fred/.unison
+

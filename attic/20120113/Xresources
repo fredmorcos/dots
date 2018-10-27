@@ -1,0 +1,39 @@
+! xft settings
+xft*dpi:		 96
+xft*antialias:		 false
+xft*rgba:		 rgb
+xft*hinting:		 false
+! hintslight
+xft*hintstyle:		 hintfull
+
+i3*font:		 xft:Liberation Mono:size=9:antialias=false
+i3bar*font:		 xft:Liberation Mono:size=9:antialias=false
+
+! urxvt settings
+urxvt*urlLauncher:	 /usr/bin/firefox
+urxvt*underlineurls:	 true
+urxvt*dynamiccolors:	 true
+urxvt*depth:		 16
+urxvt*saveLines:	 200
+
+urxvt*scrollBar:	 false
+urxvt*scrollstyle:	 plain
+urxvt*thickness:	 5
+urxvt*scrollTtyOutput:	 false
+urxvt*scrollTtyKeypress: true
+urxvt*secondaryScroll:	 true
+
+urxvt*loginshell:	 false
+urxvt*font:		 xft:Liberation Mono:size=9:antialias=false
+urxvt*buffered:		 false
+
+! urxvt colors
+urxvt*background:	 black
+urxvt*foreground:	 white
+
+! red
+*color1:		 #CC0000
+*color9:		 #FF0000
+! blue
+*color4:		 #497899
+*color12:		 #4B78E0

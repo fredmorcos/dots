@@ -1,0 +1,85 @@
+#!/usr/bin/sh
+
+echo "Fred's custom init script is starting..."
+echo "----------------------------------------"
+echo ""
+echo -n "Starting up network, will keep trying for 2 minutes..."
+
+i=0
+eth_on=0
+while [ $i -lt 60 ]; do
+  if /usr/bin/ifconfig eth0 up; then
+    echo ""
+    echo " -> eth0 is up"
+    eth_on=1
+    break
+  fi
+
+  sleep 2
+  i=`expr $i + 1`
+done
+
+if [ $eth_on -eq 0 ]; then
+  echo ""
+  echo " -> eth0 didn't come up, I won't continue"
+  echo " -> bye bye in 5 seconds"
+  sleep 5
+  echo "Sync!"
+  sync
+  exit 1
+fi
+
+echo " -> Trying DHCP, will keep trying for 2 minutes..."
+dhcpcd -t 120 -w eth0
+
+t=`date`
+echo ""
+echo "Checking time... it's $t!"
+echo " -> Yikes Doctor! Looks like we've gone back in time to the 70s!"
+echo " -> NTPD will take us Back To The Future!"
+echo " -> will keep trying for 2 minutes..."
+
+if /usr/bin/timeout 120 /usr/bin/ntpd -q -g; then
+  t=`date`
+  echo " -> The time now is $t! That's better."
+
+  echo "Will now do some HDD stuff..."
+  echo "I'll start by disabling Advanced Power Management (APM) and Suspend Time..."
+  /usr/bin/hdparm -B 255 -S 255 /dev/sda
+
+  echo "Now I will fsck you in the arse..."
+  fsck -r -C -M -t ext4 /dev/sda
+
+  ret=$?
+
+  if [ "$ret" == "0" ]; then
+    echo "Looks like fscking you went well..."
+  elif [ "$ret" == "1" ]; then
+    echo "Apparently there were some problems fscking you, but they were corrected."
+  elif [ "$ret" == "2" ]; then
+    echo "Apparently there were some problems fscking you, and a reboot is needed."
+    echo "Sync!"
+    sync
+    exit 1
+  else
+    echo "Wow! Serious issues with fscking you, eh?"
+    echo "Sync!"
+    sync
+    exit 1
+  fi
+
+  echo "Sync!"
+  sync
+
+  sleep 2
+  echo "I'll now hand over stuff to systemd..."
+  exec /usr/bin/init $@
+fi
+
+echo " -> I couldn't take us back, Marty!"
+echo " -> bye bye in 5 seconds"
+sleep 5
+echo "Sync!"
+sync
+exit 1
+

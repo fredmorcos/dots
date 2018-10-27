@@ -1,0 +1,10 @@
+# modules.d configuration file for SVGALIB_HELPER
+
+
+# Configurable module parameters
+# ------------------------------
+# all_devices:	Give access to all PCI devices, regardless of class.
+# debug:	Debug output level.
+
+probeall /dev/svga svgalib_helper
+

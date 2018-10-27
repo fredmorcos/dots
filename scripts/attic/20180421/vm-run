@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -o posix
+set -o errexit
+set -o nounset
+set -o pipefail
+
+disk_flags="format=raw,media=disk,if=virtio"
+
+if [ -z "$VM_RUN_MOUSE" ]; then
+    true
+else
+    qemu_flags="$qemu_flags -usbdevice tablet"
+fi
+
+if [ -z "$VM_RUN_MEM" ]; then
+    VM_RUN_MEM=4G
+fi
+
+if [ -z "$VM_RUN_SMP" ]; then
+    VM_RUN_SMP=4
+fi
+
+if [ -z "$VM_RUN_VIDEO" ]; then
+    VM_RUN_VIDEO=vmware
+fi
+
+if [ -z "$VM_RUN_DRIVE1" ]; then
+    echo "Provide at least 1 drive with VM_RUN_DRIVE1"
+    exit 1
+else
+    qemu_flags="$qemu_flags -drive file=$VM_RUN_DRIVE1,$disk_flags"
+fi
+
+if [ -z "$VM_RUN_DRIVE2" ]; then
+    true
+else
+    qemu_flags="$qemu_flags -drive file=$VM_RUN_DRIVE2,$disk_flags"
+fi
+
+if [ -z "$VM_RUN_CDROM" ]; then
+    true
+else
+    qemu_flags="$qemu_flags -cdrom $VM_RUN_CDROM"
+fi
+
+qemu-system-x86_64 -enable-kvm -machine type=pc,accel=kvm -m "$VM_RUN_MEM" \
+                   -cpu host -smp "$VM_RUN_SMP" -vga "$VM_RUN_VIDEO" \
+                   -net nic,model=virtio -net user \
+                   -balloon virtio -boot menu=on $qemu_flags

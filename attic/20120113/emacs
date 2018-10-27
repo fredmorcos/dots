@@ -1,0 +1,103 @@
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/haskell-mode")
+
+;; Load CEDET
+(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
+
+;; scroll line by line
+(setq scroll-conservatively 1)
+
+;; smart-tab
+(setq tab-always-indent 'complete)
+
+;; org-mode stuff
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+(setq org-agenda-files (list "~/work/management/info.org"
+			     "/personal/workspace/work/management/research.org"
+			     "/personal/workspace/work/management/weekend-projects.org"
+			     "/personal/workspace/work/research-notes/matrix-transpose.org"))
+
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+;; dired stuff
+;; allow dired to be able to delete or copy a whole dir.
+;; “always” means no asking.
+;; “top” means ask once.
+;; Any other symbol means ask each and every time for a dir and subdir.
+(setq dired-recursive-copies (quote always))
+(setq dired-recursive-deletes (quote top))
+;; end dired stuff
+
+;; Lua stuff
+(setq auto-mode-alist (cons '("\.lua$" . lua-mode) auto-mode-alist))
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+
+;; c stuff
+(setq auto-mode-alist (append '(("/*.\.cilk$" . c-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("/*.\.upc$" . c-mode)) auto-mode-alist))
+(add-hook 'c-mode-common-hook (lambda() (local-set-key (kbd "C-x /") 'ff-find-other-file)))
+
+;; python stuff
+(autoload 'python-mode "python-mode.el" "Python mode." t)
+(setq auto-mode-alist (append '(("/*.\.py$" . python-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("/*.\.json$" . js-mode)) auto-mode-alist))
+
+;; archlinux pkgbuild stuff
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(setq auto-mode-alist (append '(("/PKGBUILD$" . pkgbuild-mode)) auto-mode-alist))
+
+;; haskell stuff
+(autoload 'haskell-mode "haskell-mode.el" "Haskell mode." t)
+(setq auto-mode-alist (append '(("/*.\.hs$" . haskell-mode)) auto-mode-alist))
+
+;; verilog stuff
+(setq verilog-auto-newline nil)
+
+;; some tweaks
+(delete-selection-mode t)
+
+;; (toggle-scroll-bar -1)
+;; (tool-bar-mode -1)
+(menu-bar-mode                -1)              ;; turn off ui elements
+(setq inhibit-startup-message t)               ;; turn off welcome screen
+(setq backup-inhibited        t)               ;; disable backpu
+(setq auto-save-default       nil)             ;; disable auto save
+(blink-cursor-mode            (- (*) (*) (*))) ;; turn off cursor blink
+(setq require-final-newline t)
+(fset 'yes-or-no-p 'y-or-n-p)
+(follow-mode t)
+(setq scroll-step 1)
+(setq scroll-conservatively 5)
+
+;; make line numbers look better
+(setq linum-format  " %d ")
+(global-linum-mode  1)
+(column-number-mode 1)
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key [\M-down] 'move-line-down)
+(global-set-key [\M-up]   'move-line-up)
+
+;; duplicate line with C-c C-d
+(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")

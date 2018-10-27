@@ -1,0 +1,36 @@
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-ghci.elc")
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-cabal.elc")
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-indent.elc")
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-indentation.elc")
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-mode.elc")
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-simple-indent.elc")
+(load "/usr/share/emacs/site-lisp/haskell-mode/haskell-site-file.elc")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(custom-enabled-themes (quote (tango-dark)))
+ '(display-battery-mode t)
+ '(display-time-mode t)
+ '(font-use-system-font t)
+ '(save-place t nil (saveplace))
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(size-indication-mode t)
+ '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
+ '(tool-bar-mode nil)
+ '(inhibit-startup-screen t)
+ '(make-backup-files nil)
+ '(menu-bar-mode nil)
+ '(global-linum-mode t)
+ '(indent-tabs-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

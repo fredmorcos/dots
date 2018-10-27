@@ -1,0 +1,8 @@
+[user]
+	email = fred.morcos@gmail.com
+	name = Fred Morcos
+
+[color]
+	ui = true
+[push]
+	default = simple

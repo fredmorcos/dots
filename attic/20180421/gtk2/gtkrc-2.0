@@ -1,0 +1,3 @@
+gtk-menu-popup-delay = 0
+# gtk-key-theme-name = "Emacs"
+gtk-icon-sizes = "gtk-button=16,16"

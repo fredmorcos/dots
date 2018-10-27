@@ -1,0 +1,129 @@
+#!/sbin/runscript
+# Copyright 1999-2007 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	before *
+}
+
+start() {
+	local retval=0
+
+	if [[ ! -f /fastboot && -z ${CDBOOT} ]] \
+	&& ! is_net_fs / && ! is_union_fs / ; then
+		if touch -c / >& /dev/null ; then
+			ebegin "Remounting root filesystem read-only"
+			mount -n -o remount,ro /
+			eend $?
+		fi
+
+		if [[ -f /forcefsck ]] || get_bootparam "forcefsck" ; then
+			ebegin "Checking root filesystem (full fsck forced)"
+			fsck -C -a -f /
+			# /forcefsck isn't deleted because checkfs needs it.
+			# it'll be deleted in that script.
+			retval=$?
+		else
+			# Obey the fs_passno setting for / (see fstab(5))
+			# - find the / entry
+			# - make sure we have 6 fields
+			# - see if fs_passno is something other than 0
+			if [[ -n $(awk '($1 ~ /^(\/|UUID|LABEL)/ && $2 == "/" \
+			                && NF == 6 && $6 != 0) { print }' /etc/fstab) ]]
+			then
+				ebegin "Checking root filesystem"
+				fsck -C -T -a /
+				retval=$?
+			else
+				ebegin "Skipping root filesystem check (fstab's passno == 0)"
+				retval=0
+			fi
+		fi
+
+		if [[ ${retval} -eq 0 ]] ; then
+			eend 0
+		elif [[ ${retval} -eq 1 ]] ; then
+			ewend 1 "Filesystem repaired"
+		elif [[ ${retval} -eq 2 || ${retval} -eq 3 ]] ; then
+			ewend 1 "Filesystem repaired, but reboot needed!"
+			if [[ ${RC_FORCE_AUTO} != "yes" ]] ; then
+				echo -ne "\a"; sleep 1; echo -ne "\a"; sleep 1
+				echo -ne "\a"; sleep 1; echo -ne "\a"; sleep 1
+				ewarn "Rebooting in 10 seconds ..."
+				sleep 10
+			fi
+			einfo "Rebooting"
+			/sbin/reboot -f
+		else
+			if [[ ${RC_FORCE_AUTO} == "yes" ]] ; then
+				eend 2 "Rerunning fsck in force mode"
+				fsck -y -C -T /
+			else
+				eend 2 "Filesystem couldn't be fixed :("
+				sulogin ${CONSOLE}
+			fi
+			einfo "Unmounting filesystems"
+			/bin/mount -a -o remount,ro &> /dev/null
+			einfo "Rebooting"
+			/sbin/reboot -f
+		fi
+	fi
+
+	# Should we mount root rw ?  the touch check is to see if the / is
+	# already mounted rw in which case there's nothing for us to do
+	if mount -vf -o remount / 2> /dev/null | \
+	   awk '{ if ($6 ~ /rw/) exit 0; else exit 1; }' && \
+	   ! touch -c / >& /dev/null
+	then
+		ebegin "Remounting root filesystem read/write"
+		mount -n -o remount,rw / &> /dev/null
+		if [[ $? -ne 0 ]] ; then
+			eend 2 "Root filesystem could not be mounted read/write :("
+			if [[ ${RC_FORCE_AUTO} != "yes" ]] ; then
+				sulogin ${CONSOLE}
+			fi
+		else
+			eend 0
+		fi
+	fi
+
+	if [[ ${BOOT} == "yes" ]] ; then
+		local x=
+		local y=
+
+		#
+		# Create /etc/mtab
+		#
+
+		# Don't create mtab if /etc is readonly
+		if ! touch /etc/mtab 2> /dev/null ; then
+			ewarn "Skipping /etc/mtab initialization (ro root?)"
+			return 0
+		fi
+
+		# Clear the existing mtab
+		> /etc/mtab
+
+		# Add the entry for / to mtab
+		mount -f /
+
+		# Don't list root more than once
+		awk '$2 != "/" {print}' /proc/mounts >> /etc/mtab
+
+		# Now make sure /etc/mtab have additional info (gid, etc) in there
+		for x in $(awk '{ print $2 }' /proc/mounts | sort -u) ; do
+			for y in $(awk '{ print $2 }' /etc/fstab) ; do
+				if [[ ${x} == ${y} ]] ; then
+					mount -f -o remount $x
+					continue
+				fi
+			done
+		done
+
+		# Remove stale backups
+		rm -f /etc/mtab~ /etc/mtab~~
+	fi
+}
+
+
+# vim:ts=4

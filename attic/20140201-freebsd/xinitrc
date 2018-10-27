@@ -1,0 +1,3 @@
+/usr/local/bin/VBoxClient --clipboard
+/usr/local/bin/VBoxClient --display
+exec /usr/local/bin/i3

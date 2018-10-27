@@ -1,0 +1,2 @@
+# Adjust the port to match options in /etc/conf.d/pacserve
+Server = http://localhost:15678/pkg/?repo=$repo&arch=$arch&file=

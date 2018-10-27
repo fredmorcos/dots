@@ -1,0 +1,10 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>  <dir>			<type>	<options>			             <dump>	<pass>
+tmpfs		 /tmp			tmpfs	nodev,nosuid,noatime,norelatime	             0	0
+tmpfs		 /var/cache/pacman/pkg	tmpfs	nodev,nosuid,noatime,norelatime,mode=755     0	0
+tmpfs		 /run			tmpfs   rw,nodev,nosuid,noatime,norelatime,mode=755  0	0
+/dev/sda2        /      		ext4    rw,noatime,norelatime                        0	1
+/dev/mapper/home /home  		ext4    rw,noatime,norelatime                        0	2
+/swapfile        none   		swap    defaults                                     0	0

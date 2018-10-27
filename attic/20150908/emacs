@@ -1,0 +1,78 @@
+;;; package -- Summary
+
+;;; Commentary:
+
+;;; Code:
+
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://melpa.milkbox.net/packages/")
+ '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+(require 'haskell-mode)
+(require 'flycheck)
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(defconst flycheck-include-path
+  (quote ("/usr/include/glib-2.0"
+          "/usr/lib/glib-2.0/include"
+          "~/Workspace/build/libcello")))
+
+(defconst company-clang-args
+  (quote ("-I/usr/include/glib-2.0"
+          "-I/usr/lib/glib-2.0/include"
+          "-lglib-2.0"
+          "-I~/Workspace/build/libcello/include"
+          "-lCello")))
+
+(custom-set-variables
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(company-clang-arguments company-clang-ars)
+ '(company-ghc-show-info (quote oneline))
+ '(company-ghc-show-module nil)
+ '(company-idle-delay 0.1)
+ '(company-minimum-prefix-length 3)
+ '(flycheck-display-errors-delay 0.5)
+ '(flycheck-clang-include-path flycheck-include-path)
+ '(flycheck-gcc-include-path flycheck-include-path)
+ '(flycheck-idle-change-delay 0.5)
+ '(font-use-system-font t)
+ '(global-company-mode t)
+ '(global-flycheck-mode t nil (flycheck))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(global-whitespace-mode t)
+ '(global-whitespace-newline-mode nil)
+ '(haskell-indent-offset 2)
+ '(haskell-indentation-ifte-offset 0)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(history-delete-duplicates t)
+ '(history-length 20)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
+ '(linum-format " %d ")
+ '(menu-bar-mode nil)
+ '(mode-require-final-newline (quote visit-save))
+ '(recentf-mode t)
+ '(recentf-save-file "~/.emacs.d/recentf")
+ '(require-final-newline (quote visit-save))
+ '(savehist-mode t)
+ '(scroll-bar-mode nil)
+ '(scroll-conservatively 101)
+ '(show-trailing-whitespace t)
+ '(tool-bar-mode nil)
+ '(whitespace-action (quote (cleanup)))
+ '(whitespace-style (quote (face tabs lines-tail trailing
+                                 space-before-tab indentation
+                                 empty space-after-tab))))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f5] 'blink-matching-open)
+
+(provide '.emacs)
+;;; .emacs ends here

@@ -1,0 +1,9 @@
+[user]
+	email = fred.morcos@gmail.com
+	name = Fred Morcos
+[color]
+	ui = true
+[merge]
+	tool = vimdiff
+[push]
+	default = simple

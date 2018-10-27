@@ -1,0 +1,58 @@
+! xft settings
+xft*dpi:		 96
+xft*antialias:		 false
+xft*rgba:		 rgb
+xft*hinting:		 false
+! hintslight
+xft*hintstyle:		 hintfull
+
+i3*font:		 xft:Liberation Mono:size=9:antialias=false
+i3bar*font:		 xft:Liberation Mono:size=9:antialias=false
+
+! urxvt settings
+urxvt*urlLauncher:	 /usr/bin/firefox
+urxvt*underlineurls:	 true
+urxvt*dynamiccolors:	 true
+urxvt*depth:		 16
+urxvt*saveLines:	 200
+
+urxvt*scrollBar:	 false
+urxvt*scrollstyle:	 plain
+urxvt*thickness:	 5
+urxvt*scrollTtyOutput:	 false
+urxvt*scrollTtyKeypress: true
+urxvt*secondaryScroll:	 true
+
+urxvt*loginshell:	 false
+urxvt*font:		 xft:Liberation Mono:size=9:antialias=false
+urxvt*buffered:		 false
+
+! urxvt colors
+urxvt*background:	 black
+urxvt*foreground:	 white
+
+! Tango Color Palette
+! black
+*color0:                 #000000
+*color8:                 #666666
+! red
+*color1:		 #CC0000
+*color9:		 #EF2929
+! green
+*color2:                 #73D216
+*color10:                #4E9A06
+! yellow
+*color3:                 #FCE94F
+*color11:                #EDD400
+! blue
+*color4:		 #3465A4
+*color12:		 #729FCF
+! magenta
+*color5:                 #AD7FA8
+*color13:                #AD7FA8
+! cyan
+*color6:                 #3465A4
+*color14:                #729FCF
+! white
+*color7:                 #FFFFFF
+*color15:                #FFFFFF

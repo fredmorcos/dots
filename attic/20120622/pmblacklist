@@ -1,0 +1,1 @@
+HOOK_BLACKLIST="hal-cd-polling laptop-mode xfs_buffer intel-audio-powersave journal-commit pcie_aspm readahead sata_alpm sched-powersave wireless"

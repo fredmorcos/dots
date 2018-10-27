@@ -1,0 +1,3 @@
+skype_video_hijacker v4lsrc device=/dev/video0 ! ffmpegcolorspace ! vertigotv ! ffmpegcolorspace
+skype_video_hijacker v4lsrc device=/dev/video0 ! ffmpegcolorspace
+./gstfakevideo v4lsrc device=/dev/video0

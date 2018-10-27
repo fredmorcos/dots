@@ -1,0 +1,129 @@
+#!/usr/bin/sh
+
+sleep 1
+
+echo "Fred's custom init script is starting..."
+echo "----------------------------------------"
+echo ""
+
+echo "Starting up network, will keep trying..."
+i=0
+eth_on=0
+while [ $i -lt 30 ]; do
+    # echo "Waiting for 5 seconds for network to get up..."
+    # sleep 5
+    if /usr/bin/ifconfig eth0 up; then
+	echo ""
+	echo " -> eth0 is up"
+	eth_on=1
+	break
+    fi
+
+    echo " -> Will try again in 1 second..."
+    # sleep 1
+    i=`expr $i + 1`
+done
+
+if [ $eth_on -eq 0 ]; then
+    echo ""
+    echo " -> eth0 didn't come up, I won't continue"
+    # echo " -> bye bye in 5 seconds"
+    # sleep 5
+    echo "Sync!"
+    sync
+    # sleep 2
+    exit 1
+fi
+
+echo -n " -> Deleting previous DHCPCD PID files: "
+echo /run/dhcpcd-*
+rm -f /run/dhcpcd-*
+mkdir -p /var/lib/dhcpcd
+echo " -> Trying DHCP, will keep trying for 1 minute..."
+dhcpcd -t 60 -w eth0
+
+echo "Waiting for 1 second..."
+sleep 1
+
+echo "Will now try connectivity to the internet..."
+i=0
+did_reach=0
+while [ $i -lt 30 ]; do
+    echo " -> Pinging something on the internet..."
+    if ping -c 2 google.com &>/dev/null; then
+	echo " -> Managed to reach something on the internet..."
+	did_reach=1
+	break
+    fi
+
+    echo " -> Could not reach anything on the internet..."
+    # echo " -> Will try again in 1 seconds..."
+    # sleep 1
+    i=`expr $i + 1`
+done
+
+if [ $did_reach -eq 0 ]; then
+    echo ""
+    echo " -> Could not reach anything at all on the internet..."
+    # echo " -> bye bye in 5 seconds"
+    # sleep 5
+    echo "Sync!"
+    sync
+    # sleep 2
+    exit 1
+fi
+
+t=`date`
+echo ""
+echo "Checking time... it's $t!"
+echo " -> Yikes Doctor! Looks like we've gone back in time to the 70s!"
+echo " -> NTPD will take us Back To The Future!"
+echo " -> will keep trying for 1 minute..."
+
+if /usr/bin/timeout 60 /usr/bin/ntpd -q -g; then
+    t=`date`
+    echo " -> The time now is $t! That's better."
+
+    echo "Will now do some HDD stuff..."
+    echo "I'll disable Advanced Power Management (APM) and Suspend Time..."
+    /usr/bin/hdparm -B 255 -S 255 /dev/sda
+
+    echo "Now I will fsck you in the arse..."
+    fsck -r -C -M -t ext4 /dev/sda
+
+    ret=$?
+
+    if [ "$ret" == "0" ]; then
+	echo "Looks like fscking you went well..."
+    elif [ "$ret" == "1" ]; then
+	echo "There were some problems fscking you, but they were corrected."
+    elif [ "$ret" == "2" ]; then
+	echo "There were some problems fscking you, and a reboot is needed."
+	echo "Sync!"
+	sync
+	sleep 2
+	exit 1
+    else
+	echo "Wow! Serious issues with fscking you, eh?"
+	echo "Sync!"
+	sync
+	sleep 2
+	exit 1
+    fi
+
+    echo "Sync!"
+    sync
+    sleep 1
+
+    echo "I'll now hand over stuff to systemd..."
+    exec /usr/bin/init $@
+fi
+
+echo " -> I couldn't take us back, Marty!"
+# echo " -> bye bye in 5 seconds"
+# sleep 5
+echo "Sync!"
+sync
+# sleep 2
+exit 1
+

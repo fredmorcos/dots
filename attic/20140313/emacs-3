@@ -1,0 +1,145 @@
+;;; package -- Summary
+
+;;; Commentary:
+
+;; (custom-set-faces
+;;  '(default ((t (:family "Inconsolata"
+;;                 :foundry "unknown"
+;;                 :slant normal
+;;                 :weight normal
+;;                 :height 128
+;;                 :width normal)))))
+
+;;; Code:
+
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("melpa"     . "http://melpa.milkbox.net/packages/")
+ '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; auto-completion
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; snippets
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;; variable name refactoring
+(require 'iedit)
+
+;; on the fly checking
+(require 'flycheck)
+(add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'haskell-mode-hook 'flycheck-mode)
+
+;; c header completion
+(defun my:ac-c-header-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"/home/fnm/pet"))
+(add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+;; ocp-indent for OCaml indentation
+;; (add-to-list
+;;  'load-path
+;;  (concat (replace-regexp-in-string
+;;           "\n$" ""
+;;           (shell-command-to-string "opam config var share"))
+;;          "/emacs/site-lisp"))
+;; (require 'ocp-indent)
+
+;; setup tuareg for Ocaml development
+;; (add-to-list 'load-path "INSTALL_DIR")
+;; (load "tuareg-site-file")
+
+;; -- common-lisp compatibility if not added earlier in your .emacs
+(require 'cl)
+
+;; -- Tuareg mode -----------------------------------------
+;; Add Tuareg to your search path
+(add-to-list
+ 'load-path
+ ;; Change the path below to be wherever you've put your tuareg installation.
+ (expand-file-name "~/.opam/system/share/tuareg"))
+
+(require 'tuareg)
+(setq auto-mode-alist
+      (append '(("\\.ml[ily]?$" . tuareg-mode)) auto-mode-alist))
+
+;; -- opam and utop setup --------------------------------
+;; Setup environment variables using opam
+;; (defun opam-vars ()
+;;   (let* ((x (shell-command-to-string "opam config env"))
+;;          (x (split-string x "\n"))
+;;          (x (remove-if (lambda (x) (equal x "")) x))
+;;          (x (mapcar (lambda (x) (split-string x ";")) x))
+;;          (x (mapcar (lambda (x) (car x)) x))
+;;          (x (mapcar (lambda (x) (split-string x "=")) x))) x))
+;; (dolist (var (opam-vars)) (setenv (car var) (substring (cadr var) 1 -1)))
+
+;; The following simpler alternative works as of opam 1.1
+(dolist (var (car (read-from-string
+                   (shell-command-to-string "opam config env --sexp"))))
+  (setenv (car var) (cadr var)))
+
+;; Update the emacs path
+(setq exec-path (split-string (getenv "PATH") path-separator))
+
+;; Update the emacs load path
+(push (concat (getenv "OCAML_TOPLEVEL_PATH")
+              "/../../share/emacs/site-lisp") load-path)
+
+;; Automatically load utop.el
+(autoload 'utop "utop" "Toplevel for OCaml" t)
+(autoload 'utop-setup-ocaml-buffer "utop" "Toplevel for OCaml" t)
+(add-hook 'tuareg-mode-hook 'utop-setup-ocaml-buffer)
+
+;; (autoload 'ghc-init "ghc" nil t)
+
+(custom-set-variables
+ '(blink-cursor-mode nil)
+ '(c-backslash-column 80)
+ '(c-backslash-max-column 80)
+ '(c-basic-offset 2)
+ '(c-block-comment-prefix "* ")
+ '(c-label-minimum-indentation 1)
+ '(column-number-mode t)
+ '(global-flycheck-mode t nil (flycheck))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(global-whitespace-mode t)
+ '(global-whitespace-newline-mode nil)
+ '(history-delete-duplicates t)
+ '(history-length 100)
+ '(indent-tabs-mode nil)
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message nil)
+ '(linum-format " %d ")
+ '(menu-bar-mode nil)
+ '(mode-require-final-newline (quote visit-save))
+ '(recentf-mode t)
+ '(recentf-save-file "~/.emacs.d/recentf")
+ '(require-final-newline (quote visit-save))
+ '(savehist-mode t)
+ '(scroll-bar-mode nil)
+ '(scroll-conservatively 101)
+ '(show-trailing-whitespace t)
+ '(tool-bar-mode nil)
+ '(whitespace-action (quote (cleanup)))
+ '(whitespace-style (quote (face tabs lines-tail
+                                 trailing
+                                 space-before-tab
+                                 indentation
+                                 empty
+                                 space-after-tab))))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f5] 'blink-matching-open)
+;; (global-set-key [f2] 'flycheck-mode)
+
+(provide '.emacs)
+;;; .emacs ends here

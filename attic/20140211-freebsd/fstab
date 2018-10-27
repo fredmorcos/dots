@@ -1,0 +1,6 @@
+# Device	Mountpoint		FStype		Options		Dump	Pass#
+/dev/ada0p2	/			ufs		rw,noatime	1	1
+/dev/ada0p3	none			swap		sw		0	0
+tmpfs           /build          	tmpfs   	rw      	0       0
+tmpfs           /tmp            	tmpfs   	rw      	0       0
+linproc         /compat/linux/proc      linprocfs       rw 		0 	0

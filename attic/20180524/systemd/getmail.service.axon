@@ -1,0 +1,13 @@
+[Unit]
+Description=Getmail
+After=network-online.target
+
+[Service]
+ExecStart=/bin/getmail
+RestartSec=30sec
+
+[Install]
+Wants=network-online.target
+Requires=network-online.target
+WantedBy=default.target
+WantedBy=basic.target

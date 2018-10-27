@@ -1,0 +1,122 @@
+;; Add user and system-wide elisp library directories
+(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/haskell-mode/")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/zenburn-el/")
+
+(load-theme 'tango-dark)		; Tango Dark Theme
+
+;; Load modes for filetypes
+(setq auto-mode-alist (append '(("\\.hs\\'$"  . haskell-mode))
+			      '(("\\.org$"    . org-mode))
+			      '(("/PKGBUILD$" . pkgbuild-mode))
+			      auto-mode-alist))
+
+(load-library "haskell-site-file")	; Haskell
+
+;; C
+(add-hook 'c-mode-common-hook
+	  (lambda () (local-set-key (kbd "C-x /") 'ff-find-other-file)))
+
+;; Archlinux PKGBUILD
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+
+;; Auto-fill
+(add-hook 'text-mode-hook 'turn-on-auto-fill) ;; In Text mode
+
+;; Org Mode Agenda
+(global-set-key "\C-ca" 'org-agenda)
+
+;; Bookmarks
+;; (set-register
+;;  ?p '(file . ""))
+
+;; Easy window movement with M-{left,right,up,down}
+(windmove-default-keybindings 'meta)
+(setq windmove-wrap-around t)
+
+;; UI and other tweaks
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(delete-selection-mode t)
+ '(display-battery-mode t)
+ '(display-time-mode t)
+ '(global-linum-mode 1)
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(org-agenda-files (quote ("~/personal/org/todo")))
+ '(package-archives (quote (("marmalade" . "http://marmalade-repo.org/packages/")
+			    ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(savehist-mode 1)
+ '(scroll-bar-mode nil)
+ '(show-paren-mode t)
+ '(size-indication-mode t)
+ '(tool-bar-mode nil)
+ '(which-function-mode 1)
+ '(whitespace-mode t))
+
+(setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
+(setq whitespace-style '(face trailing lines-tail) whitespace-line-column 80)
+
+(setq tab-always-indent 'complete) ;; Smart tabs
+(setq skeleton-pair t)
+(setq linum-format " %d ")        ;; Line number format
+(fset 'yes-or-no-p 'y-or-n-p)	     ;; Use 'y' and 'n'
+
+(setq
+ auto-save-default nil
+ backup-inhibited t
+ inhibit-startup-message t
+ echo-keystrokes 0.1
+ require-final-newline t
+ redisplay-dont-pause t
+ scroll-margin 1
+ scroll-step 1
+ scroll-conservatively 5
+ scroll-preserve-screen-position 1
+ gc-cons-percentage 0.3
+ print-gensym t
+ print-circle t)
+
+(defun run-pdf-viewer ()
+  (interactive) (shell-command "evince main.pdf &"))
+(defun compile-with-make-clean ()
+  (interactive) (shell-command "xterm -e make veryclean"))
+(defun compile-with-make ()
+  (interactive) (shell-command "xterm -e make"))
+
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines 1))
+    (next-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (next-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+;; Key bindings
+(global-set-key (kbd "C-x p") 'run-pdf-viewer)
+(global-set-key (kbd "C-x c") 'compile-with-make)
+(global-set-key (kbd "C-x x") 'compile-with-make-clean)
+
+(global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "M-<up>")   'move-line-up)
+
+;; Duplicate line with C-c d
+(global-set-key (kbd "C-c d") (kbd "C-a C-@ C-e M-w RET C-y"))
+
+;; Add newlines before and after current line
+;; Useful for LaTeX \item lines
+(global-set-key (kbd "C-;") (kbd "C-a RET C-e C-o"))

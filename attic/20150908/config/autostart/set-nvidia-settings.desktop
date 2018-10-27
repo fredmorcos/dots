@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=nvidiasettings
+Comment=Set NVIDIA X Server Settings
+Exec=/usr/bin/nvidia-settings --load-config-only
+Hidden=false
+X-GNOME-Autostart-enabled=true

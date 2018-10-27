@@ -1,0 +1,18 @@
+[Unit]
+Description=Reduce HDD Power Management
+After=suspend.target
+After=hibernate.target
+After=hybrid-sleep.target
+After=basic.target
+After=sysinit.target
+
+[Service]
+Type=simple
+ExecStart=/sbin/hdparm -B 255 -S 255 /dev/sda /dev/sdb
+
+[Install]
+WantedBy=suspend.target
+WantedBy=hibernate.target
+WantedBy=hybrid-sleep.target
+WantedBy=basic.target
+WantedBy=sysinit.target

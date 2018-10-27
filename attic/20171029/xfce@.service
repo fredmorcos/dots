@@ -1,0 +1,12 @@
+[Unit]
+Description=Xfce
+Conflicts=getty@tty1.service
+After=getty@tty1.service systemd-user-sessions.service acpid.service
+
+[Service]
+User=%i
+ExecStart=/usr/bin/startxfce4
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target

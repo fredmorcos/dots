@@ -1,0 +1,7 @@
+[user]
+	name = Fred Morcos
+	email = fmorcos@ica.jku.at
+[core]
+	editor = emacs
+[merge]
+	tool = vimdiff

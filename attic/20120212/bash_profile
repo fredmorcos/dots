@@ -1,0 +1,9 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+# if [[ -z $DISPLAY && ! -e /tmp/.X11-unix/X0 && $(tty) = /dev/tty1 ]] && (( EUID )); then
+#   exec xinit -- /usr/bin/X -nolisten tcp vt7 -dpi 96
+# fi

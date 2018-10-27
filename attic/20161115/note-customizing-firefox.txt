@@ -1,0 +1,41 @@
+Preferences:
+
+General:
+Home Page: Blank
+Untick show the downloads window when downloading a file (can get it with C-S-y)
+Save files to: ...
+
+Tabs:
+Untick always show the tab bar
+
+Content:
+Fonts -> Liberation Sans
+
+Privacy:
+Tick "tell sites not to track"
+Location bar suggest "nothing"
+
+Advanced:
+General:
+Use autoscrolling
+Use smoothscrolling
+
+about:config:
+pipelining
+accelerometer.enabled false
+browser.tabs.animate false
+imge.mem.decode_bytes_at_a_time (double it)
+image.mem.decodeondraw true
+keyword.url https://duckduckgo.com/?q=
+
+.mozilla/firefox/<profile name>/chrome/userChrome.css:
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#appmenu-toolbar-button {
+  list-style-image: url("chrome://branding/content/icon16.png");
+}
+#appmenu-toolbar-button > .toolbarbutton-text,
+#appmenu-toolbar-button > .toolbarbutton-menu-dropmarker {
+  display: none !important;
+}

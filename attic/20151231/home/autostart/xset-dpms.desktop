@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=xset-dpms
+Comment=Load DPMS X Settings
+Exec=/usr/bin/xset -dpms
+Hidden=false
+X-GNOME-Autostart-enabled=true

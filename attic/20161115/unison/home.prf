@@ -1,0 +1,12 @@
+root = /home/fred
+root = socket://neuron:3333//home/fred/
+
+force = /home/fred
+
+path = Archive
+path = Documents.enc
+path = Downloads
+path = Private.enc
+path = Tubes
+path = Workspace
+

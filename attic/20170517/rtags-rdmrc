@@ -1,0 +1,12 @@
+--pch-enabled
+--no-file-lock
+--no-filemanager
+--progress
+--enable-NDEBUG
+--allow-Wpedantic
+--max-include-completion-depth 2
+--max-file-map-cache-size 200
+--completion-cache-size 20
+--no-spell-checking
+--error-limit 10
+--job-count 1

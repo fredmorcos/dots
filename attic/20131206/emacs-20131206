@@ -1,0 +1,58 @@
+;; (custom-set-faces
+;;  '(default ((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 98 :width normal)))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "CosmicSansNeueMono" :foundry "unknown" :slant normal :weight normal :height 118 :width normal)))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-quick-help-delay 1)
+ '(column-number-mode t)
+ '(electric-indent-mode t)
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(haskell-mode-hook '(turn-on-haskell-indentation))
+ ;; '(haskell-mode-hook (quote (turn-on-haskell-indentation turn-on-eldoc-mode turn-on-haskell-doc-mode turn-on-haskell-decl-scan imenu-add-menubar-index flymake-mode flymake-hlint-load ghc-init)))
+ ;; '(haskell-tags-on-save t)
+ '(inhibit-startup-screen t)
+ ;; '(python-indent-offset 2)
+ '(scroll-bar-mode nil)
+ '(sh-indentation 2)
+ '(slime-complete-symbol*-fancy t)
+ '(tool-bar-mode nil))
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key [f5] 'blink-matching-open)
+
+(require 'package)
+(add-to-list
+ 'package-archives 
+ '("marmalade" . "http://marmalade-repo.org/packages/")
+ '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
+
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+
+;; (add-to-list 'load-path "~/.cabal/share/x86_64-linux-ghc-7.6.3/ghc-mod-3.1.4/")
+
+;; (load (expand-file-name "~/.cabal/share/x86_64-linux-ghc-7.6.3/ghc-mod-3.1.4/ghc.el"))
+(load (expand-file-name "~/.emacs.d/elpa/auto-complete-1.4/auto-complete.el"))
+(load (expand-file-name "~/.emacs.d/elpa/ac-slime-0.5/ac-slime.el"))
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+(require 'ac-slime)
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'slime-repl-mode))

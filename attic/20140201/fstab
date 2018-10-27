@@ -1,0 +1,24 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# UUID=0177-C5BD
+# /dev/sda1           	/boot/efi 	vfat      	rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro	0 2
+
+# UUID=8572efbf-860d-453e-83a5-bc76148b2925 LABEL=Boot
+/dev/sda2           	/boot     	ext4      	rw,noatime,norelatime,stripe=256	0 0
+
+# UUID=a39aed0b-25b0-4e39-9cb9-9259add375c0 LABEL=Root
+/dev/md127          	/         	ext4      	rw,noatime,norelatime,stripe=256	0 1
+
+# UUID=d5d2e32b-28c7-44b3-ade6-5890724e6501 LABEL=Home
+/dev/mapper/Home    	/home     	ext4      	rw,noatime,norelatime,stripe=256	0 2
+
+# UUID=cd4ed9f9-ed43-4d65-a41a-f3af92f5905b LABEL=SwapA
+/dev/sda5           	none      	swap      	defaults,pri=0 	                        0 0
+
+# UUID=a9b7d4ca-a429-4dcc-9cb0-e82a015a4427 LABEL=SwapB
+/dev/sdb5           	none      	swap      	defaults,pri=0	                        0 0
+
+/dev/sdb1               /media/temp1    ext4            rw,noatime,norelatime,noauto            0 3
+/dev/sdb2               /media/temp2    ext4            rw,noatime,norelatime,noauto            0 3

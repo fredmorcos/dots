@@ -1,0 +1,7 @@
+VBLANK_MODE=1                                        
+CLUTTER_VBLANK=True
+CLUTTER_PAINT=disable-clipped-redraws:disable-culling
+__GL_SYNC_TO_VBLANK=1
+GL_SYNC_TO_VBLANK=1
+
+export GL_SYNC_TO_VBLANK __GL_SYNC_TO_VBLANK CLUTTER_PAINT CLUTTER_VBLANK VBLANK_MODE

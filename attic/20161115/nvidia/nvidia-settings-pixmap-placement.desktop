@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=nvidia-settings-pixmap-placement
+Comment=Load NVIDIA X Settings (Pixmap Placement)
+Exec=/usr/bin/nvidia-settings -a InitialPixmapPlacement=0
+Hidden=false
+X-GNOME-Autostart-enabled=true
