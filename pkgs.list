@@ -6,6 +6,7 @@ acpid
 afl-utils
 alacritty
 alacritty-terminfo
+amd-ucode
 android-tools
 android-udev
 aria2
@@ -20,7 +21,6 @@ autogen
 automake
 bash-completion
 bat
-bc
 beets
 beignet
 binwalk
@@ -127,6 +127,7 @@ ifenslave
 intel-gpu-tools
 intel-media-driver
 intel-ucode
+intltool
 iotop
 iputils
 ispc
@@ -214,6 +215,7 @@ opusfile
 ovmf
 pacman-contrib
 papirus-icon-theme
+paprefs
 parallel
 patch
 patchelf
@@ -228,6 +230,9 @@ pkgconf
 pkgdiff
 powertop
 pstoedit
+pulseaudio-bluetooth
+pulseaudio-equalizer
+pulseaudio-equalizer-ladspa
 python-argcomplete
 python-beautifulsoup4
 python-cairocffi
@@ -246,6 +251,7 @@ python-tlsh
 python-virtualenv
 python-xdg
 python-zeroconf
+python2-gobject
 qopenvpn
 radamsa
 radare2
