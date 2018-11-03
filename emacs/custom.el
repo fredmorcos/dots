@@ -33,7 +33,6 @@
  '(font-use-system-font t)
  '(frame-resize-pixelwise t)
  '(frame-title-format "%b - emacs" t)
- '(global-highlight-changes-mode t)
  '(help-window-select t)
  '(history-delete-duplicates t)
  '(history-length 30)
@@ -77,7 +76,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (rmsbolt which-key flx avy ivy ivy-rich swiper counsel smex org-bullets highlight-indentation lsp-mode lsp-ui flycheck company company-lsp toml-mode rust-mode cargo racer company-racer flycheck-rust lsp-rust python-mode company-jedi elpy)))
+    (flycheck-popup-tip flycheck-tip which-key flx avy ivy ivy-rich swiper counsel smex org-bullets highlight-indentation lsp-mode lsp-ui flycheck company company-lsp toml-mode rust-mode cargo racer company-racer flycheck-rust lsp-rust)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
@@ -113,8 +112,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(highlight-changes ((t (:foreground "forest green"))))
- '(highlight-changes-delete ((t (:weight bold :foreground "forest green"))))
  '(hl-line ((t (:background "cornsilk"))))
  '(lsp-ui-doc-background ((t (:background "white smoke"))))
  '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil) :foreground "gray20" :background "gray80"))))

@@ -65,6 +65,7 @@ diff-so-fancy
 diffoscope
 diffpdf
 diffuse
+discount
 distcc
 dnsmasq
 docx2txt
@@ -135,6 +136,7 @@ hyphen-en
 i3lock
 i7z
 ifenslave
+inkscape
 intel-gpu-tools
 intel-media-driver
 intel-ucode
@@ -266,7 +268,15 @@ python-tlsh
 python-virtualenv
 python-xdg
 python-zeroconf
+python2-beautifulsoup4
+python2-chardet
+python2-cssselect
+python2-genshi
 python2-gobject
+python2-html5lib
+python2-lxml
+python2-numpy
+python2-scour
 qopenvpn
 radamsa
 radare2
