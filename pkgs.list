@@ -13,7 +13,9 @@ aria2
 arj
 arm
 asp
+aspell-de
 aspell-en
+aspell-fr
 atool
 auctex
 autoconf-archive
@@ -104,7 +106,6 @@ gpart
 gparted
 gperf
 gperftools
-graphviz
 gst-editing-services
 gst-libav
 gst-plugins-ugly
@@ -120,6 +121,7 @@ gtkmm3-docs
 gtksourceview2
 gtksourceview4
 gtksourceviewmm
+gtranslator
 gucharmap
 gv
 gvfs-mtp
@@ -131,8 +133,12 @@ highlight
 hledger-ui
 hledger-web
 htop
+hunspell-de
+hunspell-fr
 hwdetect
+hyphen-de
 hyphen-en
+hyphen-fr
 i3lock
 i7z
 ifenslave
@@ -201,7 +207,9 @@ mtd-utils
 mtools
 mtpfs
 mutt
+mythes-de
 mythes-en
+mythes-fr
 nano
 ncdu
 net-tools
@@ -242,6 +250,7 @@ picard
 pigz
 pkgconf
 pkgdiff
+poedit
 powertop
 pstoedit
 pulseaudio-bluetooth
