@@ -286,6 +286,7 @@ python2-html5lib
 python2-lxml
 python2-numpy
 python2-scour
+qcachegrind
 qopenvpn
 radamsa
 radare2
@@ -295,6 +296,7 @@ realtime-privileges
 redshift
 refind-efi
 reiserfsprogs
+remake
 ripgrep
 rustup
 s-nail

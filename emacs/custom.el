@@ -76,7 +76,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (flycheck-popup-tip flycheck-tip which-key flx avy ivy ivy-rich swiper counsel smex org-bullets highlight-indentation lsp-mode lsp-ui flycheck company company-lsp toml-mode rust-mode cargo racer company-racer flycheck-rust lsp-rust)))
+    (meson-mode which-key flx avy ivy ivy-rich swiper counsel smex org-bullets highlight-indentation lsp-mode lsp-ui flycheck company company-lsp toml-mode rust-mode cargo racer company-racer flycheck-rust lsp-rust)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
