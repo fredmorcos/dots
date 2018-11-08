@@ -59,7 +59,6 @@ dblatex
 dbus-broker
 dconf-editor
 dejagnu
-devhelp
 dhcpcd
 dhex
 di
@@ -92,10 +91,8 @@ frei0r-plugins
 fwupd
 fwupdate
 fzf
-gconfmm
 gimp
 git-lfs
-glibmm-docs
 glyr
 gnome-calculator
 gnome-disk-utility
@@ -113,14 +110,8 @@ gst-python
 gst-transcoder
 gst-validate
 gstreamer-vaapi
-gtk-doc
 gtk-engine-murrine
 gtkglext
-gtkmm-docs
-gtkmm3-docs
-gtksourceview2
-gtksourceview4
-gtksourceviewmm
 gtranslator
 gucharmap
 gv
