@@ -59,6 +59,7 @@ dblatex
 dbus-broker
 dconf-editor
 dejagnu
+devhelp
 dhcpcd
 dhex
 di
@@ -93,6 +94,7 @@ fwupdate
 fzf
 gimp
 git-lfs
+glib2-docs
 glyr
 gnome-calculator
 gnome-disk-utility
@@ -157,11 +159,13 @@ libgsf
 libiscsi
 libmaa
 libmythes
+libnfs
 libnsutils
 liboggz
 libopenraw
 libreoffice-fresh
 libsidplayfp
+libtiger
 libunrar
 libva-intel-driver
 libva-mesa-driver
@@ -172,6 +176,7 @@ libxnvctrl
 licenses
 linux-headers
 linux-tools-meta
+live-media
 lldb
 llvm
 lockdown-ms
@@ -182,7 +187,6 @@ lshw
 lutris
 lxdm-gtk3
 lzop
-make
 man-pages
 mediainfo
 meld
@@ -230,7 +234,6 @@ pacman-contrib
 papirus-icon-theme
 paprefs
 parallel
-patch
 patchelf
 pavucontrol
 pavucontrol-qt
@@ -243,6 +246,7 @@ pkgconf
 pkgdiff
 poedit
 powertop
+protobuf
 pstoedit
 pulseaudio-bluetooth
 pulseaudio-equalizer
@@ -294,6 +298,7 @@ s-nail
 sbsigntools
 screen
 sdl2_gfx
+sdl_image
 seahorse
 shedskin
 simplescreenrecorder
@@ -356,10 +361,12 @@ vi
 vim-colorsamplerpack
 virglrenderer
 virtualgl
+vlc
 vokoscreen
 vulkan-intel
 wget
 whois
+wireguard-tools
 wireless_tools
 xchm
 xcompmgr

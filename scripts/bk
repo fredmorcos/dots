@@ -18,7 +18,6 @@ bk_cmd () {
   echo ""
 }
 
-bk_cmd "$HOME/CommonDocs/"             "$HDD/CommonDocs/"
 bk_cmd "$HOME/Music/"                  "$HDD/Common/Music/"
 bk_cmd "$HOME/Music.New/"              "$HDD/Common/Music.New/"
 
