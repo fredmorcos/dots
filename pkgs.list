@@ -119,13 +119,13 @@ gucharmap
 gv
 gvfs-mtp
 hddtemp
-hdf5
 hevea
 hexchat
 highlight
 hledger-ui
 hledger-web
 htop
+hugin
 hunspell-de
 hunspell-fr
 hwdetect
@@ -228,6 +228,7 @@ opencv
 oprofile
 optipng
 opusfile
+os-prober
 ostree
 ovmf
 pacman-contrib
@@ -238,7 +239,6 @@ patchelf
 pavucontrol
 pavucontrol-qt
 pbzip2
-perl-image-exiftool
 perl-locale-gettext
 picard
 pigz
