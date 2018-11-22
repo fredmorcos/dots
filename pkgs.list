@@ -11,7 +11,6 @@ android-tools
 android-udev
 aria2
 arj
-arm
 asp
 aspell-de
 aspell-en
@@ -82,7 +81,6 @@ ethtool
 evince
 exa
 exfat-utils
-falkon
 fd
 fdupes
 file-roller
@@ -194,6 +192,7 @@ mesa-demos
 mesa-vdpau
 meson
 mg
+minizip
 modemmanager
 movit
 mp3unicode
@@ -287,6 +286,7 @@ radamsa
 radare2
 radvd
 ranger
+re2
 realtime-privileges
 redshift
 refind-efi

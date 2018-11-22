@@ -17,7 +17,9 @@
  '(colon-double-space t)
  '(column-number-mode t)
  '(comment-fill-column 70)
+ '(company-idle-delay 0)
  '(company-lsp-enable-recompletion t)
+ '(company-show-numbers t)
  '(company-tooltip-align-annotations t)
  '(counsel-mode t)
  '(custom-file "~/Workspace/dots/emacs/custom.el")
@@ -76,7 +78,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (meson-mode which-key flx avy ivy ivy-rich swiper counsel smex org-bullets highlight-indentation lsp-mode lsp-ui flycheck company company-lsp toml-mode rust-mode cargo racer company-racer flycheck-rust lsp-rust)))
+    (gnuplot-mode which-key flx avy ivy ivy-rich swiper counsel smex org-bullets highlight-indentation lsp-mode lsp-ui flycheck company company-lsp toml-mode rust-mode cargo racer company-racer flycheck-rust lsp-rust)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
