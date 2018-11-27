@@ -218,6 +218,7 @@ nmap
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
+npm
 ntfs-3g
 numix-gtk-theme
 ocl-icd
@@ -235,6 +236,7 @@ pacman-contrib
 papirus-icon-theme
 paprefs
 parallel
+patch
 patchelf
 pavucontrol
 pavucontrol-qt
@@ -367,7 +369,6 @@ vokoscreen
 vulkan-intel
 wget
 whois
-wireguard-tools
 wireless_tools
 xchm
 xcompmgr
