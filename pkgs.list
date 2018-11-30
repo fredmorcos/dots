@@ -116,6 +116,8 @@ gtranslator
 gucharmap
 gv
 gvfs-mtp
+handbrake
+handbrake-cli
 hddtemp
 hevea
 hexchat
@@ -344,6 +346,8 @@ tokei
 tor-browser-en
 torsocks
 traceroute
+transcode
+transmageddon
 transmission-gtk
 trash-cli
 ttf-go-mono-git
