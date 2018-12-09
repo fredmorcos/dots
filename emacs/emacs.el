@@ -5,7 +5,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (package-initialize)
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :height 120)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
 (cua-selection-mode 1)
@@ -79,33 +79,33 @@
      (setq-local fill-column 70)
      (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
-;; programming
-(add-hook 'prog-mode-hook #'highlight-indentation-mode)
-
-;; python
-;; (require 'company-jedi)
-;; (elpy-enable)
-;; (push 'company-jedi company-backends)
-
 ;; lsp
 (require 'lsp-mode)
 (require 'lsp-ui)
 (require 'company-lsp)
+
 (push 'company-lsp company-backends)
 
-(add-hook 'lsp-mode-hook  #'lsp-ui-mode)
+(add-hook 'lsp-mode-hook #'lsp-ui-mode)
+
+(define-key lsp-ui-mode-map
+  [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+(define-key lsp-ui-mode-map
+  [remap xref-find-references] #'lsp-ui-peek-find-references)
 
 ;; rust
-(require 'cargo)
+(require 'lsp-rust)
 
-(with-eval-after-load 'lsp-mode
-  (setq-default lsp-rust-rls-command '("rustup" "run" "nightly" "rls"))
-  (require 'lsp-rust))
+(lsp-define-stdio-client lsp-rust "rust" #'lsp-rust--get-root nil
+			                   :command-fn #'lsp-rust--rls-command
+			                   :initialize #'lsp-rust--initialize-client)
 
 (add-hook 'rust-mode-hook  'lsp-rust-enable)
 (add-hook 'rust-mode-hook #'flycheck-mode)
 (add-hook 'rust-mode-hook #'company-mode)
 
+
+;; customizations
 (custom-set-variables
  '(custom-file "~/Workspace/dots/emacs/custom.el")
 
@@ -126,26 +126,24 @@
      counsel
      smex
      org-bullets
-     highlight-indentation
 
-     ;; rmsbolt
+     f
+     ht
      lsp-mode
      lsp-ui
      flycheck
      company
      company-lsp
+     ;; rmsbolt
 
      toml-mode
-     rust-mode
-     cargo
-     racer
-     company-racer
-     flycheck-rust
-     lsp-rust
+     markdown-mode
+     json-mode
+     yaml-mode
+     gnuplot-mode
 
-     ;; python-mode
-     ;; company-jedi
-     ;; elpy
+     rust-mode
+     lsp-rust
      ))
 
  '(frame-resize-pixelwise t)
@@ -169,8 +167,8 @@
  '(auto-hscroll-mode 'current-line)
  '(size-indication-mode t)
  '(show-paren-mode t)
- '(show-paren-delay 0)
- '(echo-keystrokes 0.1)
+ ;; '(show-paren-delay 0)
+ ;; '(echo-keystrokes 0.1)
 
  '(load-prefer-newer t)
  '(savehist-mode t)
@@ -200,8 +198,6 @@
  '(comment-fill-column 70)
  '(colon-double-space t)
  '(default-justification 'left)
-
- ;; '(global-highlight-changes-mode t)
 
  '(mode-require-final-newline 'visit-save)
  '(require-final-newline 'visit-save)
@@ -238,7 +234,7 @@
 
  '(which-key-mode t)
 
- '(flyspell-delay 0.2)
+ ;; '(flyspell-delay 0.2)
 
  '(org-cycle-separator-lines 0)
  '(org-indent-indentation-per-level 2)
@@ -246,16 +242,16 @@
 
  '(rust-indent-offset 2)
  '(rust-indent-method-chain t)
- '(rust-always-locate-project-on-open t)
+ ;; '(rust-always-locate-project-on-open t)
  '(rust-indent-where-clause t)
 
- '(lsp-enable-eldoc nil)
+ ;; '(lsp-enable-eldoc nil)
  ;; '(lsp-hover-text-function 'lsp--text-document-signature-help)
- '(lsp-ui-sideline-enable nil)
- '(lsp-ui-doc-enable nil)
- '(lsp-ui-doc-border "orange red")
- '(lsp-ui-doc-include-signature t)
- '(lsp-ui-doc-position 'at-point)
+ ;; '(lsp-ui-sideline-enable nil)
+ ;; '(lsp-ui-doc-enable nil)
+ ;; '(lsp-ui-doc-border "orange red")
+ ;; '(lsp-ui-doc-include-signature t)
+ ;; '(lsp-ui-doc-position 'at-point)
  ;; '(lsp-ui-flycheck-list-position 'right)
 
  '(eldoc-echo-area-use-multiline-p t)
@@ -265,11 +261,11 @@
  '(sh-basic-offset 2)
 
  '(company-tooltip-align-annotations t)
- ;; '(company-idle-delay 0.1)
- ;; '(company-minimum-prefix-length 2)
- '(company-lsp-enable-recompletion t)
+ '(company-minimum-prefix-length 1)
+ ;; '(company-idle-delay 0)
+ ;; '(company-lsp-enable-recompletion t)
 
- '(flycheck-display-errors-delay 0.3)
+ ;; '(flycheck-display-errors-delay 0.3)
 
  '(ediff-split-window-function #'split-window-horizontally)
  '(ediff-window-setup-function #'ediff-setup-windows-plain))
@@ -280,15 +276,13 @@
                        :background "gray80"))))
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
  '(hl-line ((t (:background "cornsilk"))))
- ;; '(highlight-changes ((t (:foreground "forest green"))))
- ;; '(highlight-changes-delete ((t (:weight bold :foreground "forest green"))))
  '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
- '(lsp-ui-doc-background ((t (:background "white smoke")))))
- ;; '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
- ;; '(lsp-ui-sideline-current-symbol
- ;;   ((t (:height 0.99 :weight ultra-bold :box
- ;;                (:line-width -1 :color "dim gray" :style nil)
- ;;                :foreground "dim gray")))))
+ '(lsp-ui-doc-background ((t (:background "white smoke"))))
+ '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
+ '(lsp-ui-sideline-current-symbol
+   ((t (:height 0.99 :weight ultra-bold :box
+                (:line-width -1 :color "dim gray" :style nil)
+                :foreground "dim gray")))))
 
 (provide '.emacs)
 ;;; .emacs ends here
