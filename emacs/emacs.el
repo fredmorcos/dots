@@ -80,13 +80,9 @@
      (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
 ;; lsp
-(require 'lsp-mode)
+(require 'lsp)
+(require 'lsp-clients)
 (require 'lsp-ui)
-(require 'company-lsp)
-
-(push 'company-lsp company-backends)
-
-(add-hook 'lsp-mode-hook #'lsp-ui-mode)
 
 (define-key lsp-ui-mode-map
   [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -94,16 +90,7 @@
   [remap xref-find-references] #'lsp-ui-peek-find-references)
 
 ;; rust
-(require 'lsp-rust)
-
-(lsp-define-stdio-client lsp-rust "rust" #'lsp-rust--get-root nil
-			                   :command-fn #'lsp-rust--rls-command
-			                   :initialize #'lsp-rust--initialize-client)
-
-(add-hook 'rust-mode-hook  'lsp-rust-enable)
-(add-hook 'rust-mode-hook #'flycheck-mode)
-(add-hook 'rust-mode-hook #'company-mode)
-
+(add-hook 'rust-mode-hook #'lsp)
 
 ;; customizations
 (custom-set-variables
@@ -143,7 +130,6 @@
      gnuplot-mode
 
      rust-mode
-     lsp-rust
      ))
 
  '(frame-resize-pixelwise t)
@@ -244,6 +230,14 @@
  '(rust-indent-method-chain t)
  ;; '(rust-always-locate-project-on-open t)
  '(rust-indent-where-clause t)
+
+ ;; '(lsp-auto-guess-root t)
+ ;; '(lsp-hover-text-function 'lsp--text-document-signature-help)
+
+ ;; '(lsp-ui-doc-position 'at-point)
+ '(lsp-ui-doc-include-signature t)
+ '(lsp-ui-doc-border "orange red")
+ ;; '(lsp-ui-flycheck-list-position 'bottom)
 
  ;; '(lsp-enable-eldoc nil)
  ;; '(lsp-hover-text-function 'lsp--text-document-signature-help)
