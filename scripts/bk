@@ -23,7 +23,6 @@ bk_cmd "$HOME/Music.New/"              "$HDD/Common/Music.New/"
 
 bk_cmd "$HOME/Documents/"              "$HDD/FredLaptop/Documents/"
 bk_cmd "$HOME/Downloads/"              "$HDD/FredLaptop/Downloads/"
-bk_cmd "$HOME/VPN/"                    "$HDD/FredLaptop/VPN/"
 bk_cmd "$HOME/Workspace/"              "$HDD/FredLaptop/Workspace/"
 
 bk_cmd "$HOME/.cert/"                  "$HDD/FredLaptop/DotConfigs/dot.cert/"
@@ -41,7 +40,6 @@ bk_cmd "$HDD/Fred/People/"             "fred@synapse:People/"
 bk_cmd "$HDD/FredLaptop/Documents/"    "fred@synapse:Documents/"
 bk_cmd "$HDD/FredLaptop/DotConfigs/"   "fred@synapse:DotConfigs/"
 bk_cmd "$HDD/FredLaptop/Downloads/"    "fred@synapse:Downloads/"
-bk_cmd "$HDD/FredLaptop/VPN/"          "fred@synapse:VPN/"
 bk_cmd "$HDD/FredLaptop/Workspace/"    "fred@synapse:Workspace/"
 
 bk_cmd "hilda@synapse:/home/hilda/"    "$HDD/Hilda/"
