@@ -231,6 +231,7 @@
  ;; '(rust-always-locate-project-on-open t)
  '(rust-indent-where-clause t)
 
+ '(lsp-prefer-flymake nil)
  ;; '(lsp-auto-guess-root t)
  ;; '(lsp-hover-text-function 'lsp--text-document-signature-help)
 

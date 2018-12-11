@@ -17,6 +17,7 @@
  '(colon-double-space t)
  '(column-number-mode t)
  '(comment-fill-column 70)
+ '(company-minimum-prefix-length 1)
  '(company-tooltip-align-annotations t)
  '(counsel-mode t)
  '(custom-file "~/Workspace/dots/emacs/custom.el")
@@ -53,6 +54,8 @@
  '(ivy-virtual-abbreviate (quote full))
  '(ivy-wrap t)
  '(load-prefer-newer t)
+ '(lsp-ui-doc-border "orange red")
+ '(lsp-ui-doc-include-signature t)
  '(make-backup-files t)
  '(menu-bar-mode nil)
  '(mode-require-final-newline (quote visit-save))
@@ -66,10 +69,13 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (lsp-ui which-key flx avy ivy ivy-rich swiper counsel smex org-bullets f ht lsp-mode flycheck company toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode lsp-rust)))
+    (rmsbolt hledger-mode which-key flx avy ivy ivy-rich swiper counsel smex org-bullets f ht lsp-mode lsp-ui flycheck company company-lsp toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
+ '(rust-indent-method-chain t)
+ '(rust-indent-offset 2)
+ '(rust-indent-where-clause t)
  '(save-place-file emacs-places-file)
  '(save-place-mode t)
  '(savehist-mode t)
@@ -98,5 +104,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(hl-line ((t (:background "cornsilk"))))
+ '(lsp-ui-doc-background ((t (:background "white smoke"))))
+ '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
+ '(lsp-ui-sideline-current-symbol ((t (:height 0.99 :weight ultra-bold :box (:line-width -1 :color "dim gray" :style nil) :foreground "dim gray"))))
  '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil) :foreground "gray20" :background "gray80"))))
- '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil))))))
+ '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
+ '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face))))))
