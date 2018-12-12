@@ -54,6 +54,10 @@
 ;; hledger
 (push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
 
+(add-hook
+ 'hledger-mode-hook
+ #'(lambda () (toggle-truncate-lines t)))
+
 ;; dired
 (add-hook 'dired-mode-hook #'auto-revert-mode)
 (add-hook 'dired-mode-hook  'dired-hide-details-mode)
@@ -114,6 +118,8 @@
      smex
      org-bullets
 
+     hledger-mode
+
      f
      ht
      lsp-mode
@@ -121,7 +127,7 @@
      flycheck
      company
      company-lsp
-     ;; rmsbolt
+     rmsbolt
 
      toml-mode
      markdown-mode
