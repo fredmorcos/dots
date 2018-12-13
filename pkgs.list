@@ -443,6 +443,7 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 xsel
+xsettings-client
 yapf
 yay-bin
 youtube-dl
