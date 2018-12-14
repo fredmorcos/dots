@@ -77,6 +77,7 @@ ebtables
 efitools
 enjarify
 eom
+eqonomize-bin
 ethtool
 evince
 exa
@@ -287,6 +288,7 @@ python2-numpy
 python2-scour
 qcachegrind
 qopenvpn
+qt5-charts
 radamsa
 radare2
 radvd
@@ -350,7 +352,6 @@ transmageddon
 transmission-gtk
 trash-cli
 ttf-go-mono-git
-ttf-ibm-plex
 tumbler
 udftools
 unace
