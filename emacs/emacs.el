@@ -53,6 +53,7 @@
 
 ;; hledger
 (push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
+(push '("\\.ledger\\'" . hledger-mode) auto-mode-alist)
 
 (add-hook
  'hledger-mode-hook
