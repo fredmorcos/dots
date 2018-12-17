@@ -91,6 +91,8 @@ frei0r-plugins
 fwupd
 fwupdate
 fzf
+gedit-code-assistance
+gedit-plugins
 gimp
 git-lfs
 glib2-docs
@@ -155,8 +157,10 @@ laptop-detect
 latex2html
 latex2rtf
 lbzip2
+ledger
 lhasa
 libdvdcss
+libgit2-glib
 libgsf
 libiscsi
 libmaa
@@ -376,6 +380,7 @@ virglrenderer
 virtualgl
 vlc
 vokoscreen
+vte3
 vulkan-intel
 wget
 whois
