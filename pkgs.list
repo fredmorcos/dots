@@ -190,6 +190,7 @@ logrotate
 lrzip
 lsb-release
 lshw
+lsof
 lutris
 lxdm-gtk3
 lzop

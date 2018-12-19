@@ -123,10 +123,10 @@
 
      f
      ht
-     lsp-mode
-     lsp-ui
      flycheck
      company
+     lsp-mode
+     lsp-ui
      company-lsp
      rmsbolt
 
