@@ -159,6 +159,8 @@ latex2rtf
 lbzip2
 ledger
 lhasa
+libappindicator-gtk2
+libappindicator-gtk3
 libdvdcss
 libgit2-glib
 libgsf
@@ -243,7 +245,6 @@ pacman-contrib
 papirus-icon-theme
 paprefs
 parallel
-patch
 patchelf
 pavucontrol
 pavucontrol-qt
@@ -385,6 +386,7 @@ vte3
 vulkan-intel
 wget
 whois
+wireguard-tools
 wireless_tools
 xchm
 xcompmgr
