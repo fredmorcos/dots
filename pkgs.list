@@ -17,7 +17,6 @@ aspell-en
 aspell-fr
 atool
 auctex
-autoconf-archive
 autogen
 automake
 bash-completion
@@ -54,12 +53,10 @@ compton
 cpio
 cppcheck
 crda
-ctags
 dblatex
 dbus-broker
 dconf-editor
 dejagnu
-devhelp
 dhcpcd
 dhex
 di
@@ -97,9 +94,9 @@ gedit-plugins
 gifski
 gimp
 git-lfs
-glib2-docs
 glpk
 glyr
+gnome-builder
 gnome-calculator
 gnome-disk-utility
 gnu-efi-libs
@@ -166,7 +163,6 @@ lhasa
 libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
-libgit2-glib
 libgsf
 libiscsi
 libmaa
@@ -242,7 +238,6 @@ oprofile
 optipng
 opusfile
 os-prober
-ostree
 ovmf
 pacman-contrib
 papirus-icon-theme
@@ -256,7 +251,6 @@ peek
 perl-locale-gettext
 picard
 pigz
-pkgconf
 pkgdiff
 poedit
 powertop
@@ -281,7 +275,6 @@ python-pyacoustid
 python-pycryptodome
 python-pylast
 python-pystemmer
-python-requests
 python-tlsh
 python-virtualenv
 python-xdg
@@ -328,7 +321,6 @@ stratis-cli
 stratisd
 stunnel
 subdl
-sysprof
 sysstat
 systemd-sysvcompat
 tarsnap
@@ -383,7 +375,6 @@ virglrenderer
 virtualgl
 vlc
 vokoscreen
-vte3
 vulkan-intel
 wget
 whois
@@ -392,8 +383,6 @@ wireless_tools
 xchm
 xcompmgr
 xdelta3
-xdg-dbus-proxy
-xdg-desktop-portal
 xdotool
 xf86-input-evdev
 xf86-input-keyboard
