@@ -106,7 +106,6 @@ gnu-efi-libs
 gnunet-gtk
 gnuplot
 gogglesmm
-google-talkplugin
 gpart
 gparted
 gperf
@@ -195,6 +194,7 @@ llvm
 lockdown-ms
 logrotate
 lrzip
+lsb-release
 lshw
 lsof
 lutris
@@ -360,11 +360,9 @@ transcode
 transmageddon
 transmission-gtk
 trash-cli
-ttf-fira-code
 ttf-fira-sans
 ttf-go-mono-git
 ttf-lato
-ttf-opensans
 tumbler
 udftools
 unace
