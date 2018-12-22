@@ -43,6 +43,7 @@ cdrtools
 cgdb
 checksec
 cheese
+chromium
 cldr-emoji-annotation
 cloc
 cmake
@@ -93,15 +94,19 @@ fwupdate
 fzf
 gedit-code-assistance
 gedit-plugins
+gifski
 gimp
 git-lfs
 glib2-docs
+glpk
 glyr
 gnome-calculator
 gnome-disk-utility
 gnu-efi-libs
+gnunet-gtk
 gnuplot
 gogglesmm
+google-talkplugin
 gpart
 gparted
 gperf
@@ -190,7 +195,6 @@ llvm
 lockdown-ms
 logrotate
 lrzip
-lsb-release
 lshw
 lsof
 lutris
@@ -203,7 +207,6 @@ mesa-demos
 mesa-vdpau
 meson
 mg
-minizip
 modemmanager
 movit
 mp3unicode
@@ -249,6 +252,7 @@ patchelf
 pavucontrol
 pavucontrol-qt
 pbzip2
+peek
 perl-locale-gettext
 picard
 pigz
@@ -298,7 +302,6 @@ radamsa
 radare2
 radvd
 ranger
-re2
 realtime-privileges
 redshift
 refind-efi
@@ -461,4 +464,5 @@ yapf
 yay-bin
 youtube-dl
 zeal
+zoom
 zzuf
