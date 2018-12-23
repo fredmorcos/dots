@@ -4,8 +4,6 @@ acpi_call
 acpica
 acpid
 afl-utils
-alacritty
-alacritty-terminfo
 amd-ucode
 android-tools
 android-udev
@@ -54,7 +52,9 @@ compton
 cpio
 cppcheck
 crda
+cryptominisat5
 ctags
+cvc4
 dblatex
 dbus-broker
 dconf-editor
@@ -78,7 +78,6 @@ efitools
 emacs-pkgbuild-mode
 enjarify
 eom
-eqonomize-bin
 ethtool
 evince
 exa
@@ -101,6 +100,7 @@ gnome-calculator
 gnome-disk-utility
 gnu-efi-libs
 gnuplot
+go
 gogglesmm
 gpart
 gparted
@@ -152,6 +152,7 @@ iucode-tool
 iverilog
 iwd
 jfsutils
+kitty
 laptop-detect
 latex2html
 latex2rtf
@@ -374,6 +375,7 @@ wget
 whois
 wireless_tools
 xchm
+xclip
 xcompmgr
 xdelta3
 xdg-dbus-proxy
@@ -445,6 +447,7 @@ xsettings-client
 yapf
 yay-bin
 youtube-dl
+z3
 zoom
 zssh
 zzuf

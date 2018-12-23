@@ -95,27 +95,26 @@ cmerge autostart/xnocaps.desktop   ~/.config/autostart/xnocaps.desktop
 cmerge pulse/default.pa  ~/.config/pulse/default.pa
 cmerge pulse/daemon.conf ~/.config/pulse/daemon.conf
 
-cmerge alacritty.yml     ~/.config/alacritty/alacritty.yml
-cmerge bashrc            ~/.bashrc
-cmerge compton.conf      ~/.config/compton.conf
-cmerge compton.service   ~/.config/systemd/user/compton.service
-cmerge dmrc              ~/.dmrc
-cmerge emacs/emacs.el    ~/.emacs
-cmerge fonts.conf        ~/.config/fontconfig/fonts.conf
-cmerge gitconfig         ~/.gitconfig
-cmerge htoprc            ~/.config/htop/htoprc
-cmerge hunspell_en_US    ~/.hunspell_en_US
-cmerge kitty.conf        ~/.config/kitty/kitty.conf
-cmerge nm-applet.service ~/.config/systemd/user/nm-applet.service
-cmerge redshift.conf     ~/.config/redshift.conf
-cmerge vimrc             ~/.vimrc
-cmerge youtube-dl.conf   ~/.config/youtube-dl/config
+cmerge bashrc          ~/.bashrc
+cmerge compton.conf    ~/.config/compton.conf
+cmerge compton.service ~/.config/systemd/user/compton.service
+cmerge dmrc            ~/.dmrc
+cmerge emacs/emacs.el  ~/.emacs
+cmerge fonts.conf      ~/.config/fontconfig/fonts.conf
+cmerge gitconfig       ~/.gitconfig
+cmerge htoprc          ~/.config/htop/htoprc
+cmerge hunspell_en_US  ~/.hunspell_en_US
+cmerge kitty.conf      ~/.config/kitty/kitty.conf
+cmerge redshift.conf   ~/.config/redshift.conf
+cmerge vimrc           ~/.vimrc
+cmerge youtube-dl.conf ~/.config/youtube-dl/config
 
 cmerge loader/loader.conf /boot/loader/loader.conf
 cmerge loader/arch.conf   /boot/loader/entries/arch.conf
 
 cmerge systemd/coredump.conf      /etc/systemd/coredump.conf
 cmerge systemd/lxdm-override.conf /etc/systemd/system/lxdm.service.d/override.conf
+cmerge systemd/nm-applet.service  ~/.config/systemd/user/nm-applet.service
 
 cmerge fstab           /etc/fstab
 cmerge hostname        /etc/hostname

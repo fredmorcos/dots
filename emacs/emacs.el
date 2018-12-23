@@ -51,8 +51,32 @@
   (push '("\\.pet\\'" . pet-mode) auto-mode-alist))
 
 ;; hledger
+(require 'hledger-mode)
+(require 'company)
 (push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
 (push '("\\.ledger\\'" . hledger-mode) auto-mode-alist)
+(add-to-list 'company-backends #'hledger-company)
+(add-hook 'hledger-mode-hook #'company-mode)
+
+(defun hledger/next-entry ()
+  "Move to next entry and pulse."
+  (interactive)
+  (hledger-next-or-new-entry)
+  (hledger-pulse-momentary-current-entry))
+
+(defun hledger/prev-entry ()
+  "Move to last entry and pulse."
+  (interactive)
+  (hledger-backward-entry)
+  (hledger-pulse-momentary-current-entry))
+
+(add-hook
+ 'hledger-mode-hook
+ #'(lambda ()
+     (define-key hledger-mode-map (kbd "M-p")   #'hledger/prev-entry)
+     (define-key hledger-mode-map (kbd "M-n")   #'hledger/next-entry)
+     (define-key hledger-mode-map (kbd "C-c j") #'hledger-run-command)
+     (define-key hledger-mode-map (kbd "C-c e") #'hledger-jentry)))
 
 (add-hook
  'hledger-mode-hook
@@ -231,6 +255,11 @@
  '(which-key-mode t)
 
  ;; '(flyspell-delay 0.2)
+
+ '(hledger-comments-column 2)
+ '(hledger-currency-string "EUR")
+ '(hledger-jfile (expand-file-name "~/Expenses/Expenses.ledger"))
+ '(hledger-year-of-birth 1987)
 
  '(org-cycle-separator-lines 0)
  '(org-indent-indentation-per-level 2)
