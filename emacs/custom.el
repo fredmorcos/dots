@@ -54,6 +54,7 @@
  '(ivy-virtual-abbreviate (quote full))
  '(ivy-wrap t)
  '(load-prefer-newer t)
+ '(lsp-prefer-flymake nil)
  '(lsp-ui-doc-border "orange red")
  '(lsp-ui-doc-include-signature t)
  '(make-backup-files t)
@@ -69,7 +70,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (rmsbolt hledger-mode which-key flx avy ivy ivy-rich swiper counsel smex org-bullets f ht lsp-mode lsp-ui flycheck company company-lsp toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
+    (solarized-theme which-key flx avy ivy ivy-rich swiper counsel smex org-bullets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))

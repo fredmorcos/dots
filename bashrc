@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-source <(kitty + complete setup bash)
+# source <(kitty + complete setup bash)
 
 # PS1='[\u@\h \W]\$ '
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
@@ -51,7 +51,7 @@ alias cat='bat'
 alias fzf='fzf -e --color=light'
 alias diff='diff-so-fancy'
 
-alias ssh='kitty +kitten ssh'
+# alias ssh='kitty +kitten ssh'
 
 alias neuron_systemctl='ssh neuron sudo systemctl'
 alias neuron_reboot='neuron_systemctl reboot'

@@ -75,6 +75,7 @@ dwdiff
 easy-rsa
 ebtables
 efitools
+emacs-pkgbuild-mode
 enjarify
 eom
 eqonomize-bin
@@ -151,7 +152,6 @@ iucode-tool
 iverilog
 iwd
 jfsutils
-kitty
 laptop-detect
 latex2html
 latex2rtf
@@ -222,9 +222,6 @@ networkmanager-openvpn
 networkmanager-strongswan
 nfs-utils
 nmap
-noto-fonts-cjk
-noto-fonts-emoji
-noto-fonts-extra
 ntfs-3g
 numix-gtk-theme
 ocl-icd
@@ -267,6 +264,7 @@ python-discid
 python-genshi
 python-html5lib
 python-nose
+python-numpy
 python-olefile
 python-pexpect
 python-pillow
@@ -352,9 +350,6 @@ transcode
 transmageddon
 transmission-gtk
 trash-cli
-ttf-fira-sans
-ttf-go-mono-git
-ttf-lato
 tumbler
 udftools
 unace
@@ -451,4 +446,5 @@ yapf
 yay-bin
 youtube-dl
 zoom
+zssh
 zzuf

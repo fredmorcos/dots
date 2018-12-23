@@ -5,7 +5,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (package-initialize)
-(set-face-attribute 'default nil :height 125)
+(set-face-attribute 'default nil :height 120)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
 (cua-selection-mode 1)
@@ -42,7 +42,6 @@
 ;; latex
 (load "auctex.el")
 (load "preview-latex.el")
-
 (add-hook 'LaTeX-mode-hook #'flyspell-mode)
 
 ;; PET
@@ -58,6 +57,10 @@
 (add-hook
  'hledger-mode-hook
  #'(lambda () (toggle-truncate-lines t)))
+
+;; pkgbuilds
+(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+(push '("/PKGBUILD$" . pkgbuild-mode) auto-mode-alist)
 
 ;; dired
 (add-hook 'dired-mode-hook #'auto-revert-mode)
