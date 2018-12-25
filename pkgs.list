@@ -40,8 +40,6 @@ cdrdao
 cdrtools
 cgdb
 checksec
-cheese
-chromium
 cldr-emoji-annotation
 cloc
 cmake
@@ -202,6 +200,7 @@ mesa-demos
 mesa-vdpau
 meson
 mg
+minizip
 modemmanager
 movit
 mp3unicode
@@ -295,6 +294,7 @@ radamsa
 radare2
 radvd
 ranger
+re2
 realtime-privileges
 redshift
 refind-efi
@@ -448,6 +448,5 @@ yapf
 yay-bin
 youtube-dl
 z3
-zoom
 zssh
 zzuf
