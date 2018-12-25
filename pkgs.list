@@ -21,7 +21,7 @@ automake
 bash-completion
 bat
 beets
-beignet
+biber
 binwalk
 bison
 bluez-firmware
@@ -40,7 +40,6 @@ cdrdao
 cdrtools
 cgdb
 checksec
-cldr-emoji-annotation
 cloc
 cmake
 cmus
@@ -60,6 +59,7 @@ dejagnu
 dhcpcd
 dhex
 di
+dialog
 diff-so-fancy
 diffoscope
 diffpdf
@@ -98,12 +98,12 @@ gnome-calculator
 gnome-disk-utility
 gnu-efi-libs
 gnuplot
-go
 gogglesmm
 gpart
 gparted
 gperf
 gperftools
+graphviz
 gst-editing-services
 gst-libav
 gst-plugins-ugly
@@ -113,20 +113,17 @@ gst-validate
 gstreamer-vaapi
 gtk-engine-murrine
 gtkglext
-gtranslator
 gucharmap
 gv
 gvfs-mtp
 handbrake
 handbrake-cli
 hddtemp
-hevea
 hexchat
 highlight
 hledger-ui
 hledger-web
 htop
-hugin
 hunspell-de
 hunspell-en_US
 hunspell-fr
@@ -137,7 +134,6 @@ hyphen-fr
 i3lock
 i7z
 ifenslave
-inkscape
 intel-gpu-tools
 intel-media-driver
 intel-ucode
@@ -155,7 +151,6 @@ laptop-detect
 latex2html
 latex2rtf
 lbzip2
-ledger
 lhasa
 libappindicator-gtk2
 libappindicator-gtk3
@@ -193,6 +188,7 @@ lsof
 lutris
 lxdm-gtk3
 lzop
+make
 man-pages
 mediainfo
 meld
@@ -215,6 +211,7 @@ mythes-fr
 nano
 ncdu
 net-tools
+netcdf
 netctl
 netperf
 network-manager-applet
@@ -235,6 +232,7 @@ opusfile
 os-prober
 ostree
 ovmf
+pacgraph
 pacman-contrib
 papirus-icon-theme
 paprefs
@@ -253,6 +251,7 @@ poedit
 powertop
 protobuf
 pstoedit
+psutils
 pulseaudio-bluetooth
 pulseaudio-equalizer
 pulseaudio-equalizer-ladspa
@@ -286,6 +285,7 @@ python2-gobject
 python2-html5lib
 python2-lxml
 python2-numpy
+python2-pygments
 python2-scour
 qcachegrind
 qopenvpn
@@ -293,7 +293,6 @@ qt5-charts
 radamsa
 radare2
 radvd
-ranger
 re2
 realtime-privileges
 redshift
@@ -322,6 +321,7 @@ subdl
 sysprof
 sysstat
 systemd-sysvcompat
+t1utils
 tarsnap
 tcc
 tcpdump
@@ -354,7 +354,6 @@ trash-cli
 tumbler
 udftools
 unace
-unicode-emoji
 units
 upx
 usb_modeswitch
@@ -370,6 +369,7 @@ vim-colorsamplerpack
 virglrenderer
 virtualgl
 vlc
+vtk
 vulkan-intel
 wget
 whois

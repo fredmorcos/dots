@@ -272,15 +272,12 @@
 
  '(lsp-prefer-flymake nil)
  ;; '(lsp-auto-guess-root t)
- ;; '(lsp-hover-text-function 'lsp--text-document-signature-help)
 
  ;; '(lsp-ui-doc-position 'at-point)
  '(lsp-ui-doc-include-signature t)
  '(lsp-ui-doc-border "orange red")
  ;; '(lsp-ui-flycheck-list-position 'bottom)
 
- ;; '(lsp-enable-eldoc nil)
- ;; '(lsp-hover-text-function 'lsp--text-document-signature-help)
  ;; '(lsp-ui-sideline-enable nil)
  ;; '(lsp-ui-doc-enable nil)
  ;; '(lsp-ui-doc-border "orange red")
