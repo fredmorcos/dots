@@ -56,6 +56,7 @@ dblatex
 dbus-broker
 dconf-editor
 dejagnu
+dex
 dhcpcd
 dhex
 di
@@ -75,6 +76,7 @@ ebtables
 efitools
 emacs-pkgbuild-mode
 enjarify
+entr
 eom
 ethtool
 evince
@@ -118,6 +120,7 @@ gv
 gvfs-mtp
 handbrake
 handbrake-cli
+haveged
 hddtemp
 hexchat
 highlight
@@ -152,6 +155,8 @@ latex2html
 latex2rtf
 lbzip2
 lhasa
+lib32-libpulse
+lib32-mesa-vdpau
 libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
@@ -313,6 +318,7 @@ slimmy-xfwm-theme-git
 smartmontools
 soundconverter
 squashfs-tools
+steam
 strace
 stratis-cli
 stratisd
