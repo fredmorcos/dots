@@ -68,6 +68,7 @@ diffuse
 discount
 distcc
 dnsmasq
+dnssec-tools
 docx2txt
 dtc
 dwdiff
@@ -91,6 +92,8 @@ frei0r-plugins
 fwupd
 fwupdate
 fzf
+geoip-database-extra
+geoip2-database
 gifski
 gimp
 git-lfs
@@ -265,6 +268,7 @@ python-beautifulsoup4
 python-cairocffi
 python-cssselect
 python-discid
+python-fxa
 python-genshi
 python-html5lib
 python-nose
@@ -276,8 +280,9 @@ python-progressbar
 python-pyacoustid
 python-pycryptodome
 python-pylast
+python-pyopenssl
 python-pystemmer
-python-requests
+python-requests-hawk
 python-tlsh
 python-virtualenv
 python-xdg
@@ -377,6 +382,7 @@ virtualgl
 vlc
 vtk
 vulkan-intel
+vulkan-tools
 wget
 whois
 wireless_tools
@@ -390,19 +396,6 @@ xdotool
 xf86-input-evdev
 xf86-input-keyboard
 xf86-input-mouse
-xf86-input-vmmouse
-xf86-input-void
-xf86-video-amdgpu
-xf86-video-ati
-xf86-video-dummy
-xf86-video-fbdev
-xf86-video-intel
-xf86-video-nouveau
-xf86-video-openchrome
-xf86-video-qxl
-xf86-video-vesa
-xf86-video-vmware
-xf86-video-voodoo
 xfce4-appfinder
 xfce4-clipman-plugin
 xfce4-notifyd

@@ -33,6 +33,10 @@
  '(help-window-select t)
  '(history-delete-duplicates t)
  '(history-length 30)
+ '(hledger-comments-column 2)
+ '(hledger-currency-string "EUR")
+ '(hledger-jfile (expand-file-name "~/Expenses/Expenses.ledger"))
+ '(hledger-year-of-birth 1987)
  '(hscroll-margin 1)
  '(hscroll-step 1)
  '(indent-tabs-mode nil)
@@ -70,7 +74,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (solarized-theme which-key flx avy ivy ivy-rich swiper counsel smex org-bullets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
+    (ace-window avy-flycheck which-key flx avy ivy ivy-rich swiper counsel smex org-bullets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
