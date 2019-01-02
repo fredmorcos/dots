@@ -29,7 +29,6 @@
       <property name="&lt;Alt&gt;F2" type="string" value="xfce4-appfinder">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Super&gt;l" type="string" value="i3lock -e -c 000000"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;h" type="string" value="exo-open --launch FileManager">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
@@ -54,6 +53,7 @@
       <property name="&lt;Primary&gt;Print" type="string" value="xfce4-screenshooter -w">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
+      <property name="&lt;Super&gt;l" type="string" value="xfce4-screensaver-command -l"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

@@ -1,4 +1,5 @@
 abook
+accountsservice
 acpi
 acpi_call
 acpica
@@ -63,10 +64,7 @@ di
 dialog
 diff-so-fancy
 diffoscope
-diffpdf
-diffuse
 discount
-distcc
 dnsmasq
 dnssec-tools
 docx2txt
@@ -143,7 +141,6 @@ ifenslave
 intel-gpu-tools
 intel-media-driver
 intel-ucode
-intltool
 iotop
 iputils
 ispc
@@ -199,7 +196,6 @@ lzop
 make
 man-pages
 mediainfo
-meld
 mesa-demos
 mesa-vdpau
 meson
@@ -385,6 +381,7 @@ vulkan-intel
 vulkan-tools
 wget
 whois
+whowatch
 wireless_tools
 xchm
 xclip
@@ -398,15 +395,19 @@ xf86-input-keyboard
 xf86-input-mouse
 xfce4-appfinder
 xfce4-clipman-plugin
+xfce4-dev-tools
 xfce4-notifyd
 xfce4-power-manager
 xfce4-pulseaudio-plugin
+xfce4-screensaver
 xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfce4-xkb-plugin
 xfdesktop
 xmldiff
+xmlto
+xorg-appres
 xorg-docs
 xorg-luit
 xorg-server-devel
@@ -444,6 +445,7 @@ xorg-xwininfo
 xorg-xwud
 xsel
 xsettings-client
+xssstate
 yapf
 yay-bin
 youtube-dl
