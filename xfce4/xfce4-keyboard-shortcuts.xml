@@ -53,7 +53,7 @@
       <property name="&lt;Primary&gt;Print" type="string" value="xfce4-screenshooter -w">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Super&gt;l" type="string" value="xfce4-screensaver-command -l"/>
+      <property name="&lt;Super&gt;l" type="string" value="i3lock -e -c 000000"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

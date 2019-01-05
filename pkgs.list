@@ -165,6 +165,7 @@ libnfs
 libnsutils
 liboggz
 libopenraw
+libquicktime
 libreoffice-fresh
 libsidplayfp
 libtiger
@@ -379,7 +380,6 @@ xfce4-dev-tools
 xfce4-notifyd
 xfce4-power-manager
 xfce4-pulseaudio-plugin
-xfce4-screensaver
 xfce4-screenshooter
 xfce4-session
 xfce4-settings
