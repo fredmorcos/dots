@@ -9,7 +9,7 @@
       <property name="length" type="uint" value="100"/>
       <property name="disable-struts" type="bool" value="false"/>
       <property name="position-locked" type="bool" value="true"/>
-      <property name="size" type="uint" value="26"/>
+      <property name="size" type="uint" value="23"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="1"/>
         <value type="int" value="2"/>
@@ -19,6 +19,7 @@
         <value type="int" value="7"/>
         <value type="int" value="8"/>
       </property>
+      <property name="icon-size" type="uint" value="0"/>
     </property>
   </property>
   <property name="plugins" type="empty">
@@ -34,6 +35,7 @@
       <property name="flat-buttons" type="bool" value="true"/>
       <property name="sort-order" type="uint" value="0"/>
       <property name="window-scrolling" type="bool" value="false"/>
+      <property name="show-handle" type="bool" value="false"/>
     </property>
     <property name="plugin-4" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
@@ -54,14 +56,21 @@
       <property name="show-frame" type="bool" value="false"/>
       <property name="size-max" type="uint" value="24"/>
       <property name="names-hidden" type="array">
+        <value type="string" value="vlc"/>
       </property>
+      <property name="names-ordered" type="array">
+        <value type="string" value="vlc"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="xfce4-power-manager"/>
+      </property>
+      <property name="square-icons" type="bool" value="true"/>
     </property>
     <property name="plugin-7" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="mpris-players" type="string" value="gogglesmm;vlc"/>
       <property name="enable-multimedia-keys" type="bool" value="false"/>
       <property name="enable-wnck" type="bool" value="false"/>
-      <property name="enable-mpris" type="bool" value="false"/>
+      <property name="enable-mpris" type="bool" value="true"/>
       <property name="volume-step" type="int" value="1"/>
     </property>
     <property name="plugin-8" type="string" value="clock">

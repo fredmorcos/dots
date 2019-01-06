@@ -67,6 +67,7 @@ alias synapse_update='ssh synapse sudo pacman -Syu'
 
 alias dlsub='subdl -i --output={m}.{L}.{S}'
 alias yt720='youtube-dl -f "[height<=720]"'
+alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 cpuperf() {
   sudo cpupower -c all frequency-set -g performance
