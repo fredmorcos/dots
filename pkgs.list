@@ -17,6 +17,7 @@ atool
 auctex
 autoconf-archive
 autogen
+automake
 bash-completion
 bat
 bc
@@ -41,6 +42,7 @@ cdrdao
 cdrtools
 cgdb
 checksec
+chrpath
 cloc
 cmus
 colordiff
@@ -104,6 +106,7 @@ gpart
 gparted
 gperf
 gperftools
+graphviz
 gst-editing-services
 gst-libav
 gst-plugins-ugly
@@ -137,6 +140,7 @@ ifenslave
 intel-gpu-tools
 intel-media-driver
 intel-ucode
+intltool
 iotop
 iputils
 ispc
@@ -173,6 +177,7 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libxnvctrl
+libxpresent
 licenses
 linux-headers
 linux-tools-meta
@@ -186,6 +191,7 @@ lsb-release
 lsof
 lxdm-gtk3
 lzop
+make
 man-pages
 mediainfo
 mesa-demos
@@ -238,6 +244,7 @@ pbzip2
 perl-locale-gettext
 picard
 pigz
+pkgconf
 pkgdiff
 powertop
 protobuf
@@ -321,9 +328,9 @@ texlive-music
 texlive-pstricks
 texlive-publishers
 thermald
-thunar-archive-plugin-git
-thunar-media-tags-plugin-git
-thunar-volman-git
+thunar-archive-plugin
+thunar-media-tags-plugin
+thunar-volman
 time
 tldr
 tlp-rdw
@@ -357,7 +364,6 @@ vlc
 vulkan-intel
 vulkan-tools
 wget
-which
 whois
 whowatch
 wireless_tools
@@ -371,15 +377,14 @@ xdotool
 xf86-input-evdev
 xf86-input-keyboard
 xf86-input-mouse
-xfce4-appfinder-devel
-xfce4-dev-tools-devel
-xfce4-notifyd-git
-xfce4-power-manager-devel
-xfce4-pulseaudio-plugin-git
-xfce4-screenshooter-git
-xfce4-session-devel
-xfce4-settings-devel
-xfdesktop-devel
+xfce4-appfinder
+xfce4-notifyd
+xfce4-power-manager
+xfce4-pulseaudio-plugin
+xfce4-screenshooter
+xfce4-session
+xfce4-settings
+xfdesktop
 xmldiff
 xmlto
 xorg-appres
