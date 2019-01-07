@@ -9,6 +9,7 @@ android-tools
 android-udev
 aria2
 arj
+asciidoc
 asp
 aspell-de
 aspell-en
@@ -190,6 +191,7 @@ lrzip
 lsb-release
 lsof
 lxdm-gtk3
+lynx
 lzop
 make
 man-pages
@@ -306,6 +308,7 @@ sleuthkit
 slimmy-xfwm-theme-git
 smartmontools
 soundconverter
+source-highlight
 squashfs-tools
 strace
 stratis-cli
@@ -363,6 +366,7 @@ virtualgl
 vlc
 vulkan-intel
 vulkan-tools
+w3m
 wget
 whois
 whowatch
