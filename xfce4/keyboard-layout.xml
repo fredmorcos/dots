@@ -7,7 +7,7 @@
     <property name="XkbVariant" type="string" value=""/>
     <property name="XkbOptions" type="empty">
       <property name="Group" type="string" value=""/>
-      <property name="Compose" type="string" value="compose:rctrl"/>
+      <property name="Compose" type="string" value="compose:ralt"/>
     </property>
   </property>
 </channel>
