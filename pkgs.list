@@ -21,7 +21,6 @@ autogen
 automake
 bash-completion
 bat
-bc
 beets
 biber
 binwalk
@@ -85,6 +84,7 @@ fd
 fdupes
 file-roller
 firefox
+fish
 flex
 frei0r-plugins
 fwupd
