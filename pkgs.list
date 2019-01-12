@@ -229,6 +229,7 @@ ocl-icd
 odt2txt
 openbsd-netcat
 opencl-mesa
+openpyn-nordvpn
 oprofile
 optipng
 opusfile
@@ -288,6 +289,7 @@ python2-lxml
 python2-numpy
 python2-pygments
 python2-scour
+qopenvpn
 radamsa
 radare2
 radvd
@@ -331,6 +333,7 @@ texlive-langextra
 texlive-music
 texlive-pstricks
 texlive-publishers
+the_silver_searcher
 thermald
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -368,7 +371,6 @@ vlc
 vulkan-intel
 vulkan-tools
 w3m
-wget
 whois
 whowatch
 wireless_tools
