@@ -53,6 +53,7 @@ crda
 cryptominisat5
 ctags
 cvc4
+dav1d
 dblatex
 dbus-broker
 dconf-editor
@@ -316,6 +317,7 @@ squashfs-tools
 strace
 stratis-cli
 stratisd
+stress
 stunnel
 subdl
 sysstat
