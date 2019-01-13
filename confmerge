@@ -100,7 +100,6 @@ cmerge pulse/daemon.conf ~/.config/pulse/daemon.conf
 
 cmerge bashrc          ~/.bashrc
 cmerge compton.conf    ~/.config/compton.conf
-cmerge compton.service ~/.config/systemd/user/compton.service
 cmerge dmrc            ~/.dmrc
 cmerge emacs/emacs.el  ~/.emacs
 cmerge fonts.conf      ~/.config/fontconfig/fonts.conf
@@ -117,7 +116,6 @@ cmerge loader/arch.conf   /boot/loader/entries/arch.conf
 
 cmerge systemd/coredump.conf      /etc/systemd/coredump.conf
 cmerge systemd/lxdm-override.conf /etc/systemd/system/lxdm.service.d/override.conf
-cmerge systemd/nm-applet.service  ~/.config/systemd/user/nm-applet.service
 
 cmerge fstab           /etc/fstab
 cmerge hostname        /etc/hostname
