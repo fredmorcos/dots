@@ -5,7 +5,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (package-initialize)
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :height 140)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
 (cua-selection-mode 1)
