@@ -45,6 +45,7 @@
       <property name="names-visible" type="array">
         <value type="string" value="thunar"/>
         <value type="string" value="networkmanager applet"/>
+        <value type="string" value="simplescreenrecorder"/>
         <value type="string" value="steam"/>
         <value type="string" value="hexchat"/>
         <value type="string" value="vokoscreen"/>

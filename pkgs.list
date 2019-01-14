@@ -295,6 +295,7 @@ radare2
 radvd
 re2
 realtime-privileges
+recordmydesktop
 redshift
 refind-efi
 reiserfsprogs
@@ -307,6 +308,7 @@ screen
 sdl2_gfx
 sdl_image
 shedskin
+simplescreenrecorder
 sleuthkit
 slimmy-xfwm-theme-git
 smartmontools
@@ -347,6 +349,8 @@ tmux
 tokei
 tor-browser-en
 torsocks
+tpm2-abrmd
+tpm2-tools
 traceroute
 transcode
 transmission-gtk
