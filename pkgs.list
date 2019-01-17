@@ -86,6 +86,7 @@ fd
 fdupes
 file-roller
 firefox
+firewalld
 fish
 flex
 frei0r-plugins
@@ -99,9 +100,11 @@ gimp
 git-lfs
 glpk
 glyr
+gnome-boxes
 gnome-calculator
 gnome-disk-utility
 gnome-keyring
+gnome-mpv
 gnu-efi-libs
 gnuplot
 gogglesmm
@@ -146,6 +149,7 @@ intel-media-driver
 intel-ucode
 intltool
 iotop
+ipset
 iputils
 ispc
 ispell
@@ -241,6 +245,7 @@ ovmf
 p7zip
 pacgraph
 pacman-contrib
+pacrunner
 papirus-icon-theme
 parallel
 patch
@@ -373,7 +378,8 @@ vdpauinfo
 vi
 vim-colorsamplerpack
 vim-spell-en
-virglrenderer
+virt-manager
+virt-viewer
 virtualgl
 vlc
 vulkan-intel
