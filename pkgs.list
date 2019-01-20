@@ -266,6 +266,7 @@ python-beautifulsoup4
 python-cairocffi
 python-cssselect
 python-discid
+python-dmidecode
 python-fxa
 python-genshi
 python-html5lib
@@ -363,8 +364,10 @@ transcode
 transmission-gtk
 trash-cli
 tumbler
+tuned-git
 udftools
 unace
+unbound
 unichrome-dri
 units
 unrar
