@@ -69,6 +69,14 @@ alias dlsub='subdl -i --output={m}.{L}.{S}'
 alias yt720='youtube-dl -f "[height<=720]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
+dirdlsub() {
+	for i in *; do
+    echo "$i";
+    dlsub "$i";
+    echo "-----------------------------------------";
+  done
+}
+
 cpuperf() {
   sudo cpupower -c all frequency-set -g performance
   sudo cpupower -c all set --perf-bias 0
