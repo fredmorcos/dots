@@ -69,11 +69,12 @@
     </property>
     <property name="plugin-7" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="GnomeMpv.instance7485;GnomeMpv.instance7604;gogglesmm;vlc"/>
+      <property name="mpris-players" type="string" value=""/>
       <property name="enable-multimedia-keys" type="bool" value="false"/>
       <property name="enable-wnck" type="bool" value="false"/>
-      <property name="enable-mpris" type="bool" value="true"/>
+      <property name="enable-mpris" type="bool" value="false"/>
       <property name="volume-step" type="int" value="1"/>
+      <property name="blacklisted-players" type="string" value=""/>
     </property>
     <property name="plugin-8" type="string" value="clock">
       <property name="timezone" type="string" value="Europe/Vienna"/>
