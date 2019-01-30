@@ -33,7 +33,6 @@ bootchart
 bridge-utils
 bs1770gain
 bsdiff
-cabextract
 capnproto
 catdoc
 catdvi
@@ -78,7 +77,6 @@ emacs-pkgbuild-mode
 enjarify
 entr
 eom
-ethtool
 evince
 exa
 exfat-utils
@@ -111,7 +109,6 @@ gogglesmm
 gpart
 gparted
 gperf
-gperftools
 graphviz
 gst-editing-services
 gst-libav
@@ -167,10 +164,8 @@ libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
 libgsf
-libiscsi
 libmaa
 libmythes
-libnfs
 libnsutils
 liboggz
 libopenraw
@@ -197,6 +192,7 @@ logrotate
 lrzip
 lsb-release
 lsof
+lutris
 lxdm-gtk3
 lynx
 lzop
@@ -211,7 +207,6 @@ minizip
 modemmanager
 movit
 mp3unicode
-mpv
 mtd-utils
 mtools
 mtpfs
@@ -242,7 +237,6 @@ opusfile
 os-prober
 ostree
 ovmf
-p7zip
 pacgraph
 pacman-contrib
 pacrunner
@@ -258,7 +252,6 @@ pigz
 pkgconf
 pkgdiff
 powertop
-protobuf
 pstoedit
 psutils
 pulseaudio-bluetooth
@@ -372,13 +365,11 @@ unace
 unbound
 unichrome-dri
 units
-unrar
 upx
 usleep
 valgrind
 vbindiff
 vcdimager
-vde2
 vdpauinfo
 vi
 vim-colorsamplerpack
