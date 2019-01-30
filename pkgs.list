@@ -264,6 +264,7 @@ python-dmidecode
 python-fxa
 python-genshi
 python-html5lib
+python-hypothesis
 python-nose
 python-numpy
 python-olefile
