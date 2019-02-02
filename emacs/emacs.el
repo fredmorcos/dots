@@ -27,6 +27,10 @@
 
 (setq-default ivy-initial-inputs-alist nil)
 
+;; fuzzy find files
+(global-set-key (kbd "M-p")   #'fzf-git-files)
+(global-set-key (kbd "M-P") #'fzf-git-grep)
+
 ;; file positions, backups, etc...
 (require 'saveplace)
 (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
