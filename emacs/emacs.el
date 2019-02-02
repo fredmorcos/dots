@@ -39,6 +39,11 @@
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
 
+;; yasnippet
+(require 'yasnippet)
+(push "~/Workspace/dots/emacs/snippets" yas-snippet-dirs)
+(yas-reload-all)
+
 ;; latex
 (load "auctex.el")
 (load "preview-latex.el")
@@ -57,6 +62,7 @@
 (push '("\\.ledger\\'" . hledger-mode) auto-mode-alist)
 (add-to-list 'company-backends #'hledger-company)
 (add-hook 'hledger-mode-hook #'company-mode)
+(add-hook 'hledger-mode-hook #'yas-minor-mode)
 
 (defun hledger/next-entry ()
   "Move to next entry and pulse."
@@ -123,6 +129,7 @@
 
 ;; rust
 (add-hook 'rust-mode-hook #'lsp)
+(add-hook 'rust-mode-hook #'yas-minor-mode)
 
 ;; customizations
 (custom-set-variables
@@ -145,6 +152,9 @@
      counsel
      smex
      org-bullets
+
+     yasnippet
+     yasnippet-snippets
 
      hledger-mode
 

@@ -74,7 +74,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (ace-window avy-flycheck which-key flx avy ivy ivy-rich swiper counsel smex org-bullets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
+    (yasnippet-snippets yasnippet which-key flx avy ivy ivy-rich swiper counsel smex org-bullets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode yaml-mode gnuplot-mode rust-mode)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
