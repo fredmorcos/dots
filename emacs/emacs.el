@@ -28,7 +28,7 @@
 (setq-default ivy-initial-inputs-alist nil)
 
 ;; fuzzy find files
-(global-set-key (kbd "M-p")   #'fzf-git-files)
+(global-set-key (kbd "M-p") #'fzf-git-files)
 (global-set-key (kbd "M-P") #'fzf-git-grep)
 
 ;; file positions, backups, etc...
@@ -148,6 +148,7 @@
      ("melpa" . "http://melpa.org/packages/")))
  '(package-selected-packages
    '(which-key
+     fzf
      flx
      avy
      ivy
@@ -176,6 +177,7 @@
      json-mode
      yaml-mode
      gnuplot-mode
+     dockerfile-mode
 
      rust-mode
      ))
