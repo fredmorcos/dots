@@ -158,6 +158,7 @@
      smex
      org-bullets
 
+     treemacs
      yasnippet
      yasnippet-snippets
 
