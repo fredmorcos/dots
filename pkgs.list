@@ -105,6 +105,7 @@ gnome-calculator
 gnome-disk-utility
 gnome-keyring
 gnome-mpv
+gnome-terminal
 gnu-efi-libs
 gnuplot
 gogglesmm
@@ -257,7 +258,6 @@ powertop
 pstoedit
 psutils
 pulseaudio-bluetooth
-python-argcomplete
 python-beautifulsoup4
 python-cairocffi
 python-cssselect
@@ -271,7 +271,6 @@ python-nose
 python-numpy
 python-olefile
 python-pexpect
-python-progressbar
 python-pyacoustid
 python-pycryptodome
 python-pylast
@@ -327,6 +326,7 @@ stratisd
 stress
 stunnel
 subdl
+subdownloader
 sysstat
 systemd-sysvcompat
 t1utils
@@ -361,6 +361,7 @@ traceroute
 transcode
 transmission-gtk
 trash-cli
+ttf-hack
 tumbler
 tuned-git
 udftools
@@ -464,6 +465,7 @@ xorg-xwud
 xsel
 xsettings-client
 xssstate
+yamllint
 yapf
 yay-bin
 youtube-dl

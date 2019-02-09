@@ -5,7 +5,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (package-initialize)
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 120)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
 (cua-selection-mode 1)
@@ -176,9 +176,11 @@
      toml-mode
      markdown-mode
      json-mode
-     yaml-mode
      gnuplot-mode
      dockerfile-mode
+
+     yaml-mode
+     flycheck-yamllint
 
      rust-mode
      ))
