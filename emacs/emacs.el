@@ -284,10 +284,11 @@
  '(org-indent-indentation-per-level 2)
  '(org-startup-folded t)
 
- '(rust-indent-offset 2)
+ ;; '(rust-indent-offset 2)
  '(rust-indent-method-chain t)
- ;; '(rust-always-locate-project-on-open t)
+ '(rust-always-locate-project-on-open t)
  '(rust-indent-where-clause t)
+ '(rust-format-on-save t)
 
  '(lsp-prefer-flymake nil)
  ;; '(lsp-auto-guess-root t)
