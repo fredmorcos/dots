@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+source /etc/profile.d/vte.sh
 source <(kitty + complete setup bash)
 
 # PS1='[\u@\h \W]\$ '
