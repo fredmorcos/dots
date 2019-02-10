@@ -43,11 +43,13 @@ cgdb
 checksec
 chrpath
 cloc
+cmake
 cmus
 colordiff
 colorgcc
 compton
 cpio
+cppcheck
 crda
 cryptominisat5
 ctags

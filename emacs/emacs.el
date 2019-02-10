@@ -135,6 +135,19 @@
 (add-hook 'rust-mode-hook #'lsp)
 (add-hook 'rust-mode-hook #'yas-minor-mode)
 
+;; c/c++
+(add-hook 'c++-mode-hook   #'irony-mode)
+(add-hook 'c++-mode-hook   #'flycheck-mode)
+(add-hook 'c++-mode-hook   #'company-mode)
+(add-hook 'c-mode-hook     #'irony-mode)
+(add-hook 'c-mode-hook     #'flycheck-mode)
+(add-hook 'c-mode-hook     #'company-mode)
+(add-hook 'irony-mode-hook #'irony-eldoc)
+(add-hook 'irony-mode-hook #'flycheck-irony-setup)
+(add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
+(add-to-list 'company-backends #'company-irony)
+(add-to-list 'company-backends #'company-irony-c-headers)
+
 ;; customizations
 (custom-set-variables
  '(custom-file "~/Workspace/dots/emacs/custom.el")
@@ -178,11 +191,18 @@
      json-mode
      gnuplot-mode
      dockerfile-mode
+     meson-mode
 
      yaml-mode
      flycheck-yamllint
 
      rust-mode
+
+     irony
+     irony-eldoc
+     flycheck-irony
+     company-irony
+     company-irony-c-headers
      ))
 
  '(frame-resize-pixelwise t)

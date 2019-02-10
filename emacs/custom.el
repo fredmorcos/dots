@@ -74,12 +74,13 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (flycheck-yamllint which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode yaml-mode gnuplot-mode dockerfile-mode rust-mode)))
+    (meson-mode which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode yaml-mode flycheck-yamllint rust-mode)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
+ '(rust-always-locate-project-on-open t)
+ '(rust-format-on-save t)
  '(rust-indent-method-chain t)
- '(rust-indent-offset 2)
  '(rust-indent-where-clause t)
  '(save-place-file emacs-places-file)
  '(save-place-mode t)
