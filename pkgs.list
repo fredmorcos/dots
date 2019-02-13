@@ -262,6 +262,7 @@ pstoedit
 psutils
 pulseaudio-bluetooth
 python-beautifulsoup4
+python-brotlipy
 python-cairocffi
 python-cssselect
 python-discid
@@ -351,6 +352,7 @@ thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
 time
+tinc
 tldr
 tlp-rdw
 tlsh
