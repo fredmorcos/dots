@@ -33,6 +33,7 @@ bootchart
 bridge-utils
 bs1770gain
 bsdiff
+calf
 capnproto
 catdoc
 catdvi
@@ -203,6 +204,7 @@ lynx
 lzop
 make
 man-pages
+mda.lv2
 mediainfo
 mesa-demos
 mesa-vdpau
@@ -246,7 +248,9 @@ ovmf
 pacgraph
 pacman-contrib
 pacrunner
+pamixer
 papirus-icon-theme
+paprefs
 parallel
 patch
 patchelf
@@ -257,10 +261,16 @@ picard
 pigz
 pkgconf
 pkgdiff
+ponymix
 powertop
 pstoedit
 psutils
 pulseaudio-bluetooth
+pulseaudio-equalizer
+pulseaudio-equalizer-ladspa
+pulseaudio-zeroconf
+pulseeffects
+pulsemixer
 python-beautifulsoup4
 python-brotlipy
 python-cairocffi
@@ -475,5 +485,6 @@ yapf
 yay-bin
 youtube-dl
 z3
+zam-plugins
 zssh
 zzuf
