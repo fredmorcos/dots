@@ -198,6 +198,7 @@ logrotate
 lrzip
 lsb-release
 lsof
+lsp-plugins
 lutris
 lxdm-gtk3
 lynx
@@ -231,7 +232,9 @@ network-manager-applet
 networkmanager-openvpn
 networkmanager-strongswan
 nfs-utils
+noto-fonts-cjk
 noto-fonts-emoji
+noto-fonts-extra
 ntfs-3g
 numix-gtk-theme
 ocl-icd
