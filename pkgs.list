@@ -81,6 +81,7 @@ emacs-pkgbuild-mode
 enjarify
 entr
 eom
+ethtool
 evince
 exa
 exfat-utils
@@ -132,7 +133,6 @@ handbrake-cli
 haveged
 hddtemp
 hexchat
-hexyl-bin
 highlight
 hledger-ui
 hledger-web
@@ -293,6 +293,7 @@ python-pycryptodome
 python-pylast
 python-pyopenssl
 python-pystemmer
+python-pyudev
 python-requests-hawk
 python-tlsh
 python-virtualenv
@@ -381,7 +382,6 @@ transmission-gtk
 trash-cli
 ttf-hack
 tumbler
-tuned-git
 udftools
 unace
 unbound
