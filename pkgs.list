@@ -19,6 +19,7 @@ auctex
 autoconf-archive
 autogen
 automake
+awesome-terminal-fonts
 bash-completion
 bat
 beets
@@ -98,6 +99,7 @@ fwupd
 fwupdate
 fzf
 fzy
+geary
 geoip-database-extra
 geoip2-database
 gifski
@@ -107,7 +109,6 @@ glpk
 glyr
 gnome-calculator
 gnome-disk-utility
-gnome-keyring
 gnome-mpv
 gnome-terminal
 gnu-efi-libs
@@ -127,6 +128,7 @@ gstreamer-vaapi
 gtk-engine-murrine
 gtkglext
 gucharmap
+gvfs-google
 gvfs-mtp
 handbrake
 handbrake-cli
@@ -197,6 +199,7 @@ lockdown-ms
 logrotate
 lrzip
 lsb-release
+lsd
 lsof
 lsp-plugins
 lutris
@@ -265,6 +268,7 @@ pigz
 pkgconf
 pkgdiff
 ponymix
+powerline-fonts
 powertop
 pstoedit
 psutils
