@@ -59,9 +59,13 @@
   (autoload 'pet-mode pet-mode-file)
   (push '("\\.pet\\'" . pet-mode) auto-mode-alist))
 
+;; company
+(require 'company)
+(require 'company-tabnine)
+(add-to-list 'company-backends #'company-tabnine)
+
 ;; hledger
 (require 'hledger-mode)
-(require 'company)
 (push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
 (push '("\\.ledger\\'" . hledger-mode) auto-mode-alist)
 (add-to-list 'company-backends #'hledger-company)
@@ -181,9 +185,10 @@
      ht
      flycheck
      company
+     company-lsp
+     company-tabnine
      lsp-mode
      lsp-ui
-     company-lsp
      rmsbolt
 
      toml-mode
@@ -331,9 +336,17 @@
  '(sh-indentation 2)
  '(sh-basic-offset 2)
 
+ '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
+
  '(company-tooltip-align-annotations t)
  '(company-minimum-prefix-length 1)
- ;; '(company-idle-delay 0)
+ '(company-idle-delay 0)
+ '(company-show-numbers t)
+ '(company-frontends
+   '(company-tng-frontend
+     company-pseudo-tooltip-unless-just-one-frontend
+     company-echo-metadata-frontend
+     company-preview-if-just-one-frontend))
  ;; '(company-lsp-enable-recompletion t)
 
  ;; '(flycheck-display-errors-delay 0.3)

@@ -332,6 +332,7 @@ s-nail
 sbsigntools
 screen
 sdl2_gfx
+sdl2_ttf
 sdl_image
 shedskin
 simplescreenrecorder

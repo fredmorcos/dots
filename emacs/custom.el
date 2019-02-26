@@ -74,7 +74,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (meson-mode which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode yaml-mode flycheck-yamllint rust-mode)))
+    (company-tabnine which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
