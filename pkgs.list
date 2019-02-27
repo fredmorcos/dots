@@ -60,6 +60,7 @@ dav1d
 dblatex
 dbus-broker
 dconf-editor
+deepin-screen-recorder
 devilspie
 dex
 dhcpcd
@@ -202,6 +203,7 @@ lsb-release
 lsd
 lsof
 lsp-plugins
+luajit
 lutris
 lxdm-gtk3
 lynx
@@ -240,6 +242,7 @@ noto-fonts-emoji
 noto-fonts-extra
 ntfs-3g
 numix-gtk-theme
+obs-studio
 ocl-icd
 odt2txt
 openbsd-netcat
@@ -262,6 +265,7 @@ patch
 patchelf
 pavucontrol
 pbzip2
+peek
 perl-locale-gettext
 picard
 pigz
@@ -407,7 +411,6 @@ virt-manager
 virt-viewer
 virtualgl
 vlc
-vokoscreen
 vulkan-intel
 vulkan-tools
 w3m
