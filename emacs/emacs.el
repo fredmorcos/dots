@@ -146,11 +146,25 @@
 (add-hook 'c-mode-hook     #'irony-mode)
 (add-hook 'c-mode-hook     #'flycheck-mode)
 (add-hook 'c-mode-hook     #'company-mode)
+(add-hook
+ 'c-mode-hook
+ #'(lambda ()
+     (setq-default flycheck-cppcheck-standards '("c11" "posix"))))
 (add-hook 'irony-mode-hook #'irony-eldoc)
 (add-hook 'irony-mode-hook #'flycheck-irony-setup)
 (add-hook 'irony-mode-hook #'irony-cdb-autosetup-compile-options)
-(add-to-list 'company-backends #'company-irony)
-(add-to-list 'company-backends #'company-irony-c-headers)
+(add-hook
+ 'irony-mode-hook
+ #'(lambda ()
+     (add-to-list 'company-backends #'company-irony)
+     (add-to-list 'company-backends #'company-irony-c-headers)
+     (setq-default flycheck-cppcheck-checks '("all"))
+     (setq-default flycheck-cppcheck-suppressions '("missingIncludeSystem"))))
+(with-eval-after-load 'flycheck
+  (with-eval-after-load 'flycheck-irony
+    (add-to-list 'flycheck-disabled-checkers 'c/c++-clang)
+    (add-to-list 'flycheck-disabled-checkers 'c/c++-gcc)
+    (flycheck-add-next-checker 'irony '(t . c/c++-cppcheck))))
 
 ;; customizations
 (custom-set-variables
