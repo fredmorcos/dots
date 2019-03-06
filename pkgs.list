@@ -72,7 +72,6 @@ dialog
 diff-so-fancy
 diffoscope
 discount
-dnsmasq
 dnssec-tools
 docx2txt
 dtc
@@ -287,7 +286,6 @@ pulseaudio-equalizer-ladspa
 pulseaudio-zeroconf
 pulseeffects
 pulsemixer
-python-beautifulsoup4
 python-brotlipy
 python-cairocffi
 python-cssselect
@@ -300,7 +298,6 @@ python-hypothesis
 python-nose
 python-numpy
 python-olefile
-python-pexpect
 python-pyacoustid
 python-pycryptodome
 python-pylast
@@ -323,6 +320,7 @@ python2-lxml
 python2-numpy
 python2-pygments
 qemu
+qomui
 qopenvpn
 radamsa
 radare2
@@ -344,6 +342,7 @@ sdl2_gfx
 sdl2_ttf
 sdl_image
 shedskin
+shellcheck
 simplescreenrecorder
 skypeforlinux-stable-bin
 sleuthkit
@@ -356,7 +355,6 @@ strace
 stratis-cli
 stratisd
 stress
-stunnel
 subdl
 subdownloader
 sysstat
@@ -422,6 +420,7 @@ w3m
 wavemon
 whois
 whowatch
+wireguard-arch
 wireless_tools
 x11-ssh-askpass
 xclip
