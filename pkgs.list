@@ -19,7 +19,6 @@ auctex
 autoconf-archive
 autogen
 automake
-awesome-terminal-fonts
 bash-completion
 bat
 bear-git
@@ -275,6 +274,7 @@ picard
 pigz
 pkgconf
 pkgdiff
+pkgfile
 ponymix
 powerline-fonts
 powertop
