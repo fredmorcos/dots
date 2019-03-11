@@ -4,6 +4,7 @@ acpi_call
 acpica
 acpid
 afl-utils
+albert
 amd-ucode
 android-tools
 android-udev
@@ -99,7 +100,6 @@ foremost
 fossil
 frei0r-plugins
 fwupd
-fwupdate
 fzf
 fzy
 geary
@@ -111,6 +111,7 @@ git-lfs
 glpk
 glyr
 gnome-calculator
+gnome-dictionary
 gnome-disk-utility
 gnome-mpv
 gnome-terminal
@@ -226,6 +227,8 @@ mp3unicode
 mtd-utils
 mtools
 mtpfs
+mu
+muparser
 mutt
 mythes-de
 mythes-en
@@ -264,6 +267,7 @@ pamixer
 papirus-icon-theme
 paprefs
 parallel
+pastebinit
 patch
 patchelf
 pavucontrol
@@ -334,6 +338,7 @@ reiserfsprogs
 remake
 repo
 ripgrep
+rofi
 rustup
 s-nail
 sbsigntools
@@ -341,6 +346,7 @@ screen
 sdl2_gfx
 sdl2_ttf
 sdl_image
+semi
 shedskin
 shellcheck
 simplescreenrecorder
@@ -357,6 +363,7 @@ stratisd
 stress
 subdl
 subdownloader
+synapse
 sysstat
 systemd-sysvcompat
 t1utils
@@ -503,5 +510,6 @@ yay-bin
 youtube-dl
 z3
 zam-plugins
+zile
 zssh
 zzuf
