@@ -353,8 +353,8 @@
  '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
 
  '(company-tooltip-align-annotations t)
- '(company-minimum-prefix-length 1)
- '(company-idle-delay 0)
+ ;; '(company-minimum-prefix-length 1)
+ ;; '(company-idle-delay 0)
  '(company-show-numbers t)
  '(company-frontends
    '(company-tng-frontend
