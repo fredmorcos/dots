@@ -35,6 +35,7 @@ bootchart
 bridge-utils
 bs1770gain
 bsdiff
+bully
 calf
 capnproto
 catdoc
@@ -72,6 +73,7 @@ dialog
 diff-so-fancy
 diffoscope
 discount
+dmenu
 dnssec-tools
 docx2txt
 dtc
@@ -84,7 +86,6 @@ emacs-pkgbuild-mode
 enjarify
 entr
 eom
-ethtool
 evince
 exa
 exfat-utils
@@ -136,6 +137,7 @@ gvfs-google
 gvfs-mtp
 handbrake
 handbrake-cli
+hashcat
 haveged
 hddtemp
 hexchat
@@ -213,6 +215,7 @@ lynx
 lzop
 make
 man-pages
+marisa
 maven
 mda.lv2
 mediainfo
@@ -220,6 +223,7 @@ mesa-demos
 mesa-vdpau
 meson
 mg
+mhash
 minizip
 modemmanager
 movit
@@ -235,7 +239,6 @@ mythes-en
 mythes-fr
 nano
 ncdu
-net-tools
 netcdf
 netctl
 netperf
@@ -249,7 +252,6 @@ noto-fonts-extra
 ntfs-3g
 numix-gtk-theme
 obs-studio
-ocl-icd
 odt2txt
 openbsd-netcat
 opencl-mesa
@@ -267,6 +269,7 @@ pamixer
 papirus-icon-theme
 paprefs
 parallel
+pass
 pastebinit
 patch
 patchelf
@@ -276,6 +279,7 @@ peek
 perl-locale-gettext
 picard
 pigz
+pixiewps
 pkgconf
 pkgdiff
 pkgfile
@@ -326,11 +330,13 @@ python2-pygments
 qemu
 qomui
 qopenvpn
+qrencode
 radamsa
 radare2
 radvd
 re2
 realtime-privileges
+reaver
 recordmydesktop
 redshift
 refind-efi
@@ -356,7 +362,9 @@ slimmy-xfwm-theme-git
 smartmontools
 soundconverter
 source-highlight
+sparsehash
 squashfs-tools
+stardict
 strace
 stratis-cli
 stratisd
@@ -364,6 +372,7 @@ stress
 subdl
 subdownloader
 synapse
+sysprof
 sysstat
 systemd-sysvcompat
 t1utils
@@ -428,9 +437,8 @@ wavemon
 whois
 whowatch
 wireguard-arch
-wireless_tools
+wtf
 x11-ssh-askpass
-xclip
 xcompmgr
 xdelta3
 xdg-dbus-proxy
