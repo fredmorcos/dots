@@ -64,6 +64,7 @@ dblatex
 dbus-broker
 dconf-editor
 deepin-screen-recorder
+devhelp
 devilspie
 dex
 dhcpcd
@@ -76,6 +77,7 @@ discount
 dmenu
 dnssec-tools
 docx2txt
+doxygen
 dtc
 dwdiff
 easy-rsa
@@ -109,6 +111,7 @@ geoip2-database
 gifski
 gimp
 git-lfs
+glib2-docs
 glpk
 glyr
 gnome-calculator

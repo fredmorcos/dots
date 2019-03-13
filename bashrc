@@ -15,6 +15,8 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace/bin:$PATH"
 
+EDITOR='emacs -nw'
+
 # bind "set completion-ignore-case on"
 # bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
