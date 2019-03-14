@@ -269,6 +269,8 @@ pacgraph
 pacman-contrib
 pacrunner
 pamixer
+pandoc-citeproc
+pandoc-crossref
 papirus-icon-theme
 paprefs
 parallel
