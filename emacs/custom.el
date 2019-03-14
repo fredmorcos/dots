@@ -17,7 +17,11 @@
  '(colon-double-space t)
  '(column-number-mode t)
  '(comment-fill-column 70)
- '(company-minimum-prefix-length 1)
+ '(company-frontends
+   (quote
+    (company-tng-frontend company-pseudo-tooltip-unless-just-one-frontend company-echo-metadata-frontend company-preview-if-just-one-frontend)))
+ '(company-show-numbers t)
+ '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
  '(company-tooltip-align-annotations t)
  '(counsel-mode t)
  '(custom-file "~/Workspace/dots/emacs/custom.el")
@@ -74,7 +78,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (company-tabnine which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company lsp-mode lsp-ui company-lsp rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers)))
+    (git-gutter-fringe+ which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))

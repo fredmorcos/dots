@@ -64,6 +64,16 @@
 (require 'company-tabnine)
 (add-to-list 'company-backends #'company-tabnine)
 
+;; git status
+(require 'git-gutter-fringe+)
+(global-git-gutter+-mode)
+
+;; auto-reload
+(global-auto-revert-mode)
+
+;; linum
+(global-linum-mode)
+
 ;; hledger
 (require 'hledger-mode)
 (push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
@@ -189,7 +199,7 @@
      smex
      org-bullets
 
-     treemacs
+     git-gutter-fringe+
      yasnippet
      yasnippet-snippets
 
@@ -323,6 +333,8 @@
  '(org-indent-indentation-per-level 2)
  '(org-startup-folded t)
 
+ '(linum-format "%4d ")
+
  ;; '(rust-indent-offset 2)
  '(rust-indent-method-chain t)
  '(rust-always-locate-project-on-open t)
@@ -373,6 +385,7 @@
                        :foreground "gray20"
                        :background "gray80"))))
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
+ '(linum ((t (:foreground "grey80"))))
  '(hl-line ((t (:background "cornsilk"))))
  '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
  '(lsp-ui-doc-background ((t (:background "white smoke"))))
