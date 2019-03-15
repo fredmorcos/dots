@@ -387,6 +387,7 @@
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
  '(linum ((t (:foreground "grey80"))))
  '(hl-line ((t (:background "cornsilk"))))
+ '(git-gutter+-added ((t (:foreground "yellow green"))))
  '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
  '(lsp-ui-doc-background ((t (:background "white smoke"))))
  '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
