@@ -61,6 +61,7 @@
  '(ivy-use-virtual-buffers t)
  '(ivy-virtual-abbreviate (quote full))
  '(ivy-wrap t)
+ '(linum-format "%4d ")
  '(load-prefer-newer t)
  '(lsp-prefer-flymake nil)
  '(lsp-ui-doc-border "orange red")
@@ -78,7 +79,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (git-gutter-fringe+ which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets treemacs yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers)))
+    (which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets git-gutter-fringe+ yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
@@ -113,7 +114,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(git-gutter+-added ((t (:foreground "yellow green"))))
  '(hl-line ((t (:background "cornsilk"))))
+ '(linum ((t (:foreground "grey80"))))
  '(lsp-ui-doc-background ((t (:background "white smoke"))))
  '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
  '(lsp-ui-sideline-current-symbol ((t (:height 0.99 :weight ultra-bold :box (:line-width -1 :color "dim gray" :style nil) :foreground "dim gray"))))

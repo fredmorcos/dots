@@ -11,6 +11,7 @@
 (cua-selection-mode 1)
 (global-hl-line-mode t)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
+(global-set-key (kbd "C-z") #'bury-buffer)
 
 ;; ivy, counsel, etc...
 (add-hook
@@ -387,6 +388,9 @@
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
  '(linum ((t (:foreground "grey80"))))
  '(hl-line ((t (:background "cornsilk"))))
+ '(show-paren-match ((t (:background "deep sky blue"))))
+ '(show-paren-match-expression ((t (:background "deep sky blue"))))
+ '(show-paren-mismatch ((t (:background "light salmon"))))
  '(git-gutter+-added ((t (:foreground "yellow green"))))
  '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
  '(lsp-ui-doc-background ((t (:background "white smoke"))))
