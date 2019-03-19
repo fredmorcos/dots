@@ -47,10 +47,10 @@
         <value type="string" value="thunar"/>
         <value type="string" value="vokoscreen"/>
         <value type="string" value="transmission"/>
-        <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="synapse"/>
         <value type="string" value="hexchat"/>
         <value type="string" value="simplescreenrecorder"/>
+        <value type="string" value="xfce4-power-manager"/>
       </property>
       <property name="show-frame" type="bool" value="false"/>
       <property name="size-max" type="uint" value="24"/>
