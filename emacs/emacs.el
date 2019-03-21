@@ -273,6 +273,8 @@
      flycheck-irony
      company-irony
      company-irony-c-headers
+     cquery
+     ccls
 
      z3-mode
      boogie-friends

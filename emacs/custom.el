@@ -17,9 +17,7 @@
  '(colon-double-space t)
  '(column-number-mode t)
  '(comment-fill-column 70)
- '(company-frontends
-   (quote
-    (company-tng-frontend company-pseudo-tooltip-unless-just-one-frontend company-echo-metadata-frontend company-preview-if-just-one-frontend)))
+ '(company-idle-delay 0.2)
  '(company-show-numbers t)
  '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
  '(company-tooltip-align-annotations t)
@@ -27,6 +25,8 @@
  '(custom-file "~/Workspace/dots/emacs/custom.el")
  '(default-justification (quote left))
  '(delete-old-versions t)
+ '(display-line-numbers-grow-only t)
+ '(display-line-numbers-width-start t)
  '(ediff-split-window-function (function split-window-horizontally))
  '(ediff-window-setup-function (function ediff-setup-windows-plain))
  '(eldoc-echo-area-use-multiline-p t)
@@ -61,7 +61,6 @@
  '(ivy-use-virtual-buffers t)
  '(ivy-virtual-abbreviate (quote full))
  '(ivy-wrap t)
- '(linum-format "%4d ")
  '(load-prefer-newer t)
  '(lsp-prefer-flymake nil)
  '(lsp-ui-doc-border "orange red")
@@ -79,7 +78,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets git-gutter-fringe+ yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers)))
+    (ccls cquery which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets git-gutter-fringe+ yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers z3-mode boogie-friends)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
@@ -114,12 +113,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Hack" :height 120))))
  '(git-gutter+-added ((t (:foreground "yellow green"))))
  '(hl-line ((t (:background "cornsilk"))))
- '(linum ((t (:foreground "grey80"))))
+ '(line-number ((t (:foreground "grey80"))))
+ '(line-number-current-line ((t (:foreground "grey60" :background "cornsilk"))))
  '(lsp-ui-doc-background ((t (:background "white smoke"))))
  '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
  '(lsp-ui-sideline-current-symbol ((t (:height 0.99 :weight ultra-bold :box (:line-width -1 :color "dim gray" :style nil) :foreground "dim gray"))))
  '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil) :foreground "gray20" :background "gray80"))))
  '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
- '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face))))))
+ '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+ '(show-paren-match ((t (:background "powder blue"))))
+ '(show-paren-match-expression ((t (:background "powder blue"))))
+ '(show-paren-mismatch ((t (:background "light salmon")))))
