@@ -42,6 +42,7 @@ capnproto
 catdoc
 catdvi
 ccache
+ccls
 cdrdao
 cdrtools
 cgdb
@@ -78,6 +79,7 @@ docx2txt
 dtc
 dwdiff
 easy-rsa
+easytag
 ebtables
 eclipse-java
 efitools
@@ -253,7 +255,6 @@ opencl-mesa
 openpyn-nordvpn
 oprofile
 optipng
-opusfile
 os-prober
 ostree
 ovmf
@@ -312,6 +313,7 @@ python-pyudev
 python-requests-hawk
 python-tlsh
 python-virtualenv
+python-wikipedia
 python-xdg
 python-zeroconf
 python2-beautifulsoup4
