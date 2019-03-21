@@ -4,14 +4,86 @@
 
 ;; -*- lexical-binding: t; -*-
 
-(package-initialize)
-(set-face-attribute 'default nil :height 120)
+;; (call-interactively 'profiler-start)
+
+(defvar old-gc-cons-threshold gc-cons-threshold)
+(setq gc-cons-threshold 100000000)
+
+(setq vc-handled-backends nil)
+
+(defvar old-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
+(defvar package-thread (make-thread (lambda () (package-initialize))))
+
+(custom-set-faces
+ '(default ((t (:family "Hack" :height 120))))
+ '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
+                       :foreground "gray20"
+                       :background "gray80"))))
+ '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
+ '(line-number ((t (:foreground "grey80"))))
+ '(line-number-current-line ((t (:foreground "grey60" :background "cornsilk"))))
+ '(hl-line ((t (:background "cornsilk"))))
+ '(show-paren-match ((t (:background "powder blue"))))
+ '(show-paren-match-expression ((t (:background "powder blue"))))
+ '(show-paren-mismatch ((t (:background "light salmon"))))
+ '(git-gutter+-added ((t (:foreground "yellow green"))))
+ '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+ '(lsp-ui-doc-background ((t (:background "white smoke"))))
+ '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
+ '(lsp-ui-sideline-current-symbol
+   ((t (:height 0.99 :weight ultra-bold :box
+                (:line-width -1 :color "dim gray" :style nil)
+                :foreground "dim gray")))))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
 (cua-selection-mode 1)
 (global-hl-line-mode t)
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 (global-set-key (kbd "C-z") #'bury-buffer)
+(global-auto-revert-mode)
+(electric-pair-mode)
+(electric-indent-mode)
+(electric-quote-mode)
+(electric-layout-mode)
+(global-display-line-numbers-mode)
+
+;; file positions, backups, etc...
+(defvar backups-thread
+  (make-thread
+   (lambda ()
+     (progn
+       (require 'saveplace)
+       (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
+       (defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
+       (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
+       (defconst emacs-places-file (concat user-emacs-directory "places"))
+       (defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
+       (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
+       (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
+       (make-directory emacs-autosaves-dir t)
+       (make-directory emacs-backups-dir t)))))
+
+;; dired
+(add-hook 'dired-mode-hook #'auto-revert-mode)
+(add-hook 'dired-mode-hook  'dired-hide-details-mode)
+
+;; flyspell
+(add-hook 'flyspell-mode-hook #'flyspell-buffer)
+
+;; org mode
+(add-hook 'org-mode-hook  'org-indent-mode)
+(add-hook 'org-mode-hook  'org-bullets-mode)
+(add-hook 'org-mode-hook #'flyspell-buffer)
+(add-hook
+ 'org-mode-hook
+ #'(lambda ()
+     (setq-local fill-column 70)
+     (add-hook 'after-save-hook #'flyspell-buffer nil t)))
+
+(thread-join package-thread)
 
 ;; ivy, counsel, etc...
 (add-hook
@@ -32,22 +104,13 @@
 (global-set-key (kbd "M-p") #'fzf-git-files)
 (global-set-key (kbd "M-P") #'fzf-git-grep)
 
-;; file positions, backups, etc...
-(require 'saveplace)
-(defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
-(defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
-(defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
-(defconst emacs-places-file (concat user-emacs-directory "places"))
-(defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
-(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
-(make-directory emacs-autosaves-dir t)
-(make-directory emacs-backups-dir t)
-
 ;; yasnippet
 (require 'yasnippet)
-(push "~/Workspace/dots/emacs/snippets" yas-snippet-dirs)
-(yas-reload-all)
+(defvar yasnippet-thread
+  (lambda ()
+    (progn
+      (push "~/Workspace/dots/emacs/snippets" yas-snippet-dirs)
+      (yas-reload-all))))
 
 ;; latex
 (load "auctex.el")
@@ -63,17 +126,11 @@
 ;; company
 (require 'company)
 (require 'company-tabnine)
-(add-to-list 'company-backends #'company-tabnine)
+(push #'company-tabnine company-backends)
 
 ;; git status
 (require 'git-gutter-fringe+)
 (global-git-gutter+-mode)
-
-;; auto-reload
-(global-auto-revert-mode)
-
-;; linum
-(global-linum-mode)
 
 ;; hledger
 (require 'hledger-mode)
@@ -111,10 +168,6 @@
 (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
 (push '("/PKGBUILD$" . pkgbuild-mode) auto-mode-alist)
 
-;; dired
-(add-hook 'dired-mode-hook #'auto-revert-mode)
-(add-hook 'dired-mode-hook  'dired-hide-details-mode)
-
 ;; emacs lisp
 (push '("\\emacs\\'" . emacs-lisp-mode) auto-mode-alist)
 
@@ -122,19 +175,6 @@
 (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 (add-hook 'emacs-lisp-mode-hook #'company-mode)
-
-;; flyspell
-(add-hook 'flyspell-mode-hook #'flyspell-buffer)
-
-;; org mode
-(add-hook 'org-mode-hook  'org-indent-mode)
-(add-hook 'org-mode-hook  'org-bullets-mode)
-(add-hook 'org-mode-hook #'flyspell-buffer)
-(add-hook
- 'org-mode-hook
- #'(lambda ()
-     (setq-local fill-column 70)
-     (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
 ;; lsp
 (require 'lsp)
@@ -233,6 +273,9 @@
      flycheck-irony
      company-irony
      company-irony-c-headers
+
+     z3-mode
+     boogie-friends
      ))
 
  '(frame-resize-pixelwise t)
@@ -334,7 +377,8 @@
  '(org-indent-indentation-per-level 2)
  '(org-startup-folded t)
 
- '(linum-format "%4d ")
+ '(display-line-numbers-grow-only t)
+ '(display-line-numbers-width-start t)
 
  ;; '(rust-indent-offset 2)
  '(rust-indent-method-chain t)
@@ -367,13 +411,13 @@
 
  '(company-tooltip-align-annotations t)
  ;; '(company-minimum-prefix-length 1)
- ;; '(company-idle-delay 0)
+ '(company-idle-delay 0.2)
  '(company-show-numbers t)
- '(company-frontends
-   '(company-tng-frontend
-     company-pseudo-tooltip-unless-just-one-frontend
-     company-echo-metadata-frontend
-     company-preview-if-just-one-frontend))
+ ;; '(company-frontends
+ ;;   '(company-tng-frontend
+ ;;     company-pseudo-tooltip-unless-just-one-frontend
+ ;;     company-echo-metadata-frontend
+ ;;     company-preview-if-just-one-frontend))
  ;; '(company-lsp-enable-recompletion t)
 
  ;; '(flycheck-display-errors-delay 0.3)
@@ -381,24 +425,11 @@
  '(ediff-split-window-function #'split-window-horizontally)
  '(ediff-window-setup-function #'ediff-setup-windows-plain))
 
-(custom-set-faces
- '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
-                       :foreground "gray20"
-                       :background "gray80"))))
- '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
- '(linum ((t (:foreground "grey80"))))
- '(hl-line ((t (:background "cornsilk"))))
- '(show-paren-match ((t (:background "deep sky blue"))))
- '(show-paren-match-expression ((t (:background "deep sky blue"))))
- '(show-paren-mismatch ((t (:background "light salmon"))))
- '(git-gutter+-added ((t (:foreground "yellow green"))))
- '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
- '(lsp-ui-doc-background ((t (:background "white smoke"))))
- '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
- '(lsp-ui-sideline-current-symbol
-   ((t (:height 0.99 :weight ultra-bold :box
-                (:line-width -1 :color "dim gray" :style nil)
-                :foreground "dim gray")))))
+(setq file-name-handler-alist old-file-name-handler-alist)
+
+(setq gc-cons-threshold old-gc-cons-threshold)
+
+;; (call-interactively 'profiler-report)
 
 (provide '.emacs)
 ;;; .emacs ends here
