@@ -51,11 +51,11 @@
 (global-display-line-numbers-mode)
 
 ;; file positions, backups, etc...
+(require 'saveplace)
 (defvar backups-thread
   (make-thread
    (lambda ()
      (progn
-       (require 'saveplace)
        (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
        (defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
        (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
@@ -113,8 +113,9 @@
       (yas-reload-all))))
 
 ;; latex
-(load "auctex.el")
-(load "preview-latex.el")
+(when (string-equal (system-name) "axon")
+  (load "auctex.el")
+  (load "preview-latex.el"))
 (add-hook 'LaTeX-mode-hook #'flyspell-mode)
 
 ;; PET
@@ -125,8 +126,8 @@
 
 ;; company
 (require 'company)
-(require 'company-tabnine)
-(push #'company-tabnine company-backends)
+;; (require 'company-tabnine)
+;; (push #'company-tabnine company-backends)
 
 ;; git status
 (require 'git-gutter-fringe+)
@@ -216,6 +217,8 @@
     (add-to-list 'flycheck-disabled-checkers 'c/c++-clang)
     (add-to-list 'flycheck-disabled-checkers 'c/c++-gcc)
     (flycheck-add-next-checker 'irony '(t . c/c++-cppcheck))))
+
+(thread-join backups-thread)
 
 ;; customizations
 (custom-set-variables
@@ -409,12 +412,12 @@
  '(sh-indentation 2)
  '(sh-basic-offset 2)
 
- '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
+ ;; '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
 
  '(company-tooltip-align-annotations t)
  ;; '(company-minimum-prefix-length 1)
  '(company-idle-delay 0.2)
- '(company-show-numbers t)
+ ;; '(company-show-numbers t)
  ;; '(company-frontends
  ;;   '(company-tng-frontend
  ;;     company-pseudo-tooltip-unless-just-one-frontend
