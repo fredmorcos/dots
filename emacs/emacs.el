@@ -16,46 +16,46 @@
 
 (defvar package-thread (make-thread (lambda () (package-initialize))))
 
-(custom-set-faces
- '(default ((t (:family "Hack" :height 120))))
- '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
-                       :foreground "gray20"
-                       :background "gray80"))))
- '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
- '(line-number ((t (:foreground "grey80"))))
- '(line-number-current-line ((t (:foreground "grey60" :background "cornsilk"))))
- '(hl-line ((t (:background "cornsilk"))))
- '(show-paren-match ((t (:background "powder blue"))))
- '(show-paren-match-expression ((t (:background "powder blue"))))
- '(show-paren-mismatch ((t (:background "light salmon"))))
- '(git-gutter+-added ((t (:foreground "yellow green"))))
- '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
- '(lsp-ui-doc-background ((t (:background "white smoke"))))
- '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
- '(lsp-ui-sideline-current-symbol
-   ((t (:height 0.99 :weight ultra-bold :box
-                (:line-width -1 :color "dim gray" :style nil)
-                :foreground "dim gray")))))
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-(windmove-default-keybindings)
-(cua-selection-mode 1)
-(global-hl-line-mode t)
-(add-hook 'before-save-hook #'delete-trailing-whitespace)
-(global-set-key (kbd "C-z") #'bury-buffer)
-(global-auto-revert-mode)
-(electric-pair-mode)
-(electric-indent-mode)
-(electric-quote-mode)
-(electric-layout-mode)
-(global-display-line-numbers-mode)
-
-;; file positions, backups, etc...
-(require 'saveplace)
-(defvar backups-thread
+(defvar background-thread
   (make-thread
    (lambda ()
      (progn
+       (custom-set-faces
+        '(default ((t (:family "Hack" :height 120))))
+        '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
+                              :foreground "gray20"
+                              :background "gray80"))))
+        '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
+        '(line-number ((t (:foreground "grey80"))))
+        '(line-number-current-line ((t (:foreground "grey60" :background "cornsilk"))))
+        '(hl-line ((t (:background "cornsilk"))))
+        '(show-paren-match ((t (:background "powder blue"))))
+        '(show-paren-match-expression ((t (:background "powder blue"))))
+        '(show-paren-mismatch ((t (:background "light salmon"))))
+        '(git-gutter+-added ((t (:foreground "yellow green"))))
+        '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+        '(lsp-ui-doc-background ((t (:background "white smoke"))))
+        '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
+        '(lsp-ui-sideline-current-symbol
+          ((t (:height 0.99 :weight ultra-bold :box
+                       (:line-width -1 :color "dim gray" :style nil)
+                       :foreground "dim gray")))))
+
+       (defalias 'yes-or-no-p 'y-or-n-p)
+       (windmove-default-keybindings)
+       (cua-selection-mode 1)
+       (global-hl-line-mode t)
+       (add-hook 'before-save-hook #'delete-trailing-whitespace)
+       (global-set-key (kbd "C-z") #'bury-buffer)
+       (global-auto-revert-mode)
+       (electric-pair-mode)
+       (electric-indent-mode)
+       (electric-quote-mode)
+       (electric-layout-mode)
+       (global-display-line-numbers-mode)
+
+       ;; file positions, backups, etc...
+       (require 'saveplace)
        (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
        (defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
        (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
@@ -64,24 +64,24 @@
        (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
        (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
        (make-directory emacs-autosaves-dir t)
-       (make-directory emacs-backups-dir t)))))
+       (make-directory emacs-backups-dir t)
 
-;; dired
-(add-hook 'dired-mode-hook #'auto-revert-mode)
-(add-hook 'dired-mode-hook  'dired-hide-details-mode)
+       ;; dired
+       (add-hook 'dired-mode-hook #'auto-revert-mode)
+       (add-hook 'dired-mode-hook  'dired-hide-details-mode)
 
-;; flyspell
-(add-hook 'flyspell-mode-hook #'flyspell-buffer)
+       ;; flyspell
+       (add-hook 'flyspell-mode-hook #'flyspell-buffer)
 
-;; org mode
-(add-hook 'org-mode-hook  'org-indent-mode)
-(add-hook 'org-mode-hook  'org-bullets-mode)
-(add-hook 'org-mode-hook #'flyspell-buffer)
-(add-hook
- 'org-mode-hook
- #'(lambda ()
-     (setq-local fill-column 70)
-     (add-hook 'after-save-hook #'flyspell-buffer nil t)))
+       ;; org mode
+       (add-hook 'org-mode-hook  'org-indent-mode)
+       (add-hook 'org-mode-hook  'org-bullets-mode)
+       (add-hook 'org-mode-hook #'flyspell-buffer)
+       (add-hook
+        'org-mode-hook
+        #'(lambda ()
+            (setq-local fill-column 70)
+            (add-hook 'after-save-hook #'flyspell-buffer nil t)))))))
 
 (thread-join package-thread)
 
@@ -218,7 +218,7 @@
     (add-to-list 'flycheck-disabled-checkers 'c/c++-gcc)
     (flycheck-add-next-checker 'irony '(t . c/c++-cppcheck))))
 
-(thread-join backups-thread)
+(thread-join background-thread)
 
 ;; customizations
 (custom-set-variables
