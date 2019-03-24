@@ -14,7 +14,38 @@
 (defvar old-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
-(defvar package-thread (make-thread (lambda () (package-initialize))))
+(defvar package-thread
+  (make-thread
+   (lambda ()
+     (progn
+       (package-initialize)
+
+       ;; ivy, counsel, etc...
+       (add-hook
+        'ivy-mode-hook
+        '(lambda ()
+           (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+           (ivy-set-display-transformer 'ivy-switch-buffer
+                                        'ivy-rich-switch-buffer-transformer)))
+
+       (global-set-key (kbd "C-s")     #'swiper)
+       (global-set-key (kbd "C-r")     #'swiper)
+       (global-set-key (kbd "M-x")     #'counsel-M-x)
+       (global-set-key (kbd "C-x C-f") #'counsel-find-file)
+
+       (setq-default ivy-initial-inputs-alist nil)
+
+       ;; fuzzy find files
+       (global-set-key (kbd "M-p") #'fzf-git-files)
+       (global-set-key (kbd "M-P") #'fzf-git-grep)
+
+       ;; emacs lisp
+       (push '("\\emacs\\'" . emacs-lisp-mode) auto-mode-alist)
+
+       (add-hook 'emacs-lisp-mode-hook #'checkdoc-minor-mode)
+       (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+       (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
+       (add-hook 'emacs-lisp-mode-hook #'company-mode)))))
 
 (defvar background-thread
   (make-thread
@@ -81,48 +112,34 @@
         'org-mode-hook
         #'(lambda ()
             (setq-local fill-column 70)
-            (add-hook 'after-save-hook #'flyspell-buffer nil t)))))))
+            (add-hook 'after-save-hook #'flyspell-buffer nil t)))
+
+       ;; latex
+       (when (string-equal (system-name) "axon")
+         (load "auctex.el")
+         (load "preview-latex.el"))
+       (add-hook 'LaTeX-mode-hook #'flyspell-mode)
+
+       ;; PET
+       (defconst pet-mode-file "~/Workspace/dots/emacs/pet-mode.el")
+       (when (file-exists-p pet-mode-file)
+         (autoload 'pet-mode pet-mode-file)
+         (push '("\\.pet\\'" . pet-mode) auto-mode-alist))
+
+       ;; pkgbuilds
+       (autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
+       (push '("/PKGBUILD$" . pkgbuild-mode) auto-mode-alist)))))
 
 (thread-join package-thread)
-
-;; ivy, counsel, etc...
-(add-hook
- 'ivy-mode-hook
- '(lambda ()
-    (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
-    (ivy-set-display-transformer 'ivy-switch-buffer
-                                 'ivy-rich-switch-buffer-transformer)))
-
-(global-set-key (kbd "C-s")     #'swiper)
-(global-set-key (kbd "C-r")     #'swiper)
-(global-set-key (kbd "M-x")     #'counsel-M-x)
-(global-set-key (kbd "C-x C-f") #'counsel-find-file)
-
-(setq-default ivy-initial-inputs-alist nil)
-
-;; fuzzy find files
-(global-set-key (kbd "M-p") #'fzf-git-files)
-(global-set-key (kbd "M-P") #'fzf-git-grep)
 
 ;; yasnippet
 (require 'yasnippet)
 (defvar yasnippet-thread
-  (lambda ()
-    (progn
-      (push "~/Workspace/dots/emacs/snippets" yas-snippet-dirs)
-      (yas-reload-all))))
-
-;; latex
-(when (string-equal (system-name) "axon")
-  (load "auctex.el")
-  (load "preview-latex.el"))
-(add-hook 'LaTeX-mode-hook #'flyspell-mode)
-
-;; PET
-(defconst pet-mode-file "~/Workspace/dots/emacs/pet-mode.el")
-(when (file-exists-p pet-mode-file)
-  (autoload 'pet-mode pet-mode-file)
-  (push '("\\.pet\\'" . pet-mode) auto-mode-alist))
+  (make-thread
+   (lambda ()
+     (progn
+       (push "~/Workspace/dots/emacs/snippets" yas-snippet-dirs)
+       (yas-reload-all)))))
 
 ;; company
 (require 'company)
@@ -133,50 +150,6 @@
 (require 'git-gutter-fringe+)
 (global-git-gutter+-mode)
 
-;; hledger
-(require 'hledger-mode)
-(push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
-(push '("\\.ledger\\'" . hledger-mode) auto-mode-alist)
-(add-to-list 'company-backends #'hledger-company)
-(add-hook 'hledger-mode-hook #'company-mode)
-(add-hook 'hledger-mode-hook #'yas-minor-mode)
-
-(defun hledger/next-entry ()
-  "Move to next entry and pulse."
-  (interactive)
-  (hledger-next-or-new-entry)
-  (hledger-pulse-momentary-current-entry))
-
-(defun hledger/prev-entry ()
-  "Move to last entry and pulse."
-  (interactive)
-  (hledger-backward-entry)
-  (hledger-pulse-momentary-current-entry))
-
-(add-hook
- 'hledger-mode-hook
- #'(lambda ()
-     (define-key hledger-mode-map (kbd "M-p")   #'hledger/prev-entry)
-     (define-key hledger-mode-map (kbd "M-n")   #'hledger/next-entry)
-     (define-key hledger-mode-map (kbd "C-c j") #'hledger-run-command)
-     (define-key hledger-mode-map (kbd "C-c e") #'hledger-jentry)))
-
-(add-hook
- 'hledger-mode-hook
- #'(lambda () (toggle-truncate-lines t)))
-
-;; pkgbuilds
-(autoload 'pkgbuild-mode "pkgbuild-mode.el" "PKGBUILD mode." t)
-(push '("/PKGBUILD$" . pkgbuild-mode) auto-mode-alist)
-
-;; emacs lisp
-(push '("\\emacs\\'" . emacs-lisp-mode) auto-mode-alist)
-
-(add-hook 'emacs-lisp-mode-hook #'checkdoc-minor-mode)
-(add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
-(add-hook 'emacs-lisp-mode-hook #'company-mode)
-
 ;; lsp
 (require 'lsp)
 (require 'lsp-clients)
@@ -186,10 +159,6 @@
   [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
 (define-key lsp-ui-mode-map
   [remap xref-find-references] #'lsp-ui-peek-find-references)
-
-;; rust
-(add-hook 'rust-mode-hook #'lsp)
-(add-hook 'rust-mode-hook #'yas-minor-mode)
 
 ;; c/c++
 (add-hook 'c++-mode-hook   #'irony-mode)
@@ -218,7 +187,44 @@
     (add-to-list 'flycheck-disabled-checkers 'c/c++-gcc)
     (flycheck-add-next-checker 'irony '(t . c/c++-cppcheck))))
 
-(thread-join background-thread)
+;; hledger
+(require 'hledger-mode)
+(push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
+(push '("\\.ledger\\'" . hledger-mode) auto-mode-alist)
+(add-to-list 'company-backends #'hledger-company)
+(add-hook 'hledger-mode-hook #'company-mode)
+
+(defun hledger/next-entry ()
+  "Move to next entry and pulse."
+  (interactive)
+  (hledger-next-or-new-entry)
+  (hledger-pulse-momentary-current-entry))
+
+(defun hledger/prev-entry ()
+  "Move to last entry and pulse."
+  (interactive)
+  (hledger-backward-entry)
+  (hledger-pulse-momentary-current-entry))
+
+(add-hook
+ 'hledger-mode-hook
+ #'(lambda ()
+     (define-key hledger-mode-map (kbd "M-p")   #'hledger/prev-entry)
+     (define-key hledger-mode-map (kbd "M-n")   #'hledger/next-entry)
+     (define-key hledger-mode-map (kbd "C-c j") #'hledger-run-command)
+     (define-key hledger-mode-map (kbd "C-c e") #'hledger-jentry)))
+
+(add-hook
+ 'hledger-mode-hook
+ #'(lambda () (toggle-truncate-lines t)))
+
+;; rust
+(add-hook 'rust-mode-hook #'lsp)
+
+;; (thread-join background-thread)
+(thread-join yasnippet-thread)
+(add-hook 'hledger-mode-hook #'yas-minor-mode)
+(add-hook 'rust-mode-hook #'yas-minor-mode)
 
 ;; customizations
 (custom-set-variables
