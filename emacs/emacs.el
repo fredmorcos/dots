@@ -39,11 +39,6 @@
        (global-set-key (kbd "M-p") #'fzf-git-files)
        (global-set-key (kbd "M-P") #'fzf-git-grep)
 
-       ;; company
-       (add-hook 'company-mode-hook #'company-box-mode)
-       ;; (require 'company-tabnine)
-       ;; (push #'company-tabnine company-backends)
-
        ;; emacs lisp
        (push '("\\emacs\\'" . emacs-lisp-mode) auto-mode-alist)
 
@@ -142,6 +137,12 @@
        (push '("/PKGBUILD$" . pkgbuild-mode) auto-mode-alist)))))
 
 (thread-join package-thread)
+
+;; company
+(require 'company)
+(add-hook 'company-mode-hook #'company-box-mode)
+;; (require 'company-tabnine)
+;; (push #'company-tabnine company-backends)
 
 ;; iedit
 (require 'iedit)
