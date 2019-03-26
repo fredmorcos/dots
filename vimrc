@@ -10,6 +10,9 @@ set ignorecase
 set smartcase
 set autoindent
 set ruler
+set colorcolumn=80
+
+set mouse=r
 
 " turn off search highlight with ,SPC
 nnoremap <leader><space> :nohlsearch<CR>

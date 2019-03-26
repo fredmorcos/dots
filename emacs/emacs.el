@@ -39,13 +39,23 @@
        (global-set-key (kbd "M-p") #'fzf-git-files)
        (global-set-key (kbd "M-P") #'fzf-git-grep)
 
+       ;; company
+       (add-hook 'company-mode-hook #'company-box-mode)
+       ;; (require 'company-tabnine)
+       ;; (push #'company-tabnine company-backends)
+
        ;; emacs lisp
        (push '("\\emacs\\'" . emacs-lisp-mode) auto-mode-alist)
 
        (add-hook 'emacs-lisp-mode-hook #'checkdoc-minor-mode)
        (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
        (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
-       (add-hook 'emacs-lisp-mode-hook #'company-mode)))))
+       (add-hook 'emacs-lisp-mode-hook #'company-mode)
+
+       ;; symbol-overlay
+       (add-hook 'prog-mode-hook #'symbol-overlay-mode)
+       (global-set-key (kbd "M->") #'symbol-overlay-jump-next)
+       (global-set-key (kbd "M-<") #'symbol-overlay-jump-prev)))))
 
 (defvar background-thread
   (make-thread
@@ -57,6 +67,7 @@
                               :foreground "gray20"
                               :background "gray80"))))
         '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
+        '(symbol-overlay-default-face ((t (:background "honeydew2"))))
         '(line-number ((t (:foreground "grey80"))))
         '(line-number-current-line ((t (:foreground "grey60" :background "cornsilk"))))
         '(hl-line ((t (:background "cornsilk"))))
@@ -78,12 +89,12 @@
        (global-hl-line-mode t)
        (add-hook 'before-save-hook #'delete-trailing-whitespace)
        (global-set-key (kbd "C-z") #'bury-buffer)
-       (global-auto-revert-mode)
+       (global-auto-revert-mode t)
        (electric-pair-mode)
        (electric-indent-mode)
        (electric-quote-mode)
        (electric-layout-mode)
-       (global-display-line-numbers-mode)
+       (global-display-line-numbers-mode t)
 
        ;; file positions, backups, etc...
        (require 'saveplace)
@@ -132,6 +143,16 @@
 
 (thread-join package-thread)
 
+;; iedit
+(require 'iedit)
+
+;; multiple-cursors
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c C-v")       #'mc/edit-lines)
+(global-set-key (kbd "C->")           #'mc/mark-next-like-this)
+(global-set-key (kbd "C-<")           #'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-<mouse-1>") #'mc/add-cursor-on-click)
+
 ;; yasnippet
 (require 'yasnippet)
 (defvar yasnippet-thread
@@ -140,11 +161,6 @@
      (progn
        (push "~/Workspace/dots/emacs/snippets" yas-snippet-dirs)
        (yas-reload-all)))))
-
-;; company
-(require 'company)
-;; (require 'company-tabnine)
-;; (push #'company-tabnine company-backends)
 
 ;; git status
 (require 'git-gutter-fringe+)
@@ -248,8 +264,11 @@
      counsel
      smex
      org-bullets
-
      git-gutter-fringe+
+     symbol-overlay
+     multiple-cursors
+     iedit
+
      yasnippet
      yasnippet-snippets
 
@@ -261,6 +280,7 @@
      company
      company-lsp
      company-tabnine
+     company-box
      lsp-mode
      lsp-ui
      rmsbolt
@@ -377,6 +397,8 @@
 
  '(which-key-mode t)
 
+ '(symbol-overlay-idle-time 0.1)
+
  ;; '(flyspell-delay 0.2)
 
  '(hledger-comments-column 2)
@@ -419,6 +441,8 @@
  '(sh-basic-offset 2)
 
  ;; '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
+
+ '(company-box-show-single-candidate t)
 
  '(company-tooltip-align-annotations t)
  ;; '(company-minimum-prefix-length 1)

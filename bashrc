@@ -16,6 +16,7 @@ PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace/bin:$PATH"
 
 EDITOR='emacs -nw'
+GIT_EDITOR=vim
 
 # bind "set completion-ignore-case on"
 # bind "set completion-map-case on"
@@ -33,10 +34,14 @@ HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 
+export PS1 PATH EDITOR GIT_EDITOR HISTCONTROL HISTIGNORE
+
 shopt -s autocd
 shopt -s dirspell
 shopt -s cdspell
 
+alias ..='cd ..'
+alias ...='cd ../..'
 alias -- -='cd -'
 
 alias grep='grep --color'
@@ -54,7 +59,7 @@ alias cat='bat'
 alias fzf='fzf -e --color=light'
 alias diff='diff-so-fancy'
 
-alias ssh='kitty +kitten ssh'
+# alias ssh='kitty +kitten ssh'
 
 alias neuron_systemctl='ssh neuron sudo systemctl'
 alias neuron_reboot='neuron_systemctl reboot'
@@ -73,7 +78,7 @@ alias yt720='youtube-dl -f "[height<=720]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 dirdlsub() {
-	for i in *; do
+  for i in *; do
     echo "$i";
     dlsub "$i";
     echo "-----------------------------------------";
