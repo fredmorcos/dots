@@ -41,7 +41,6 @@
 
        ;; emacs lisp
        (push '("\\emacs\\'" . emacs-lisp-mode) auto-mode-alist)
-
        (add-hook 'emacs-lisp-mode-hook #'checkdoc-minor-mode)
        (add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
        (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
@@ -50,7 +49,10 @@
        ;; symbol-overlay
        (add-hook 'prog-mode-hook #'symbol-overlay-mode)
        (global-set-key (kbd "M->") #'symbol-overlay-jump-next)
-       (global-set-key (kbd "M-<") #'symbol-overlay-jump-prev)))))
+       (global-set-key (kbd "M-<") #'symbol-overlay-jump-prev)
+
+       ;; magit
+       (global-set-key (kbd "C-x g") 'magit-status)))))
 
 (defvar background-thread
   (make-thread
@@ -84,7 +86,7 @@
        (global-hl-line-mode t)
        (add-hook 'before-save-hook #'delete-trailing-whitespace)
        (global-set-key (kbd "C-z") #'bury-buffer)
-       (global-auto-revert-mode t)
+       ;; (global-auto-revert-mode t)
        (electric-pair-mode)
        (electric-indent-mode)
        (electric-quote-mode)
@@ -143,6 +145,10 @@
 (add-hook 'company-mode-hook #'company-box-mode)
 ;; (require 'company-tabnine)
 ;; (push #'company-tabnine company-backends)
+
+;; vdiff
+(require 'vdiff)
+(define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map)
 
 ;; iedit
 (require 'iedit)
@@ -269,6 +275,10 @@
      symbol-overlay
      multiple-cursors
      iedit
+
+     magit
+     vdiff
+     vdiff-magit
 
      yasnippet
      yasnippet-snippets
@@ -442,8 +452,6 @@
  '(sh-basic-offset 2)
 
  ;; '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
-
- '(company-box-show-single-candidate t)
 
  '(company-tooltip-align-annotations t)
  ;; '(company-minimum-prefix-length 1)
