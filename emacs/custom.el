@@ -1,3 +1,7 @@
+;;; custom -- custom emacs configs
+;;; Code:
+;;; Commentary:
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -128,3 +132,6 @@
  '(show-paren-match-expression ((t (:background "powder blue"))))
  '(show-paren-mismatch ((t (:background "light salmon"))))
  '(symbol-overlay-default-face ((t (:background "honeydew2")))))
+
+(provide 'custom)
+;;; custom.el ends here

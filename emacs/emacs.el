@@ -143,8 +143,6 @@
 ;; company
 (require 'company)
 (add-hook 'company-mode-hook #'company-box-mode)
-;; (require 'company-tabnine)
-;; (push #'company-tabnine company-backends)
 
 ;; vdiff
 (require 'vdiff)
@@ -244,7 +242,11 @@
 ;; rust
 (add-hook 'rust-mode-hook #'lsp)
 
-;; (thread-join background-thread)
+;; java
+(require 'lsp-java)
+(add-hook 'java-mode-hook #'lsp)
+
+;; yasnippet
 (thread-join yasnippet-thread)
 (add-hook 'hledger-mode-hook #'yas-minor-mode)
 (add-hook 'rust-mode-hook #'yas-minor-mode)
@@ -308,6 +310,8 @@
 
      rust-mode
 
+     lsp-java
+
      irony
      irony-eldoc
      flycheck-irony
@@ -341,8 +345,6 @@
  '(auto-hscroll-mode 'current-line)
  '(size-indication-mode t)
  '(show-paren-mode t)
- ;; '(show-paren-delay 0)
- ;; '(echo-keystrokes 0.1)
 
  '(load-prefer-newer t)
  '(savehist-mode t)
@@ -410,8 +412,6 @@
 
  '(symbol-overlay-idle-time 0.1)
 
- ;; '(flyspell-delay 0.2)
-
  '(hledger-comments-column 2)
  '(hledger-currency-string "EUR")
  '(hledger-jfile (expand-file-name "~/Expenses/Expenses.ledger"))
@@ -424,47 +424,26 @@
  '(display-line-numbers-grow-only t)
  '(display-line-numbers-width-start t)
 
- ;; '(rust-indent-offset 2)
  '(rust-indent-method-chain t)
  '(rust-always-locate-project-on-open t)
  '(rust-indent-where-clause t)
  '(rust-format-on-save t)
 
  '(lsp-prefer-flymake nil)
- ;; '(lsp-auto-guess-root t)
-
- ;; '(lsp-ui-doc-position 'at-point)
  '(lsp-ui-doc-include-signature t)
  '(lsp-ui-doc-border "orange red")
- ;; '(lsp-ui-flycheck-list-position 'bottom)
-
- ;; '(lsp-ui-sideline-enable nil)
- ;; '(lsp-ui-doc-enable nil)
- ;; '(lsp-ui-doc-border "orange red")
- ;; '(lsp-ui-doc-include-signature t)
- ;; '(lsp-ui-doc-position 'at-point)
- ;; '(lsp-ui-flycheck-list-position 'right)
+ '(lsp-ui-doc-use-webkit t)
+ '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-sideline-ignore-duplicate t)
+ '(lsp-ui-sideline-update-mode 'point)
 
  '(eldoc-echo-area-use-multiline-p t)
- ;; '(eldoc-idle-delay 2)
 
  '(sh-indentation 2)
  '(sh-basic-offset 2)
 
- ;; '(company-tabnine-binaries-folder "~/.emacs.d/tabnine")
-
  '(company-tooltip-align-annotations t)
- ;; '(company-minimum-prefix-length 1)
  '(company-idle-delay 0.2)
- ;; '(company-show-numbers t)
- ;; '(company-frontends
- ;;   '(company-tng-frontend
- ;;     company-pseudo-tooltip-unless-just-one-frontend
- ;;     company-echo-metadata-frontend
- ;;     company-preview-if-just-one-frontend))
- ;; '(company-lsp-enable-recompletion t)
-
- ;; '(flycheck-display-errors-delay 0.3)
 
  '(ediff-split-window-function #'split-window-horizontally)
  '(ediff-window-setup-function #'ediff-setup-windows-plain))
