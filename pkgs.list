@@ -15,18 +15,15 @@ aspell-de
 aspell-en
 aspell-fr
 atool
-auctex
 autoconf-archive
 autogen
 automake
 bash-completion
 bat
-bear-git
 beets
 biber
 binwalk
 bison
-bluez-firmware
 bluez-plugins
 bluez-tools
 bluez-utils
@@ -40,7 +37,6 @@ cabextract
 calf
 capnproto
 catdoc
-catdvi
 ccache
 ccls
 cdrdao
@@ -74,6 +70,7 @@ diff-so-fancy
 diffoscope
 discount
 dmenu
+dnsmasq
 dnssec-tools
 docx2txt
 dtc
@@ -129,7 +126,6 @@ gst-libav
 gst-plugins-ugly
 gst-python
 gst-transcoder
-gst-validate
 gstreamer-vaapi
 gtk-engine-murrine
 gtkglext
@@ -229,7 +225,6 @@ mp3unicode
 mtd-utils
 mtools
 mtpfs
-mu
 muparser
 mutt
 mythes-en
@@ -302,6 +297,7 @@ python-hypothesis
 python-nose
 python-numpy
 python-olefile
+python-pexpect
 python-pillow
 python-pyacoustid
 python-pycryptodome
@@ -325,7 +321,6 @@ python2-ipaddress
 python2-lxml
 python2-numpy
 python2-pygments
-qomui
 qopenvpn
 qrencode
 radamsa
@@ -366,6 +361,7 @@ strace
 stratis-cli
 stratisd
 stress
+stunnel
 subdl
 subdownloader
 sysprof
@@ -385,7 +381,6 @@ texlive-music
 texlive-pstricks
 texlive-publishers
 the_silver_searcher
-thermald
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
