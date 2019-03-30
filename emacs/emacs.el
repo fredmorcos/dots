@@ -59,7 +59,7 @@
    (lambda ()
      (progn
        (custom-set-faces
-        '(default ((t (:family "Hack" :height 120))))
+        '(default ((t (:family "Hack" :height 110))))
         '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
                               :foreground "gray20"
                               :background "gray80"))))
@@ -94,7 +94,6 @@
        (global-display-line-numbers-mode t)
 
        ;; file positions, backups, etc...
-       (require 'saveplace)
        (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
        (defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
        (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
@@ -431,8 +430,9 @@
 
  '(lsp-prefer-flymake nil)
  '(lsp-ui-doc-include-signature t)
- '(lsp-ui-doc-border "orange red")
- '(lsp-ui-doc-use-webkit t)
+ '(lsp-ui-doc-border "light salmon")
+ '(lsp-ui-doc-position 'at-point)
+ '(lsp-ui-doc-max-width 60)
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-sideline-ignore-duplicate t)
  '(lsp-ui-sideline-update-mode 'point)
