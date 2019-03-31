@@ -107,6 +107,7 @@ cmerge gitconfig       ~/.gitconfig
 cmerge htoprc          ~/.config/htop/htoprc
 cmerge hunspell_en_US  ~/.hunspell_en_US
 cmerge kitty.conf      ~/.config/kitty/kitty.conf
+cmerge nanorc          ~/.nanorc
 cmerge redshift.conf   ~/.config/redshift.conf
 cmerge vimrc           ~/.vimrc
 cmerge youtube-dl.conf ~/.config/youtube-dl/config

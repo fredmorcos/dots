@@ -21,7 +21,6 @@
  '(colon-double-space t)
  '(column-number-mode t)
  '(comment-fill-column 70)
- '(company-box-show-single-candidate t)
  '(company-idle-delay 0.2)
  '(company-tooltip-align-annotations t)
  '(counsel-mode t)
@@ -66,8 +65,13 @@
  '(ivy-wrap t)
  '(load-prefer-newer t)
  '(lsp-prefer-flymake nil)
- '(lsp-ui-doc-border "orange red")
+ '(lsp-ui-doc-border "light salmon")
  '(lsp-ui-doc-include-signature t)
+ '(lsp-ui-doc-max-width 60)
+ '(lsp-ui-doc-position (quote at-point))
+ '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-sideline-ignore-duplicate t)
+ '(lsp-ui-sideline-update-mode (quote point))
  '(make-backup-files t)
  '(menu-bar-mode nil)
  '(mode-require-final-newline (quote visit-save))
@@ -81,7 +85,7 @@
  '(package-check-signature nil)
  '(package-selected-packages
    (quote
-    (company-box which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets git-gutter-fringe+ symbol-overlay multiple-cursors iedit magit vdiff vdiff-magit yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode irony irony-eldoc flycheck-irony company-irony company-irony-c-headers cquery ccls z3-mode boogie-friends)))
+    (which-key fzf flx avy ivy ivy-rich swiper counsel smex org-bullets git-gutter-fringe+ symbol-overlay multiple-cursors iedit magit vdiff vdiff-magit yasnippet yasnippet-snippets hledger-mode f ht flycheck company company-lsp company-tabnine company-box lsp-mode lsp-ui rmsbolt toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode yaml-mode flycheck-yamllint rust-mode lsp-java irony irony-eldoc flycheck-irony company-irony company-irony-c-headers cquery ccls z3-mode boogie-friends)))
  '(recentf-mode t)
  '(recentf-save-file emacs-recentf-file)
  '(require-final-newline (quote visit-save))
@@ -117,7 +121,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :height 120))))
+ '(default ((t (:family "Hack" :height 110))))
  '(git-gutter+-added ((t (:foreground "yellow green"))))
  '(hl-line ((t (:background "cornsilk"))))
  '(line-number ((t (:foreground "grey80"))))
