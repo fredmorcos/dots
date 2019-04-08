@@ -27,7 +27,6 @@ bison
 bluez-plugins
 bluez-tools
 bluez-utils
-bootchart
 bridge-utils
 bs1770gain
 bsdiff
@@ -64,7 +63,6 @@ devilspie
 dex
 dhcpcd
 dhex
-di
 dialog
 diff-so-fancy
 diffoscope
