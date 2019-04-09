@@ -6,8 +6,10 @@
 
 ;; (call-interactively 'profiler-start)
 
-(defvar old-gc-cons-threshold gc-cons-threshold)
-(setq gc-cons-threshold 100000000)
+;; (defvar old-gc-cons-threshold gc-cons-threshold)
+(setq gc-cons-threshold most-positive-fixnum)
+
+(run-with-idle-timer 5 t #'garbage-collect)
 
 (setq vc-handled-backends nil)
 
@@ -60,6 +62,7 @@
      (progn
        (custom-set-faces
         '(default ((t (:family "Hack" :height 110))))
+        '(region ((t (:background "lightsteelblue1"))))
         '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
                               :foreground "gray20"
                               :background "gray80"))))
@@ -72,6 +75,12 @@
         '(show-paren-match-expression ((t (:background "powder blue"))))
         '(show-paren-mismatch ((t (:background "light salmon"))))
         '(git-gutter+-added ((t (:foreground "yellow green"))))
+        '(dired-subtree-depth-1-face ((t (:background "light blue"))))
+        '(dired-subtree-depth-2-face ((t (:background "light green"))))
+        '(dired-subtree-depth-3-face ((t (:background "light yellow"))))
+        '(dired-subtree-depth-4-face ((t (:background "light blue"))))
+        '(dired-subtree-depth-5-face ((t (:background "light green"))))
+        '(dired-subtree-depth-6-face ((t (:background "light yellow"))))
         '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
         '(lsp-ui-doc-background ((t (:background "white smoke"))))
         '(lsp-ui-sideline-code-action ((t (:foreground "orange"))))
@@ -107,6 +116,9 @@
        ;; dired
        (add-hook 'dired-mode-hook #'auto-revert-mode)
        (add-hook 'dired-mode-hook  'dired-hide-details-mode)
+       (add-hook
+        'dired-mode-hook
+        #'(lambda () (local-set-key (kbd "TAB") #'dired-subtree-toggle)))
 
        ;; flyspell
        (add-hook 'flyspell-mode-hook #'flyspell-buffer)
@@ -167,8 +179,9 @@
        (yas-reload-all)))))
 
 ;; git status
-(require 'git-gutter-fringe+)
+(require 'git-gutter+)
 (global-git-gutter+-mode)
+(add-hook 'magit-refresh-status-hook #'git-gutter+-on-magit-refresh-status)
 
 ;; lsp
 (require 'lsp)
@@ -270,9 +283,10 @@
      ivy-rich
      swiper
      counsel
+     amx
      smex
      org-bullets
-     git-gutter-fringe+
+     git-gutter+
      symbol-overlay
      multiple-cursors
      iedit
@@ -285,6 +299,8 @@
      yasnippet-snippets
 
      hledger-mode
+
+     dired-subtree
 
      f
      ht
@@ -442,15 +458,26 @@
  '(sh-indentation 2)
  '(sh-basic-offset 2)
 
+ '(company-auto-complete ''company-explicit-action-p)
+ '(company-auto-complete-chars '(32 95 41 46))
+ '(company-echo-truncate-lines nil)
+ '(company-selection-wrap-around t)
+ '(company-tooltip-limit 100)
+ '(company-tooltip-minimum 10)
  '(company-tooltip-align-annotations t)
  '(company-idle-delay 0.2)
+ '(company-transformers '(company-sort-by-backend-importance))
 
  '(ediff-split-window-function #'split-window-horizontally)
- '(ediff-window-setup-function #'ediff-setup-windows-plain))
+ '(ediff-window-setup-function #'ediff-setup-windows-plain)
+ '(ediff-window-setup-function #'ediff-setup-windows-plain)
+
+ '(dired-listing-switches "-l --group-directories-first")
+ '(dired-hide-details-hide-symlink-targets nil))
 
 (setq file-name-handler-alist old-file-name-handler-alist)
 
-(setq gc-cons-threshold old-gc-cons-threshold)
+;; (setq gc-cons-threshold old-gc-cons-threshold)
 
 ;; (call-interactively 'profiler-report)
 
