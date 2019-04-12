@@ -4,6 +4,8 @@ acpi_call
 acpica
 acpid
 afl-utils
+alacritty
+alacritty-terminfo
 amd-ucode
 android-tools
 android-udev
