@@ -98,7 +98,7 @@
        ;; (global-auto-revert-mode t)
        (electric-pair-mode)
        (electric-indent-mode)
-       (electric-quote-mode)
+       ;; (electric-quote-mode)
        (electric-layout-mode)
        (global-display-line-numbers-mode t)
 
@@ -275,7 +275,11 @@
    '(("gnu"   . "http://elpa.gnu.org/packages/")
      ("melpa" . "http://melpa.org/packages/")))
  '(package-selected-packages
-   '(which-key
+   '(use-package
+     diminish
+     bind-key
+
+     which-key
      fzf
      flx
      avy

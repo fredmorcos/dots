@@ -17,6 +17,8 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace/bin:$PATH"
 
+RUSTC_WRAPPER=sccache
+
 EDITOR='emacs -nw'
 GIT_EDITOR=vim
 
@@ -36,7 +38,7 @@ HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 
-export PS1 PATH EDITOR GIT_EDITOR HISTCONTROL HISTIGNORE
+export PS1 PATH EDITOR GIT_EDITOR HISTCONTROL HISTIGNORE RUSTC_WRAPPER
 
 shopt -s autocd
 shopt -s dirspell
