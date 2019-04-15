@@ -474,7 +474,6 @@
 
  '(ediff-split-window-function #'split-window-horizontally)
  '(ediff-window-setup-function #'ediff-setup-windows-plain)
- '(ediff-window-setup-function #'ediff-setup-windows-plain)
 
  '(dired-listing-switches "-l --group-directories-first")
  '(dired-hide-details-hide-symlink-targets nil))
