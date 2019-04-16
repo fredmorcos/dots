@@ -14,6 +14,7 @@ source /usr/share/fzf/completion.bash
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace/bin:$PATH"
 

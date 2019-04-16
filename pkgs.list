@@ -301,7 +301,6 @@ python-dmidecode
 python-evdev
 python-fxa
 python-genshi
-python-html5lib
 python-hypothesis
 python-markdown
 python-nose
@@ -309,6 +308,7 @@ python-numpy
 python-olefile
 python-pexpect
 python-pillow
+python-pip
 python-pyacoustid
 python-pycryptodome
 python-pylast

@@ -53,6 +53,9 @@
        (global-set-key (kbd "M->") #'symbol-overlay-jump-next)
        (global-set-key (kbd "M-<") #'symbol-overlay-jump-prev)
 
+       ;; electric spacing
+       (add-hook 'prog-mode-hook #'electric-spacing-mode)
+
        ;; magit
        (global-set-key (kbd "C-x g") 'magit-status)))))
 
@@ -112,6 +115,10 @@
        (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
        (make-directory emacs-autosaves-dir t)
        (make-directory emacs-backups-dir t)
+
+       ;; extra keys
+       (global-set-key (kbd "s-w") #'delete-window)
+       (global-set-key (kbd "s-o") #'other-window)
 
        ;; dired
        (add-hook 'dired-mode-hook #'auto-revert-mode)
@@ -294,6 +301,7 @@
      symbol-overlay
      multiple-cursors
      iedit
+     electic-spacing
 
      magit
      vdiff
