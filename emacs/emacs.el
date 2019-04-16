@@ -53,9 +53,6 @@
        (global-set-key (kbd "M->") #'symbol-overlay-jump-next)
        (global-set-key (kbd "M-<") #'symbol-overlay-jump-prev)
 
-       ;; electric spacing
-       (add-hook 'prog-mode-hook #'electric-spacing-mode)
-
        ;; magit
        (global-set-key (kbd "C-x g") 'magit-status)))))
 
@@ -301,7 +298,6 @@
      symbol-overlay
      multiple-cursors
      iedit
-     electic-spacing
 
      magit
      vdiff
