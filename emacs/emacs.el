@@ -121,6 +121,8 @@
        ;; extra keys
        (global-set-key (kbd "s-w") #'delete-window)
        (global-set-key (kbd "s-o") #'other-window)
+       (global-set-key (kbd "s-a") #'backward-page)
+       (global-set-key (kbd "s-e") #'forward-page)
 
        ;; dired
        (add-hook 'dired-mode-hook #'auto-revert-mode)
