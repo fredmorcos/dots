@@ -63,12 +63,15 @@
      (progn
        (custom-set-faces
         '(default ((t (:family "Hack" :height 110))))
+        '(cursor ((t (:background "gray30"))))
         '(region ((t (:background "lightsteelblue1"))))
         '(mode-line ((t (:box (:line-width -1 :color "grey75" :style nil)
                               :foreground "gray20"
                               :background "gray80"))))
         '(mode-line-highlight ((t (:box (:line-width 1 :color "grey40" :style nil)))))
         '(symbol-overlay-default-face ((t (:background "honeydew2"))))
+        '(mc/cursor-bar-face ((t (:background "gray40" :foreground "white"))))
+        '(mc/cursor-face ((t (:background "gray50" :foreground "white"))))
         '(line-number ((t (:foreground "grey80"))))
         '(line-number-current-line ((t (:foreground "grey60" :background "cornsilk"))))
         '(hl-line ((t (:background "cornsilk"))))
@@ -76,6 +79,7 @@
         '(show-paren-match-expression ((t (:background "powder blue"))))
         '(show-paren-mismatch ((t (:background "light salmon"))))
         '(git-gutter+-added ((t (:foreground "yellow green"))))
+        '(org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod"))))
         '(dired-subtree-depth-1-face ((t (:background "light blue"))))
         '(dired-subtree-depth-2-face ((t (:background "light green"))))
         '(dired-subtree-depth-3-face ((t (:background "light yellow"))))
@@ -159,10 +163,6 @@
 ;; company
 (require 'company)
 (add-hook 'company-mode-hook #'company-box-mode)
-
-;; vdiff
-(require 'vdiff)
-(define-key vdiff-mode-map (kbd "C-c") vdiff-mode-prefix-map)
 
 ;; iedit
 (require 'iedit)
@@ -301,8 +301,6 @@
      iedit
 
      magit
-     vdiff
-     vdiff-magit
 
      yasnippet
      yasnippet-snippets
@@ -444,6 +442,7 @@
  '(org-cycle-separator-lines 0)
  '(org-indent-indentation-per-level 2)
  '(org-startup-folded t)
+ '(org-ellipsis "   ▼")
 
  '(display-line-numbers-grow-only t)
  '(display-line-numbers-width-start t)
@@ -481,7 +480,9 @@
  '(ediff-window-setup-function #'ediff-setup-windows-plain)
 
  '(dired-listing-switches "-l --group-directories-first")
- '(dired-hide-details-hide-symlink-targets nil))
+ '(dired-hide-details-hide-symlink-targets nil)
+
+ '(mc/always-run-for-all t))
 
 (setq file-name-handler-alist old-file-name-handler-alist)
 
