@@ -54,7 +54,8 @@
        (global-set-key (kbd "M-<") #'symbol-overlay-jump-prev)
 
        ;; magit
-       (global-set-key (kbd "C-x g") 'magit-status)))))
+       (global-set-key (kbd "C-x g") #'magit-status)
+       (add-hook 'with-editor-mode-hook #'flyspell-mode)))))
 
 (defvar background-thread
   (make-thread
