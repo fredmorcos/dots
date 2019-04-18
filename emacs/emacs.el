@@ -38,7 +38,7 @@
        (setq-default ivy-initial-inputs-alist nil)
 
        ;; fuzzy find files
-       (global-set-key (kbd "M-p") #'fzf-git-files)
+       (global-set-key (kbd "M-F") #'fzf-git-files)
        (global-set-key (kbd "M-P") #'fzf-git-grep)
 
        ;; emacs lisp
@@ -55,7 +55,9 @@
 
        ;; magit
        (global-set-key (kbd "C-x g") #'magit-status)
-       (add-hook 'with-editor-mode-hook #'flyspell-mode)))))
+       (add-hook
+        'with-editor-mode-hook
+        #'(lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t)))))))
 
 (defvar background-thread
   (make-thread
@@ -123,6 +125,8 @@
        (global-set-key (kbd "s-o") #'other-window)
        (global-set-key (kbd "s-a") #'backward-page)
        (global-set-key (kbd "s-e") #'forward-page)
+       (global-set-key (kbd "s-n") #'next-buffer)
+       (global-set-key (kbd "s-b") #'previous-buffer)
 
        ;; dired
        (add-hook 'dired-mode-hook #'auto-revert-mode)
@@ -141,7 +145,6 @@
        (add-hook
         'org-mode-hook
         #'(lambda ()
-            (setq-local fill-column 70)
             (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
        ;; latex
