@@ -182,7 +182,7 @@ latex2html
 latex2rtf
 lbzip2
 lhasa
-libappindicator-gtk2
+lib32-mesa-vdpau
 libappindicator-gtk3
 libdvdcss
 libgsf
@@ -364,8 +364,6 @@ sbsigntools
 scrcpy
 screen
 sdl2_gfx
-sdl2_ttf
-sdl_image
 semi
 shedskin
 shellcheck
@@ -379,6 +377,8 @@ source-highlight
 sparsehash
 squashfs-tools
 stardict
+steam
+steam-native-runtime
 strace
 stratis-cli
 stratisd

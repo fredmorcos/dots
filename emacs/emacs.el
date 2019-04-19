@@ -289,6 +289,10 @@
      diminish
      bind-key
 
+     f
+     ht
+     dash
+
      which-key
      fzf
      flx
@@ -305,6 +309,8 @@
      multiple-cursors
      iedit
 
+     outshine
+
      magit
 
      yasnippet
@@ -314,8 +320,6 @@
 
      dired-subtree
 
-     f
-     ht
      flycheck
      company
      company-lsp
@@ -336,6 +340,8 @@
      flycheck-yamllint
 
      rust-mode
+     rustic
+     rust-auto-use
 
      lsp-java
 
@@ -467,6 +473,8 @@
  '(lsp-ui-sideline-update-mode 'point)
 
  '(eldoc-echo-area-use-multiline-p t)
+
+ '(flycheck-checker-error-threshold nil)
 
  '(sh-indentation 2)
  '(sh-basic-offset 2)
