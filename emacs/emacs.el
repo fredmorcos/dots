@@ -377,10 +377,16 @@
          ("M-P" . fzf-git-grep)))
 
 (use-package magit
-  :bind (("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
   :hook (with-editor-mode
          . (lambda ()
-             (add-hook 'after-save-hook #'flyspell-buffer nil t))))
+             (add-hook 'after-save-hook #'flyspell-buffer nil t)))
+  :defines magit-status-buffer-switch-function
+  :commands magit-display-buffer-same-window-except-diff-v1
+  :custom (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
 
 (use-package dired-subtree
   :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle))
