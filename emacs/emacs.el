@@ -287,15 +287,6 @@
   :custom ((auto-revert-interval 2)
            (auto-revert-mode-text " AR")))
 
-(use-package prog-mode
-  :ensure nil
-  :hook (prog-mode . flyspell-prog-mode))
-
-(use-package flyspell
-  :ensure nil
-  :diminish "Spell"
-  :hook (flyspell-mode . flyspell-buffer))
-
 (use-package sh-script
   :ensure nil
   :custom ((sh-indentation 2)
@@ -418,11 +409,9 @@
            (company-tooltip-minimum 10)
            (company-tooltip-align-annotations t)
            (company-idle-delay 0.2)
+           (company-echo-delay 0)
+           (company-begin-commands '(self-insert-command))
            (company-transformers '(company-sort-by-backend-importance))))
-
-(use-package company-box
-  :diminish
-  :hook (company-mode . company-box-mode))
 
 (use-package symbol-overlay
   :diminish
