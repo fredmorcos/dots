@@ -125,6 +125,7 @@ gnome-dictionary
 gnome-disk-utility
 gnome-icon-theme-extras
 gnome-keyring
+gnome-latex
 gnome-mpv
 gnome-terminal
 gnu-efi-libs
@@ -144,6 +145,7 @@ gstreamer-vaapi
 gtk-engine-murrine
 gtkglext
 gucharmap
+gummi
 gvfs-mtp
 hashcat
 haveged
@@ -233,6 +235,7 @@ meson
 mg
 mhash
 minizip
+minted
 mlocate
 movit
 mp3unicode
@@ -265,6 +268,8 @@ oprofile
 optipng
 os-prober
 ostree
+otf-latin-modern
+otf-latinmodern-math
 ovmf
 p7zip
 pacgraph
@@ -358,6 +363,7 @@ remake
 repo
 ripgrep
 rofi
+rubber
 rustup
 s-nail
 sbsigntools
@@ -402,6 +408,8 @@ texlive-langextra
 texlive-music
 texlive-pstricks
 texlive-publishers
+texmaker
+texstudio
 the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
