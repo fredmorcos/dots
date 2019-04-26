@@ -17,6 +17,8 @@
               auto-window-vscroll nil
               vc-handled-backends nil
 
+              save-interprogram-paste-before-kill t
+
               url-privacy-level 'high
               url-proxy-services '(("no_proxy" . "127.0.0.1"))
 
@@ -74,6 +76,7 @@
 (use-package scroll-bar
   :ensure nil
   :custom ((scroll-bar-mode nil)
+           (horizontal-scroll-bar-mode nil)
            (scroll-conservatively 4)
            (hscroll-margin 1)
            (hscroll-step 1)
@@ -117,6 +120,20 @@
   :ensure nil
   :custom (global-hl-line-mode t)
   :init (set-face-background 'hl-line "CornSilk"))
+
+(use-package apropos
+  :ensure nil
+  :custom (apropos-do-all t))
+
+(use-package expand
+  :ensure nil
+  :bind ("M-/" . hippie-expand))
+
+(use-package fringe
+  :ensure nil
+  :config (progn
+            (set-window-fringes nil 16)
+            (set-face-background 'fringe "Gray97")))
 
 (defconst emacs-places-file (concat user-emacs-directory "places"))
 (defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
@@ -445,13 +462,11 @@
 
 (use-package yasnippet-snippets)
 
-(use-package git-gutter+
-  :diminish "GG"
-  :config (set-face-foreground 'git-gutter+-added "YellowGreen")
-  :hook ((prog-mode . git-gutter+-mode)
-         (org-mode . git-gutter+-mode)
-         (hledger-mode . git-gutter+-mode)
-         (magit-refresh-status . git-gutter+-on-magit-refresh-status)))
+(use-package git-gutter-fringe+
+  :init (set-face-foreground 'git-gutter+-added "YellowGreen")
+  :custom ((global-git-gutter+-mode t)
+           (git-gutter+-lighter " GG"))
+  :hook (magit-status-refresh . git-gutter+-on-magit-refresh-status))
 
 (use-package hledger-mode
   :mode (("\\.journal\\'" . hledger-mode)
