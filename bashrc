@@ -39,7 +39,9 @@ HISTCONTROL="erasedups:ignoreboth"
 # Don't record some commands
 HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 
-export PS1 PATH EDITOR GIT_EDITOR HISTCONTROL HISTIGNORE RUSTC_WRAPPER
+LS_COLORS='ex=00:su=00:sg=00:ca=00:'
+
+export PS1 PATH EDITOR GIT_EDITOR HISTCONTROL HISTIGNORE RUSTC_WRAPPER LS_COLORS
 
 shopt -s autocd
 shopt -s dirspell
