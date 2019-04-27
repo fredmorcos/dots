@@ -175,14 +175,10 @@
            (coding-system-for-read 'utf-8-unix)
            (coding-system-for-write 'utf-8-unix)))
 
-(use-package window
-  :ensure nil
-  :bind ("C-z" . bury-buffer))
-
-(use-package electric
-  :ensure nil
-  :custom ((electric-layout-mode t)
-           (electric-pair-mode t)))
+;; (use-package electric
+;;   :ensure nil
+;;   :custom ((electric-layout-mode t)
+;;            (electric-pair-mode t)))
 
 (use-package cua-base
   :ensure nil
@@ -195,14 +191,13 @@
 
 (use-package window
   :ensure nil
-  :commands (delete-window
-             other-window
-             next-buffer
-             previous-buffer)
-  :bind (("s-w" . #'delete-window)
-         ("s-o" . #'other-window)
-         ("s-n" . #'next-buffer)
-         ("s-b" . #'previous-buffer)))
+  :bind (("C-z" . bury-buffer)
+         ("s-w" . delete-window)
+         ("s-o" . other-window)
+         ("s-n" . next-buffer)
+         ("s-b" . previous-buffer)
+         ("s-v" . split-window-below)
+         ("s-h" . split-window-right)))
 
 (use-package page
   :ensure nil
@@ -390,8 +385,20 @@
   :commands magit-display-buffer-same-window-except-diff-v1
   :custom (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package smartparens
+  :config (progn
+            (require 'smartparens-config)
+            (sp-use-paredit-bindings)
+            (set-face-background 'sp-show-pair-enclosing "DarkSeaGreen1"))
+  :custom ((sp-hybrid-kill-excessive-whitespace 'kill)
+           (sp-show-pair-from-inside t))
+  :hook (prog-mode . smartparens-strict-mode))
+
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
+
+(use-package ivy-xref
+  :init (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package dired-subtree
   :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle))
