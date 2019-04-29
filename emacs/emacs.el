@@ -354,8 +354,9 @@
 (use-package counsel
   :diminish
   :custom (counsel-mode t)
-  :bind (("M-x"     . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)))
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("M-A" . counsel-ag)))
 
 (use-package ivy
   :diminish
