@@ -3,34 +3,36 @@
 ;;; Code:
 
 ;;; Enable init profiling
-;; (call-interactively 'profiler-start)
-;; (add-hook 'after-init-hook '#profiler-report)
+;; (require 'profiler)
+;; (call-interactively #'profiler-start)
+;; (add-hook 'after-init-hook #'profiler-report)
 
 (run-with-idle-timer 5 t #'garbage-collect)
 
 (defconst file-name-handler-alist-old file-name-handler-alist)
 
-(setq-default custom-file "/dev/null"
-              gc-cons-threshold most-positive-fixnum
-              gc-cons-percentage 0.6
-              file-name-handler-alist nil
-              auto-window-vscroll nil
-              vc-handled-backends nil
+(setq-default
+ custom-file "/dev/null"
+ gc-cons-threshold most-positive-fixnum
+ gc-cons-percentage 0.6
+ file-name-handler-alist nil
+ auto-window-vscroll nil
+ vc-handled-backends nil
 
-              save-interprogram-paste-before-kill t
+ save-interprogram-paste-before-kill t
 
-              url-privacy-level 'high
-              url-proxy-services '(("no_proxy" . "127.0.0.1"))
+ url-privacy-level 'high
+ url-proxy-services '(("no_proxy" . "127.0.0.1"))
 
-              package-check-signature nil
-              package-enable-at-startup nil
-              package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                                 ("melpa" . "http://melpa.org/packages/"))
+ package-check-signature nil
+ package-enable-at-startup nil
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("melpa" . "http://melpa.org/packages/"))
 
-              use-package-always-defer t
-              use-package-always-ensure t
-              use-package-enable-imenu-support t
-              use-package-expand-minimally t)
+ use-package-always-defer t
+ use-package-always-ensure t
+ use-package-enable-imenu-support t
+ use-package-expand-minimally t)
 
 (require 'package)
 (package-initialize)
@@ -60,6 +62,7 @@
              set-face-background
              set-face-attribute)
   :init (progn
+          (setq font-use-system-font t)
           (set-face-font 'default "Hack 11")
           (set-face-background 'cursor "gray30")
           (set-face-background 'region "LightSteelBlue1")
@@ -70,8 +73,7 @@
            :background "gray80")
           (set-face-attribute
            'mode-line-highlight nil
-           :box '(:line-width 1 :color "gray40" :style nil)))
-  :custom (font-use-system-font t))
+           :box '(:line-width 1 :color "gray40" :style nil))))
 
 (use-package scroll-bar
   :ensure nil
@@ -175,10 +177,10 @@
            (coding-system-for-read 'utf-8-unix)
            (coding-system-for-write 'utf-8-unix)))
 
-;; (use-package electric
-;;   :ensure nil
-;;   :custom ((electric-layout-mode t)
-;;            (electric-pair-mode t)))
+(use-package electric
+  :ensure nil
+  :custom ((electric-layout-mode t)
+           (electric-pair-mode t)))
 
 (use-package cua-base
   :ensure nil
@@ -339,6 +341,22 @@
   :diminish
   :custom (which-key-mode t))
 
+(use-package prescient
+  :custom ((prescient-persist-mode t)
+           (prescient-filter-method '(literal regexp initialism fuzzy))))
+
+(use-package ivy-prescient
+  :config (ivy-prescient-mode))
+
+(use-package company-prescient
+  :config (company-prescient-mode))
+
+(use-package counsel
+  :diminish
+  :custom (counsel-mode t)
+  :bind (("M-x"     . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)))
+
 (use-package ivy
   :diminish
   :bind (:map ivy-minibuffer-map ("RET" . ivy-alt-done))
@@ -349,7 +367,6 @@
            (ivy-count-format "(%d/%d) ")
            (ivy-wrap t)
            (ivy-regex-ignore-order t)
-           (ivy--regex-ignore-order t)
            (ivy-virtual-abbreviate 'full)
            (ivy-action-wrap t)
            (ivy-initial-inputs-alist nil)))
@@ -365,12 +382,6 @@
            (ivy-rich-path-style 'abbrev)
            (ivy-format-function #'ivy-format-function-line)))
 
-(use-package counsel
-  :diminish
-  :custom (counsel-mode t)
-  :bind (("M-x"     . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)))
-
 (use-package swiper
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
@@ -384,15 +395,6 @@
   :defines magit-status-buffer-switch-function
   :commands magit-display-buffer-same-window-except-diff-v1
   :custom (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-(use-package smartparens
-  :config (progn
-            (require 'smartparens-config)
-            (sp-use-paredit-bindings)
-            (set-face-background 'sp-show-pair-enclosing "DarkSeaGreen1"))
-  :custom ((sp-hybrid-kill-excessive-whitespace 'kill)
-           (sp-show-pair-from-inside t))
-  :hook (prog-mode . smartparens-strict-mode))
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
