@@ -282,7 +282,10 @@
 
 (use-package paren
   :ensure nil
-  :custom (show-paren-mode t)
+  :custom ((show-paren-mode t)
+           (show-paren-when-point-inside-paren t)
+           (show-paren-when-point-in-periphery t)
+           (show-paren-style 'mixed))
   :init (progn
           (set-face-background 'show-paren-match "PowderBlue")
           (set-face-background 'show-paren-match-expression "PowderBlue")
@@ -333,9 +336,10 @@
 (use-package smex)
 (use-package lv)
 (use-package all-the-icons)
-
-(use-package iedit)
 (use-package org-bullets)
+
+(use-package iedit
+  :init (require 'iedit))
 
 (use-package which-key
   :diminish
@@ -416,15 +420,20 @@
 (use-package flycheck
   :hook (prog-mode . flycheck-mode)
   :bind (:map flycheck-mode-map
-              ("C-s-n" . flycheck-next-error)
-              ("C-s-p" . flycheck-previous-error)
-              ("C-s-l" . flycheck-list-errors))
+              ("C-c n" . flycheck-next-error)
+              ("C-c p" . flycheck-previous-error)
+              ("C-c l" . flycheck-list-errors))
   :custom ((flycheck-checker-error-threshold nil)
            (flycheck-mode-line-prefix "Chk")))
 
 (use-package company
   :diminish "Com"
-  :hook (prog-mode . company-mode)
+  :commands (local-set-key company-indent-or-complete-common)
+  :hook ((prog-mode . company-mode)
+         (company-mode . (lambda ()
+                           (local-set-key
+                            (kbd "TAB")
+                            #'company-indent-or-complete-common))))
   :custom ((company-auto-complete 'company-explicit-action-p)
            (company-auto-complete-chars '(32 95 41 46))
            (company-echo-truncate-lines nil)
@@ -486,6 +495,8 @@
            (hledger-current-overlay t))
   :commands toggle-truncate-lines
   :hook (hledger-mode . (lambda nil (toggle-truncate-lines t))))
+
+(use-package z3-mode)
 
 (use-package eglot)
 (use-package rustic)
