@@ -1,7 +1,3 @@
-(defvar background-thread
-  (make-thread
-   (lambda ()
-     (progn
        (custom-set-faces
         '(rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
         '(lsp-ui-doc-background ((t (:background "white smoke"))))
@@ -10,21 +6,6 @@
           ((t (:height 0.99 :weight ultra-bold :box
                        (:line-width -1 :color "dim gray" :style nil)
                        :foreground "dim gray")))))
-
-       ;; org mode
-       (add-hook 'org-mode-hook  'org-indent-mode)
-       (add-hook 'org-mode-hook  'org-bullets-mode)
-       (add-hook 'org-mode-hook #'flyspell-buffer)
-       (add-hook
-        'org-mode-hook
-        #'(lambda ()
-            (add-hook 'after-save-hook #'flyspell-buffer nil t)))
-
-       ;; latex
-       (when (string-equal (system-name) "axon")
-         (load "auctex.el")
-         (load "preview-latex.el"))
-       (add-hook 'LaTeX-mode-hook #'flyspell-mode)
 
 ;; lsp
 (require 'lsp)
@@ -72,25 +53,10 @@
 (custom-set-variables
  '(package-selected-packages
    '(use-package
-     avy
-
-     outshine
-
      company-lsp
      company-tabnine
      lsp-mode
      lsp-ui
-     rmsbolt
-
-     toml-mode
-     markdown-mode
-     json-mode
-     gnuplot-mode
-     dockerfile-mode
-     meson-mode
-
-     yaml-mode
-     flycheck-yamllint
 
      rust-mode
      rustic
@@ -105,14 +71,6 @@
      company-irony-c-headers
      cquery
      ccls
-
-     z3-mode
-     boogie-friends
-     ))
-
- '(TeX-auto-save t)
- '(TeX-parse-self t)
- '(TeX-master nil)
 
  '(rust-indent-method-chain t)
  '(rust-always-locate-project-on-open t)

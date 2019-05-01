@@ -1,15 +1,10 @@
-;; 	avy
 ;; 	hledger-mode
-;; 	rmsbolt
 ;; 	company-tabnine
 ;; 	lsp-mode lsp-ui company-lsp
-;; 	toml-mode markdown-mode json-mode gnuplot-mode dockerfile-mode meson-mode
-;; 	yaml-mode flycheck-yamllint
 ;; 	rust-mode
 ;; 	lsp-java
 ;; 	irony irony-eldoc flycheck-irony company-irony company-irony-c-headers
 ;; 	cquery ccls
-;; 	z3-mode boogie-friends))
 
 ;; (defvar background-thread
 ;;   (make-thread

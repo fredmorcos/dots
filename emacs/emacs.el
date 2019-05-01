@@ -326,6 +326,16 @@
                   :foreground "DarkGoldenRod")
                  (setq org-ellipsis "   ▼")))
 
+(use-package auctex
+  :ensure nil
+  :init (when (string-equal (system-name) "axon")
+          (load "auctex.el")
+          (load "preview-latex.el"))
+  :hook (LaTeX-mode . flyspell-mode)
+  :custom ((TeX-auto-save t)
+           (TeX-parse-self t)
+           (TeX-master nil)))
+
 (use-package f)
 (use-package ht)
 (use-package dash)
@@ -497,6 +507,15 @@
   :hook (hledger-mode . (lambda nil (toggle-truncate-lines t))))
 
 (use-package z3-mode)
+(use-package rmsbolt)
+(use-package toml-mode)
+(use-package markdown-mode)
+(use-package json-mode)
+(use-package gnuplot-mode)
+(use-package dockerfile-mode)
+(use-package meson-mode)
+(use-package yaml-mode)
+(use-package flycheck-yamllint)
 
 (use-package eglot)
 (use-package rustic)
