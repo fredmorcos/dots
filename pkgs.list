@@ -133,6 +133,7 @@ gnome-mpv
 gnome-terminal
 gnu-efi-libs
 gnuplot
+gobject-introspection
 gogglesmm
 gpart
 gparted
@@ -145,6 +146,7 @@ gst-plugins-ugly
 gst-python
 gst-transcoder
 gstreamer-vaapi
+gtk-doc
 gtk-engine-murrine
 gtkglext
 gucharmap
@@ -315,7 +317,6 @@ python-evdev
 python-fxa
 python-genshi
 python-hypothesis
-python-markdown
 python-nose
 python-numpy
 python-olefile
@@ -382,7 +383,6 @@ slimmy-xfwm-theme-git
 smartmontools
 socat
 soundconverter
-source-highlight
 sparsehash
 squashfs-tools
 stardict
@@ -411,8 +411,6 @@ texlive-langextra
 texlive-music
 texlive-pstricks
 texlive-publishers
-texmaker
-texstudio
 the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
