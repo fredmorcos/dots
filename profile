@@ -1,0 +1,1 @@
+export XFWM4_USE_PRESENT=1
