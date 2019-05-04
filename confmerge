@@ -130,6 +130,7 @@ cmerge mkinitcpio.conf /etc/mkinitcpio.conf
 cmerge modprobe.conf   /etc/modprobe.d/modprobe.conf
 cmerge pacman.conf     /etc/pacman.conf
 cmerge sysctl.conf     /etc/sysctl.d/sysctl.conf
+cmerge intel.conf      /etc/X11/xorg.conf.d/20-intel.conf
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
