@@ -128,6 +128,7 @@ cmerge lxdm.conf       /etc/lxdm/lxdm.conf
 cmerge makepkg.conf    /etc/makepkg.conf
 cmerge mkinitcpio.conf /etc/mkinitcpio.conf
 cmerge modprobe.conf   /etc/modprobe.d/modprobe.conf
+cmerge modules.conf    /etc/modules-load.d/modules.conf
 cmerge pacman.conf     /etc/pacman.conf
 cmerge sysctl.conf     /etc/sysctl.d/sysctl.conf
 cmerge intel.conf      /etc/X11/xorg.conf.d/20-intel.conf
