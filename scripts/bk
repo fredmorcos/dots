@@ -18,6 +18,12 @@ bk_cmd () {
   echo ""
 }
 
+# Temporary
+bk_cmd "$HOME/Videos/"                 "$HDD/Fred/Videos/"
+bk_cmd "$HOME/Eclipse/"                "$HDD/Fred/Eclipse/"
+bk_cmd "$HDD/Fred/Videos/"             "fred@synapse:Videos/"
+bk_cmd "$HDD/Fred/Eclipse/"            "fred@synapse:Eclipse/"
+
 bk_cmd "$HOME/Music/"                  "$HDD/Common/Music/"
 bk_cmd "$HOME/Music.New/"              "$HDD/Common/Music.New/"
 
