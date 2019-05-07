@@ -57,6 +57,25 @@
 (use-package startup
   :ensure nil
 
+  :init
+  (defun replace-escapes ()
+    (interactive)
+    (goto-char (point-min))
+    (while (search-forward "\\n" nil t)
+      (replace-match (char-to-string ?\n) nil t))
+    (while (search-forward "\\t" nil t)
+      (replace-match (char-to-string ?\t) nil t)))
+
+  :bind
+  ("C-x e" . replace-escapes)
+
+  :custom
+  (inhibit-startup-screen t)
+  (inhibit-startup-message t)
+  (inhibit-startup-buffer-menu t)
+  (initial-scratch-message nil)
+  (initial-major-mode 'fundamental-mode)
+
   :hook
   (after-init
    . (lambda ()
@@ -106,16 +125,6 @@
 
   :custom
   (menu-bar-mode nil))
-
-(use-package startup
-  :ensure nil
-
-  :custom
-  (inhibit-startup-screen t)
-  (inhibit-startup-message t)
-  (inhibit-startup-buffer-menu t)
-  (initial-scratch-message nil)
-  (initial-major-mode 'fundamental-mode))
 
 (use-package frame
   :ensure nil
@@ -358,9 +367,6 @@
   :ensure nil
   :diminish "CD"
 
-  :hook
-  (prog-mode . checkdoc-minor-mode)
-
   :custom
   (checkdoc-minor-mode-string " CD"))
 
@@ -370,6 +376,18 @@
 
   :custom
   (eldoc-echo-area-use-multiline-p t))
+
+(use-package prog-mode
+  :ensure nil
+
+  :hook
+  (prog-mode . eldoc-mode)
+  (prog-mode . checkdoc-minor-mode)
+  (prog-mode . which-function-mode)
+  (prog-mode . flycheck-mode)
+  (prog-mode . company-mode)
+  (prog-mode . symbol-overlay-mode)
+  (prog-mode . yas-minor-mode))
 
 (use-package paren
   :ensure nil
@@ -601,9 +619,6 @@
   (dired-subtree-depth-6-face ((t (:background "LightYellow")))))
 
 (use-package flycheck
-  :hook
-  (prog-mode . flycheck-mode)
-
   :bind
   (:map flycheck-mode-map
         ("C-c n" . flycheck-next-error)
@@ -621,7 +636,6 @@
   local-set-key company-indent-or-complete-common
 
   :hook
-  (prog-mode . company-mode)
   (company-mode
    . (lambda ()
        (local-set-key
@@ -654,10 +668,6 @@
 (use-package symbol-overlay
   :diminish
 
-  :hook
-  (prog-mode . symbol-overlay-mode)
-  (hledger-mode . symbol-overlay-mode)
-
   :bind
   ("M->" . symbol-overlay-jump-next)
   ("M-<" . symbol-overlay-just-prev)
@@ -686,10 +696,6 @@
    ((t (:background "Gray50" :foreground "White")))))
 
 (use-package yasnippet
-  :hook
-  (hledger-mode . yas-minor-mode)
-  (prog-mode . yas-minor-mode)
-
   :commands
   yas-reload-all
 
@@ -716,6 +722,8 @@
   toggle-truncate-lines
 
   :hook
+  (hledger-mode . yas-minor-mode)
+  (hledger-mode . symbol-overlay-mode)
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package pdf-tools
