@@ -174,8 +174,23 @@
   :custom-face
   (fringe ((t (:background "Gray97"))))
 
+  :commands
+  set-fringe-style
+
   :config
-  (set-window-fringes nil 16))
+  (set-fringe-style '(16 . 0)))
+
+(use-package minibuffer
+  :ensure nil
+
+  :custom
+  (completion-styles
+   '(initials
+     substring
+     basic
+     partial-completion
+     emacs22
+     emacs21)))
 
 (defconst emacs-places-file (concat user-emacs-directory "places"))
 (defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
@@ -211,7 +226,7 @@
 
   :custom
   (recentf-save-file emacs-recentf-file)
-  (recentf-auto-cleanup 30)
+  ;; (recentf-auto-cleanup 30)
   (recentf-max-menu-items 50)
   (recentf-max-saved-items 50)
   (recentf-mode t))
@@ -230,6 +245,12 @@
   (load-prefer-newer t)
   (coding-system-for-read 'utf-8-unix)
   (coding-system-for-write 'utf-8-unix))
+
+(use-package keyboard
+  :ensure nil
+
+  :custom
+  (suggest-key-bindings 10))
 
 (use-package electric
   :ensure nil
@@ -652,15 +673,26 @@
   (company-tooltip-align-annotations t)
   (company-idle-delay 0.2)
   (company-echo-delay 0)
-  (company-begin-commands '(self-insert-command))
+  ;; (company-begin-commands '(self-insert-command))
   (company-transformers '(company-sort-by-backend-importance)))
+
+(use-package company-flx
+  :after company
+
+  :config
+  (company-flx-mode +1)
+
+  :custom
+  (company-flx-limit 2000))
 
 (use-package diff-hl
   :demand t
 
-  :config
-  (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
+  :custom
+  (global-diff-hl-mode t)
+  (diff-hl-flydiff-mode t)
+  (diff-hl-draw-borders nil)
+  (diff-hl-flydiff-delay 0.1)
 
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh))
@@ -694,6 +726,8 @@
    ((t (:background "Gray40" :foreground "White"))))
   (mc/cursor-face
    ((t (:background "Gray50" :foreground "White")))))
+
+(use-package smartparens)
 
 (use-package yasnippet
   :commands
@@ -756,6 +790,7 @@
 
   :hook
   (before-save . gofmt-before-save)
+  (go-mode . eglot-ensure)
 
   :config
   (setq flycheck-disabled-checkers '(go-errcheck))
@@ -763,13 +798,26 @@
     (progn (setenv "CGO_CFLAGS" "")
            (setenv "CGO_LDFLAGS" ""))))
 
-(use-package company-go
-  :hook
-  (go
-   . (lambda ()
-       (push 'company-go company-backends))))
+;; (use-package company-go
+;;   :custom
+;;   (company-go-show-annotation t)
 
-(use-package eglot)
+;;   :hook
+;;   (go-mode
+;;    . (lambda ()
+;;        (push 'company-go company-backends))))
+
+(use-package eglot
+  :custom
+  (eglot-put-doc-in-help-buffer t)
+
+  :bind
+  (:map eglot-mode-map
+        ("<f1>" . eglot-help-at-point)
+        ("<f12>" . xref-find-definitions-other-window)
+        ("<f11>" . xref-find-references)
+        ("<f10>" . xref-pop-marker-stack)))
+
 (use-package rustic)
 
 (provide '.emacs)
