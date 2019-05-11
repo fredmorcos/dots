@@ -466,6 +466,29 @@
   :config
   (setq org-ellipsis "   ▼"))
 
+(use-package auctex
+  :ensure nil
+  :if (string-equal (system-name) "axon")
+
+  :commands
+  TeX-revert-document-buffer
+
+  :init
+  (load "auctex.el")
+  (load "preview-latex.el")
+
+  :hook
+  (LaTeX-mode . flyspell-mode)
+
+  :config
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer)
+
+  :custom
+  (TeX-auto-save t)
+  (TeX-parse-self t)
+  (TeX-master nil))
+
 (use-package f)
 (use-package ht)
 (use-package dash)
