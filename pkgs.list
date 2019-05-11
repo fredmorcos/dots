@@ -28,8 +28,9 @@ beets
 biber
 binwalk
 bison
+blueberry
+blueman
 bluez-plugins
-bluez-tools
 bluez-utils
 bridge-utils
 bs1770gain
@@ -82,7 +83,6 @@ dwdiff
 easy-rsa
 easytag
 ebtables
-eclipse-java
 efitools
 elementary-icon-theme
 enjarify
@@ -297,7 +297,6 @@ powerline-fonts
 powertop
 pstoedit
 psutils
-pulseaudio-bluetooth
 pulseaudio-equalizer
 pulseaudio-equalizer-ladspa
 pulseaudio-zeroconf
