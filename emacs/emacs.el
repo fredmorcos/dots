@@ -82,20 +82,13 @@
 (use-package faces
   :ensure nil
 
-  :commands
-  set-face-font
-  set-face-foreground
-  set-face-background
-  set-face-attribute
-
   :custom-face
   (default ((t (:font "Hack 11"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
-  (mode-line
-   ((t (:foreground "Gray20" :background "Gray80"
-        :box (:line-width 1 :color "Gray75" :style nil)))))
+  (mode-line ((t (:foreground "Gray20" :background "Gray80"
+                  :box (:line-width 1 :color "Gray75" :style nil)))))
 
   :init
   (setq font-use-system-font t))
@@ -759,42 +752,31 @@
     (progn (setenv "CGO_CFLAGS" "")
            (setenv "CGO_LDFLAGS" ""))))
 
-;; (use-package company-go
-;;   :custom
-;;   (company-go-show-annotation t)
+(use-package company-go
+  :custom
+  (company-go-show-annotation t)
 
-;;   :hook
-;;   (go-mode
-;;    . (lambda ()
-;;        (push 'company-go company-backends))))
-
-;; (use-package eglot
-;;   :custom
-;;   (eglot-put-doc-in-help-buffer t)
-
-;;   :hook
-;;   (go-mode . eglot-ensure)
-
-;;   :bind
-;;   (:map eglot-mode-map
-;;         ("<f1>" . eglot-help-at-point)
-;;         ("<f12>" . xref-find-definitions-other-window)
-;;         ("<f11>" . xref-find-references)
-;;         ("<f10>" . xref-pop-marker-stack)))
+  :hook
+  (go-mode . (lambda () (push 'company-go company-backends))))
 
 (use-package lsp-mode
   :commands
   lsp
 
+  :bind
+  ("<f1>" . lsp-ui-doc-show)
+  ("<f2>" . lsp-ui-doc-hide)
+  ("<f12>" . xref-find-definitions-other-window)
+  ("<f11>" . xref-find-references)
+  ("<f10>" . xref-pop-marker-stack)
+
   :hook
   (go-mode . lsp)
 
   :custom
-  (lsp-print-io t)
-  (lsp-print-performance t)
-  (lsp-response-timeout 100)
+  (lsp-eldoc-render-all t)
   (lsp-auto-guess-root t)
-  (lsp-prefer-flymake nil))
+  (lsp-prefer-flymake :none))
 
 (use-package hydra)
 (use-package treemacs)
@@ -803,6 +785,28 @@
 (use-package lsp-ui
   :commands
   lsp-ui-mode
+
+  :custom
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-doc-include-signature t)
+  (lsp-ui-doc-border "LightSalmon")
+  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-max-width 60)
+  (lsp-ui-doc-use-webkit t)
+  (lsp-ui-doc-header t)
+  (lsp-ui-sideline-ignore-duplicate t)
+  (lsp-ui-sideline-update-mode 'point)
+
+  :custom-face
+  (lsp-ui-doc-background ((t (:background "WhiteSmoke"))))
+  (lsp-ui-doc-header ((t (:background "LightSkyBlue"))))
+  (lsp-ui-sideline-code-action ((t (:foreground "DarkOrange"))))
+  (lsp-ui-sideline-current-symbol ((t (:height 0.99 :weight ultra-bold
+                                       :foreground "DimGray"
+                                       :box (:line-width -1
+                                             :color "DimGray"
+                                             :style nil)))))
 
   :hook
   (lsp-mode . lsp-ui-mode))
@@ -816,7 +820,15 @@
 (use-package cquery)
 
 (use-package rustic
+  :init
+  (require 'yasnippet)
+  (require 'lsp-mode)
+
+  :custom-face
+  (rustic-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+
   :custom
+  rustic-flycheck-setup-mode-line-p nil
   rustic-always-locate-project-on-open t
   rustic-indent-where-clause t
   rustic-indent-method-chain t)
