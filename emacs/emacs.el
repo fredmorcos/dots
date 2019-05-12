@@ -629,8 +629,8 @@
   ;;       #'company-indent-or-complete-common)))
 
   :custom
-  (company-auto-complete 'company-explicit-action-p)
-  (company-auto-complete-chars '(32 95 41 46))
+  ;; (company-auto-complete 'company-explicit-action-p)
+  ;; (company-auto-complete-chars '(32 95 41 46))
   (company-echo-truncate-lines nil)
   (company-selection-wrap-around t)
   (company-tooltip-limit 100)
@@ -638,7 +638,7 @@
   (company-tooltip-align-annotations t)
   (company-idle-delay 0.2)
   (company-echo-delay 0)
-  (company-begin-commands '(self-insert-command))
+  ;; (company-begin-commands '(self-insert-command))
   (company-transformers '(company-sort-by-backend-importance)))
 
 (use-package company-flx
@@ -783,6 +783,12 @@
 ;;         ("<f10>" . xref-pop-marker-stack)))
 
 (use-package lsp-mode
+  :commands
+  lsp
+
+  :hook
+  (go-mode . lsp)
+
   :custom
   (lsp-print-io t)
   (lsp-print-performance t)
@@ -808,7 +814,12 @@
 (use-package dap-mode)
 (use-package ccls)
 (use-package cquery)
-(use-package rustic)
+
+(use-package rustic
+  :custom
+  rustic-always-locate-project-on-open t
+  rustic-indent-where-clause t
+  rustic-indent-method-chain t)
 
 (provide '.emacs)
 ;;; .emacs ends here
