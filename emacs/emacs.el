@@ -210,7 +210,7 @@
   recentf-cleanup
 
   :config
-  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d/"))
+  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d"))
   (recentf-cleanup)
 
   :custom
@@ -682,8 +682,6 @@
   (mc/cursor-bar-face ((t (:background "Gray40" :foreground "White"))))
   (mc/cursor-face ((t (:background "Gray50" :foreground "White")))))
 
-(use-package smartparens)
-
 (use-package yasnippet
   :commands
   yas-reload-all
@@ -738,6 +736,12 @@
 (use-package meson-mode)
 (use-package yaml-mode)
 (use-package flycheck-yamllint)
+(use-package hydra)
+(use-package treemacs)
+(use-package lsp-java)
+(use-package dap-mode)
+(use-package ccls)
+(use-package cquery)
 
 (use-package go-mode
   :mode
@@ -757,7 +761,7 @@
   (company-go-show-annotation t)
 
   :hook
-  (go-mode . (lambda () (push 'company-go company-backends))))
+  (push 'company-go company-backends))
 
 (use-package lsp-mode
   :commands
@@ -765,7 +769,7 @@
 
   :bind
   ("<f1>" . lsp-ui-doc-show)
-  ("<f2>" . lsp-ui-doc-hide)
+  ("<f2>" . lsp-rename)
   ("<f12>" . xref-find-definitions-other-window)
   ("<f11>" . xref-find-references)
   ("<f10>" . xref-pop-marker-stack)
@@ -776,11 +780,7 @@
   :custom
   (lsp-eldoc-render-all t)
   (lsp-auto-guess-root t)
-  (lsp-prefer-flymake :none))
-
-(use-package hydra)
-(use-package treemacs)
-(use-package lsp-java)
+  (lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :commands
@@ -814,10 +814,6 @@
 (use-package company-lsp
   :commands
   company-lsp)
-
-(use-package dap-mode)
-(use-package ccls)
-(use-package cquery)
 
 (use-package rustic
   :init
