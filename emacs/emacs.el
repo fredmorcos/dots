@@ -760,7 +760,7 @@
   :custom
   (company-go-show-annotation t)
 
-  :hook
+  :config
   (push 'company-go company-backends))
 
 (use-package lsp-mode
