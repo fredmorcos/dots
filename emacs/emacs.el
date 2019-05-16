@@ -224,6 +224,7 @@
   :ensure nil
 
   :custom
+  (confirm-kill-processes nil)
   (auto-save-file-name-transforms `((".*" ,emacs-autosaves-pattern t)))
   (backup-directory-alist `((".*" . ,emacs-backups-pattern)))
   (backup-inhibited nil)
