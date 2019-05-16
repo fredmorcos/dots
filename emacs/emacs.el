@@ -168,7 +168,7 @@
   set-fringe-style
 
   :config
-  (set-fringe-style '(16 . 16)))
+  (set-fringe-style '(8 . 8)))
 
 (use-package minibuffer
   :ensure nil
@@ -655,9 +655,9 @@
   (diff-hl-flydiff-delay 0.1)
 
   :custom-face
-  (diff-hl-delete ((t (:background "Coral2"))))
-  (diff-hl-insert ((t (:background "ChartreUse3"))))
-  (diff-hl-change ((t (:background "DeepSkyBlue"))))
+  (diff-hl-delete ((t (:background "RosyBrown1"))))
+  (diff-hl-insert ((t (:background "HoneyDew2"))))
+  (diff-hl-change ((t (:background "Lavender"))))
 
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh))
