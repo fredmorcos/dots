@@ -168,7 +168,7 @@
   set-fringe-style
 
   :config
-  (set-fringe-style '(16 . 0)))
+  (set-fringe-style '(16 . 16)))
 
 (use-package minibuffer
   :ensure nil
@@ -303,7 +303,8 @@
 
   :custom
   (column-number-mode t)
-  (size-indication-mode t)
+  ;; (size-indication-mode t)
+  (line-number-mode nil)
   (auto-save-mode t))
 
 (use-package uniquify
@@ -651,6 +652,11 @@
   (diff-hl-flydiff-mode t)
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
+
+  :custom-face
+  (diff-hl-delete ((t (:background "Coral2"))))
+  (diff-hl-insert ((t (:background "ChartreUse3"))))
+  (diff-hl-change ((t (:background "DeepSkyBlue"))))
 
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh))
