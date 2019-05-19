@@ -376,6 +376,15 @@
 (use-package elisp-mode
   :ensure nil
 
+  :hook
+  (emacs-lisp-mode . eldoc-mode)
+  (emacs-lisp-mode . checkdoc-minor-mode)
+  (emacs-lisp-mode . which-function-mode)
+  (emacs-lisp-mode . flycheck-mode)
+  (emacs-lisp-mode . company-mode)
+  (emacs-lisp-mode . symbol-overlay-mode)
+  (emacs-lisp-mode . yas-minor-mode)
+
   :mode
   ("\\emacs\\'" . emacs-lisp-mode))
 
@@ -392,18 +401,6 @@
 
   :custom
   (eldoc-echo-area-use-multiline-p t))
-
-(use-package prog-mode
-  :ensure nil
-
-  :hook
-  (prog-mode . eldoc-mode)
-  (prog-mode . checkdoc-minor-mode)
-  (prog-mode . which-function-mode)
-  (prog-mode . flycheck-mode)
-  (prog-mode . company-mode)
-  (prog-mode . symbol-overlay-mode)
-  (prog-mode . yas-minor-mode))
 
 (use-package paren
   :ensure nil
@@ -593,11 +590,21 @@
   (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "Chk"))
 
+(use-package flymake
+  :bind
+  (:map flymake-mode-map
+        ("C-c n" . flymake-goto-next-error)
+        ("C-c p" . flymake-goto-prev-error)))
+
 (use-package company
   :diminish "Com"
 
   :bind
-  ("C-v" . company-complete)
+  (:map company-active-map
+        ("M-RET" . company-complete-selection)
+        ("M-<return>" . company-complete-selection)
+        ("RET" . nil)
+        ("<return>" . nil))
 
   :custom
   (company-lighter-base "Com")
@@ -610,6 +617,16 @@
   (company-tooltip-align-annotations t)
   (company-begin-commands '(self-insert-command))
   (company-transformers '(company-sort-by-backend-importance)))
+
+(use-package auto-complete
+  :custom
+  (ac-auto-start t)
+  (ac-auto-show-menu 0)
+  (ac-show-menu-immediately-on-auto-complete t)
+  (ac-delay 0)
+  (ac-dwim t)
+  (ac-dwim-enable t)
+  (ac-use-comphist t))
 
 (use-package diff-hl
   :demand t
@@ -727,7 +744,24 @@
   :config
   (push 'company-go company-backends))
 
-;; (use-package rust-mode)
+(use-package eglot
+  :bind
+  (:map eglot-mode-map
+        ("C-c h" . eglot-help-at-point)
+        ("C-c r" . eglot-rename)
+        ("C-c s" . eglot-code-actions))
+
+  :hook
+  (before-save . eglot-format-buffer))
+
+(use-package rust-mode
+  :hook
+  (rust-mode . eglot-ensure)
+  (rust-mode . company-mode)
+  (rust-mode . yas-minor-mode)
+  (rust-mode . (lambda ()
+                 (progn (setq tab-width 4)
+                        (setq-local standard-indent 4)))))
 
 ;; (use-package rustic
 ;;   :init
