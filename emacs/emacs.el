@@ -12,7 +12,7 @@
 (defconst fnh-alist-old file-name-handler-alist)
 
 (setq-default
- custom-file "/dev/null"
+ custom-file (concat user-emacs-directory "custom.el")
  gc-cons-threshold most-positive-fixnum
  gc-cons-percentage 0.6
  file-name-handler-alist nil
@@ -24,10 +24,9 @@
  url-privacy-level 'high
  url-proxy-services '(("no_proxy" . "127.0.0.1"))
 
- package-check-signature nil
  package-enable-at-startup nil
- package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                    ("melpa" . "http://melpa.org/packages/"))
+ package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                    ("melpa" . "https://melpa.org/packages/"))
 
  use-package-always-defer t
  use-package-always-ensure t
@@ -304,9 +303,14 @@
 
   :custom
   (column-number-mode t)
-  ;; (size-indication-mode t)
   (line-number-mode nil)
   (auto-save-mode t))
+
+(use-package bindings
+  :ensure nil
+
+  :custom
+  (column-number-indicator-zero-based nil))
 
 (use-package uniquify
   :ensure nil
@@ -483,19 +487,6 @@
   :custom
   (which-key-mode t))
 
-(use-package prescient
-  :custom
-  (prescient-persist-mode t)
-  (prescient-filter-method '(literal regexp initialism fuzzy)))
-
-(use-package ivy-prescient
-  :config
-  (ivy-prescient-mode))
-
-(use-package company-prescient
-  :config
-  (company-prescient-mode))
-
 (use-package counsel
   :diminish
 
@@ -546,13 +537,6 @@
   :bind
   ("C-s" . swiper)
   ("C-r" . swiper))
-
-(use-package avy
-  :config
-  (avy-setup-default)
-
-  :bind
-  ("C-c C-j" . avy-resume))
 
 (use-package fzf
   :bind
@@ -612,38 +596,20 @@
 (use-package company
   :diminish "Com"
 
-  ;; :commands
-  ;; local-set-key
-  ;; company-indent-or-complete-common
-
-  ;; :hook
-  ;; (company-mode
-  ;;  . (lambda ()
-  ;;      (local-set-key
-  ;;       (kbd "TAB")
-  ;;       #'company-indent-or-complete-common)))
+  :bind
+  ("C-v" . company-complete)
 
   :custom
-  ;; (company-auto-complete 'company-explicit-action-p)
-  ;; (company-auto-complete-chars '(32 95 41 46))
+  (company-lighter-base "Com")
   (company-echo-truncate-lines nil)
-  (company-selection-wrap-around t)
-  (company-tooltip-limit 100)
-  (company-tooltip-minimum 10)
-  (company-tooltip-align-annotations t)
-  (company-idle-delay 0.2)
   (company-echo-delay 0)
-  ;; (company-begin-commands '(self-insert-command))
+  (company-idle-delay 0.3)
+  (company-selection-wrap-around t)
+  (company-tooltip-minimum 10)
+  (company-tooltip-limit 20)
+  (company-tooltip-align-annotations t)
+  (company-begin-commands '(self-insert-command))
   (company-transformers '(company-sort-by-backend-importance)))
-
-(use-package company-flx
-  :after company
-
-  :config
-  (company-flx-mode +1)
-
-  :custom
-  (company-flx-limit 2000))
 
 (use-package diff-hl
   :demand t
@@ -654,13 +620,13 @@
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
 
+  :hook
+  (magit-post-refresh . diff-hl-magit-post-refresh)
+
   :custom-face
   (diff-hl-delete ((t (:background "RosyBrown1"))))
-  (diff-hl-insert ((t (:background "HoneyDew2"))))
-  (diff-hl-change ((t (:background "Lavender"))))
-
-  :hook
-  (magit-post-refresh . diff-hl-magit-post-refresh))
+  (diff-hl-insert ((t (:background "LightGreen"))))
+  (diff-hl-change ((t (:background "PowderBlue")))))
 
 (use-package symbol-overlay
   :diminish
@@ -720,17 +686,6 @@
   (hledger-mode . symbol-overlay-mode)
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
-(use-package pdf-tools
-  :mode
-  ("\\.pdf\\'" . pdf-view-mode)
-
-  :hook
-  (pdf-view-mode . pdf-tools-enable-minor-modes)
-  (pdf-view-mode . (lambda () (display-line-numbers-mode -1)))
-
-  :config
-  (pdf-loader-install))
-
 (use-package smartparens)
 (use-package adaptive-wrap)
 (use-package boogie-friends)
@@ -764,77 +719,29 @@
            (setenv "CGO_LDFLAGS" ""))))
 
 (use-package company-go
+  :demand t
+
   :custom
   (company-go-show-annotation t)
 
   :config
   (push 'company-go company-backends))
 
-(use-package lsp-mode
-  :commands
-  lsp
+;; (use-package rust-mode)
 
-  :bind
-  ("<f1>" . lsp-ui-doc-show)
-  ("<f2>" . lsp-rename)
-  ("<f12>" . xref-find-definitions-other-window)
-  ("<f11>" . xref-find-references)
-  ("<f10>" . xref-pop-marker-stack)
+;; (use-package rustic
+;;   :init
+;;   (require 'yasnippet)
+;;   (require 'lsp-mode)
 
-  :hook
-  (go-mode . lsp)
+;;   :custom-face
+;;   (rustic-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
 
-  :custom
-  (lsp-eldoc-render-all t)
-  (lsp-auto-guess-root t)
-  (lsp-prefer-flymake nil))
-
-(use-package lsp-ui
-  :commands
-  lsp-ui-mode
-
-  :custom
-  (lsp-ui-doc-enable nil)
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-doc-include-signature t)
-  (lsp-ui-doc-border "LightSalmon")
-  (lsp-ui-doc-position 'bottom)
-  (lsp-ui-doc-max-width 60)
-  (lsp-ui-doc-use-webkit t)
-  (lsp-ui-doc-header t)
-  (lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-sideline-update-mode 'point)
-
-  :custom-face
-  (lsp-ui-doc-background ((t (:background "WhiteSmoke"))))
-  (lsp-ui-doc-header ((t (:background "LightSkyBlue"))))
-  (lsp-ui-sideline-code-action ((t (:foreground "DarkOrange"))))
-  (lsp-ui-sideline-current-symbol ((t (:height 0.99 :weight ultra-bold
-                                       :foreground "DimGray"
-                                       :box (:line-width -1
-                                             :color "DimGray"
-                                             :style nil)))))
-
-  :hook
-  (lsp-mode . lsp-ui-mode))
-
-(use-package company-lsp
-  :commands
-  company-lsp)
-
-(use-package rustic
-  :init
-  (require 'yasnippet)
-  (require 'lsp-mode)
-
-  :custom-face
-  (rustic-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
-
-  :custom
-  rustic-flycheck-setup-mode-line-p nil
-  rustic-always-locate-project-on-open t
-  rustic-indent-where-clause t
-  rustic-indent-method-chain t)
+;;   :custom
+;;   rustic-flycheck-setup-mode-line-p nil
+;;   rustic-always-locate-project-on-open t
+;;   rustic-indent-where-clause t
+;;   rustic-indent-method-chain t)
 
 (provide '.emacs)
 ;;; .emacs ends here
