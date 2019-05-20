@@ -482,6 +482,7 @@
   :diminish
 
   :custom
+  (which-key-idle-delay 0.3)
   (which-key-mode t))
 
 (use-package counsel
@@ -603,6 +604,7 @@
   (:map company-active-map
         ("M-RET" . company-complete-selection)
         ("M-<return>" . company-complete-selection)
+        ("SPC" . company-complete)
         ("RET" . nil)
         ("<return>" . nil))
 
@@ -727,22 +729,19 @@
   ("\\.go\\'" . go-mode)
 
   :hook
-  (before-save . gofmt-before-save)
+  ;; (before-save . gofmt-before-save)
+  (go-mode . eglot-ensure)
+  (go-mode . company-mode)
+  (go-mode . yas-minor-mode)
+  (go-mode . (lambda ()
+               (progn (setq tab-width 4)
+                      (setq-local standard-indent 4))))
 
   :config
   (setq flycheck-disabled-checkers '(go-errcheck))
   (when (string-equal (system-name) "symflower002")
     (progn (setenv "CGO_CFLAGS" "")
            (setenv "CGO_LDFLAGS" ""))))
-
-(use-package company-go
-  :demand t
-
-  :custom
-  (company-go-show-annotation t)
-
-  :config
-  (push 'company-go company-backends))
 
 (use-package eglot
   :bind
@@ -755,6 +754,13 @@
   (before-save . eglot-format-buffer))
 
 (use-package rust-mode
+  :custom-face
+  (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+
+  :custom
+  (rust-indent-where-clause t)
+  (rust-indent-method-chain t)
+
   :hook
   (rust-mode . eglot-ensure)
   (rust-mode . company-mode)
@@ -762,20 +768,6 @@
   (rust-mode . (lambda ()
                  (progn (setq tab-width 4)
                         (setq-local standard-indent 4)))))
-
-;; (use-package rustic
-;;   :init
-;;   (require 'yasnippet)
-;;   (require 'lsp-mode)
-
-;;   :custom-face
-;;   (rustic-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
-
-;;   :custom
-;;   rustic-flycheck-setup-mode-line-p nil
-;;   rustic-always-locate-project-on-open t
-;;   rustic-indent-where-clause t
-;;   rustic-indent-method-chain t)
 
 (provide '.emacs)
 ;;; .emacs ends here
