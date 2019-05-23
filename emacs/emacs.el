@@ -330,6 +330,11 @@
   :custom
   (comment-fill-column 70))
 
+(use-package abbrev
+  :ensure nil
+
+  :diminish "Abb")
+
 (use-package fill
   :ensure nil
 
@@ -380,6 +385,7 @@
   (emacs-lisp-mode . eldoc-mode)
   (emacs-lisp-mode . checkdoc-minor-mode)
   (emacs-lisp-mode . which-function-mode)
+  (emacs-lisp-mode . prettify-symbols-mode)
   (emacs-lisp-mode . flycheck-mode)
   (emacs-lisp-mode . company-mode)
   (emacs-lisp-mode . symbol-overlay-mode)
@@ -407,9 +413,11 @@
 
   :custom
   (show-paren-mode t)
+  (show-paren-delay 0)
   (show-paren-when-point-inside-paren t)
   (show-paren-when-point-in-periphery t)
   (show-paren-style 'mixed)
+  (show-paren-highlight-openparen t)
 
   :custom-face
   (show-paren-match ((t (:background "PowderBlue"))))
@@ -442,6 +450,12 @@
   (sh-indentation 2)
   (sh-basic-offset 2))
 
+(use-package eshell
+  :ensure nil
+
+  :hook
+  (eshell-mode . (lambda () (display-line-numbers-mode -1))))
+
 (use-package org
   :ensure nil
 
@@ -453,6 +467,7 @@
   :hook
   (org-mode . org-indent-mode)
   (org-mode . org-bullets-mode)
+  (org-mode . prettify-symbols-mode)
   (org-mode . flyspell-buffer)
   (org-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
@@ -541,6 +556,10 @@
   ("M-F" . fzf-git-files)
   ("M-P" . fzf-git-grep))
 
+(use-package transient
+  :custom
+  (transient-default-level 7))
+
 (use-package magit
   :bind
   ("C-x g" . magit-status)
@@ -592,6 +611,11 @@
   (flycheck-mode-line-prefix "Chk"))
 
 (use-package flymake
+  ;; :diminish "FM"
+
+  :custom
+  (flymake-suppress-zero-counters t)
+  
   :bind
   (:map flymake-mode-map
         ("C-c n" . flymake-goto-next-error)
@@ -602,9 +626,11 @@
 
   :bind
   (:map company-active-map
-        ("M-RET" . company-complete-selection)
-        ("M-<return>" . company-complete-selection)
-        ("SPC" . company-complete)
+        ;; ("M-RET" . company-complete-selection)
+        ;; ("M-<return>" . company-complete-selection)
+        ;; ("SPC" . company-complete)
+        ("TAB" . company-complete-selection)
+        ("<tab>" . company-complete-selection)
         ("RET" . nil)
         ("<return>" . nil))
 
@@ -703,6 +729,7 @@
   :hook
   (hledger-mode . yas-minor-mode)
   (hledger-mode . symbol-overlay-mode)
+  (hledger-mode . prettify-symbols-mode)
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package smartparens)
@@ -724,6 +751,17 @@
 (use-package ccls)
 (use-package cquery)
 
+(use-package eglot
+  :bind
+  (:map eglot-mode-map
+        ("C-c h" . eglot-help-at-point)
+        ("C-c r" . eglot-rename)
+        ("C-c s" . eglot-code-actions)
+        ("C-c q" . eglot-reconnect))
+
+  :hook
+  (before-save . eglot-format-buffer))
+
 (use-package go-mode
   :mode
   ("\\.go\\'" . go-mode)
@@ -731,6 +769,8 @@
   :hook
   ;; (before-save . gofmt-before-save)
   (go-mode . eglot-ensure)
+  (go-mode . which-function-mode)
+  (go-mode . prettify-symbols-mode)
   (go-mode . company-mode)
   (go-mode . yas-minor-mode)
   (go-mode . (lambda ()
@@ -743,16 +783,6 @@
     (progn (setenv "CGO_CFLAGS" "")
            (setenv "CGO_LDFLAGS" ""))))
 
-(use-package eglot
-  :bind
-  (:map eglot-mode-map
-        ("C-c h" . eglot-help-at-point)
-        ("C-c r" . eglot-rename)
-        ("C-c s" . eglot-code-actions))
-
-  :hook
-  (before-save . eglot-format-buffer))
-
 (use-package rust-mode
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
@@ -763,9 +793,24 @@
 
   :hook
   (rust-mode . eglot-ensure)
+  (rust-mode . which-function-mode)
+  (rust-mode . prettify-symbols-mode)
   (rust-mode . company-mode)
   (rust-mode . yas-minor-mode)
   (rust-mode . (lambda ()
+                 (progn (setq tab-width 4)
+                        (setq-local standard-indent 4)))))
+
+(use-package java-mode
+  :ensure nil
+
+  :hook
+  (java-mode . eglot-ensure)
+  (java-mode . which-function-mode)
+  (java-mode . prettify-symbols-mode)
+  (java-mode . company-mode)
+  (java-mode . yas-minor-mode)
+  (java-mode . (lambda ()
                  (progn (setq tab-width 4)
                         (setq-local standard-indent 4)))))
 
