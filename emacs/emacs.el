@@ -734,7 +734,6 @@
 
 (use-package smartparens)
 (use-package adaptive-wrap)
-(use-package boogie-friends)
 (use-package rmsbolt)
 (use-package toml-mode)
 (use-package markdown-mode)
@@ -750,6 +749,15 @@
 (use-package dap-mode)
 (use-package ccls)
 (use-package cquery)
+
+(use-package boogie-friends
+  :hook
+  (z3-smt2-mode . prettify-symbols-mode)
+
+  :custom
+  (z3-smt2-prover-custom-args '("smt.relevancy=1"
+                                "sat.acce=true"
+                                "smt.arith.solver=6")))
 
 (use-package eglot
   :bind
