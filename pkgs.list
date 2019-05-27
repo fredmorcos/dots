@@ -50,6 +50,7 @@ cdrtools
 cgdb
 cgit
 checksec
+cheese
 chrpath
 cloc
 cmake
@@ -104,7 +105,6 @@ flawfinder
 flex
 foremost
 fossil
-frei0r-plugins
 fwupd
 fzf
 fzy
@@ -186,6 +186,7 @@ latex2rtf
 lbzip2
 lhasa
 lib32-mesa-vdpau
+libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
 libgsf
@@ -368,6 +369,8 @@ sbsigntools
 scrcpy
 screen
 sdl2_gfx
+sdl2_ttf
+sdl_image
 semi
 shedskin
 shellcheck
@@ -383,8 +386,6 @@ spirv-headers
 spirv-llvm-translator
 squashfs-tools
 stardict
-steam
-steam-native-runtime
 strace
 stratis-cli
 stratisd
