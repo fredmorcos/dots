@@ -124,6 +124,7 @@ glyr
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
+gnome-icon-theme
 gnome-icon-theme-extras
 gnome-keyring
 gnome-mpv
@@ -419,7 +420,9 @@ traceroute
 transcode
 transmission-gtk
 trash-cli
-ttf-hack
+ttf-fira-mono
+ttf-fira-sans
+ttf-symbola
 tumbler
 udftools
 unace
