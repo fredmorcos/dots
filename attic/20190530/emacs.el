@@ -30,6 +30,7 @@
 
  use-package-always-defer t
  use-package-always-ensure t
+ use-package-enable-imenu-support t
  use-package-expand-minimally t)
 
 (package-initialize)
@@ -213,6 +214,7 @@
 
   :custom
   (recentf-save-file emacs-recentf-file)
+  ;; (recentf-auto-cleanup 30)
   (recentf-max-menu-items 50)
   (recentf-max-saved-items 50)
   (recentf-mode t))
@@ -383,12 +385,27 @@
 
   :hook
   (emacs-lisp-mode . eldoc-mode)
+  (emacs-lisp-mode . checkdoc-minor-mode)
+  (emacs-lisp-mode . which-function-mode)
+  (emacs-lisp-mode . prettify-symbols-mode)
   (emacs-lisp-mode . flycheck-mode)
   (emacs-lisp-mode . company-mode)
   (emacs-lisp-mode . symbol-overlay-mode)
+  (emacs-lisp-mode . yas-minor-mode)
+  (emacs-lisp-mode
+   . (lambda ()
+       (push '("progn" . "→") prettify-symbols-alist)
+       (push '("use-package" . "⮩") prettify-symbols-alist)))
 
   :mode
   ("\\emacs\\'" . emacs-lisp-mode))
+
+(use-package checkdoc
+  :ensure nil
+  :diminish "CD"
+
+  :custom
+  (checkdoc-minor-mode-string " CD"))
 
 (use-package eldoc
   :ensure nil
@@ -455,8 +472,14 @@
   :hook
   (org-mode . org-indent-mode)
   (org-mode . org-bullets-mode)
+  (org-mode . prettify-symbols-mode)
   (org-mode . (lambda () (jit-lock-register 'flyspell-region)))
   (org-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t)))
+  (org-mode . (lambda ()
+                (push '("[ ]" . "☐") prettify-symbols-alist)
+                (push '("[X]" . "☑") prettify-symbols-alist)
+                (push '("[x]" . "☑") prettify-symbols-alist)
+                (push '("[-]" . "❍") prettify-symbols-alist)))
 
   :custom-face
   (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod"))))
@@ -721,6 +744,7 @@
   :hook
   (hledger-mode . yas-minor-mode)
   (hledger-mode . symbol-overlay-mode)
+  (hledger-mode . prettify-symbols-mode)
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package smartparens)
@@ -742,6 +766,9 @@
 (use-package cquery)
 
 (use-package boogie-friends
+  :hook
+  (z3-smt2-mode . prettify-symbols-mode)
+
   :custom
   (z3-smt2-prover-custom-args '("smt.relevancy=1"
                                 "sat.acce=true"
@@ -763,13 +790,18 @@
   ("\\.go\\'" . go-mode)
 
   :hook
+  ;; (before-save . gofmt-before-save)
   (go-mode . eglot-ensure)
+  (go-mode . which-function-mode)
+  (go-mode . prettify-symbols-mode)
   (go-mode . company-mode)
+  (go-mode . yas-minor-mode)
   (go-mode . (lambda ()
                (setq tab-width 4)
                (setq-local standard-indent 4)))
 
   :config
+  (setq flycheck-disabled-checkers '(go-errcheck))
   (when (string-equal (system-name) "symflower002")
     (progn
       (setenv "CGO_CFLAGS" "")
@@ -785,17 +817,24 @@
 
   :hook
   (rust-mode . eglot-ensure)
+  (rust-mode . which-function-mode)
+  (rust-mode . prettify-symbols-mode)
   (rust-mode . company-mode)
+  (rust-mode . yas-minor-mode)
   (rust-mode . (lambda ()
                  (setq tab-width 4)
-                 (setq-local standard-indent 4))))
+                 (setq-local standard-indent 4)))
+  (rust-mode . (lambda () (push '("->" . "→") prettify-symbols-alist))))
 
 (use-package java-mode
   :ensure nil
 
   :hook
   (java-mode . eglot-ensure)
+  (java-mode . which-function-mode)
+  (java-mode . prettify-symbols-mode)
   (java-mode . company-mode)
+  (java-mode . yas-minor-mode)
   (java-mode . (lambda ()
                  (setq tab-width 4)
                  (setq-local standard-indent 4))))
