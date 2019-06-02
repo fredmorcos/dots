@@ -81,7 +81,7 @@
   :ensure nil
 
   :custom-face
-  (default ((t (:font "Fira Mono 11"))))
+  (default ((t (:font "Fira Mono 13"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
@@ -616,26 +616,19 @@
 (use-package company
   :diminish "Com"
 
-  :bind
-  (:map company-active-map
-        ;; ("M-RET" . company-complete-selection)
-        ;; ("M-<return>" . company-complete-selection)
-        ;; ("SPC" . company-complete)
-        ("TAB" . company-complete-selection)
-        ("<tab>" . company-complete-selection)
-        ("RET" . nil)
-        ("<return>" . nil))
-
   :custom
-  (company-lighter-base "Com")
+  (company-dabbrev-minimum-length 1)
+  (company-dabbrev-code-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-echo-delay 0)
-  (company-idle-delay 0.3)
+  (company-idle-delay 0)
+  (company-tooltip-idle-delay 0)
+  (company-minimum-prefix-length 1)
+  (company-require-match nil)
   (company-selection-wrap-around t)
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
-  (company-begin-commands '(self-insert-command))
   (company-transformers '(company-sort-by-backend-importance)))
 
 (use-package auto-complete
@@ -723,23 +716,9 @@
   (hledger-mode . symbol-overlay-mode)
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
-(use-package smartparens)
-(use-package adaptive-wrap)
-(use-package rmsbolt)
 (use-package toml-mode)
-(use-package markdown-mode)
 (use-package json-mode)
-(use-package gnuplot-mode)
-(use-package dockerfile-mode)
-(use-package meson-mode)
-(use-package yaml-mode)
-(use-package flycheck-yamllint)
-(use-package hydra)
-(use-package treemacs)
-(use-package lsp-java)
-(use-package dap-mode)
-(use-package ccls)
-(use-package cquery)
+(use-package pkgbuild-mode)
 
 (use-package boogie-friends
   :custom
@@ -778,8 +757,13 @@
 (use-package rust-mode
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+  
+  :bind
+  (:map rust-mode-map
+        ("C-c C-c" . rust-run))
 
   :custom
+  (rust-format-on-save t)
   (rust-indent-where-clause t)
   (rust-indent-method-chain t)
 
