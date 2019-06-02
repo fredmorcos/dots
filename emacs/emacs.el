@@ -81,7 +81,7 @@
   :ensure nil
 
   :custom-face
-  (default ((t (:font "Fira Mono 13"))))
+  (default ((t (:font "Fira Mono 11"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
