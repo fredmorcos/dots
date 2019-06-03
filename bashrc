@@ -81,7 +81,7 @@ alias synapse_reboot='synapse_systemctl reboot'
 alias synapse_poweroff='synapse_systemctl poweroff'
 alias synapse_update='ssh synapse sudo pacman -Syu'
 
-alias vpn_p2p='sudo /usr/bin/openpyn nl -t 10 -f --p2p --tcp'
+alias vpn_p2p='sudo /usr/bin/openpyn nl -s nl567 -f --p2p --tcp'
 alias vpn='sudo /usr/bin/openpyn nl -s nl567 -f --tcp'
 alias dlsub='subdl -i --output={m}.{L}.{S}'
 alias yt720='youtube-dl -f "[height<=720]"'

@@ -631,15 +631,21 @@
   (company-tooltip-align-annotations t)
   (company-transformers '(company-sort-by-backend-importance)))
 
-(use-package auto-complete
+(use-package company-quickhelp
+  :pin melpa
+
+  :after company
+
+  :hook
+  (company-mode . company-quickhelp-mode)
+
   :custom
-  (ac-auto-start t)
-  (ac-auto-show-menu 0)
-  (ac-show-menu-immediately-on-auto-complete t)
-  (ac-delay 0)
-  (ac-dwim t)
-  (ac-dwim-enable t)
-  (ac-use-comphist t))
+  (company-quickhelp-use-propertized-text t)
+  (company-quickhelp-delay nil)
+
+  :bind
+  (:map company-active-map
+        ("C-c h" . company-quickhelp-manual-begin)))
 
 (use-package diff-hl
   :demand t
