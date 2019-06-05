@@ -444,8 +444,21 @@
   :hook
   (eshell-mode . (lambda () (display-line-numbers-mode -1))))
 
+(use-package f)
+(use-package ht)
+(use-package cl)
+(use-package dash)
+(use-package diminish)
+(use-package bind-key)
+(use-package flx)
+(use-package amx)
+(use-package smex)
+(use-package lv)
+(use-package all-the-icons)
+(use-package org-bullets)
+
 (use-package org
-  :ensure nil
+  :pin melpa
 
   :custom
   (org-cycle-separator-lines 0)
@@ -463,19 +476,6 @@
 
   :config
   (setq org-ellipsis "   ▾"))
-
-(use-package f)
-(use-package ht)
-(use-package cl)
-(use-package dash)
-(use-package diminish)
-(use-package bind-key)
-(use-package flx)
-(use-package amx)
-(use-package smex)
-(use-package lv)
-(use-package all-the-icons)
-(use-package org-bullets)
 
 (use-package unicode-fonts
   :config
@@ -617,8 +617,11 @@
   :diminish "Com"
 
   :custom
+  (completion-ignore-case t)
+  (company-etags-ignore-case t)
   (company-dabbrev-minimum-length 1)
   (company-dabbrev-code-ignore-case t)
+  (company-dabbrev-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-echo-delay 0)
   (company-idle-delay 0)
