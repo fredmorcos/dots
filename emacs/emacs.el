@@ -610,8 +610,8 @@
 
   :bind
   (:map flymake-mode-map
-        ("C-c n" . flymake-goto-next-error)
-        ("C-c p" . flymake-goto-prev-error)))
+        ("M-n" . flymake-goto-next-error)
+        ("M-p" . flymake-goto-prev-error)))
 
 (use-package company
   :diminish "Com"
@@ -733,7 +733,10 @@
   :custom
   (z3-smt2-prover-custom-args '("smt.relevancy=1"
                                 "sat.acce=true"
-                                "smt.arith.solver=6")))
+                                "smt.arith.solver=6"))
+
+  :hook
+  (z3-smt2-mode . symbol-overlay-mode))
 
 (use-package eglot
   :bind
@@ -741,10 +744,7 @@
         ("C-c h" . eglot-help-at-point)
         ("C-c r" . eglot-rename)
         ("C-c s" . eglot-code-actions)
-        ("C-c q" . eglot-reconnect))
-
-  :hook
-  (before-save . eglot-format-buffer))
+        ("C-c q" . eglot-reconnect)))
 
 (use-package go-mode
   :mode
@@ -756,6 +756,7 @@
   (go-mode . (lambda ()
                (setq tab-width 4)
                (setq-local standard-indent 4)))
+  (before-save . eglot-format-buffer)
 
   :config
   (when (string-equal (system-name) "symflower002")
@@ -766,7 +767,7 @@
 (use-package rust-mode
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
-  
+
   :bind
   (:map rust-mode-map
         ("C-c C-c" . rust-run))
@@ -781,7 +782,8 @@
   (rust-mode . company-mode)
   (rust-mode . (lambda ()
                  (setq tab-width 4)
-                 (setq-local standard-indent 4))))
+                 (setq-local standard-indent 4)))
+  (before-save . eglot-format-buffer))
 
 (use-package java-mode
   :ensure nil
@@ -791,7 +793,8 @@
   (java-mode . company-mode)
   (java-mode . (lambda ()
                  (setq tab-width 4)
-                 (setq-local standard-indent 4))))
+                 (setq-local standard-indent 4)))
+  (before-save . eglot-format-buffer))
 
 (provide '.emacs)
 ;;; .emacs ends here
