@@ -594,8 +594,8 @@
 (use-package flycheck
   :bind
   (:map flycheck-mode-map
-        ("C-c n" . flycheck-next-error)
-        ("C-c p" . flycheck-previous-error)
+        ("M-n" . flycheck-next-error)
+        ("M-p" . flycheck-previous-error)
         ("C-c l" . flycheck-list-errors))
 
   :custom
@@ -744,7 +744,10 @@
         ("C-c h" . eglot-help-at-point)
         ("C-c r" . eglot-rename)
         ("C-c s" . eglot-code-actions)
-        ("C-c q" . eglot-reconnect)))
+        ("C-c q" . eglot-reconnect))
+
+  :commands
+  eglot-format-buffer)
 
 (use-package go-mode
   :mode
@@ -756,7 +759,8 @@
   (go-mode . (lambda ()
                (setq tab-width 4)
                (setq-local standard-indent 4)))
-  (before-save . eglot-format-buffer)
+  (go-mode . (lambda ()
+               (add-hook 'before-save-hook #'eglot-format-buffer t t)))
 
   :config
   (when (string-equal (system-name) "symflower002")
@@ -783,7 +787,8 @@
   (rust-mode . (lambda ()
                  (setq tab-width 4)
                  (setq-local standard-indent 4)))
-  (before-save . eglot-format-buffer))
+  (rust-mode . (lambda ()
+                 (add-hook 'before-save-hook #'eglot-format-buffer t t))))
 
 (use-package java-mode
   :ensure nil
@@ -794,7 +799,8 @@
   (java-mode . (lambda ()
                  (setq tab-width 4)
                  (setq-local standard-indent 4)))
-  (before-save . eglot-format-buffer))
+  (java-mode . (lambda ()
+                 (add-hook 'before-save-hook #'eglot-format-buffer t t))))
 
 (provide '.emacs)
 ;;; .emacs ends here
