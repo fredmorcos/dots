@@ -603,8 +603,6 @@
   (flycheck-mode-line-prefix "Chk"))
 
 (use-package flymake
-  ;; :diminish "FM"
-
   :custom
   (flymake-suppress-zero-counters t)
 
