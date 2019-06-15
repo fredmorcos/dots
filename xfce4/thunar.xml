@@ -19,4 +19,5 @@
   <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
   <property name="misc-remember-geometry" type="bool" value="true"/>
   <property name="misc-small-toolbar-icons" type="bool" value="true"/>
+  <property name="last-side-pane" type="string" value="ThunarShortcutsPane"/>
 </channel>

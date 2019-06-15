@@ -55,6 +55,7 @@ chrpath
 cloc
 cmake
 cmus
+code
 colordiff
 colorgcc
 compton
@@ -190,7 +191,6 @@ latex2rtf
 lbzip2
 lhasa
 lib32-mesa-vdpau
-libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
 libgsf
@@ -241,7 +241,6 @@ mesa-vdpau
 meson
 mg
 mhash
-minizip
 mlocate
 movit
 mp3unicode
@@ -356,7 +355,6 @@ qrencode
 radamsa
 radare2
 radvd
-re2
 realtime-privileges
 reaver
 recordmydesktop
@@ -365,7 +363,6 @@ refind-efi
 reiserfsprogs
 remake
 repo
-ripgrep
 rofi
 rubber
 rustup
@@ -374,8 +371,6 @@ sbsigntools
 scrcpy
 screen
 sdl2_gfx
-sdl2_ttf
-sdl_image
 semi
 shedskin
 shellcheck
@@ -391,6 +386,8 @@ spirv-headers
 spirv-llvm-translator
 squashfs-tools
 stardict
+steam
+steam-native-runtime
 strace
 stratis-cli
 stratisd

@@ -83,6 +83,7 @@ alias synapse_update='ssh synapse sudo pacman -Syu'
 
 alias vpn_p2p='sudo /usr/bin/openpyn nl -s nl567 -f --p2p --tcp'
 alias vpn='sudo /usr/bin/openpyn nl -s nl567 -f --tcp'
+alias vpn_kill='sudo /usr/bin/openpyn -x'
 alias dlsub='subdl -i --output={m}.{L}.{S}'
 alias yt720='youtube-dl -f "[height<=720]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
