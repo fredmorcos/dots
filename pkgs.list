@@ -44,7 +44,6 @@ capnproto
 catdoc
 catfish
 ccache
-ccls
 cdrdao
 cdrtools
 cgdb
@@ -61,7 +60,6 @@ colorgcc
 compton
 cpio
 cppcheck
-cquery
 crda
 cryptominisat5
 ctags
@@ -104,7 +102,6 @@ firewalld
 fish
 flawfinder
 flex
-foliate
 foremost
 fossil
 fwupd
@@ -120,7 +117,6 @@ gimp
 git-crypt
 git-repair
 git-review
-gitea
 gitprompt-rs
 glpk
 glyr
@@ -190,7 +186,7 @@ laptop-detect
 latex2rtf
 lbzip2
 lhasa
-lib32-mesa-vdpau
+libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
 libgsf
@@ -264,7 +260,6 @@ noto-fonts-emoji
 noto-fonts-extra
 ntfs-3g
 numix-gtk-theme
-obs-studio
 odt2txt
 openbsd-netcat
 opencl-mesa
@@ -317,7 +312,6 @@ python-fxa
 python-genshi
 python-hypothesis
 python-nose
-python-numpy
 python-olefile
 python-pillow
 python-pip
@@ -342,14 +336,11 @@ python2-html5lib
 python2-lxml
 python2-m2crypto
 python2-monotonic
-python2-numpy
 python2-priority
 python2-pycurl
-python2-pygments
 python2-pyserial
 python2-service-identity
 python2-soappy
-python2-tornado
 qopenvpn
 qrencode
 radamsa
@@ -368,9 +359,10 @@ rubber
 rustup
 s-nail
 sbsigntools
-scrcpy
 screen
 sdl2_gfx
+sdl2_ttf
+sdl_image
 semi
 shedskin
 shellcheck
@@ -386,8 +378,6 @@ spirv-headers
 spirv-llvm-translator
 squashfs-tools
 stardict
-steam
-steam-native-runtime
 strace
 stratis-cli
 stratisd
@@ -423,7 +413,6 @@ transmission-gtk
 trash-cli
 ttf-fira-mono
 ttf-fira-sans
-ttf-symbola
 tumbler
 udftools
 unace
