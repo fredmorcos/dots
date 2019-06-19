@@ -52,6 +52,7 @@ checksec
 cheese
 chrpath
 cloc
+clojure
 cmake
 cmus
 code
@@ -229,7 +230,9 @@ lzop
 make
 man-pages
 marisa
+mathomatic
 maven
+maxima-ecl
 mda.lv2
 mediainfo
 mesa-demos
@@ -354,6 +357,7 @@ refind-efi
 reiserfsprogs
 remake
 repo
+rlwrap
 rofi
 rubber
 rustup
@@ -409,6 +413,7 @@ tpm2-abrmd
 tpm2-tools
 traceroute
 transcode
+translate-shell
 transmission-gtk
 trash-cli
 ttf-fira-mono
