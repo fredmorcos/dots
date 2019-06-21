@@ -501,7 +501,8 @@
   :bind
   ("M-x" . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("M-A" . counsel-ag))
+  ("M-A" . counsel-ag)
+  ("M-R" . counsel-rg))
 
 (use-package ivy
   :diminish
@@ -547,6 +548,10 @@
   :bind
   ("M-F" . fzf-git-files)
   ("M-P" . fzf-git-grep))
+
+(use-package deadgrep
+  :bind
+  ("M-G" . deadgrep))
 
 (use-package transient
   :custom
@@ -799,6 +804,8 @@
                  (setq-local standard-indent 4)))
   (java-mode . (lambda ()
                  (add-hook 'before-save-hook #'eglot-format-buffer t t))))
+
+(use-package cider)
 
 (provide '.emacs)
 ;;; .emacs ends here
