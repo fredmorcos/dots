@@ -439,8 +439,10 @@ vim-colorsamplerpack
 vim-spell-en
 virglrenderer
 virtualgl
+vkd3d
 vlc
 vulkan-intel
+vulkan-mesa-layer
 vulkan-tools
 w3m
 wavemon
