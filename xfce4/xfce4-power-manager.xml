@@ -26,7 +26,7 @@
     <property name="blank-on-ac" type="int" value="0"/>
     <property name="brightness-level-on-battery" type="uint" value="100"/>
     <property name="brightness-level-on-ac" type="uint" value="100"/>
-    <property name="critical-power-level" type="uint" value="3"/>
+    <property name="critical-power-level" type="uint" value="5"/>
     <property name="inactivity-on-battery" type="uint" value="14"/>
     <property name="inactivity-on-ac" type="uint" value="14"/>
     <property name="show-panel-label" type="bool" value="true"/>
