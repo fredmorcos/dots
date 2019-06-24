@@ -187,7 +187,7 @@ laptop-detect
 latex2rtf
 lbzip2
 lhasa
-libappindicator-gtk2
+lib32-mesa-vdpau
 libappindicator-gtk3
 libdvdcss
 libgsf
@@ -365,8 +365,6 @@ s-nail
 sbsigntools
 screen
 sdl2_gfx
-sdl2_ttf
-sdl_image
 semi
 shedskin
 shellcheck
@@ -382,6 +380,8 @@ spirv-headers
 spirv-llvm-translator
 squashfs-tools
 stardict
+steam
+steam-native-runtime
 strace
 stratis-cli
 stratisd

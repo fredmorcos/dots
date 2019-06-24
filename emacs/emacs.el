@@ -442,7 +442,10 @@
   :ensure nil
 
   :hook
-  (eshell-mode . (lambda () (display-line-numbers-mode -1))))
+  (eshell-mode . (lambda () (display-line-numbers-mode -1)))
+
+  :custom
+  (eshell-destroy-buffer-when-process-dies t))
 
 (use-package f)
 (use-package ht)
@@ -620,6 +623,8 @@
   :diminish "Com"
 
   :custom
+  (company-backends '(company-capf company-dabbrev-code company-keywords
+                                   company-dabbrev company-files))
   (completion-ignore-case t)
   (company-etags-ignore-case t)
   (company-dabbrev-minimum-length 1)
@@ -806,6 +811,7 @@
                  (add-hook 'before-save-hook #'eglot-format-buffer t t))))
 
 (use-package cider)
+(use-package clojure-snippets)
 
 (provide '.emacs)
 ;;; .emacs ends here
