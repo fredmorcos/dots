@@ -20,10 +20,8 @@ bk_cmd () {
 
 # Temporary
 bk_cmd "$HOME/Videos/"                 "$HDD/Fred/Videos/"
-bk_cmd "$HOME/VideosTemp/"             "$HDD/Fred/VideosTemp/"
 bk_cmd "$HOME/Eclipse/"                "$HDD/Fred/Eclipse/"
 bk_cmd "$HDD/Fred/Videos/"             "fred@synapse:Videos/"
-bk_cmd "$HDD/Fred/VideosTemp/"         "fred@synapse:VideosTemp/"
 bk_cmd "$HDD/Fred/Eclipse/"            "fred@synapse:Eclipse/"
 
 bk_cmd "$HOME/Music/"                  "$HDD/Common/Music/"
