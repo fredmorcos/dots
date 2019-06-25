@@ -227,6 +227,7 @@ lsp-plugins
 lxdm-gtk3
 lynx
 lzop
+mailutils
 make
 man-pages
 marisa

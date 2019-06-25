@@ -13,16 +13,6 @@ source /usr/share/fzf/completion.bash
 # PS1='[\u@\h \W]\$ '
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
-PATH="$HOME/.cargo/bin:$PATH"
-PATH="$HOME/.local/bin:$PATH"
-PATH="$HOME/Workspace/dots/scripts:$PATH"
-PATH="$HOME/Documents/Workspace/bin:$PATH"
-
-RUSTC_WRAPPER=sccache
-
-EDITOR='emacs -nw'
-GIT_EDITOR=vim
-
 # bind "set completion-ignore-case on"
 # bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
@@ -41,7 +31,7 @@ HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 
 LS_COLORS='ex=00:su=00:sg=00:ca=00:'
 
-export PS1 PATH EDITOR GIT_EDITOR HISTCONTROL HISTIGNORE RUSTC_WRAPPER LS_COLORS
+export PS1 HISTCONTROL HISTIGNORE LS_COLORS
 
 shopt -s autocd
 shopt -s dirspell
