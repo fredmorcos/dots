@@ -622,6 +622,9 @@
 (use-package company
   :diminish "Com"
 
+  :bind
+  ("TAB" . company-indent-or-complete-common)
+
   :custom
   (company-backends '(company-capf company-dabbrev-code company-keywords
                                    company-dabbrev company-files))
@@ -632,7 +635,7 @@
   (company-dabbrev-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-echo-delay 0)
-  (company-idle-delay 0)
+  (company-idle-delay nil)
   (company-tooltip-idle-delay 0)
   (company-minimum-prefix-length 1)
   (company-require-match nil)
@@ -810,8 +813,45 @@
   (java-mode . (lambda ()
                  (add-hook 'before-save-hook #'eglot-format-buffer t t))))
 
-(use-package cider)
+(use-package lsp-mode
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+(use-package company-lsp
+  :commands company-lsp)
+
+(use-package lsp-treemacs
+  :commands lsp-treemacs-errors-list)
+
+(use-package dap-mode)
+
+(use-package clojure-mode)
 (use-package clojure-snippets)
+
+(use-package cider
+  :hook
+  (cider-mode . company-mode)
+  (cider-mode . eldoc-mode)
+  (cider-mode . cider-company-enable-fuzzy-completion)
+  (cider-repl-mode . company-mode)
+  (cider-repl-mode . eldoc-mode)
+  (cider-repl-mode . cider-company-enable-fuzzy-completion))
+
+(use-package clj-refactor)
+
+;; (use-package flycheck-clojure
+;;   :after
+;;   flycheck
+;;   clojure-mode
+;;   cider-mode
+
+;;   :commands
+;;   flycheck-clojure-setup
+
+;;   :init
+;;   (flycheck-clojure-setup))
 
 (provide '.emacs)
 ;;; .emacs ends here

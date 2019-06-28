@@ -52,7 +52,7 @@ checksec
 cheese
 chrpath
 cloc
-clojure
+clojure-lsp-bin
 cmake
 cmus
 code
@@ -186,6 +186,8 @@ kitty
 laptop-detect
 latex2rtf
 lbzip2
+leiningen
+leiningen-completions
 lhasa
 libappindicator-gtk2
 libappindicator-gtk3
