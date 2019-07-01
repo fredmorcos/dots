@@ -41,10 +41,11 @@ bk_cmd "$HDD/Common/Music/"            "common@synapse:Music/"
 bk_cmd "$HDD/Common/Music.New/"        "common@synapse:Music.New/"
 bk_cmd "$HDD/Common/Pictures/"         "common@synapse:Pictures/"
 
-bk_cmd "$HDD/Fred/People/"             "fred@synapse:People/"
+bk_cmd "$HDD/Fred/People/"             "fred@synapse:Private/People/"
 
-bk_cmd "$HDD/FredLaptop/Documents/"    "fred@synapse:Documents/"
-bk_cmd "$HDD/FredLaptop/DotConfigs/"   "fred@synapse:DotConfigs/"
+bk_cmd "$HDD/FredLaptop/Documents/"    "fred@synapse:Private/Documents/"
+bk_cmd "$HDD/FredLaptop/DotConfigs/"   "fred@synapse:Private/DotConfigs/"
+
 bk_cmd "$HDD/FredLaptop/Downloads/"    "fred@synapse:Downloads/"
 bk_cmd "$HDD/FredLaptop/Workspace/"    "fred@synapse:Workspace/"
 
