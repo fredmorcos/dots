@@ -56,7 +56,7 @@ alias cat='bat'
 alias fzf='fzf -e --color=light'
 alias diff='diff-so-fancy'
 
-alias ssh='kitty +kitten ssh'
+# alias ssh='kitty +kitten ssh'
 
 alias neuron_systemctl='ssh neuron sudo systemctl'
 alias neuron_resolved='neuron_systemctl restart systemd-resolved'
@@ -70,6 +70,10 @@ alias synapse_systemctl='ssh synapse sudo systemctl'
 alias synapse_reboot='synapse_systemctl reboot'
 alias synapse_poweroff='synapse_systemctl poweroff'
 alias synapse_update='ssh synapse sudo pacman -Syu'
+
+alias private_cred='cat ~/Documents/Workspace/private-credentials'
+alias private='private_cred | ssh synapse encfs ~/Private-enc ~/Private'
+alias private_umount='ssh synapse fusermount -u ~/Private'
 
 alias vpn_p2p='sudo /usr/bin/openpyn nl -s nl567 -f --p2p --tcp'
 alias vpn='sudo /usr/bin/openpyn nl -s nl567 -f --tcp'
