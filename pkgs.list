@@ -25,7 +25,6 @@ automake
 bash-completion
 bat
 beets
-biber
 binwalk
 bison
 blueberry
@@ -316,7 +315,6 @@ python-dmidecode
 python-evdev
 python-fxa
 python-genshi
-python-hypothesis
 python-nose
 python-olefile
 python-pillow
