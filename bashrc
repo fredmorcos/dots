@@ -56,7 +56,7 @@ alias cat='bat'
 alias fzf='fzf -e --color=light'
 alias diff='diff-so-fancy'
 
-# alias ssh='kitty +kitten ssh'
+alias ssh='kitty +kitten ssh'
 
 alias neuron_systemctl='ssh neuron sudo systemctl'
 alias neuron_resolved='neuron_systemctl restart systemd-resolved'
