@@ -55,7 +55,6 @@ cloc
 clojure-lsp-bin
 cmake
 cmus
-code
 colordiff
 colorgcc
 compton
@@ -243,6 +242,7 @@ mesa-vdpau
 meson
 mg
 mhash
+minizip
 mlocate
 movit
 mp3unicode
@@ -352,6 +352,7 @@ qrencode
 radamsa
 radare2
 radvd
+re2
 realtime-privileges
 reaver
 recordmydesktop
@@ -360,6 +361,7 @@ refind-efi
 reiserfsprogs
 remake
 repo
+ripgrep
 rlwrap
 rofi
 rubber
