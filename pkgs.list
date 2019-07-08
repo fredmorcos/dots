@@ -5,6 +5,7 @@ acpica
 acpid
 adobe-source-sans-pro-fonts
 afl-utils
+afpfs-ng
 alacritty
 alacritty-terminfo
 amd-ucode
@@ -83,6 +84,7 @@ easy-rsa
 easytag
 ebtables
 eclipse-java
+ed
 efitools
 elementary-icon-theme
 enjarify
@@ -147,6 +149,9 @@ gtk-doc
 gtk-engine-murrine
 gtkglext
 gucharmap
+gufw
+gupnp-dlna
+gupnp-tools
 gvfs-mtp
 hashcat
 haveged
@@ -236,11 +241,13 @@ maven
 maxima-ecl
 mda.lv2
 mediainfo
+mediastreamer
 mesa-demos
 mesa-vdpau
 meson
 mg
 mhash
+minidlna
 minizip
 mlocate
 movit
@@ -266,6 +273,7 @@ noto-fonts-extra
 ntfs-3g
 numix-gtk-theme
 odt2txt
+ogmtools
 openbsd-netcat
 opencl-mesa
 openpyn-nordvpn
@@ -371,6 +379,7 @@ sdl2_gfx
 sdl2_ttf
 sdl_image
 semi
+shairplay
 shedskin
 shellcheck
 simplescreenrecorder
@@ -410,7 +419,7 @@ tlp-rdw
 tlsh
 tmux
 tokei
-tor-browser-en
+tor-browser
 torsocks
 tpm2-abrmd
 tpm2-tools
@@ -419,11 +428,9 @@ transcode
 translate-shell
 transmission-gtk
 trash-cli
-ttf-fira-mono
-ttf-fira-sans
-ttf-meslo
 tumbler
 udftools
+ufw-extras
 unace
 unbound
 unichrome-dri
