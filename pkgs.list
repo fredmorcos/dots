@@ -111,7 +111,6 @@ gnome-disk-utility
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-keyring
-gnome-terminal
 gnu-efi-libs
 gnuplot
 gobject-introspection
@@ -165,9 +164,7 @@ iucode-tool
 iverilog
 iwd
 jfsutils
-kitty
 laptop-detect
-latex2rtf
 lbzip2
 leiningen
 leiningen-completions
@@ -216,7 +213,6 @@ mailutils
 make
 man-pages
 marisa
-maven
 mda.lv2
 mediainfo
 mediastreamer
@@ -299,7 +295,6 @@ python-brotlipy
 python-cairocffi
 python-cssselect
 python-discid
-python-dmidecode
 python-evdev
 python-fxa
 python-genshi

@@ -5,7 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-source /etc/profile.d/vte.sh
 # source <(kitty + complete setup bash)
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
