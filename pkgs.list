@@ -3,7 +3,6 @@ acpi
 acpi_call
 acpica
 acpid
-adobe-source-sans-pro-fonts
 afl-utils
 afpfs-ng
 alacritty
@@ -203,7 +202,6 @@ lockdown-ms
 logrotate
 lrzip
 lsb-release
-lsd
 lsof
 lsp-plugins
 lxdm-gtk3
@@ -282,7 +280,6 @@ pkgconf
 pkgdiff
 pkgfile
 ponymix
-powerline-fonts
 powertop
 pstoedit
 psutils

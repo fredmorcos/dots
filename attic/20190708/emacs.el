@@ -610,6 +610,15 @@
   (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "Chk"))
 
+(use-package flymake
+  :custom
+  (flymake-suppress-zero-counters t)
+
+  :bind
+  (:map flymake-mode-map
+        ("M-n" . flymake-goto-next-error)
+        ("M-p" . flymake-goto-prev-error)))
+
 (use-package company
   :diminish "Com"
 
@@ -740,39 +749,83 @@
   :hook
   (z3-smt2-mode . symbol-overlay-mode))
 
+(use-package eglot
+  :bind
+  (:map eglot-mode-map
+        ("C-c h" . eglot-help-at-point)
+        ("C-c r" . eglot-rename)
+        ("C-c s" . eglot-code-actions)
+        ("C-c q" . eglot-reconnect))
+
+  :commands
+  eglot-format-buffer)
+
+(use-package go-mode
+  :mode
+  ("\\.go\\'" . go-mode)
+
+  :hook
+  (go-mode . eglot-ensure)
+  (go-mode . company-mode)
+  (go-mode . (lambda ()
+               (setq tab-width 4)
+               (setq-local standard-indent 4)))
+  (go-mode . (lambda ()
+               (add-hook 'before-save-hook #'eglot-format-buffer t t)))
+
+  :config
+  (when (string-equal (system-name) "symflower002")
+    (progn
+      (setenv "CGO_CFLAGS" "")
+      (setenv "CGO_LDFLAGS" ""))))
+
 (use-package rust-mode
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
 
-  :hook
-  (rust-mode . lsp)
-  (rust-mode . yas-minor-mode)
-  (rust-mode . (lambda ()
-                 (setq tab-width 4)
-                 (setq-local standard-indent 4))))
-
-(use-package lsp-mode
-  :commands (lsp lsp-deferred)
+  :bind
+  (:map rust-mode-map
+        ("C-c C-c" . rust-run))
 
   :custom
-  (lsp-prefer-flymake nil)
+  (rust-format-on-save t)
+  (rust-indent-where-clause t)
+  (rust-indent-method-chain t)
 
-  (lsp-rust-all-targets nil)
-  (lsp-rust-build-bin t)
-  (lsp-rust-build-lib t)
-  ;; (lsp-rust-build-on-save t)
-  (lsp-rust-clippy-preference "on")
-  (lsp-rust-full-docs t)
-  (lsp-rust-wait-to-build 0.1)
+  :hook
+  (rust-mode . eglot-ensure)
+  (rust-mode . company-mode)
+  (rust-mode . (lambda ()
+                 (setq tab-width 4)
+                 (setq-local standard-indent 4)))
+  (rust-mode . (lambda ()
+                 (add-hook 'before-save-hook #'eglot-format-buffer t t))))
 
-  (lsp-ui-doc-enable nil)
-  (lsp-ui-doc-border "black"))
+(use-package java-mode
+  :ensure nil
+
+  :hook
+  (java-mode . eglot-ensure)
+  (java-mode . company-mode)
+  (java-mode . (lambda ()
+                 (setq tab-width 4)
+                 (setq-local standard-indent 4)))
+  (java-mode . (lambda ()
+                 (add-hook 'before-save-hook #'eglot-format-buffer t t))))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
 (use-package company-lsp
   :commands company-lsp)
+
+(use-package lsp-treemacs
+  :commands lsp-treemacs-errors-list)
+
+(use-package dap-mode)
 
 (use-package clojure-mode)
 (use-package clojure-snippets)
@@ -787,6 +840,18 @@
   (cider-repl-mode . cider-company-enable-fuzzy-completion))
 
 (use-package clj-refactor)
+
+;; (use-package flycheck-clojure
+;;   :after
+;;   flycheck
+;;   clojure-mode
+;;   cider-mode
+
+;;   :commands
+;;   flycheck-clojure-setup
+
+;;   :init
+;;   (flycheck-clojure-setup))
 
 (provide '.emacs)
 ;;; .emacs ends here
