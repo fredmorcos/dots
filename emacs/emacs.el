@@ -751,6 +751,10 @@
                  (setq tab-width 4)
                  (setq-local standard-indent 4))))
 
+(use-package cargo
+  :hook
+  (rust-mode . cargo-minor-mode))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
 
@@ -760,7 +764,6 @@
   (lsp-rust-all-targets nil)
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
-  ;; (lsp-rust-build-on-save t)
   (lsp-rust-clippy-preference "on")
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
