@@ -81,7 +81,7 @@
   :ensure nil
 
   :custom-face
-  (default ((t (:font "DejaVu Sans Mono 12"))))
+  (default ((t (:font "Monospace 11"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
@@ -748,15 +748,32 @@
   (rust-mode . lsp)
   (rust-mode . yas-minor-mode)
   (rust-mode . (lambda ()
-                 (setq tab-width 4)
-                 (setq-local standard-indent 4))))
+                 (setq tab-width 4
+                       fill-column 100)
+                 (setq-local standard-indent 4)
+                 (setq-local comment-fill-column 100))))
 
 (use-package cargo
   :hook
-  (rust-mode . cargo-minor-mode))
+  (rust-mode . cargo-minor-mode)
+
+  :init
+  (defun cargo-fmt-and-lint ()
+    (interactive)
+    (cargo-process-fmt)
+    (cargo-process-clippy))
+
+  :bind
+  (:map cargo-minor-mode-map
+        ("C-c C-c C-c" . cargo-fmt-and-lint)))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
+
+  :bind
+  (:map lsp-mode-map
+        ("C-c f" . lsp-format-buffer)
+        ("C-c r" . lsp-rename))
 
   :custom
   (lsp-prefer-flymake nil)
