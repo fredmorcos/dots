@@ -749,9 +749,9 @@
   (rust-mode . yas-minor-mode)
   (rust-mode . (lambda ()
                  (setq tab-width 4
-                       fill-column 100)
+                       fill-column 90)
                  (setq-local standard-indent 4)
-                 (setq-local comment-fill-column 100))))
+                 (setq-local comment-fill-column 90))))
 
 (use-package cargo
   :hook
