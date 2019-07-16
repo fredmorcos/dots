@@ -48,6 +48,7 @@
   eval-after-load
   add-hook
   add-to-list
+  sit-for
 
   :init
   (defalias 'yes-or-no-p 'y-or-n-p))
@@ -383,6 +384,7 @@
 
   :hook
   (emacs-lisp-mode . eldoc-mode)
+  (emacs-lisp-mode . flycheck-elsa-setup)
   (emacs-lisp-mode . flycheck-mode)
   (emacs-lisp-mode . company-mode)
   (emacs-lisp-mode . symbol-overlay-mode)
@@ -610,6 +612,9 @@
   (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "Chk"))
 
+(use-package elsa)
+(use-package flycheck-elsa)
+
 (use-package company
   :diminish "Com"
 
@@ -761,6 +766,7 @@
   (defun cargo-fmt-and-lint ()
     (interactive)
     (cargo-process-fmt)
+    (sit-for 1)
     (cargo-process-clippy))
 
   :bind

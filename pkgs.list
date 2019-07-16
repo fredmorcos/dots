@@ -7,7 +7,6 @@ afl-utils
 afpfs-ng
 alacritty
 alacritty-terminfo
-amd-ucode
 android-tools
 android-udev
 arc-icon-theme
@@ -35,6 +34,7 @@ bup
 byzanz
 cabextract
 capnproto
+cask
 catdoc
 ccache
 cdrdao
@@ -93,6 +93,7 @@ fwupd
 fzf
 fzy
 geckodriver
+gedit-plugins
 geoip-database-extra
 geoip2-database
 ghi
@@ -171,6 +172,7 @@ lhasa
 libappindicator-gtk2
 libappindicator-gtk3
 libdvdcss
+libgit2-glib
 libgsf
 libiscsi
 libmaa
@@ -254,8 +256,6 @@ optipng
 opusfile
 os-prober
 ostree
-otf-latin-modern
-otf-latinmodern-math
 ovmf
 p7zip
 pacgraph
@@ -279,6 +279,7 @@ pixiewps
 pkgconf
 pkgdiff
 pkgfile
+plantri
 ponymix
 powertop
 pstoedit
@@ -345,7 +346,6 @@ repo
 ripgrep
 rlwrap
 rofi
-rubber
 rustup
 s-nail
 sbsigntools
@@ -380,6 +380,7 @@ t1utils
 tarsnap
 tcc
 tcpdump
+tepl
 the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -423,6 +424,7 @@ virglrenderer
 virtualgl
 vkd3d
 vlc
+vte3
 vulkan-intel
 vulkan-mesa-layer
 vulkan-tools
