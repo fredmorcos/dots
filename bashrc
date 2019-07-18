@@ -55,15 +55,13 @@ alias cat='bat'
 alias fzf='fzf -e --color=light'
 alias diff='diff-so-fancy'
 
-alias ssh='kitty +kitten ssh'
-
 alias neuron_systemctl='ssh neuron sudo systemctl'
-alias neuron_resolved='neuron_systemctl restart systemd-resolved'
+alias neuron_dns='neuron_systemctl restart systemd-resolved'
 alias neuron_reboot='neuron_systemctl reboot'
 alias neuron_poweroff='neuron_systemctl poweroff'
-alias neuron_kodi_restart='neuron_resolved && neuron_systemctl restart kodi'
+alias neuron_kodi_restart='neuron_dns && neuron_systemctl restart kodi'
 alias neuron_kodi_stop='neuron_systemctl stop kodi'
-alias neuron_update='neuron_resolved && ssh neuron sudo pacman -Syu'
+alias neuron_update='neuron_dns && ssh neuron sudo pacman -Syu'
 
 alias synapse_systemctl='ssh synapse sudo systemctl'
 alias synapse_reboot='synapse_systemctl reboot'
