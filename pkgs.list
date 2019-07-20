@@ -24,6 +24,7 @@ automake
 bash-completion
 bat
 beets
+bin2iso
 binwalk
 bison
 bridge-utils
@@ -50,9 +51,12 @@ cpio
 crda
 cryptominisat5
 ctags
+cuetools
 dav1d
 dbus-broker
 dconf-editor
+dd_rescue
+ddrescue
 devilspie
 dex
 dhcpcd
@@ -149,6 +153,7 @@ hyphen-en
 hyphen-fr
 i3lock
 i7z
+id3v2
 ifenslave
 intel-compute-runtime
 intel-gpu-tools
@@ -171,11 +176,13 @@ leiningen-completions
 lhasa
 libappindicator-gtk2
 libappindicator-gtk3
+libcue
 libdvdcss
 libgit2-glib
 libgsf
 libiscsi
 libmaa
+libmirage
 libmythes
 libnfs
 libnsutils

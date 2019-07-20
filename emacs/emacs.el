@@ -81,16 +81,16 @@
 (use-package faces
   :ensure nil
 
+  :init
+  (setq font-use-system-font t)
+
   :custom-face
   (default ((t (:font "Monospace 11"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
-  (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
-  (mode-line ((t (:foreground "Gray20" :background "Gray80"
-                  :box (:line-width 1 :color "Gray75" :style nil)))))
-
-  :init
-  (setq font-use-system-font t))
+  ;; (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
+  (mode-line ((t (:foreground "Gray20" :background "Gray80")))))
+                  ;; :box (:line-width 1 :color "Gray75" :style nil)))))
 
 (use-package scroll-bar
   :ensure nil
@@ -795,10 +795,38 @@
   (lsp-ui-doc-border "black"))
 
 (use-package lsp-ui
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+
+  :custom
+  (lsp-ui-sideline-show-symbol nil)
+  (lsp-ui-sideline-delay 0)
+  (lsp-ui-sideline-ignore-duplicate t)
+  ;; (lsp-ui-sideline-update-mode 'point)
+  (lsp-ui-peek-always-show t)
+  (lsp-ui-flycheck-enable t)
+  (lsp-ui-flycheck-list-mode t)
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-delay 0)
+  (lsp-ui-doc-header t)
+  (lsp-ui-doc-include-signature t)
+
+  :custom-face
+  (lsp-lens-face ((t (:inherit shadow))))
+  (lsp-lens-mouse-face ((t (:inherit link))))
+  (lsp-ui-doc-background ((t (:background "Gray95"))))
+  (lsp-ui-doc-header ((t (:background "Pale Turquoise"))))
+  (lsp-ui-doc-border ((t (:background "Gray70"))))
+  (lsp-ui-sideline-code-action ((t (:foreground "Tan"))))
+  (lsp-ui-sideline-global ((t (:foreground "Gray70"))))
+  (lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
+  (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
+  (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
 (use-package company-lsp
-  :commands company-lsp)
+  :commands company-lsp
+
+  :custom
+  (company-lsp-cache-candidates 'auto))
 
 (use-package clojure-mode)
 (use-package clojure-snippets)
