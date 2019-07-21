@@ -174,7 +174,7 @@ lbzip2
 leiningen
 leiningen-completions
 lhasa
-libappindicator-gtk2
+lib32-mesa-vdpau
 libappindicator-gtk3
 libcue
 libdvdcss
@@ -260,7 +260,6 @@ opencl-mesa
 openpyn-nordvpn
 oprofile
 optipng
-opusfile
 os-prober
 ostree
 ovmf
@@ -358,8 +357,6 @@ s-nail
 sbsigntools
 screen
 sdl2_gfx
-sdl2_ttf
-sdl_image
 semi
 shairplay
 shedskin
@@ -375,6 +372,8 @@ sparsehash
 spirv-headers
 spirv-llvm-translator
 squashfs-tools
+steam
+steam-native-runtime
 strace
 stratis-cli
 stratisd
@@ -440,7 +439,6 @@ wavemon
 whois
 whowatch
 wireguard-arch
-woff2
 wtf
 x11-ssh-askpass
 xcompmgr
@@ -454,6 +452,7 @@ xf86-input-mouse
 xf86-input-synaptics
 xf86-input-vmmouse
 xf86-input-void
+xf86-video-intel
 xfce4-appfinder
 xfce4-notifyd
 xfce4-power-manager

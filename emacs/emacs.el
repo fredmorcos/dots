@@ -547,7 +547,7 @@
 (use-package swiper
   :bind
   ("C-s" . swiper)
-  ("C-r" . swiper))
+  ("C-r" . swiper-backward))
 
 (use-package fzf
   :bind
@@ -784,7 +784,6 @@
   :custom
   (lsp-prefer-flymake nil)
 
-  (lsp-rust-all-targets nil)
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
   (lsp-rust-clippy-preference "on")
@@ -799,14 +798,13 @@
 
   :custom
   (lsp-ui-sideline-show-symbol nil)
-  (lsp-ui-sideline-delay 0)
+  (lsp-ui-sideline-delay 0.1)
   (lsp-ui-sideline-ignore-duplicate t)
-  ;; (lsp-ui-sideline-update-mode 'point)
   (lsp-ui-peek-always-show t)
   (lsp-ui-flycheck-enable t)
   (lsp-ui-flycheck-list-mode t)
   (lsp-ui-doc-enable t)
-  (lsp-ui-doc-delay 0)
+  (lsp-ui-doc-delay 0.1)
   (lsp-ui-doc-header t)
   (lsp-ui-doc-include-signature t)
 
