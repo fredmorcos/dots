@@ -68,16 +68,21 @@ alias synapse_reboot='synapse_systemctl reboot'
 alias synapse_poweroff='synapse_systemctl poweroff'
 alias synapse_update='ssh synapse sudo pacman -Syu'
 
-alias private_cred='cat ~/Documents/Workspace/private-credentials'
+alias private_cred='cat ~/Documents/Important/Passwords/credentials-private'
 alias private='private_cred | ssh synapse encfs ~/Private-enc ~/Private'
 alias private_umount='ssh synapse fusermount -u ~/Private'
 
-alias vpn='sudo /usr/bin/openpyn nl -t 10 -f --tcp'
+alias vpn='/usr/bin/openpyn de -t 5 -f -m 40'
 alias vpn_p2p='vpn --p2p'
 alias vpn_kill='sudo /usr/bin/openpyn -x'
-alias dlsub='subdl -i --output={m}.{L}.{S}'
 alias yt720='youtube-dl -f "[height<=720]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
+
+DLSUB_UN=$(< ~/Documents/Important/Passwords/credentials-ost-un)
+DLSUB_PW=$(< ~/Documents/Important/Passwords/credentials-ost-pw)
+
+alias dlsub='subdl -i --output={m}.{L}.{S} \
+             --username $DLSUB_UN --password $DLSUB_PW'
 
 dirdlsub() {
   for i in *; do
