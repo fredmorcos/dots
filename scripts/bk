@@ -34,6 +34,7 @@ bk_cmd "$HOME/.config/"                "$HDD/FredLaptop/DotConfigs/dot.config/"
 bk_cmd "$HOME/.gnupg/"                 "$HDD/FredLaptop/DotConfigs/dot.gnupg/"
 bk_cmd "$HOME/.ssh/"                   "$HDD/FredLaptop/DotConfigs/dot.ssh/"
 
+bk_cmd "$HDD/Common/Archive/"          "common@synapse:Archive/"
 bk_cmd "$HDD/Common/Media/"            "common@synapse:Media/"
 bk_cmd "$HDD/Common/Music/"            "common@synapse:Music/"
 bk_cmd "$HDD/Common/Music.New/"        "common@synapse:Music.New/"

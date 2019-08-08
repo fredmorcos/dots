@@ -54,7 +54,6 @@ crda
 cryptominisat5
 ctags
 cuetools
-dav1d
 dbus-broker
 dconf-editor
 dd_rescue
@@ -86,6 +85,7 @@ evince
 exa
 exfat-utils
 f2fs-tools
+fcrackzip
 fd
 fdupes
 file-roller
@@ -139,6 +139,7 @@ gtkglext
 gucharmap
 gvfs-mtp
 hashcat
+hashcat-utils
 haveged
 hddtemp
 hexchat
@@ -171,6 +172,7 @@ iucode-tool
 iverilog
 iwd
 jfsutils
+john
 laptop-detect
 lbzip2
 leiningen
@@ -281,6 +283,7 @@ patchelf
 pavucontrol
 pbzip2
 pdfarranger
+pdfcrack
 perl-locale-gettext
 picard
 pigz
