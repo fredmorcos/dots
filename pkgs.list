@@ -51,6 +51,7 @@ colordiff
 colorgcc
 cpio
 crda
+crunch
 cryptominisat5
 ctags
 cuetools
@@ -141,6 +142,8 @@ gvfs-mtp
 hashcat
 hashcat-utils
 haveged
+hcxkeys
+hcxtools
 hddtemp
 hexchat
 highlight
@@ -158,7 +161,6 @@ i3lock
 i7z
 id3v2
 ifenslave
-intel-compute-runtime
 intel-gpu-tools
 intel-media-driver
 intel-ucode
@@ -260,7 +262,6 @@ numix-gtk-theme-git
 odt2txt
 ogmtools
 openbsd-netcat
-opencl-mesa
 openpyn-nordvpn
 oprofile
 optipng
@@ -300,6 +301,7 @@ pulseaudio-equalizer
 pulseaudio-equalizer-ladspa
 pulseaudio-zeroconf
 pulsemixer
+pwgen
 python-argcomplete
 python-brotlipy
 python-cairocffi
@@ -446,6 +448,7 @@ whois
 whowatch
 wireguard-arch
 woff2
+words
 wtf
 x11-ssh-askpass
 xcompmgr
@@ -468,6 +471,7 @@ xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfdesktop
+xkcdpass
 xmldiff
 xmlto
 xorg-appres

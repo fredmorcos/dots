@@ -85,7 +85,7 @@
   (setq font-use-system-font t)
 
   :custom-face
-  (default ((t (:font "Monospace 11"))))
+  (default ((t (:font "Monospace 13"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
   ;; (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
@@ -451,7 +451,6 @@
 
 (use-package f)
 (use-package ht)
-(use-package cl)
 (use-package dash)
 (use-package diminish)
 (use-package bind-key)
