@@ -36,6 +36,9 @@
     <property name="CursorThemeSize" type="empty"/>
     <property name="DecorationLayout" type="string" value=":minimize,maximize,close"/>
   </property>
+  <property name="Gdk" type="empty">
+    <property name="WindowScalingFactor" type="empty"/>
+  </property>
   <property name="Xfce" type="empty">
     <property name="LastCustomDPI" type="int" value="92"/>
   </property>

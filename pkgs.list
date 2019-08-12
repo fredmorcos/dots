@@ -206,7 +206,6 @@ libva-vdpau-driver
 libva1-intel-driver
 libvdpau-va-gl
 libxnvctrl
-libxpresent
 licenses
 linux-headers
 linux-tools-meta
@@ -225,6 +224,7 @@ lzop
 mailutils
 make
 man-pages
+mariadb-clients
 marisa
 mda.lv2
 mediainfo
@@ -294,6 +294,7 @@ pkgdiff
 pkgfile
 plantri
 ponymix
+postgresql
 powertop
 pstoedit
 psutils
