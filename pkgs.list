@@ -47,6 +47,7 @@ checksec
 chrpath
 cloc
 clojure-lsp-bin
+cmake-fedora
 colordiff
 colorgcc
 cpio
@@ -85,6 +86,7 @@ etckeeper
 evince
 exa
 exfat-utils
+extra-cmake-modules
 f2fs-tools
 fcrackzip
 fd
@@ -99,6 +101,7 @@ fossil
 fwupd
 fzf
 fzy
+gcc-fortran
 geckodriver
 gedit-plugins
 geoip-database-extra
@@ -159,6 +162,7 @@ hyphen-en
 hyphen-fr
 i3lock
 i7z
+icmake
 id3v2
 ifenslave
 intel-gpu-tools
@@ -177,6 +181,7 @@ jfsutils
 john
 laptop-detect
 lbzip2
+leatherman
 leiningen
 leiningen-completions
 lhasa
@@ -522,5 +527,6 @@ yay-bin
 youtube-dl
 z3
 zile
+zoom
 zssh
 zzuf
