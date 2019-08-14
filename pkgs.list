@@ -29,7 +29,6 @@ beets
 bin2iso
 binwalk
 bison
-bridge-utils
 bs1770gain
 bsdiff
 bully
@@ -50,6 +49,7 @@ clojure-lsp-bin
 cmake-fedora
 colordiff
 colorgcc
+container-diff
 cpio
 crda
 crunch
@@ -71,6 +71,8 @@ discount
 dmenu
 dnsmasq
 dnssec-tools
+docker-compose
+docker-machine
 docx2txt
 dtc
 dwdiff
@@ -179,6 +181,8 @@ iverilog
 iwd
 jfsutils
 john
+kubectl
+kubectx
 laptop-detect
 lbzip2
 leatherman
@@ -239,6 +243,7 @@ mesa-vdpau
 meson
 mg
 mhash
+minikube
 minizip
 mlocate
 movit
@@ -311,11 +316,13 @@ pwgen
 python-argcomplete
 python-brotlipy
 python-cairocffi
+python-cjkwrap
 python-cssselect
 python-discid
 python-evdev
 python-fxa
 python-genshi
+python-libevdev
 python-nose
 python-olefile
 python-pexpect
