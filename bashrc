@@ -32,13 +32,13 @@ LS_COLORS='ex=00:su=00:sg=00:ca=00:'
 
 export PS1 HISTCONTROL HISTIGNORE LS_COLORS
 
-shopt -s autocd
-shopt -s dirspell
-shopt -s cdspell
+# shopt -s autocd
+# shopt -s dirspell
+# shopt -s cdspell
 
-alias ..='cd ..'
-alias ...='cd ../..'
-alias -- -='cd -'
+# alias ..='cd ..'
+# alias ...='cd ../..'
+# alias -- -='cd -'
 
 alias grep='grep --color'
 alias ls='exa'
@@ -52,8 +52,8 @@ alias ip='ip -c'
 alias fd='fd -iIH'
 alias bat='bat --theme GitHub'
 alias cat='bat'
-alias fzf='fzf -e --color=light'
-alias diff='diff-so-fancy'
+# alias fzf='fzf -e --color=light'
+# alias diff='diff-so-fancy'
 
 alias neuron_systemctl='ssh neuron sudo systemctl'
 alias neuron_dns='neuron_systemctl restart systemd-resolved'
@@ -86,7 +86,7 @@ alias dlsub='subdl -i --output={m}.{L}.{S} \
 
 dirdlsub() {
   for i in *; do
-    echo "$i";
+    echo ">>> $i";
     dlsub "$i";
     echo "-----------------------------------------";
   done

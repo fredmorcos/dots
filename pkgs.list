@@ -105,7 +105,6 @@ fzf
 fzy
 gcc-fortran
 geckodriver
-gedit-plugins
 geoip-database-extra
 geoip2-database
 ghi
@@ -451,7 +450,6 @@ virglrenderer
 virtualgl
 vkd3d
 vlc
-vte3
 vulkan-intel
 vulkan-mesa-layer
 vulkan-tools
