@@ -20,4 +20,5 @@
   <property name="misc-remember-geometry" type="bool" value="true"/>
   <property name="misc-small-toolbar-icons" type="bool" value="true"/>
   <property name="last-side-pane" type="string" value="ThunarShortcutsPane"/>
+  <property name="misc-recursive-permissions" type="string" value="THUNAR_RECURSIVE_PERMISSIONS_ALWAYS"/>
 </channel>
