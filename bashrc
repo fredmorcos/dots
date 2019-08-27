@@ -52,6 +52,7 @@ alias ip='ip -c'
 alias fd='fd -iIH'
 alias bat='bat --theme GitHub'
 alias cat='bat'
+alias up='topgrade --no-retry'
 # alias fzf='fzf -e --color=light'
 # alias diff='diff-so-fancy'
 
