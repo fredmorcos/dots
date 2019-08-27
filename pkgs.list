@@ -62,7 +62,6 @@ dbus-broker
 dconf-editor
 dd_rescue
 ddrescue
-devilspie
 dex
 dhcpcd
 dhex
@@ -228,7 +227,6 @@ logrotate
 lrzip
 lsb-release
 lsof
-lsp-plugins
 lxdm-gtk3
 lynx
 lzop
