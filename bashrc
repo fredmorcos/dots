@@ -6,31 +6,31 @@
 [[ $- != *i* ]] && return
 
 # source <(kitty + complete setup bash)
-source /usr/share/fzf/key-bindings.bash
-source /usr/share/fzf/completion.bash
+# source /usr/share/fzf/key-bindings.bash
+# source /usr/share/fzf/completion.bash
 
 # PS1='[\u@\h \W]\$ '
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
 # bind "set completion-ignore-case on"
 # bind "set completion-map-case on"
-bind "set show-all-if-ambiguous on"
-bind "set mark-symlinked-directories on"
-bind "set match-hidden-files on"
-bind "set skip-completed-text on"
-bind "set colored-stats on"
+# bind "set show-all-if-ambiguous on"
+# bind "set mark-symlinked-directories on"
+# bind "set match-hidden-files on"
+# bind "set skip-completed-text on"
+# bind "set colored-stats on"
 
-shopt -s histappend
-shopt -s cmdhist
+# shopt -s histappend
+# shopt -s cmdhist
 
 HISTCONTROL="erasedups:ignoreboth"
 
 # Don't record some commands
-HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
+# HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history"
 
 LS_COLORS='ex=00:su=00:sg=00:ca=00:'
 
-export PS1 HISTCONTROL HISTIGNORE LS_COLORS
+export PS1 LS_COLORS # HISTCONTROL HISTIGNORE
 
 # shopt -s autocd
 # shopt -s dirspell

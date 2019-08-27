@@ -68,6 +68,7 @@
         <value type="string" value="vlc"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="skypeforlinux"/>
         <value type="string" value="zoom"/>
         <value type="string" value="thunar"/>
         <value type="string" value="transmission"/>
