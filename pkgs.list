@@ -7,8 +7,6 @@ adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
 afl-utils
 afpfs-ng
-alacritty
-alacritty-terminfo
 android-tools
 android-udev
 arc-icon-theme
@@ -482,6 +480,7 @@ xfce4-pulseaudio-plugin
 xfce4-screenshooter
 xfce4-session
 xfce4-settings
+xfce4-terminal
 xfdesktop
 xkcdpass
 xmldiff
