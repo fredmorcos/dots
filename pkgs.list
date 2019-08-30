@@ -35,7 +35,6 @@ bup
 byzanz
 cabextract
 capnproto
-cask
 catdoc
 ccache
 cdrdao
@@ -107,7 +106,6 @@ gcc-fortran
 geckodriver
 geoip-database-extra
 geoip2-database
-ghi
 gifski
 gimp
 git-crypt
@@ -228,11 +226,13 @@ lsof
 lxdm-gtk3
 lynx
 lzop
+m17n-lib
 mailutils
 make
 man-pages
 mariadb-clients
 marisa
+masterpdfeditor
 mda.lv2
 mediainfo
 mediastreamer
@@ -242,7 +242,6 @@ meson
 mg
 mhash
 minikube
-minizip
 mlocate
 movit
 mp3unicode
@@ -355,11 +354,14 @@ python2-pyserial
 python2-service-identity
 python2-soappy
 qrencode
+qt5-examples
+qt5-graphicaleffects
+qt5-webkit
+qtcreator
 radamsa
 radare2
 radvd
 ranger
-re2
 realtime-privileges
 reaver
 recordmydesktop
@@ -378,7 +380,6 @@ screen
 sdl2_gfx
 sdl2_ttf
 sdl_image
-semi
 shairplay
 shedskin
 shellcheck
@@ -457,7 +458,6 @@ wavemon
 whois
 whowatch
 wireguard-arch
-woff2
 words
 wtf
 x11-ssh-askpass

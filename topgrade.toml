@@ -4,7 +4,7 @@ git_repos = [
 ]
 
 remote_topgrades = ["neuron", "synapse"]
-remote_timeout = 2
+ssh_arguments = "-o ConnectTimeout=2"
 
 [pre_commands]
 "Emacs Snapshot" = "rm -rf ~/.emacs.d/elpa.bak && cp -rl ~/.emacs.d/elpa ~/.emacs.d/elpa.bak"
