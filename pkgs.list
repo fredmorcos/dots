@@ -106,6 +106,7 @@ gcc-fortran
 geckodriver
 geoip-database-extra
 geoip2-database
+getmail
 gifski
 gimp
 git-crypt
@@ -173,6 +174,7 @@ ipset
 iputils
 ispc
 ispell
+isync
 iucode-tool
 iverilog
 iwd
@@ -267,6 +269,7 @@ noto-fonts-extra
 ntfs-3g
 numix-gtk-theme-git
 odt2txt
+offlineimap
 ogmtools
 openbsd-netcat
 openpyn-nordvpn
