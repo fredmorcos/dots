@@ -7,10 +7,11 @@ set -o nounset
 
 if [ "$1" = "intel" ] || [ "$1" = "in" ]; then
   optimus-manager --switch intel
-fi
-
-if [ "$1" = "nvidia" ] || [ "$1" = "nv" ]; then
+elif [ "$1" = "nvidia" ] || [ "$1" = "nv" ]; then
   optimus-manager --switch nvidia
+else
+  echo "Error: Only accept 'nvidia' or 'intel'"
+  exit 1
 fi
 
 loginctl terminate-session "$XDG_SESSION_ID"

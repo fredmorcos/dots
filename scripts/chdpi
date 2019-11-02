@@ -13,9 +13,7 @@ if [ "$1" = "hi" ] || [ "$1" = "high" ]; then
 
   sed -i 's/^# export GDK_SCALE/export GDK_SCALE/'         ~/.profile
   sed -i 's/^# export GDK_DPI_SCALE/export GDK_DPI_SCALE/' ~/.profile
-fi
-
-if [ "$1" = "lo" ] || [ "$1" = "low" ]; then
+elif [ "$1" = "lo" ] || [ "$1" = "low" ]; then
   xfconf-query -c xsettings -p /Xft/DPI                 -s 96
   xfconf-query -c xsettings -p /Gtk/CursorThemeSize     -s 16
   xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 1
@@ -23,6 +21,9 @@ if [ "$1" = "lo" ] || [ "$1" = "low" ]; then
 
   sed -i 's/^export GDK_SCALE/# export GDK_SCALE/'         ~/.profile
   sed -i 's/^export GDK_DPI_SCALE/# export GDK_DPI_SCALE/' ~/.profile
+else
+  echo "Error: Only accept 'high' or 'low'"
+  exit 1
 fi
 
 loginctl terminate-session "$XDG_SESSION_ID"

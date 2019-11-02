@@ -6,4 +6,4 @@
   ui = true
 
 [core]
-  gitproxy=~/Workspace/dots/scripts/git-proxy-wrapper for ol-bitbucket.us.oracle.com
+  gitproxy = ~/Workspace/dots/scripts/git-proxy-wrapper for ol-bitbucket.us.oracle.com
