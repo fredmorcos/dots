@@ -47,12 +47,14 @@ alias yt1080='youtube-dl -f "[height<=1080]"'
 
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
-DLSUB_UN_FILE=~/Documents/Important/Passwords/credentials-ost-un
-DLSUB_PW_FILE=~/Documents/Important/Passwords/credentials-ost-pw
+PASS_FILE=~/Documents/Important/Passwords/Passwords.txt
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
 
-if [ -f $DLSUB_UN_FILE ] && [ -f $DLSUB_PW_FILE ]; then
-  DLSUB_CMD="$DLSUB_CMD --username $(< $DLSUB_UN_FILE) --password $(< $DLSUB_PW_FILE)"
+if [ -f $PASS_FILE ]; then
+  OST_LINE=$(grep OpenSubtitles $PASS_FILE)
+  DLSUB_UN=$(echo "$OST_LINE" | awk '{ print $4 }')
+  DLSUB_PW=$(echo "$OST_LINE" | awk '{ print $5 }')
+  DLSUB_CMD="$DLSUB_CMD --username $DLSUB_UN --password $DLSUB_PW"
 fi
 
 # shellcheck disable=SC2139
