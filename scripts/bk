@@ -25,6 +25,7 @@ bk_cmd "$HOME/Downloads/"              "$HDD/Fred/Downloads/"
 bk_cmd "$HOME/Music/"                  "$HDD/Fred/Music/"
 bk_cmd "$HOME/Music.New/"              "$HDD/Fred/Music.New/"
 bk_cmd "$HOME/Videos/"                 "$HDD/Fred/Videos/"
+bk_cmd "$HOME/VideosCS/"               "$HDD/Fred/VideosCS/"
 bk_cmd "$HOME/Workspace/"              "$HDD/Fred/Workspace/"
 
 bk_cmd "$HOME/.local/share/keyrings"   "$HDD/Fred/DotConfigs/keyrings/"
