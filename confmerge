@@ -117,6 +117,7 @@ cmerge emacs/emacs.el               ~/.config/emacs/init
 cmerge gitconfig                    ~/.gitconfig
 cmerge htoprc                       ~/.config/htop/htoprc
 cmerge hunspell_en_US               ~/.hunspell_en_US
+cmerge nvidia-settings              ~/.nvidia-settings-rc
 cmerge profile                      ~/.profile
 cmerge redshift.conf                ~/.config/redshift.conf
 cmerge topgrade.toml                ~/.config/topgrade.toml
@@ -125,6 +126,9 @@ cmerge youtube-dl.conf              ~/.config/youtube-dl/config
 
 cmerge loader/loader.conf           /boot/loader/loader.conf
 cmerge loader/arch.conf             /boot/loader/entries/arch.conf
+
+cmerge optimus/manager.conf         /etc/optimus-manager/optimus-manager.conf
+cmerge optimus/xorg-nvidia.conf     /etc/optimus-manager/xorg-nvidia.conf
 
 cmerge systemd/coredump.conf        /etc/systemd/coredump.conf
 cmerge systemd/lxdm-override.conf   /etc/systemd/system/lxdm.service.d/override.conf
