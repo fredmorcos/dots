@@ -57,7 +57,8 @@ chafa
 checksec
 cheese
 chrpath
-claws-mail
+claws-mail-themes
+clawsker
 cmake
 coin-or-mp
 colordiff
@@ -344,7 +345,6 @@ pbzip2
 pcp
 pdfarranger
 pdfcrack
-perl-locale-gettext
 picard
 pigz
 pipesocks

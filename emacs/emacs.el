@@ -829,14 +829,27 @@
   (z3-smt2-mode . symbol-overlay-mode))
 
 (use-package lsp-java
-  :demand t)
+  :demand t
+  :after lsp)
 
 (use-package java-mode
   :ensure nil
 
+  :custom
+  (lsp-enable-file-watchers nil)
+
   :hook
   (java-mode . lsp)
   (java-mode . yas-minor-mode))
+
+(use-package javadoc-lookup
+  :demand t)
+
+(use-package javaimp
+  :demand t)
+
+(use-package mvn
+  :demand t)
 
 (use-package c-mode
   :ensure nil
