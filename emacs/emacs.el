@@ -26,7 +26,8 @@
 
  package-enable-at-startup nil
  package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                    ("melpa" . "https://melpa.org/packages/"))
+                    ("melpa" . "https://melpa.org/packages/")
+                    ("org" . "https://orgmode.org/elpa/"))
 
  use-package-always-defer t
  use-package-always-ensure t
@@ -38,6 +39,12 @@
 
 (eval-when-compile
   (require 'use-package))
+
+(put 'use-package 'lisp-indent-function 1)
+
+(use-package gcmh
+  :diminish
+  :init (gcmh-mode 1))
 
 (use-package subr
   :ensure nil
