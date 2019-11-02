@@ -7,16 +7,17 @@
 [[ -f /etc/profile.d/vte.sh ]] && . /etc/profile.d/vte.sh
 
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
+LS_COLORS='ex=00:su=00:sg=00:ca=00:'
 HISTCONTROL=ignoredups
 HISTSIZE=10000
 
-export PS1 HISTCONTROL HISTSIZE
+export PS1 LS_COLORS HISTCONTROL HISTSIZE
 
 shopt -s checkwinsize
 
 alias grep='grep --color'
 alias ls='exa'
-alias ll='ls -lg --group-directories-first'
+alias ll='ls -lghH --group-directories-first --git -@'
 alias la='ll -a'
 alias mv='mv -i'
 alias cp='cp -i'
