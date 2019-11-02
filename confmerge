@@ -111,7 +111,6 @@ cmerge applications/Eclipse.desktop ~/.local/share/applications/Eclipse.desktop
 
 cmerge bashrc                       ~/.bashrc
 cmerge bash_profile                 ~/.bash_profile
-cmerge dmrc                         ~/.dmrc
 cmerge emacs/emacs.el               ~/.config/emacs/init
 cmerge gitconfig                    ~/.gitconfig
 cmerge htoprc                       ~/.config/htop/htoprc
