@@ -101,57 +101,54 @@ do
   cmerge xfce4/$i ~/.config/xfce4/xfconf/xfce-perchannel-xml/$i
 done
 
-cmerge xfce4/terminalrrc            ~/.config/xfce4/terminal/terminalrc
+cmerge xfce4/terminalrrc              ~/.config/xfce4/terminal/terminalrc
 
-cmerge autostart/xintelrgb.desktop  ~/.config/autostart/xintelrgb.desktop
-cmerge autostart/xnocaps.desktop    ~/.config/autostart/xnocaps.desktop
+cmerge autostart/xintelrgb.desktop    ~/.config/autostart/xintelrgb.desktop
+cmerge autostart/xnocaps.desktop      ~/.config/autostart/xnocaps.desktop
 
-cmerge applications/Zoom.desktop    ~/.local/share/applications/Zoom.desktop
-cmerge applications/Eclipse.desktop ~/.local/share/applications/Eclipse.desktop
+cmerge applications/Zoom.desktop      ~/.local/share/applications/Zoom.desktop
+cmerge applications/Eclipse.desktop   ~/.local/share/applications/Eclipse.desktop
 
-cmerge bashrc                       ~/.bashrc
-cmerge bash_profile                 ~/.bash_profile
-cmerge gtk-bookmarks                ~/.config/gtk-3.0/bookmarks
-cmerge dmrc                         ~/.dmrc
-cmerge emacs/emacs.el               ~/.config/emacs/init
-cmerge gitconfig                    ~/.gitconfig
-cmerge htoprc                       ~/.config/htop/htoprc
-cmerge hunspell_en_US               ~/.hunspell_en_US
-cmerge nvidia-settings              ~/.nvidia-settings-rc
-cmerge profile                      ~/.profile
-cmerge redshift.conf                ~/.config/redshift.conf
-cmerge topgrade.toml                ~/.config/topgrade.toml
-cmerge vimrc                        ~/.vimrc
-cmerge youtube-dl.conf              ~/.config/youtube-dl/config
+cmerge bashrc                         ~/.bashrc
+cmerge bash_profile                   ~/.bash_profile
+cmerge gtk-bookmarks                  ~/.config/gtk-3.0/bookmarks
+cmerge dmrc                           ~/.dmrc
+cmerge emacs/emacs.el                 ~/.config/emacs/init
+cmerge gitconfig                      ~/.gitconfig
+cmerge htoprc                         ~/.config/htop/htoprc
+cmerge hunspell_en_US                 ~/.hunspell_en_US
+cmerge nvidia-settings                ~/.nvidia-settings-rc
+cmerge profile                        ~/.profile
+cmerge redshift.conf                  ~/.config/redshift.conf
+cmerge topgrade.toml                  ~/.config/topgrade.toml
+cmerge vimrc                          ~/.vimrc
+cmerge youtube-dl.conf                ~/.config/youtube-dl/config
 
-cmerge loader/loader.conf           /boot/loader/loader.conf
-cmerge loader/arch.conf             /boot/loader/entries/arch.conf
+cmerge loader/loader.conf             /boot/loader/loader.conf
+cmerge loader/arch.conf               /boot/loader/entries/arch.conf
 
-cmerge optimus/manager.conf         /etc/optimus-manager/optimus-manager.conf
-cmerge optimus/xorg-nvidia.conf     /etc/optimus-manager/xorg-nvidia.conf
+cmerge optimus/manager.conf           /etc/optimus-manager/optimus-manager.conf
+cmerge optimus/xorg-nvidia.conf       /etc/optimus-manager/xorg-nvidia.conf
 
-cmerge systemd/coredump.conf        /etc/systemd/coredump.conf
-cmerge systemd/lxdm-override.conf   /etc/systemd/system/lxdm.service.d/override.conf
+cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
+cmerge systemd/lightdm-override.conf  /etc/systemd/system/lightdm.service.d/override.conf
 
-cmerge network-manager/wifi.conf    /etc/NetworkManager/conf.d/wifi.conf
-cmerge udev/wifi-powersave.rules    /etc/udev/rules.d/81-wifi-powersave.rules
-cmerge udev/wake-on-lan.rules       /etc/udev/rules.d/81-wol.rules
+cmerge network-manager/wifi.conf      /etc/NetworkManager/conf.d/wifi.conf
+cmerge udev/wifi-powersave.rules      /etc/udev/rules.d/81-wifi-powersave.rules
+cmerge udev/wake-on-lan.rules         /etc/udev/rules.d/81-wol.rules
 
-# cmerge x11/01-noautogpu.conf      /etc/X11/xorg.conf.d/01-noautogpu.conf
-
-cmerge fstab                        /etc/fstab
-cmerge hostname                     /etc/hostname
-cmerge hosts                        /etc/hosts
-cmerge locale.conf                  /etc/locale.conf
-cmerge lxdm.conf                    /etc/lxdm/lxdm.conf
-cmerge lightdm.conf                 /etc/lightdm/lightdm.conf
-cmerge vconsole.conf                /etc/vconsole.conf
-cmerge makepkg.conf                 /etc/makepkg.conf
-cmerge mkinitcpio.conf              /etc/mkinitcpio.conf
-cmerge modprobe.conf                /etc/modprobe.d/modprobe.conf
-cmerge modules.conf                 /etc/modules-load.d/modules.conf
-cmerge pacman.conf                  /etc/pacman.conf
-cmerge sysctl.conf                  /etc/sysctl.d/sysctl.conf
+cmerge fstab                          /etc/fstab
+cmerge hostname                       /etc/hostname
+cmerge hosts                          /etc/hosts
+cmerge locale.conf                    /etc/locale.conf
+cmerge lightdm.conf                   /etc/lightdm/lightdm.conf
+cmerge vconsole.conf                  /etc/vconsole.conf
+cmerge makepkg.conf                   /etc/makepkg.conf
+cmerge mkinitcpio.conf                /etc/mkinitcpio.conf
+cmerge modprobe.conf                  /etc/modprobe.d/modprobe.conf
+cmerge modules.conf                   /etc/modules-load.d/modules.conf
+cmerge pacman.conf                    /etc/pacman.conf
+cmerge sysctl.conf                    /etc/sysctl.d/sysctl.conf
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then

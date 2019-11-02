@@ -2,7 +2,7 @@
 # /home/fred/.nvidia-settings-rc
 #
 # Configuration file for nvidia-settings - the NVIDIA X Server Settings utility
-# Generated on Mon Oct  7 13:04:49 2019
+# Generated on Mon Oct  7 16:06:52 2019
 #
 
 # ConfigProperties:
@@ -13,9 +13,9 @@ SliderTextEntries = Yes
 IncludeDisplayNameInConfigFile = No
 ShowQuitDialog = No
 UpdateRulesOnProfileNameChange = Yes
-Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
-Timer = Thermal_Monitor_(GPU_0),Yes,1000
 Timer = Memory_Used_(GPU_0),Yes,3000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 
 # Attributes:
 
@@ -25,6 +25,6 @@ Timer = Memory_Used_(GPU_0),Yes,3000
 0/FXAA=0
 0/FSAAAppControlled=1
 0/LogAnisoAppControlled=1
-0/OpenGLImageSettings=1
+0/OpenGLImageSettings=2
 0/FSAAAppEnhanced=0
 0/ShowGraphicsVisualIndicator=0
