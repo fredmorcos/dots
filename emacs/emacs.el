@@ -131,7 +131,8 @@
 
   :custom-face
   (tab-bar ((t (:background "Gray97"))))
-  (tab-bar-tab ((t (:background "LightSteelBlue1" :box "DeepSkyBlue")))))
+  (tab-bar-tab ((t (:background "LightSteelBlue1" :box "DeepSkyBlue"))))
+  (tab-bar-tab-inactive ((t (:background "Gray90" :box "Gray60")))))
 
 (use-package frame
   :ensure nil
@@ -826,6 +827,23 @@
 
   :hook
   (z3-smt2-mode . symbol-overlay-mode))
+
+(use-package lsp-java
+  :demand t)
+
+(use-package java-mode
+  :ensure nil
+
+  :hook
+  (java-mode . lsp)
+  (java-mode . yas-minor-mode))
+
+(use-package c-mode
+  :ensure nil
+
+  :hook
+  (c-mode . lsp)
+  (c-mode . yas-minor-mode))
 
 (use-package rust-mode
   :custom-face
