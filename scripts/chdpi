@@ -26,9 +26,3 @@ if [ "$1" = "lo" ] || [ "$1" = "low" ]; then
 fi
 
 loginctl terminate-session "$XDG_SESSION_ID"
-
-# pkill xfwm4
-# xfwm4 > /dev/null &
-# pkill xfce4-panel
-# xfce4-panel > /dev/null &
-# systemctl --user restart xfce4-notifyd
