@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Zoom
 Comment=Zoom Video Conference
-Exec=env QT_SCALE_FACTOR=2 /home/fred/Oracle/ZoomLauncher %U
+Exec=/home/fred/Oracle/opt/ZoomLauncher %U
 Icon=Zoom.png
 Terminal=false
 Type=Application

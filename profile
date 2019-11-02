@@ -14,16 +14,15 @@ export XFWM4_USE_PRESENT LIBVA_DRIVER_NAME MESA_LOADER_DRIVER_OVERRIDE
 # export GDK_DPI_SCALE=0.5 # Undo scaling of text
 
 # Java-specific
-PATH="$HOME/Oracle/oraclejdk/bin:$PATH"
-PATH="$HOME/Oracle/oraclejdk/jre/bin:$PATH"
-PATH="$HOME/Oracle/eclipse:$PATH"
 PATH="$HOME/Oracle/mx:$PATH"
-PATH="$HOME/Oracle/maven36/bin:$PATH"
-PATH="$HOME/Oracle/gradle56/bin:$PATH"
+PATH="$HOME/Oracle/opt/oraclejdk/bin:$PATH"
+PATH="$HOME/Oracle/opt/oraclejdk/jre/bin:$PATH"
+PATH="$HOME/Oracle/opt/eclipse:$PATH"
 
 # Other
-PATH="$HOME/Oracle/zoom:$PATH"
-LD_LIBRARY_PATH="$HOME/Oracle/zoom:$LD_LIBRARY_PATH"
+PATH="$HOME/Oracle/opt/node13/bin:$PATH"
+PATH="$HOME/Oracle/opt/zoom:$PATH"
+LD_LIBRARY_PATH="$HOME/Oracle/opt/zoom:$LD_LIBRARY_PATH"
 
 # Path
 PATH="$HOME/.cargo/bin:$PATH"

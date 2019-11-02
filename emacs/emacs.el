@@ -17,7 +17,7 @@
  gc-cons-percentage 0.6
  file-name-handler-alist nil
  auto-window-vscroll nil
- vc-handled-backends nil
+ ; vc-handled-backends nil
 
  save-interprogram-paste-before-kill t
 
@@ -423,6 +423,7 @@
   (emacs-lisp-mode . flycheck-mode)
   (emacs-lisp-mode . company-mode)
   (emacs-lisp-mode . symbol-overlay-mode)
+  (emacs-lisp-mode . aggressive-indent-mode)
 
   :mode
   ("\\emacs\\'" . emacs-lisp-mode)
@@ -767,7 +768,7 @@
 
   :custom-face
   (diff-hl-delete ((t (:background "RosyBrown1"))))
-  (diff-hl-insert ((t (:background "LightGreen"))))
+  (diff-hl-insert ((t (:background "DarkSeaGreen2"))))
   (diff-hl-change ((t (:background "PowderBlue")))))
 
 (use-package symbol-overlay
@@ -861,7 +862,8 @@
                  (setq tab-width 2
                        fill-column 90)
                  (setq-local standard-indent 2)
-                 (setq-local comment-fill-column 90))))
+                 (setq-local comment-fill-column 90)))
+  (java-mode . aggressive-indent-mode))
 
 (use-package javadoc-lookup
   :demand t)
@@ -881,7 +883,8 @@
 
   :hook
   (python-mode . lsp)
-  (python-mode . yas-minor-mode))
+  (python-mode . yas-minor-mode)
+  (python-mode . aggressive-indent-mode))
 
 (use-package rust-mode
   :custom-face
@@ -895,7 +898,8 @@
                  (setq tab-width 4
                        fill-column 90)
                  (setq-local standard-indent 4)
-                 (setq-local comment-fill-column 90))))
+                 (setq-local comment-fill-column 90)))
+  (rust-mode . aggressive-indent-mode))
 
 (use-package cargo
   :hook
@@ -975,6 +979,13 @@
 
   :custom
   (company-lsp-cache-candidates 'auto))
+
+(use-package treemacs
+  :hook
+  (treemacs-mode . (lambda () (display-line-numbers-mode -1))))
+
+(use-package aggressive-indent
+  :pin melpa)
 
 (provide 'init)
 ;;; init ends here

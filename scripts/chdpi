@@ -21,6 +21,7 @@ if [ "$1" = "hi" ] || [ "$1" = "high" ]; then
   sed -i 's/Monospace [0-9]\+/Monospace 13/'                      ~/.config/xfce4/terminal/terminalrc
   sed -i "s/^gtk-icon-sizes.\+$/gtk-icon-sizes = \"$GTK_ICONS\"/" ~/.gtkrc-2.0
   sed -i "s/SMALL_TOOLBAR/LARGE_TOOLBAR/"                         ~/.gtkrc-2.0
+  sed -i "s/^Exec=/Exec=env QT_SCALE_FACTOR=2 /"                  ~/.local/share/applications/Zoom.desktop
 elif [ "$1" = "lo" ] || [ "$1" = "low" ]; then
   GTK_ICONS="gtk-large-toolbar=16,16:gtk-small-toolbar=16,16:gtk-menu=16,16:gtk-button=16,16:gtk-dialog=16,16:gtk-dnd=16,16:panel-menu=16,16:panel=16,16"
 
@@ -37,6 +38,7 @@ elif [ "$1" = "lo" ] || [ "$1" = "low" ]; then
   sed -i 's/Monospace [0-9]\+/Monospace 12/'                      ~/.config/xfce4/terminal/terminalrc
   sed -i "s/^gtk-icon-sizes.\+$/gtk-icon-sizes = \"$GTK_ICONS\"/" ~/.gtkrc-2.0
   sed -i "s/LARGE_TOOLBAR/SMALL_TOOLBAR/"                         ~/.gtkrc-2.0
+  sed -i "s/^Exec=env QT_SCALE_FACTOR=2 /Exec=/"                  ~/.local/share/applications/Zoom.desktop
 else
   echo "Error: Only accept 'high' or 'low'"
   exit 1
