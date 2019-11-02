@@ -18,34 +18,16 @@ bk_cmd () {
   echo ""
 }
 
-# Temporary
-bk_cmd "$HOME/Videos/"                 "$HDD/FredLaptop/Videos/"
-bk_cmd "$HDD/FredLaptop/Videos/"       "fred@synapse:Videos/"
+bk_cmd "$HOME/Archive/"                "$HDD/Fred/Archive/"
+bk_cmd "$HOME/Books/"                  "$HDD/Fred/Books/"
+bk_cmd "$HOME/Documents/"              "$HDD/Fred/Documents/"
+bk_cmd "$HOME/Downloads/"              "$HDD/Fred/Downloads/"
+bk_cmd "$HOME/Music/"                  "$HDD/Fred/Music/"
+bk_cmd "$HOME/Music.New/"              "$HDD/Fred/Music.New/"
+bk_cmd "$HOME/Videos/"                 "$HDD/Fred/Videos/"
+bk_cmd "$HOME/Workspace/"              "$HDD/Fred/Workspace/"
 
-bk_cmd "$HOME/Music/"                  "$HDD/Common/Music/"
-bk_cmd "$HOME/Music.New/"              "$HDD/Common/Music.New/"
-
-bk_cmd "$HOME/Documents/"              "$HDD/FredLaptop/Documents/"
-bk_cmd "$HOME/Downloads/"              "$HDD/FredLaptop/Downloads/"
-bk_cmd "$HOME/Workspace/"              "$HDD/FredLaptop/Workspace/"
-
-bk_cmd "$HOME/.cert/"                  "$HDD/FredLaptop/DotConfigs/dot.cert/"
-bk_cmd "$HOME/.config/"                "$HDD/FredLaptop/DotConfigs/dot.config/"
-bk_cmd "$HOME/.gnupg/"                 "$HDD/FredLaptop/DotConfigs/dot.gnupg/"
-bk_cmd "$HOME/.ssh/"                   "$HDD/FredLaptop/DotConfigs/dot.ssh/"
-
-bk_cmd "$HDD/Common/Archive/"          "common@synapse:Archive/"
-bk_cmd "$HDD/Common/Media/"            "common@synapse:Media/"
-bk_cmd "$HDD/Common/Music/"            "common@synapse:Music/"
-bk_cmd "$HDD/Common/Music.New/"        "common@synapse:Music.New/"
-bk_cmd "$HDD/Common/Pictures/"         "common@synapse:Pictures/"
-
-bk_cmd "$HDD/Fred/Archive/"            "fred@synapse:Private/Archive/"
-
-bk_cmd "$HDD/FredLaptop/Documents/"    "fred@synapse:Private/Documents/"
-bk_cmd "$HDD/FredLaptop/DotConfigs/"   "fred@synapse:Private/DotConfigs/"
-bk_cmd "$HDD/FredLaptop/Downloads/"    "fred@synapse:Private/Downloads/"
-
-bk_cmd "$HDD/FredLaptop/Workspace/"    "fred@synapse:Workspace/"
-
-bk_cmd "hilda@synapse:/home/hilda/"    "$HDD/Hilda/"
+bk_cmd "$HOME/.cert/"                  "$HDD/Fred/DotConfigs/dot.cert/"
+bk_cmd "$HOME/.config/"                "$HDD/Fred/DotConfigs/dot.config/"
+bk_cmd "$HOME/.gnupg/"                 "$HDD/Fred/DotConfigs/dot.gnupg/"
+bk_cmd "$HOME/.ssh/"                   "$HDD/Fred/DotConfigs/dot.ssh/"

@@ -1,0 +1,9 @@
+[Match]
+Name=enp0s31f6
+
+[Network]
+DHCP=ipv4
+LinkLocalAddressing=no
+
+# [DHCP]
+# UseDNS=false

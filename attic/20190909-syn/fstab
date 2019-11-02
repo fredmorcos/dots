@@ -1,0 +1,10 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <fs>        <dir>       <type><options>               <d><p>
+/dev/sda1     /boot        vfat  rw,relatime             0  2
+/dev/md127    /            ext4  rw,relatime,stripe=256  0  1
+
+# LABEL=MediaA  /mnt/MediaA  ext4  defaults,rw,nofail      0  3
+# LABEL=MediaB  /mnt/MediaB  ext4  defaults,rw,nofail      0  3
+
