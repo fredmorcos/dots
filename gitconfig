@@ -3,36 +3,3 @@
   name = Fred Morcos
 [color]
   ui = true
-[merge]
-  tool = vimdiff
-  ff = only
-  conflictStyle = diff3
-[push]
-  default = simple
-  followTags = true
-[diff]
-  algorithm = patience
-[pager]
-  diff = diff-so-fancy | less -RX
-  show = diff-so-fancy | less -RX
-[alias]
-  cdiff = diff --word-diff=color
-  glog = log --graph \
-    --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-[credential]
-  helper = cache --timeout=10800
-[submodule]
-  fetchJobs = 4
-[status]
-  showUntrackedFiles = all
-[transfer]
-  fsckObjects = true
-[include]
-  path = .gitconfig-https
-[help]
-  autocorrect = 20
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
