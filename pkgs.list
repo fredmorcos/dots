@@ -23,6 +23,7 @@ autoconf-archive
 autogen
 automake
 badvpn
+base
 bash-completion
 bat
 bbswitch
@@ -46,16 +47,19 @@ cabextract
 capnproto
 catch2
 catdoc
+catimg
 ccache
 ccls
 cdrdao
 cdrtools
 ceres-solver
 cgdb
+chafa
 checksec
 cheese
 chromium
 chrpath
+clipgrab
 clojure-lsp-bin
 cmake-fedora
 coin-or-mp
@@ -75,6 +79,7 @@ cups-pk-helper
 cxxopts
 dbus-broker
 dconf-editor
+dcraw
 dd_rescue
 ddrescue
 dex
@@ -85,6 +90,7 @@ dialog
 diff-so-fancy
 diffoscope
 discount
+diskus
 displaycal
 dmenu
 dnsmasq
@@ -138,6 +144,7 @@ galculator
 gcc-fortran
 geckodriver
 genius
+geotag
 getmail
 ghex
 gifski
@@ -158,10 +165,13 @@ gnu-efi-libs
 gnuplot
 gobject-introspection
 gogglesmm
+gottengeography
 gpart
 gparted
 gperf
 gperftools
+gpsbabel
+gpscorrelate
 graphviz
 gst-editing-services
 gst-libav
@@ -170,6 +180,7 @@ gst-python
 gst-transcoder
 gstreamer-vaapi
 gtest
+gthumb
 gtk-doc
 gtk-engine-murrine
 gucharmap
@@ -182,6 +193,7 @@ hcxkeys
 hcxtools
 hddtemp
 hexchat
+hexyl
 highlight
 hledger-ui
 hledger-web
@@ -206,7 +218,6 @@ intel-media-driver
 intel-ucode
 iotop
 ipset
-iputils
 ispc
 ispell
 isync
@@ -215,6 +226,7 @@ iverilog
 iwd
 jfsutils
 john
+jp2a
 kubectl
 kubectx
 laptop-detect
@@ -259,8 +271,8 @@ libva-utils
 libva-vdpau-driver
 libva1-intel-driver
 libvdpau-va-gl
-licenses
 lightdm-gtk-greeter
+linux-firmware
 linux-headers
 linux-tools-meta
 live-media
@@ -309,6 +321,7 @@ nano
 nccl
 ncdu
 ncftp
+neofetch
 netcdf
 netctl
 netperf
@@ -321,7 +334,6 @@ nilfs-utils
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
-ntfs-3g
 numix-gtk-theme-git
 nvidia
 nvidia-settings
@@ -355,6 +367,7 @@ pbzip2
 pdfarranger
 pdfcrack
 perl-locale-gettext
+pfetch-git
 picard
 pigz
 pipesocks
@@ -488,12 +501,12 @@ sysprof
 sysstat
 system-config-printer
 system76-power
-systemd-sysvcompat
 t1utils
 tarsnap
 tcc
 tcpdump
 tepl
+testdisk
 the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -616,6 +629,7 @@ xssstate
 yamllint
 yapf
 yay-bin
+you-get
 youtube-dl
 z3
 zile

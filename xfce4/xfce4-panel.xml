@@ -69,6 +69,7 @@
         <value type="string" value="vlc"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="clipgrab"/>
         <value type="string" value="slack"/>
         <value type="string" value="hexchat"/>
         <value type="string" value="steam"/>
