@@ -164,8 +164,6 @@ gstreamer-vaapi
 gtest
 gtk-doc
 gtk-engine-murrine
-gtkglarea
-gtkglext
 gucharmap
 gutenprint
 gvfs-mtp
@@ -435,6 +433,7 @@ refind-efi
 reiserfsprogs
 remake
 repo
+restic
 ripgrep
 rlwrap
 rofi

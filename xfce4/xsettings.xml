@@ -25,7 +25,7 @@
     <property name="ColorPalette" type="empty"/>
     <property name="FontName" type="string" value="Sans 9"/>
     <property name="MonospaceFontName" type="string" value="Monospace 13"/>
-    <property name="IconSizes" type="string" value="gtk-large-toolbar=96,96:gtk-small-toolbar=64,64:gtk-menu=64,64:gtk-dialog=96,96:gtk-button=64,64:gtk-dnd=64,64"/>
+    <property name="IconSizes" type="string" value="gtk-large-toolbar=96,96:gtk-small-toolbar=64,64:gtk-menu=32,32:gtk-dialog=96,96:gtk-button=64,64:gtk-dnd=64,64"/>
     <property name="KeyThemeName" type="empty"/>
     <property name="ToolbarStyle" type="empty"/>
     <property name="ToolbarIconSize" type="empty"/>
