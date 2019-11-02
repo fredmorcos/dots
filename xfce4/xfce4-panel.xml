@@ -91,7 +91,7 @@
       <property name="enable-multimedia-keys" type="bool" value="false"/>
       <property name="enable-wnck" type="bool" value="false"/>
       <property name="enable-mpris" type="bool" value="false"/>
-      <property name="volume-step" type="int" value="1"/>
+      <property name="volume-step" type="int" value="5"/>
       <property name="blacklisted-players" type="string" value=""/>
     </property>
     <property name="plugin-8" type="string" value="clock">
