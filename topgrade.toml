@@ -7,4 +7,4 @@ remote_topgrades = ["neuron"]
 ssh_arguments = "-o ConnectTimeout=2"
 
 [pre_commands]
-"Emacs Snapshot" = "rm -rf ~/.config/emacs.bak && cp -rl ~/config/emacs ~/.config/emacs.bak"
+"Emacs Snapshot" = "rm -rf ~/.config/emacs.bak && cp -rl ~/.config/emacs ~/.config/emacs.bak"
