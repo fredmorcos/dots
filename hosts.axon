@@ -3,10 +3,10 @@
 
 127.0.0.1 localhost
 ::1       localhost
-127.0.1.1 floron.localdomain    floron
+127.0.1.1 axon.localdomain    axon
 
-::1       localhost.localdomain localhost ip6-localhost ip6-loopback floron
-::1       axon.localdomain      localhost ip6-localhost ip6-loopback floron
+::1       localhost.localdomain localhost ip6-localhost ip6-loopback axon
+::1       axon.localdomain      localhost ip6-localhost ip6-loopback axon
 
 ff02::1   ip6-allnodes
 ff02::2   ip6-allrouters
