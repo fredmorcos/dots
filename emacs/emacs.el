@@ -433,6 +433,9 @@
   (emacs-lisp-mode . company-mode)
   (emacs-lisp-mode . symbol-overlay-mode)
   (emacs-lisp-mode . aggressive-indent-mode)
+  (emacs-lisp-mode . (lambda ()
+                       (setq fill-column 90)
+                       (setq-local comment-fill-column 90)))
 
   :mode
   ("\\emacs\\'" . emacs-lisp-mode)
@@ -567,7 +570,7 @@
   :custom
   (org-cycle-separator-lines 0)
   (org-indent-indentation-per-level 2)
-  (org-startup-folded nil)
+  (org-startup-folded t)
 
   :hook
   (org-mode . org-indent-mode)
@@ -995,6 +998,18 @@
 (use-package aggressive-indent
   :pin melpa
   :diminish "AInd")
+
+(use-package olivetti
+  :pin melpa
+
+  :hook
+  (org-mode . olivetti-mode)
+
+  :custom
+  (olivetti-body-width 100))
+
+;; TODO Check out EEV
+(use-package eev)
 
 (provide 'init)
 ;;; init ends here
