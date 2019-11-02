@@ -34,7 +34,7 @@
   <property name="Logitech_Gaming_Mouse_G400" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
     <property name="Threshold" type="int" value="1"/>
-    <property name="Acceleration" type="double" value="8.000000"/>
+    <property name="Acceleration" type="double" value="10.000000"/>
   </property>
   <property name="SYNA239300_06CB7A13_Touchpad" type="empty">
     <property name="Properties" type="empty">
