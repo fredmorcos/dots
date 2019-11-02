@@ -119,6 +119,16 @@
   :custom
   (menu-bar-mode nil))
 
+(use-package tab-bar
+  :ensure nil
+
+  :custom
+  (tab-bar-mode t)
+
+  :bind
+  ("C-<next>" . tab-bar-switch-to-next-tab)
+  ("C-<prior>" . tab-bar-switch-to-prev-tab))
+
 (use-package frame
   :ensure nil
 
