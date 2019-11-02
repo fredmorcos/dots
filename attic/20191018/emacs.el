@@ -17,7 +17,7 @@
  gc-cons-percentage 0.6
  file-name-handler-alist nil
  auto-window-vscroll nil
- vc-handled-backends nil
+ ;; vc-handled-backends nil
 
  save-interprogram-paste-before-kill t
 
@@ -511,12 +511,12 @@
 (use-package org-bullets)
 
 (use-package org
-  :pin org
+  :pin melpa
 
   :custom
   (org-cycle-separator-lines 0)
   (org-indent-indentation-per-level 2)
-  (org-startup-folded nil)
+  (org-startup-folded t)
 
   :hook
   (org-mode . org-indent-mode)
@@ -876,6 +876,45 @@
 
   :custom
   (company-lsp-cache-candidates 'auto))
+
+;; (use-package clojure-mode)
+;; (use-package clojure-snippets)
+
+;; (use-package cider
+;;   :hook
+;;   (cider-mode . company-mode)
+;;   (cider-mode . eldoc-mode)
+;;   (cider-mode . cider-company-enable-fuzzy-completion)
+;;   (cider-repl-mode . company-mode)
+;;   (cider-repl-mode . eldoc-mode)
+;;   (cider-repl-mode . cider-company-enable-fuzzy-completion))
+
+;; (use-package clj-refactor)
+
+;; (use-package java-mode
+;;   :ensure nil
+
+;;   :custom
+;;   (lsp-enable-file-watchers nil)
+
+;;   :hook
+;;   (java-mode . lsp)
+;;   (java-mode . yas-minor-mode))
+
+;; (use-package lsp-java
+;;   :demand t
+;;   :after lsp)
+
+;; (use-package dap-mode
+;;   :demand t
+;;   :after lsp-mode
+
+;;   :config
+;;   (dap-mode t)
+;;   (dap-ui-mode t)
+;;   (dap-tooltip-mode t)
+;;   (tooltip-mode t)
+;;   (require 'dap-java))
 
 (provide 'init)
 ;;; init ends here
