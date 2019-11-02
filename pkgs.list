@@ -65,6 +65,7 @@ ctags
 cuetools
 cups-pdf
 cups-pk-helper
+curlftpfs
 dbus-broker
 dconf-editor
 dcraw
@@ -91,6 +92,7 @@ ebtables
 ed
 efitools
 eigen
+elinks
 enjarify
 entr
 eom
@@ -103,6 +105,7 @@ fcrackzip
 fd
 fdupes
 file-roller
+filezilla
 firefox
 fish
 flawfinder
@@ -168,6 +171,7 @@ hexyl
 highlight
 hledger-ui
 hledger-web
+howl
 htop
 httptunnel
 hunspell-de
@@ -195,6 +199,7 @@ isync
 iucode-tool
 iverilog
 iwd
+jemalloc
 jfsutils
 jp2a
 jre10-openjdk
@@ -475,6 +480,7 @@ tpm2-tools
 traceroute
 transcode
 translate-shell
+transmission-cli
 transmission-gtk
 trash-cli
 tumbler
