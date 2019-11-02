@@ -458,6 +458,23 @@
   :hook
   (llvm-mode . (lambda () (toggle-truncate-lines t))))
 
+(use-package ra-emacs-lsp
+  :ensure nil
+  :demand t
+
+  :init
+  (let* ((dir "~/Build/rust-analyzer/editors/emacs/")
+         (dst (concat dir "ra-emacs-lsp.el"))
+         (bc (concat dir "ra-emacs-lsp.elc")))
+    (when (not (file-readable-p bc))
+      (byte-compile-file dst))
+    (add-to-list 'load-path dir))
+
+  :commands
+  rust-analyzer-join-lines
+  rust-analyzer-extend-selection
+  rust-analyzer-inlay-hints-mode)
+
 (use-package paren
   :ensure nil
 
@@ -811,6 +828,7 @@
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
 
   :hook
+  (rust-mode . rust-analyzer-inlay-hints-mode)
   (rust-mode . lsp)
   (rust-mode . yas-minor-mode)
   (rust-mode . (lambda ()

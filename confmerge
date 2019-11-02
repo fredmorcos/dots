@@ -120,7 +120,6 @@ cmerge hunspell_en_US                 ~/.hunspell_en_US
 cmerge nvidia-settings                ~/.nvidia-settings-rc
 cmerge profile                        ~/.profile
 cmerge redshift.conf                  ~/.config/redshift.conf
-cmerge topgrade.toml                  ~/.config/topgrade.toml
 cmerge vimrc                          ~/.vimrc
 cmerge youtube-dl.conf                ~/.config/youtube-dl/config
 
