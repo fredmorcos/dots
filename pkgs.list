@@ -8,6 +8,7 @@ afl-utils
 afpfs-ng
 android-tools
 android-udev
+archey3
 aria2
 arj
 asp
@@ -159,6 +160,7 @@ gthumb
 gtk-engine-murrine
 gucharmap
 gvfs-mtp
+hardinfo
 hashcat-utils
 haveged
 hcxkeys
@@ -367,6 +369,7 @@ python-genshi
 python-jsbeautifier
 python-libevdev
 python-llfuse
+python-logbook
 python-nose
 python-olefile
 python-pexpect
@@ -426,6 +429,7 @@ s-nail
 sassc
 sbsigntools
 screen
+screenfetch
 sdl2_gfx
 sdl_image
 seahorse
@@ -559,7 +563,6 @@ xorg-xbacklight
 xorg-xclipboard
 xorg-xcmsdb
 xorg-xcursorgen
-xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
 xorg-xgamma
@@ -572,7 +575,6 @@ xorg-xlsatoms
 xorg-xlsclients
 xorg-xmessage
 xorg-xpr
-xorg-xprop
 xorg-xrefresh
 xorg-xsetroot
 xorg-xvinfo

@@ -91,7 +91,7 @@
   (setq font-use-system-font t)
 
   :custom-face
-  (default ((t (:font "Monospace 13"))))
+  (default ((t (:font "Monospace 11"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line ((t (:foreground "Gray20" :background "Gray80")))))
@@ -127,7 +127,11 @@
 
   :bind
   ("C-<next>" . tab-bar-switch-to-next-tab)
-  ("C-<prior>" . tab-bar-switch-to-prev-tab))
+  ("C-<prior>" . tab-bar-switch-to-prev-tab)
+
+  :custom-face
+  (tab-bar ((t (:background "Gray97"))))
+  (tab-bar-tab ((t (:background "LightSteelBlue1" :box "DeepSkyBlue")))))
 
 (use-package frame
   :ensure nil
