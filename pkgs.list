@@ -230,7 +230,6 @@ lynx
 lzop
 m17n-lib
 mailutils
-make
 man-pages
 mariadb-clients
 marisa
@@ -289,7 +288,6 @@ paprefs
 parallel
 pass
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
@@ -404,6 +402,7 @@ stress
 stunnel
 subdl
 sysstat
+system76-power
 systemd-sysvcompat
 t1utils
 tarsnap
