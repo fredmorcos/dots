@@ -56,6 +56,7 @@ chafa
 checksec
 cheese
 chrpath
+clazy
 cmake
 coin-or-mp
 colordiff
@@ -198,6 +199,7 @@ ifenslave
 ifplugd
 intel-gpu-tools
 intel-media-driver
+intel-opencl-clang
 intel-ucode
 iotop
 ipset

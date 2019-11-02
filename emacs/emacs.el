@@ -883,8 +883,7 @@
 
   :hook
   (python-mode . lsp)
-  (python-mode . yas-minor-mode)
-  (python-mode . aggressive-indent-mode))
+  (python-mode . yas-minor-mode))
 
 (use-package rust-mode
   :custom-face

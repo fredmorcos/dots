@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Eclipse
 Comment=Eclipse Java IDE
-Exec=/home/fred/Oracle/eclipse/eclipse
-Icon=/home/fred/Oracle/eclipse/icon.xpm
+Exec=/home/fred/Oracle/opt/eclipse/eclipse
+Icon=/home/fred/Oracle/opt/eclipse/icon.xpm
 Terminal=false
 Type=Application
 Encoding=UTF-8
