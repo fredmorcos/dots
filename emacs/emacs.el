@@ -318,8 +318,8 @@
     (forward-line -1))
 
   :bind
-  ("M-<up>" . #'move-line-up)
-  ("M-<down>" . #'move-line-down))
+  ("M-<up>" . move-line-up)
+  ("M-<down>" . move-line-down))
 
 (use-package bindings
   :ensure nil
@@ -749,6 +749,9 @@
 (use-package toml-mode)
 (use-package json-mode)
 (use-package pkgbuild-mode)
+
+(use-package rmsbolt
+  :diminish "Bolt")
 
 (use-package boogie-friends
   :custom
