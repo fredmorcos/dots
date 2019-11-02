@@ -88,7 +88,6 @@ dnssec-tools
 docker-compose
 docker-machine
 docx2txt
-dtc
 dwdiff
 easy-rsa
 ebook-tools
@@ -461,6 +460,7 @@ soundconverter
 source-highlight
 sparsehash
 speech-dispatcher
+spike
 spirv-headers
 spirv-llvm-translator
 squashfs-tools
@@ -487,6 +487,7 @@ thunar-media-tags-plugin
 thunar-volman
 time
 tinc
+tinyemu
 tldr
 tlp-rdw
 tlsh
