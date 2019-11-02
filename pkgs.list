@@ -221,6 +221,8 @@ lbzip2
 leatherman
 lftp
 lhasa
+lib32-mesa-vdpau
+lib32-opencl-nvidia
 libappindicator-gtk3
 libc++
 libcue
@@ -452,7 +454,6 @@ sbsigntools
 screen
 screenfetch
 sdl2_gfx
-sdl_image
 seahorse
 shadowsocks
 shairplay
@@ -460,6 +461,7 @@ shedskin
 shellcheck
 shfmt
 simplescreenrecorder
+skim
 sleuthkit
 slimmy-xfwm-theme-git
 smartmontools
@@ -472,6 +474,7 @@ spike
 spirv-headers
 spirv-llvm-translator
 squashfs-tools
+steam-native-runtime
 strace
 stratis-cli
 stratisd
@@ -491,6 +494,7 @@ the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
+tig
 time
 tinc
 tinyemu
@@ -542,6 +546,7 @@ vulkan-intel
 vulkan-mesa-layer
 vulkan-tools
 w3m
+watchexec
 wavemon
 when
 whois
