@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# set -o posix
+# set -o pipefail
+set -o errexit
+set -o nounset
+
+if [ "$1" = "hi" ] || [ "$1" = "high" ]; then
+  xfconf-query -c xsettings -p /Xft/DPI                 -s 192
+  xfconf-query -c xsettings -p /Gtk/CursorThemeSize     -s 48
+  xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 2
+  xfconf-query -c xsettings -p /Xfce/LastCustomDPI      -s 192
+
+  sed -i 's/^# export GDK_SCALE/export GDK_SCALE/'         ~/.profile
+  sed -i 's/^# export GDK_DPI_SCALE/export GDK_DPI_SCALE/' ~/.profile
+fi
+
+if [ "$1" = "lo" ] || [ "$1" = "low" ]; then
+  xfconf-query -c xsettings -p /Xft/DPI                 -s 96
+  xfconf-query -c xsettings -p /Gtk/CursorThemeSize     -s 16
+  xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 1
+  xfconf-query -c xsettings -p /Xfce/LastCustomDPI      -s 96
+
+  sed -i 's/^export GDK_SCALE/# export GDK_SCALE/'         ~/.profile
+  sed -i 's/^export GDK_DPI_SCALE/# export GDK_DPI_SCALE/' ~/.profile
+fi
+
+loginctl terminate-session "$XDG_SESSION_ID"
+
+# pkill xfwm4
+# xfwm4 > /dev/null &
+# pkill xfce4-panel
+# xfce4-panel > /dev/null &
+# systemctl --user restart xfce4-notifyd
