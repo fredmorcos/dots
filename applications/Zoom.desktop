@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Zoom
+Comment=Zoom Video Conference
+Exec=env QT_SCALE_FACTOR=2 /usr/bin/zoom %U
+Icon=Zoom.png
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Network;Application;
+StartupWMClass=Zoom
+MimeType=x-scheme-handler/zoommtg;application/x-zoom;
+X-KDE-Protocols=zoommtg
+Name[en_US]=Zoom

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Eclipse
+Comment=Eclipse Java IDE
+Exec=/home/fred/Oracle/eclipse/eclipse
+Icon=/home/fred/Oracle/eclipse/icon.xpm
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Development;
+StartupWMClass=Eclipse
+Name[en_US]=Eclipse
