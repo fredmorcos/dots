@@ -31,6 +31,7 @@ PATH="$HOME/Documents/Workspace/bin:$PATH"
 
 # Rust
 RUSTC_WRAPPER=sccache
+RUSTFLAGS="-C link-arg=-fuse-ld=lld"
 
 # Editors
 EDITOR='emacs -nw'

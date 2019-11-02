@@ -2,6 +2,7 @@ abook
 acpi
 acpi_call
 acpica
+acpid
 adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
 afl-utils
@@ -20,6 +21,7 @@ atool
 autoconf-archive
 autogen
 automake
+autopep8
 badvpn
 base
 bash-completion
@@ -41,6 +43,8 @@ bully
 bup
 byzanz
 cabextract
+cadaver
+calcurse
 capnproto
 catch2
 catdoc
@@ -53,6 +57,7 @@ chafa
 checksec
 cheese
 chrpath
+claws-mail
 cmake
 coin-or-mp
 colordiff
@@ -66,6 +71,7 @@ cuetools
 cups-pdf
 cups-pk-helper
 curlftpfs
+davfs2
 dbus-broker
 dconf-editor
 dcraw
@@ -108,6 +114,7 @@ file-roller
 filezilla
 firefox
 fish
+flake8
 flawfinder
 flex
 fmt
@@ -159,6 +166,7 @@ gtest
 gthumb
 gtk-engine-murrine
 gucharmap
+gumbo-parser
 gvfs-mtp
 hardinfo
 hashcat-utils
@@ -169,7 +177,6 @@ hddtemp
 hdparm
 hexchat
 hexyl
-hidpi-daemon
 highlight
 hledger-ui
 hledger-web
@@ -205,17 +212,20 @@ jemalloc
 jfsutils
 jp2a
 jre10-openjdk
+kak-lsp
+khal
+khard
 laptop-detect
 lbzip2
 leatherman
 lftp
 lhasa
-libappindicator-gtk2
 libappindicator-gtk3
 libc++
 libcue
 libdvdcss
 libgit2-glib
+libgnome-keyring
 libgrss
 libgsf
 libiptcdata
@@ -272,6 +282,7 @@ modest
 mousetweaks
 movit
 mp3unicode
+mpop
 mpv
 mtd-utils
 mtools
@@ -330,6 +341,7 @@ patch
 patchelf
 pavucontrol
 pbzip2
+pcp
 pdfarranger
 pdfcrack
 perl-locale-gettext
@@ -363,10 +375,13 @@ python-cjkwrap
 python-cssselect
 python-discid
 python-distutils-extra
+python-etesync
 python-evdev
 python-fxa
 python-genshi
+python-httplib2
 python-jsbeautifier
+python-language-server
 python-libevdev
 python-llfuse
 python-logbook
@@ -378,13 +393,18 @@ python-pip
 python-progressbar
 python-pyacoustid
 python-pycryptodome
+python-pydocstyle
 python-pylast
+python-pylint
 python-pyopenssl
 python-pysmbc
 python-pysocks
 python-pystemmer
 python-pyudev
 python-requests-hawk
+python-requests-oauthlib
+python-rope
+python-setproctitle
 python-tlsh
 python-virtualenv
 python-wikipedia
@@ -419,6 +439,7 @@ redshift
 refind-efi
 reiserfsprogs
 remake
+remind
 repo
 ripgrep
 rlwrap
@@ -506,6 +527,7 @@ valgrind
 vbindiff
 vcdimager
 vde2
+vdirsyncer
 vdpauinfo
 vi
 vim-colorsamplerpack
@@ -521,6 +543,7 @@ vulkan-mesa-layer
 vulkan-tools
 w3m
 wavemon
+when
 whois
 whowatch
 wireguard-arch
