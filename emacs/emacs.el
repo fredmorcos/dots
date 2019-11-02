@@ -32,8 +32,6 @@
  use-package-always-ensure t
  use-package-expand-minimally t)
 
-(package-initialize)
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -209,6 +207,7 @@
 
   :config
   (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d"))
+  (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
   (recentf-cleanup)
 
   :custom
@@ -413,6 +412,28 @@
 
   :custom
   (eldoc-echo-area-use-multiline-p t))
+
+(use-package js
+  :ensure nil
+
+  :mode
+  ("\\.hocon\\'" . javascript-mode))
+
+(use-package url-handlers
+  :ensure nil
+
+  :config
+  (let* ((url "https://raw.githubusercontent.com/llvm/llvm-project")
+         (url (concat url "/master/llvm/utils/emacs/llvm-mode.el"))
+         (dst-dir (concat user-emacs-directory "extra/"))
+         (dst (concat dst-dir "llvm-mode.el"))
+         (dst-bc (concat dst-dir "llvm-mode.elc")))
+    (when (not (file-readable-p dst-bc))
+      (make-directory dst-dir t)
+      (url-copy-file url dst t)
+      (byte-compile-file dst))
+    (add-to-list 'load-path dst-dir))
+  (require 'llvm-mode))
 
 (use-package paren
   :ensure nil
@@ -856,6 +877,19 @@
   (cider-repl-mode . cider-company-enable-fuzzy-completion))
 
 (use-package clj-refactor)
+
+(use-package lsp-java
+  :after lsp
+
+  :hook
+  (java-mode . lsp))
+
+(use-package dap-mode
+  :after lsp-mode
+
+  :config
+  (dap-mode t)
+  (dap-ui-mode t))
 
 (provide 'init)
 ;;; init ends here
