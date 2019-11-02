@@ -985,7 +985,8 @@
   (treemacs-mode . (lambda () (display-line-numbers-mode -1))))
 
 (use-package aggressive-indent
-  :pin melpa)
+  :pin melpa
+  :diminish "AInd")
 
 (provide 'init)
 ;;; init ends here
