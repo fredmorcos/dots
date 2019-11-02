@@ -571,6 +571,13 @@
   :config
   (setq org-ellipsis "   ▾"))
 
+(use-package markdown-mode
+  :ensure nil
+
+  :hook
+  (markdown-mode . (lambda () (jit-lock-register 'flyspell-region)))
+  (markdown-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t))))
+
 (use-package unicode-fonts
   :config
   (unicode-fonts-setup))

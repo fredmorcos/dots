@@ -56,8 +56,6 @@ chafa
 checksec
 cheese
 chrpath
-claws-mail-themes
-clawsker
 cmake
 coin-or-mp
 colordiff
@@ -112,7 +110,6 @@ fcrackzip
 fd
 fdupes
 file-roller
-filezilla
 firefox
 fish
 flake8
@@ -347,6 +344,7 @@ pbzip2
 pcp
 pdfarranger
 pdfcrack
+perl-locale-gettext
 picard
 pigz
 pipesocks
@@ -495,6 +493,7 @@ the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
+thunderbird
 tig
 time
 tinc
