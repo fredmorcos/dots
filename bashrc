@@ -50,14 +50,14 @@ alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 DLSUB_UN_FILE=~/Documents/Important/Passwords/credentials-ost-un
 DLSUB_PW_FILE=~/Documents/Important/Passwords/credentials-ost-pw
+DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
 
 if [ -f $DLSUB_UN_FILE ] && [ -f $DLSUB_PW_FILE ]; then
-  alias dlsub='subdl -i --output={m}.{L}.{S}'  \
-              '--username $(< $DLSUB_UN_FILE)' \
-              '--password $(< $DLSUB_PW_FILE)'
-else
-  alias dlsub='subdl -i --output={m}.{L}.{S}'
+  DLSUB_CMD="$DLSUB_CMD --username $(< $DLSUB_UN_FILE) --password $(< $DLSUB_PW_FILE)"
 fi
+
+# shellcheck disable=SC2139
+alias dlsub="$DLSUB_CMD"
 
 dirdlsub() {
   for i in *; do

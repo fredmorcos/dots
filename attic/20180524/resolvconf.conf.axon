@@ -1,9 +1,0 @@
-# Configuration for resolvconf(8)
-# See resolvconf.conf(5) for details
-
-resolv_conf=/etc/resolv.conf
-# If you run a local name server, you should uncomment the below line and
-# configure your subscribers configuration files below.
-#name_servers=127.0.0.1
-#name_servers="162.242.211.137 78.46.223.24"
-name_servers="103.86.96.100 103.86.99.100"

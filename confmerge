@@ -98,7 +98,6 @@ cmerge autostart/xnocaps.desktop   ~/.config/autostart/xnocaps.desktop
 cmerge pulse/default.pa  ~/.config/pulse/default.pa
 cmerge pulse/daemon.conf ~/.config/pulse/daemon.conf
 
-cmerge alacritty.yml   ~/.config/alacritty/alacritty.yml
 cmerge bashrc          ~/.bashrc
 cmerge dmrc            ~/.dmrc
 cmerge emacs/emacs.el  ~/.emacs
