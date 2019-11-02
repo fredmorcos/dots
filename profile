@@ -19,6 +19,10 @@ PATH="$HOME/Oracle/oraclejdk/jre/bin:$PATH"
 PATH="$HOME/Oracle/eclipse:$PATH"
 PATH="$HOME/Oracle/mx:$PATH"
 
+# Other
+PATH="$HOME/Oracle/zoom:$PATH"
+LD_LIBRARY_PATH="$HOME/Oracle/zoom:$LD_LIBRARY_PATH"
+
 # Path
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
