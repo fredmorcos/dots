@@ -82,52 +82,64 @@ cmerge () {
   fi
 }
 
-for i in keyboard-layout.xml keyboards.xml pointers.xml   \
-	 thunar.xml xfce4-appfinder.xml xfce4-desktop.xml \
-	 xfce4-keyboard-shortcuts.xml xfce4-notifyd.xml   \
-	 xfce4-panel.xml xfce4-power-manager.xml          \
-         xfce4-session.xml xfce4-settings-editor.xml      \
-	 xfce4-settings-manager.xml xfwm4.xml             \
-	 xsettings.xml ; do
+for i in keyboard-layout.xml          \
+         keyboards.xml                \
+         pointers.xml                 \
+	       thunar.xml                   \
+         xfce4-appfinder.xml          \
+         xfce4-desktop.xml            \
+	       xfce4-keyboard-shortcuts.xml \
+         xfce4-notifyd.xml            \
+	       xfce4-panel.xml              \
+         xfce4-power-manager.xml      \
+         xfce4-session.xml            \
+         xfce4-settings-editor.xml    \
+	       xfce4-settings-manager.xml   \
+         xfwm4.xml                    \
+	       xsettings.xml
+do
   cmerge xfce4/$i ~/.config/xfce4/xfconf/xfce-perchannel-xml/$i
 done
 
-cmerge autostart/xintelrgb.desktop ~/.config/autostart/xintelrgb.desktop
-cmerge autostart/xnocaps.desktop   ~/.config/autostart/xnocaps.desktop
+cmerge autostart/xintelrgb.desktop  ~/.config/autostart/xintelrgb.desktop
+cmerge autostart/xnocaps.desktop    ~/.config/autostart/xnocaps.desktop
 
-cmerge pulse/default.pa  ~/.config/pulse/default.pa
-cmerge pulse/daemon.conf ~/.config/pulse/daemon.conf
+cmerge applications/Zoom.desktop    ~/.local/share/applications/Zoom.desktop
 
-cmerge bashrc          ~/.bashrc
-cmerge dmrc            ~/.dmrc
-cmerge emacs/emacs.el  ~/.emacs
-cmerge fonts.conf      ~/.config/fontconfig/fonts.conf
-cmerge gitconfig       ~/.gitconfig
-cmerge htoprc          ~/.config/htop/htoprc
-cmerge hunspell_en_US  ~/.hunspell_en_US
-cmerge profile         ~/.profile
-cmerge redshift.conf   ~/.config/redshift.conf
-cmerge topgrade.toml   ~/.config/topgrade.toml
-cmerge vimrc           ~/.vimrc
-cmerge youtube-dl.conf ~/.config/youtube-dl/config
+cmerge bashrc                       ~/.bashrc
+cmerge dmrc                         ~/.dmrc
+cmerge emacs/emacs.el               ~/.config/emacs/init
+cmerge gitconfig                    ~/.gitconfig
+cmerge htoprc                       ~/.config/htop/htoprc
+cmerge hunspell_en_US               ~/.hunspell_en_US
+cmerge profile                      ~/.profile
+cmerge redshift.conf                ~/.config/redshift.conf
+cmerge topgrade.toml                ~/.config/topgrade.toml
+cmerge vimrc                        ~/.vimrc
+cmerge youtube-dl.conf              ~/.config/youtube-dl/config
 
-cmerge loader/loader.conf /boot/loader/loader.conf
-cmerge loader/arch.conf   /boot/loader/entries/arch.conf
+cmerge loader/loader.conf           /boot/loader/loader.conf
+cmerge loader/arch.conf             /boot/loader/entries/arch.conf
 
-cmerge systemd/coredump.conf      /etc/systemd/coredump.conf
-cmerge systemd/lxdm-override.conf /etc/systemd/system/lxdm.service.d/override.conf
+cmerge systemd/coredump.conf        /etc/systemd/coredump.conf
+cmerge systemd/lxdm-override.conf   /etc/systemd/system/lxdm.service.d/override.conf
 
-cmerge fstab           /etc/fstab
-cmerge hostname        /etc/hostname
-cmerge hosts           /etc/hosts
-cmerge locale.conf     /etc/locale.conf
-cmerge lxdm.conf       /etc/lxdm/lxdm.conf
-cmerge makepkg.conf    /etc/makepkg.conf
-cmerge mkinitcpio.conf /etc/mkinitcpio.conf
-cmerge modprobe.conf   /etc/modprobe.d/modprobe.conf
-cmerge modules.conf    /etc/modules-load.d/modules.conf
-cmerge pacman.conf     /etc/pacman.conf
-cmerge sysctl.conf     /etc/sysctl.d/sysctl.conf
+cmerge network-manager/wifi.conf    /etc/NetworkManager/conf.d/wifi.conf
+cmerge udev/wifi-powersave.rules    /etc/udev/rules.d/81-wifi-powersave.rules
+cmerge udev/wake-on-lan.rules       /etc/udev/rules.d/81-wol.rules
+
+cmerge fstab                        /etc/fstab
+cmerge hostname                     /etc/hostname
+cmerge hosts                        /etc/hosts
+cmerge locale.conf                  /etc/locale.conf
+cmerge lxdm.conf                    /etc/lxdm/lxdm.conf
+cmerge vconsole.conf                /etc/vconsole.conf
+cmerge makepkg.conf                 /etc/makepkg.conf
+cmerge mkinitcpio.conf              /etc/mkinitcpio.conf
+cmerge modprobe.conf                /etc/modprobe.d/modprobe.conf
+cmerge modules.conf                 /etc/modules-load.d/modules.conf
+cmerge pacman.conf                  /etc/pacman.conf
+cmerge sysctl.conf                  /etc/sysctl.d/sysctl.conf
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
