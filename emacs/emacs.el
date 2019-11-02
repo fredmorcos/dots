@@ -1,4 +1,4 @@
-;;; .emacs --- Emacs configuration -*- lexical-binding: t; -*-
+;;; init --- Emacs configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -74,6 +74,7 @@
   (inhibit-startup-buffer-menu t)
   (initial-scratch-message nil)
   (initial-major-mode 'fundamental-mode)
+  (auto-save-list-file-prefix nil)
 
   :hook
   (after-init . (lambda () (setq file-name-handler-alist fnh-alist-old))))
@@ -85,12 +86,10 @@
   (setq font-use-system-font t)
 
   :custom-face
-  (default ((t (:font "Monospace 12"))))
+  (default ((t (:font "Monospace 13"))))
   (cursor ((t (:background "Gray30"))))
   (region ((t (:background "LightSteelBlue1"))))
-  ;; (mode-line-highlight ((t (:box (:line-width 1 :color "Gray40" :style nil)))))
   (mode-line ((t (:foreground "Gray20" :background "Gray80")))))
-                  ;; :box (:line-width 1 :color "Gray75" :style nil)))))
 
 (use-package scroll-bar
   :ensure nil
@@ -305,7 +304,22 @@
   :custom
   (column-number-mode t)
   (line-number-mode nil)
-  (auto-save-mode t))
+  (auto-save-mode t)
+
+  :init
+  (defun move-line-up ()
+    (interactive)
+    (transpose-lines 1)
+    (forward-line -2))
+  (defun move-line-down ()
+    (interactive)
+    (forward-line 1)
+    (transpose-lines 1)
+    (forward-line -1))
+
+  :bind
+  ("M-<up>" . #'move-line-up)
+  ("M-<down>" . #'move-line-down))
 
 (use-package bindings
   :ensure nil
@@ -390,7 +404,8 @@
   (emacs-lisp-mode . symbol-overlay-mode)
 
   :mode
-  ("\\emacs\\'" . emacs-lisp-mode))
+  ("\\emacs\\'" . emacs-lisp-mode)
+  ("\\.config/emacs/init\\'" . emacs-lisp-mode))
 
 (use-package eldoc
   :ensure nil
@@ -839,5 +854,5 @@
 
 (use-package clj-refactor)
 
-(provide '.emacs)
-;;; .emacs ends here
+(provide 'init)
+;;; init ends here

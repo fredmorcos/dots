@@ -108,6 +108,7 @@ cmerge applications/Zoom.desktop    ~/.local/share/applications/Zoom.desktop
 cmerge applications/Eclipse.desktop ~/.local/share/applications/Eclipse.desktop
 
 cmerge bashrc                       ~/.bashrc
+cmerge bash_profile                 ~/.bash_profile
 cmerge dmrc                         ~/.dmrc
 cmerge emacs/emacs.el               ~/.config/emacs/init
 cmerge gitconfig                    ~/.gitconfig
@@ -128,6 +129,8 @@ cmerge systemd/lxdm-override.conf   /etc/systemd/system/lxdm.service.d/override.
 cmerge network-manager/wifi.conf    /etc/NetworkManager/conf.d/wifi.conf
 cmerge udev/wifi-powersave.rules    /etc/udev/rules.d/81-wifi-powersave.rules
 cmerge udev/wake-on-lan.rules       /etc/udev/rules.d/81-wol.rules
+
+cmerge x11/01-noautogpu.conf        /etc/X11/xorg.conf.d/01-noautogpu.conf
 
 cmerge fstab                        /etc/fstab
 cmerge hostname                     /etc/hostname

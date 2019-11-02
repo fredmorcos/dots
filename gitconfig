@@ -1,5 +1,9 @@
 [user]
-  email = fred.morcos@gmail.com
+  email = fred.morcos@oracle.com
   name = Fred Morcos
+
 [color]
   ui = true
+
+[core]
+  gitproxy=~/Workspace/dots/scripts/git-proxy-wrapper for ol-bitbucket.us.oracle.com

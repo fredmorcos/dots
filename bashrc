@@ -4,9 +4,11 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+[[ -f /etc/profile.d/vte.sh ]] && . /etc/profile.d/vte.sh
 
-if [ -f /etc/profile.d/vte.sh ]; then
-  . /etc/profile.d/vte.sh
+if [ -f ~/.bashrc.priv ]; then
+  # shellcheck source=/home/fred/.bashrc.priv
+  . "$HOME/.bashrc.priv"
 fi
 
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
@@ -44,11 +46,6 @@ alias yt720='youtube-dl -f "[height<=720]"'
 alias yt1080='youtube-dl -f "[height<=1080]"'
 
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
-
-if [ -f "/home/fred/.bashrc.priv" ]; then
-  # shellcheck source=/home/fred/.bashrc.priv
-  source "/home/fred/.bashrc.priv"
-fi
 
 DLSUB_UN_FILE=~/Documents/Important/Passwords/credentials-ost-un
 DLSUB_PW_FILE=~/Documents/Important/Passwords/credentials-ost-pw

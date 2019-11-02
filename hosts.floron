@@ -1,0 +1,15 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+
+127.0.0.1 localhost
+::1       localhost
+127.0.1.1 floron.localdomain    floron
+
+::1       localhost.localdomain localhost ip6-localhost ip6-loopback floron
+::1       axon.localdomain      localhost ip6-localhost ip6-loopback floron
+
+ff02::1   ip6-allnodes
+ff02::2   ip6-allrouters
+
+192.168.0.1   router
+192.168.0.104 neuron
