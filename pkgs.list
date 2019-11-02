@@ -303,6 +303,7 @@ openbsd-netcat
 openldap
 openmp
 openmpi
+openpyn-nordvpn
 oprofile
 optimus-manager
 optipng
@@ -511,7 +512,6 @@ vulkan-mesa-layer
 vulkan-tools
 w3m
 wavemon
-wget
 whois
 whowatch
 wireguard-arch
@@ -584,6 +584,7 @@ yay-bin
 you-get
 youtube-dl
 z3
+zfec
 zile
 zssh
 zzuf

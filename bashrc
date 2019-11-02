@@ -8,8 +8,12 @@
 
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 LS_COLORS='ex=00:su=00:sg=00:ca=00:'
+HISTCONTROL=ignoredups
+HISTSIZE=10000
 
-export PS1 LS_COLORS
+export PS1 LS_COLORS HISTCONTROL HISTSIZE
+
+shopt -s checkwinsize
 
 alias grep='grep --color'
 alias ls='exa'
