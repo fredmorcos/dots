@@ -43,11 +43,13 @@ bup
 byzanz
 cabextract
 capnproto
+catch2
 catdoc
 ccache
 ccls
 cdrdao
 cdrtools
+ceres-solver
 cgdb
 checksec
 cheese
@@ -69,6 +71,7 @@ ctags
 cuetools
 cups-pdf
 cups-pk-helper
+cxxopts
 dbus-broker
 dconf-editor
 dd_rescue
@@ -115,6 +118,7 @@ firefox
 fish
 flawfinder
 flex
+fmt
 fontforge
 foomatic-db
 foomatic-db-engine
@@ -270,6 +274,7 @@ man-pages
 mariadb-clients
 marisa
 masterpdfeditor
+maven
 mcpp
 mda.lv2
 mediainfo
@@ -450,8 +455,10 @@ shadowsocks
 shairplay
 shedskin
 shellcheck
+shfmt
 simple-scan
 simplescreenrecorder
+slack-desktop
 sleuthkit
 slimmy-xfwm-theme-git
 smartmontools

@@ -419,10 +419,11 @@
   :mode
   ("\\.hocon\\'" . javascript-mode))
 
-(use-package url-handlers
+(use-package llvm-mode
   :ensure nil
+  :demand t
 
-  :config
+  :init
   (let* ((url "https://raw.githubusercontent.com/llvm/llvm-project")
          (url (concat url "/master/llvm/utils/emacs/llvm-mode.el"))
          (dst-dir (concat user-emacs-directory "extra/"))
@@ -433,7 +434,12 @@
       (url-copy-file url dst t)
       (byte-compile-file dst))
     (add-to-list 'load-path dst-dir))
-  (require 'llvm-mode))
+
+  :commands
+  toggle-truncate-lines
+
+  :hook
+  (llvm-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package paren
   :ensure nil
@@ -864,32 +870,44 @@
   :custom
   (company-lsp-cache-candidates 'auto))
 
-(use-package clojure-mode)
-(use-package clojure-snippets)
+;; (use-package clojure-mode)
+;; (use-package clojure-snippets)
 
-(use-package cider
-  :hook
-  (cider-mode . company-mode)
-  (cider-mode . eldoc-mode)
-  (cider-mode . cider-company-enable-fuzzy-completion)
-  (cider-repl-mode . company-mode)
-  (cider-repl-mode . eldoc-mode)
-  (cider-repl-mode . cider-company-enable-fuzzy-completion))
+;; (use-package cider
+;;   :hook
+;;   (cider-mode . company-mode)
+;;   (cider-mode . eldoc-mode)
+;;   (cider-mode . cider-company-enable-fuzzy-completion)
+;;   (cider-repl-mode . company-mode)
+;;   (cider-repl-mode . eldoc-mode)
+;;   (cider-repl-mode . cider-company-enable-fuzzy-completion))
 
-(use-package clj-refactor)
+;; (use-package clj-refactor)
 
-(use-package lsp-java
-  :after lsp
+;; (use-package java-mode
+;;   :ensure nil
 
-  :hook
-  (java-mode . lsp))
+;;   :custom
+;;   (lsp-enable-file-watchers nil)
 
-(use-package dap-mode
-  :after lsp-mode
+;;   :hook
+;;   (java-mode . lsp)
+;;   (java-mode . yas-minor-mode))
 
-  :config
-  (dap-mode t)
-  (dap-ui-mode t))
+;; (use-package lsp-java
+;;   :demand t
+;;   :after lsp)
+
+;; (use-package dap-mode
+;;   :demand t
+;;   :after lsp-mode
+
+;;   :config
+;;   (dap-mode t)
+;;   (dap-ui-mode t)
+;;   (dap-tooltip-mode t)
+;;   (tooltip-mode t)
+;;   (require 'dap-java))
 
 (provide 'init)
 ;;; init ends here

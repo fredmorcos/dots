@@ -6,11 +6,6 @@
 [[ $- != *i* ]] && return
 [[ -f /etc/profile.d/vte.sh ]] && . /etc/profile.d/vte.sh
 
-if [ -f ~/.bashrc.priv ]; then
-  # shellcheck source=/home/fred/.bashrc.priv
-  . "$HOME/.bashrc.priv"
-fi
-
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 LS_COLORS='ex=00:su=00:sg=00:ca=00:'
 
@@ -47,8 +42,8 @@ alias yt1080='youtube-dl -f "[height<=1080]"'
 
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
-PASS_FILE=~/Documents/Important/Passwords/Passwords.txt
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
+PASS_FILE=~/Documents/Important/Passwords/Passwords.txt
 
 if [ -f $PASS_FILE ]; then
   OST_LINE=$(grep OpenSubtitles $PASS_FILE)

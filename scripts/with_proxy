@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# set -o posix
+# set -o pipefail
+set -o errexit
+set -o nounset
+
+PASS_FILE=~/Documents/Important/Passwords/Passwords.txt
+PROXY=$(grep Oracle:Proxy $PASS_FILE)
+PROXY=$(echo "$PROXY" | awk '{ print $3 }')
+
+HTTP_PROXY="$PROXY" HTTPS_PROXY="$PROXY" FTP_PROXY="$PROXY" RSYNC_PROXY="$PROXY" NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com" "$@"
