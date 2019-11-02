@@ -101,6 +101,8 @@ do
   cmerge xfce4/$i ~/.config/xfce4/xfconf/xfce-perchannel-xml/$i
 done
 
+cmerge xfce4/terminalrrc            ~/.config/xfce4/terminal/terminalrc
+
 cmerge autostart/xintelrgb.desktop  ~/.config/autostart/xintelrgb.desktop
 cmerge autostart/xnocaps.desktop    ~/.config/autostart/xnocaps.desktop
 

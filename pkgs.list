@@ -2,6 +2,7 @@ abook
 acpi
 acpi_call
 acpica
+acpid
 adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
 afl-utils
@@ -175,7 +176,6 @@ hcxkeys
 hcxtools
 hddtemp
 hexchat
-hidpi-daemon
 highlight
 hledger-ui
 hledger-web
