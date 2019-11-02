@@ -1,0 +1,1 @@
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="1024", ATTR{queue/iosched/low_latency}="1"

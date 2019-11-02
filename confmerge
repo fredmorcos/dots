@@ -136,6 +136,7 @@ cmerge systemd/lightdm-override.conf  /etc/systemd/system/lightdm.service.d/over
 cmerge network-manager/wifi.conf      /etc/NetworkManager/conf.d/wifi.conf
 cmerge udev/wifi-powersave.rules      /etc/udev/rules.d/81-wifi-powersave.rules
 cmerge udev/wake-on-lan.rules         /etc/udev/rules.d/81-wol.rules
+cmerge udev/io-sched.rules            /etc/udev/rules.d/98-io-sched.rules
 
 cmerge fstab                          /etc/fstab
 cmerge hostname                       /etc/hostname
