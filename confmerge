@@ -85,18 +85,18 @@ cmerge () {
 for i in keyboard-layout.xml          \
          keyboards.xml                \
          pointers.xml                 \
-	       thunar.xml                   \
+         thunar.xml                   \
          xfce4-appfinder.xml          \
          xfce4-desktop.xml            \
-	       xfce4-keyboard-shortcuts.xml \
+         xfce4-keyboard-shortcuts.xml \
          xfce4-notifyd.xml            \
-	       xfce4-panel.xml              \
+         xfce4-panel.xml              \
          xfce4-power-manager.xml      \
          xfce4-session.xml            \
          xfce4-settings-editor.xml    \
-	       xfce4-settings-manager.xml   \
+         xfce4-settings-manager.xml   \
          xfwm4.xml                    \
-	       xsettings.xml
+         xsettings.xml
 do
   cmerge xfce4/$i ~/.config/xfce4/xfconf/xfce-perchannel-xml/$i
 done
@@ -105,6 +105,7 @@ cmerge autostart/xintelrgb.desktop  ~/.config/autostart/xintelrgb.desktop
 cmerge autostart/xnocaps.desktop    ~/.config/autostart/xnocaps.desktop
 
 cmerge applications/Zoom.desktop    ~/.local/share/applications/Zoom.desktop
+cmerge applications/Eclipse.desktop ~/.local/share/applications/Eclipse.desktop
 
 cmerge bashrc                       ~/.bashrc
 cmerge dmrc                         ~/.dmrc
