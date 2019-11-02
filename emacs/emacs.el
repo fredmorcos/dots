@@ -482,10 +482,12 @@
       (byte-compile-file dst))
     (add-to-list 'load-path dir))
 
+  :custom
+  (rust-analyzer-inlay-hints-mode t)
+
   :commands
   rust-analyzer-join-lines
-  rust-analyzer-extend-selection
-  rust-analyzer-inlay-hints-mode)
+  rust-analyzer-extend-selection)
 
 (use-package paren
   :ensure nil
