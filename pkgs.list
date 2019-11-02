@@ -45,6 +45,7 @@ cabextract
 capnproto
 catdoc
 ccache
+ccls
 cdrdao
 cdrtools
 cgdb
@@ -470,6 +471,7 @@ stratisd
 stress
 stunnel
 subdl
+sysprof
 sysstat
 system-config-printer
 system76-power

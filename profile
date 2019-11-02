@@ -10,7 +10,7 @@ export XFWM4_USE_PRESENT LIBVA_DRIVER_NAME # MESA_LOADER_DRIVER_OVERRIDE
 # export QT_SCALE_FACTOR=2
 
 # Gtk3
-# export GDK_SCALE=2       # 2x scaling
+export GDK_SCALE=2       # 2x scaling
 export GDK_DPI_SCALE=0.5 # Undo scaling of text
 
 # Java-specific
