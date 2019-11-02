@@ -6,29 +6,37 @@ set -o errexit
 set -o nounset
 
 if [ "$1" = "hi" ] || [ "$1" = "high" ]; then
+  GTK_ICONS="gtk-large-toolbar=96,96:gtk-small-toolbar=64,64:gtk-menu=32,32:gtk-button=64,64:gtk-dialog=96,96:gtk-dnd=64,64:panel-menu=64,64:panel=64,64"
+
   xfconf-query -c xsettings -p /Xft/DPI                 -s 192
   xfconf-query -c xsettings -p /Gtk/CursorThemeSize     -s 48
   xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 2
   xfconf-query -c xsettings -p /Xfce/LastCustomDPI      -s 192
   xfconf-query -c xsettings -p /Gtk/MonospaceFontName   -s "Monospace 13"
-  xfconf-query -c xsettings -p /Gtk/IconSizes           -s "gtk-large-toolbar=96,96:gtk-small-toolbar=64,64:gtk-menu=32,32:gtk-dialog=96,96:gtk-button=64,64:gtk-dnd=64,64"
+  xfconf-query -c xsettings -p /Gtk/IconSizes           -s $GTK_ICONS
 
-  sed -i 's/^# export GDK_SCALE/export GDK_SCALE/'          ~/.profile
-  sed -i 's/^# export GDK_DPI_SCALE/export GDK_DPI_SCALE/'  ~/.profile
-  sed -i 's/Monospace [0-9]\+/Monospace 13/'                ~/.config/emacs/init
-  sed -i 's/Monospace [0-9]\+/Monospace 13/'                ~/.config/xfce4/terminal/terminalrc
+  sed -i 's/^# export GDK_SCALE/export GDK_SCALE/'                ~/.profile
+  sed -i 's/^# export GDK_DPI_SCALE/export GDK_DPI_SCALE/'        ~/.profile
+  sed -i 's/Monospace [0-9]\+/Monospace 13/'                      ~/.config/emacs/init
+  sed -i 's/Monospace [0-9]\+/Monospace 13/'                      ~/.config/xfce4/terminal/terminalrc
+  sed -i "s/^gtk-icon-sizes.\+$/gtk-icon-sizes = \"$GTK_ICONS\"/" ~/.gtkrc-2.0
+  sed -i "s/SMALL_TOOLBAR/LARGE_TOOLBAR/"                         ~/.gtkrc-2.0
 elif [ "$1" = "lo" ] || [ "$1" = "low" ]; then
+  GTK_ICONS="gtk-large-toolbar=16,16:gtk-small-toolbar=16,16:gtk-menu=16,16:gtk-button=16,16:gtk-dialog=16,16:gtk-dnd=16,16:panel-menu=16,16:panel=16,16"
+
   xfconf-query -c xsettings -p /Xft/DPI                 -s 96
   xfconf-query -c xsettings -p /Gtk/CursorThemeSize     -s 16
   xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s 1
   xfconf-query -c xsettings -p /Xfce/LastCustomDPI      -s 96
   xfconf-query -c xsettings -p /Gtk/MonospaceFontName   -s "Monospace 12"
-  xfconf-query -c xsettings -p /Gtk/IconSizes           -s "gtk-large-toolbar=16,16:gtk-small-toolbar=16,16:gtk-menu=16,16:gtk-dialog=16,16:gtk-button=16,16:gtk-dnd=16,16"
+  xfconf-query -c xsettings -p /Gtk/IconSizes           -s $GTK_ICONS
 
-  sed -i 's/^export GDK_SCALE/# export GDK_SCALE/'          ~/.profile
-  sed -i 's/^export GDK_DPI_SCALE/# export GDK_DPI_SCALE/'  ~/.profile
-  sed -i 's/Monospace [0-9]\+/Monospace 12/'                ~/.config/emacs/init
-  sed -i 's/Monospace [0-9]\+/Monospace 12/'                ~/.config/xfce4/terminal/terminalrc
+  sed -i 's/^export GDK_SCALE/# export GDK_SCALE/'                ~/.profile
+  sed -i 's/^export GDK_DPI_SCALE/# export GDK_DPI_SCALE/'        ~/.profile
+  sed -i 's/Monospace [0-9]\+/Monospace 12/'                      ~/.config/emacs/init
+  sed -i 's/Monospace [0-9]\+/Monospace 12/'                      ~/.config/xfce4/terminal/terminalrc
+  sed -i "s/^gtk-icon-sizes.\+$/gtk-icon-sizes = \"$GTK_ICONS\"/" ~/.gtkrc-2.0
+  sed -i "s/LARGE_TOOLBAR/SMALL_TOOLBAR/"                         ~/.gtkrc-2.0
 else
   echo "Error: Only accept 'high' or 'low'"
   exit 1

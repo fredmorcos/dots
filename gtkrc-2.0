@@ -1,0 +1,2 @@
+gtk-icon-sizes = "gtk-large-toolbar=96,96:gtk-small-toolbar=64,64:gtk-menu=32,32:gtk-button=64,64:gtk-dialog=96,96:gtk-dnd=64,64:panel-menu=64,64:panel=64,64"
+gtk-toolbar-icon-size = GTK_ICON_SIZE_LARGE_TOOLBAR

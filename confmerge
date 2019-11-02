@@ -112,6 +112,7 @@ cmerge applications/Eclipse.desktop   ~/.local/share/applications/Eclipse.deskto
 cmerge bashrc                         ~/.bashrc
 cmerge bash_profile                   ~/.bash_profile
 cmerge gtk-bookmarks                  ~/.config/gtk-3.0/bookmarks
+cmerge gtkrc-2.0                      ~/.gtkrc-2.0
 cmerge dmrc                           ~/.dmrc
 cmerge emacs/emacs.el                 ~/.config/emacs/init
 cmerge fonts.conf                     ~/.config/fontconfig/fonts.conf

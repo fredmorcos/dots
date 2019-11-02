@@ -867,6 +867,13 @@
   (c-mode . lsp)
   (c-mode . yas-minor-mode))
 
+(use-package python-mode
+  :ensure nil
+
+  :hook
+  (python-mode . lsp)
+  (python-mode . yas-minor-mode))
+
 (use-package rust-mode
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
