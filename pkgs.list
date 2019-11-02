@@ -218,7 +218,6 @@ lhasa
 lib32-libappindicator-gtk3
 lib32-mesa-vdpau
 lib32-opencl-nvidia
-lib32-primus_vk
 lib32-simplescreenrecorder
 lib32-virtualgl
 libappindicator-gtk2
@@ -252,6 +251,7 @@ libva-vdpau-driver
 libva1-intel-driver
 libvdpau-va-gl
 licenses
+lightdm-gtk-greeter
 linux-headers
 linux-tools-meta
 live-media
@@ -274,7 +274,6 @@ mcpp
 mda.lv2
 mediainfo
 mediastreamer
-mesa-demos
 mesa-vdpau
 meson
 mg
@@ -322,6 +321,7 @@ openldap
 openmp
 openpyn-nordvpn
 oprofile
+optimus-manager
 optipng
 os-prober
 osinfo-db-tools
@@ -354,7 +354,6 @@ plantri
 ponymix
 postgresql
 powertop
-primus_vk
 privoxy
 proxytunnel
 pstoedit
@@ -546,6 +545,7 @@ xcompmgr
 xdelta3
 xdg-desktop-portal
 xdotool
+xf86-video-intel
 xfce4-appfinder
 xfce4-notifyd
 xfce4-power-manager
