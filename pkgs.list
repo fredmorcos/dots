@@ -30,6 +30,7 @@ beets
 bin2iso
 binwalk
 bison
+bitlbee
 bluez-cups
 bluez-hid2hci
 bluez-tools
@@ -351,6 +352,9 @@ pdfarranger
 pdfcrack
 perl-locale-gettext
 picard
+pidgin-hotkeys
+pidgin-libnotify
+pidgin-otr
 pigz
 pipesocks
 pixiewps
@@ -372,6 +376,9 @@ pulseaudio-equalizer
 pulseaudio-equalizer-ladspa
 pulseaudio-zeroconf
 pulsemixer
+purple-facebook
+purple-plugin-pack
+purple-skypeweb
 pwgen
 python-argcomplete
 python-brotlipy
@@ -476,6 +483,7 @@ speech-dispatcher
 spike
 spirv-headers
 spirv-llvm-translator
+sqlitebrowser
 squashfs-tools
 steam-native-runtime
 strace

@@ -155,6 +155,15 @@
   (line-number-current-line
    ((t (:foreground "Gray60" :background "CornSilk")))))
 
+(use-package display-fill-column-indicator
+  :ensure nil
+
+  :custom
+  (global-display-fill-column-indicator-mode t)
+
+  :custom-face
+  (fill-column-indicator ((t (:foreground "LightSteelBlue")))))
+
 (use-package hl-line
   :ensure nil
 
