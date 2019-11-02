@@ -16,7 +16,6 @@ asp
 aspell-de
 aspell-en
 aspell-fr
-astyle
 atool
 autoconf-archive
 autogen
@@ -66,6 +65,7 @@ colorgcc
 corkscrew
 cpio
 crda
+creduce
 cryptominisat5
 ctags
 cuetools
@@ -257,7 +257,6 @@ linux-headers
 linux-tools-meta
 live-media
 lldb
-llvm
 lockdown-ms
 logrotate
 lrzip

@@ -19,6 +19,7 @@ PATH="$HOME/Oracle/oraclejdk/jre/bin:$PATH"
 PATH="$HOME/Oracle/eclipse:$PATH"
 PATH="$HOME/Oracle/mx:$PATH"
 PATH="$HOME/Oracle/maven36/bin:$PATH"
+PATH="$HOME/Oracle/gradle56/bin:$PATH"
 
 # Other
 PATH="$HOME/Oracle/zoom:$PATH"

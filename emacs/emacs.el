@@ -428,6 +428,13 @@
   ("\\emacs\\'" . emacs-lisp-mode)
   ("\\.config/emacs/init\\'" . emacs-lisp-mode))
 
+(use-package text-mode
+  :ensure nil
+
+  :mode
+  ("\\Passwords.txt\\'" . (lambda () (toggle-truncate-lines t)))
+  ("\\Passwords_old.txt\\'" . (lambda () (toggle-truncate-lines t))))
+
 (use-package eldoc
   :ensure nil
   :diminish "ED"
@@ -840,12 +847,14 @@
 
   :hook
   (java-mode . lsp)
-  (java-mode . yas-minor-mode))
+  (java-mode . yas-minor-mode)
+  (java-mode . (lambda ()
+                 (setq tab-width 2
+                       fill-column 90)
+                 (setq-local standard-indent 2)
+                 (setq-local comment-fill-column 90))))
 
 (use-package javadoc-lookup
-  :demand t)
-
-(use-package javaimp
   :demand t)
 
 (use-package mvn
@@ -903,6 +912,17 @@
   (lsp-rust-clippy-preference "on")
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
+
+  (lsp-clients-clangd-args
+   '("--background-index"
+     "--clang-tidy"
+     "--completion-style=detailed"
+     "--header-insertion=iwyu"
+     "--header-insertion-decorators"
+     "--suggest-missing-includes"
+     "--fallback-style=llvm"
+     "-j=13"
+     "--pch-storage=memory"))
 
   (lsp-ui-doc-enable nil)
   (lsp-ui-doc-border "black"))
