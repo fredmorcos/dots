@@ -35,6 +35,7 @@ bluez-hid2hci
 bluez-tools
 bluez-utils
 bolt
+borg
 brook
 bs1770gain
 bsdiff
@@ -91,6 +92,7 @@ dnssec-tools
 docker-compose
 docker-machine
 docx2txt
+duplicity
 dwdiff
 easy-rsa
 ebook-tools
@@ -132,8 +134,10 @@ fprintd
 fwupd
 fzf
 fzy
+galculator
 gcc-fortran
 geckodriver
+genius
 getmail
 ghex
 gifski
@@ -218,6 +222,7 @@ lbzip2
 leatherman
 leiningen
 leiningen-completions
+lftp
 lhasa
 lib32-libappindicator-gtk3
 lib32-mesa-vdpau
@@ -302,6 +307,7 @@ mythes-fr
 nano
 nccl
 ncdu
+ncftp
 netcdf
 netctl
 netperf
@@ -383,6 +389,7 @@ python-fxa
 python-genshi
 python-jsbeautifier
 python-libevdev
+python-llfuse
 python-nose
 python-olefile
 python-opengl
@@ -410,7 +417,6 @@ python2-h2
 python2-html5lib
 python2-lxml
 python2-m2crypto
-python2-monotonic
 python2-priority
 python2-pycurl
 python2-pyserial
@@ -466,6 +472,7 @@ soundconverter
 source-highlight
 sparsehash
 speech-dispatcher
+speedcrunch
 spike
 spirv-headers
 spirv-llvm-translator
