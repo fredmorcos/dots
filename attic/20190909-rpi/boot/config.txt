@@ -1,0 +1,24 @@
+# See /boot/overlays/README for all available options
+
+gpu_mem=400
+initramfs initramfs-linux.img followkernel
+
+# Uncomment if hdmi display is not detected and composite is being output
+hdmi_force_hotplug=1
+hdmi_edid_file=1
+
+# Uncomment to force a specific HDMI mode (this will force VGA)
+hdmi_group=1
+hdmi_mode=4
+
+#cma_lwm=16
+#cma_hwm=32
+#cma_offline_start=16
+
+# Codec keys
+decode_MPG2=0xf30b6759
+decode_WVC1=0x2231f66a
+
+disable_splash=1
+disable_camera_led=1
+
