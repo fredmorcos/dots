@@ -103,6 +103,8 @@ done
 
 cmerge xfce4/terminalrrc              ~/.config/xfce4/terminal/terminalrc
 
+cmerge autostart/redshift.desktop     ~/.config/autostart/redshift.desktop
+cmerge autostart/notifyd.desktop      ~/.config/autostart/notifyd.desktop
 cmerge autostart/xintelrgb.desktop    ~/.config/autostart/xintelrgb.desktop
 cmerge autostart/xnocaps.desktop      ~/.config/autostart/xnocaps.desktop
 
