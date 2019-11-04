@@ -92,7 +92,7 @@
 
   :custom-face
   (default ((t (:font "Monospace 12"))))
-  (cursor ((t (:background "Gray30"))))
+  (cursor ((t (:background "SlateGray3"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line ((t (:foreground "Gray20" :background "Gray80")))))
 
@@ -563,6 +563,7 @@
 (use-package lv)
 (use-package all-the-icons)
 (use-package org-bullets)
+(use-package org-present)
 
 (use-package org
   :pin org
