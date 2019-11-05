@@ -262,6 +262,7 @@ linux-tools-meta
 live-media
 lldb
 lockdown-ms
+lockfile-progs
 logrotate
 lrzip
 lsof
@@ -274,6 +275,7 @@ make
 man-pages
 marisa
 masscan
+mb2md
 mcpp
 mda.lv2
 mediainfo
@@ -526,6 +528,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
+tree-sitter-cli-bin
 ttf-fira-mono
 tumbler
 udftools

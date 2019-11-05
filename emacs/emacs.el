@@ -158,8 +158,8 @@
 (use-package display-fill-column-indicator
   :ensure nil
 
-  :custom
-  (global-display-fill-column-indicator-mode t)
+  ;; :custom
+  ;; (global-display-fill-column-indicator-mode t)
 
   :custom-face
   (fill-column-indicator ((t (:foreground "LightSteelBlue")))))
@@ -303,7 +303,14 @@
   ("s-n" . next-buffer)
   ("s-b" . previous-buffer)
   ("s-v" . split-window-below)
-  ("s-h" . split-window-right))
+  ("s-h" . split-window-right)
+
+  :custom
+  (display-buffer-alist
+   '(("\\*help"
+      (display-buffer-reuse-window display-buffer-in-side-window)
+      (side . right)
+      (window-width . 100)))))
 
 (use-package page
   :ensure nil
@@ -501,6 +508,33 @@
   :commands
   rust-analyzer-join-lines
   rust-analyzer-extend-selection)
+
+(use-package tree-sitter
+  :ensure nil
+  :demand t
+
+  :commands
+  ts-require-language
+
+  :init
+  (let* ((dir "~/Build/emacs-tree-sitter/")
+         (core-dst (concat dir "tree-sitter-core.el"))
+         (core-bc (concat dir "tree-sitter-core.elc"))
+         (debug-dst (concat dir "tree-sitter-debug.el"))
+         (debug-bc (concat dir "tree-sitter-debug.elc"))
+         (dst (concat dir "tree-sitter.el"))
+         (bc (concat dir "tree-sitter.elc")))
+    (add-to-list 'load-path dir)
+    (when (not (file-readable-p bc))
+      (byte-compile-file dst))
+    (when (not (file-readable-p debug-bc))
+      (byte-compile-file debug-dst))
+    (when (not (file-readable-p core-bc))
+      (byte-compile-file core-dst)))
+
+  :config
+  ;; Use `make ensure/lang' in the emacs-tree-sitter repo to generate a language parser.
+  (ts-require-language 'rust))
 
 (use-package paren
   :ensure nil
@@ -826,8 +860,8 @@
 
 (use-package hledger-mode
   :mode
-  ("\\.journal\\'" . hledger-mode)
-  ("\\.ledger\\'" . hledger-mode)
+  "\\.journal\\'"
+  "\\.ledger\\'"
 
   :custom
   (hledger-comments-column 2)
@@ -1005,6 +1039,7 @@
 
   :hook
   (org-mode . olivetti-mode)
+  (markdown-mode . olivetti-mode)
 
   :custom
   (olivetti-body-width 100))
