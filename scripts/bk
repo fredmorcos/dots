@@ -5,7 +5,7 @@
 set -o errexit
 set -o nounset
 
-RSYNC_CMD="rsync -ahH --delete --progress --xattrs --acls $@"
+RSYNC_CMD="rsync -ahH --delete --progress --xattrs --acls --delete-excluded --exclude='*/target' $@"
 
 echo "RSYNC Command: $RSYNC_CMD"
 
