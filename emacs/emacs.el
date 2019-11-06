@@ -596,8 +596,11 @@
 (use-package smex)
 (use-package lv)
 (use-package all-the-icons)
-(use-package org-bullets)
 (use-package org-present)
+
+(use-package org-bullets
+  :config
+  (setq org-bullets-bullet-list (seq-take org-bullets-bullet-list 2)))
 
 (use-package org
   :pin org
@@ -627,6 +630,8 @@
   (markdown-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t))))
 
 (use-package unicode-fonts
+  :demand t
+
   :config
   (unicode-fonts-setup))
 
