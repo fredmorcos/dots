@@ -598,6 +598,14 @@
 (use-package all-the-icons)
 (use-package org-present)
 
+(use-package org-sticky-header
+  :hook
+  (org-mode . org-sticky-header-mode)
+
+  :custom
+  (org-sticky-header-full-path 'full)
+  (org-sticky-header-outline-path-separator " > "))
+
 (use-package org-bullets
   :config
   (setq org-bullets-bullet-list (seq-take org-bullets-bullet-list 2)))
@@ -1034,6 +1042,8 @@
 (use-package treemacs
   :hook
   (treemacs-mode . (lambda () (display-line-numbers-mode -1))))
+  ;; rust-mode
+  ;; java-mode)
 
 (use-package aggressive-indent
   :pin melpa
