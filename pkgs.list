@@ -9,6 +9,7 @@ afl-utils
 afpfs-ng
 android-tools
 android-udev
+antiword
 archey3
 aria2
 arj
@@ -271,6 +272,7 @@ lynx
 lzop
 m17n-lib
 mailutils
+mairix
 make
 man-pages
 marisa
@@ -352,6 +354,7 @@ pbzip2
 pcp
 pdfarranger
 pdfcrack
+perl-image-exiftool
 perl-locale-gettext
 picard
 pidgin-hotkeys
@@ -370,6 +373,7 @@ powertop
 privoxy
 proxytunnel
 pstoedit
+pstotext
 psutils
 ptunnel
 pulseaudio-alsa
@@ -432,6 +436,7 @@ python2-h2
 python2-html5lib
 python2-lxml
 python2-m2crypto
+python2-mutagen
 python2-priority
 python2-pycurl
 python2-pyserial
@@ -448,6 +453,7 @@ razor
 read-edid
 realtime-privileges
 reaver
+recoll
 recordmydesktop
 redshift
 refind-efi
@@ -538,6 +544,7 @@ unicode-emoji
 unison
 units
 unrar
+unrtf
 unshield
 upx
 uriparser
