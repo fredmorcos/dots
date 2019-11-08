@@ -38,9 +38,6 @@ bk_cmd  "$HOME/.config/MusicBrainz/"    "$HDD/Fred/DotConfigs/config/MusicBrainz
 bk_cmd  "$HOME/.config/transmission/"   "$HDD/Fred/DotConfigs/config/transmission/"
 bk_cmd  "$HOME/.config/youtube-dl/"     "$HDD/Fred/DotConfigs/config/youtube-dl/"
 
-bk_cmd  "$HOME/.mx/"                    "$HDD/Fred/DotConfigs/mx/"
-bk_cmd  "$HOME/.p2/"                    "$HDD/Fred/DotConfigs/p2/"
-bk_cmd  "$HOME/.m2/"                    "$HDD/Fred/DotConfigs/m2/"
 bk_cmd  "$HOME/.thunderbird/"           "$HDD/Fred/DotConfigs/thunderbird/"
 bk_cmd  "$HOME/.idealgraphvisualizer/"  "$HDD/Fred/DotConfigs/idealgraphvisualizer/"
 bk_cmd  "$HOME/.eclipse/"               "$HDD/Fred/DotConfigs/eclipse/"
@@ -53,3 +50,7 @@ bk_cmd  "$HOME/.wallpaper_old.jpg"      "$HDD/Fred/DotConfigs/wallpaper_old.jpg"
 find "$HOME/Oracle/opt/" -maxdepth 1 -type d >  "$HOME/Oracle/opt-files.txt"
 find "$HOME/Oracle/opt/" -maxdepth 1 -type f >> "$HOME/Oracle/opt-files.txt"
 tar -c --exclude='opt/*' --exclude='*/mxbuild' -f "$HDD/Fred/Oracle.tar" "$HOME/Oracle/"
+
+tar -c -f "$HDD/Fred/Oracle_mx.tar" "$HOME/.mx"
+tar -c -f "$HDD/Fred/Oracle_m2.tar" "$HOME/.m2"
+tar -c -f "$HDD/Fred/Oracle_p2.tar" "$HOME/.p2"
