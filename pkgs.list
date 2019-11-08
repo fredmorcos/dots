@@ -57,6 +57,7 @@ cgdb
 chafa
 checksec
 cheese
+chromium
 chrpath
 clazy
 cmake
@@ -458,6 +459,7 @@ recordmydesktop
 redshift
 refind-efi
 reiserfsprogs
+remacs
 remake
 remind
 repo
