@@ -17,7 +17,6 @@
  gc-cons-percentage 0.6
  file-name-handler-alist nil
  auto-window-vscroll nil
- ; vc-handled-backends nil
 
  save-interprogram-paste-before-kill t
 
@@ -87,8 +86,8 @@
 (use-package faces
   :ensure nil
 
-  :init
-  (setq font-use-system-font t)
+  :custom
+  (font-use-system-font t)
 
   :custom-face
   (default ((t (:font "Monospace 12"))))
@@ -146,23 +145,15 @@
   :ensure nil
 
   :custom
-  (global-display-line-numbers-mode t)
   (display-line-numbers-grow-only t)
   (display-line-numbers-width-start t)
 
   :custom-face
-  (line-number ((t (:foreground "Gray80"))))
-  (line-number-current-line
-   ((t (:foreground "Gray60" :background "CornSilk")))))
+  (line-number ((t (:foreground "Gray90"))))
+  (line-number-current-line ((t (:foreground "Gray60"))))
 
-(use-package display-fill-column-indicator
-  :ensure nil
-
-  ;; :custom
-  ;; (global-display-fill-column-indicator-mode t)
-
-  :custom-face
-  (fill-column-indicator ((t (:foreground "LightSteelBlue")))))
+  :hook
+  (prog-mode . display-line-numbers-mode))
 
 (use-package hl-line
   :ensure nil
@@ -315,13 +306,9 @@
 (use-package page
   :ensure nil
 
-  :commands
-  backward-page
-  forward-page
-
   :bind
-  ("s-a" . #'backward-page)
-  ("s-e" . #'forward-page))
+  ("s-a" . backward-page)
+  ("s-e" . forward-page))
 
 (use-package windmove
   :ensure nil
@@ -376,16 +363,24 @@
   :custom
   (vc-make-backup-files t))
 
+(use-package abbrev
+  :ensure nil
+  :diminish "Abb")
+
 (use-package newcomment
   :ensure nil
 
   :custom
   (comment-fill-column 70))
 
-(use-package abbrev
+(use-package display-fill-column-indicator
   :ensure nil
 
-  :diminish "Abb")
+  :custom-face
+  (fill-column-indicator ((t (:foreground "Azure2"))))
+
+  :hook
+  ((emacs-lisp-mode c-mode) . display-fill-column-indicator-mode))
 
 (use-package fill
   :ensure nil
@@ -430,23 +425,17 @@
      empty
      space-after-tab)))
 
-(use-package elisp-mode
+(use-package emacs-lisp-mode
   :ensure nil
 
   :hook
-  (emacs-lisp-mode . eldoc-mode)
-  (emacs-lisp-mode . flycheck-elsa-setup)
-  (emacs-lisp-mode . flycheck-mode)
-  (emacs-lisp-mode . company-mode)
-  (emacs-lisp-mode . symbol-overlay-mode)
-  (emacs-lisp-mode . aggressive-indent-mode)
   (emacs-lisp-mode . (lambda ()
                        (setq fill-column 90)
                        (setq-local comment-fill-column 90)))
 
   :mode
-  ("\\emacs\\'" . emacs-lisp-mode)
-  ("\\.config/emacs/init\\'" . emacs-lisp-mode))
+  "\\emacs\\'"
+  "\\.config/emacs/init\\'")
 
 (use-package text-mode
   :ensure nil
@@ -460,7 +449,10 @@
   :diminish "ED"
 
   :custom
-  (eldoc-echo-area-use-multiline-p t))
+  (eldoc-echo-area-use-multiline-p t)
+
+  :hook
+  (prog-mode . eldoc-mode))
 
 (use-package js
   :ensure nil
@@ -495,19 +487,26 @@
   :demand t
 
   :init
-  (let* ((dir "~/Build/rust-analyzer/editors/emacs/")
-         (dst (concat dir "ra-emacs-lsp.el"))
-         (bc (concat dir "ra-emacs-lsp.elc")))
-    (when (not (file-readable-p bc))
+  (let* ((url "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer")
+         (url (concat url "/master/editors/emacs/ra-emacs-lsp.el"))
+         (dst-dir (concat user-emacs-directory "extra/"))
+         (dst (concat dst-dir "ra-emacs-lsp.el"))
+         (dst-bc (concat dst-dir "ra-emacs-lsp.elc")))
+    (when (not (file-readable-p dst-bc))
+      (make-directory dst-dir t)
+      (url-copy-file url dst t)
       (byte-compile-file dst))
-    (add-to-list 'load-path dir))
+    (add-to-list 'load-path dst-dir))
 
   :custom
   (rust-analyzer-inlay-hints-mode t)
 
   :commands
   rust-analyzer-join-lines
-  rust-analyzer-extend-selection)
+  rust-analyzer-extend-selection
+
+  :hook
+  (rust-mode . rust-analyzer-inlay-hints-mode))
 
 (use-package tree-sitter
   :ensure nil
@@ -556,7 +555,6 @@
 
   :hook
   (dired-mode . dired-hide-details-mode)
-  (dired-mode . auto-revert-mode)
 
   :custom
   (dired-listing-switches "-l --group-directories-first")
@@ -568,7 +566,10 @@
 
   :custom
   (auto-revert-interval 2)
-  (auto-revert-mode-text " AR"))
+  (auto-revert-mode-text " AR")
+
+  :hook
+  (dired-mode . auto-revert-mode))
 
 (use-package sh-script
   :ensure nil
@@ -579,9 +580,6 @@
 
 (use-package eshell
   :ensure nil
-
-  :hook
-  (eshell-mode . (lambda () (display-line-numbers-mode -1)))
 
   :custom
   (eshell-destroy-buffer-when-process-dies t))
@@ -608,7 +606,10 @@
 
 (use-package org-bullets
   :config
-  (setq org-bullets-bullet-list (seq-take org-bullets-bullet-list 2)))
+  (setq org-bullets-bullet-list (seq-take org-bullets-bullet-list 2))
+
+  :hook
+  (org-mode . org-bullets-mode))
 
 (use-package org
   :pin org
@@ -620,7 +621,6 @@
 
   :hook
   (org-mode . org-indent-mode)
-  (org-mode . org-bullets-mode)
   (org-mode . (lambda () (jit-lock-register 'flyspell-region)))
   (org-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
@@ -636,12 +636,6 @@
   :hook
   (markdown-mode . (lambda () (jit-lock-register 'flyspell-region)))
   (markdown-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t))))
-
-(use-package unicode-fonts
-  :demand t
-
-  :config
-  (unicode-fonts-setup))
 
 (use-package iedit
   :bind
@@ -716,6 +710,8 @@
   ("M-G" . deadgrep))
 
 (use-package transient
+  ;; Magit-related
+
   :custom
   (transient-default-level 7))
 
@@ -759,6 +755,8 @@
   (dired-subtree-depth-6-face ((t (:background "LightYellow")))))
 
 (use-package flycheck
+  :pin melpa
+
   :bind
   (:map flycheck-mode-map
         ("M-n" . flycheck-next-error)
@@ -767,12 +765,13 @@
 
   :custom
   (flycheck-checker-error-threshold nil)
-  (flycheck-mode-line-prefix "Chk"))
+  (flycheck-mode-line-prefix "Chk")
 
-(use-package elsa)
-(use-package flycheck-elsa)
+  :hook
+  (prog-mode . flycheck-mode))
 
 (use-package company
+  :pin melpa
   :diminish "Com"
 
   :bind
@@ -796,11 +795,13 @@
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
-  (company-transformers '(company-sort-by-backend-importance)))
+  (company-transformers '(company-sort-by-backend-importance))
+
+  :hook
+  (prog-mode . company-mode))
 
 (use-package company-quickhelp
   :pin melpa
-
   :after company
 
   :hook
@@ -832,6 +833,7 @@
   (diff-hl-change ((t (:background "PowderBlue")))))
 
 (use-package symbol-overlay
+  :pin melpa
   :diminish
 
   :bind
@@ -842,7 +844,10 @@
   (symbol-overlay-idle-time 0.1)
 
   :custom-face
-  (symbol-overlay-default-face ((t (:background "HoneyDew2")))))
+  (symbol-overlay-default-face ((t (:background "HoneyDew2"))))
+
+  :hook
+  ((hledger-mode prog-mode z3-smt2-mode) . symbol-overlay-mode))
 
 (use-package multiple-cursors
   :bind
@@ -867,7 +872,10 @@
 
   :config
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
-  (make-thread #'yas-reload-all))
+  (make-thread #'yas-reload-all)
+
+  :hook
+  ((hledger-mode java-mode c-mode python-mode rust-mode) . yas-minor-mode))
 
 (use-package yasnippet-snippets)
 
@@ -885,8 +893,6 @@
   toggle-truncate-lines
 
   :hook
-  (hledger-mode . yas-minor-mode)
-  (hledger-mode . symbol-overlay-mode)
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package toml-mode)
@@ -898,16 +904,11 @@
 
 (use-package boogie-friends
   :custom
-  (z3-smt2-prover-custom-args '("smt.relevancy=1"
-                                "sat.acce=true"
-                                "smt.arith.solver=6"))
-
-  :hook
-  (z3-smt2-mode . symbol-overlay-mode))
+  (z3-smt2-prover-custom-args
+   '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
 (use-package lsp-java
-  :demand t
-  :after lsp)
+  :demand t)
 
 (use-package java-mode
   :ensure nil
@@ -916,14 +917,11 @@
   (lsp-enable-file-watchers nil)
 
   :hook
-  (java-mode . lsp)
-  (java-mode . yas-minor-mode)
   (java-mode . (lambda ()
-                 (setq tab-width 2
-                       fill-column 90)
                  (setq-local standard-indent 2)
-                 (setq-local comment-fill-column 90)))
-  (java-mode . aggressive-indent-mode))
+                 (setq-local comment-fill-column 90)
+                 (setq tab-width 2
+                       fill-column 90))))
 
 (use-package javadoc-lookup
   :demand t)
@@ -931,39 +929,18 @@
 (use-package mvn
   :demand t)
 
-(use-package c-mode
-  :ensure nil
-
-  :hook
-  (c-mode . lsp)
-  (c-mode . yas-minor-mode))
-
-(use-package python-mode
-  :ensure nil
-
-  :hook
-  (python-mode . lsp)
-  (python-mode . yas-minor-mode))
-
 (use-package rust-mode
-  :custom-face
-  (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
-
   :hook
-  (rust-mode . rust-analyzer-inlay-hints-mode)
-  (rust-mode . lsp)
-  (rust-mode . yas-minor-mode)
   (rust-mode . (lambda ()
-                 (setq tab-width 4
-                       fill-column 90)
                  (setq-local standard-indent 4)
-                 (setq-local comment-fill-column 90)))
-  (rust-mode . aggressive-indent-mode))
+                 (setq-local comment-fill-column 90)
+                 (setq tab-width 4
+                       fill-column 90)))
+
+  :custom-face
+  (rust-question-mark-face ((t (:inherit (font-lock-builtin-face))))))
 
 (use-package cargo
-  :hook
-  (rust-mode . cargo-minor-mode)
-
   :init
   (defun cargo-fmt-and-lint ()
     (interactive)
@@ -973,10 +950,30 @@
 
   :bind
   (:map cargo-minor-mode-map
-        ("C-c C-c C-c" . cargo-fmt-and-lint)))
+        ("C-c C-c C-c" . cargo-fmt-and-lint))
+
+  :hook
+  (rust-mode . cargo-minor-mode))
+
+(use-package c-mode
+  :ensure nil
+
+  :custom
+  (lsp-clients-clangd-args
+   '("--background-index"
+     "--clang-tidy"
+     "--completion-style=detailed"
+     "--header-insertion=iwyu"
+     "--header-insertion-decorators"
+     "--suggest-missing-includes"
+     "--fallback-style=llvm"
+     "-j=13"
+     "--pch-storage=memory")))
 
 (use-package lsp-mode
-  :commands (lsp lsp-deferred)
+  :commands
+  lsp
+  lsp-deferred
 
   :bind
   (:map lsp-mode-map
@@ -992,19 +989,11 @@
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
 
-  (lsp-clients-clangd-args
-   '("--background-index"
-     "--clang-tidy"
-     "--completion-style=detailed"
-     "--header-insertion=iwyu"
-     "--header-insertion-decorators"
-     "--suggest-missing-includes"
-     "--fallback-style=llvm"
-     "-j=13"
-     "--pch-storage=memory"))
-
   (lsp-ui-doc-enable nil)
-  (lsp-ui-doc-border "black"))
+  (lsp-ui-doc-border "black")
+
+  :hook
+  ((c-mode python-mode java-mode rust-mode) . lsp))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -1039,25 +1028,32 @@
   :custom
   (company-lsp-cache-candidates 'auto))
 
-(use-package treemacs
-  :hook
-  (treemacs-mode . (lambda () (display-line-numbers-mode -1))))
-  ;; rust-mode
-  ;; java-mode)
-
 (use-package aggressive-indent
   :pin melpa
-  :diminish "AInd")
+  :diminish "AInd"
+
+  :hook
+  ((emacs-lisp-mode java-mode rust-mode) . aggressive-indent-mode))
 
 (use-package olivetti
   :pin melpa
 
   :hook
-  (org-mode . olivetti-mode)
-  (markdown-mode . olivetti-mode)
+  ((org-mode markdown-mode) . olivetti-mode)
 
   :custom
   (olivetti-body-width 100))
+
+(use-package jsonnet-mode)
+
+(use-package indent-guide
+  :pin melpa
+
+  :hook
+  ((python-mode json-mode jsonnet-mode) . indent-guide-mode)
+
+  :custom-face
+  (indent-guide-face ((t (:foreground "gray80")))))
 
 ;; TODO Check out EEV
 (use-package eev)

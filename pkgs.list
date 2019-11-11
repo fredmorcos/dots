@@ -262,6 +262,7 @@ linux-firmware
 linux-headers
 linux-tools-meta
 live-media
+lld
 lldb
 llvm
 lockdown-ms
@@ -353,7 +354,6 @@ patch
 patchelf
 pavucontrol
 pbzip2
-pcp
 pdfarranger
 pdfcrack
 perl-image-exiftool
@@ -445,8 +445,6 @@ recordmydesktop
 redshift
 refind-efi
 reiserfsprogs
-remacs
-remake
 remind
 rink
 ripgrep
