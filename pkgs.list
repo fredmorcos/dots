@@ -101,6 +101,7 @@ efitools
 eigen
 elinks
 ell
+emacs-git
 enjarify
 entr
 eom
@@ -452,6 +453,7 @@ ripgrep
 rlwrap
 rofi
 rpmextract
+rust-analyzer-git
 rustup
 s-nail
 sassc
@@ -523,6 +525,7 @@ transmission-gtk
 trash-cli
 tree-sitter-cli-bin
 ttf-fira-mono
+ttf-go-mono-git
 tumbler
 udftools
 unace
