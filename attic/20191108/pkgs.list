@@ -17,7 +17,6 @@ asp
 aspell-de
 aspell-en
 aspell-fr
-astyle
 atool
 autoconf-archive
 autogen
@@ -42,6 +41,7 @@ bridge-utils
 bs1770gain
 bsdiff
 bully
+bup
 byzanz
 cabextract
 cadaver
@@ -61,13 +61,14 @@ chromium
 chrpath
 clazy
 cmake
-cobalt
 coin-or-mp
 colordiff
 colorgcc
 corkscrew
 cpio
 crda
+creduce
+cryptominisat5
 ctags
 cuetools
 cups-pdf
@@ -92,6 +93,7 @@ dmenu
 dnsmasq
 dnssec-tools
 docx2txt
+duplicity
 dwdiff
 easy-rsa
 ebook-tools
@@ -131,8 +133,10 @@ fzf
 fzy
 galculator
 gcc-fortran
+getmail
 ghex
 gifski
+gimp
 git-crypt
 git-repair
 git-review
@@ -233,7 +237,6 @@ libgit2-glib
 libgnome-keyring
 libgrss
 libgsf
-libheif
 libiptcdata
 libiscsi
 libisoburn
@@ -245,9 +248,9 @@ liboggz
 libopenraw
 libosinfo
 libquicktime
-libraw
 libreoffice-fresh
 libsidplayfp
+libtiger
 libunrar
 libva-intel-driver
 libva-mesa-driver
@@ -255,14 +258,12 @@ libva-utils
 libva-vdpau-driver
 libva1-intel-driver
 libvdpau-va-gl
-libwmf
 lightdm-gtk-greeter
 linux-firmware
 linux-headers
 linux-tools-meta
 live-media
 lldb
-llvm
 lockdown-ms
 lockfile-progs
 logrotate
@@ -324,6 +325,7 @@ numix-gtk-theme-git
 nvidia
 nvidia-settings
 odt2txt
+offlineimap
 ogmtools
 openbsd-netcat
 openldap
@@ -344,7 +346,6 @@ pacrunner
 pamixer
 papirus-icon-theme
 paprefs
-par2cmdline
 parallel
 pass
 pastebinit
@@ -369,7 +370,6 @@ pkgdiff
 pkgfile
 plantri
 ponymix
-poppler-data
 postgresql
 powertop
 privoxy
@@ -430,6 +430,21 @@ python-tlsh
 python-virtualenv
 python-wikipedia
 python-zeroconf
+python2-beautifulsoup4
+python2-chardet
+python2-cssselect
+python2-genshi
+python2-h2
+python2-html5lib
+python2-lxml
+python2-m2crypto
+python2-mutagen
+python2-priority
+python2-pycurl
+python2-pyserial
+python2-pysocks
+python2-service-identity
+python2-soappy
 qrencode
 qt5-graphicaleffects
 qt5-multimedia
@@ -440,6 +455,7 @@ razor
 read-edid
 realtime-privileges
 reaver
+recoll
 recordmydesktop
 redshift
 refind-efi
@@ -447,7 +463,7 @@ reiserfsprogs
 remacs
 remake
 remind
-rink
+repo
 ripgrep
 rlwrap
 rofi
@@ -462,6 +478,7 @@ sdl2_gfx
 seahorse
 shadowsocks
 shairplay
+shedskin
 shellcheck
 shfmt
 simplescreenrecorder
@@ -486,7 +503,7 @@ stratisd
 stress
 stunnel
 subdl
-syncthing
+syncthing-gtk
 syncthing-relaysrv
 sysprof
 sysstat
@@ -509,7 +526,6 @@ tinyemu
 tldr
 tlsh
 tmux
-toastify
 tokei
 tor-browser
 torsocks
@@ -631,6 +647,7 @@ yay-bin
 you-get
 youtube-dl
 z3
+zfec
 zile
 zssh
 zzuf
