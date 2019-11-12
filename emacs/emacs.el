@@ -982,15 +982,18 @@
 
   :custom
   (lsp-prefer-flymake nil)
+  (lsp-document-highlight-delay 0.1)
 
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
   (lsp-rust-clippy-preference "on")
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
+  (lsp-rust-analyzer-inlay-hints-mode t)
 
   (lsp-ui-doc-enable nil)
   (lsp-ui-doc-border "black")
+  (lsp-ui-sideline-update-mode 'line)
 
   :hook
   ((c-mode python-mode java-mode rust-mode) . lsp))

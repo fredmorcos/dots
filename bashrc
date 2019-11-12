@@ -26,7 +26,7 @@ alias ip='ip -c'
 alias fd='fd -iIH'
 alias bat='bat --theme GitHub'
 alias cat='bat'
-alias up='topgrade --no-retry'
+alias up='yay --devel -Syu'
 
 alias neuron_systemctl='ssh root@neuron systemctl'
 alias neuron_reboot='neuron_systemctl reboot'
