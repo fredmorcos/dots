@@ -460,6 +460,17 @@
   :mode
   ("\\.hocon\\'" . javascript-mode))
 
+(use-package antlr-mode
+  :ensure nil
+
+  :custom
+  (antlr-tab-offset-alist
+   '((antlr-mode nil 2 nil)
+     (java-mode "antlr" 2 nil)))
+
+  :mode
+  "\\.g4\\'")
+
 (use-package llvm-mode
   :ensure nil
   :demand t

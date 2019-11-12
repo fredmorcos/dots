@@ -7,6 +7,7 @@ adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
 afl-utils
 afpfs-ng
+android-file-transfer
 android-tools
 android-udev
 antiword
@@ -232,6 +233,7 @@ libcue
 libdvdcss
 libgit2-glib
 libgnome-keyring
+libgooglepinyin
 libgrss
 libgsf
 libheif
