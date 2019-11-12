@@ -1030,7 +1030,6 @@
 
 (use-package aggressive-indent
   :pin melpa
-  :diminish "AInd"
 
   :hook
   ((emacs-lisp-mode java-mode rust-mode) . aggressive-indent-mode))
