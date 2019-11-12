@@ -82,23 +82,26 @@ cmerge () {
   fi
 }
 
-cmerge xfce4/displays.xml                  ~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
-cmerge xfce4/keyboard-layout.xml           ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml
-cmerge xfce4/keyboards.xml                 ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
-cmerge xfce4/pointers.xml                  ~/.config/xfce4/xfconf/xfce-perchannel-xml/pointers.xml
-cmerge xfce4/thunar.xml                    ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
-cmerge xfce4/xfce4-appfinder.xml           ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-appfinder.xml
-cmerge xfce4/xfce4-desktop.xml             ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-cmerge xfce4/xfce4-keyboard-shortcuts.xml  ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
-cmerge xfce4/xfce4-notifyd.xml             ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
-cmerge xfce4/xfce4-panel.xml               ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
-cmerge xfce4/xfce4-power-manager.xml       ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
-cmerge xfce4/xfce4-session.xml             ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
-cmerge xfce4/xfce4-settings-editor.xml     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-editor.xml
-cmerge xfce4/xfce4-settings-manager.xml    ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml
-cmerge xfce4/xfwm4.xml                     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
-cmerge xfce4/xsettings.xml                 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-cmerge xfce4/terminalrrc                   ~/.config/xfce4/terminal/terminalrc
+for i in keyboard-layout.xml          \
+         keyboards.xml                \
+         pointers.xml                 \
+         thunar.xml                   \
+         xfce4-appfinder.xml          \
+         xfce4-desktop.xml            \
+         xfce4-keyboard-shortcuts.xml \
+         xfce4-notifyd.xml            \
+         xfce4-panel.xml              \
+         xfce4-power-manager.xml      \
+         xfce4-session.xml            \
+         xfce4-settings-editor.xml    \
+         xfce4-settings-manager.xml   \
+         xfwm4.xml                    \
+         xsettings.xml
+do
+  cmerge xfce4/$i ~/.config/xfce4/xfconf/xfce-perchannel-xml/$i
+done
+
+cmerge xfce4/terminalrrc              ~/.config/xfce4/terminal/terminalrc
 
 cmerge autostart/redshift.desktop     ~/.config/autostart/redshift.desktop
 cmerge autostart/notifyd.desktop      ~/.config/autostart/notifyd.desktop
@@ -119,6 +122,7 @@ cmerge fonts.conf                     ~/.config/fontconfig/fonts.conf
 cmerge gitconfig                      ~/.gitconfig
 cmerge htoprc                         ~/.config/htop/htoprc
 cmerge hunspell_en_US                 ~/.hunspell_en_US
+cmerge nvidia-settings                ~/.nvidia-settings-rc
 cmerge profile                        ~/.profile
 cmerge redshift.conf                  ~/.config/redshift.conf
 cmerge vimrc                          ~/.vimrc
@@ -127,13 +131,16 @@ cmerge youtube-dl.conf                ~/.config/youtube-dl/config
 cmerge loader/loader.conf             /boot/loader/loader.conf
 cmerge loader/arch.conf               /boot/loader/entries/arch.conf
 
-# TODO Remove
-cmerge nvidia-settings                ~/.nvidia-settings-rc
 cmerge optimus/manager.conf           /etc/optimus-manager/optimus-manager.conf
 cmerge optimus/xorg-nvidia.conf       /etc/optimus-manager/xorg-nvidia.conf
 
 cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
 cmerge systemd/lightdm-override.conf  /etc/systemd/system/lightdm.service.d/override.conf
+
+cmerge network-manager/wifi.conf      /etc/NetworkManager/conf.d/wifi.conf
+cmerge udev/wifi-powersave.rules      /etc/udev/rules.d/81-wifi-powersave.rules
+cmerge udev/wake-on-lan.rules         /etc/udev/rules.d/81-wol.rules
+cmerge udev/io-sched.rules            /etc/udev/rules.d/98-io-sched.rules
 
 cmerge fstab                          /etc/fstab
 cmerge hostname                       /etc/hostname
