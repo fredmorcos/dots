@@ -397,6 +397,7 @@ python-cairocffi
 python-capstone
 python-cjkwrap
 python-cssselect
+python-diff-match-patch
 python-discid
 python-distutils-extra
 python-etesync
@@ -429,6 +430,7 @@ python-requests-hawk
 python-requests-oauthlib
 python-rope
 python-setproctitle
+python-sphinx
 python-tlsh
 python-virtualenv
 python-wikipedia
@@ -453,6 +455,7 @@ ripgrep
 rlwrap
 rofi
 rpmextract
+rstcheck
 rust-analyzer-git
 rustup
 s-nail
