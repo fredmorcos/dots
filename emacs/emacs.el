@@ -454,11 +454,11 @@
   :hook
   (prog-mode . eldoc-mode))
 
-(use-package js
+(use-package js-mode
   :ensure nil
 
   :mode
-  ("\\.hocon\\'" . javascript-mode))
+  "\\.hocon\\'")
 
 (use-package antlr-mode
   :ensure nil
@@ -1010,7 +1010,8 @@
   ((c-mode python-mode java-mode rust-mode) . lsp))
 
 (use-package lsp-ui
-  :commands lsp-ui-mode
+  :commands
+  lsp-ui-mode
 
   :custom
   (lsp-ui-sideline-show-symbol nil)
@@ -1037,7 +1038,8 @@
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
 (use-package company-lsp
-  :commands company-lsp
+  :commands
+  company-lsp
 
   :custom
   (company-lsp-cache-candidates 'auto))
