@@ -249,7 +249,6 @@ libopenraw
 libosinfo
 libquicktime
 libraw
-libreoffice-fresh
 libsidplayfp
 libunrar
 libva-intel-driver
@@ -535,6 +534,7 @@ unbound
 unicode-emoji
 unison
 units
+unoconv
 unrar
 unrtf
 unshield
@@ -573,6 +573,7 @@ wireguard-tools
 words
 wtf
 x11-ssh-askpass
+xcape
 xcompmgr
 xdelta3
 xdg-desktop-portal
@@ -588,6 +589,7 @@ xfce4-settings
 xfce4-terminal
 xfdesktop
 xkcdpass
+xkeycaps
 xmldiff
 xmlto
 xorg-appres

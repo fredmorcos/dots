@@ -19,6 +19,8 @@ PATH="$HOME/Oracle/opt/oraclejdk/bin:$PATH"
 PATH="$HOME/Oracle/opt/oraclejdk/jre/bin:$PATH"
 PATH="$HOME/Oracle/opt/eclipse:$PATH"
 
+export MX_PYTHON_VERSION=3
+
 # Other
 PATH="$HOME/Oracle/opt/node13/bin:$PATH"
 PATH="$HOME/Oracle/opt/zoom:$PATH"
