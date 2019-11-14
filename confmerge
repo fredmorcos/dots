@@ -113,7 +113,6 @@ cmerge bashrc                         ~/.bashrc
 cmerge bash_profile                   ~/.bash_profile
 cmerge gtk/gtkrc-2.0                  ~/.gtkrc-2.0
 cmerge gtk/filechooser.ini            ~/.config/gtk-2.0/gtkfilechooser.ini
-cmerge dmrc                           ~/.dmrc
 cmerge emacs/emacs.el                 ~/.config/emacs/init
 cmerge fonts.conf                     ~/.config/fontconfig/fonts.conf
 cmerge gitconfig                      ~/.gitconfig
@@ -124,12 +123,15 @@ cmerge redshift.conf                  ~/.config/redshift.conf
 cmerge vimrc                          ~/.vimrc
 cmerge youtube-dl.conf                ~/.config/youtube-dl/config
 
+cmerge x11/dmrc                       ~/.dmrc
+cmerge x11/lightdm.conf               /etc/lightdm/lightdm.conf
+
 cmerge loader/loader.conf             /boot/loader/loader.conf
 cmerge loader/arch.conf               /boot/loader/entries/arch.conf
 
-cmerge nvidia-settings                ~/.nvidia-settings-rc
-cmerge optimus/manager.conf           /etc/optimus-manager/optimus-manager.conf
-cmerge optimus/xorg-nvidia.conf       /etc/optimus-manager/xorg-nvidia.conf
+cmerge nvidia/nvidia-settings         ~/.nvidia-settings-rc
+cmerge nvidia/optimus-manager.conf    /etc/optimus-manager/optimus-manager.conf
+cmerge nvidia/optimus-xorg.conf       /etc/optimus-manager/xorg-nvidia.conf
 
 cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
 
@@ -141,7 +143,6 @@ cmerge fstab                          /etc/fstab
 cmerge hostname                       /etc/hostname
 cmerge hosts                          /etc/hosts
 cmerge locale.conf                    /etc/locale.conf
-cmerge lightdm.conf                   /etc/lightdm/lightdm.conf
 cmerge vconsole.conf                  /etc/vconsole.conf
 cmerge sysctl.conf                    /etc/sysctl.d/sysctl.conf
 
