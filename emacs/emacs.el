@@ -571,6 +571,8 @@
   (dired-listing-switches "-l --group-directories-first")
   (dired-hide-details-hide-symlink-targets nil))
 
+(use-package ranger)
+
 (use-package autorevert
   :ensure nil
   :diminish "AR"

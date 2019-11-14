@@ -111,8 +111,8 @@ cmerge applications/Eclipse.desktop   ~/.local/share/applications/Eclipse.deskto
 
 cmerge bashrc                         ~/.bashrc
 cmerge bash_profile                   ~/.bash_profile
-cmerge gtk-bookmarks                  ~/.config/gtk-3.0/bookmarks
-cmerge gtkrc-2.0                      ~/.gtkrc-2.0
+cmerge gtk/gtkrc-2.0                  ~/.gtkrc-2.0
+cmerge gtk/filechooser.ini            ~/.config/gtk-2.0/gtkfilechooser.ini
 cmerge dmrc                           ~/.dmrc
 cmerge emacs/emacs.el                 ~/.config/emacs/init
 cmerge fonts.conf                     ~/.config/fontconfig/fonts.conf
@@ -127,13 +127,15 @@ cmerge youtube-dl.conf                ~/.config/youtube-dl/config
 cmerge loader/loader.conf             /boot/loader/loader.conf
 cmerge loader/arch.conf               /boot/loader/entries/arch.conf
 
-# TODO Remove
 cmerge nvidia-settings                ~/.nvidia-settings-rc
 cmerge optimus/manager.conf           /etc/optimus-manager/optimus-manager.conf
 cmerge optimus/xorg-nvidia.conf       /etc/optimus-manager/xorg-nvidia.conf
 
 cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
-cmerge systemd/lightdm-override.conf  /etc/systemd/system/lightdm.service.d/override.conf
+
+cmerge archlinux/makepkg.conf         /etc/makepkg.conf
+cmerge archlinux/mkinitcpio.conf      /etc/mkinitcpio.conf
+cmerge archlinux/pacman.conf          /etc/pacman.conf
 
 cmerge fstab                          /etc/fstab
 cmerge hostname                       /etc/hostname
@@ -141,11 +143,6 @@ cmerge hosts                          /etc/hosts
 cmerge locale.conf                    /etc/locale.conf
 cmerge lightdm.conf                   /etc/lightdm/lightdm.conf
 cmerge vconsole.conf                  /etc/vconsole.conf
-cmerge makepkg.conf                   /etc/makepkg.conf
-cmerge mkinitcpio.conf                /etc/mkinitcpio.conf
-cmerge modprobe.conf                  /etc/modprobe.d/modprobe.conf
-cmerge modules.conf                   /etc/modules-load.d/modules.conf
-cmerge pacman.conf                    /etc/pacman.conf
 cmerge sysctl.conf                    /etc/sysctl.d/sysctl.conf
 
 if [ -f /etc/os-release ]; then

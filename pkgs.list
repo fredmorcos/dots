@@ -169,9 +169,6 @@ gthumb
 gtk-engine-murrine
 gucharmap
 gumbo-parser
-gvfs-mtp
-gvfs-nfs
-gvfs-smb
 hardinfo
 hashcat-utils
 haveged
@@ -243,6 +240,7 @@ libisoburn
 libmaa
 libmirage
 libmythes
+libnfs
 libnsutils
 liboggz
 libopenraw
