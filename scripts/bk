@@ -47,8 +47,7 @@ bk_cmd  "$HOME/.wallpaper.jpg"          "$HDD/Fred/DotConfigs/wallpaper.jpg"
 bk_cmd  "$HOME/.face"                   "$HDD/Fred/DotConfigs/face"
 bk_cmd  "$HOME/.wallpaper_old.jpg"      "$HDD/Fred/DotConfigs/wallpaper_old.jpg"
 
-find "$HOME/Oracle/opt/" -maxdepth 1 -type d >  "$HOME/Oracle/opt-files.txt"
-find "$HOME/Oracle/opt/" -maxdepth 1 -type f >> "$HOME/Oracle/opt-files.txt"
+find "$HOME/Oracle/opt/" -maxdepth 1 > "$HOME/Oracle/opt-files.txt"
 tar -c --exclude='opt/*' --exclude='*/mxbuild' -f "$HDD/Fred/Oracle.tar" "$HOME/Oracle/"
 
 tar -c -f "$HDD/Fred/Oracle_mx.tar" "$HOME/.mx"

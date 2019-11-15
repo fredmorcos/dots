@@ -141,7 +141,6 @@ git-review
 gitprompt-rs
 glyr
 gnome-calculator
-gnome-characters
 gnome-dictionary
 gnome-disk-utility
 gnome-icon-theme
@@ -432,7 +431,6 @@ python-tlsh
 python-virtualenv
 python-wikipedia
 python-zeroconf
-qrencode
 qt5-graphicaleffects
 qt5-multimedia
 radamsa
@@ -517,6 +515,8 @@ tor-browser
 torsocks
 tpm2-abrmd
 tpm2-tools
+tpm2-totp
+tpm2-tss-engine
 traceroute
 transcode
 translate-shell

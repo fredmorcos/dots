@@ -158,11 +158,11 @@
 (use-package hl-line
   :ensure nil
 
-  :custom
-  (global-hl-line-mode t)
-
   :custom-face
-  (hl-line ((t (:background "CornSilk")))))
+  (hl-line ((t (:background "CornSilk"))))
+
+  :hook
+  (prog-mode . hl-line-mode))
 
 (use-package apropos
   :ensure nil
@@ -746,6 +746,10 @@
   (magit-display-buffer-function
    #'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package magit-todos
+  :hook
+  (magit-mode . magit-todos-mode))
+
 (use-package expand-region
   :bind
   ("C-=" . er/expand-region))
@@ -1071,6 +1075,10 @@
 
   :custom-face
   (indent-guide-face ((t (:foreground "gray80")))))
+
+(use-package vterm
+  :bind
+  ("<f6>" . vterm-other-window))
 
 ;; TODO Check out EEV
 (use-package eev)
