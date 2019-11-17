@@ -221,6 +221,8 @@ lbzip2
 leatherman
 lftp
 lhasa
+lib32-libva-intel-driver
+lib32-libva-vdpau-driver
 lib32-mesa-vdpau
 lib32-opencl-nvidia
 libappindicator-gtk3
@@ -476,7 +478,6 @@ sparsehash
 speech-dispatcher
 spike
 spirv-headers
-spirv-llvm-translator
 sqlitebrowser
 squashfs-tools
 steam-native-runtime
