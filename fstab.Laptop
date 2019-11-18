@@ -1,8 +1,5 @@
 # Static information about the filesystems.
 # See fstab(5) for details.
 
-# <file system>           <dir> <type> <options>            <d><p>
-/dev/nvme0n1p1            /boot vfat   defaults,rw,noatime  0  2   # UUID=0AA4-E79C LABEL=EFI
-/dev/mapper/RootEncrypted /     ext4   defaults,rw,noatime  0  1   # UUID=c49fe3ef-e790-416c-9a1c-25c80bc9e1f4 LABEL=Root
-/dev/mapper/HomeEncrypted /home ext4   defaults,rw,noatime  0  2   # UUID=d6d2075a-6751-4b6b-98cb-f5e640546c02 LABEL=Home
-/dev/nvme0n1p2            none  swap   defaults             0  0   # UUID=b5354b2a-891d-4432-9208-b24871755883 LABEL=Swap
+# <file system>	<dir>	<type>	<options>									<d>	<p>
+/dev/nvme0n1p1	/boot	vfat	defaults,rw,relatime,noauto,x-systemd.automount,x-systemd.idle-timeout=30	0	2	# UUID=0AA4-E79C LABEL=EFI
