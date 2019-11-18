@@ -1,5 +1,0 @@
-# Static information about the filesystems.
-# See fstab(5) for details.
-
-# <file system>	<dir>	<type>	<options>									<d>	<p>
-/dev/nvme0n1p1	/boot	vfat	defaults,rw,relatime,noauto,x-systemd.automount,x-systemd.idle-timeout=30	0	2	# UUID=0AA4-E79C LABEL=EFI

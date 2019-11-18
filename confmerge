@@ -134,12 +134,12 @@ cmerge nvidia/optimus-manager.conf    /etc/optimus-manager/optimus-manager.conf
 cmerge nvidia/optimus-xorg.conf       /etc/optimus-manager/xorg-nvidia.conf
 
 cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
+cmerge systemd/system.conf            /etc/systemd/system.conf
 
 cmerge archlinux/makepkg.conf         /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf      /etc/mkinitcpio.conf
 cmerge archlinux/pacman.conf          /etc/pacman.conf
 
-cmerge fstab                          /etc/fstab
 cmerge hostname                       /etc/hostname
 cmerge hosts                          /etc/hosts
 cmerge locale.conf                    /etc/locale.conf
