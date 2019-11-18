@@ -135,6 +135,7 @@ cmerge nvidia/optimus-xorg.conf       /etc/optimus-manager/xorg-nvidia.conf
 
 cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
 cmerge systemd/system.conf            /etc/systemd/system.conf
+cmerge systemd/boot-override.conf     /etc/systemd/system/boot.mount.d/override.conf
 
 cmerge archlinux/makepkg.conf         /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf      /etc/mkinitcpio.conf
