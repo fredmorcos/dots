@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=X11 Full RGB Range
+Comment=Set X11 to broadcast full RGB support to HDMI
+Exec=xrandr --output DP-3 --set "Broadcast RGB" "Full"
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
