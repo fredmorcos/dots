@@ -162,7 +162,7 @@
   (hl-line ((t (:background "CornSilk"))))
 
   :hook
-  (prog-mode . hl-line-mode))
+  ((prog-mode text-mode) . hl-line-mode))
 
 (use-package apropos
   :ensure nil
@@ -441,8 +441,11 @@
   :ensure nil
 
   :mode
-  ("\\Passwords.txt\\'" . (lambda () (toggle-truncate-lines t)))
-  ("\\Passwords_old.txt\\'" . (lambda () (toggle-truncate-lines t))))
+  "\\Passwords.txt\\'"
+  "\\Passwords_old.txt\\'"
+
+  :hook
+  (text-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package eldoc
   :ensure nil
