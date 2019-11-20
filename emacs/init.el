@@ -916,7 +916,10 @@
 (use-package pkgbuild-mode)
 
 (use-package rmsbolt
-  :diminish "Bolt")
+  :diminish "Bolt"
+
+  :custom
+  (rms-bolt-lighter "Bolt"))
 
 (use-package boogie-friends
   :custom
