@@ -8,42 +8,29 @@
 ;; (add-hook 'after-init-hook #'profiler-report)
 
 (run-with-idle-timer 5 t #'garbage-collect)
-
 (defconst fnh-alist-old file-name-handler-alist)
 
 (setq-default
- custom-file (concat user-emacs-directory "custom.el")
- gc-cons-threshold most-positive-fixnum
- gc-cons-percentage 0.6
- file-name-handler-alist nil
- auto-window-vscroll nil
-
- save-interprogram-paste-before-kill t
-
  url-privacy-level 'high
- url-proxy-services '(("no_proxy" . "127.0.0.1"))
+ url-proxy-services '(("no_proxy" . "127.0.0.1")))
 
- package-enable-at-startup nil
- package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                    ("melpa" . "https://melpa.org/packages/")
-                    ("org" . "https://orgmode.org/elpa/"))
-
- use-package-always-defer t
- use-package-always-ensure t
- use-package-expand-minimally t)
+(setq-default
+ package-archives
+ '(("gnu" . "https://elpa.gnu.org/packages/")
+   ("melpa" . "https://melpa.org/packages/")
+   ("org" . "https://orgmode.org/elpa/")))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
+(setq-default
+ use-package-always-defer t
+ use-package-always-ensure t
+ use-package-expand-minimally t)
+
 (eval-when-compile
   (require 'use-package))
-
-(put 'use-package 'lisp-indent-function 1)
-
-(use-package gcmh
-  :diminish
-  :init (gcmh-mode 1))
 
 (use-package subr
   :ensure nil
@@ -329,6 +316,7 @@
   (column-number-mode t)
   (line-number-mode nil)
   (auto-save-mode t)
+  (save-interprogram-paste-before-kill t)
 
   :init
   (defun move-line-up ()
@@ -425,6 +413,12 @@
      empty
      space-after-tab)))
 
+(use-package lisp-mode
+  :ensure nil
+
+  :init
+  (put 'use-package 'lisp-indent-function 1))
+
 (use-package emacs-lisp-mode
   :ensure nil
 
@@ -476,7 +470,9 @@
 
 (use-package llvm-mode
   :ensure nil
-  :demand t
+
+  :mode
+  "\\.ll\\'"
 
   :init
   (let* ((url "https://raw.githubusercontent.com/llvm/llvm-project")
@@ -490,15 +486,11 @@
       (byte-compile-file dst))
     (add-to-list 'load-path dst-dir))
 
-  :commands
-  toggle-truncate-lines
-
   :hook
   (llvm-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package ra-emacs-lsp
   :ensure nil
-  :demand t
 
   :init
   (let* ((url "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer")
@@ -524,7 +516,6 @@
 
 (use-package tree-sitter
   :ensure nil
-  :demand t
 
   :commands
   ts-require-language
@@ -547,7 +538,14 @@
 
   :config
   ;; Use `make ensure/lang' in the emacs-tree-sitter repo to generate a language parser.
-  (ts-require-language 'rust))
+  (ts-require-language 'rust)
+  (ts-require-language 'python)
+  (ts-require-language 'c)
+  (ts-require-language 'java)
+  (ts-require-language 'bash)
+
+  :hook
+  ((rust-mode python-mode c-mode java-mode sh-mode) . tree-sitter-mode))
 
 (use-package paren
   :ensure nil
@@ -573,8 +571,6 @@
   :custom
   (dired-listing-switches "-l --group-directories-first")
   (dired-hide-details-hide-symlink-targets nil))
-
-(use-package ranger)
 
 (use-package autorevert
   :ensure nil
@@ -836,7 +832,7 @@
         ("C-c h" . company-quickhelp-manual-begin)))
 
 (use-package diff-hl
-  :demand t
+  :after magit
 
   :custom
   (global-diff-hl-mode t)
@@ -928,10 +924,11 @@
    '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
 (use-package lsp-java
-  :demand t)
+  :requires lsp-mode)
 
 (use-package java-mode
   :ensure nil
+  :after lsp-mode
 
   :custom
   (lsp-enable-file-watchers nil)
@@ -943,13 +940,9 @@
                  (setq tab-width 2
                        fill-column 90))))
 
-(use-package javadoc-lookup
-  :demand t)
-
-(use-package mvn
-  :demand t)
-
 (use-package rust-mode
+  :requires tree-sitter ra-emacs-lsp
+
   :hook
   (rust-mode . (lambda ()
                  (setq-local standard-indent 4)
@@ -961,6 +954,8 @@
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face))))))
 
 (use-package cargo
+  :after rust-mode
+
   :init
   (defun cargo-fmt-and-lint ()
     (interactive)
@@ -1019,6 +1014,8 @@
   ((c-mode python-mode java-mode rust-mode) . lsp))
 
 (use-package lsp-ui
+  :after lsp-mode
+
   :commands
   lsp-ui-mode
 
@@ -1047,6 +1044,8 @@
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
 (use-package company-lsp
+  :after lsp-mode
+
   :commands
   company-lsp
 
