@@ -215,9 +215,8 @@
   recentf-cleanup
 
   :config
-  (add-to-list 'recentf-exclude (expand-file-name "~/.emacs.d"))
-  (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
-  (recentf-cleanup)
+  (add-to-list 'recentf-exclude "~/.config/emacs/elpa")
+  (run-with-idle-timer 30 t #'recentf-cleanup)
 
   :custom
   (recentf-save-file emacs-recentf-file)
@@ -475,8 +474,8 @@
   "\\.ll\\'"
 
   :init
-  (let* ((url "https://raw.githubusercontent.com/llvm/llvm-project")
-         (url (concat url "/master/llvm/utils/emacs/llvm-mode.el"))
+  (let* ((url (concat "https://raw.githubusercontent.com/llvm/llvm-project"
+                      "/master/llvm/utils/emacs/llvm-mode.el"))
          (dst-dir (concat user-emacs-directory "extra/"))
          (dst (concat dst-dir "llvm-mode.el"))
          (dst-bc (concat dst-dir "llvm-mode.elc")))
@@ -493,8 +492,8 @@
   :ensure nil
 
   :init
-  (let* ((url "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer")
-         (url (concat url "/master/editors/emacs/ra-emacs-lsp.el"))
+  (let* ((url (concat "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer"
+                      "/master/editors/emacs/ra-emacs-lsp.el"))
          (dst-dir (concat user-emacs-directory "extra/"))
          (dst (concat dst-dir "ra-emacs-lsp.el"))
          (dst-bc (concat dst-dir "ra-emacs-lsp.elc")))
@@ -521,31 +520,28 @@
   ts-require-language
 
   :init
-  (let* ((dir "~/Build/emacs-tree-sitter/")
-         (core-dst (concat dir "tree-sitter-core.el"))
-         (core-bc (concat dir "tree-sitter-core.elc"))
-         (debug-dst (concat dir "tree-sitter-debug.el"))
-         (debug-bc (concat dir "tree-sitter-debug.elc"))
-         (dst (concat dir "tree-sitter.el"))
-         (bc (concat dir "tree-sitter.elc")))
-    (add-to-list 'load-path dir)
+  (let* ((default-directory "~/Build/emacs-tree-sitter/")
+         (core-dst (expand-file-name "tree-sitter-core.el"))
+         (core-bc (expand-file-name "tree-sitter-core.elc"))
+         ;; (debug-dst (expand-file-name "tree-sitter-debug.el"))
+         ;; (debug-bc (expand-file-name "tree-sitter-debug.elc"))
+         (dst (expand-file-name "tree-sitter.el"))
+         (bc (expand-file-name "tree-sitter.elc")))
+    (add-to-list 'load-path default-directory)
     (when (not (file-readable-p bc))
       (byte-compile-file dst))
-    (when (not (file-readable-p debug-bc))
-      (byte-compile-file debug-dst))
+    ;; (when (not (file-readable-p debug-bc))
+    ;;   (byte-compile-file debug-dst))
     (when (not (file-readable-p core-bc))
       (byte-compile-file core-dst)))
 
-  :config
-  ;; Use `make ensure/lang' in the emacs-tree-sitter repo to generate a language parser.
-  (ts-require-language 'rust)
-  (ts-require-language 'python)
-  (ts-require-language 'c)
-  (ts-require-language 'java)
-  (ts-require-language 'bash)
-
   :hook
-  ((rust-mode python-mode c-mode java-mode sh-mode) . tree-sitter-mode))
+  ((rust-mode python-mode c-mode java-mode sh-mode) . tree-sitter-mode)
+  (rust-mode   . (lambda () (ts-require-language 'rust)))
+  (python-mode . (lambda () (ts-require-language 'python)))
+  (c-mode      . (lambda () (ts-require-language 'c)))
+  (java-mode   . (lambda () (ts-require-language 'java)))
+  (sh-mode     . (lambda () (ts-require-language 'bash))))
 
 (use-package paren
   :ensure nil

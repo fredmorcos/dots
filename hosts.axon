@@ -1,0 +1,9 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+
+127.0.0.1 localhost
+::1       localhost
+127.0.1.1 axon.localdomain axon
+
+192.168.0.1   router
+192.168.0.104 neuron
