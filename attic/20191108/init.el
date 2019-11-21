@@ -786,14 +786,23 @@
   :pin melpa
   :diminish "Com"
 
+  :bind
+  ("TAB" . company-indent-or-complete-common)
+
   :custom
-  (company-backends '(company-capf company-keywords company-files))
+  (company-backends '(company-capf company-dabbrev-code company-keywords
+                                   company-dabbrev company-files))
   (completion-ignore-case t)
+  (company-etags-ignore-case t)
+  (company-dabbrev-minimum-length 1)
+  (company-dabbrev-code-ignore-case t)
+  (company-dabbrev-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-echo-delay 0)
-  (company-idle-delay 0)
+  (company-idle-delay nil)
   (company-tooltip-idle-delay 0)
-  (company-minimum-prefix-length 2)
+  (company-minimum-prefix-length 1)
+  (company-require-match nil)
   (company-selection-wrap-around t)
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
