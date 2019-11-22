@@ -16,9 +16,9 @@
 
 (setq-default
  package-archives
- '(("gnu" . "https://elpa.gnu.org/packages/")
+ '(("gnu"   . "https://elpa.gnu.org/packages/")
    ("melpa" . "https://melpa.org/packages/")
-   ("org" . "https://orgmode.org/elpa/")))
+   ("org"   . "https://orgmode.org/elpa/")))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -918,7 +918,7 @@
 
 (use-package java-mode
   :ensure nil
-  :after lsp-mode
+  :requires lsp-java
 
   :custom
   (lsp-enable-file-watchers nil)
@@ -1041,12 +1041,6 @@
 
   :custom
   (company-lsp-cache-candidates 'auto))
-
-(use-package aggressive-indent
-  :pin melpa
-
-  :hook
-  ((emacs-lisp-mode java-mode rust-mode) . aggressive-indent-mode))
 
 (use-package olivetti
   :pin melpa

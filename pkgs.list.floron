@@ -290,6 +290,7 @@ mesa-vdpau
 meson
 mg
 mhash
+minidlna
 mlocate
 modest
 mousetweaks
@@ -456,6 +457,7 @@ rpmextract
 rstcheck
 rust-analyzer-git
 rustup
+rygel
 s-nail
 sassc
 sbsigntools
@@ -641,4 +643,5 @@ youtube-dl
 z3
 zile
 zssh
+zsync
 zzuf
