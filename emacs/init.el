@@ -735,6 +735,7 @@
 
   :commands
   magit-display-buffer-same-window-except-diff-v1
+  diff-hl-magit-post-refresh
 
   :custom
   (magit-auto-revert-tracked-only nil)
@@ -801,7 +802,10 @@
   (company-transformers '(company-sort-by-backend-importance))
 
   :hook
-  (prog-mode . company-mode))
+  ((prog-mode hledger-mode) . company-mode)
+  (hledger-mode
+   . (lambda ()
+       (setq-local company-backends (cons hledger-company company-backends)))))
 
 (use-package company-quickhelp
   :pin melpa
@@ -819,16 +823,13 @@
         ("C-c h" . company-quickhelp-manual-begin)))
 
 (use-package diff-hl
-  :after magit
-
   :custom
-  (global-diff-hl-mode t)
-  (diff-hl-flydiff-mode t)
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
 
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh)
+  (prog-mode . diff-hl-mode)
 
   :custom-face
   (diff-hl-delete ((t (:background "RosyBrown1"))))
