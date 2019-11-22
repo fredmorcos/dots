@@ -914,7 +914,12 @@
    '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
 (use-package lsp-java
-  :requires lsp-mode)
+  :requires lsp-mode
+
+  :custom
+  (lsp-java-format-settings-profile "_Graal")
+  (lsp-java-format-settings-url "~/Oracle/graal/sulong/.idea/eclipseCodeFormatter.xml")
+  (lsp-java-autobuild-enabled nil))
 
 (use-package java-mode
   :ensure nil
