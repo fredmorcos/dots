@@ -2,9 +2,9 @@
 
 # set -o xtrace
 # set -o errexit
-set -o posix
+# set -o posix
 set -o nounset
-set -o pipefail
+# set -o pipefail
 
 HNAME=$(hostname)
 echo "Status: Hostname $HNAME"
@@ -100,55 +100,56 @@ cmerge xfce4/xfwm4.xml                     ~/.config/xfce4/xfconf/xfce-perchanne
 cmerge xfce4/xsettings.xml                 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 cmerge xfce4/terminalrrc                   ~/.config/xfce4/terminal/terminalrc
 
-cmerge autostart/redshift.desktop     ~/.config/autostart/redshift.desktop
-cmerge autostart/notifyd.desktop      ~/.config/autostart/notifyd.desktop
-cmerge autostart/xrgb-dp1-3.desktop   ~/.config/autostart/xrgb-dp1-3.desktop
-cmerge autostart/xrgb-dp3.desktop     ~/.config/autostart/xrgb-dp3.desktop
-cmerge autostart/xnocaps.desktop      ~/.config/autostart/xnocaps.desktop
+cmerge autostart/redshift.desktop          ~/.config/autostart/redshift.desktop
+cmerge autostart/notifyd.desktop           ~/.config/autostart/notifyd.desktop
+cmerge autostart/xrgb-dp1-3.desktop        ~/.config/autostart/xrgb-dp1-3.desktop
+cmerge autostart/xrgb-dp3.desktop          ~/.config/autostart/xrgb-dp3.desktop
+cmerge autostart/xrgb-hdmi-a0.desktop      ~/.config/autostart/xrgb-hdmi-a0.desktop
+cmerge autostart/xnocaps.desktop           ~/.config/autostart/xnocaps.desktop
 
-cmerge applications/Zoom.desktop      ~/.local/share/applications/Zoom.desktop
-cmerge applications/Eclipse.desktop   ~/.local/share/applications/Eclipse.desktop
+cmerge applications/Zoom.desktop           ~/.local/share/applications/Zoom.desktop
+cmerge applications/Eclipse.desktop        ~/.local/share/applications/Eclipse.desktop
 
-cmerge gtk/gtkrc-2.0                  ~/.gtkrc-2.0
-cmerge gtk/filechooser.ini            ~/.config/gtk-2.0/gtkfilechooser.ini
+cmerge gtk/gtkrc-2.0                       ~/.gtkrc-2.0
+cmerge gtk/filechooser.ini                 ~/.config/gtk-2.0/gtkfilechooser.ini
 
-cmerge emacs/init.el                  ~/.config/emacs/init
-cmerge emacs/early-init.el            ~/.config/emacs/early-init.el
+cmerge emacs/init.el                       ~/.config/emacs/init
+cmerge emacs/early-init.el                 ~/.config/emacs/early-init.el
 
-cmerge bashrc                         ~/.bashrc
-cmerge bash_profile                   ~/.bash_profile
-cmerge fonts.conf                     ~/.config/fontconfig/fonts.conf
-cmerge gitconfig                      ~/.gitconfig
-cmerge htoprc                         ~/.config/htop/htoprc
-cmerge hunspell_en_US                 ~/.hunspell_en_US
-cmerge profile                        ~/.profile
-cmerge redshift.conf                  ~/.config/redshift.conf
-cmerge vimrc                          ~/.vimrc
-cmerge youtube-dl.conf                ~/.config/youtube-dl/config
+cmerge bashrc                              ~/.bashrc
+cmerge bash_profile                        ~/.bash_profile
+cmerge fonts.conf                          ~/.config/fontconfig/fonts.conf
+cmerge gitconfig                           ~/.gitconfig
+cmerge htoprc                              ~/.config/htop/htoprc
+cmerge hunspell_en_US                      ~/.hunspell_en_US
+cmerge profile                             ~/.profile
+cmerge redshift.conf                       ~/.config/redshift.conf
+cmerge vimrc                               ~/.vimrc
+cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
 
-cmerge x11/dmrc                       ~/.dmrc
-cmerge x11/lightdm.conf               /etc/lightdm/lightdm.conf
+cmerge x11/dmrc                            ~/.dmrc
+cmerge x11/lightdm.conf                    /etc/lightdm/lightdm.conf
 
-cmerge loader/loader.conf             /boot/loader/loader.conf
-cmerge loader/arch.conf               /boot/loader/entries/arch.conf
+cmerge loader/loader.conf                  /boot/loader/loader.conf
+cmerge loader/arch.conf                    /boot/loader/entries/arch.conf
 
-cmerge nvidia/nvidia-settings         ~/.nvidia-settings-rc
-cmerge nvidia/optimus-manager.conf    /etc/optimus-manager/optimus-manager.conf
-cmerge nvidia/optimus-xorg.conf       /etc/optimus-manager/xorg-nvidia.conf
+cmerge nvidia/nvidia-settings              ~/.nvidia-settings-rc
+cmerge nvidia/optimus-manager.conf         /etc/optimus-manager/optimus-manager.conf
+cmerge nvidia/optimus-xorg.conf            /etc/optimus-manager/xorg-nvidia.conf
 
-cmerge systemd/coredump.conf          /etc/systemd/coredump.conf
-cmerge systemd/system.conf            /etc/systemd/system.conf
-cmerge systemd/boot-override.conf     /etc/systemd/system/boot.mount.d/override.conf
+cmerge systemd/coredump.conf               /etc/systemd/coredump.conf
+cmerge systemd/system.conf                 /etc/systemd/system.conf
+cmerge systemd/boot-override.conf          /etc/systemd/system/boot.mount.d/override.conf
 
-cmerge archlinux/makepkg.conf         /etc/makepkg.conf
-cmerge archlinux/mkinitcpio.conf      /etc/mkinitcpio.conf
-cmerge archlinux/pacman.conf          /etc/pacman.conf
+cmerge archlinux/makepkg.conf              /etc/makepkg.conf
+cmerge archlinux/mkinitcpio.conf           /etc/mkinitcpio.conf
+cmerge archlinux/pacman.conf               /etc/pacman.conf
 
-cmerge hostname                       /etc/hostname
-cmerge hosts                          /etc/hosts
-cmerge locale.conf                    /etc/locale.conf
-cmerge vconsole.conf                  /etc/vconsole.conf
-cmerge sysctl.conf                    /etc/sysctl.d/sysctl.conf
+cmerge hostname                            /etc/hostname
+cmerge hosts                               /etc/hosts
+cmerge locale.conf                         /etc/locale.conf
+cmerge vconsole.conf                       /etc/vconsole.conf
+cmerge sysctl.conf                         /etc/sysctl.d/sysctl.conf
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
