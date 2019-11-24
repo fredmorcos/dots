@@ -1,3 +1,6 @@
+# Umask
+umask 077
+
 # Graphics
 XFWM4_USE_PRESENT=1
 # LIBVA_DRIVER_NAME=iHD
