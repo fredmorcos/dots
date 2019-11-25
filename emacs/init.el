@@ -215,7 +215,7 @@
   recentf-cleanup
 
   :config
-  (add-to-list 'recentf-exclude "~/.config/emacs/elpa")
+  (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
   (run-with-idle-timer 30 t #'recentf-cleanup)
 
   :custom
@@ -520,7 +520,7 @@
   ts-require-language
 
   :init
-  (let* ((default-directory "~/Build/emacs-tree-sitter/")
+  (let* ((default-directory (expand-file-name "~/Build/emacs-tree-sitter/"))
          (core-dst (expand-file-name "tree-sitter-core.el"))
          (core-bc (expand-file-name "tree-sitter-core.elc"))
          ;; (debug-dst (expand-file-name "tree-sitter-debug.el"))
@@ -663,10 +663,10 @@
   (counsel-mode t)
 
   :bind
-  ("M-x" . counsel-M-x)
+  ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("M-A" . counsel-ag)
-  ("M-R" . counsel-rg))
+  ("M-A"     . counsel-ag)
+  ("M-R"     . counsel-rg))
 
 (use-package ivy
   :diminish
@@ -735,16 +735,11 @@
 
   :commands
   magit-display-buffer-same-window-except-diff-v1
-  diff-hl-magit-post-refresh
 
   :custom
   (magit-auto-revert-tracked-only nil)
   (magit-display-buffer-function
    #'magit-display-buffer-same-window-except-diff-v1))
-
-(use-package magit-todos
-  :hook
-  (magit-mode . magit-todos-mode))
 
 (use-package expand-region
   :bind
@@ -823,9 +818,14 @@
         ("C-c h" . company-quickhelp-manual-begin)))
 
 (use-package diff-hl
+  :after magit
+
   :custom
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
+
+  :commands
+  diff-hl-magit-post-refresh
 
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh)
@@ -919,7 +919,8 @@
 
   :custom
   (lsp-java-format-settings-profile "_Graal")
-  (lsp-java-format-settings-url "~/Oracle/graal/sulong/.idea/eclipseCodeFormatter.xml")
+  (lsp-java-format-settings-url
+   (expand-file-name "~/Oracle/graal/sulong/.idea/eclipseCodeFormatter.xml"))
   (lsp-java-autobuild-enabled nil))
 
 (use-package java-mode

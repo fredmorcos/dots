@@ -491,7 +491,6 @@ stress
 stunnel
 subdl
 syncthing
-syncthing-relaysrv
 sysprof
 sysstat
 system-config-printer
@@ -535,7 +534,6 @@ udftools
 unace
 unbound
 unicode-emoji
-unison
 units
 unoconv
 unrar
