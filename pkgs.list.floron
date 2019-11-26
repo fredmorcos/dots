@@ -7,7 +7,6 @@ adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
 afl-utils
 afpfs-ng
-android-file-transfer
 android-tools
 android-udev
 antiword
@@ -153,6 +152,7 @@ gperf
 gperftools
 gpsbabel
 gpscorrelate
+graphviz
 grsync
 gst-editing-services
 gst-libav
@@ -296,7 +296,6 @@ mpop
 mpv
 mtd-utils
 mtools
-mtpfs
 muparser
 mutt
 mx
@@ -363,6 +362,7 @@ pidgin-otr
 pigz
 pipesocks
 pixiewps
+pkgconf
 pkgdiff
 pkgfile
 plantri
