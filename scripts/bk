@@ -1,59 +1,64 @@
-#!/bin/sh
+#!/bin/bash
 
-# set -o posix
-# set -o pipefail
+set -o pipefail
 set -o errexit
 set -o nounset
 
-HOME=/home/fred
+CMD=("rsync" "-ahH" "--delete" "--progress" "--xattrs" "--acls" "--delete-excluded" "--exclude=*/target" "$@")
+
+echo "Rsync command: " "${CMD[@]}"
 
 bk_cmd () {
-  echo ">>> $1 --> $2:"
-  rsync "-ahH" "--delete" "--progress" "--xattrs" "--acls" "--delete-excluded" '--exclude="*/target"' "$1" "$2"
-  echo ">>> ------ <<<"
+  echo ">>> ------ $1 --> $2:"
+  "${CMD[@]}" "$1" "$2"
+  echo ""
+  echo ""
 }
 
-if [ "$(hostname)" = "floron" ]; then
-  echo "Floron backup"
+HOME=/home/fred
+FLORON="fred@floron:$HOME"
+DATA="$HOME/Data/Fred"
+LAPTOP="$DATA/Laptop"
+DESKTOP="$DATA/Desktop"
 
-  DST="fred@axon:$HOME/Data/Fred"
+bk_cmd "$FLORON/Build/"                  "$LAPTOP/Build/"
+bk_cmd "$FLORON/GMail/"                  "$LAPTOP/GMail/"
+bk_cmd "$FLORON/Workspace/"              "$LAPTOP/Workspace/"
+bk_cmd "$FLORON/.gnupg/"                 "$LAPTOP/Configs/gnupg/"
+bk_cmd "$FLORON/.ssh/"                   "$LAPTOP/Configs/ssh/"
+bk_cmd "$FLORON/.config/beets/"          "$LAPTOP/Configs/config-beets/"
+bk_cmd "$FLORON/.config/hexchat/"        "$LAPTOP/Configs/config-hexchat/"
+bk_cmd "$FLORON/.config/MusicBrainz/"    "$LAPTOP/Configs/config-MusicBrainz/"
+bk_cmd "$FLORON/.config/transmission/"   "$LAPTOP/Configs/config-transmission/"
+bk_cmd "$FLORON/.config/youtube-dl/"     "$LAPTOP/Configs/config-youtube-dl/"
+bk_cmd "$FLORON/.local/share/keyrings"   "$LAPTOP/Configs/local-share-keyrings/"
+bk_cmd "$FLORON/.tree-sitter/"           "$LAPTOP/Configs/tree-sitter/"
+bk_cmd "$FLORON/.face"                   "$LAPTOP/Configs/face.png"
+bk_cmd "$FLORON/.wallpaper.jpg"          "$LAPTOP/Configs/wallpaper.jpg"
+bk_cmd "$FLORON/.wallpaper_old.jpg"      "$LAPTOP/Configs/wallpaper_old.jpg"
+bk_cmd "$FLORON/.thunderbird/"           "$LAPTOP/Configs/oracle-thunderbird/"
+bk_cmd "$FLORON/.idealgraphvisualizer/"  "$LAPTOP/Configs/oracle-idealgraphvisualizer/"
+bk_cmd "$FLORON/.eclipse/"               "$LAPTOP/Configs/oracle-eclipse/"
+bk_cmd "$FLORON/.zoom/"                  "$LAPTOP/Configs/oracle-zoom/"
 
-  bk_cmd  "$HOME/.gnupg/"                 "$DST/Configs/Laptop/gnupg/"
-  bk_cmd  "$HOME/.ssh/"                   "$DST/Configs/Laptop/ssh/"
-  bk_cmd  "$HOME/.config/beets/"          "$DST/Configs/Laptop/config-beets/"
-  bk_cmd  "$HOME/.config/hexchat/"        "$DST/Configs/Laptop/config-hexchat/"
-  bk_cmd  "$HOME/.config/MusicBrainz/"    "$DST/Configs/Laptop/config-MusicBrainz/"
-  bk_cmd  "$HOME/.config/transmission/"   "$DST/Configs/Laptop/config-transmission/"
-  bk_cmd  "$HOME/.config/youtube-dl/"     "$DST/Configs/Laptop/config-youtube-dl/"
-  bk_cmd  "$HOME/.local/share/keyrings"   "$DST/Configs/Laptop/local-share-keyrings/"
+bk_cmd "$DATA/Archive/"                  "$FLORON/Archive/"
+bk_cmd "$DATA/Music/"                    "$FLORON/Music/"
+bk_cmd "$DATA/Music.New/"                "$FLORON/Music.New/"
 
-  bk_cmd  "$HOME/.thunderbird/"           "$DST/Configs/Laptop/thunderbird/"
-  bk_cmd  "$HOME/.idealgraphvisualizer/"  "$DST/Configs/Laptop/idealgraphvisualizer/"
-  bk_cmd  "$HOME/.eclipse/"               "$DST/Configs/Laptop/eclipse/"
-  bk_cmd  "$HOME/.zoom/"                  "$DST/Configs/Laptop/zoom/"
-  bk_cmd  "$HOME/.tree-sitter/"           "$DST/Configs/Laptop/tree-sitter/"
-
-  bk_cmd  "$HOME/.face"                   "$DST/Configs/Laptop/face"
-  bk_cmd  "$HOME/.wallpaper.jpg"          "$DST/Configs/Laptop/wallpaper.jpg"
-  bk_cmd  "$HOME/.wallpaper_old.jpg"      "$DST/Configs/Laptop/wallpaper_old.jpg"
-
-elif [ "$(hostname)" = "axon" ]; then
-  echo "Axon backup"
-
-  DST="$HOME/Data/Fred/"
-
-  bk_cmd  "$HOME/Documents/"              "$DST/Documents/"
-  bk_cmd  "$HOME/Downloads/"              "$DST/Downloads/"
-  bk_cmd  "$HOME/Videos/"                 "$DST/Videos/"
-  bk_cmd  "$HOME/VideosCS/"               "$DST/VideosCS/"
-
-  # bk_cmd  "$HOME/Archive/"                "$DST/Archive/"
-  # bk_cmd  "$HOME/Books/"                  "$DST/Books/"
-  # bk_cmd  "$HOME/GMail/"                  "$DST/GMail/"
-  # bk_cmd  "$HOME/Music/"                  "$DST/Music/"
-  # bk_cmd  "$HOME/Music.New/"              "$DST/Music.New/"
-  # bk_cmd  "$HOME/Workspace/"              "$DST/Workspace/"
-
-else
-  echo "Unknown host, not doing any backups"
-fi
+bk_cmd "$HOME/Documents/"                "$DATA/Documents/"
+bk_cmd "$HOME/Downloads/"                "$DATA/Downloads/"
+bk_cmd "$HOME/Phone/"                    "$DATA/Phone/"
+bk_cmd "$HOME/Videos/"                   "$DATA/Videos/"
+bk_cmd "$HOME/VideosCS/"                 "$DATA/VideosCS/"
+bk_cmd "$HOME/Build/"                    "$DESKTOP/Build/"
+bk_cmd "$HOME/Workspace/"                "$DESKTOP/Workspace/"
+bk_cmd "$HOME/.gnupg/"                   "$DESKTOP/Configs/gnupg/"
+bk_cmd "$HOME/.ssh/"                     "$DESKTOP/Configs/ssh/"
+bk_cmd "$HOME/.config/beets/"            "$DESKTOP/Configs/config-beets/"
+bk_cmd "$HOME/.config/hexchat/"          "$DESKTOP/Configs/config-hexchat/"
+bk_cmd "$HOME/.config/MusicBrainz/"      "$DESKTOP/Configs/config-MusicBrainz/"
+bk_cmd "$HOME/.config/transmission/"     "$DESKTOP/Configs/config-transmission/"
+bk_cmd "$HOME/.config/youtube-dl/"       "$DESKTOP/Configs/config-youtube-dl/"
+bk_cmd "$HOME/.local/share/keyrings"     "$DESKTOP/Configs/local-share-keyrings/"
+bk_cmd "$HOME/.tree-sitter/"             "$DESKTOP/Configs/tree-sitter/"
+bk_cmd "$HOME/.wallpaper.jpg"            "$DESKTOP/Configs/wallpaper.jpg"

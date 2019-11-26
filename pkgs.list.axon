@@ -13,6 +13,7 @@ ccache
 clinfo
 compsize
 curlftpfs
+dateutils
 dbus-broker
 duperemove
 easy-rsa
@@ -38,11 +39,13 @@ gst-plugins-ugly
 gst-python
 hdparm
 hexchat
+hledger-web
 htop
 hunspell-en_US
 i3lock
 iotop
 ispell
+kcov
 lib32-libva-intel-driver
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
@@ -100,6 +103,8 @@ rust-analyzer-git
 rustup
 screen
 seahorse
+shellcheck
+shfmt
 skim
 slimmy-xfwm-theme-git
 smartmontools
@@ -111,6 +116,7 @@ thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
 tmux
+transmission-gtk
 tree-sitter-cli-bin
 ttf-go-mono-git
 unace
