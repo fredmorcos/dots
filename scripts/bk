@@ -5,51 +5,50 @@
 set -o errexit
 set -o nounset
 
-RSYNC_CMD="rsync -ahH --delete --progress --xattrs --acls --delete-excluded --exclude='*/target' $@"
-
-echo "RSYNC Command: $RSYNC_CMD"
-
 HOME=/home/fred
-HDD=/run/media/fred/MyFiles
 
 bk_cmd () {
-  echo -n "  >>> $1 --> $2: "
-  $RSYNC_CMD "$1" "$2"
-  echo ""
+  echo ">>> $1 --> $2:"
+  rsync "-ahH" "--delete" "--progress" "--xattrs" "--acls" "--delete-excluded" '--exclude="*/target"' "$1" "$2"
+  echo ">>> ------ <<<"
 }
 
-bk_cmd  "$HOME/Archive/"                "$HDD/Fred/Archive/"
-bk_cmd  "$HOME/Books/"                  "$HDD/Fred/Books/"
-bk_cmd  "$HOME/Documents/"              "$HDD/Fred/Documents/"
-bk_cmd  "$HOME/Downloads/"              "$HDD/Fred/Downloads/"
-bk_cmd  "$HOME/GMail/"                  "$HDD/Fred/GMail/"
-bk_cmd  "$HOME/Music/"                  "$HDD/Fred/Music/"
-bk_cmd  "$HOME/Music.New/"              "$HDD/Fred/Music.New/"
-bk_cmd  "$HOME/Videos/"                 "$HDD/Fred/Videos/"
-bk_cmd  "$HOME/VideosCS/"               "$HDD/Fred/VideosCS/"
-bk_cmd  "$HOME/Workspace/"              "$HDD/Fred/Workspace/"
+if [ "$(hostname)" = "floron" ]; then
+  echo "Floron backup"
 
-bk_cmd  "$HOME/.local/share/keyrings"   "$HDD/Fred/DotConfigs/keyrings/"
-bk_cmd  "$HOME/.gnupg/"                 "$HDD/Fred/DotConfigs/gnupg/"
-bk_cmd  "$HOME/.ssh/"                   "$HDD/Fred/DotConfigs/ssh/"
-bk_cmd  "$HOME/.config/beets/"          "$HDD/Fred/DotConfigs/config/beets/"
-bk_cmd  "$HOME/.config/hexchat/"        "$HDD/Fred/DotConfigs/config/hexchat/"
-bk_cmd  "$HOME/.config/MusicBrainz/"    "$HDD/Fred/DotConfigs/config/MusicBrainz/"
-bk_cmd  "$HOME/.config/transmission/"   "$HDD/Fred/DotConfigs/config/transmission/"
-bk_cmd  "$HOME/.config/youtube-dl/"     "$HDD/Fred/DotConfigs/config/youtube-dl/"
+  DST=
 
-bk_cmd  "$HOME/.thunderbird/"           "$HDD/Fred/DotConfigs/thunderbird/"
-bk_cmd  "$HOME/.idealgraphvisualizer/"  "$HDD/Fred/DotConfigs/idealgraphvisualizer/"
-bk_cmd  "$HOME/.eclipse/"               "$HDD/Fred/DotConfigs/eclipse/"
-bk_cmd  "$HOME/.zoom/"                  "$HDD/Fred/DotConfigs/zoom/"
-bk_cmd  "$HOME/.tree-sitter/"           "$HDD/Fred/DotConfigs/tree-sitter/"
-bk_cmd  "$HOME/.wallpaper.jpg"          "$HDD/Fred/DotConfigs/wallpaper.jpg"
-bk_cmd  "$HOME/.face"                   "$HDD/Fred/DotConfigs/face"
-bk_cmd  "$HOME/.wallpaper_old.jpg"      "$HDD/Fred/DotConfigs/wallpaper_old.jpg"
+  bk_cmd  "$HOME/.gnupg/"                 "$DST/Data/Fred/Configs/Laptop/gnupg/"
+  bk_cmd  "$HOME/.ssh/"                   "$DST/Data/Fred/Configs/Laptop/ssh/"
+  bk_cmd  "$HOME/.config/beets/"          "$DST/Data/Fred/Configs/Laptop/config-beets/"
+  bk_cmd  "$HOME/.config/hexchat/"        "$DST/Data/Fred/Configs/Laptop/config-hexchat/"
+  bk_cmd  "$HOME/.config/MusicBrainz/"    "$DST/Data/Fred/Configs/Laptop/config-MusicBrainz/"
+  bk_cmd  "$HOME/.config/transmission/"   "$DST/Data/Fred/Configs/Laptop/config-transmission/"
+  bk_cmd  "$HOME/.config/youtube-dl/"     "$DST/Data/Fred/Configs/Laptop/config-youtube-dl/"
+  bk_cmd  "$HOME/.local/share/keyrings"   "$DST/Data/Fred/Configs/Laptop/local-share-keyrings/"
 
-find "$HOME/Oracle/opt/" -maxdepth 1 > "$HOME/Oracle/opt-files.txt"
-tar -c --exclude='opt/*' --exclude='*/mxbuild' -f "$HDD/Fred/Oracle.tar" "$HOME/Oracle/"
+  bk_cmd  "$HOME/.thunderbird/"           "$DST/Data/Fred/Configs/Laptop/thunderbird/"
+  bk_cmd  "$HOME/.idealgraphvisualizer/"  "$DST/Data/Fred/Configs/Laptop/idealgraphvisualizer/"
+  bk_cmd  "$HOME/.eclipse/"               "$DST/Data/Fred/Configs/Laptop/eclipse/"
+  bk_cmd  "$HOME/.zoom/"                  "$DST/Data/Fred/Configs/Laptop/zoom/"
+  bk_cmd  "$HOME/.tree-sitter/"           "$DST/Data/Fred/Configs/Laptop/tree-sitter/"
 
-tar -c -f "$HDD/Fred/Oracle_mx.tar" "$HOME/.mx"
-tar -c -f "$HDD/Fred/Oracle_m2.tar" "$HOME/.m2"
-tar -c -f "$HDD/Fred/Oracle_p2.tar" "$HOME/.p2"
+  bk_cmd  "$HOME/.face"                   "$DST/Data/Fred/Configs/Laptop/face"
+  bk_cmd  "$HOME/.wallpaper.jpg"          "$DST/Data/Fred/Configs/Laptop/wallpaper.jpg"
+  bk_cmd  "$HOME/.wallpaper_old.jpg"      "$DST/Data/Fred/Configs/Laptop/wallpaper_old.jpg"
+elif [ "$(hostname)" = "axon" ]; then
+  echo "Axon backup"
+
+  bk_cmd  "$HOME/Archive/"                "$HDD/Fred/Archive/"
+  bk_cmd  "$HOME/Books/"                  "$HDD/Fred/Books/"
+  bk_cmd  "$HOME/Documents/"              "$HDD/Fred/Documents/"
+  bk_cmd  "$HOME/Downloads/"              "$HDD/Fred/Downloads/"
+  bk_cmd  "$HOME/GMail/"                  "$HDD/Fred/GMail/"
+  bk_cmd  "$HOME/Music/"                  "$HDD/Fred/Music/"
+  bk_cmd  "$HOME/Music.New/"              "$HDD/Fred/Music.New/"
+  bk_cmd  "$HOME/Videos/"                 "$HDD/Fred/Videos/"
+  bk_cmd  "$HOME/VideosCS/"               "$HDD/Fred/VideosCS/"
+  bk_cmd  "$HOME/Workspace/"              "$HDD/Fred/Workspace/"
+else
+  echo "Unknown host, not doing any backups"
+fi

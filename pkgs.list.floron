@@ -153,7 +153,6 @@ gperf
 gperftools
 gpsbabel
 gpscorrelate
-graphviz
 grsync
 gst-editing-services
 gst-libav
@@ -364,7 +363,6 @@ pidgin-otr
 pigz
 pipesocks
 pixiewps
-pkgconf
 pkgdiff
 pkgfile
 plantri

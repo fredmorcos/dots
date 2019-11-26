@@ -774,6 +774,9 @@
   :custom
   (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "Chk")
+  (flycheck-idle-change-delay 0.1)
+  (flycheck-display-errors-delay 0.1)
+  (flycheck-idle-buffer-switch-delay 0.1)
 
   :hook
   (prog-mode . flycheck-mode))
@@ -786,10 +789,6 @@
   (company-backends '(company-capf company-keywords company-files))
   (completion-ignore-case t)
   (company-echo-truncate-lines nil)
-  (company-echo-delay 0)
-  (company-idle-delay 0)
-  (company-tooltip-idle-delay 0)
-  (company-minimum-prefix-length 2)
   (company-selection-wrap-around t)
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
