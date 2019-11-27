@@ -123,6 +123,7 @@ cmerge gitconfig                           ~/.gitconfig
 cmerge htoprc                              ~/.config/htop/htoprc
 cmerge hunspell_en_US                      ~/.hunspell_en_US
 cmerge profile                             ~/.profile
+cmerge simplescreenrecorder.conf           ~/.ssr/settings.conf
 cmerge redshift.conf                       ~/.config/redshift.conf
 cmerge vimrc                               ~/.vimrc
 cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
