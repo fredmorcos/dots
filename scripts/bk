@@ -4,7 +4,22 @@ set -o pipefail
 set -o errexit
 set -o nounset
 
-CMD=("rsync" "-ahH" "--delete" "--progress" "--xattrs" "--acls" "--delete-excluded" "--exclude=*/target" "$@")
+CMD=("rsync"
+     "--human-readable"
+     "--progress"
+     "--archive"
+     "--xattrs"
+     "--acls"
+     "--preallocate"
+     "--sparse"
+     "--delete"
+     "--delete-after"
+     "--delete-excluded"
+     "--exclude=*/target"
+     "--hard-links"
+     "--safe-links"
+     "--munge-links"
+     "$@")
 
 echo "Rsync command: " "${CMD[@]}"
 
