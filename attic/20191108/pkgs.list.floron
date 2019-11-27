@@ -30,6 +30,7 @@ bat
 bbswitch
 beets
 bin2iso
+binwalk
 bison
 bitlbee
 bluez-cups
@@ -64,6 +65,7 @@ colordiff
 colorgcc
 corkscrew
 cpio
+cppcheck
 crda
 ctags
 cuetools
@@ -82,6 +84,7 @@ dhcpcd
 dhex
 dialog
 diff-so-fancy
+diffoscope
 discount
 diskus
 dmenu
@@ -173,6 +176,7 @@ hexyl
 highlight
 hledger-ui
 hledger-web
+howl
 htop
 httptunnel
 hunspell-de
@@ -204,7 +208,10 @@ iwd
 jemalloc
 jfsutils
 jp2a
+jre10-openjdk
+kak-lsp
 khal
+khard
 laptop-detect
 lbzip2
 leatherman
@@ -275,6 +282,7 @@ mda.lv2
 mediainfo
 mediastreamer
 mesa-vdpau
+meson
 mg
 mhash
 minidlna
@@ -380,6 +388,7 @@ pwgen
 python-argcomplete
 python-brotlipy
 python-cairocffi
+python-capstone
 python-cjkwrap
 python-cssselect
 python-diff-match-patch
@@ -391,6 +400,7 @@ python-fxa
 python-genshi
 python-httplib2
 python-jsbeautifier
+python-language-server
 python-libevdev
 python-llfuse
 python-logbook
@@ -404,6 +414,7 @@ python-pyacoustid
 python-pycryptodome
 python-pydocstyle
 python-pylast
+python-pylint
 python-pyopenssl
 python-pysmbc
 python-pysocks
@@ -411,7 +422,9 @@ python-pystemmer
 python-pyudev
 python-requests-hawk
 python-requests-oauthlib
+python-rope
 python-setproctitle
+python-sphinx
 python-tlsh
 python-virtualenv
 python-wikipedia
@@ -435,6 +448,7 @@ ripgrep
 rlwrap
 rofi
 rpmextract
+rstcheck
 rust-analyzer-git
 rustup
 rygel
@@ -569,6 +583,7 @@ xfce4-session
 xfce4-settings
 xfce4-terminal
 xfdesktop
+xkcdpass
 xkeycaps
 xmldiff
 xmlto
