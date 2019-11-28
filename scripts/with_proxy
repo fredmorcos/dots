@@ -3,7 +3,6 @@
 set -o errexit
 set -o nounset
 
-PASS_FILE=~/Documents/Important/Passwords/Passwords.txt
-PROXY=$(grep Oracle:Proxy $PASS_FILE | awk '{ print $3 }')
+PROXY=$(pw url Oracle:Proxy1)
 
 HTTP_PROXY="$PROXY" HTTPS_PROXY="$PROXY" FTP_PROXY="$PROXY" RSYNC_PROXY="$PROXY" NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com" "$@"

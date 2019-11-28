@@ -1,11 +1,6 @@
 # Umask
 umask 077
 
-# Passwords
-PASSFILE=/home/fred/Documents/Important/Passwords/Passwords.txt
-
-export PASSFILE
-
 # Qt
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export QT_SCALE_FACTOR=2

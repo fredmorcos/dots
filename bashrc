@@ -47,8 +47,8 @@ alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
 if [ -f "$PASSFILE" ]; then
-  DLSUB_UN=$(passuser OpenSubtitles)
-  DLSUB_PW=$(passpass OpenSubtitles)
+  DLSUB_UN=$(pw user OpenSubtitles)
+  DLSUB_PW=$(pw pass OpenSubtitles)
   DLSUB_CMD="$DLSUB_CMD --username $DLSUB_UN --password $DLSUB_PW"
 fi
 # shellcheck disable=SC2139

@@ -1,0 +1,70 @@
+#!/bin/sh
+
+set -o nounset
+
+PASSFILE="/home/fred/Documents/Important/Passwords/Passwords.txt"
+
+if [ "$1" = "check" ]; then
+  NCHANGE=$(grep -cE '^\*' "$PASSFILE")
+  NINACTIVE=$(grep -cE '^-' "$PASSFILE")
+
+  if [ "$NCHANGE" != "0" ]; then
+    echo "$NCHANGE passwords need changing"
+  fi
+
+  if [ "$NINACTIVE" != "0" ]; then
+    echo "$NINACTIVE accounts are inactive"
+  fi
+
+  exit 0
+fi
+
+NMATCHES=$(grep -ic "$2" "$PASSFILE")
+
+if [ "$NMATCHES" = "0" ]; then
+  echo "Error: No matches for" "$2" >&2
+  exit 1
+elif [ "$NMATCHES" != "1" ]; then
+  echo "Error: More than 1 match for" "$2" >&2
+  exit 1
+fi
+
+MATCH_INACTIVE=$(grep -i "$2" "$PASSFILE" | grep -cE '^-')
+
+if [ "$MATCH_INACTIVE" != "0" ]; then
+  echo "Warning: Account for" "$2" "is inactive" >&2
+fi
+
+MATCH_NEEDSCHANGE=$(grep -i "$2" "$PASSFILE" | grep -cE '^\*')
+
+if [ "$MATCH_NEEDSCHANGE" != "0" ]; then
+  echo "Warning: Account for" "$2" "needs a password change" >&2
+fi
+
+LINE=$(grep -i "$2" "$PASSFILE")
+
+# PASSFILE is not needed anymore
+unset PASSFILE
+
+print_output() {
+  if [ "$1" = "-" ]; then
+    echo "Error: No value available" >&2
+    exit 1
+  fi
+
+  echo "$1"
+}
+
+VAL=
+if [ "$1" = "url" ]; then
+  VAL=$(echo "$LINE" | awk '{ print $3 }')
+elif [ "$1" = "user" ]; then
+  VAL=$(echo "$LINE" | awk '{ print $4 }')
+elif [ "$1" = "pass" ]; then
+  VAL=$(echo "$LINE" | awk '{ print $5 }')
+else
+  echo "Error: Unknown column name $1" >&2
+  exit 1
+fi
+
+print_output "$VAL"

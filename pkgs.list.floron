@@ -57,6 +57,7 @@ cheese
 chromium
 chrpath
 clazy
+clinfo
 cobalt
 coin-or-mp
 colordiff
@@ -164,7 +165,6 @@ gumbo-parser
 hardinfo
 hashcat-utils
 haveged
-hcxkeys
 hcxtools
 hddtemp
 hdparm
@@ -189,9 +189,9 @@ icmake
 id3v2
 ifenslave
 ifplugd
+intel-compute-runtime
 intel-gpu-tools
 intel-media-driver
-intel-opencl-clang
 intel-ucode
 iotop
 ipset
@@ -210,10 +210,6 @@ lbzip2
 leatherman
 lftp
 lhasa
-lib32-libva-intel-driver
-lib32-libva-vdpau-driver
-lib32-mesa-vdpau
-lib32-opencl-nvidia
 libappindicator-gtk3
 libc++
 libcue
@@ -274,6 +270,7 @@ mcpp
 mda.lv2
 mediainfo
 mediastreamer
+mesa-demos
 mesa-vdpau
 mg
 mhash
@@ -311,17 +308,15 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
 numix-gtk-theme-git
-nvidia
-nvidia-settings
 odt2txt
 ogmtools
 openbsd-netcat
+opencl-mesa
 openldap
 openmp
 openmpi
 openpyn-nordvpn
 oprofile
-optimus-manager
 optipng
 os-prober
 osinfo-db-tools
@@ -444,6 +439,7 @@ sbsigntools
 screen
 screenfetch
 sdl2_gfx
+sdl_image
 seahorse
 shadowsocks
 shairplay
@@ -463,7 +459,6 @@ spike
 spirv-headers
 sqlitebrowser
 squashfs-tools
-steam-native-runtime
 strace
 stratis-cli
 stratisd
@@ -556,6 +551,7 @@ x11-ssh-askpass
 xcape
 xcompmgr
 xdelta3
+xdg-dbus-proxy
 xdg-desktop-portal
 xdotool
 xf86-video-intel
