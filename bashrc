@@ -46,17 +46,14 @@ alias yt1080='youtube-dl -f "[height<=1080]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
-PASS_FILE=~/Documents/Important/Passwords/Passwords.txt
-
-if [ -f $PASS_FILE ]; then
-  OST_LINE=$(grep OpenSubtitles $PASS_FILE)
-  DLSUB_UN=$(echo "$OST_LINE" | awk '{ print $4 }')
-  DLSUB_PW=$(echo "$OST_LINE" | awk '{ print $5 }')
+if [ -f "$PASSFILE" ]; then
+  DLSUB_UN=$(passuser OpenSubtitles)
+  DLSUB_PW=$(passpass OpenSubtitles)
   DLSUB_CMD="$DLSUB_CMD --username $DLSUB_UN --password $DLSUB_PW"
 fi
-
 # shellcheck disable=SC2139
 alias dlsub="$DLSUB_CMD"
+unset DLSUB_CMD
 
 dirdlsub() {
   for i in *; do

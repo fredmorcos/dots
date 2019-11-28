@@ -37,7 +37,6 @@ bluez-hid2hci
 bluez-tools
 bluez-utils
 bolt
-bridge-utils
 bs1770gain
 bsdiff
 bully
@@ -87,6 +86,7 @@ diskus
 dmenu
 dnsmasq
 dnssec-tools
+docker
 docx2txt
 dwdiff
 easy-rsa
@@ -521,7 +521,6 @@ unrtf
 unshield
 upx
 uriparser
-usb_modeswitch
 usbutils
 usleep
 uthash

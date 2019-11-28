@@ -1,12 +1,10 @@
 # Umask
 umask 077
 
-# Graphics
-XFWM4_USE_PRESENT=1
-# LIBVA_DRIVER_NAME=iHD
-# MESA_LOADER_DRIVER_OVERRIDE=iris
+# Passwords
+PASSFILE=/home/fred/Documents/Important/Passwords/Passwords.txt
 
-export XFWM4_USE_PRESENT # LIBVA_DRIVER_NAME MESA_LOADER_DRIVER_OVERRIDE
+export PASSFILE
 
 # Qt
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
@@ -41,6 +39,6 @@ RUSTFLAGS="-C link-arg=-fuse-ld=lld"
 
 # Editors
 EDITOR='emacs -nw'
-GIT_EDITOR=vim
+GIT_EDITOR=$EDITOR
 
 export PATH EDITOR GIT_EDITOR RUSTC_WRAPPER
