@@ -2,7 +2,7 @@
 
 set -o nounset
 
-test -z "$PASSFILE"
+PASSFILE=/home/fred/Documents/Important/Passwords/Passwords.txt
 
 if [ "$1" = "check" ]; then
   NCHANGE=$(grep -cE '^\*' "$PASSFILE")

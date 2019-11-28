@@ -35,6 +35,40 @@ alias neuron_kodi_restart='neuron_systemctl restart kodi'
 alias neuron_kodi_stop='neuron_systemctl stop kodi'
 alias neuron_update='ssh root@neuron pacman -Syu'
 
+neuron_mount() {
+  mkdir -p ~/NeuronFTP
+  ADDR="$(pw user neuron:common)"
+  ADDR="$ADDR:$(pw pass neuron:common)"
+  ADDR="$ADDR@neuron://mnt"
+  curlftpfs "$ADDR" ~/NeuronFTP
+}
+
+neuron_unmount() {
+  fusermount -u ~/NeuronFTP
+  rmdir ~/NeuronFTP
+}
+
+phone_mount_ssw() {
+  mkdir -p ~/PhoneFTP
+  ADDR="$(pw user 'phone ')"
+  ADDR="$ADDR:$(pw pass 'phone ')"
+  ADDR="$ADDR@phonessw://mnt"
+  curlftpfs "$ADDR" ~/PhoneFTP
+}
+
+phone_mount() {
+  mkdir -p ~/PhoneFTP
+  ADDR="$(pw user 'phone ')"
+  ADDR="$ADDR:$(pw pass 'phone ')"
+  ADDR="$ADDR@phone://mnt"
+  curlftpfs "$ADDR" ~/PhoneFTP
+}
+
+phone_unmount() {
+  fusermount -u ~/PhoneFTP
+  rmdir ~/PhoneFTP
+}
+
 alias vpn='/usr/bin/openpyn de -t 5 -f -m 40'
 alias vpn_p2p='vpn --p2p'
 alias vpn_kill='sudo /usr/bin/openpyn -x'
@@ -46,11 +80,8 @@ alias yt1080='youtube-dl -f "[height<=1080]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
-if [ -f "$PASSFILE" ]; then
-  DLSUB_UN=$(pw user OpenSubtitles)
-  DLSUB_PW=$(pw pass OpenSubtitles)
-  DLSUB_CMD="$DLSUB_CMD --username $DLSUB_UN --password $DLSUB_PW"
-fi
+DLSUB_CMD="$DLSUB_CMD --username $(pw user opensubtitles)"
+DLSUB_CMD="$DLSUB_CMD --password $(pw pass opensubtitles)"
 # shellcheck disable=SC2139
 alias dlsub="$DLSUB_CMD"
 unset DLSUB_CMD
