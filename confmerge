@@ -134,10 +134,6 @@ cmerge x11/lightdm.conf                    /etc/lightdm/lightdm.conf
 cmerge loader/loader.conf                  /boot/loader/loader.conf
 cmerge loader/arch.conf                    /boot/loader/entries/arch.conf
 
-cmerge nvidia/nvidia-settings              ~/.nvidia-settings-rc
-cmerge nvidia/optimus-manager.conf         /etc/optimus-manager/optimus-manager.conf
-cmerge nvidia/optimus-xorg.conf            /etc/optimus-manager/xorg-nvidia.conf
-
 cmerge systemd/coredump.conf               /etc/systemd/coredump.conf
 cmerge systemd/system.conf                 /etc/systemd/system.conf
 cmerge systemd/boot-override.conf          /etc/systemd/system/boot.mount.d/override.conf
