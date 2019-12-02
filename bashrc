@@ -4,7 +4,6 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-[[ -f /etc/profile.d/vte.sh ]] && . /etc/profile.d/vte.sh
 
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 HISTCONTROL=ignoredups

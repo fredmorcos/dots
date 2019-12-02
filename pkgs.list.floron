@@ -274,7 +274,6 @@ mesa-demos
 mesa-vdpau
 mg
 mhash
-minidlna
 mlocate
 modest
 mousetweaks
@@ -432,7 +431,6 @@ rofi
 rpmextract
 rust-analyzer-git
 rustup
-rygel
 s-nail
 sassc
 sbsigntools

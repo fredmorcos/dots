@@ -42,4 +42,4 @@ else
   exit 1
 fi
 
-loginctl terminate-session "$XDG_SESSION_ID"
+# loginctl terminate-session "$XDG_SESSION_ID"
