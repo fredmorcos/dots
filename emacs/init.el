@@ -868,18 +868,11 @@
    '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
 (use-package lsp-java
-  :custom
-  (lsp-java-format-settings-profile "_Graal")
-  (lsp-java-format-settings-url
-   (expand-file-name "~/Oracle/graal/sulong/.idea/eclipseCodeFormatter.xml"))
-  (lsp-java-autobuild-enabled nil))
+  :requires lsp)
 
 (use-package java-mode
   :ensure nil
   :requires lsp-java
-
-  :custom
-  (lsp-enable-file-watchers nil)
 
   :hook
   (java-mode . (lambda ()
@@ -901,11 +894,12 @@
                        fill-column 90)))
 
   :custom-face
-  (rust-question-mark-face ((t (:inherit (font-lock-builtin-face))))))
+  (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
+
+  :custom
+  (rust-always-locate-project-on-open t))
 
 (use-package cargo
-  :after rust-mode
-
   :init
   (defun cargo-fmt-and-lint ()
     (interactive)
@@ -922,6 +916,7 @@
 
 (use-package c-mode
   :ensure nil
+  :requires lsp
 
   :custom
   (lsp-clients-clangd-args
@@ -946,7 +941,7 @@
         ("C-c r" . lsp-rename))
 
   :custom
-  (lsp-file-watch-threshold 8000)
+  (lsp-file-watch-threshold 100000)
 
   (lsp-prefer-flymake nil)
   (lsp-document-highlight-delay 0.1)
@@ -1002,15 +997,6 @@
 
   :custom
   (company-lsp-cache-candidates 'auto))
-
-(use-package olivetti
-  :pin melpa
-
-  :hook
-  ((org-mode markdown-mode) . olivetti-mode)
-
-  :custom
-  (olivetti-body-width 100))
 
 (use-package jsonnet-mode)
 
