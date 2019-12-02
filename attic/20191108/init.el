@@ -16,9 +16,9 @@
 
 (setq-default
  package-archives
- '(("gnu" . "https://elpa.gnu.org/packages/")
+ '(("gnu"   . "https://elpa.gnu.org/packages/")
    ("melpa" . "https://melpa.org/packages/")
-   ("org" . "https://orgmode.org/elpa/")))
+   ("org"   . "https://orgmode.org/elpa/")))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -215,7 +215,7 @@
   recentf-cleanup
 
   :config
-  (add-to-list 'recentf-exclude "~/.config/emacs/elpa")
+  (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
   (run-with-idle-timer 30 t #'recentf-cleanup)
 
   :custom
@@ -520,7 +520,7 @@
   ts-require-language
 
   :init
-  (let* ((default-directory "~/Build/emacs-tree-sitter/")
+  (let* ((default-directory (expand-file-name "~/Build/emacs-tree-sitter/"))
          (core-dst (expand-file-name "tree-sitter-core.el"))
          (core-bc (expand-file-name "tree-sitter-core.elc"))
          ;; (debug-dst (expand-file-name "tree-sitter-debug.el"))
@@ -663,10 +663,10 @@
   (counsel-mode t)
 
   :bind
-  ("M-x" . counsel-M-x)
+  ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("M-A" . counsel-ag)
-  ("M-R" . counsel-rg))
+  ("M-A"     . counsel-ag)
+  ("M-R"     . counsel-rg))
 
 (use-package ivy
   :diminish
@@ -741,10 +741,6 @@
   (magit-display-buffer-function
    #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package magit-todos
-  :hook
-  (magit-mode . magit-todos-mode))
-
 (use-package expand-region
   :bind
   ("C-=" . er/expand-region))
@@ -778,6 +774,9 @@
   :custom
   (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "Chk")
+  (flycheck-idle-change-delay 0.1)
+  (flycheck-display-errors-delay 0.1)
+  (flycheck-idle-buffer-switch-delay 0.1)
 
   :hook
   (prog-mode . flycheck-mode))
@@ -786,23 +785,10 @@
   :pin melpa
   :diminish "Com"
 
-  :bind
-  ("TAB" . company-indent-or-complete-common)
-
   :custom
-  (company-backends '(company-capf company-dabbrev-code company-keywords
-                                   company-dabbrev company-files))
+  (company-backends '(company-capf company-keywords company-files))
   (completion-ignore-case t)
-  (company-etags-ignore-case t)
-  (company-dabbrev-minimum-length 1)
-  (company-dabbrev-code-ignore-case t)
-  (company-dabbrev-ignore-case t)
   (company-echo-truncate-lines nil)
-  (company-echo-delay 0)
-  (company-idle-delay nil)
-  (company-tooltip-idle-delay 0)
-  (company-minimum-prefix-length 1)
-  (company-require-match nil)
   (company-selection-wrap-around t)
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
@@ -810,7 +796,10 @@
   (company-transformers '(company-sort-by-backend-importance))
 
   :hook
-  (prog-mode . company-mode))
+  ((prog-mode hledger-mode) . company-mode)
+  (hledger-mode
+   . (lambda ()
+       (setq-local company-backends (cons hledger-company company-backends)))))
 
 (use-package company-quickhelp
   :pin melpa
@@ -831,13 +820,15 @@
   :after magit
 
   :custom
-  (global-diff-hl-mode t)
-  (diff-hl-flydiff-mode t)
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
 
+  :commands
+  diff-hl-magit-post-refresh
+
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh)
+  (prog-mode . diff-hl-mode)
 
   :custom-face
   (diff-hl-delete ((t (:background "RosyBrown1"))))
@@ -923,11 +914,17 @@
    '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
 (use-package lsp-java
-  :requires lsp-mode)
+  :requires lsp-mode
+
+  :custom
+  (lsp-java-format-settings-profile "_Graal")
+  (lsp-java-format-settings-url
+   (expand-file-name "~/Oracle/graal/sulong/.idea/eclipseCodeFormatter.xml"))
+  (lsp-java-autobuild-enabled nil))
 
 (use-package java-mode
   :ensure nil
-  :after lsp-mode
+  :requires lsp-java
 
   :custom
   (lsp-enable-file-watchers nil)
@@ -1050,12 +1047,6 @@
 
   :custom
   (company-lsp-cache-candidates 'auto))
-
-(use-package aggressive-indent
-  :pin melpa
-
-  :hook
-  ((emacs-lisp-mode java-mode rust-mode) . aggressive-indent-mode))
 
 (use-package olivetti
   :pin melpa

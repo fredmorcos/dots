@@ -7,7 +7,7 @@
 
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 HISTCONTROL=ignoredups
-HISTSIZE=10000
+HISTSIZE=1000
 
 export PS1 HISTCONTROL HISTSIZE
 
@@ -79,8 +79,8 @@ alias yt1080='youtube-dl -f "[height<=1080]"'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
-DLSUB_CMD="$DLSUB_CMD --username $(pw user opensubtitles)"
-DLSUB_CMD="$DLSUB_CMD --password $(pw pass opensubtitles)"
+DLSUB_CMD="$DLSUB_CMD --username $(pw user '+ opensubtitles')"
+DLSUB_CMD="$DLSUB_CMD --password $(pw pass '+ opensubtitles')"
 # shellcheck disable=SC2139
 alias dlsub="$DLSUB_CMD"
 unset DLSUB_CMD

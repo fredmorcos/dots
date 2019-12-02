@@ -18,13 +18,11 @@ PATH="$HOME/Oracle/opt/eclipse:$PATH"
 export MX_PYTHON_VERSION=3
 
 # Other
-PATH="$HOME/Oracle/opt/node13/bin:$PATH"
 PATH="$HOME/Oracle/opt/zoom:$PATH"
 LD_LIBRARY_PATH="$HOME/Oracle/opt/zoom:$LD_LIBRARY_PATH"
 
 # Path
 PATH="$HOME/.cargo/bin:$PATH"
-PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace/bin:$PATH"
 
