@@ -4,6 +4,11 @@ set -o nounset
 
 PASSFILE=/home/fred/Documents/Important/Passwords/Passwords.txt
 
+if [ "$1" = "gen" ]; then
+  pwgen -c -n -y -s -B -1 34 1
+  exit 0
+fi
+
 if [ "$1" = "check" ]; then
   NCHANGE=$(grep -cE '^\*' "$PASSFILE")
   NINACTIVE=$(grep -cE '^-' "$PASSFILE")
