@@ -29,6 +29,7 @@ flex
 fwupd
 fzf
 gdb
+gimp
 gnome-calculator
 gnome-disk-utility
 gogglesmm
@@ -54,14 +55,11 @@ lib32-ocl-icd
 lib32-simplescreenrecorder
 lib32-vkd3d
 lib32-vulkan-radeon
-libheif
 libmythes
-libraw
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
-libwmf
 lightdm-gtk-greeter
 linux
 linux-firmware
