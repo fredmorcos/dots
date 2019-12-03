@@ -51,7 +51,7 @@ phone_mount_ssw() {
   mkdir -p ~/PhoneFTP
   ADDR="$(pw user 'phone ')"
   ADDR="$ADDR:$(pw pass 'phone ')"
-  ADDR="$ADDR@phonessw://mnt"
+  ADDR="$ADDR@phonessw:9999"
   curlftpfs "$ADDR" ~/PhoneFTP
 }
 
@@ -59,7 +59,7 @@ phone_mount() {
   mkdir -p ~/PhoneFTP
   ADDR="$(pw user 'phone ')"
   ADDR="$ADDR:$(pw pass 'phone ')"
-  ADDR="$ADDR@phone://mnt"
+  ADDR="$ADDR@phone:9999"
   curlftpfs "$ADDR" ~/PhoneFTP
 }
 

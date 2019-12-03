@@ -22,9 +22,9 @@ PATH="$HOME/Oracle/opt/zoom:$PATH"
 LD_LIBRARY_PATH="$HOME/Oracle/opt/zoom:$LD_LIBRARY_PATH"
 
 # Path
-PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
 
 # Rust
 RUSTC_WRAPPER=sccache

@@ -944,6 +944,8 @@
   (lsp-rust-wait-to-build 0.1)
   (lsp-rust-analyzer-inlay-hints-mode t)
 
+  (lsp-auto-guess-root t)
+
   :hook
   ((c-mode python-mode java-mode rust-mode) . lsp-deferred))
 
