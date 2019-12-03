@@ -59,6 +59,7 @@ chromium
 chrpath
 clazy
 clinfo
+cmake
 cobalt
 coin-or-mp
 colordiff
@@ -293,6 +294,7 @@ networkmanager-openvpn
 networkmanager-strongswan
 nfs-utils
 nilfs-utils
+ninja
 nordvpn-bin
 noto-fonts-cjk
 noto-fonts-emoji
