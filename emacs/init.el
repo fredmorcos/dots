@@ -732,6 +732,7 @@
   (flycheck-idle-change-delay 0.1)
   (flycheck-display-errors-delay 0.1)
   (flycheck-idle-buffer-switch-delay 0.1)
+  (flycheck-disabled-checkers '(rust-cargo rust-clippy rust))
 
   :hook
   (prog-mode . flycheck-mode))
@@ -758,7 +759,6 @@
 
 (use-package company-quickhelp
   :pin melpa
-  :after company
 
   :hook
   (company-mode . company-quickhelp-mode)
@@ -772,8 +772,6 @@
         ("C-c h" . company-quickhelp-manual-begin)))
 
 (use-package diff-hl
-  :after magit
-
   :custom
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
@@ -867,12 +865,10 @@
   (z3-smt2-prover-custom-args
    '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
-(use-package lsp-java
-  :requires lsp)
+(use-package lsp-java)
 
 (use-package java-mode
   :ensure nil
-  :requires lsp-java
 
   :hook
   (java-mode . (lambda ()
@@ -882,10 +878,6 @@
                        fill-column 90))))
 
 (use-package rust-mode
-  :requires
-  ra-emacs-lsp
-  lsp-mode
-
   :hook
   (rust-mode . (lambda ()
                  (setq-local standard-indent 4)
@@ -916,7 +908,6 @@
 
 (use-package c-mode
   :ensure nil
-  :requires lsp
 
   :custom
   (lsp-clients-clangd-args
