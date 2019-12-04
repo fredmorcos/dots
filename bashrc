@@ -68,7 +68,8 @@ alias vpn_kill='sudo /usr/bin/openpyn -x'
 
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
-DLSUB_CMD="subdl -i --output={m}.{L}.{S} $(pw get OpenSubtitles "--username %U --password %P")"
+DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
+DLSUB_CMD="$DLSUB_CMD $(pw get OpenSubtitles "--username %U --password %P")"
 # shellcheck disable=SC2139
 alias dlsub="$DLSUB_CMD"
 unset DLSUB_CMD

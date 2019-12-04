@@ -47,6 +47,7 @@ i3lock
 iotop
 ispell
 kcov
+lib32-amdvlk
 lib32-libva-intel-driver
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
@@ -55,6 +56,7 @@ lib32-ocl-icd
 lib32-simplescreenrecorder
 lib32-vkd3d
 lib32-vulkan-radeon
+lib32-vulkan-validation-layers
 libmythes
 libva-mesa-driver
 libva-utils
@@ -96,6 +98,7 @@ python-pyacoustid
 python-pycryptodome
 python-pylast
 python-xdg
+radeontool
 redshift
 rink
 rsync
@@ -130,6 +133,7 @@ vi
 vim-colorsamplerpack
 vim-spell-en
 vkd3d
+vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
