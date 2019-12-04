@@ -36,9 +36,7 @@ alias neuron_update='ssh root@neuron pacman -Syu'
 
 neuron_mount() {
   mkdir -p ~/NeuronFTP
-  ADDR="$(pw user neuron:common)"
-  ADDR="$ADDR:$(pw pass neuron:common)"
-  ADDR="$ADDR@neuron://mnt"
+  ADDR="$(pw get Neuron:Common "%U:%P")@neuron://mnt"
   curlftpfs "$ADDR" ~/NeuronFTP
 }
 
@@ -49,17 +47,13 @@ neuron_unmount() {
 
 phone_mount_ssw() {
   mkdir -p ~/PhoneFTP
-  ADDR="$(pw user 'phone ')"
-  ADDR="$ADDR:$(pw pass 'phone ')"
-  ADDR="$ADDR@phonessw:9999"
+  ADDR="$(pw get Phone "%U:%P")@phonessw:9999"
   curlftpfs "$ADDR" ~/PhoneFTP
 }
 
 phone_mount() {
   mkdir -p ~/PhoneFTP
-  ADDR="$(pw user 'phone ')"
-  ADDR="$ADDR:$(pw pass 'phone ')"
-  ADDR="$ADDR@phone:9999"
+  ADDR="$(pw get Phone "%U:%P")@phone:9999"
   curlftpfs "$ADDR" ~/PhoneFTP
 }
 
@@ -74,9 +68,7 @@ alias vpn_kill='sudo /usr/bin/openpyn -x'
 
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 
-DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
-DLSUB_CMD="$DLSUB_CMD --username $(pw user '+ opensubtitles')"
-DLSUB_CMD="$DLSUB_CMD --password $(pw pass '+ opensubtitles')"
+DLSUB_CMD="subdl -i --output={m}.{L}.{S} $(pw get OpenSubtitles "--username %U --password %P")"
 # shellcheck disable=SC2139
 alias dlsub="$DLSUB_CMD"
 unset DLSUB_CMD
