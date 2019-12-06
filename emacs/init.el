@@ -528,7 +528,7 @@
   :diminish "AR"
 
   :custom
-  (auto-revert-interval 2)
+  (auto-revert-interval 1)
   (auto-revert-mode-text " AR")
 
   :hook
@@ -949,9 +949,26 @@
   :hook
   ((c-mode python-mode java-mode rust-mode) . lsp-deferred))
 
+(use-package lsp-ivy
+  :commands
+  lsp-ivy-workspace-symbol
+  lsp-ivy-global-workspace-symbol)
+
+(use-package treemacs
+  :hook
+  (lsp-mode . treemacs))
+
 (use-package lsp-treemacs
   :commands
-  lsp-treemacs-errors-list)
+  lsp-treemacs-errors-list
+  lsp-treemacs-symbols-list
+  lsp-treemacs-references
+  lsp-treemacs-implementations
+  lsp-treemacs-deps-list
+  lsp-treemacs-sync-mode
+
+  :hook
+  (lsp-mode . lsp-treemacs-sync-mode))
 
 (use-package lsp-ui
   :commands
