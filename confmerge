@@ -149,6 +149,7 @@ cmerge locale.conf                         /etc/locale.conf
 cmerge vconsole.conf                       /etc/vconsole.conf
 cmerge sysctl.conf                         /etc/sysctl.d/sysctl.conf
 cmerge bbswitch.conf                       /etc/modprobe.d/bbswitch.conf
+cmerge limits.conf                         /etc/security/limits.conf
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
