@@ -954,22 +954,6 @@
   lsp-ivy-workspace-symbol
   lsp-ivy-global-workspace-symbol)
 
-(use-package treemacs
-  :hook
-  (lsp-mode . treemacs))
-
-(use-package lsp-treemacs
-  :commands
-  lsp-treemacs-errors-list
-  lsp-treemacs-symbols-list
-  lsp-treemacs-references
-  lsp-treemacs-implementations
-  lsp-treemacs-deps-list
-  lsp-treemacs-sync-mode
-
-  :hook
-  (lsp-mode . lsp-treemacs-sync-mode))
-
 (use-package lsp-ui
   :commands
   lsp-ui-mode
