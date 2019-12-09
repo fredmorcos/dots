@@ -66,7 +66,6 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 lightdm-gtk-greeter
-linux
 linux-firmware
 lld
 lldb
@@ -88,6 +87,7 @@ numix-gtk-theme-git
 odt2txt
 opencl-mesa
 openpyn-nordvpn
+openresolv
 p7zip
 pacman-contrib
 papirus-icon-theme
@@ -125,6 +125,7 @@ steam-native-runtime
 strace
 subdl
 syncthing
+tensorflow-opt
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
@@ -147,6 +148,8 @@ vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
+wireguard-arch
+wireguard-tools
 xf86-input-evdev
 xf86-input-keyboard
 xf86-input-mouse
