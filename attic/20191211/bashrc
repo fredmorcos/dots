@@ -37,7 +37,7 @@ alias neuron_update='ssh root@neuron pacman -Syu'
 neuron_mount() {
   mkdir -p ~/NeuronFTP
   ADDR="$(pw get Neuron:Common "%U:%P")@neuron://mnt"
-  curlftpfs -o connect_timeout=10 "$ADDR" ~/NeuronFTP
+  curlftpfs "$ADDR" ~/NeuronFTP
 }
 
 neuron_unmount() {
@@ -48,13 +48,13 @@ neuron_unmount() {
 phone_mount_ssw() {
   mkdir -p ~/PhoneFTP
   ADDR="$(pw get Phone "%U:%P")@phonessw:9999"
-  curlftpfs -o connect_timeout=10 "$ADDR" ~/PhoneFTP
+  curlftpfs "$ADDR" ~/PhoneFTP
 }
 
 phone_mount() {
   mkdir -p ~/PhoneFTP
   ADDR="$(pw get Phone "%U:%P")@phone:9999"
-  curlftpfs -o connect_timeout=10 "$ADDR" ~/PhoneFTP
+  curlftpfs "$ADDR" ~/PhoneFTP
 }
 
 phone_unmount() {
@@ -80,6 +80,16 @@ dirdlsub() {
     dlsub "$i";
     echo "-----------------------------------------";
   done
+}
+
+cpuperf() {
+  sudo cpupower -c all frequency-set -g performance
+  sudo cpupower -c all set --perf-bias 0
+}
+
+cpusave() {
+  sudo cpupower -c all frequency-set -g powersave
+  sudo cpupower -c all set --perf-bias 15
 }
 
 gitall() {

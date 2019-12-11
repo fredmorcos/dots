@@ -587,6 +587,7 @@ xorg-xwud
 xsel
 xsettings-client
 xsettingsd
+xss-lock
 xssstate
 yamllint
 yapf
