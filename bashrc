@@ -11,8 +11,6 @@ HISTSIZE=1000
 
 export PS1 HISTCONTROL HISTSIZE
 
-shopt -s checkwinsize
-
 alias grep='grep --color'
 alias ls='exa'
 alias ll='ls -lg --group-directories-first'
