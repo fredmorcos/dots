@@ -134,6 +134,7 @@ tor-browser
 transmission-gtk
 trash-cli
 ttf-go-mono-git
+tup
 unace
 unoconv
 unrar
@@ -200,5 +201,6 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xss-lock
 yay-bin
 youtube-dl

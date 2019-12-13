@@ -17,8 +17,8 @@ CMD=("rsync"
      "--delete-excluded"
      "--exclude=*/target"
      "--hard-links"
-     "--safe-links"
-     "--munge-links"
+     # "--safe-links"
+     # "--munge-links"
      "$@")
 
 echo "Rsync command: " "${CMD[@]}"
