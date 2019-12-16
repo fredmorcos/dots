@@ -4,6 +4,9 @@ umask 077
 # AMD
 export RADV_PERFTEST=aco
 
+# Firefox
+export MOZ_WEBRENDER=1
+
 # Qt
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export QT_SCALE_FACTOR=2
