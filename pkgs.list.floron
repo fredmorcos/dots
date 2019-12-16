@@ -1,4 +1,5 @@
 abook
+aconfmgr-git
 acpi
 acpi_call
 acpica
@@ -19,6 +20,7 @@ aspell-en
 aspell-fr
 astyle
 atool
+augeas
 autoconf-archive
 autogen
 automake
@@ -244,6 +246,7 @@ llvm
 lockdown-ms
 lockfile-progs
 logrotate
+lostfiles
 lrzip
 lsof
 lxdm-gtk3
