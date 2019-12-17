@@ -1,5 +1,4 @@
 abook
-aconfmgr-git
 acpi
 acpi_call
 acpica
@@ -320,6 +319,7 @@ p7zip
 pacgraph
 pacman-contrib
 pacrunner
+pacutils
 pamixer
 papirus-icon-theme
 paprefs
