@@ -1,9 +1,6 @@
 # User-related
 umask 077
 
-# AMD
-export RADV_PERFTEST=aco
-
 # Firefox
 export MOZ_WEBRENDER=1
 
