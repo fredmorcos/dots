@@ -10,7 +10,7 @@ set ignorecase
 set smartcase
 set autoindent
 set ruler
-set colorcolumn=80
+set colorcolumn=100
 
 set mouse=r
 

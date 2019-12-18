@@ -3,7 +3,7 @@
 ;;; Code:
 
 (setq-default
- custom-file (concat user-emacs-directory "custom.el")
+ custom-file (concat temporary-file-directory "emacs/custom.el")
  gc-cons-threshold most-positive-fixnum
  gc-cons-percentage 0.6
  file-name-handler-alist nil

@@ -81,7 +81,9 @@ dd_rescue
 ddrescue
 dex
 dhclient
+dhcp
 dhcpcd
+dhcping
 dhex
 dialog
 diff-so-fancy

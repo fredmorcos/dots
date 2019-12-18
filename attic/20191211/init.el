@@ -125,7 +125,7 @@
   (line-number-current-line ((t (:foreground "Gray60"))))
 
   :hook
-  ((prog-mode z3-smt2-mode) . display-line-numbers-mode))
+  (prog-mode . display-line-numbers-mode))
 
 (use-package hl-line
   :ensure nil
@@ -134,7 +134,7 @@
   (hl-line ((t (:background "CornSilk"))))
 
   :hook
-  ((prog-mode text-mode z3-smt2-mode) . hl-line-mode))
+  ((prog-mode text-mode) . hl-line-mode))
 
 (use-package apropos
   :ensure nil
@@ -435,6 +435,44 @@
   :hook
   (prog-mode . eldoc-mode))
 
+(use-package js-mode
+  :ensure nil
+
+  :mode
+  "\\.hocon\\'")
+
+(use-package antlr-mode
+  :ensure nil
+
+  :custom
+  (antlr-tab-offset-alist
+   '((antlr-mode nil 2 nil)
+     (java-mode "antlr" 2 nil)))
+
+  :mode
+  "\\.g4\\'")
+
+(use-package llvm-mode
+  :ensure nil
+
+  :mode
+  "\\.ll\\'"
+
+  :init
+  (let* ((url (concat "https://raw.githubusercontent.com/llvm/llvm-project"
+                      "/master/llvm/utils/emacs/llvm-mode.el"))
+         (dst-dir (concat user-emacs-directory "extra/"))
+         (dst (concat dst-dir "llvm-mode.el"))
+         (dst-bc (concat dst-dir "llvm-mode.elc")))
+    (when (not (file-readable-p dst-bc))
+      (make-directory dst-dir t)
+      (url-copy-file url dst t)
+      (byte-compile-file dst))
+    (add-to-list 'load-path dst-dir))
+
+  :hook
+  (llvm-mode . (lambda () (toggle-truncate-lines t))))
+
 (use-package ra-emacs-lsp
   :ensure nil
 
@@ -555,6 +593,13 @@
   :config
   (setq org-ellipsis "   ▾"))
 
+(use-package markdown-mode
+  :ensure nil
+
+  :hook
+  (markdown-mode . (lambda () (jit-lock-register 'flyspell-region)))
+  (markdown-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t))))
+
 (use-package iedit
   :bind
   ("C-;" . iedit-mode))
@@ -659,6 +704,19 @@
   :init
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
+(use-package dired-subtree
+  :bind
+  (:map dired-mode-map
+        ("TAB" . dired-subtree-toggle))
+
+  :custom-face
+  (dired-subtree-depth-1-face ((t (:background "LightBlue"))))
+  (dired-subtree-depth-2-face ((t (:background "LightGreen"))))
+  (dired-subtree-depth-3-face ((t (:background "LightYellow"))))
+  (dired-subtree-depth-4-face ((t (:background "LightBlue"))))
+  (dired-subtree-depth-5-face ((t (:background "LightGreen"))))
+  (dired-subtree-depth-6-face ((t (:background "LightYellow")))))
+
 (use-package flycheck
   :pin melpa
 
@@ -677,7 +735,7 @@
   (flycheck-disabled-checkers '(rust-cargo rust-clippy rust))
 
   :hook
-  ((prog-mode z3-smt2-mode) . flycheck-mode))
+  (prog-mode . flycheck-mode))
 
 (use-package company
   :pin melpa
@@ -694,7 +752,7 @@
   (company-transformers '(company-sort-by-backend-importance))
 
   :hook
-  (prog-mode . company-mode)
+  ((prog-mode hledger-mode) . company-mode)
   (hledger-mode
    . (lambda ()
        (setq-local company-backends (cons hledger-company company-backends)))))
@@ -723,7 +781,7 @@
 
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh)
-  ((prog-mode z3-smt2-mode) . diff-hl-mode)
+  (prog-mode . diff-hl-mode)
 
   :custom-face
   (diff-hl-delete ((t (:background "RosyBrown1"))))
@@ -773,7 +831,7 @@
   (make-thread #'yas-reload-all)
 
   :hook
-  ((hledger-mode c-mode rust-mode) . yas-minor-mode))
+  ((hledger-mode java-mode c-mode python-mode rust-mode) . yas-minor-mode))
 
 (use-package yasnippet-snippets)
 
@@ -796,40 +854,6 @@
 (use-package toml-mode)
 (use-package json-mode)
 
-(use-package markdown-mode
-  :ensure nil
-
-  :hook
-  (markdown-mode . (lambda () (jit-lock-register 'flyspell-region)))
-  (markdown-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t))))
-
-(use-package js-mode
-  :ensure nil
-
-  :mode
-  "\\.hocon\\'")
-
-(use-package llvm-mode
-  :ensure nil
-
-  :mode
-  "\\.ll\\'"
-
-  :init
-  (let* ((url (concat "https://raw.githubusercontent.com/llvm/llvm-project"
-                      "/master/llvm/utils/emacs/llvm-mode.el"))
-         (dst-dir (concat user-emacs-directory "extra/"))
-         (dst (concat dst-dir "llvm-mode.el"))
-         (dst-bc (concat dst-dir "llvm-mode.elc")))
-    (when (not (file-readable-p dst-bc))
-      (make-directory dst-dir t)
-      (url-copy-file url dst t)
-      (byte-compile-file dst))
-    (add-to-list 'load-path dst-dir))
-
-  :hook
-  (llvm-mode . (lambda () (toggle-truncate-lines t))))
-
 (use-package rmsbolt
   :diminish "Bolt"
 
@@ -840,6 +864,18 @@
   :custom
   (z3-smt2-prover-custom-args
    '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
+
+(use-package lsp-java)
+
+(use-package java-mode
+  :ensure nil
+
+  :hook
+  (java-mode . (lambda ()
+                 (setq-local standard-indent 2)
+                 (setq-local comment-fill-column 90)
+                 (setq tab-width 2
+                       fill-column 90))))
 
 (use-package rust-mode
   :hook
@@ -911,7 +947,7 @@
   (lsp-auto-guess-root t)
 
   :hook
-  ((c-mode rust-mode) . lsp-deferred))
+  ((c-mode python-mode java-mode rust-mode) . lsp-deferred))
 
 (use-package lsp-ivy
   :commands
@@ -956,11 +992,13 @@
   :custom
   (company-lsp-cache-candidates 'auto))
 
+(use-package jsonnet-mode)
+
 (use-package indent-guide
   :pin melpa
 
   :hook
-  (json-mode . indent-guide-mode)
+  ((python-mode json-mode jsonnet-mode) . indent-guide-mode)
 
   :custom-face
   (indent-guide-face ((t (:foreground "gray80")))))
@@ -968,6 +1006,9 @@
 (use-package vterm
   :bind
   ("<f6>" . vterm-other-window))
+
+;; TODO Check out EEV
+(use-package eev)
 
 (provide 'init)
 ;;; init ends here
