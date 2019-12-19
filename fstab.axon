@@ -1,0 +1,5 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <fs>           <dir>           <type> <options>                                  <d><p>
+/dev/mapper/data /home/fred/Data btrfs  defaults,rw,relatime,compress=zstd,noauto  0  2
