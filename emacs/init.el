@@ -68,7 +68,8 @@
   (auto-save-list-file-prefix nil)
 
   :hook
-  (after-init . (lambda () (setq file-name-handler-alist fnh-alist-old))))
+  (after-init . (lambda () (setq file-name-handler-alist fnh-alist-old)))
+  (after-init . (lambda () (message "Startup in %s" (emacs-init-time)))))
 
 (use-package faces
   :ensure nil

@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(fset 'display-startup-echo-area-message 'ignore)
+
 (setq-default
  custom-file (concat temporary-file-directory "emacs/custom.el")
  gc-cons-threshold most-positive-fixnum
