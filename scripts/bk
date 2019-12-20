@@ -35,6 +35,7 @@ FLORON="fred@floron:$HOME"
 DATA="$HOME/Data/Fred"
 LAPTOP="$DATA/Laptop"
 DESKTOP="$DATA/Desktop"
+EXTERNAL="/var/run/media/Fred/External"
 
 bk_cmd "$FLORON/GMail/"                  "$LAPTOP/GMail/"
 bk_cmd "$FLORON/Workspace/"              "$LAPTOP/Workspace/"
@@ -73,3 +74,7 @@ bk_cmd "$HOME/.config/youtube-dl/"       "$DESKTOP/Configs/config-youtube-dl/"
 bk_cmd "$HOME/.local/share/keyrings"     "$DESKTOP/Configs/local-share-keyrings/"
 bk_cmd "$HOME/.face"                     "$DESKTOP/Configs/face.jpg"
 bk_cmd "$HOME/.wallpaper.jpg"            "$DESKTOP/Configs/wallpaper.jpg"
+
+if [ -d "$EXTERNAL" ]; then
+  bk_cmd "$HOME/Data/" "$EXTERNAL/"
+fi
