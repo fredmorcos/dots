@@ -1,6 +1,9 @@
 # User-related
 umask 077
 
+export AMD_DEBUG="nongg nodma"
+export RADV_PERFTEST="aco"
+
 # Qt
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export QT_SCALE_FACTOR=2

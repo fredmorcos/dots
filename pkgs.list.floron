@@ -447,6 +447,7 @@ sparsehash
 speech-dispatcher
 spike
 spirv-headers
+sqlitebrowser
 squashfs-tools
 strace
 stratis-cli
@@ -560,7 +561,6 @@ xorg-fonts-100dpi
 xorg-fonts-75dpi
 xorg-luit
 xorg-server-devel
-xorg-server-xdmx
 xorg-server-xephyr
 xorg-server-xnest
 xorg-server-xvfb
