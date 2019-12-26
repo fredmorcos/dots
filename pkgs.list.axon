@@ -121,6 +121,7 @@ simplescreenrecorder
 skim
 slimmy-xfwm-theme-git
 smartmontools
+sshfs
 steam-native-runtime
 strace
 subdl
@@ -152,8 +153,6 @@ vulkan-tools
 wireguard-arch
 wireguard-tools
 xf86-input-evdev
-xf86-input-keyboard
-xf86-input-mouse
 xf86-input-synaptics
 xf86-input-vmmouse
 xf86-input-void
@@ -172,7 +171,6 @@ xorg-fonts-75dpi
 xorg-luit
 xorg-server
 xorg-server-devel
-xorg-server-xdmx
 xorg-server-xephyr
 xorg-server-xnest
 xorg-server-xvfb

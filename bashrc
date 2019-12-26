@@ -32,6 +32,16 @@ alias neuron_kodi_restart='neuron_systemctl restart kodi'
 alias neuron_kodi_stop='neuron_systemctl stop kodi'
 alias neuron_update='ssh root@neuron pacman -Syu'
 
+floron_mount() {
+  mkdir -p ~/Floron
+  sshfs fred@floron:/home/fred ~/Floron
+}
+
+floron_unmount() {
+  fusermount -u ~/Floron
+  rmdir ~/Floron
+}
+
 neuron_mount() {
   mkdir -p ~/NeuronFTP
   ADDR="$(pw get Neuron:Common "%U:%P")@neuron://mnt"
