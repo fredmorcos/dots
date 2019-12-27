@@ -524,7 +524,7 @@
 
 (use-package org-bullets
   :config
-  (setq org-bullets-bullet-list (seq-take org-bullets-bullet-list 2))
+  (setq org-bullets-bullet-list '("●" "○"))
 
   :hook
   (org-mode . org-bullets-mode))
