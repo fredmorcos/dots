@@ -770,6 +770,23 @@
 
 (use-package yasnippet-snippets)
 
+(use-package helpful
+  :after counsel
+
+  :bind
+  ([remap describe-variable] . helpful-variable)
+  ([remap describe-function] . helpful-function)
+  ([remap describe-key]      . helpful-key)
+  ([remap describe-mode]     . helpful-mode)
+
+  :custom
+  (counsel-describe-variable-function #'helpful-variable)
+  (counsel-describe-function-function #'helpful-function))
+
+(use-package unfill
+  :bind
+  ([remap fill-paragraph] . unfill-toggle))
+
 (use-package hledger-mode
   :mode
   "\\.journal\\'"
@@ -900,6 +917,7 @@
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
   (lsp-rust-analyzer-inlay-hints-mode t)
+  (lsp-rust-analyzer-server-display-inlay-hints t)
 
   (lsp-auto-guess-root t)
 
