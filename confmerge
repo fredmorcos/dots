@@ -144,7 +144,6 @@ cmerge archlinux/makepkg.conf              /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf           /etc/mkinitcpio.conf
 cmerge archlinux/pacman.conf               /etc/pacman.conf
 
-cmerge fstab                               /etc/fstab
 cmerge hostname                            /etc/hostname
 cmerge hosts                               /etc/hosts
 cmerge locale.conf                         /etc/locale.conf
