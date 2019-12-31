@@ -32,6 +32,21 @@ alias neuron_kodi_restart='neuron_systemctl restart kodi'
 alias neuron_kodi_stop='neuron_systemctl stop kodi'
 alias neuron_update='ssh root@neuron pacman -Syu'
 
+data_mount() {
+  sudo cryptsetup open /dev/disk/by-label/EncryptedData data
+  mkdir -p ~/Data
+  if [ "$1" == "check" ]; then
+    sudo btrfs check -p /dev/mapper/data
+  fi
+  sudo mount -o defaults,rw,relatime,compress=zstd /dev/mapper/data ~/Data
+}
+
+data_unmount() {
+  sudo umount ~/Data
+  rmdir ~/Data
+  sudo cryptsetup close data
+}
+
 floron_mount() {
   mkdir -p ~/Floron
   sshfs fred@floron:/home/fred ~/Floron

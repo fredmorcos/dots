@@ -1,3 +1,4 @@
+acpid
 amd-ucode
 amdvlk
 aspell-en
@@ -84,6 +85,7 @@ nnn
 nordvpn-bin
 ntfs-3g
 numix-gtk-theme-git
+nvme-cli
 odt2txt
 opencl-mesa
 openpyn-nordvpn
@@ -96,6 +98,7 @@ pavucontrol
 picard
 pkgconf
 powertop
+progress
 pstoedit
 psutils
 pulseaudio

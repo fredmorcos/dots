@@ -918,6 +918,7 @@
   (lsp-rust-wait-to-build 0.1)
   (lsp-rust-analyzer-inlay-hints-mode t)
   (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-rust-show-hover-context t)
 
   (lsp-auto-guess-root t)
 
