@@ -1,6 +1,5 @@
 acpid
 amd-ucode
-amdvlk
 aspell-en
 atool
 autoconf
@@ -51,7 +50,6 @@ iotop
 ispell
 kcov
 lhasa
-lib32-amdvlk
 lib32-libva-intel-driver
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
