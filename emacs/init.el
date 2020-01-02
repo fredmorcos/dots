@@ -451,12 +451,6 @@
       (byte-compile-file dst))
     (add-to-list 'load-path dst-dir))
 
-  :custom
-  (rust-analyzer-inlay-hints-mode t)
-
-  :commands
-  rust-analyzer-join-lines
-  rust-analyzer-extend-selection
 
   :hook
   (rust-mode . rust-analyzer-inlay-hints-mode))
@@ -916,9 +910,9 @@
   (lsp-rust-clippy-preference "on")
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
-  (lsp-rust-analyzer-inlay-hints-mode t)
-  (lsp-rust-analyzer-server-display-inlay-hints t)
   (lsp-rust-show-hover-context t)
+  (lsp-rust-racer-completion nil)
+  (lsp-rust-server 'rust-analyzer)
 
   (lsp-auto-guess-root t)
 
