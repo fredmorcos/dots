@@ -1,5 +1,5 @@
 title	Arch Linux
-linux	/vmlinuz-linux
+linux	/vmlinuz-linux-zen
 initrd	/amd-ucode.img
-initrd	/initramfs-linux.img
+initrd	/initramfs-linux-zen.img
 options	rootflags=rw add_efi_memmap quiet nowatchdog nmi_watchdog=0 ipv6.disable=1 mitigations=off libahci.ignore_sss=1
