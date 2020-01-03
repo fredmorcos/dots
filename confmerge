@@ -141,6 +141,7 @@ cmerge systemd/system.conf                 /etc/systemd/system.conf
 cmerge systemd/boot-override.conf          /etc/systemd/system/boot.mount.d/override.conf
 
 cmerge default.pa                          /etc/pulse/default.pa
+cmerge lm_sensors                          /etc/conf.d/lm_sensors
 
 cmerge archlinux/makepkg.conf              /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf           /etc/mkinitcpio.conf

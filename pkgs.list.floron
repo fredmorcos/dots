@@ -28,7 +28,7 @@ badvpn
 base
 bash-completion
 bat
-bbswitch
+bbswitch-dkms
 beets
 bin2iso
 bison
@@ -110,6 +110,8 @@ espeak-ng
 evince
 exa
 exfat-utils
+ext4magic
+extundelete
 f2fs-tools
 fcrackzip
 fd
@@ -191,6 +193,7 @@ intel-media-driver
 intel-ucode
 iotop
 ipset
+irqbalance
 ispc
 ispell
 isync
@@ -240,6 +243,8 @@ libwmf
 lightdm-gtk-greeter
 linux-firmware
 linux-headers
+linux-zen
+linux-zen-headers
 live-media
 lld
 lldb
@@ -256,7 +261,6 @@ lzop
 m17n-lib
 mailutils
 mairix
-make
 man-pages
 marisa
 masscan
@@ -329,7 +333,6 @@ par2cmdline
 parallel
 pass
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
@@ -433,6 +436,7 @@ sdl_image
 seahorse
 shadowsocks
 shairplay
+shake
 shellcheck
 shfmt
 simplescreenrecorder
@@ -531,7 +535,7 @@ wavemon
 when
 whois
 whowatch
-wireguard-arch
+wireguard-dkms
 wireguard-tools
 words
 wtf
