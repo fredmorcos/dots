@@ -1,0 +1,11 @@
+[Match]
+Name=enp4s0
+
+[Network]
+DHCP=ipv4
+
+[DHCPv4]
+UseDNS=no
+
+[Link]
+MTUBytes=9000

@@ -139,6 +139,7 @@ cmerge loader/arch.conf                    /boot/loader/entries/arch.conf
 cmerge systemd/coredump.conf               /etc/systemd/coredump.conf
 cmerge systemd/system.conf                 /etc/systemd/system.conf
 cmerge systemd/boot-override.conf          /etc/systemd/system/boot.mount.d/override.conf
+cmerge systemd/20-wired.conf               /etc/systemd/network/20-wired.network
 
 cmerge default.pa                          /etc/pulse/default.pa
 cmerge lm_sensors                          /etc/conf.d/lm_sensors

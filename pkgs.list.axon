@@ -40,13 +40,16 @@ gst-plugins-bad
 gst-plugins-base
 gst-plugins-ugly
 gst-python
+hddtemp
 hdparm
 hexchat
 hledger-web
 htop
 hunspell-en_US
+i2c-tools
 i3lock
 iotop
+irqbalance
 ispell
 kcov
 lhasa
@@ -109,6 +112,7 @@ python-pylast
 python-xdg
 radeontool
 ranger
+read-edid
 redshift
 rink
 rsync
