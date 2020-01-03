@@ -28,7 +28,7 @@ badvpn
 base
 bash-completion
 bat
-bbswitch-dkms
+bbswitch
 beets
 bin2iso
 bison
@@ -243,8 +243,6 @@ libwmf
 lightdm-gtk-greeter
 linux-firmware
 linux-headers
-linux-zen
-linux-zen-headers
 live-media
 lld
 lldb
@@ -261,6 +259,7 @@ lzop
 m17n-lib
 mailutils
 mairix
+make
 man-pages
 marisa
 masscan
@@ -333,6 +332,7 @@ par2cmdline
 parallel
 pass
 pastebinit
+patch
 patchelf
 pavucontrol
 pbzip2
@@ -535,7 +535,7 @@ wavemon
 when
 whois
 whowatch
-wireguard-dkms
+wireguard-arch
 wireguard-tools
 words
 wtf
