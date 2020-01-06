@@ -3,6 +3,7 @@ Name=enp4s0
 
 [Network]
 DHCP=ipv4
+# DNSSEC=no
 
 [DHCPv4]
 UseDNS=no
