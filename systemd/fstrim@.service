@@ -1,14 +1,11 @@
 [Unit]
 Description=Discard unused blocks on a filesystem
 Documentation=man:fstrim(8)
-Requires=%f.mount
-After=%f.mount
 
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/fstrim --verbose %f
 ProtectSystem=strict
-ProtectHome=yes
 PrivateDevices=no
 PrivateNetwork=yes
 PrivateUsers=no
