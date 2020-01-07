@@ -35,7 +35,7 @@ FLORON="fred@floron:$HOME"
 DATA="$HOME/Data/Fred"
 LAPTOP="$DATA/Laptop"
 DESKTOP="$DATA/Desktop"
-EXTERNAL="/var/run/media/Fred/External"
+EXTERNAL="/var/run/media/fred/External"
 
 bk_cmd "$FLORON/GMail/"                  "$LAPTOP/GMail/"
 bk_cmd "$FLORON/Workspace/"              "$LAPTOP/Workspace/"
