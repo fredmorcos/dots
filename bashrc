@@ -45,6 +45,7 @@ data_unmount() {
   sudo umount ~/Data
   rmdir ~/Data
   sudo cryptsetup close data
+  sudo hdparm -Y /dev/disk/by-label/EncryptedData
 }
 
 floron_mount() {
