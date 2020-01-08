@@ -672,6 +672,7 @@
 
   :custom
   (company-backends '(company-capf company-keywords company-files))
+  (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
   (completion-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-selection-wrap-around t)
