@@ -33,6 +33,16 @@ alias n-up='ssh root@neuron pacman -Syu'
 alias kodi-restart='n-sysctl restart kodi'
 alias kodi-stop='n-sysctl stop kodi'
 
+wmount() {
+  mkdir -p ~/Windows
+  sudo mount /dev/nvme0n1p6 ~/Windows
+}
+
+wunmount() {
+  sudo umount ~/Windows
+  rmdir ~/Windows
+}
+
 dmount() {
   sudo cryptsetup open /dev/disk/by-label/EncryptedData data
   mkdir -p ~/Data
