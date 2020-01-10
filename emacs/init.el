@@ -451,7 +451,6 @@
       (byte-compile-file dst))
     (add-to-list 'load-path dst-dir))
 
-
   :hook
   (rust-mode . rust-analyzer-inlay-hints-mode))
 
@@ -672,7 +671,7 @@
 
   :custom
   (company-backends '(company-capf company-keywords company-files))
-  (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
+  (company-frontends '(company-echo-metadata-frontend)) ;; company-pseudo-tooltip-frontend
   (completion-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-selection-wrap-around t)
@@ -686,6 +685,42 @@
   (hledger-mode
    . (lambda ()
        (setq-local company-backends (cons hledger-company company-backends)))))
+
+(use-package font-lock+
+  :ensure nil
+
+  :init
+  (let* ((url (concat "https://raw.githubusercontent.com/emacsmirror/emacswiki.org"
+                      "/master/font-lock+.el"))
+         (dst-dir (concat user-emacs-directory "extra/"))
+         (dst (concat dst-dir "font-lock+.el"))
+         (dst-bc (concat dst-dir "font-lock+.elc")))
+    (when (not (file-readable-p dst-bc))
+      (make-directory dst-dir t)
+      (url-copy-file url dst t)
+      (byte-compile-file dst))
+    (add-to-list 'load-path dst-dir)))
+
+(use-package icons-in-terminal
+  :ensure nil
+
+  :init
+  (add-to-list 'load-path "/usr/share/icons-in-terminal/")
+  (require 'icons-in-terminal))
+
+(use-package all-the-icons
+  :commands
+  all-the-icons-faicon)
+
+(use-package company-box
+  :diminish
+
+  :custom
+  (company-box-show-single-candidate t)
+  (company-box-icons-alist 'company-box-icons-icons-in-terminal)
+
+  :hook
+  (company-mode . company-box-mode))
 
 (use-package company-quickhelp
   :pin melpa
