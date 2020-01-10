@@ -29,20 +29,20 @@ video_y=0
 
 [output]
 add_timestamp=true
-audio_codec=vorbis
+audio_codec=mp3
 audio_codec_av=aac
 audio_kbit_rate=128
 audio_options=
 container=mp4
 container_av=3g2
-file=/home/fred/cyka-blyatt.mp4
+file=/home/fred/lolwat.mp4
 profile=
 separate_files=true
 video_allow_frame_skipping=true
 video_codec=h264
 video_codec_av=alias_pix
 video_h264_crf=23
-video_h264_preset=1
+video_h264_preset=4
 video_kbit_rate=5000
 video_options=
 video_vp8_cpu_used=5
