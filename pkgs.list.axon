@@ -47,6 +47,7 @@ htop
 hunspell-en_US
 i2c-tools
 i3lock
+icons-in-terminal
 iotop
 irqbalance
 ispell
@@ -72,6 +73,7 @@ libwmf
 lightdm-gtk-greeter
 linux
 linux-firmware
+linux-headers
 linux-zen
 linux-zen-headers
 lld
@@ -211,3 +213,4 @@ xorg-xwud
 xss-lock
 yay-bin
 youtube-dl
+zfs-dkms

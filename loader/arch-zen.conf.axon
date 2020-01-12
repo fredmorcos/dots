@@ -1,4 +1,4 @@
-title	Arch Linux Zen
+title	Archlinux Zen
 linux	/vmlinuz-linux-zen
 initrd	/amd-ucode.img
 initrd	/initramfs-linux-zen.img

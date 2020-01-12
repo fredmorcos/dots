@@ -70,14 +70,14 @@ funmount() {
 }
 
 nmount() {
-  mkdir -p ~/NeuronFTP
+  mkdir -p ~/Neuron
   ADDR="$(pw get Neuron:Common "%U:%P")@neuron://mnt"
-  curlftpfs -o connect_timeout=10 "$ADDR" ~/NeuronFTP
+  curlftpfs -o connect_timeout=10 "$ADDR" ~/Neuron
 }
 
 nunmount() {
-  fusermount -u ~/NeuronFTP
-  rmdir ~/NeuronFTP
+  fusermount -u ~/Neuron
+  rmdir ~/Neuron
 }
 
 pmountssw() {

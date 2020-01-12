@@ -1,12 +1,18 @@
 [Match]
 Name=enp4s0
 
-[Network]
-DHCP=ipv4
+# [Network]
+# DHCP=ipv4
 # DNSSEC=no
 
-[DHCPv4]
-UseDNS=no
+# [DHCPv4]
+# UseDNS=no
+
+[Network]
+Address=192.168.0.105/24
+Gateway=192.168.0.1
+# DNS=https://doh.libredns.gr/ads
+# DNS=127.0.0.53
 
 [Link]
 MTUBytes=9000
