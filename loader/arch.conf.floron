@@ -1,4 +1,4 @@
-title	Arch Linux
+title	Archlinux
 linux	/vmlinuz-linux
 initrd	/intel-ucode.img
 initrd	/initramfs-linux.img
