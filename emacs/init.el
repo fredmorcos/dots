@@ -449,10 +449,7 @@
       (make-directory dst-dir t)
       (url-copy-file url dst t)
       (byte-compile-file dst))
-    (add-to-list 'load-path dst-dir))
-
-  :hook
-  (rust-mode . rust-analyzer-inlay-hints-mode))
+    (add-to-list 'load-path dst-dir)))
 
 (use-package paren
   :ensure nil
@@ -681,10 +678,7 @@
   (company-transformers '(company-sort-by-backend-importance))
 
   :hook
-  (prog-mode . company-mode)
-  (hledger-mode
-   . (lambda ()
-       (setq-local company-backends (cons hledger-company company-backends)))))
+  (prog-mode . company-mode))
 
 (use-package font-lock+
   :ensure nil
@@ -927,7 +921,6 @@
 
 (use-package lsp-mode
   :commands
-  lsp
   lsp-deferred
 
   :bind
@@ -954,11 +947,6 @@
 
   :hook
   ((c-mode rust-mode) . lsp-deferred))
-
-(use-package lsp-ivy
-  :commands
-  lsp-ivy-workspace-symbol
-  lsp-ivy-global-workspace-symbol)
 
 (use-package lsp-ui
   :commands
@@ -991,12 +979,7 @@
   (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
-(use-package company-lsp
-  :commands
-  company-lsp
-
-  :custom
-  (company-lsp-cache-candidates 'auto))
+(use-package company-lsp)
 
 (use-package indent-guide
   :pin melpa
