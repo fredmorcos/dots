@@ -129,6 +129,7 @@ foomatic-db-nonfree-ppds
 foremost
 fossil
 fprintd
+fuseiso
 fwupd
 fzf
 fzy
@@ -453,6 +454,7 @@ spike
 spirv-headers
 sqlitebrowser
 squashfs-tools
+sshfs
 strace
 stratis-cli
 stratisd
@@ -523,7 +525,7 @@ vim-spell-de
 vim-spell-en
 vim-spell-fr
 virglrenderer
-virtualbox
+virtualbox-ext-oracle
 vkd3d
 vulkan-intel
 vulkan-mesa-layer
