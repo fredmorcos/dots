@@ -1,0 +1,5 @@
+title	Archlinux Zen
+linux	/vmlinuz-linux-zen
+initrd	/intel-ucode.img
+initrd	/initramfs-linux-zen.img
+options	rootflags=rw add_efi_memmap nowatchdog nmi_watchdog=0 ipv6.disable=1 mitigations=off libahci.ignore_sss=1
