@@ -117,8 +117,11 @@ cmerge gtk/filechooser.ini                 ~/.config/gtk-2.0/gtkfilechooser.ini
 cmerge emacs/init.el                       ~/.config/emacs/init
 cmerge emacs/early-init.el                 ~/.config/emacs/early-init.el
 
-cmerge bashrc                              ~/.bashrc
-cmerge bash_profile                        ~/.bash_profile
+cmerge bash/rc                             ~/.bashrc
+cmerge bash/rc_graalvm                     ~/.bashrc_graalvm
+cmerge bash/profile                        ~/.bash_profile
+cmerge bash/aliases                        ~/.bash_aliases
+
 cmerge fonts.conf                          ~/.config/fontconfig/fonts.conf
 cmerge gitconfig                           ~/.gitconfig
 cmerge htoprc                              ~/.config/htop/htoprc

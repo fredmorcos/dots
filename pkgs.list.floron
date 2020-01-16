@@ -255,6 +255,7 @@ lockfile-progs
 logrotate
 lostfiles
 lrzip
+lsb-release
 lsof
 lxdm-gtk3
 lynx
@@ -406,7 +407,6 @@ python-tlsh
 python-virtualenv
 python-wikipedia
 python-zeroconf
-qt5-multimedia
 radamsa
 radvd
 ranger
@@ -500,6 +500,7 @@ ttf-fira-mono
 ttf-go-mono-git
 ttf-ibm-plex
 tup
+udevil
 udftools
 unace
 unicode-emoji
@@ -527,6 +528,7 @@ vim-spell-fr
 virglrenderer
 virtualbox-ext-oracle
 vkd3d
+vokoscreen
 vulkan-intel
 vulkan-mesa-layer
 vulkan-tools

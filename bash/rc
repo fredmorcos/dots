@@ -11,20 +11,10 @@ HISTSIZE=1000
 
 export PS1 HISTCONTROL HISTSIZE
 
-alias grep='grep --color'
-alias g='grep'
-alias ls='exa'
-alias ll='ls -lg --group-directories-first'
-alias la='ll -a'
-alias mv='mv -i'
-alias cp='cp -i'
-alias rm='rm -i'
-alias dired='emacs -nw .'
-alias ip='ip -c'
-alias fd='fd -iIH'
-alias bat='bat --theme GitHub'
-alias cat='bat'
-alias up='yay --devel -Syu'
+if [ -f ~/.bash_aliases ]; then
+  # shellcheck source=/home/fred/.bash_aliases
+  source ~/.bash_aliases
+fi
 
 alias n-sysctl='ssh root@neuron systemctl'
 alias n-reboot='n-sysctl reboot'
@@ -95,6 +85,15 @@ pmount() {
 punmount() {
   fusermount -u ~/PhoneFTP
   rmdir ~/PhoneFTP
+}
+
+enter_graalvm() {
+  if [ -f ~/.bashrc_graalvm ]; then
+    cd "$1" || exit
+    exec bash --rcfile ~/.bashrc_graalvm
+  else
+    echo "Error: Could not find ~/.bashrc_graalvm"
+  fi
 }
 
 alias vpn='/usr/bin/openpyn de -t 5 -f -m 40'
