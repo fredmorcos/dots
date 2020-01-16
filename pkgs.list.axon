@@ -71,7 +71,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libwmf
 lightdm-gtk-greeter
-linux
 linux-firmware
 linux-headers
 lld
@@ -80,6 +79,7 @@ llvm
 lrzip
 lsof
 lzop
+make
 mediainfo
 mesa-demos
 mesa-vdpau
@@ -98,6 +98,7 @@ openresolv
 p7zip
 pacman-contrib
 papirus-icon-theme
+patch
 pavucontrol
 picard
 pkgconf
