@@ -100,7 +100,6 @@ cmerge xfce4/xsettings.xml                 ~/.config/xfce4/xfconf/xfce-perchanne
 cmerge xfce4/terminalrrc                   ~/.config/xfce4/terminal/terminalrc
 
 cmerge autostart/redshift.desktop          ~/.config/autostart/redshift.desktop
-cmerge autostart/notifyd.desktop           ~/.config/autostart/notifyd.desktop
 cmerge autostart/xrgb.desktop              ~/.config/autostart/xrgb.desktop
 cmerge autostart/xnocaps.desktop           ~/.config/autostart/xnocaps.desktop
 
@@ -129,8 +128,6 @@ cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
 
 cmerge x11/dmrc                            ~/.dmrc
 cmerge x11/lightdm.conf                    /etc/lightdm/lightdm.conf
-cmerge x11/lightdm-override.conf           /etc/systemd/system/lightdm.service.d/override.conf
-cmerge x11/amdgpu.conf                     /etc/X11/xorg.conf.d/20-amdgpu.conf
 
 cmerge loader/loader.conf                  /boot/loader/loader.conf
 cmerge loader/arch.conf                    /boot/loader/entries/arch.conf
