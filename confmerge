@@ -131,7 +131,6 @@ cmerge x11/lightdm.conf                    /etc/lightdm/lightdm.conf
 
 cmerge loader/loader.conf                  /boot/loader/loader.conf
 cmerge loader/arch.conf                    /boot/loader/entries/arch.conf
-cmerge loader/arch-zen.conf                /boot/loader/entries/arch-zen.conf
 
 cmerge systemd/coredump.conf               /etc/systemd/coredump.conf
 cmerge systemd/system.conf                 /etc/systemd/system.conf

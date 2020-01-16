@@ -244,8 +244,6 @@ libwmf
 lightdm-gtk-greeter
 linux-firmware
 linux-headers
-linux-zen
-linux-zen-headers
 live-media
 lld
 lldb

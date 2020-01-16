@@ -74,8 +74,6 @@ lightdm-gtk-greeter
 linux
 linux-firmware
 linux-headers
-linux-zen
-linux-zen-headers
 lld
 lldb
 llvm
