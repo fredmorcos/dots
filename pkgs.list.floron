@@ -32,7 +32,6 @@ bbswitch-dkms
 beets
 bin2iso
 bison
-bitlbee
 bluez-cups
 bluez-hid2hci
 bluez-tools
@@ -230,7 +229,6 @@ libnsutils
 liboggz
 libopenraw
 libosinfo
-libquicktime
 libraw
 libsidplayfp
 libunrar
@@ -286,7 +284,6 @@ mtd-utils
 mtools
 muparser
 mutt
-mx
 mythes-de
 mythes-en
 mythes-fr
@@ -344,9 +341,6 @@ perf
 perl-image-exiftool
 perl-locale-gettext
 picard
-pidgin-hotkeys
-pidgin-libnotify
-pidgin-otr
 pigz
 pixiewps
 pkgconf
@@ -473,7 +467,6 @@ testdisk
 the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
-thunar-volman
 thunderbird
 tig
 time
@@ -608,7 +601,6 @@ yay-bin
 you-get
 youtube-dl
 z3
-zfs-dkms
 zile
 zssh
 zsync

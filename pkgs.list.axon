@@ -139,7 +139,6 @@ syncthing
 tensorflow-opt
 thunar-archive-plugin
 thunar-media-tags-plugin
-thunar-volman
 time
 tmux
 tor-browser
@@ -213,4 +212,3 @@ xorg-xwud
 xss-lock
 yay-bin
 youtube-dl
-zfs-dkms
