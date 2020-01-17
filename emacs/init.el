@@ -2,14 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;;; Enable init profiling
-;; (require 'profiler)
-;; (call-interactively #'profiler-start)
-;; (add-hook 'after-init-hook #'profiler-report)
-
-(run-with-idle-timer 5 t #'garbage-collect)
-(defconst fnh-alist-old file-name-handler-alist)
-
 (setq-default
  url-privacy-level 'high
  url-proxy-services '(("no_proxy" . "127.0.0.1")))
@@ -68,7 +60,7 @@
   (auto-save-list-file-prefix nil)
 
   :hook
-  (after-init . (lambda () (setq file-name-handler-alist fnh-alist-old)))
+  (after-init . (lambda () (setq file-name-handler-alist nil)))
   (after-init . (lambda () (message "Startup in %s" (emacs-init-time)))))
 
 (use-package faces
@@ -439,11 +431,11 @@
 (use-package rust-analyzer
   :ensure nil
 
-  ;; :commands
-  ;; rust-analyzer-inlay-hints-mode
-  ;; rust-analyzer-expand-macro
-  ;; rust-analyzer-join-lines
-  ;; rust-analyzer-extend-selection
+  :commands
+  rust-analyzer-inlay-hints-mode
+  rust-analyzer-expand-macro
+  rust-analyzer-join-lines
+  rust-analyzer-extend-selection
 
   :init
   (let* ((url (concat "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer"
@@ -455,7 +447,10 @@
       (make-directory dst-dir t)
       (url-copy-file url dst t)
       (byte-compile-file dst))
-    (add-to-list 'load-path dst-dir)))
+    (add-to-list 'load-path dst-dir))
+
+  :config
+  (require 'rust-analyzer))
 
 (use-package paren
   :ensure nil
@@ -649,7 +644,7 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package flycheck
-  :pin melpa
+  ;; :pin melpa
 
   :bind
   (:map flycheck-mode-map
@@ -669,7 +664,7 @@
   ((prog-mode z3-smt2-mode) . flycheck-mode))
 
 (use-package company
-  :pin melpa
+  ;; :pin melpa
   :diminish "Com"
 
   :custom
@@ -754,7 +749,7 @@
   (diff-hl-change ((t (:background "PowderBlue")))))
 
 (use-package symbol-overlay
-  :pin melpa
+  ;; :pin melpa
   :diminish
 
   :bind
@@ -888,8 +883,6 @@
                  (setq-local comment-fill-column 90)
                  (setq tab-width 4
                        fill-column 90)))
-  (rust-mode . rust-analyzer-inlay-hints-mode)
-  (rust-mode . (lambda () (require 'rust-analyzer)))
 
   :bind
   (:map rust-mode-map
@@ -995,7 +988,7 @@
 (use-package company-lsp)
 
 (use-package indent-guide
-  :pin melpa
+  ;; :pin melpa
 
   :hook
   (json-mode . indent-guide-mode)
