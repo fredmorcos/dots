@@ -2,4 +2,4 @@ title   Archlinux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options rootflags=rw add_efi_memmap nowatchdog nmi_watchdog=0 ipv6.disable=1 mitigations=off libahci.ignore_sss=1
+options rootflags=rw add_efi_memmap nmi_watchdog=0 mitigations=off ipv6.disable=1

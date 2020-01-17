@@ -891,6 +891,11 @@
   (rust-mode . rust-analyzer-inlay-hints-mode)
   (rust-mode . (lambda () (require 'rust-analyzer)))
 
+  :bind
+  (:map rust-mode-map
+        ("<f5>" . rust-analyzer-inlay-hints-mode)
+        ("<f6>" . rust-analyzer-expand-macro))
+
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
 

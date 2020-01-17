@@ -1,0 +1,3 @@
+# blacklist radeon
+
+options amdgpu noretry=0
