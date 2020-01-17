@@ -436,15 +436,21 @@
   :hook
   (prog-mode . eldoc-mode))
 
-(use-package ra-emacs-lsp
+(use-package rust-analyzer
   :ensure nil
+
+  ;; :commands
+  ;; rust-analyzer-inlay-hints-mode
+  ;; rust-analyzer-expand-macro
+  ;; rust-analyzer-join-lines
+  ;; rust-analyzer-extend-selection
 
   :init
   (let* ((url (concat "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer"
-                      "/master/editors/emacs/ra-emacs-lsp.el"))
+                      "/master/editors/emacs/rust-analyzer.el"))
          (dst-dir (concat user-emacs-directory "extra/"))
-         (dst (concat dst-dir "ra-emacs-lsp.el"))
-         (dst-bc (concat dst-dir "ra-emacs-lsp.elc")))
+         (dst (concat dst-dir "rust-analyzer.el"))
+         (dst-bc (concat dst-dir "rust-analyzer.elc")))
     (when (not (file-readable-p dst-bc))
       (make-directory dst-dir t)
       (url-copy-file url dst t)
@@ -882,6 +888,8 @@
                  (setq-local comment-fill-column 90)
                  (setq tab-width 4
                        fill-column 90)))
+  (rust-mode . rust-analyzer-inlay-hints-mode)
+  (rust-mode . (lambda () (require 'rust-analyzer)))
 
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))

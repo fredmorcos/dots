@@ -111,6 +111,7 @@ cmerge gtk/filechooser.ini                 ~/.config/gtk-2.0/gtkfilechooser.ini
 
 cmerge emacs/init.el                       ~/.config/emacs/init
 cmerge emacs/early-init.el                 ~/.config/emacs/early-init.el
+cmerge emacs/rust-analyzer.el              ~/.config/emacs/extra/rust-analyzer.el
 
 cmerge bash/rc                             ~/.bashrc
 cmerge bash/rc_graalvm                     ~/.bashrc_graalvm
