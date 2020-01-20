@@ -87,7 +87,7 @@ punmount() {
   rmdir ~/PhoneFTP
 }
 
-enter_graalvm() {
+enter-graalvm() {
   if [ -f ~/.bashrc_graalvm ]; then
     cd "$1" || exit
     exec bash --rcfile ~/.bashrc_graalvm
