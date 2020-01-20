@@ -39,6 +39,7 @@ gst-plugins-bad
 gst-plugins-base
 gst-plugins-ugly
 gst-python
+gvfs
 hddtemp
 hdparm
 hexchat
@@ -73,6 +74,7 @@ libwmf
 lightdm-gtk-greeter
 linux-firmware
 linux-headers
+linux-tools-meta
 lld
 lldb
 llvm
