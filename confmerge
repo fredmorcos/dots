@@ -160,26 +160,11 @@ cmerge modules/amdgpu.conf                 /etc/modprobe.d/amdgpu.conf
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
     pkgs_tmp_file=$(mktemp)
-    pacman -Qtte | awk '{ print $1 }' > "$pkgs_tmp_file"
+    pacman -Qtte | awk '{ print $1 }' | sort > "$pkgs_tmp_file"
     cmerge "pkgs.list" "$pkgs_tmp_file"
 
-    pkgs_install=""
-
-    while read -r pkg ; do
-      if ! grep "$pkg" "$pkgs_tmp_file" 1>/dev/null 2>&1 ; then
-        echo "Install: $pkg"
-        pkgs_install="$pkg $pkgs_install"
-      fi
-    done < "pkgs.list.$HNAME"
-
-    pkgs_remove=""
-
-    while read -r pkg ; do
-      if ! grep "$pkg" "pkgs.list.$HNAME" 1>/dev/null 2>&1 ; then
-        echo "Remove: $pkg"
-        pkgs_remove="$pkg $pkgs_remove"
-      fi
-    done < "$pkgs_tmp_file"
+    pkgs_install=$(comm --check-order -2 -3 "pkgs.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
+    pkgs_remove=$(comm --check-order -1 -3 "pkgs.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
 
     rm "$pkgs_tmp_file"
 

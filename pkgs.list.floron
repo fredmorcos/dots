@@ -1,7 +1,7 @@
 abook
 acpi
-acpi_call
 acpica
+acpi_call
 acpid
 adobe-source-sans-pro-fonts
 adobe-source-serif-pro-fonts
@@ -60,15 +60,12 @@ chromium
 chrpath
 clazy
 clinfo
-cmake
-cobalt
 coin-or-mp
 colordiff
 colorgcc
 compsize
 corkscrew
 cpio
-cppcheck
 cpupower
 crda
 ctags
@@ -131,7 +128,6 @@ foomatic-db-engine
 foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foremost
-fossil
 fprintd
 fuseiso
 fwupd
@@ -139,9 +135,9 @@ fzf
 fzy
 gifski
 git-crypt
+gitprompt-rs
 git-repair
 git-review
-gitprompt-rs
 glyr
 gnome-calculator
 gnome-dictionary
@@ -160,8 +156,8 @@ gst-editing-services
 gst-libav
 gst-plugins-ugly
 gst-python
-gst-transcoder
 gstreamer-vaapi
+gst-transcoder
 gtest
 gtk-engine-murrine
 gucharmap
@@ -239,11 +235,11 @@ libraw
 libsidplayfp
 libtraceevent
 libunrar
+libva1-intel-driver
 libva-intel-driver
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
-libva1-intel-driver
 libvdpau-va-gl
 libwmf
 lightdm-gtk-greeter
@@ -322,8 +318,8 @@ openmp
 openpyn-nordvpn
 oprofile
 optipng
-os-prober
 osinfo-db-tools
+os-prober
 ostree
 ovmf
 p7zip
@@ -356,7 +352,6 @@ pkgfile
 plantri
 ponymix
 poppler-data
-postgresql
 powertop
 privoxy
 proxytunnel
@@ -428,7 +423,6 @@ rofi
 rpmextract
 rust-analyzer-git
 rustup
-s-nail
 sassc
 sbsigntools
 screen
@@ -446,6 +440,7 @@ skim
 sleuthkit
 slimmy-xfwm-theme-git
 smartmontools
+s-nail
 snapper
 socat
 soundconverter
@@ -454,12 +449,9 @@ sparsehash
 speech-dispatcher
 spike
 spirv-headers
-sqlitebrowser
 squashfs-tools
 sshfs
 strace
-stratis-cli
-stratisd
 stress
 stunnel
 subdl
