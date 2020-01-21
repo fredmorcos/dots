@@ -37,7 +37,6 @@ bluez-hid2hci
 bluez-tools
 bluez-utils
 bolt
-bpf
 bs1770gain
 bsdiff
 bully
@@ -52,7 +51,6 @@ ccache
 cdrdao
 cdrtools
 cgdb
-cgroup_event_listener
 chafa
 checksec
 cheese
@@ -66,7 +64,6 @@ colorgcc
 compsize
 corkscrew
 cpio
-cpupower
 crda
 ctags
 cuetools
@@ -178,7 +175,6 @@ hunspell-de
 hunspell-en_US
 hunspell-fr
 hwdetect
-hyperv
 hyphen-de
 hyphen-en
 hyphen-fr
@@ -233,7 +229,6 @@ libopenraw
 libosinfo
 libraw
 libsidplayfp
-libtraceevent
 libunrar
 libva1-intel-driver
 libva-intel-driver
@@ -245,6 +240,7 @@ libwmf
 lightdm-gtk-greeter
 linux-firmware
 linux-headers
+linux-tools-meta
 live-media
 lld
 lldb
@@ -340,7 +336,6 @@ pavucontrol
 pbzip2
 pdfarranger
 pdfcrack
-perf
 perl-image-exiftool
 perl-locale-gettext
 picard
@@ -474,7 +469,6 @@ tinc
 tinyemu
 tldr
 tlsh
-tmon
 tmux
 toastify
 tokei
@@ -494,7 +488,6 @@ ttf-fira-mono
 ttf-go-mono-git
 ttf-ibm-plex
 tup
-turbostat
 udevil
 udftools
 unace
@@ -506,7 +499,6 @@ unrtf
 unshield
 upx
 uriparser
-usbip
 usbutils
 usleep
 uthash
@@ -540,7 +532,6 @@ wmctrl
 words
 wtf
 x11-ssh-askpass
-x86_energy_perf_policy
 xcape
 xcompmgr
 xdelta3
