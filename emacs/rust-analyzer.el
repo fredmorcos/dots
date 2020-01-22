@@ -210,9 +210,9 @@
 ;; inlay hints
 (defun rust-analyzer--update-inlay-hints (buffer)
   (if (and (rust-analyzer--initialized?) (eq buffer (current-buffer)))
-    (lsp-send-request-async
-     (lsp-make-request "rust-analyzer/inlayHints"
-                       (list :textDocument (lsp--text-document-identifier)))
+    (lsp-request-async
+     "rust-analyzer/inlayHints"
+     (list :textDocument (lsp--text-document-identifier))
      (lambda (res)
        (remove-overlays (point-min) (point-max) 'rust-analyzer--inlay-hint t)
        (dolist (hint res)
@@ -221,9 +221,16 @@
                  (overlay (make-overlay beg end)))
            (overlay-put overlay 'rust-analyzer--inlay-hint t)
            (overlay-put overlay 'evaporate t)
-           (overlay-put overlay 'after-string (propertize (concat ": " label)
-                                                          'font-lock-face '(:background "old lace" :foreground "darkgray" :box t))))))
-     'tick))
+           (cond
+            ((string= kind "TypeHint")
+             (overlay-put overlay 'after-string (propertize (concat ": " label)
+                                                            'font-lock-face '(:background "old lace" :foreground "darkgray" :box t))))
+            ((string= kind "ParameterHint")
+             (overlay-put overlay 'before-string (propertize (concat label ": ")
+                                                            'font-lock-face '(:background "old lace" :foreground "darkgray" :box t))))
+            )
+           )))
+     :mode 'tick))
   nil)
 
 (defvar-local rust-analyzer--inlay-hints-timer nil)

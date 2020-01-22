@@ -36,10 +36,14 @@
   :init
   (defalias 'yes-or-no-p 'y-or-n-p))
 
+(defconst emacs-extra-dir (concat user-emacs-directory "extra/"))
+(make-directory emacs-extra-dir t)
+
 (use-package startup
   :ensure nil
 
   :init
+  (add-to-list 'load-path emacs-extra-dir)
   (defun replace-escapes ()
     (interactive)
     (goto-char (point-min))
@@ -440,14 +444,11 @@
   :init
   (let* ((url (concat "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer"
                       "/master/editors/emacs/rust-analyzer.el"))
-         (dst-dir (concat user-emacs-directory "extra/"))
-         (dst (concat dst-dir "rust-analyzer.el"))
-         (dst-bc (concat dst-dir "rust-analyzer.elc")))
+         (dst (concat emacs-extra-dir "rust-analyzer.el"))
+         (dst-bc (concat emacs-extra-dir "rust-analyzer.elc")))
     (when (not (file-readable-p dst-bc))
-      (make-directory dst-dir t)
       (url-copy-file url dst t)
-      (byte-compile-file dst))
-    (add-to-list 'load-path dst-dir))
+      (byte-compile-file dst)))
 
   :config
   (require 'rust-analyzer))
@@ -687,20 +688,22 @@
   :init
   (let* ((url (concat "https://raw.githubusercontent.com/emacsmirror/emacswiki.org"
                       "/master/font-lock+.el"))
-         (dst-dir (concat user-emacs-directory "extra/"))
-         (dst (concat dst-dir "font-lock+.el"))
-         (dst-bc (concat dst-dir "font-lock+.elc")))
+         (dst (concat emacs-extra-dir "font-lock+.el"))
+         (dst-bc (concat emacs-extra-dir "font-lock+.elc")))
     (when (not (file-readable-p dst-bc))
-      (make-directory dst-dir t)
       (url-copy-file url dst t)
-      (byte-compile-file dst))
-    (add-to-list 'load-path dst-dir)))
+      (byte-compile-file dst)))
+
+  :config
+  (require 'font-lock+))
 
 (use-package icons-in-terminal
   :ensure nil
 
   :init
   (add-to-list 'load-path "/usr/share/icons-in-terminal/")
+
+  :config
   (require 'icons-in-terminal))
 
 (use-package all-the-icons
@@ -853,14 +856,14 @@
   :init
   (let* ((url (concat "https://raw.githubusercontent.com/llvm/llvm-project"
                       "/master/llvm/utils/emacs/llvm-mode.el"))
-         (dst-dir (concat user-emacs-directory "extra/"))
-         (dst (concat dst-dir "llvm-mode.el"))
-         (dst-bc (concat dst-dir "llvm-mode.elc")))
+         (dst (concat emacs-extra-dir "llvm-mode.el"))
+         (dst-bc (concat emacs-extra-dir "llvm-mode.elc")))
     (when (not (file-readable-p dst-bc))
-      (make-directory dst-dir t)
       (url-copy-file url dst t)
-      (byte-compile-file dst))
-    (add-to-list 'load-path dst-dir))
+      (byte-compile-file dst)))
+
+  :config
+  (require 'llvm-mode)
 
   :hook
   (llvm-mode . (lambda () (toggle-truncate-lines t))))
