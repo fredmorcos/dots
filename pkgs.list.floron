@@ -143,7 +143,6 @@ gnome-disk-utility
 gnome-icon-theme
 gnome-icon-theme-extras
 gnu-efi-libs
-gobject-introspection
 gogglesmm
 gpart
 gparted
@@ -361,6 +360,7 @@ purple-plugin-pack
 purple-skypeweb
 pwgen
 python-argcomplete
+python-beautifulsoup4
 python-brotlipy
 python-cairocffi
 python-cjkwrap
@@ -370,7 +370,6 @@ python-discid
 python-distutils-extra
 python-etesync
 python-evdev
-python-fxa
 python-genshi
 python-httplib2
 python-jsbeautifier
@@ -397,8 +396,6 @@ python-requests-oauthlib
 python-setproctitle
 python-tlsh
 python-virtualenv
-python-wikipedia
-python-zeroconf
 radamsa
 radvd
 ranger
