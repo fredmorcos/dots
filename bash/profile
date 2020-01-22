@@ -2,5 +2,8 @@
 # ~/.bash_profile
 #
 
+# shellcheck source=/home/fred/.profile
 [[ -f ~/.profile ]] && . ~/.profile
+
+# shellcheck source=/home/fred/.bashrc
 [[ -f ~/.bashrc ]] && . ~/.bashrc

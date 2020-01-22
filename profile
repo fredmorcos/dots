@@ -34,8 +34,10 @@ PATH="$HOME/.cargo/bin:$PATH"
 RUSTC_WRAPPER=sccache
 RUSTFLAGS="-C link-arg=-fuse-ld=lld"
 
+export RUSTC_WRAPPER RUSTFLAGS
+
 # Editors
 EDITOR='emacs -nw'
 GIT_EDITOR=$EDITOR
 
-export PATH EDITOR GIT_EDITOR RUSTC_WRAPPER
+export PATH EDITOR GIT_EDITOR

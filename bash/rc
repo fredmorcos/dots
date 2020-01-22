@@ -5,16 +5,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
+[[ -f /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
+
 PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 HISTCONTROL=ignoredups
 HISTSIZE=1000
 
 export PS1 HISTCONTROL HISTSIZE
 
-if [ -f ~/.bash_aliases ]; then
-  # shellcheck source=/home/fred/.bash_aliases
-  source ~/.bash_aliases
-fi
+# shellcheck source=/home/fred/.bash_aliases
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
 alias n-sysctl='ssh root@neuron systemctl'
 alias n-reboot='n-sysctl reboot'
