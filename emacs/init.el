@@ -994,10 +994,6 @@
 
 (use-package company-lsp)
 
-(use-package dap-mode
-  :hook
-  (lsp-mode . (lambda () (dap-mode) (dap-ui-mode))))
-
 (use-package indent-guide
   :hook
   (json-mode . indent-guide-mode)
