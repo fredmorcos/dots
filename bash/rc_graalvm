@@ -1,10 +1,12 @@
+#
+# ~/.bashrc_graalvm
+#
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ -f ~/.bash_aliases ]; then
-  # shellcheck source=/home/fred/.bash_aliases
-  source ~/.bash_aliases
-fi
+# shellcheck source=/home/fred/.bashrc_extras
+[[ -f ~/.bashrc_extras ]] && . ~/.bashrc_extras
 
 GRAALVM_HOME="$(pwd)"
 PS1="\[\e[7;34m\]\w\[\e[0m\] (\[\e[32m\]$(basename "$GRAALVM_HOME")\[\e[0m\]) >  "

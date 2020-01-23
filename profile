@@ -1,7 +1,7 @@
 # User-related
 umask 077
 
-export AMD_DEBUG="nongg nodma"
+# export AMD_DEBUG="nongg nodma"
 export RADV_PERFTEST="aco"
 
 # Qt

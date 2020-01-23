@@ -5,24 +5,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
-[[ -f /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
+export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
-PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
-HISTCONTROL=ignoredups
-HISTSIZE=1000
+# shellcheck source=/home/fred/.bashrc_extras
+[[ -f ~/.bashrc_extras ]] && . ~/.bashrc_extras
 
-export PS1 HISTCONTROL HISTSIZE
-
-# shellcheck source=/home/fred/.bash_aliases
-[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
-
-alias n-sysctl='ssh root@neuron systemctl'
-alias n-reboot='n-sysctl reboot'
-alias n-poweroff='n-sysctl poweroff'
-alias n-up='ssh root@neuron pacman -Syu'
-alias kodi-restart='n-sysctl restart kodi'
-alias kodi-stop='n-sysctl stop kodi'
+alias nsysctl='ssh root@neuron systemctl'
+alias nreboot='n-sysctl reboot'
+alias npoweroff='n-sysctl poweroff'
+alias nup='ssh root@neuron pacman -Syu'
+alias krestart='n-sysctl restart kodi'
+alias kstop='n-sysctl stop kodi'
 
 wmount() {
   mkdir -p ~/Windows
@@ -101,8 +94,6 @@ alias vpn='/usr/bin/openpyn de -t 5 -f -m 40'
 alias vpn-p2p='vpn --p2p'
 alias vpn-kill='sudo /usr/bin/openpyn -x'
 
-alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
-
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
 DLSUB_CMD="$DLSUB_CMD $(pw get OpenSubtitles " --username %U --password %P")"
 # shellcheck disable=SC2139
@@ -116,17 +107,3 @@ dirdlsub() {
     echo "-----------------------------------------";
   done
 }
-
-gitall() {
-  for i in *; do
-    if [ -e "$i/.git" ] || [ -d "$i/.git" ]; then
-      cd "$i" || exit
-      echo ">>> git $*: $i"
-      git "$@"
-      cd .. || exit
-    fi
-  done
-}
-
-alias gitstatus='gitall status -s'
-alias gitpp='gitall pull -q && gitall push -q'

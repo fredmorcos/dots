@@ -1,0 +1,44 @@
+#
+# ~/.bash_settings
+#
+
+[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
+[[ -f /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
+
+HISTCONTROL=ignoredups
+HISTSIZE=1000
+
+export HISTCONTROL HISTSIZE
+
+alias grep='grep --color'
+alias g='grep'
+alias ls='exa'
+alias ll='ls -lg --group-directories-first'
+alias la='ll -a'
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
+alias dired='emacs -nw .'
+alias ip='ip -c'
+alias fd='fd -iIH'
+alias bat='bat --theme GitHub'
+alias cat='bat'
+alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
+alias up='yay --devel -Syu'
+alias pac="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --needed"
+alias aur="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
+alias pacremove="yay -Qeq | fzf -m --preview 'pacman -Qi {1}' | xargs -ro pacman -Rcsn"
+
+gitall() {
+  for i in *; do
+    if [ -e "$i/.git" ] || [ -d "$i/.git" ]; then
+      cd "$i" || exit
+      echo ">>> git $*: $i"
+      git "$@"
+      cd .. || exit
+    fi
+  done
+}
+
+alias gitstatus='gitall status -s'
+alias gitpp='gitall pull -q && gitall push -q'

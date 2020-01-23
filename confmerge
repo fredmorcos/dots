@@ -115,8 +115,8 @@ cmerge emacs/rust-analyzer.el              ~/.config/emacs/extra/rust-analyzer.e
 
 cmerge bash/rc                             ~/.bashrc
 cmerge bash/rc_graalvm                     ~/.bashrc_graalvm
+cmerge bash/rc_extras                      ~/.bashrc_extras
 cmerge bash/profile                        ~/.bash_profile
-cmerge bash/aliases                        ~/.bash_aliases
 
 cmerge fonts.conf                          ~/.config/fontconfig/fonts.conf
 cmerge gitconfig                           ~/.gitconfig
