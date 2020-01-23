@@ -645,8 +645,6 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package flycheck
-  ;; :pin melpa
-
   :bind
   (:map flycheck-mode-map
         ("M-n" . flycheck-next-error)
@@ -665,7 +663,6 @@
   ((prog-mode z3-smt2-mode) . flycheck-mode))
 
 (use-package company
-  ;; :pin melpa
   :diminish "Com"
 
   :custom
@@ -678,6 +675,7 @@
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
   (company-transformers '(company-sort-by-backend-importance))
+  (company-idle-delay 0.1)
 
   :hook
   (prog-mode . company-mode))
@@ -720,19 +718,17 @@
   :hook
   (company-mode . company-box-mode))
 
-(use-package company-quickhelp
-  :pin melpa
+;; (use-package company-quickhelp
+;;   :hook
+;;   (company-mode . company-quickhelp-mode)
 
-  :hook
-  (company-mode . company-quickhelp-mode)
+;;   :bind
+;;   (:map company-active-map
+;;         ("C-c h" . company-quickhelp-manual-begin))
 
-  :custom
-  (company-quickhelp-use-propertized-text t)
-  (company-quickhelp-delay nil)
-
-  :bind
-  (:map company-active-map
-        ("C-c h" . company-quickhelp-manual-begin)))
+;;   :custom
+;;   (company-quickhelp-use-propertized-text t)
+;;   (company-quickhelp-delay nil))
 
 (use-package diff-hl
   :custom
@@ -752,7 +748,6 @@
   (diff-hl-change ((t (:background "PowderBlue")))))
 
 (use-package symbol-overlay
-  ;; :pin melpa
   :diminish
 
   :bind
@@ -935,21 +930,20 @@
   :bind
   (:map lsp-mode-map
         ("C-c f" . lsp-format-buffer)
-        ("C-c r" . lsp-rename))
+        ("C-c r" . lsp-rename)
+        ("C-c t" . lsp-describe-thing-at-point))
 
   :custom
+  (lsp-idle-delay 0.1)
+  (lsp-prefer-flymake nil)
   (lsp-file-watch-threshold 100000)
 
-  (lsp-prefer-flymake nil)
-  (lsp-document-highlight-delay 0.1)
-
+  (lsp-rust-full-docs t)
+  (lsp-rust-wait-to-build 0.1)
+  (lsp-rust-racer-completion nil)
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
   (lsp-rust-clippy-preference "on")
-  (lsp-rust-full-docs t)
-  (lsp-rust-wait-to-build 0.1)
-  (lsp-rust-show-hover-context t)
-  (lsp-rust-racer-completion nil)
   (lsp-rust-server 'rust-analyzer)
 
   (lsp-auto-guess-root t)
@@ -961,20 +955,30 @@
   :commands
   lsp-ui-mode
 
+  :bind
+  (:map lsp-mode-map
+        ("M-." . lsp-ui-peek-find-definitions)
+        ("M-?" . lsp-ui-peek-find-references)
+        ("C-c h" . lsp-ui-doc-glance))
+
   :custom
-  (lsp-ui-sideline-show-symbol nil)
-  (lsp-ui-sideline-delay 0.1)
-  (lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-sideline-update-mode 'line)
-  (lsp-ui-peek-always-show t)
   (lsp-ui-flycheck-enable t)
   (lsp-ui-flycheck-list-mode t)
+
+  (lsp-ui-peek-always-show t)
+  (lsp-ui-peek-show-directory nil)
+
   (lsp-ui-doc-enable t)
-  (lsp-ui-doc-delay 0.1)
   (lsp-ui-doc-header t)
   (lsp-ui-doc-include-signature t)
-  (lsp-ui-doc-enable nil)
+  (lsp-ui-doc-delay 0.5)
   (lsp-ui-doc-border "black")
+  (lsp-ui-doc-alignment 'window)
+
+  (lsp-ui-sideline-delay 0.1)
+  (lsp-ui-sideline-update-mode 'line)
+  (lsp-ui-sideline-ignore-duplicate t)
+  (lsp-ui-sideline-show-hover t)
 
   :custom-face
   (lsp-lens-face ((t (:inherit shadow))))
@@ -982,7 +986,7 @@
   (lsp-ui-doc-background ((t (:background "Gray95"))))
   (lsp-ui-doc-header ((t (:background "Pale Turquoise"))))
   (lsp-ui-doc-border ((t (:background "Gray70"))))
-  (lsp-ui-sideline-code-action ((t (:foreground "Tan"))))
+  (lsp-ui-sideline-code-action ((t (:foreground "Sienna"))))
   (lsp-ui-sideline-global ((t (:foreground "Gray70"))))
   (lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
   (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
@@ -990,9 +994,11 @@
 
 (use-package company-lsp)
 
-(use-package indent-guide
-  ;; :pin melpa
+(use-package dap-mode
+  :hook
+  (lsp-mode . (lambda () (dap-mode) (dap-ui-mode))))
 
+(use-package indent-guide
   :hook
   (json-mode . indent-guide-mode)
 
