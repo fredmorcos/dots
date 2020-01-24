@@ -59,6 +59,7 @@ chromium
 chrpath
 clazy
 clinfo
+cmake
 coin-or-mp
 colordiff
 colorgcc
@@ -415,10 +416,12 @@ ripgrep
 rlwrap
 rofi
 rpmextract
+rtirq
 rust-analyzer-git
 rustup
 sassc
 sbsigntools
+schedtool
 screen
 screenfetch
 sdl2_gfx

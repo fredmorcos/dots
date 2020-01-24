@@ -1003,7 +1003,16 @@
 
 (use-package vterm
   :bind
-  ("<f6>" . vterm-other-window))
+  (:map vterm-mode-map
+        ("<f7>" . vterm-copy-mode)))
+
+(use-package shell-pop
+  :bind
+  ("<f6>" . shell-pop)
+
+  :custom
+  (shell-pop-shell-type '("vterm" "*vterm*" #'vterm))
+  (shell-pop-universal-key "<f6>"))
 
 (provide 'init)
 ;;; init ends here
