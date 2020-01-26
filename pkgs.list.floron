@@ -160,6 +160,7 @@ gtest
 gtk-engine-murrine
 gucharmap
 gumbo-parser
+gvfs
 hashcat-utils
 haveged
 hcxtools
