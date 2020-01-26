@@ -12,6 +12,7 @@ bison
 bs1770gain
 ccache
 clinfo
+cmus
 compsize
 cpio
 curlftpfs
@@ -33,7 +34,6 @@ fzf
 gdb
 gnome-calculator
 gnome-disk-utility
-gogglesmm
 gst-libav
 gst-plugins-bad
 gst-plugins-base
@@ -63,7 +63,10 @@ lib32-simplescreenrecorder
 lib32-vkd3d
 lib32-vulkan-radeon
 lib32-vulkan-validation-layers
+libao
 libheif
+libmad
+libmp4v2
 libmythes
 libraw
 libva-mesa-driver
