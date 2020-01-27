@@ -3,8 +3,6 @@ acpi
 acpica
 acpi_call
 acpid
-adobe-source-sans-pro-fonts
-adobe-source-serif-pro-fonts
 afl-utils
 afpfs-ng
 android-tools
@@ -38,7 +36,6 @@ bluez-tools
 bluez-utils
 bolt
 bonnie++
-broot
 bs1770gain
 bsdiff
 bully
@@ -67,6 +64,7 @@ chrpath
 clazy
 clinfo
 cmake
+cmus
 coin-or-mp
 colordiff
 colorgcc
@@ -149,10 +147,8 @@ glyr
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
-gnome-icon-theme
-gnome-icon-theme-extras
+gnome-icon-theme-symbolic
 gnu-efi-libs
-gogglesmm
 gpart
 gparted
 gperf
@@ -233,6 +229,7 @@ libiscsi
 libisoburn
 libmaa
 libmirage
+libmp4v2
 libmythes
 libnfs
 libnsutils
@@ -317,6 +314,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
 numix-gtk-theme-git
+nvme-cli
 odt2txt
 ogmtools
 openbsd-netcat
@@ -326,6 +324,7 @@ openmp
 openpyn-nordvpn
 oprofile
 optipng
+opusfile
 osinfo-db-tools
 os-prober
 ostree
@@ -497,9 +496,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
-ttf-fira-mono
 ttf-go-mono-git
-ttf-ibm-plex
 tup
 udevil
 udftools
@@ -529,7 +526,6 @@ vim-spell-fr
 virglrenderer
 virtualbox-ext-oracle
 vkd3d
-vokoscreen
 vulkan-intel
 vulkan-mesa-layer
 vulkan-tools
