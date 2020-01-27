@@ -37,6 +37,7 @@ bluez-hid2hci
 bluez-tools
 bluez-utils
 bolt
+bonnie++
 broot
 bs1770gain
 bsdiff
@@ -46,8 +47,14 @@ cabextract
 cadaver
 calcurse
 capnproto
+cargo-audit
+cargo-crev
+cargo-fuzz
+cargo-outdated
+cargo-tree
 catdoc
 catimg
+cbindgen
 ccache
 cdrdao
 cdrtools
@@ -117,6 +124,7 @@ fcrackzip
 fd
 fdupes
 file-roller
+fio
 firefox
 fish
 flake8
@@ -161,6 +169,7 @@ gtk-engine-murrine
 gucharmap
 gumbo-parser
 gvfs
+hardinfo
 hashcat-utils
 haveged
 hcxtools
@@ -177,6 +186,7 @@ hunspell-de
 hunspell-en_US
 hunspell-fr
 hwdetect
+hyperfine
 hyphen-de
 hyphen-en
 hyphen-fr
@@ -336,11 +346,13 @@ patch
 patchelf
 pavucontrol
 pbzip2
+pcmanfm-gtk3
 pdfarranger
 pdfcrack
 perl-image-exiftool
 perl-locale-gettext
 picard
+picom
 pigz
 pixiewps
 pkgconf
@@ -419,7 +431,7 @@ rofi
 rpmextract
 rtirq
 rust-analyzer-git
-rustup
+rust-bindgen
 sassc
 sbsigntools
 schedtool
@@ -463,8 +475,6 @@ tcpdump
 tepl
 testdisk
 the_silver_searcher
-thunar-archive-plugin
-thunar-media-tags-plugin
 thunderbird
 tig
 time
@@ -550,7 +560,6 @@ xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfce4-terminal
-xfdesktop
 xkeycaps
 xmldiff
 xmlto

@@ -127,6 +127,9 @@ cmerge redshift.conf                       ~/.config/redshift.conf
 cmerge vimrc                               ~/.vimrc
 cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
 
+cmerge pcmanfm/pcmanfm.conf                ~/.config/pcmanfm/default/pcmanfm.conf
+cmerge pcmanfm/libfm.conf                  ~/.config/libfm/libfm.conf
+
 cmerge x11/dmrc                            ~/.dmrc
 cmerge x11/lxdm.conf                       /etc/lxdm/lxdm.conf
 
