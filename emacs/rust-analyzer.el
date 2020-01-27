@@ -207,6 +207,20 @@
               (insert parse-result)))
           (pop-to-buffer buf))))))
 
+(defface rust-analyzer-inlay-hint-type-hint-face
+  '((t :background "old lace"
+       :foreground "darkgray"
+       :box t))
+  "Face for inlay type hints (e.g. inferred types)."
+  :group 'rust-analyzer-faces)
+
+(defface rust-analyzer-inlay-hint-parameter-hint-face
+  '((t :background "old lace"
+       :foreground "darkgray"
+       :box t))
+  "Face for inlay parameter hints (e.g. function parameter names at call-site)."
+  :group 'rust-analyzer-faces)
+
 ;; inlay hints
 (defun rust-analyzer--update-inlay-hints (buffer)
   (if (and (rust-analyzer--initialized?) (eq buffer (current-buffer)))
@@ -223,11 +237,19 @@
            (overlay-put overlay 'evaporate t)
            (cond
             ((string= kind "TypeHint")
-             (overlay-put overlay 'after-string (propertize (concat ": " label)
-                                                            'font-lock-face '(:background "old lace" :foreground "darkgray" :box t))))
+             (overlay-put
+              overlay
+              'after-string
+              (propertize
+               (concat ": " label)
+               'font-lock-face 'rust-analyzer-inlay-hint-type-hint-face)))
             ((string= kind "ParameterHint")
-             (overlay-put overlay 'before-string (propertize (concat label ": ")
-                                                            'font-lock-face '(:background "old lace" :foreground "darkgray" :box t))))
+             (overlay-put
+              overlay
+              'before-string
+              (propertize
+               (concat label ": ")
+               'font-lock-face 'rust-analyzer-inlay-hint-parameter-hint-face)))
             )
            )))
      :mode 'tick))
