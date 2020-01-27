@@ -239,7 +239,6 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libwmf
-lightdm-gtk-greeter
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -352,6 +351,7 @@ ponymix
 poppler-data
 powertop
 privoxy
+progress
 proxytunnel
 pstoedit
 pstotext
