@@ -44,8 +44,6 @@ gnome-calculator
 gnome-dictionary
 gnome-disk-utility
 gst-libav
-gst-plugins-bad
-gst-plugins-base
 gst-plugins-ugly
 gst-python
 gstreamer-vaapi
@@ -159,8 +157,6 @@ subdl
 syncthing
 sysstat
 tensorflow-opt
-thunar-archive-plugin
-thunar-media-tags-plugin
 time
 tmux
 tokei
@@ -198,12 +194,10 @@ xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfce4-terminal
-xfdesktop
 xorg-docs
 xorg-fonts-100dpi
 xorg-fonts-75dpi
 xorg-luit
-xorg-server
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
