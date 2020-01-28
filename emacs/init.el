@@ -198,7 +198,7 @@
 
   :config
   (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
-  (run-with-idle-timer 30 t #'recentf-cleanup)
+  (run-with-idle-timer 90 t #'recentf-cleanup)
 
   :custom
   (recentf-save-file emacs-recentf-file)
