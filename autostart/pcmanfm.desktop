@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Desktop Manager
-Exec=pcmanfm --desktop
+Exec=pcmanfm --desktop -d
 Icon=image-x-generic
 Terminal=false
 Type=Application

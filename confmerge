@@ -109,6 +109,7 @@ cmerge applications/Eclipse.desktop        ~/.local/share/applications/Eclipse.d
 
 cmerge gtk/gtkrc-2.0                       ~/.gtkrc-2.0
 cmerge gtk/filechooser.ini                 ~/.config/gtk-2.0/gtkfilechooser.ini
+cmerge gtk/settings.ini                    ~/.config/gtk-3.0/settings.ini
 
 cmerge emacs/init.el                       ~/.config/emacs/init
 cmerge emacs/early-init.el                 ~/.config/emacs/early-init.el
