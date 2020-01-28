@@ -130,6 +130,7 @@ cmerge vimrc                               ~/.vimrc
 cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
 
 cmerge pcmanfm/pcmanfm.conf                ~/.config/pcmanfm/default/pcmanfm.conf
+cmerge pcmanfm/desktop-items-0.conf        ~/.config/pcmanfm/default/desktop-items-0.conf
 cmerge pcmanfm/libfm.conf                  ~/.config/libfm/libfm.conf
 
 cmerge x11/dmrc                            ~/.dmrc
