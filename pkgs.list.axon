@@ -55,8 +55,13 @@ hdparm
 hexchat
 hledger-web
 htop
+hunspell-de
 hunspell-en_US
+hunspell-fr
 hyperfine
+hyphen-de
+hyphen-en
+hyphen-fr
 i2c-tools
 i3lock
 icons-in-terminal
@@ -105,6 +110,9 @@ mythes-en
 ncdu
 nnn
 nordvpn-bin
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
 ntfs-3g
 numix-gtk-theme-git
 nvme-cli
