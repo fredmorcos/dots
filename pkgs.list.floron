@@ -9,6 +9,7 @@ android-tools
 android-udev
 antiword
 archey3
+arch-install-scripts
 aria2
 arj
 asp
@@ -260,6 +261,9 @@ lostfiles
 lrzip
 lsb-release
 lsof
+lua-alt-getopt
+lua-filesystem
+lxc
 lxdm-gtk3
 lynx
 lzop
