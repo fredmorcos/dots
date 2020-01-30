@@ -211,6 +211,7 @@ iwd
 jemalloc
 jfsutils
 jp2a
+kcov
 khal
 laptop-detect
 lbzip2
