@@ -2,4 +2,4 @@ title   Archlinux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options rw rd.log=all fastboot add_efi_memmap nmi_watchdog=0 mitigations=off ipv6.disable=1
+options rw rd.log=all fastboot add_efi_memmap nmi_watchdog=0 mitigations=off ipv6.disable=1 mem_sleep_default=deep

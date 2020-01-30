@@ -2,6 +2,9 @@
 # ~/.bash_settings
 #
 
+# shellcheck source=/home/fred/.profile
+[[ -f ~/.profile ]] && . ~/.profile
+
 [[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
 [[ -f /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
 

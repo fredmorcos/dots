@@ -1,3 +1,8 @@
 blacklist nouveau
+blacklist nvidiafb
+blacklist nv
+blacklist rivafb
+blacklist rivatv
+blacklist nvidia
 
 options bbswitch load_state=0 unload_state=1
