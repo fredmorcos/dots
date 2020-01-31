@@ -39,6 +39,7 @@ bolt
 bonnie++
 bs1770gain
 bsdiff
+bspwm
 bully
 byzanz
 cabextract
@@ -94,7 +95,6 @@ dialog
 diff-so-fancy
 discount
 diskus
-dmenu
 dnsmasq
 dnssec-tools
 docker
@@ -172,6 +172,7 @@ haveged
 hcxtools
 hddtemp
 hdparm
+herbstluftwm
 hexchat
 hexyl
 highlight
@@ -211,6 +212,7 @@ iwd
 jemalloc
 jfsutils
 jp2a
+jwm
 kcov
 khal
 laptop-detect
@@ -315,6 +317,7 @@ nilfs-utils
 ninja
 nnn
 nordvpn-bin
+notion
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
@@ -460,6 +463,7 @@ socat
 soundconverter
 source-highlight
 sparsehash
+spectrwm
 speech-dispatcher
 spike
 spirv-headers
