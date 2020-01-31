@@ -5,6 +5,8 @@ acpi_call
 acpid
 afl-utils
 afpfs-ng
+alacritty
+alacritty-terminfo
 android-tools
 android-udev
 antiword
