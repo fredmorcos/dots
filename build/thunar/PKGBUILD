@@ -1,0 +1,46 @@
+# Maintainer: Evangelos Foutras <evangelos@foutrelis.com>
+# Contributor: Andrew Simmons <andrew.simmons@gmail.com>
+
+pkgname=thunar
+pkgver=1.8.12
+pkgrel=1
+pkgdesc="Modern file manager for Xfce"
+arch=('x86_64')
+url="https://docs.xfce.org/xfce/thunar/start"
+license=('GPL2' 'LGPL2.1')
+groups=('xfce4')
+depends=('desktop-file-utils' 'libexif' 'hicolor-icon-theme' 'libnotify'
+         'libgudev' 'exo' 'libxfce4util' 'libxfce4ui' 'libpng')
+makedepends=('intltool')
+optdepends=('gvfs: for trash support, mounting with udisk and remote filesystems'
+            'thunar-archive-plugin: create and deflate archives')
+source=(https://archive.xfce.org/src/xfce/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2)
+sha256sums=('29295bee0b1f5bfd525e37405e5d32b497ae539b15183dd14e6ca49e252225f8')
+
+prepare() {
+  cd "$srcdir/$pkgname-$pkgver"
+}
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --enable-exif \
+    --enable-pcre \
+    --disable-debug \
+    --disable-gio-unix \
+    --disable-gudev \
+    --disable-apr-plugin \
+    --disable-tpa-plugin \
+    --disable-notifications
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:set ts=2 sw=2 et:
