@@ -164,27 +164,42 @@ cmerge modules/modprobe.conf               /etc/modprobe.d/modprobe.conf
 cmerge modules/nvidia.conf                 /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf                 /etc/modprobe.d/amdgpu.conf
 
+pkgs_cargo_tmp_file=$(mktemp)
+cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
+cmerge "pkgs-cargo.list" "$pkgs_cargo_tmp_file"
+pkgs_cargo_install=$(comm --check-order -2 -3 "pkgs-cargo.list" "$pkgs_cargo_tmp_file" | tr '\n' ' ')
+pkgs_cargo_remove=$(comm --check-order -1 -3 "pkgs-cargo.list" "$pkgs_cargo_tmp_file" | tr '\n' ' ')
+rm "$pkgs_cargo_tmp_file"
+
+if [ "$pkgs_cargo_remove" != "" ]; then
+  echo "Remove Cargo packages:"
+  $SHELL -c "cargo uninstall $pkgs_cargo_remove"
+fi
+
+if [ "$pkgs_cargo_install" != "" ]; then
+  echo "Install Cargo packages:"
+  $SHELL -c "cargo install $pkgs_cargo_install"
+fi
+
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
     pkgs_tmp_file=$(mktemp)
     pacman -Qtteq | sort > "$pkgs_tmp_file"
     cmerge "pkgs.list" "$pkgs_tmp_file"
-
     pkgs_install=$(comm --check-order -2 -3 "pkgs.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
     pkgs_remove=$(comm --check-order -1 -3 "pkgs.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
-
     rm "$pkgs_tmp_file"
 
     if [ "$pkgs_remove" != "" ]; then
-      echo "Remove Packages:"
+      echo "Remove packages:"
       $SHELL -c "sudo pacman -Rcsn $pkgs_remove"
     fi
 
     echo "Update System"
-    $SHELL -c "yay"
+    yay
 
     if [ "$pkgs_install" != "" ]; then
-      echo "Install Packages:"
+      echo "Install packages:"
       $SHELL -c "sudo pacman -S --needed $pkgs_install"
     fi
   fi

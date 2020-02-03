@@ -288,6 +288,7 @@ mediainfo
 mediastreamer
 mesa-demos
 mesa-vdpau
+meson
 mg
 mhash
 mlocate
@@ -318,7 +319,6 @@ networkmanager-openvpn
 networkmanager-strongswan
 nfs-utils
 nilfs-utils
-ninja
 nnn
 nordvpn-bin
 notion
@@ -443,6 +443,7 @@ rpmextract
 rtirq
 rust-analyzer-git
 rust-bindgen
+samurai
 sassc
 sbsigntools
 schedtool
@@ -487,6 +488,7 @@ tcpdump
 tepl
 testdisk
 the_silver_searcher
+thunar-archive-plugin
 thunderbird
 tig
 time
