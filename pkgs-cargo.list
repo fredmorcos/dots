@@ -1,5 +1,8 @@
 cargo-asm
 cargo-expand
+cargo-geiger
 cargo-watch
 pw
 sccache
+titlecase
+what

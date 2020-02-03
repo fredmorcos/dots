@@ -66,6 +66,7 @@ hyphen-fr
 i2c-tools
 i3lock
 icons-in-terminal
+intltool
 iotop
 irqbalance
 ispell
@@ -166,6 +167,7 @@ subdl
 syncthing
 sysstat
 tensorflow-opt
+thunar-archive-plugin
 time
 tmux
 tokei
