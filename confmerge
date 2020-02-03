@@ -102,7 +102,7 @@ cmerge xfce4/terminalrrc                   ~/.config/xfce4/terminal/terminalrc
 cmerge autostart/redshift.desktop          ~/.config/autostart/redshift.desktop
 cmerge autostart/xrgb.desktop              ~/.config/autostart/xrgb.desktop
 cmerge autostart/xnocaps.desktop           ~/.config/autostart/xnocaps.desktop
-cmerge autostart/pcmanfm.desktop         ~/.config/autostart/pcmanfm.desktop
+cmerge autostart/pcmanfm.desktop           ~/.config/autostart/pcmanfm.desktop
 
 cmerge applications/Zoom.desktop           ~/.local/share/applications/Zoom.desktop
 cmerge applications/Eclipse.desktop        ~/.local/share/applications/Eclipse.desktop
