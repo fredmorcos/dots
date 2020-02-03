@@ -121,13 +121,13 @@ cmerge bash/rc_extras                      ~/.bashrc_extras
 cmerge bash/profile                        ~/.bash_profile
 
 cmerge fonts.conf                          ~/.config/fontconfig/fonts.conf
-cmerge gitconfig                           ~/.gitconfig
 cmerge htoprc                              ~/.config/htop/htoprc
+cmerge redshift.conf                       ~/.config/redshift.conf
+cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
+cmerge gitconfig                           ~/.config/git/config
 cmerge hunspell_en_US                      ~/.hunspell_en_US
 cmerge profile                             ~/.profile
-cmerge redshift.conf                       ~/.config/redshift.conf
 cmerge vimrc                               ~/.vimrc
-cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
 
 cmerge pcmanfm/pcmanfm.conf                ~/.config/pcmanfm/default/pcmanfm.conf
 cmerge pcmanfm/desktop-items-0.conf        ~/.config/pcmanfm/default/desktop-items-0.conf
