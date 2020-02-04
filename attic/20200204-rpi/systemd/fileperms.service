@@ -1,0 +1,11 @@
+[Unit]
+Description=Fix file permissions
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/chown -R kodi:kodi /mnt/MediaA /mnt/MediaB
+ExecStart=/usr/bin/find /mnt/MediaA -type d -exec chmod ugo+rwx '{}' \;
+ExecStart=/usr/bin/find /mnt/MediaB -type d -exec chmod ugo+rwx '{}' \;
+ExecStart=/usr/bin/find /mnt/MediaA -type f -exec chmod ugo+rw '{}' \;
+ExecStart=/usr/bin/find /mnt/MediaB/Movies -type f -exec chmod ugo+rw '{}' \;
+ExecStart=/usr/bin/find /mnt/MediaB/Series -type f -exec chmod ugo+rw '{}' \;

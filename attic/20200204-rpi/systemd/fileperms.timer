@@ -1,0 +1,9 @@
+[Unit]
+Description=Fix file permissions every hour
+
+[Timer]
+OnBootSec=10m
+OnUnitActiveSec=5h
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,8 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir>        <type> <options>            <d> <p>
+/dev/mmcblk0p1  /boot        vfat   defaults,rw,relatime  0   0
+/dev/mmcblk0p2  none         swap   defaults              0   0
+LABEL=MediaA    /mnt/MediaA  ext4   defaults,rw,relatime  0   0
+LABEL=MediaB    /mnt/MediaB  ext4   defaults,rw,relatime  0   0

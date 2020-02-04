@@ -1,0 +1,15 @@
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.0.104/24
+Gateway=192.168.0.1
+DNS=192.168.0.1
+# DHCP=ipv4
+# DNSSEC=no
+
+#[DHCPv4]
+#UseDNS=no
+
+# [Link]
+# MTUBytes=4000
