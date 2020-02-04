@@ -10,6 +10,7 @@ bat
 beets
 bison
 bonnie++
+boost
 bs1770gain
 cargo-audit
 cargo-crev
@@ -28,6 +29,7 @@ dbus-broker
 dconf-editor
 duperemove
 easy-rsa
+ecm-tools
 efibootmgr
 emacs-git
 eom
@@ -41,6 +43,7 @@ flex
 fwupd
 fzf
 gdb
+gmp-ecm
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
@@ -91,6 +94,7 @@ libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
+libvterm
 libwmf
 linux-firmware
 linux-headers

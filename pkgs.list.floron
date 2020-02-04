@@ -41,6 +41,7 @@ bluez-tools
 bluez-utils
 bolt
 bonnie++
+boost
 bs1770gain
 bsdiff
 bspwm
@@ -108,6 +109,7 @@ dwdiff
 easy-rsa
 ebook-tools
 ebtables
+ecm-tools
 ed
 efitools
 eigen
@@ -149,6 +151,7 @@ gitprompt-rs
 git-repair
 git-review
 glyr
+gmp-ecm
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
@@ -227,6 +230,7 @@ libappindicator-gtk3
 libc++
 libcue
 libdvdcss
+libemf
 libgit2-glib
 libgnome-keyring
 libgooglepinyin
@@ -254,6 +258,7 @@ libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
+libvterm
 libwmf
 linux-firmware
 linux-headers
