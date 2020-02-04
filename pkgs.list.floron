@@ -53,6 +53,7 @@ calcurse
 capnproto
 cargo-audit
 cargo-crev
+cargo-edit
 cargo-fuzz
 cargo-outdated
 cargo-tree
