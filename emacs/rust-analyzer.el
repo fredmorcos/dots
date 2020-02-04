@@ -29,9 +29,14 @@
 ;; Also, there's a problem with company-lsp's caching being too eager, sometimes
 ;; resulting in outdated completions.
 
+(defgroup rust-analyzer nil
+  "LSP support for Rust Analyzer."
+  :group 'lsp-mode)
+
 (defcustom rust-analyzer-command '("ra_lsp_server")
   ""
-  :type '(repeat (string)))
+  :type '(repeat (string))
+  :group 'rust-analyzer)
 
 (defconst rust-analyzer--notification-handlers
   '(("rust-analyzer/publishDecorations" . (lambda (_w _p)))))
@@ -218,17 +223,15 @@
 
 (defface rust-analyzer-inlay-hint-type-hint-face
   '((t :background "old lace"
-       :foreground "darkgray"
-       :box t))
+       :foreground "darkgray"))
   "Face for inlay type hints (e.g. inferred types)."
-  :group 'rust-analyzer-faces)
+  :group 'rust-analyzer)
 
 (defface rust-analyzer-inlay-hint-parameter-hint-face
-  '((t :background "old lace"
-       :foreground "darkgray"
-       :box t))
+  '((t :background "azure"
+       :foreground "darkgray"))
   "Face for inlay parameter hints (e.g. function parameter names at call-site)."
-  :group 'rust-analyzer-faces)
+  :group 'rust-analyzer)
 
 ;; inlay hints
 (defun rust-analyzer--update-inlay-hints (buffer)
@@ -249,16 +252,18 @@
              (overlay-put
               overlay
               'after-string
-              (propertize
-               (concat ": " label)
-               'font-lock-face 'rust-analyzer-inlay-hint-type-hint-face)))
+              (concat
+               (propertize ": " 'font-lock-face '((t :foreground "darkgray")))
+               (propertize
+                label 'font-lock-face 'rust-analyzer-inlay-hint-type-hint-face))))
             ((string= kind "ParameterHint")
              (overlay-put
               overlay
               'before-string
-              (propertize
-               (concat label ": ")
-               'font-lock-face 'rust-analyzer-inlay-hint-parameter-hint-face)))
+              (concat
+               (propertize
+                label 'font-lock-face 'rust-analyzer-inlay-hint-parameter-hint-face)
+               (propertize ": " 'font-lock-face '((t :foreground "darkgray"))))))
             )
            )))
      :mode 'tick))

@@ -198,7 +198,7 @@
 
   :config
   (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
-  (run-with-idle-timer 90 t #'recentf-cleanup)
+  (run-with-idle-timer 1 nil #'recentf-cleanup)
 
   :custom
   (recentf-save-file emacs-recentf-file)
@@ -250,7 +250,7 @@
   :custom
   (help-window-select t)
   (help-at-pt-display-when-idle t)
-  (help-at-pt-timer-delay 0.1))
+  (help-at-pt-timer-delay 0.5))
 
 (use-package window
   :ensure nil
@@ -548,7 +548,7 @@
   :diminish
 
   :custom
-  (which-key-idle-delay 0.3)
+  (which-key-idle-delay 0.1)
   (which-key-mode t))
 
 (use-package counsel
@@ -877,6 +877,7 @@
 (use-package rust-mode
   :hook
   (rust-mode . (lambda ()
+                 (run-with-idle-timer 5 nil #'rust-analyzer-inlay-hints-mode)
                  (setq-local standard-indent 4)
                  (setq-local comment-fill-column 90)
                  (setq tab-width 4
@@ -884,7 +885,6 @@
 
   :bind
   (:map rust-mode-map
-        ("<f5>" . rust-analyzer-inlay-hints-mode)
         ("<f6>" . rust-analyzer-expand-macro))
 
   :custom-face
