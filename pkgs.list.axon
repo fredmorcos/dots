@@ -198,6 +198,7 @@ vulkan-tools
 wireguard-arch
 wireguard-tools
 wmctrl
+xclip
 xf86-input-evdev
 xf86-input-synaptics
 xf86-input-vmmouse
