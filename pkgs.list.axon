@@ -21,6 +21,7 @@ cargo-tree
 cbindgen
 ccache
 clinfo
+cmake
 cmus
 compsize
 cpio

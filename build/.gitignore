@@ -5,5 +5,3 @@ src
 *.bz2
 *.xz
 .SRCINFO
-*.patch
-*.sh
