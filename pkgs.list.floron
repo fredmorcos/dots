@@ -42,6 +42,7 @@ bluez-utils
 bolt
 bonnie++
 boost
+bridge-utils
 bs1770gain
 bsdiff
 bspwm
@@ -103,7 +104,6 @@ discount
 diskus
 dnsmasq
 dnssec-tools
-docker
 docx2txt
 duperemove
 dwdiff
@@ -277,7 +277,6 @@ lsb-release
 lsof
 lua-alt-getopt
 lua-filesystem
-lxc
 lxdm-gtk3
 lynx
 lzop
@@ -346,7 +345,6 @@ optipng
 opusfile
 osinfo-db-tools
 os-prober
-ostree
 ovmf
 p7zip
 pacgraph
@@ -446,7 +444,6 @@ ripgrep
 rlwrap
 rofimoji
 rofi-pass
-rpmextract
 rtirq
 rust-analyzer-git
 rust-bindgen

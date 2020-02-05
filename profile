@@ -28,7 +28,7 @@ PATH="$HOME/Oracle/opt/idea-IU-193.5233.102/bin:$PATH"
 
 # Path
 PATH="$HOME/Workspace/dots/scripts:$PATH"
-PATH="$HOME/Documents/Workspace/bin:$PATH"
+PATH="$HOME/Documents/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 
 # Rust
