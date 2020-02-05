@@ -266,6 +266,7 @@ linux-firmware
 linux-headers
 linux-tools-meta
 live-media
+lld
 lldb
 llvm
 lockdown-ms
@@ -622,7 +623,6 @@ yay-bin
 you-get
 youtube-dl
 z3
-zig
 zile
 zssh
 zsync
