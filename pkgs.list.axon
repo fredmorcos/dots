@@ -87,6 +87,7 @@ lib32-vkd3d
 lib32-vulkan-radeon
 lib32-vulkan-validation-layers
 libao
+libgnome-keyring
 libheif
 libmad
 libmp4v2
