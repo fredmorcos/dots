@@ -195,13 +195,13 @@ if [ -f /etc/os-release ]; then
       $SHELL -c "sudo pacman -Rcsn $pkgs_remove"
     fi
 
-    echo "Update System"
-    yay
-
     if [ "$pkgs_install" != "" ]; then
       echo "Install packages:"
-      $SHELL -c "sudo pacman -S --needed $pkgs_install"
+      $SHELL -c "sudo pacman -Sy --needed $pkgs_install"
     fi
+
+    echo "Update System"
+    yay -Su
   fi
 fi
 

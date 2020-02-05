@@ -331,7 +331,6 @@ nnn
 nordvpn-bin
 notion
 noto-fonts-cjk
-noto-fonts-emoji
 noto-fonts-extra
 numix-gtk-theme-git
 nvme-cli
@@ -359,7 +358,7 @@ papirus-icon-theme
 paprefs
 par2cmdline
 parallel
-pass
+pass-otp
 pastebinit
 patch
 patchelf
@@ -392,7 +391,6 @@ pulsemixer
 purple-facebook
 purple-plugin-pack
 purple-skypeweb
-pwgen
 python-argcomplete
 python-beautifulsoup4
 python-brotlipy
@@ -446,7 +444,8 @@ reptyr
 rink
 ripgrep
 rlwrap
-rofi
+rofimoji
+rofi-pass
 rpmextract
 rtirq
 rust-analyzer-git
@@ -569,7 +568,6 @@ xcompmgr
 xdelta3
 xdg-dbus-proxy
 xdg-desktop-portal
-xdotool
 xf86-video-intel
 xfce4-appfinder
 xfce4-notifyd
@@ -617,7 +615,6 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
-xsel
 xsettings-client
 xsettingsd
 xss-lock
