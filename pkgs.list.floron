@@ -34,6 +34,7 @@ bat
 bbswitch
 beets
 bin2iso
+binwalk
 bison
 bluez-cups
 bluez-hid2hci
@@ -394,6 +395,7 @@ python-argcomplete
 python-beautifulsoup4
 python-brotlipy
 python-cairocffi
+python-capstone
 python-cjkwrap
 python-cssselect
 python-diff-match-patch
@@ -409,6 +411,7 @@ python-llfuse
 python-logbook
 python-nose
 python-olefile
+python-opengl
 python-pexpect
 python-pillow
 python-pip
