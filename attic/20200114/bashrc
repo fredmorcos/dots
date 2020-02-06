@@ -1,0 +1,112 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
+
+# shellcheck source=/home/fred/.bashrc_extras
+[[ -f ~/.bashrc_extras ]] && . ~/.bashrc_extras
+
+alias fsysctl='ssh fred@floron sudo systemctl'
+alias fpoweroff='fsysctl poweroff'
+
+alias nsysctl='ssh root@neuron systemctl'
+alias nreboot='nsysctl reboot'
+alias npoweroff='nsysctl poweroff'
+alias nup='ssh root@neuron pacman -Syu'
+alias krestart='nsysctl restart kodi'
+alias kstop='nsysctl stop kodi'
+
+wmount() {
+  mkdir -p ~/Windows
+  sudo mount /dev/nvme0n1p6 ~/Windows
+}
+
+wunmount() {
+  sudo umount ~/Windows
+  rmdir ~/Windows
+}
+
+dmount() {
+  sudo cryptsetup open /dev/disk/by-label/EncryptedData data
+  mkdir -p ~/Data
+  if [ "$1" == "check" ]; then
+    sudo btrfs check -p /dev/mapper/data
+  fi
+  sudo mount -o defaults,rw,relatime,compress=zstd /dev/mapper/data ~/Data
+}
+
+dunmount() {
+  sudo umount ~/Data
+  rmdir ~/Data
+  sudo cryptsetup close data
+  sudo hdparm -y /dev/disk/by-label/EncryptedData
+}
+
+fmount() {
+  mkdir -p ~/Floron
+  sshfs fred@floron:/home/fred ~/Floron
+}
+
+funmount() {
+  fusermount -u ~/Floron
+  rmdir ~/Floron
+}
+
+nmount() {
+  mkdir -p ~/Neuron
+  ADDR="$(pw get "$PASSFILE" Neuron:Common "%U:%P")@neuron://mnt"
+  curlftpfs -o connect_timeout=10 "$ADDR" ~/Neuron
+}
+
+nunmount() {
+  fusermount -u ~/Neuron
+  rmdir ~/Neuron
+}
+
+pmountssw() {
+  mkdir -p ~/PhoneFTP
+  ADDR="$(pw get "$PASSFILE" Phone "%U:%P")@phonessw:9999"
+  curlftpfs -o connect_timeout=10 "$ADDR" ~/PhoneFTP
+}
+
+pmount() {
+  mkdir -p ~/PhoneFTP
+  ADDR="$(pw get "$PASSFILE" Phone "%U:%P")@phone:9999"
+  curlftpfs -o connect_timeout=10 "$ADDR" ~/PhoneFTP
+}
+
+punmount() {
+  fusermount -u ~/PhoneFTP
+  rmdir ~/PhoneFTP
+}
+
+enter-graalvm() {
+  if [ -f ~/.bashrc_graalvm ]; then
+    cd "$1" || exit
+    exec bash --rcfile ~/.bashrc_graalvm
+  else
+    echo "Error: Could not find ~/.bashrc_graalvm"
+  fi
+}
+
+alias vpn='/usr/bin/openpyn de -t 5 -f -m 40'
+alias vpn-p2p='vpn --p2p'
+alias vpn-kill='sudo /usr/bin/openpyn -x'
+
+DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
+DLSUB_CMD="$DLSUB_CMD $(pw get "$PASSFILE" OpenSubtitles " --username %U --password %P")"
+# shellcheck disable=SC2139
+alias dlsub="$DLSUB_CMD"
+unset DLSUB_CMD
+
+dirdlsub() {
+  for i in *; do
+    echo ">>> $i";
+    dlsub "$i";
+    echo "-----------------------------------------";
+  done
+}
