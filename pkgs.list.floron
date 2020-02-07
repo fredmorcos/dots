@@ -413,7 +413,6 @@ python-nose
 python-olefile
 python-opengl
 python-pexpect
-python-pillow
 python-pip
 python-progressbar
 python-pyacoustid
