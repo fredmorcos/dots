@@ -1014,5 +1014,7 @@
   (shell-pop-shell-type '("vterm" "*vterm*" #'vterm))
   (shell-pop-universal-key "<f6>"))
 
+(use-package pkgbuild-mode)
+
 (provide 'init)
 ;;; init ends here
