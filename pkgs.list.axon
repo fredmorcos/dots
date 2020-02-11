@@ -77,6 +77,7 @@ irqbalance
 ispell
 kcov
 lhasa
+lib32-libsamplerate
 lib32-libva-intel-driver
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
@@ -156,7 +157,7 @@ redshift
 rink
 ripgrep
 rsync
-rust-analyzer-git
+rust-analyzer-bin
 rust-bindgen
 screen
 seahorse
