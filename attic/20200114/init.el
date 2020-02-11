@@ -432,6 +432,27 @@
   :hook
   (prog-mode . eldoc-mode))
 
+(use-package rust-analyzer
+  :ensure nil
+
+  :commands
+  rust-analyzer-inlay-hints-mode
+  rust-analyzer-expand-macro
+  rust-analyzer-join-lines
+  rust-analyzer-extend-selection
+
+  :init
+  (let* ((url (concat "https://raw.githubusercontent.com/rust-analyzer/rust-analyzer"
+                      "/master/editors/emacs/rust-analyzer.el"))
+         (dst (concat emacs-extra-dir "rust-analyzer.el"))
+         (dst-bc (concat emacs-extra-dir "rust-analyzer.elc")))
+    (when (not (file-readable-p dst-bc))
+      (url-copy-file url dst t)
+      (byte-compile-file dst)))
+
+  :config
+  (require 'rust-analyzer))
+
 (use-package paren
   :ensure nil
 
@@ -856,6 +877,7 @@
 (use-package rust-mode
   :hook
   (rust-mode . (lambda ()
+                 (run-with-idle-timer 5 nil #'rust-analyzer-inlay-hints-mode)
                  (setq-local standard-indent 4)
                  (setq-local comment-fill-column 90)
                  (setq tab-width 4
@@ -923,7 +945,6 @@
   (lsp-rust-build-lib t)
   (lsp-rust-clippy-preference "on")
   (lsp-rust-server 'rust-analyzer)
-  (lsp-rust-analyzer-server-display-inlay-hints t)
 
   (lsp-auto-guess-root t)
 
