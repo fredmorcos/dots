@@ -50,15 +50,15 @@ DOCS_HTML=        # Generate and install html documentation.
 DOCS_PDF=         # Generate and install pdf documentation.
 MAGICK=           # ImageMagick 7 support. Deprecated (read the logs).
                   # ImageMagick, like flash, is a bug ridden pest that
-		  # won't die;  yet it is useful if you know what you
-		  #are doing.
+                  # won't die;  yet it is useful if you know what you
+		              # are doing.
                   # -->>If you just *believe* you need it, you don't.<<--
 NOGZ="YES"        # Don't compress .el files.
 ################################################################################
 
 ################################################################################
 pkgname="emacs-git"
-pkgver=28.0.50.140314
+pkgver=28.0.50.139945
 pkgrel=1
 pkgdesc="GNU Emacs. Development master branch."
 arch=('x86_64' )
@@ -70,11 +70,11 @@ provides=('emacs' 'emacs-seq')
 conflicts=('emacs' 'emacs26-git' 'emacs-27-git' 'emacs-seq')
 replaces=('emacs26-git' 'emacs27-git' 'emacs-seq')
 source=("emacs-git::git://git.savannah.gnu.org/emacs.git")
-md5sums=('SKIP')
 # If Savannah access is blocked for reasons, use Github instead.
 # Edit the config file of your local repo copy as well.
 #source=("emacs-git::git://github.com/emacs-mirror/emacs.git")
 options=(!strip)
+md5sums=('SKIP')
 ################################################################################
 
 ################################################################################
@@ -179,13 +179,9 @@ build() {
     --libexecdir=/usr/lib
     --localstatedir=/var
     --mandir=/usr/share/man
-    --with-gameuser=:games
-# Beware https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25228
-# dconf and gconf break font settings you set in ~/.emacs.
-# If you insist you'll need to read that bug report in *full*.
-# Good luck!
     --enable-checking=no
     --enable-link-time-optimization
+    --with-gameuser=:games
     --disable-acl
     --without-mailutils
     --without-pop
@@ -193,8 +189,6 @@ build() {
     --without-kerberos5
     --without-hesiod
     --without-mail-unlink
-    --with-sound=no
-    --with-x-toolkit=gtk3
     --without-wide-int
     --without-xpm
     --without-jpeg
@@ -216,6 +210,8 @@ build() {
     --without-selinux
     --without-xwidgets
     --without-compress-install
+    --without-sound
+    --with-sound=no
     --with-cairo
     --with-json
     --with-xml2
@@ -227,6 +223,7 @@ build() {
     --with-modules
     --with-threads
     --with-file-notification=yes
+    --with-x-toolkit=gtk3
     --with-x
   )
 
