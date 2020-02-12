@@ -10,14 +10,12 @@
 (fset 'display-startup-echo-area-message 'ignore)
 (run-with-idle-timer 5 t #'garbage-collect)
 
-(setq-default
- custom-file (concat temporary-file-directory "emacs/custom.el")
- gc-cons-threshold most-positive-fixnum
- gc-cons-percentage 0.6
- file-name-handler-alist nil
- ;; package-enable-at-startup nil
- auto-window-vscroll nil
- vc-handled-backends '(Git)
- recentf-auto-cleanup 'never)
+(setq-default gc-cons-threshold most-positive-fixnum
+              gc-cons-percentage 0.6
+              custom-file (concat temporary-file-directory "emacs/custom.el")
+              file-name-handler-alist nil
+              auto-window-vscroll nil
+              vc-handled-backends '(Git)
+              recentf-auto-cleanup 'never)
 
 ;;; early-init.el ends here
