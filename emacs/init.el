@@ -193,9 +193,6 @@
 (use-package recentf
   :ensure nil
 
-  :commands
-  recentf-cleanup
-
   :config
   (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
   (run-with-idle-timer 1 nil #'recentf-cleanup)
@@ -660,19 +657,7 @@
   (prog-mode . company-mode))
 
 (use-package font-lock+
-  :ensure nil
-
-  :init
-  (let* ((url (concat "https://raw.githubusercontent.com/emacsmirror/emacswiki.org"
-                      "/master/font-lock+.el"))
-         (dst (concat emacs-extra-dir "font-lock+.el"))
-         (dst-bc (concat emacs-extra-dir "font-lock+.elc")))
-    (when (not (file-readable-p dst-bc))
-      (url-copy-file url dst t)
-      (byte-compile-file dst)))
-
-  :config
-  (require 'font-lock+))
+  :ensure nil)
 
 (use-package icons-in-terminal
   :ensure nil
@@ -827,18 +812,6 @@
   :mode
   "\\.ll\\'"
 
-  :init
-  (let* ((url (concat "https://raw.githubusercontent.com/llvm/llvm-project"
-                      "/master/llvm/utils/emacs/llvm-mode.el"))
-         (dst (concat emacs-extra-dir "llvm-mode.el"))
-         (dst-bc (concat emacs-extra-dir "llvm-mode.elc")))
-    (when (not (file-readable-p dst-bc))
-      (url-copy-file url dst t)
-      (byte-compile-file dst)))
-
-  :config
-  (require 'llvm-mode)
-
   :hook
   (llvm-mode . (lambda () (toggle-truncate-lines t))))
 
@@ -979,19 +952,6 @@
 
   :custom-face
   (indent-guide-face ((t (:foreground "gray80")))))
-
-(use-package vterm
-  :bind
-  (:map vterm-mode-map
-        ("<f7>" . vterm-copy-mode)))
-
-(use-package shell-pop
-  :bind
-  ("<f6>" . shell-pop)
-
-  :custom
-  (shell-pop-shell-type '("vterm" "*vterm*" #'vterm))
-  (shell-pop-universal-key "<f6>"))
 
 (provide 'init)
 ;;; init ends here

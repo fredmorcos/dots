@@ -150,6 +150,7 @@ fzf
 fzy
 gifski
 git-crypt
+gitolite
 gitprompt-rs
 git-repair
 git-review
@@ -191,6 +192,7 @@ hledger-web
 hsetroot
 htop
 httptunnel
+hub
 hunspell-de
 hunspell-en_US
 hunspell-fr
@@ -205,6 +207,7 @@ i7z
 icmake
 icons-in-terminal
 id3v2
+idle3-tools
 ifenslave
 ifplugd
 intel-compute-runtime
@@ -300,6 +303,7 @@ mesa-vdpau
 meson
 mg
 mhash
+minisign
 mlocate
 moc
 modest

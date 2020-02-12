@@ -121,6 +121,21 @@ cmerge emacs/init.el                       ~/.config/emacs/init
 cmerge emacs/early-init.el                 ~/.config/emacs/early-init.el
 cmerge emacs/lsp-rust.el                   ~/.config/emacs/elpa/lsp-mode-*/lsp-rust.el
 
+# TODO Write an emacs-byte-compile-file function
+echo ~/.config/emacs/early-init.el | emacs --batch -f byte-compile-file &>/dev/null
+
+# TODO Write a github-emacs-module function
+URL='https://raw.githubusercontent.com/llvm/llvm-project/master/llvm/utils/emacs/llvm-mode.el'
+curl -# -o emacs/llvm-mode.el "$URL"
+cmerge emacs/llvm-mode.el                  ~/.config/emacs/extra/llvm-mode.el
+echo ~/.config/emacs/extra/llvm-mode.el | emacs --batch -f byte-compile-file &>/dev/null
+
+# TODO Write a github-emacs-module function
+URL='https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/font-lock+.el'
+curl -# -o emacs/font-lock+.el "$URL"
+cmerge emacs/font-lock+.el                 ~/.config/emacs/extra/font-lock+.el
+echo ~/.config/emacs/extra/font-lock+.el | emacs --batch -f byte-compile-file &>/dev/null
+
 cmerge bash/rc                             ~/.bashrc
 cmerge bash/rc_graalvm                     ~/.bashrc_graalvm
 cmerge bash/rc_extras                      ~/.bashrc_extras

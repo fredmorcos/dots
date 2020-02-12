@@ -17,6 +17,7 @@
  file-name-handler-alist nil
  ;; package-enable-at-startup nil
  auto-window-vscroll nil
- vc-handled-backends '(Git))
+ vc-handled-backends '(Git)
+ recentf-auto-cleanup 'never)
 
 ;;; early-init.el ends here
