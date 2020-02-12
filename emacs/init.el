@@ -491,7 +491,7 @@
 (use-package smex)
 (use-package lv)
 (use-package all-the-icons)
-(use-package org-present)
+(use-package pkgbuild-mode)
 
 (use-package org-bullets
   :config
@@ -992,8 +992,6 @@
   :custom
   (shell-pop-shell-type '("vterm" "*vterm*" #'vterm))
   (shell-pop-universal-key "<f6>"))
-
-(use-package pkgbuild-mode)
 
 (provide 'init)
 ;;; init ends here
