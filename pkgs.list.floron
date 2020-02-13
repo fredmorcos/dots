@@ -284,7 +284,7 @@ lsof
 lua-alt-getopt
 lua-filesystem
 lxdm-gtk3
-lynx
+ly-git
 lzop
 m17n-lib
 mailutils
@@ -333,7 +333,6 @@ networkmanager-openvpn
 networkmanager-strongswan
 nfs-utils
 nilfs-utils
-nnn
 nordvpn-bin
 notion
 noto-fonts-cjk
@@ -436,7 +435,6 @@ python-tlsh
 python-virtualenv
 radamsa
 radvd
-ranger
 razor
 read-edid
 realtime-privileges
@@ -524,6 +522,7 @@ transmission-cli
 transmission-gtk
 trash-cli
 ttf-go-mono-git
+ttf-jetbrains-mono
 tup
 udevil
 udftools
