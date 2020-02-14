@@ -87,42 +87,94 @@ cmerge () {
   fi
 }
 
-cmerge xfce4/displays.xml                  ~/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
-cmerge xfce4/keyboard-layout.xml           ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboard-layout.xml
-cmerge xfce4/keyboards.xml                 ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
-cmerge xfce4/pointers.xml                  ~/.config/xfce4/xfconf/xfce-perchannel-xml/pointers.xml
-cmerge xfce4/xfce4-appfinder.xml           ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-appfinder.xml
-cmerge xfce4/xfce4-desktop.xml             ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-cmerge xfce4/xfce4-keyboard-shortcuts.xml  ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
-cmerge xfce4/xfce4-notifyd.xml             ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
-cmerge xfce4/xfce4-panel.xml               ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
-cmerge xfce4/xfce4-power-manager.xml       ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml
-cmerge xfce4/xfce4-session.xml             ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
-cmerge xfce4/xfce4-settings-editor.xml     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-editor.xml
-cmerge xfce4/xfce4-settings-manager.xml    ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml
-cmerge xfce4/xfwm4.xml                     ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml
-cmerge xfce4/xsettings.xml                 ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-cmerge xfce4/terminalrrc                   ~/.config/xfce4/terminal/terminalrc
+XFCONF=~/.config/xfce4/xfconf/xfce-perchannel-xml
 
-cmerge autostart/redshift.desktop          ~/.config/autostart/redshift.desktop
-cmerge autostart/xrgb.desktop              ~/.config/autostart/xrgb.desktop
-cmerge autostart/xnocaps.desktop           ~/.config/autostart/xnocaps.desktop
-cmerge autostart/pcmanfm.desktop           ~/.config/autostart/pcmanfm.desktop
+cmerge xfce4/displays.xml            $XFCONF/displays.xml
+cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
+cmerge xfce4/keyboards.xml           $XFCONF/keyboards.xml
+cmerge xfce4/pointers.xml            $XFCONF/pointers.xml
+cmerge xfce4/appfinder.xml           $XFCONF/xfce4-appfinder.xml
+cmerge xfce4/desktop.xml             $XFCONF/xfce4-desktop.xml
+cmerge xfce4/keyboard-shortcuts.xml  $XFCONF/xfce4-keyboard-shortcuts.xml
+cmerge xfce4/notifyd.xml             $XFCONF/xfce4-notifyd.xml
+cmerge xfce4/panel.xml               $XFCONF/xfce4-panel.xml
+cmerge xfce4/power-manager.xml       $XFCONF/xfce4-power-manager.xml
+cmerge xfce4/session.xml             $XFCONF/xfce4-session.xml
+cmerge xfce4/settings-editor.xml     $XFCONF/xfce4-settings-editor.xml
+cmerge xfce4/settings-manager.xml    $XFCONF/xfce4-settings-manager.xml
+cmerge xfce4/xfwm4.xml               $XFCONF/xfwm4.xml
+cmerge xfce4/xsettings.xml           $XFCONF/xsettings.xml
 
-cmerge applications/Zoom.desktop           ~/.local/share/applications/Zoom.desktop
-cmerge applications/Eclipse.desktop        ~/.local/share/applications/Eclipse.desktop
+cmerge xfce4/terminalrrc             ~/.config/xfce4/terminal/terminalrc
 
-cmerge gtk/gtkrc-2.0                       ~/.gtkrc-2.0
-cmerge gtk/filechooser.ini                 ~/.config/gtk-2.0/gtkfilechooser.ini
-cmerge gtk/settings.ini                    ~/.config/gtk-3.0/settings.ini
-cmerge gtk/bookmarks                       ~/.config/gtk-3.0/bookmarks
+cmerge autostart/redshift.desktop    ~/.config/autostart/redshift.desktop
+cmerge autostart/xrgb.desktop        ~/.config/autostart/xrgb.desktop
+cmerge autostart/xnocaps.desktop     ~/.config/autostart/xnocaps.desktop
+cmerge autostart/pcmanfm.desktop     ~/.config/autostart/pcmanfm.desktop
 
-cmerge emacs/init.el                       ~/.config/emacs/init
-cmerge emacs/early-init.el                 ~/.config/emacs/early-init.el
-cmerge emacs/lsp-rust.el                   ~/.config/emacs/elpa/lsp-mode-*/lsp-rust.el
+cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
+cmerge applications/Eclipse.desktop  ~/.local/share/applications/Eclipse.desktop
+
+cmerge gtk/gtkrc-2.0                 ~/.gtkrc-2.0
+cmerge gtk/filechooser.ini           ~/.config/gtk-2.0/gtkfilechooser.ini
+cmerge gtk/settings.ini              ~/.config/gtk-3.0/settings.ini
+cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
+
+cmerge emacs/init.el                 ~/.config/emacs/init
+cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
+cmerge emacs/lsp-rust.el             ~/.config/emacs/elpa/lsp-mode-*/lsp-rust.el
+
+cmerge bash/rc                       ~/.bashrc
+cmerge bash/rc_graalvm               ~/.bashrc_graalvm
+cmerge bash/rc_extras                ~/.bashrc_extras
+cmerge bash/profile                  ~/.bash_profile
+
+cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
+cmerge htoprc                        ~/.config/htop/htoprc
+cmerge redshift.conf                 ~/.config/redshift.conf
+cmerge youtube-dl.conf               ~/.config/youtube-dl/config
+cmerge gitconfig                     ~/.config/git/config
+cmerge hunspell_en_US                ~/.hunspell_en_US
+cmerge profile                       ~/.profile
+cmerge vimrc                         ~/.vimrc
+
+cmerge pcmanfm/pcmanfm.conf          ~/.config/pcmanfm/default/pcmanfm.conf
+cmerge pcmanfm/desktop-items-0.conf  ~/.config/pcmanfm/default/desktop-items-0.conf
+cmerge pcmanfm/libfm.conf            ~/.config/libfm/libfm.conf
+
+cmerge x11/dmrc                      ~/.dmrc
+cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
+
+cmerge loader/loader.conf            /boot/loader/loader.conf
+cmerge loader/arch.conf              /boot/loader/entries/arch.conf
+
+cmerge systemd/coredump.conf         /etc/systemd/coredump.conf
+cmerge systemd/system.conf           /etc/systemd/system.conf
+cmerge systemd/journald.conf         /etc/systemd/journald.conf
+cmerge systemd/boot-override.conf    /etc/systemd/system/boot.mount.d/override.conf
+cmerge systemd/20-wired.conf         /etc/systemd/network/20-wired.network
+cmerge systemd/fstrim@.service       /etc/systemd/system/fstrim@.service
+cmerge systemd/fstrim@.timer         /etc/systemd/system/fstrim@.timer
+
+cmerge default.pa                    /etc/pulse/default.pa
+
+cmerge archlinux/makepkg.conf        /etc/makepkg.conf
+cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
+cmerge archlinux/pacman.conf         /etc/pacman.conf
+
+cmerge hostname                      /etc/hostname
+cmerge hosts                         /etc/hosts
+cmerge locale.conf                   /etc/locale.conf
+cmerge vconsole.conf                 /etc/vconsole.conf
+cmerge sysctl.conf                   /etc/sysctl.d/sysctl.conf
+cmerge limits.conf                   /etc/security/limits.conf
+
+cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
+cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
+cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 
 # TODO Write an emacs-byte-compile-file function
-echo ~/.config/emacs/early-init.el | emacs --batch -f byte-compile-file &>/dev/null
+# echo ~/.config/emacs/early-init.el | emacs --batch -f byte-compile-file &>/dev/null
 
 # TODO Write a github-emacs-module function
 URL='https://raw.githubusercontent.com/llvm/llvm-project/master/llvm/utils/emacs/llvm-mode.el'
@@ -135,55 +187,6 @@ URL='https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/font-loc
 curl -# -o emacs/font-lock+.el "$URL"
 cmerge emacs/font-lock+.el                 ~/.config/emacs/extra/font-lock+.el
 echo ~/.config/emacs/extra/font-lock+.el | emacs --batch -f byte-compile-file &>/dev/null
-
-cmerge bash/rc                             ~/.bashrc
-cmerge bash/rc_graalvm                     ~/.bashrc_graalvm
-cmerge bash/rc_extras                      ~/.bashrc_extras
-cmerge bash/profile                        ~/.bash_profile
-
-cmerge fonts.conf                          ~/.config/fontconfig/fonts.conf
-cmerge htoprc                              ~/.config/htop/htoprc
-cmerge redshift.conf                       ~/.config/redshift.conf
-cmerge youtube-dl.conf                     ~/.config/youtube-dl/config
-cmerge gitconfig                           ~/.config/git/config
-cmerge hunspell_en_US                      ~/.hunspell_en_US
-cmerge profile                             ~/.profile
-cmerge vimrc                               ~/.vimrc
-
-cmerge pcmanfm/pcmanfm.conf                ~/.config/pcmanfm/default/pcmanfm.conf
-cmerge pcmanfm/desktop-items-0.conf        ~/.config/pcmanfm/default/desktop-items-0.conf
-cmerge pcmanfm/libfm.conf                  ~/.config/libfm/libfm.conf
-
-cmerge x11/dmrc                            ~/.dmrc
-cmerge x11/lxdm.conf                       /etc/lxdm/lxdm.conf
-
-cmerge loader/loader.conf                  /boot/loader/loader.conf
-cmerge loader/arch.conf                    /boot/loader/entries/arch.conf
-
-cmerge systemd/coredump.conf               /etc/systemd/coredump.conf
-cmerge systemd/system.conf                 /etc/systemd/system.conf
-cmerge systemd/journald.conf               /etc/systemd/journald.conf
-cmerge systemd/boot-override.conf          /etc/systemd/system/boot.mount.d/override.conf
-cmerge systemd/20-wired.conf               /etc/systemd/network/20-wired.network
-cmerge systemd/fstrim@.service             /etc/systemd/system/fstrim@.service
-cmerge systemd/fstrim@.timer               /etc/systemd/system/fstrim@.timer
-
-cmerge default.pa                          /etc/pulse/default.pa
-
-cmerge archlinux/makepkg.conf              /etc/makepkg.conf
-cmerge archlinux/mkinitcpio.conf           /etc/mkinitcpio.conf
-cmerge archlinux/pacman.conf               /etc/pacman.conf
-
-cmerge hostname                            /etc/hostname
-cmerge hosts                               /etc/hosts
-cmerge locale.conf                         /etc/locale.conf
-cmerge vconsole.conf                       /etc/vconsole.conf
-cmerge sysctl.conf                         /etc/sysctl.d/sysctl.conf
-cmerge limits.conf                         /etc/security/limits.conf
-
-cmerge modules/modprobe.conf               /etc/modprobe.d/modprobe.conf
-cmerge modules/nvidia.conf                 /etc/modprobe.d/nvidia.conf
-cmerge modules/amdgpu.conf                 /etc/modprobe.d/amdgpu.conf
 
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
