@@ -22,4 +22,20 @@
               auto-save-list-file-prefix nil
               frame-inhibit-implied-resize t)
 
+;; (defconst emacs-site-lisp-dir (concat "/usr/share/emacs/" emacs-version "/"))
+
+;; (setq load-path `("/usr/share/emacs/site-lisp"
+;; 		  ,(concat emacs-site-lisp-dir "site-lisp")
+;; 		  ,(concat emacs-site-lisp-dir "lisp")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/vc")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/cedet")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/url")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/textmodes")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/progmodes")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/nxml")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/net")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/international")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/emacs-lisp")
+;; 		  ,(concat emacs-site-lisp-dir "lisp/calendar")))
+
 ;;; early-init.el ends here

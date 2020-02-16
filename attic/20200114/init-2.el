@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(package-initialize)
-
 (setq-default
  url-privacy-level 'high
  url-proxy-services '(("no_proxy" . "127.0.0.1")))
@@ -44,10 +42,8 @@
 (use-package startup
   :ensure nil
 
-  :load-path
-  emacs-extra-dir
-
   :init
+  (add-to-list 'load-path emacs-extra-dir)
   (defun replace-escapes ()
     (interactive)
     (goto-char (point-min))
@@ -78,11 +74,10 @@
   (font-use-system-font t)
 
   :custom-face
-  (default ((t (:font "Monospace 11"))))
+  (default ((t (:font "Monospace 12"))))
   (cursor ((t (:background "SlateGray3"))))
   (region ((t (:background "LightSteelBlue1"))))
-  (mode-line ((t (:foreground "Gray30" :background "Gray90" :box nil))))
-  (mode-line-inactive ((t (:foreground "Gray50" :background "Gray90" :box nil)))))
+  (mode-line ((t (:foreground "Gray20" :background "Gray80")))))
 
 (use-package scroll-bar
   :ensure nil
@@ -166,15 +161,9 @@
   :ensure nil
 
   :custom
-  (enable-recursive-minibuffers t)
-  (minibuffer-depth-indicate-mode t)
-  (minibuffer-electric-default-mode t)
-  (minibuffer-allow-text-properties t)
-  (minibuffer-auto-raise t)
   (completion-styles
    '(initials substring basic partial-completion emacs22 emacs21)))
 
-(defconst emacs-elpa-dir (concat user-emacs-directory "elpa/"))
 (defconst emacs-places-file (concat user-emacs-directory "places"))
 (defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
 (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
@@ -182,9 +171,8 @@
 (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
 (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
 (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
-(run-with-idle-timer 0 nil #'(lambda ()
-                                (make-directory emacs-autosaves-dir t)
-                                (make-directory emacs-backups-dir t)))
+(make-directory emacs-autosaves-dir t)
+(make-directory emacs-backups-dir t)
 
 (use-package saveplace
   :ensure nil
@@ -206,8 +194,8 @@
   :ensure nil
 
   :config
-  (push emacs-elpa-dir recentf-exclude)
-  (run-with-idle-timer 0 nil #'recentf-cleanup)
+  (add-to-list 'recentf-exclude (expand-file-name "~/.config/emacs/elpa"))
+  (run-with-idle-timer 1 nil #'recentf-cleanup)
 
   :custom
   (recentf-save-file emacs-recentf-file)
@@ -372,9 +360,9 @@
   :ensure nil
 
   :custom
-  ;; (standard-indent 2)
-  ;; (tab-width 2))
-  (indent-tabs-mode nil))
+  (standard-indent 2)
+  (indent-tabs-mode nil)
+  (tab-width 2))
 
 (use-package ediff-wind
   :ensure nil
@@ -390,29 +378,18 @@
 (use-package whitespace
   :ensure nil
 
-  :diminish
-
   :custom
   (show-trailing-whitespace nil)
   (whitespace-action '(cleanup))
-  ;; (whitespace-style
-  ;;  '(face
-  ;;    tabs
-  ;;    lines-tail
-  ;;    trailing
-  ;;    space-before-tab
-  ;;    indentation
-  ;;    empty
-  ;;    space-after-tab)))
   (whitespace-style
    '(face
      tabs
-     indentation::tab
-     indentation::space
-     indentation))
-
-  :hook
-  ((prog-mode hledger-mode) . whitespace-mode))
+     lines-tail
+     trailing
+     space-before-tab
+     indentation
+     empty
+     space-after-tab)))
 
 (use-package lisp-mode
   :ensure nil
@@ -446,8 +423,8 @@
   :ensure nil
   :diminish "ED"
 
-  ;; :custom
-  ;; (eldoc-echo-area-use-multiline-p t)
+  :custom
+  (eldoc-echo-area-use-multiline-p t)
 
   :hook
   (prog-mode . eldoc-mode))
@@ -685,8 +662,8 @@
 (use-package icons-in-terminal
   :ensure nil
 
-  :load-path
-  "/usr/share/icons-in-terminal/"
+  :init
+  (add-to-list 'load-path "/usr/share/icons-in-terminal/")
 
   :config
   (require 'icons-in-terminal))

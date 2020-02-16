@@ -174,7 +174,7 @@ cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 
 # TODO Write an emacs-byte-compile-file function
-# echo ~/.config/emacs/early-init.el | emacs --batch -f byte-compile-file &>/dev/null
+echo ~/.config/emacs/early-init.el | emacs --batch -f byte-compile-file &>/dev/null
 
 # TODO Write a github-emacs-module function
 URL='https://raw.githubusercontent.com/llvm/llvm-project/master/llvm/utils/emacs/llvm-mode.el'
