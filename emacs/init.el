@@ -4,27 +4,21 @@
 
 (package-initialize)
 
-(setq-default
- url-privacy-level 'high
- url-proxy-services '(("no_proxy" . "127.0.0.1")))
+(setq-default package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
+                                 ("melpa" . "https://melpa.org/packages/")
+                                 ("org"   . "https://orgmode.org/elpa/")))
 
-(setq-default
- package-archives
- '(("gnu"   . "https://elpa.gnu.org/packages/")
-   ("melpa" . "https://melpa.org/packages/")
-   ("org"   . "https://orgmode.org/elpa/")))
+;; (setf package-thread (make-thread #'package-initialize))
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
 
-(setq-default
- use-package-always-defer t
- use-package-always-ensure t
- use-package-expand-minimally t)
+;; (eval-when-compile
+;;   (require 'use-package))
 
-(eval-when-compile
-  (require 'use-package))
+;; (message "%s" load-path)
+;; (autoload 'use-package "use-package" nil nil 'macro)
 
 (use-package subr
   :ensure nil
@@ -256,9 +250,9 @@
   :ensure nil
 
   :custom
-  (help-window-select t)
-  (help-at-pt-display-when-idle t)
-  (help-at-pt-timer-delay 0.5))
+  ;; (help-at-pt-display-when-idle t)
+  ;; (help-at-pt-timer-delay 0.5)
+  (help-window-select t))
 
 (use-package window
   :ensure nil
@@ -546,7 +540,7 @@
   :diminish
 
   :custom
-  (which-key-idle-delay 0.1)
+  (which-key-idle-delay 0.3)
   (which-key-mode t))
 
 (use-package counsel
@@ -595,6 +589,10 @@
   (ivy-rich-switch-buffer-align-virtual-buffer t)
   (ivy-rich-path-style 'abbrev)
   (ivy-format-function #'ivy-format-function-line))
+
+;; (use-package all-the-icons-ivy-rich
+;;   :custom
+;;   (all-the-icons-ivy-rich-mode t))
 
 (use-package swiper
   :bind
@@ -651,7 +649,7 @@
 
   :custom
   (flycheck-checker-error-threshold nil)
-  (flycheck-mode-line-prefix "Chk")
+  (flycheck-mode-line-prefix "FC")
   (flycheck-idle-change-delay 0.1)
   (flycheck-display-errors-delay 0.1)
   (flycheck-idle-buffer-switch-delay 0.1)
@@ -678,28 +676,29 @@
   :hook
   (prog-mode . company-mode))
 
-(use-package font-lock+
-  :ensure nil)
+;; (use-package font-lock+
+;;   :ensure nil)
 
-(use-package icons-in-terminal
-  :ensure nil
+;; (use-package icons-in-terminal
+;;   :ensure nil
 
-  :load-path
-  "/usr/share/icons-in-terminal/"
+;;   :load-path
+;;   "/usr/share/icons-in-terminal/"
 
-  :config
-  (require 'icons-in-terminal))
+;;   :config
+;;   (require 'icons-in-terminal))
 
-(use-package all-the-icons
-  :commands
-  all-the-icons-faicon)
+;; (use-package all-the-icons
+;;   :commands
+;;   all-the-icons-faicon)
 
 (use-package company-box
   :diminish
 
   :custom
   (company-box-show-single-candidate t)
-  (company-box-icons-alist 'company-box-icons-icons-in-terminal)
+  ;; (company-box-icons-alist 'company-box-icons-icons-in-terminal)
+  (company-box-enable-icon nil)
 
   :hook
   (company-mode . company-box-mode))
@@ -747,7 +746,7 @@
   (symbol-overlay-default-face ((t (:background "HoneyDew2"))))
 
   :hook
-  ((hledger-mode prog-mode z3-smt2-mode) . symbol-overlay-mode))
+  ((hledger-mode emacs-lisp-mode z3-smt2-mode) . symbol-overlay-mode))
 
 (use-package multiple-cursors
   :bind
@@ -764,6 +763,8 @@
   (mc/cursor-face ((t (:background "Gray50" :foreground "White")))))
 
 (use-package yasnippet
+  :diminish "YS"
+
   :commands
   yas-reload-all
 
@@ -779,18 +780,18 @@
 
 (use-package yasnippet-snippets)
 
-(use-package helpful
-  :after counsel
+;; (use-package helpful
+;;   :after counsel
 
-  :bind
-  ([remap describe-variable] . helpful-variable)
-  ([remap describe-function] . helpful-function)
-  ([remap describe-key]      . helpful-key)
-  ([remap describe-mode]     . helpful-mode)
+;;   :bind
+;;   ([remap describe-variable] . helpful-variable)
+;;   ([remap describe-function] . helpful-function)
+;;   ([remap describe-key]      . helpful-key)
+;;   ([remap describe-mode]     . helpful-mode)
 
-  :custom
-  (counsel-describe-variable-function #'helpful-variable)
-  (counsel-describe-function-function #'helpful-function))
+;;   :custom
+;;   (counsel-describe-variable-function #'helpful-variable)
+;;   (counsel-describe-function-function #'helpful-function))
 
 (use-package unfill
   :bind
@@ -858,13 +859,18 @@
 
   :bind
   (:map rust-mode-map
-        ("<f6>" . rust-analyzer-expand-macro))
+        ("<f6>" . lsp-rust-analyzer-expand-macro)
+        ("<f7>" . lsp-rust-analyzer-join-lines))
 
   :custom-face
   (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
 
   :custom
   (rust-always-locate-project-on-open t))
+
+;; (use-package rustic
+;;   :mode
+;;   "\\.rs\\'")
 
 (use-package cargo
   :init
@@ -898,15 +904,17 @@
 
 (use-package lsp-mode
   :commands
-  lsp-deferred
+  (lsp lsp-deferred)
 
   :bind
   (:map lsp-mode-map
         ("C-c f" . lsp-format-buffer)
         ("C-c r" . lsp-rename)
-        ("C-c t" . lsp-describe-thing-at-point))
+        ("C-c t" . lsp-describe-thing-at-point)
+        ("C-c s" . lsp-extend-selection))
 
   :custom
+  (lsp-keymap-prefix "C-c")
   (lsp-idle-delay 0.1)
   (lsp-prefer-flymake nil)
   (lsp-file-watch-threshold 100000)
@@ -923,7 +931,8 @@
   (lsp-auto-guess-root t)
 
   :hook
-  ((c-mode rust-mode) . lsp-deferred))
+  ((c-mode rust-mode) . lsp-deferred)
+  (lsp-mode . lsp-enable-which-key-integration))
 
 (use-package lsp-ui
   :commands
@@ -966,7 +975,15 @@
   (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
-(use-package company-lsp)
+(use-package company-lsp
+  :commands
+  company-lsp)
+
+(use-package lsp-treemacs
+  :commands
+  lsp-treemacs-errors-list)
+
+(use-package dap-mode)
 
 (use-package indent-guide
   :hook
