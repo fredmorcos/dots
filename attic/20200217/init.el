@@ -4,16 +4,30 @@
 
 (package-initialize)
 
-(use-package package
-  :ensure nil
+(setq-default package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
+                                 ("melpa" . "https://melpa.org/packages/")
+                                 ("org"   . "https://orgmode.org/elpa/")))
 
-  :custom
-  (package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
-                      ("melpa" . "https://melpa.org/packages/")
-                      ("org"   . "https://orgmode.org/elpa/"))))
+;; (setf package-thread (make-thread #'package-initialize))
+
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
+
+;; (eval-when-compile
+;;   (require 'use-package))
+
+;; (message "%s" load-path)
+;; (autoload 'use-package "use-package" nil nil 'macro)
 
 (use-package subr
   :ensure nil
+
+  :commands
+  eval-after-load
+  add-hook
+  add-to-list
+  sit-for
 
   :init
   (defalias 'yes-or-no-p 'y-or-n-p))
@@ -29,7 +43,6 @@
 
   :init
   (defun replace-escapes ()
-    "Replace strange newline escapes with proper UNIX newlines."
     (interactive)
     (goto-char (point-min))
     (while (search-forward "\\n" nil t)
@@ -54,6 +67,9 @@
 
 (use-package faces
   :ensure nil
+
+  :custom
+  (font-use-system-font t)
 
   :custom-face
   (default ((t (:font "Monospace 11"))))
@@ -105,7 +121,7 @@
   (line-number-current-line ((t (:foreground "Gray60"))))
 
   :hook
-  (prog-mode . display-line-numbers-mode))
+  ((prog-mode z3-smt2-mode) . display-line-numbers-mode))
 
 (use-package hl-line
   :ensure nil
@@ -114,7 +130,19 @@
   (hl-line ((t (:background "CornSilk"))))
 
   :hook
-  ((prog-mode text-mode) . hl-line-mode))
+  ((prog-mode text-mode z3-smt2-mode) . hl-line-mode))
+
+(use-package apropos
+  :ensure nil
+
+  :custom
+  (apropos-do-all t))
+
+(use-package expand
+  :ensure nil
+
+  :bind
+  ("M-/" . hippie-expand))
 
 (use-package fringe
   :ensure nil
@@ -122,10 +150,25 @@
   :custom-face
   (fringe ((t (:background "Gray97"))))
 
+  :commands
+  set-fringe-style
+
   :config
   (set-fringe-style '(8 . 8)))
 
-(defconst emacs-elpa-dir (concat user-emacs-directory "elpa"))
+(use-package minibuffer
+  :ensure nil
+
+  :custom
+  (enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode t)
+  (minibuffer-electric-default-mode t)
+  (minibuffer-allow-text-properties t)
+  (minibuffer-auto-raise t)
+  (completion-styles
+   '(initials substring basic partial-completion emacs22 emacs21)))
+
+(defconst emacs-elpa-dir (concat user-emacs-directory "elpa/"))
 (defconst emacs-places-file (concat user-emacs-directory "places"))
 (defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
 (defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
@@ -155,10 +198,8 @@
 (use-package recentf
   :ensure nil
 
-  :init
-  (setq recentf-exclude `(,emacs-elpa-dir))
-
   :config
+  (push emacs-elpa-dir recentf-exclude)
   (recentf-cleanup)
 
   :custom
@@ -193,16 +234,57 @@
   :ensure nil
 
   :custom
-  (electric-layout-mode t))
+  (electric-layout-mode t)
+  (electric-pair-mode t))
+
+(use-package cua-base
+  :ensure nil
+
+  :commands
+  cua-selection-mode
+
+  :init
+  (cua-selection-mode 1))
 
 (use-package help
   :ensure nil
 
   :custom
+  ;; (help-at-pt-display-when-idle t)
+  ;; (help-at-pt-timer-delay 0.5)
   (help-window-select t))
+
+(use-package window
+  :ensure nil
+
+  :bind
+  ("C-z" . bury-buffer)
+  ("s-w" . delete-window)
+  ("s-o" . other-window)
+  ("s-n" . next-buffer)
+  ("s-b" . previous-buffer)
+  ("s-v" . split-window-below)
+  ("s-h" . split-window-right)
+
+  :custom
+  (display-buffer-alist
+   '(("\\*help"
+      (display-buffer-reuse-window display-buffer-in-side-window)
+      (side . right)
+      (window-width . 100)))))
+
+(use-package page
+  :ensure nil
+
+  :bind
+  ("s-a" . backward-page)
+  ("s-e" . forward-page))
 
 (use-package windmove
   :ensure nil
+
+  :commands
+  windmove-default-keybindings
 
   :init
   (windmove-default-keybindings))
@@ -221,12 +303,10 @@
 
   :init
   (defun move-line-up ()
-    "Move a line up."
     (interactive)
     (transpose-lines 1)
     (forward-line -2))
   (defun move-line-down ()
-    "Move a line down."
     (interactive)
     (forward-line 1)
     (transpose-lines 1)
@@ -256,13 +336,13 @@
 
 (use-package abbrev
   :ensure nil
-  :diminish "Ab")
+  :diminish "Abb")
 
 (use-package newcomment
   :ensure nil
 
   :custom
-  (comment-fill-column 80))
+  (comment-fill-column 70))
 
 (use-package display-fill-column-indicator
   :ensure nil
@@ -271,13 +351,13 @@
   (fill-column-indicator ((t (:foreground "Azure2"))))
 
   :hook
-  (prog-mode . display-fill-column-indicator-mode))
+  ((emacs-lisp-mode c-mode) . display-fill-column-indicator-mode))
 
 (use-package fill
   :ensure nil
 
   :custom
-  (fill-column 80)
+  (fill-column 70)
   (colon-double-space t)
   (default-justification 'left))
 
@@ -285,10 +365,16 @@
   :ensure nil
 
   :custom
+  ;; (standard-indent 2)
+  ;; (tab-width 2))
   (indent-tabs-mode nil))
 
 (use-package ediff-wind
   :ensure nil
+
+  :commands
+  split-window-horizontally
+  ediff-setup-windows-plain
 
   :custom
   (ediff-split-window-function #'split-window-horizontally)
@@ -302,6 +388,15 @@
   :custom
   (show-trailing-whitespace nil)
   (whitespace-action '(cleanup))
+  ;; (whitespace-style
+  ;;  '(face
+  ;;    tabs
+  ;;    lines-tail
+  ;;    trailing
+  ;;    space-before-tab
+  ;;    indentation
+  ;;    empty
+  ;;    space-after-tab)))
   (whitespace-style
    '(face
      tabs
@@ -311,6 +406,12 @@
 
   :hook
   ((prog-mode hledger-mode) . whitespace-mode))
+
+(use-package lisp-mode
+  :ensure nil
+
+  :init
+  (put 'use-package 'lisp-indent-function 1))
 
 (use-package emacs-lisp-mode
   :ensure nil
@@ -338,11 +439,21 @@
   :ensure nil
   :diminish "ED"
 
+  ;; :custom
+  ;; (eldoc-echo-area-use-multiline-p t)
+
   :hook
   (prog-mode . eldoc-mode))
 
 (use-package paren
   :ensure nil
+
+  :custom
+  (show-paren-mode t)
+  (show-paren-delay 0)
+  (show-paren-when-point-inside-paren t)
+  (show-paren-style 'mixed)
+  (show-paren-highlight-openparen t)
 
   :custom-face
   (show-paren-match ((t (:background "PowderBlue"))))
@@ -370,6 +481,19 @@
   :hook
   (dired-mode . auto-revert-mode))
 
+(use-package sh-script
+  :ensure nil
+
+  :custom
+  (sh-indentation 2)
+  (sh-basic-offset 2))
+
+(use-package eshell
+  :ensure nil
+
+  :custom
+  (eshell-destroy-buffer-when-process-dies t))
+
 (use-package f)
 (use-package ht)
 (use-package dash)
@@ -394,16 +518,23 @@
 
   :custom
   (org-cycle-separator-lines 0)
-  (org-startup-folded nil)
+  (org-indent-indentation-per-level 2)
+  (org-startup-folded t)
 
   :hook
   (org-mode . org-indent-mode)
+  (org-mode . (lambda () (jit-lock-register 'flyspell-region)))
+  (org-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t)))
 
   :custom-face
   (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod"))))
 
   :config
   (setq org-ellipsis "   ▾"))
+
+(use-package iedit
+  :bind
+  ("C-;" . iedit-mode))
 
 (use-package which-key
   :diminish
@@ -420,7 +551,9 @@
 
   :bind
   ("M-x"     . counsel-M-x)
-  ("C-x C-f" . counsel-find-file))
+  ("C-x C-f" . counsel-find-file)
+  ("M-A"     . counsel-ag)
+  ("M-R"     . counsel-rg))
 
 (use-package ivy
   :diminish
@@ -430,37 +563,46 @@
         ("RET" . ivy-alt-done))
 
   :custom
-  ;; (ivy-display-style 'fancy)
-  (ivy-wrap t)
-  ;; (ivy-regex-ignore-order t)
-  ;; (ivy-action-wrap t)
   (ivy-mode t)
   (ivy-use-selectable-prompt t)
   (ivy-use-virtual-buffers t)
+  (ivy-display-style 'fancy)
   (ivy-count-format "(%d/%d) ")
+  (ivy-wrap t)
+  (ivy-regex-ignore-order t)
   (ivy-virtual-abbreviate 'full)
+  (ivy-action-wrap t)
   (ivy-initial-inputs-alist nil))
 
 (use-package ivy-rich
+  :commands
+  ivy-set-display-transformer
+  ivy-format-function-line
+
   :config
   (ivy-set-display-transformer
    'ivy-switch-buffer
    'ivy-rich--ivy-switch-buffer-transformer)
 
   :custom
-  ;; (ivy-rich-switch-buffer-align-virtual-buffer t)
-  ;; (ivy-rich-path-style 'abbrev)
-  ;; (ivy-format-function #'ivy-format-function-line)
-  (ivy-rich-mode t))
+  (ivy-rich-mode t)
+  (ivy-rich-switch-buffer-align-virtual-buffer t)
+  (ivy-rich-path-style 'abbrev)
+  (ivy-format-function #'ivy-format-function-line))
 
-;; (use-package swiper
-;;   :bind
-;;   ("C-s" . swiper)
-;;   ("C-r" . swiper-backward))
+;; (use-package all-the-icons-ivy-rich
+;;   :custom
+;;   (all-the-icons-ivy-rich-mode t))
+
+(use-package swiper
+  :bind
+  ("C-s" . swiper)
+  ("C-r" . swiper-backward))
 
 (use-package fzf
   :bind
-  ("M-F" . fzf-git-files))
+  ("M-F" . fzf-git-files)
+  ("M-P" . fzf-git-grep))
 
 (use-package deadgrep
   :bind
@@ -479,25 +621,42 @@
   :hook
   (after-save . magit-after-save-refresh-status)
 
+  :defines
+  magit-status-buffer-switch-function
+
+  :commands
+  magit-display-buffer-same-window-except-diff-v1
+
   :custom
   (magit-auto-revert-tracked-only nil)
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (magit-repository-directories '(("~/Workspace" . 3) ("~/Oracle" . 3))))
 
 (use-package expand-region
   :bind
   ("C-=" . er/expand-region))
 
+(use-package ivy-xref
+  :init
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
 (use-package flycheck
   :bind
   (:map flycheck-mode-map
         ("M-n" . flycheck-next-error)
-        ("M-p" . flycheck-previous-error))
+        ("M-p" . flycheck-previous-error)
+        ("C-c l" . flycheck-list-errors))
 
   :custom
+  (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "FC")
+  (flycheck-idle-change-delay 0.1)
+  (flycheck-display-errors-delay 0.1)
+  (flycheck-idle-buffer-switch-delay 0.1)
+  (flycheck-disabled-checkers '(rust-cargo rust-clippy rust))
 
   :hook
-  (prog-mode . flycheck-mode))
+  ((prog-mode z3-smt2-mode) . flycheck-mode))
 
 (use-package company
   :diminish "Com"
@@ -511,30 +670,62 @@
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
-  ;; (company-transformers '(company-sort-by-backend-importance))
-  ;; (company-idle-delay 0.1)
+  (company-transformers '(company-sort-by-backend-importance))
+  (company-idle-delay 0.1)
 
   :hook
   (prog-mode . company-mode))
+
+;; (use-package font-lock+
+;;   :ensure nil)
+
+;; (use-package icons-in-terminal
+;;   :ensure nil
+
+;;   :load-path
+;;   "/usr/share/icons-in-terminal/"
+
+;;   :config
+;;   (require 'icons-in-terminal))
+
+;; (use-package all-the-icons
+;;   :commands
+;;   all-the-icons-faicon)
 
 (use-package company-box
   :diminish
 
   :custom
   (company-box-show-single-candidate t)
+  ;; (company-box-icons-alist 'company-box-icons-icons-in-terminal)
   (company-box-enable-icon nil)
 
   :hook
   (company-mode . company-box-mode))
+
+;; (use-package company-quickhelp
+;;   :hook
+;;   (company-mode . company-quickhelp-mode)
+
+;;   :bind
+;;   (:map company-active-map
+;;         ("C-c h" . company-quickhelp-manual-begin))
+
+;;   :custom
+;;   (company-quickhelp-use-propertized-text t)
+;;   (company-quickhelp-delay nil))
 
 (use-package diff-hl
   :custom
   (diff-hl-draw-borders nil)
   (diff-hl-flydiff-delay 0.1)
 
+  :commands
+  diff-hl-magit-post-refresh
+
   :hook
   (magit-post-refresh . diff-hl-magit-post-refresh)
-  (prog-mode . diff-hl-mode)
+  ((prog-mode z3-smt2-mode) . diff-hl-mode)
 
   :custom-face
   (diff-hl-delete ((t (:background "RosyBrown1"))))
@@ -555,7 +746,7 @@
   (symbol-overlay-default-face ((t (:background "HoneyDew2"))))
 
   :hook
-  ((hledger-mode emacs-lisp-mode) . symbol-overlay-mode))
+  ((hledger-mode emacs-lisp-mode z3-smt2-mode) . symbol-overlay-mode))
 
 (use-package multiple-cursors
   :bind
@@ -574,14 +765,37 @@
 (use-package yasnippet
   :diminish "YS"
 
+  :commands
+  yas-reload-all
+
+  :defines
+  yas-snippet-dirs
+
   :config
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
   (make-thread #'yas-reload-all)
 
   :hook
-  ((hledger-mode prog-mode) . yas-minor-mode))
+  ((hledger-mode c-mode rust-mode) . yas-minor-mode))
 
 (use-package yasnippet-snippets)
+
+;; (use-package helpful
+;;   :after counsel
+
+;;   :bind
+;;   ([remap describe-variable] . helpful-variable)
+;;   ([remap describe-function] . helpful-function)
+;;   ([remap describe-key]      . helpful-key)
+;;   ([remap describe-mode]     . helpful-mode)
+
+;;   :custom
+;;   (counsel-describe-variable-function #'helpful-variable)
+;;   (counsel-describe-function-function #'helpful-function))
+
+(use-package unfill
+  :bind
+  ([remap fill-paragraph] . unfill-toggle))
 
 (use-package hledger-mode
   :mode
@@ -593,11 +807,21 @@
   (hledger-currency-string "EUR")
   (hledger-current-overlay t)
 
+  :commands
+  toggle-truncate-lines
+
   :hook
   (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package toml-mode)
 (use-package json-mode)
+
+(use-package markdown-mode
+  :ensure nil
+
+  :hook
+  (markdown-mode . (lambda () (jit-lock-register 'flyspell-region)))
+  (markdown-mode . (lambda () (add-hook 'after-save-hook #'flyspell-buffer nil t))))
 
 (use-package js-mode
   :ensure nil
@@ -614,12 +838,16 @@
   :hook
   (llvm-mode . (lambda () (toggle-truncate-lines t))))
 
-(use-package indent-guide
-  :hook
-  (json-mode . indent-guide-mode)
+(use-package rmsbolt
+  :diminish "Bolt"
 
-  :custom-face
-  (indent-guide-face ((t (:foreground "gray80")))))
+  :custom
+  (rms-bolt-lighter "Bolt"))
+
+(use-package boogie-friends
+  :custom
+  (z3-smt2-prover-custom-args
+   '("smt.relevancy=1" "sat.acce=true" "smt.arith.solver=6")))
 
 (use-package rust-mode
   :hook
@@ -643,6 +871,21 @@
 ;; (use-package rustic
 ;;   :mode
 ;;   "\\.rs\\'")
+
+(use-package cargo
+  :init
+  (defun cargo-fmt-and-lint ()
+    (interactive)
+    (cargo-process-fmt)
+    (sit-for 1)
+    (cargo-process-clippy))
+
+  :bind
+  (:map cargo-minor-mode-map
+        ("C-c C-c C-c" . cargo-fmt-and-lint))
+
+  :hook
+  (rust-mode . cargo-minor-mode))
 
 (use-package c-mode
   :ensure nil
@@ -741,6 +984,13 @@
   lsp-treemacs-errors-list)
 
 (use-package dap-mode)
+
+(use-package indent-guide
+  :hook
+  (json-mode . indent-guide-mode)
+
+  :custom-face
+  (indent-guide-face ((t (:foreground "gray80")))))
 
 (provide 'init)
 ;;; init ends here
