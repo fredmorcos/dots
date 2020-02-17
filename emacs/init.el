@@ -182,9 +182,8 @@
 (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
 (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
 (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
-(run-with-idle-timer 0 nil #'(lambda ()
-                                (make-directory emacs-autosaves-dir t)
-                                (make-directory emacs-backups-dir t)))
+(make-directory emacs-autosaves-dir t)
+(make-directory emacs-backups-dir t)
 
 (use-package saveplace
   :ensure nil
@@ -207,7 +206,7 @@
 
   :config
   (push emacs-elpa-dir recentf-exclude)
-  (run-with-idle-timer 0 nil #'recentf-cleanup)
+  (recentf-cleanup)
 
   :custom
   (recentf-save-file emacs-recentf-file)
