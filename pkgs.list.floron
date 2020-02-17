@@ -8,7 +8,6 @@ adobe-source-serif-pro-fonts
 afl-utils
 afpfs-ng
 alacritty
-alacritty-terminfo
 android-tools
 android-udev
 antiword
@@ -238,6 +237,7 @@ libc++
 libcue
 libdvdcss
 libemf
+libfido2
 libgit2-glib
 libgnome-keyring
 libgooglepinyin
