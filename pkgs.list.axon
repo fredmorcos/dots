@@ -90,6 +90,7 @@ lib32-vkd3d
 lib32-vulkan-radeon
 lib32-vulkan-validation-layers
 libao
+libfido2
 libgnome-keyring
 libheif
 libmad
