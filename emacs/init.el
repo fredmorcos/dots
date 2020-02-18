@@ -201,6 +201,12 @@
   :custom
   (help-window-select t))
 
+(use-package window
+  :ensure nil
+
+  :custom
+  (split-height-threshold 160))
+
 (use-package windmove
   :ensure nil
 
@@ -481,6 +487,7 @@
 
   :custom
   (magit-auto-revert-tracked-only nil)
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (magit-repository-directories '(("~/Workspace" . 3) ("~/Oracle" . 3))))
 
 (use-package expand-region
