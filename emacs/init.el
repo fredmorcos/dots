@@ -2,6 +2,20 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
+(defconst emacs-extra-dir (concat expanded-user-emacs-dir "extra/"))
+(defconst emacs-elpa-dir (concat expanded-user-emacs-dir "elpa"))
+(defconst emacs-places-file (concat expanded-user-emacs-dir "places"))
+(defconst emacs-recentf-file (concat expanded-user-emacs-dir "recentf"))
+(defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
+(defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
+(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
+(defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
+(defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
+(make-directory emacs-extra-dir t)
+(make-directory emacs-autosaves-dir t)
+(make-directory emacs-backups-dir t)
+
 (package-initialize)
 
 (use-package package
@@ -17,9 +31,6 @@
 
   :init
   (defalias 'yes-or-no-p 'y-or-n-p))
-
-(defconst emacs-extra-dir (concat user-emacs-directory "extra/"))
-(make-directory emacs-extra-dir t)
 
 (use-package startup
   :ensure nil
@@ -124,17 +135,6 @@
 
   :config
   (set-fringe-style '(8 . 8)))
-
-(defconst emacs-elpa-dir (concat user-emacs-directory "elpa"))
-(defconst emacs-places-file (concat user-emacs-directory "places"))
-(defconst emacs-recentf-file (concat user-emacs-directory "recentf"))
-(defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
-(defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
-(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
-(defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
-(make-directory emacs-autosaves-dir t)
-(make-directory emacs-backups-dir t)
 
 (use-package saveplace
   :ensure nil
@@ -507,7 +507,7 @@
   (prog-mode . flycheck-mode))
 
 (use-package company
-  :diminish "Com"
+  :diminish "Co"
 
   :custom
   (company-backends '(company-capf company-keywords company-files))
@@ -583,10 +583,11 @@
 
   :config
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
-  (make-thread #'yas-reload-all)
+  (diminish 'yas-minor-mode " Y")
 
   :hook
-  ((hledger-mode prog-mode) . yas-minor-mode))
+  ((hledger-mode prog-mode) . yas-minor-mode)
+  (yas-minor-mode . yas-reload-all))
 
 (use-package yasnippet-snippets)
 
@@ -634,7 +635,7 @@
                  (setq-local standard-indent 4)
                  (setq-local comment-fill-column 90)
                  (setq tab-width 4
-                       fill-column 90)))
+                       fill-column 100)))
 
   :bind
   (:map rust-mode-map
@@ -695,7 +696,7 @@
   (lsp-auto-guess-root t)
 
   :hook
-  ((c-mode rust-mode) . lsp-deferred)
+  (rust-mode . lsp-deferred)
   (lsp-mode . lsp-enable-which-key-integration))
 
 (use-package lsp-ui
@@ -745,7 +746,10 @@
 
 (use-package lsp-treemacs
   :commands
-  lsp-treemacs-errors-list)
+  lsp-treemacs-errors-list
+
+  :hook
+  (lsp-mode-hook . lsp-treemacs-sync-mode))
 
 (use-package dap-mode)
 
