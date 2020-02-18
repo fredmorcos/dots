@@ -597,12 +597,14 @@
   "\\.ledger\\'"
 
   :custom
-  (hledger-comments-column 2)
   (hledger-currency-string "EUR")
   (hledger-current-overlay t)
+  (hledger-comments-column 0)
 
   :hook
-  (hledger-mode . (lambda () (toggle-truncate-lines t))))
+  (hledger-mode . (lambda ()
+                    (toggle-truncate-lines t)
+                    (setq tab-width 1))))
 
 (use-package toml-mode)
 (use-package json-mode)
@@ -683,6 +685,8 @@
   (lsp-idle-delay 0.1)
   (lsp-prefer-flymake nil)
   (lsp-file-watch-threshold 100000)
+  (lsp-auto-guess-root t)
+  (lsp-enable-semantic-highlighting t)
 
   (lsp-rust-full-docs t)
   (lsp-rust-wait-to-build 0.1)
@@ -692,8 +696,6 @@
   (lsp-rust-clippy-preference "on")
   (lsp-rust-server 'rust-analyzer)
   (lsp-rust-analyzer-server-display-inlay-hints t)
-
-  (lsp-auto-guess-root t)
 
   :hook
   (rust-mode . lsp-deferred)
