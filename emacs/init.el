@@ -599,7 +599,7 @@
   :custom
   (hledger-currency-string "EUR")
   (hledger-current-overlay t)
-  (hledger-comments-column 0)
+  (hledger-comments-column 1)
 
   :hook
   (hledger-mode . (lambda ()
