@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(defconst emacs-extra-dir "/home/fred/Workspace/dots/emacs/extra")
 (defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
-(defconst emacs-extra-dir (concat expanded-user-emacs-dir "extra/"))
 (defconst emacs-elpa-dir (concat expanded-user-emacs-dir "elpa"))
 (defconst emacs-places-file (concat expanded-user-emacs-dir "places"))
 (defconst emacs-recentf-file (concat expanded-user-emacs-dir "recentf"))
@@ -12,19 +12,14 @@
 (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
 (defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
 (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
-(make-directory emacs-extra-dir t)
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
 
 (package-initialize)
 
-(use-package package
-  :ensure nil
-
-  :custom
-  (package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
-                      ("melpa" . "https://melpa.org/packages/")
-                      ("org"   . "https://orgmode.org/elpa/"))))
+(setq-default package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
+                                 ("melpa" . "https://melpa.org/packages/")
+                                 ("org"   . "https://orgmode.org/elpa/")))
 
 (use-package subr
   :ensure nil
@@ -34,9 +29,6 @@
 
 (use-package startup
   :ensure nil
-
-  :load-path
-  emacs-extra-dir
 
   :init
   (defun replace-escapes ()
@@ -136,16 +128,6 @@
   :config
   (set-fringe-style '(8 . 8)))
 
-(use-package minibuffer
-  :ensure nil
-
-  :custom
-  (enable-recursive-minibuffers t)
-  (minibuffer-depth-indicate-mode t)
-  (minibuffer-electric-default-mode t)
-  (minibuffer-allow-text-properties t)
-  (minibuffer-auto-raise t))
-
 (use-package saveplace
   :ensure nil
 
@@ -160,7 +142,7 @@
   :custom
   (savehist-mode t)
   (history-delete-duplicates t)
-  (history-length 50))
+  (history-length 100))
 
 (use-package recentf
   :ensure nil
@@ -174,7 +156,7 @@
   :custom
   (recentf-save-file emacs-recentf-file)
   (recentf-max-menu-items 50)
-  (recentf-max-saved-items 50)
+  (recentf-max-saved-items 100)
   (recentf-mode t))
 
 (use-package files
@@ -335,7 +317,7 @@
   :hook
   (emacs-lisp-mode . (lambda ()
                        (setq fill-column 90)
-                       (setq-local comment-fill-column 90)))
+                       (setq-local comment-fill-column 80)))
 
   :mode
   "\\emacs\\'"
@@ -399,8 +381,6 @@
 (use-package pkgbuild-mode)
 
 (use-package org-bullets
-  :pin org
-
   :custom
   (org-bullets-bullet-list '("●" "○"))
 
@@ -438,8 +418,7 @@
   :diminish
 
   :bind
-  (:map ivy-minibuffer-map
-        ("RET" . ivy-alt-done))
+  (:map ivy-minibuffer-map ("RET" . ivy-alt-done))
 
   :custom
   (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
@@ -449,7 +428,8 @@
   (ivy-use-virtual-buffers t)
   (ivy-count-format "(%d/%d) ")
   (ivy-virtual-abbreviate 'full)
-  (ivy-initial-inputs-alist nil))
+  (ivy-initial-inputs-alist nil)
+  (ivy-extra-directories nil))
 
 (use-package ivy-rich
   :custom
@@ -509,7 +489,7 @@
 
   :custom
   (company-backends '(company-capf company-keywords company-files))
-  (company-frontends '(company-echo-metadata-frontend)) ;; company-pseudo-tooltip-frontend
+  (company-frontends '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
   (completion-ignore-case t)
   (company-echo-truncate-lines nil)
   (company-selection-wrap-around t)
@@ -521,16 +501,6 @@
 
   :hook
   (prog-mode . company-mode))
-
-(use-package company-box
-  :diminish
-
-  :custom
-  (company-box-show-single-candidate t)
-  (company-box-enable-icon nil)
-
-  :hook
-  (company-mode . company-box-mode))
 
 (use-package diff-hl
   :custom
@@ -600,9 +570,7 @@
   (hledger-comments-column 1)
 
   :hook
-  (hledger-mode . (lambda ()
-                    (toggle-truncate-lines t)
-                    (setq tab-width 1))))
+  (hledger-mode . (lambda () (toggle-truncate-lines t))))
 
 (use-package toml-mode)
 (use-package json-mode)
@@ -615,6 +583,8 @@
 
 (use-package llvm-mode
   :ensure nil
+
+  :load-path emacs-extra-dir
 
   :mode
   "\\.ll\\'"
@@ -629,43 +599,26 @@
   :custom-face
   (indent-guide-face ((t (:foreground "gray80")))))
 
-(use-package rust-mode
-  :hook
-  (rust-mode . (lambda ()
-                 (setq-local standard-indent 4)
-                 (setq-local comment-fill-column 90)
-                 (setq tab-width 4
-                       fill-column 100)))
+(use-package rustic
+  :load-path emacs-extra-dir
+
+  :init
+  (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
 
   :bind
-  (:map rust-mode-map
+  (:map rustic-mode-map
+        ("<f5>" . rust-dbg-wrap-or-unwrap)
         ("<f6>" . lsp-rust-analyzer-expand-macro)
         ("<f7>" . lsp-rust-analyzer-join-lines))
 
-  :custom-face
-  (rust-question-mark-face ((t (:inherit (font-lock-builtin-face)))))
-
   :custom
-  (rust-always-locate-project-on-open t))
+  (rustic-lsp-server 'rust-analyzer)
+  (rustic-analyzer-command '("/usr/bin/ra_lsp_server"))
 
-;; (use-package rustic
-;;   :mode
-;;   "\\.rs\\'")
-
-(use-package c-mode
-  :ensure nil
-
-  :custom
-  (lsp-clients-clangd-args
-   '("--background-index"
-     "--clang-tidy"
-     "--completion-style=detailed"
-     "--header-insertion=iwyu"
-     "--header-insertion-decorators"
-     "--suggest-missing-includes"
-     "--fallback-style=llvm"
-     "-j=13"
-     "--pch-storage=memory")))
+  :hook
+  (rustic-mode . (lambda ()
+                   (setq-local comment-fill-column 90)
+                   (setq fill-column 100))))
 
 (use-package lsp-mode
   :commands
@@ -696,8 +649,66 @@
   (lsp-rust-analyzer-server-display-inlay-hints t)
 
   :hook
-  (rust-mode . lsp-deferred)
-  (lsp-mode . lsp-enable-which-key-integration))
+  (lsp-mode . lsp-enable-which-key-integration)
+
+  :config
+  (eval-after-load 'lsp-rust
+    '(progn
+       (defface rust-analyzer-inlay-hint-type-hint-face
+         '((t :background "old lace"
+              :foreground "darkgray"))
+         "Face for inlay type hints (e.g. inferred types)."
+         :group 'lsp-rust)
+
+       (defface rust-analyzer-inlay-hint-parameter-hint-face
+         '((t :background "azure"
+              :foreground "darkgray"))
+         "Face for inlay parameter hints (e.g. function parameter names at call-site)."
+         :group 'lsp-rust)
+
+       (defun lsp-rust-analyzer-update-inlay-hints (buffer)
+         (if (and (lsp-rust-analyzer-initialized?)
+                  (eq buffer (current-buffer)))
+             (lsp-request-async
+              "rust-analyzer/inlayHints"
+              (list :textDocument (lsp--text-document-identifier))
+              (lambda (res)
+                (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
+                (dolist (hint res)
+                  (-let* (((&hash "range" "label" "kind") hint)
+                          ((beg . end) (lsp--range-to-region range))
+                          (overlay (make-overlay beg end)))
+                    (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
+                    (overlay-put overlay 'evaporate t)
+                    (cond
+                     ((string= kind "TypeHint")
+                      (overlay-put
+                       overlay
+                       'after-string
+                       (concat
+                        (propertize
+                         ": "
+                         'font-lock-face
+                         '((t :foreground "darkgray")))
+                        (propertize
+                         label
+                         'font-lock-face
+                         'rust-analyzer-inlay-hint-type-hint-face))))
+                     ((string= kind "ParameterHint")
+                      (overlay-put
+                       overlay
+                       'before-string
+                       (concat
+                        (propertize
+                         label
+                         'font-lock-face
+                         'rust-analyzer-inlay-hint-parameter-hint-face)
+                        (propertize
+                         ": "
+                         'font-lock-face
+                         '((t :foreground "darkgray"))))))))))
+              :mode 'tick))
+         nil))))
 
 (use-package lsp-ui
   :commands

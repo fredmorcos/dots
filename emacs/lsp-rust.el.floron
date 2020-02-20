@@ -505,18 +505,6 @@ PARAMS progress report notification data."
 
 ;; inlay hints
 
-(defface rust-analyzer-inlay-hint-type-hint-face
-  '((t :background "old lace"
-       :foreground "darkgray"))
-  "Face for inlay type hints (e.g. inferred types)."
-  :group 'lsp-rust)
-
-(defface rust-analyzer-inlay-hint-parameter-hint-face
-  '((t :background "azure"
-       :foreground "darkgray"))
-  "Face for inlay parameter hints (e.g. function parameter names at call-site)."
-  :group 'lsp-rust)
-
 (defvar-local lsp-rust-analyzer-inlay-hints-timer nil)
 
 ;; TODO: we should update only if the current buffer has changed
@@ -536,13 +524,12 @@ PARAMS progress report notification data."
              (overlay-put overlay 'evaporate t)
              (cond
               ((string= kind "TypeHint")
-               (overlay-put overlay 'after-string (concat
-                                                   (propertize ": " 'font-lock-face '((t :foreground "darkgray")))
-                                                   (propertize label 'font-lock-face 'rust-analyzer-inlay-hint-type-hint-face))))
+               (overlay-put overlay 'after-string (propertize (concat ": " label)
+                                                              'font-lock-face 'font-lock-comment-face)))
               ((string= kind "ParameterHint")
-               (overlay-put overlay 'before-string (concat
-                                                    (propertize label 'font-lock-face 'rust-analyzer-inlay-hint-parameter-hint-face)
-                                                    (propertize ": " 'font-lock-face '((t :foreground "darkgray"))))))))))
+               (overlay-put overlay 'before-string (propertize (concat label ": ")
+                                                               'font-lock-face 'font-lock-comment-face)))
+              ))))
        :mode 'tick))
   nil)
 

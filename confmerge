@@ -168,21 +168,6 @@ cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 
-# TODO Write an emacs-byte-compile-file function
-echo ~/.config/emacs/early-init.el | emacs --batch -f byte-compile-file &>/dev/null
-
-# TODO Write a github-emacs-module function
-URL='https://raw.githubusercontent.com/llvm/llvm-project/master/llvm/utils/emacs/llvm-mode.el'
-curl -# -o emacs/llvm-mode.el "$URL"
-cmerge emacs/llvm-mode.el                  ~/.config/emacs/extra/llvm-mode.el
-echo ~/.config/emacs/extra/llvm-mode.el | emacs --batch -f byte-compile-file &>/dev/null
-
-# TODO Write a github-emacs-module function
-URL='https://raw.githubusercontent.com/emacsmirror/emacswiki.org/master/font-lock+.el'
-curl -# -o emacs/font-lock+.el "$URL"
-cmerge emacs/font-lock+.el                 ~/.config/emacs/extra/font-lock+.el
-echo ~/.config/emacs/extra/font-lock+.el | emacs --batch -f byte-compile-file &>/dev/null
-
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
 cmerge "pkgs-cargo.list" "$pkgs_cargo_tmp_file"
