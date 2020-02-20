@@ -140,7 +140,6 @@ papirus-icon-theme
 par2cmdline
 patch
 pavucontrol
-pcmanfm-gtk3
 picard
 picom
 pkgconf
@@ -220,6 +219,7 @@ xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfce4-terminal
+xfdesktop
 xorg-docs
 xorg-fonts-100dpi
 xorg-fonts-75dpi
