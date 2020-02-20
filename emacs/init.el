@@ -631,10 +631,14 @@
   (rustic-lsp-server 'rust-analyzer)
   (rustic-analyzer-command '("/usr/bin/ra_lsp_server"))
 
+  :config
+  (eval-after-load 'flycheck
+    '(push 'rustic-clippy flycheck-checkers))
+
   :hook
   (rustic-mode . (lambda ()
-                   (setq-local comment-fill-column 90)
-                   (setq fill-column 100))))
+                   (setq-local comment-fill-column 80)
+                   (setq fill-column 90))))
 
 (use-package lsp-mode
   :commands
@@ -645,18 +649,15 @@
         ("C-c f" . lsp-format-buffer)
         ("C-c r" . lsp-rename)
         ("C-c t" . lsp-describe-thing-at-point)
-        ("C-c s" . lsp-extend-selection))
+        ("C-="   . lsp-extend-selection))
 
   :custom
   (lsp-keymap-prefix "C-c")
-  (lsp-idle-delay 0.1)
   (lsp-prefer-flymake nil)
-  (lsp-file-watch-threshold 100000)
   (lsp-auto-guess-root t)
   (lsp-enable-semantic-highlighting t)
 
   (lsp-rust-full-docs t)
-  (lsp-rust-wait-to-build 0.1)
   (lsp-rust-racer-completion nil)
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
