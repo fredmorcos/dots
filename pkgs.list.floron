@@ -369,7 +369,6 @@ patch
 patchelf
 pavucontrol
 pbzip2
-pcmanfm-gtk3
 pdfarranger
 pdfcrack
 perl-image-exiftool
@@ -582,6 +581,7 @@ xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfce4-terminal
+xfdesktop
 xkeycaps
 xmldiff
 xmlto

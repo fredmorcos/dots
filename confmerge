@@ -110,7 +110,6 @@ cmerge xfce4/terminalrrc             ~/.config/xfce4/terminal/terminalrc
 cmerge autostart/redshift.desktop    ~/.config/autostart/redshift.desktop
 cmerge autostart/xrgb.desktop        ~/.config/autostart/xrgb.desktop
 cmerge autostart/xnocaps.desktop     ~/.config/autostart/xnocaps.desktop
-cmerge autostart/pcmanfm.desktop     ~/.config/autostart/pcmanfm.desktop
 
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
 cmerge applications/Eclipse.desktop  ~/.local/share/applications/Eclipse.desktop
@@ -137,10 +136,6 @@ cmerge gitconfig                     ~/.config/git/config
 cmerge hunspell_en_US                ~/.hunspell_en_US
 cmerge profile                       ~/.profile
 cmerge vimrc                         ~/.vimrc
-
-cmerge pcmanfm/pcmanfm.conf          ~/.config/pcmanfm/default/pcmanfm.conf
-cmerge pcmanfm/desktop-items-0.conf  ~/.config/pcmanfm/default/desktop-items-0.conf
-cmerge pcmanfm/libfm.conf            ~/.config/libfm/libfm.conf
 
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf

@@ -136,6 +136,16 @@
   :config
   (set-fringe-style '(8 . 8)))
 
+(use-package minibuffer
+  :ensure nil
+
+  :custom
+  (enable-recursive-minibuffers t)
+  (minibuffer-depth-indicate-mode t)
+  (minibuffer-electric-default-mode t)
+  (minibuffer-allow-text-properties t)
+  (minibuffer-auto-raise t))
+
 (use-package saveplace
   :ensure nil
 
@@ -205,7 +215,8 @@
   :ensure nil
 
   :custom
-  (split-height-threshold 160))
+  (split-height-threshold 160)
+  (even-window-sizes 'width-only))
 
 (use-package windmove
   :ensure nil
@@ -239,7 +250,7 @@
     (forward-line -1))
 
   :bind
-  ("M-<up>" . move-line-up)
+  ("M-<up>"   . move-line-up)
   ("M-<down>" . move-line-down))
 
 (use-package bindings
@@ -385,12 +396,13 @@
 (use-package amx)
 (use-package smex)
 (use-package lv)
-(use-package all-the-icons)
 (use-package pkgbuild-mode)
 
 (use-package org-bullets
-  :config
-  (setq org-bullets-bullet-list '("●" "○"))
+  :pin org
+
+  :custom
+  (org-bullets-bullet-list '("●" "○"))
 
   :hook
   (org-mode . org-bullets-mode))
@@ -401,15 +413,13 @@
   :custom
   (org-cycle-separator-lines 0)
   (org-startup-folded nil)
+  (org-ellipsis "   ▾")
 
   :hook
   (org-mode . org-indent-mode)
 
   :custom-face
-  (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod"))))
-
-  :config
-  (setq org-ellipsis "   ▾"))
+  (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod")))))
 
 (use-package which-key
   :diminish
@@ -422,11 +432,7 @@
   :diminish
 
   :custom
-  (counsel-mode t)
-
-  :bind
-  ("M-x"     . counsel-M-x)
-  ("C-x C-f" . counsel-find-file))
+  (counsel-mode t))
 
 (use-package ivy
   :diminish
@@ -436,10 +442,8 @@
         ("RET" . ivy-alt-done))
 
   :custom
-  ;; (ivy-display-style 'fancy)
+  (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
   (ivy-wrap t)
-  ;; (ivy-regex-ignore-order t)
-  ;; (ivy-action-wrap t)
   (ivy-mode t)
   (ivy-use-selectable-prompt t)
   (ivy-use-virtual-buffers t)
@@ -448,21 +452,15 @@
   (ivy-initial-inputs-alist nil))
 
 (use-package ivy-rich
-  :config
-  (ivy-set-display-transformer
-   'ivy-switch-buffer
-   'ivy-rich--ivy-switch-buffer-transformer)
-
   :custom
-  ;; (ivy-rich-switch-buffer-align-virtual-buffer t)
-  ;; (ivy-rich-path-style 'abbrev)
-  ;; (ivy-format-function #'ivy-format-function-line)
   (ivy-rich-mode t))
 
-;; (use-package swiper
-;;   :bind
-;;   ("C-s" . swiper)
-;;   ("C-r" . swiper-backward))
+(use-package swiper
+  :bind
+  ("C-s"         . swiper-isearch)
+  ("C-c C-c C-s" . swiper-all)
+  ("C-c C-s"     . swiper-thing-at-point)
+  ("C-r"         . swiper-isearch-backward))
 
 (use-package fzf
   :bind
@@ -566,9 +564,9 @@
 
 (use-package multiple-cursors
   :bind
-  ("C-c C-v" . mc/edit-lines)
-  ("C->" . mc/mark-next-like-this)
-  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-v"       . mc/edit-lines)
+  ("C->"           . mc/mark-next-like-this)
+  ("C-<"           . mc/mark-previous-like-this)
   ("C-S-<mouse-1>" . mc/add-cursor-on-click)
 
   :custom
@@ -707,8 +705,8 @@
 
   :bind
   (:map lsp-mode-map
-        ("M-." . lsp-ui-peek-find-definitions)
-        ("M-?" . lsp-ui-peek-find-references)
+        ("M-."   . lsp-ui-peek-find-definitions)
+        ("M-?"   . lsp-ui-peek-find-references)
         ("C-c h" . lsp-ui-doc-glance))
 
   :custom
