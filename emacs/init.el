@@ -185,7 +185,17 @@
   :ensure nil
 
   :custom
-  (electric-layout-mode t))
+  (electric-layout-mode t)
+  (electric-pair-mode t))
+
+(use-package cua-base
+  :ensure nil
+
+  :commands
+  cua-selection-mode
+
+  :init
+  (cua-selection-mode 1))
 
 (use-package help
   :ensure nil
@@ -342,6 +352,12 @@
 
 (use-package paren
   :ensure nil
+
+  :custom
+  (show-paren-mode t)
+  (show-paren-when-point-inside-paren t)
+  (show-paren-style 'mixed)
+  (show-paren-highlight-openparen t)
 
   :custom-face
   (show-paren-match ((t (:background "PowderBlue"))))
@@ -652,63 +668,48 @@
   (lsp-mode . lsp-enable-which-key-integration)
 
   :config
+  (defface lsp-rust-inlay-type-face
+    '((t :background "old lace" :foreground "darkgray"))
+    "Face for inlay type hints (e.g. inferred types)."
+    :group 'lsp-rust)
+
+  (defface lsp-rust-inlay-param-face
+    '((t :background "azure" :foreground "darkgray"))
+    "Face for inlay parameter hints (e.g. function parameter names at call-site)."
+    :group 'lsp-rust)
+
   (eval-after-load 'lsp-rust
-    '(progn
-       (defface rust-analyzer-inlay-hint-type-hint-face
-         '((t :background "old lace"
-              :foreground "darkgray"))
-         "Face for inlay type hints (e.g. inferred types)."
-         :group 'lsp-rust)
-
-       (defface rust-analyzer-inlay-hint-parameter-hint-face
-         '((t :background "azure"
-              :foreground "darkgray"))
-         "Face for inlay parameter hints (e.g. function parameter names at call-site)."
-         :group 'lsp-rust)
-
-       (defun lsp-rust-analyzer-update-inlay-hints (buffer)
-         (if (and (lsp-rust-analyzer-initialized?)
-                  (eq buffer (current-buffer)))
-             (lsp-request-async
-              "rust-analyzer/inlayHints"
-              (list :textDocument (lsp--text-document-identifier))
-              (lambda (res)
-                (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
-                (dolist (hint res)
-                  (-let* (((&hash "range" "label" "kind") hint)
-                          ((beg . end) (lsp--range-to-region range))
-                          (overlay (make-overlay beg end)))
-                    (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
-                    (overlay-put overlay 'evaporate t)
-                    (cond
-                     ((string= kind "TypeHint")
-                      (overlay-put
-                       overlay
-                       'after-string
-                       (concat
-                        (propertize
-                         ": "
-                         'font-lock-face
-                         '((t :foreground "darkgray")))
-                        (propertize
-                         label
-                         'font-lock-face
-                         'rust-analyzer-inlay-hint-type-hint-face))))
-                     ((string= kind "ParameterHint")
-                      (overlay-put
-                       overlay
-                       'before-string
-                       (concat
-                        (propertize
-                         label
-                         'font-lock-face
-                         'rust-analyzer-inlay-hint-parameter-hint-face)
-                        (propertize
-                         ": "
-                         'font-lock-face
-                         '((t :foreground "darkgray"))))))))))
-              :mode 'tick))
-         nil))))
+    '(defun lsp-rust-analyzer-update-inlay-hints (buffer)
+       (if (and (lsp-rust-analyzer-initialized?)
+                (eq buffer (current-buffer)))
+           (lsp-request-async
+            "rust-analyzer/inlayHints"
+            (list :textDocument (lsp--text-document-identifier))
+            (lambda (res)
+              (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
+              (dolist (hint res)
+                (-let* (((&hash "range" "label" "kind") hint)
+                        ((beg . end) (lsp--range-to-region range))
+                        (overlay (make-overlay beg end)))
+                  (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
+                  (overlay-put overlay 'evaporate t)
+                  (cond
+                   ((string= kind "TypeHint")
+                    (overlay-put overlay
+                                 'after-string
+                                 (concat (propertize ": " 'font-lock-face
+                                                     '((t :foreground "darkgray")))
+                                         (propertize label 'font-lock-face
+                                                     'lsp-rust-inlay-type-face))))
+                   ((string= kind "ParameterHint")
+                    (overlay-put overlay
+                                 'before-string
+                                 (concat (propertize label 'font-lock-face
+                                                     'lsp-rust-inlay-param-face)
+                                         (propertize ": " 'font-lock-face
+                                                     '((t :foreground "darkgray"))))))))))
+            :mode 'tick))
+       nil)))
 
 (use-package lsp-ui
   :commands
