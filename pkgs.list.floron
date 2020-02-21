@@ -349,7 +349,6 @@ openmp
 openpyn-nordvpn
 oprofile
 optipng
-opusfile
 osinfo-db-tools
 os-prober
 ovmf
@@ -460,6 +459,10 @@ schedtool
 screen
 screenfetch
 sdl2_gfx
+sdl2_image
+sdl2_mixer
+sdl2_net
+sdl2_ttf
 sdl_image
 seahorse
 shadowsocks

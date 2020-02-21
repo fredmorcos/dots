@@ -24,6 +24,9 @@
 (use-package subr
   :ensure nil
 
+  :custom
+  (read-process-output-max (* 1024 1024))
+
   :init
   (defalias 'yes-or-no-p 'y-or-n-p))
 
@@ -273,20 +276,11 @@
   :custom
   (comment-fill-column 80))
 
-(use-package display-fill-column-indicator
-  :ensure nil
-
-  :custom-face
-  (fill-column-indicator ((t (:foreground "Azure2"))))
-
-  :hook
-  (prog-mode . display-fill-column-indicator-mode))
-
 (use-package fill
   :ensure nil
 
   :custom
-  (fill-column 80)
+  (fill-column 90)
   (colon-double-space t)
   (default-justification 'left))
 
@@ -305,29 +299,33 @@
 
 (use-package whitespace
   :ensure nil
-
   :diminish
 
   :custom
+  (whitespace-line-column 90)
   (show-trailing-whitespace nil)
   (whitespace-action '(cleanup))
   (whitespace-style
    '(face
      tabs
+     lines
+     empty
      indentation::tab
      indentation::space
-     indentation))
+     indentation
+     space-after-tab::tab
+     space-after-tab::space
+     space-after-tab
+     space-before-tab::tab
+     space-before-tab::space
+     space-before-tab
+     tab-mark))
 
   :hook
   ((prog-mode hledger-mode) . whitespace-mode))
 
 (use-package emacs-lisp-mode
   :ensure nil
-
-  :hook
-  (emacs-lisp-mode . (lambda ()
-                       (setq fill-column 90)
-                       (setq-local comment-fill-column 80)))
 
   :mode
   "\\emacs\\'"
@@ -633,12 +631,7 @@
 
   :config
   (eval-after-load 'flycheck
-    '(push 'rustic-clippy flycheck-checkers))
-
-  :hook
-  (rustic-mode . (lambda ()
-                   (setq-local comment-fill-column 80)
-                   (setq fill-column 90))))
+    '(push 'rustic-clippy flycheck-checkers)))
 
 (use-package lsp-mode
   :commands
@@ -654,6 +647,7 @@
   :custom
   (lsp-keymap-prefix "C-c")
   (lsp-prefer-flymake nil)
+  (lsp-prefer-capf t)
   (lsp-auto-guess-root t)
   (lsp-enable-semantic-highlighting t)
 
@@ -752,10 +746,6 @@
   (lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
   (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
-
-(use-package company-lsp
-  :commands
-  company-lsp)
 
 (use-package lsp-treemacs
   :commands
