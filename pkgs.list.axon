@@ -79,6 +79,7 @@ irqbalance
 ispell
 kcov
 lhasa
+lib32-libavtp
 lib32-libsamplerate
 lib32-libva-intel-driver
 lib32-libva-mesa-driver
