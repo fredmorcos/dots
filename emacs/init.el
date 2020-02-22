@@ -352,6 +352,7 @@
   :ensure nil
 
   :custom
+  (show-paren-delay 0.2)
   (show-paren-mode t)
   (show-paren-when-point-inside-paren t)
   (show-paren-style 'mixed)
