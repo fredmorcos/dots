@@ -585,7 +585,9 @@
   (hledger-comments-column 1)
 
   :hook
-  (hledger-mode . (lambda () (toggle-truncate-lines t))))
+  (hledger-mode . (lambda ()
+                    (toggle-truncate-lines t)
+                    (setq tab-width 1))))
 
 (use-package toml-mode)
 (use-package json-mode)
