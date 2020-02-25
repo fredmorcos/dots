@@ -2,6 +2,7 @@ cargo-asm
 cargo-expand
 cargo-geiger
 cargo-watch
+dbus-codegen
 pw
 sccache
 titlecase

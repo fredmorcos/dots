@@ -630,7 +630,7 @@
 
   :custom
   (rustic-lsp-server 'rust-analyzer)
-  (rustic-analyzer-command '("/usr/bin/ra_lsp_server"))
+  (rustic-analyzer-command '("/usr/bin/rust-analyzer"))
 
   :config
   (eval-after-load 'flycheck
