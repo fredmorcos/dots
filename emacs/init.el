@@ -197,8 +197,20 @@
   :ensure nil
 
   :custom
-  (electric-layout-mode t)
-  (electric-pair-mode t))
+  (electric-indent-mode nil)
+  (electric-layout-rules '((?\; . 'after) (?\} . 'after)))
+
+  :hook
+  (prog-mode . electric-layout-local-mode)
+  (prog-mode . electric-indent-local-mode)
+  (prog-mode . electric-pair-local-mode)
+  (prog-mode  . electric-quote-local-mode))
+
+(use-package minibuf-eldef
+  :ensure nil
+
+  :custom
+  (minibuffer-electric-default-mode t))
 
 (use-package cua-base
   :ensure nil
