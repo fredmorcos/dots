@@ -69,10 +69,10 @@ cmerge () {
   if [ -e "$DST" ]; then
     if [ -f "$DST" ]; then
       if diff "$DPATH/$SRC" "$DST" 1>/dev/null 2>&1 ; then
-	echo "Skip: {$SRC} === $DST"
+        echo "Skip: {$SRC} === $DST"
       else
-	echo "Merge: {$SRC} != $DST"
-	dosudo "vim -f -d $DPATH/$SRC" "$DST"
+        echo "Merge: {$SRC} != $DST"
+        dosudo "vim -f -d $DPATH/$SRC" "$DST"
       fi
     else
       echo "Error: $DST exists but is not a file"
@@ -93,6 +93,7 @@ cmerge xfce4/displays.xml            $XFCONF/displays.xml
 cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
 cmerge xfce4/keyboards.xml           $XFCONF/keyboards.xml
 cmerge xfce4/pointers.xml            $XFCONF/pointers.xml
+cmerge xfce4/thunar.xml              $XFCONF/thunar.xml
 cmerge xfce4/appfinder.xml           $XFCONF/xfce4-appfinder.xml
 cmerge xfce4/desktop.xml             $XFCONF/xfce4-desktop.xml
 cmerge xfce4/keyboard-shortcuts.xml  $XFCONF/xfce4-keyboard-shortcuts.xml
@@ -106,6 +107,9 @@ cmerge xfce4/xfwm4.xml               $XFCONF/xfwm4.xml
 cmerge xfce4/xsettings.xml           $XFCONF/xsettings.xml
 
 cmerge xfce4/terminalrrc             ~/.config/xfce4/terminal/terminalrc
+cmerge xfce4/help.rc                 ~/.config/xfce4/help.rc
+cmerge xfce4/helpers.rc              ~/.config/xfce4/helpers.rc
+cmerge xfce4/screenshooter           ~/.config/xfce4/xfce4-screenshooter
 
 cmerge autostart/redshift.desktop    ~/.config/autostart/redshift.desktop
 cmerge autostart/xrgb.desktop        ~/.config/autostart/xrgb.desktop
