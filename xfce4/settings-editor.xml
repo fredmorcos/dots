@@ -2,8 +2,8 @@
 
 <channel name="xfce4-settings-editor" version="1.0">
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="944"/>
-    <property name="window-height" type="int" value="520"/>
+    <property name="window-width" type="int" value="1122"/>
+    <property name="window-height" type="int" value="556"/>
     <property name="paned-position" type="int" value="180"/>
   </property>
 </channel>
