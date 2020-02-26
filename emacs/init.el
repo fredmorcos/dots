@@ -197,14 +197,9 @@
   :ensure nil
 
   :custom
-  (electric-indent-mode nil)
-  (electric-layout-rules '((?\; . 'after) (?\} . 'after)))
-
-  :hook
-  (prog-mode . electric-layout-local-mode)
-  (prog-mode . electric-indent-local-mode)
-  (prog-mode . electric-pair-local-mode)
-  (prog-mode  . electric-quote-local-mode))
+  (electric-layout-mode t)
+  (electric-pair-mode t)
+  (electric-quote-mode t))
 
 (use-package minibuf-eldef
   :ensure nil

@@ -173,7 +173,6 @@ gst-python
 gstreamer-vaapi
 gst-transcoder
 gtest
-gtk-engine-murrine
 gucharmap
 gumbo-parser
 gvfs
