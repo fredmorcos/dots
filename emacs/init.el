@@ -784,7 +784,5 @@
 
 (use-package dap-mode)
 
-(use-package smartparens)
-
 (provide 'init)
 ;;; init ends here
