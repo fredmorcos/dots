@@ -1,6 +1,5 @@
 # User-related
 umask 077
-export PASSFILE="$HOME/Documents/Important/Passwords/Passwords.txt"
 
 # export AMD_DEBUG="nongg nodma"
 export RADV_PERFTEST="aco"

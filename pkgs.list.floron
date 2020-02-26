@@ -471,7 +471,7 @@ seahorse
 shadowsocks
 shairplay
 shake
-shellcheck
+shellcheck-static
 shfmt
 simplescreenrecorder
 skim

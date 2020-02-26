@@ -24,6 +24,12 @@
 (use-package subr
   :ensure nil
 
+  :commands
+  add-to-list
+  add-hook
+  eval-after-load
+  remove-overlays
+
   :custom
   (read-process-output-max (* 1024 1024))
 
@@ -150,6 +156,9 @@
 (use-package recentf
   :ensure nil
 
+  :commands
+  recentf-cleanup
+
   :init
   (setq recentf-exclude `(,emacs-elpa-dir))
 
@@ -208,6 +217,9 @@
 
 (use-package window
   :ensure nil
+
+  :commands
+  split-window-horizontally
 
   :custom
   (split-height-threshold 160)
@@ -292,6 +304,9 @@
 
 (use-package ediff-wind
   :ensure nil
+
+  :commands
+  ediff-setup-windows-plain
 
   :custom
   (ediff-split-window-function #'split-window-horizontally)
@@ -472,6 +487,9 @@
   (transient-default-level 7))
 
 (use-package magit
+  :commands
+  magit-display-buffer-same-window-except-diff-v1
+
   :bind
   ("C-x g" . magit-status)
 
@@ -645,7 +663,8 @@
         ("C-c f" . lsp-format-buffer)
         ("C-c r" . lsp-rename)
         ("C-c t" . lsp-describe-thing-at-point)
-        ("C-="   . lsp-extend-selection))
+        ("C-="   . lsp-extend-selection)
+        ("M-RET" . lsp-execute-code-action))
 
   :custom
   (lsp-keymap-prefix "C-c")
@@ -664,6 +683,12 @@
 
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
+
+  :commands
+  lsp-rust-analyzer-initialized?
+  lsp-request-async
+  lsp--text-document-identifier
+  lsp--range-to-region
 
   :config
   (defface lsp-rust-inlay-type-face
@@ -758,6 +783,8 @@
   (lsp-mode-hook . lsp-treemacs-sync-mode))
 
 (use-package dap-mode)
+
+(use-package smartparens)
 
 (provide 'init)
 ;;; init ends here

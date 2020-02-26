@@ -3,7 +3,7 @@
 set -o errexit
 set -o nounset
 
-PROXY=$(pw get "$PASSFILE" Oracle:Proxy1 "%L")
+PROXY=$(pw get Oracle:Proxy1 "%L")
 
 echo "Proxy = $PROXY"
 

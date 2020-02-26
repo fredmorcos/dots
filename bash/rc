@@ -34,7 +34,7 @@ alias vpn-p2p='vpn --p2p'
 alias vpn-kill='sudo /usr/bin/openpyn -x'
 
 DLSUB_CMD="subdl -i --output={m}.{L}.{S}"
-DLSUB_CMD="$DLSUB_CMD $(pw get "$PASSFILE" OpenSubtitles " --username %U --password %P")"
+DLSUB_CMD="$DLSUB_CMD $(pw get OpenSubtitles " --username %U --password %P")"
 # shellcheck disable=SC2139
 alias dlsub="$DLSUB_CMD"
 unset DLSUB_CMD
