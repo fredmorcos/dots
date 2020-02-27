@@ -160,7 +160,7 @@
   recentf-cleanup
 
   :init
-  (setq recentf-exclude `(,emacs-elpa-dir))
+  (setq recentf-exclude `(,emacs-elpa-dir ,(expand-file-name "~/Oracle")))
 
   :config
   (recentf-cleanup)
@@ -411,10 +411,6 @@
 (use-package dash)
 (use-package diminish)
 (use-package bind-key)
-(use-package flx)
-(use-package amx)
-(use-package smex)
-(use-package lv)
 (use-package pkgbuild-mode)
 
 (use-package org-bullets
@@ -451,6 +447,13 @@
   :custom
   (counsel-mode t))
 
+(use-package swiper
+  :bind
+  ("C-s"         . swiper-isearch)
+  ("C-c C-c C-s" . swiper-all)
+  ("C-c C-s"     . swiper-thing-at-point)
+  ("C-r"         . swiper-isearch-backward))
+
 (use-package ivy
   :diminish
 
@@ -471,13 +474,6 @@
 (use-package ivy-rich
   :custom
   (ivy-rich-mode t))
-
-(use-package swiper
-  :bind
-  ("C-s"         . swiper-isearch)
-  ("C-c C-c C-s" . swiper-all)
-  ("C-c C-s"     . swiper-thing-at-point)
-  ("C-r"         . swiper-isearch-backward))
 
 (use-package fzf
   :bind
@@ -519,6 +515,7 @@
         ("M-p" . flycheck-previous-error))
 
   :custom
+  (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "FC")
 
   :hook
@@ -787,9 +784,55 @@
   lsp-treemacs-errors-list
 
   :hook
-  (lsp-mode-hook . lsp-treemacs-sync-mode))
+  (lsp-mode . lsp-treemacs-sync-mode))
 
 (use-package dap-mode)
+
+(use-package posframe
+  :pin melpa)
+
+(use-package company-posframe
+  :diminish
+
+  :hook
+  (company-mode . company-posframe-mode))
+
+(use-package flycheck-posframe
+  :hook
+  (flycheck-mode . flycheck-posframe-mode)
+
+  :config
+  (flycheck-posframe-configure-pretty-defaults)
+
+  :custom
+  (flycheck-posframe-border-width 2)
+  (flycheck-posframe-position 'window-bottom-right-corner))
+
+(use-package ivy-posframe
+  :diminish
+
+  :hook
+  (ivy-mode . ivy-posframe-mode)
+
+  :custom
+  (ivy-posframe-mode t)
+  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (ivy-posframe-border-width 2))
+
+(use-package prescient
+  :commands
+  prescient-persist-mode
+
+  :config
+  (prescient-persist-mode))
+
+(use-package ivy-prescient
+  :hook
+  (ivy-mode . ivy-prescient-mode))
+
+(use-package company-prescient
+  :hook
+  (company-mode . company-prescient-mode))
 
 (provide 'init)
 ;;; init ends here
