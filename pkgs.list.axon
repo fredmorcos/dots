@@ -167,7 +167,7 @@ rust-analyzer-bin
 rust-bindgen
 screen
 seahorse
-shellcheck
+shellcheck-static
 shfmt
 simplescreenrecorder
 skim
