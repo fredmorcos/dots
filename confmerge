@@ -216,18 +216,18 @@ if [ -f /etc/os-release ]; then
     else
       yay -Su
     fi
+
+    pkgs_custom=$(find build -maxdepth 1 -type d | tail -n +2 | tr '\n' ' ')
+    for pkg in $pkgs_custom; do
+        pkg_name=$(basename "$pkg")
+        avail_ver=$(yay -Si "$pkg_name" | grep Version | awk '{ print $3 }')
+        build_ver=$(grep pkgver= "$pkg/PKGBUILD")
+        build_rel=$(grep pkgrel= "$pkg/PKGBUILD")
+        build_ver=${build_ver:7}-${build_rel:7}
+
+        if [ "$avail_ver" != "$build_ver" ]; then
+            echo "Needs update: $pkg_name: $build_ver -> $avail_ver"
+        fi
+    done
   fi
 fi
-
-pkgs_custom=$(find build -maxdepth 1 -type d | tail -n +2 | tr '\n' ' ')
-for pkg in $pkgs_custom; do
-  pkg_name=$(basename "$pkg")
-  avail_ver=$(yay -Si "$pkg_name" | grep Version | awk '{ print $3 }')
-  build_ver=$(grep pkgver= "$pkg/PKGBUILD")
-  build_rel=$(grep pkgrel= "$pkg/PKGBUILD")
-  build_ver=${build_ver:7}-${build_rel:7}
-
-  if [ "$avail_ver" != "$build_ver" ]; then
-    echo "Needs update: $pkg_name: $build_ver -> $avail_ver"
-  fi
-done
