@@ -321,7 +321,8 @@
 
 (use-package whitespace
   :ensure nil
-  :diminish
+
+  :diminish "Ws"
 
   :custom
   (whitespace-line-column 90)
@@ -365,7 +366,7 @@
 
 (use-package eldoc
   :ensure nil
-  :diminish "ED"
+  :diminish "Ed"
 
   :hook
   (prog-mode . eldoc-mode))
@@ -375,7 +376,6 @@
 
   :custom
   (show-paren-delay 0.2)
-  (show-paren-mode t)
   (show-paren-when-point-inside-paren t)
   (show-paren-style 'mixed)
   (show-paren-highlight-openparen t)
@@ -383,7 +383,10 @@
   :custom-face
   (show-paren-match ((t (:background "PowderBlue"))))
   (show-paren-match-expression ((t (:background "AliceBlue"))))
-  (show-paren-mismatch ((t (:background "LightSalmon")))))
+  (show-paren-mismatch ((t (:background "LightSalmon"))))
+
+  :hook
+  (prog-mode . show-paren-mode))
 
 (use-package dired
   :ensure nil
@@ -435,14 +438,14 @@
   (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod")))))
 
 (use-package which-key
-  :diminish
+  :diminish "Wk"
 
   :custom
   (which-key-idle-delay 0.3)
   (which-key-mode t))
 
 (use-package counsel
-  :diminish
+  :diminish "Csel"
 
   :custom
   (counsel-mode t))
@@ -455,7 +458,7 @@
   ("C-r"         . swiper-isearch-backward))
 
 (use-package ivy
-  :diminish
+  :diminish "Ivy"
 
   :bind
   (:map ivy-minibuffer-map ("RET" . ivy-alt-done))
@@ -554,7 +557,7 @@
   (diff-hl-change ((t (:background "PowderBlue")))))
 
 (use-package symbol-overlay
-  :diminish
+  :diminish "Sy"
 
   :bind
   ("M->" . symbol-overlay-jump-next)
@@ -792,7 +795,7 @@
   :pin melpa)
 
 (use-package company-posframe
-  :diminish
+  :diminish "CoFr"
 
   :hook
   (company-mode . company-posframe-mode))
@@ -809,7 +812,7 @@
   (flycheck-posframe-position 'window-bottom-right-corner))
 
 (use-package ivy-posframe
-  :diminish
+  :diminish "IvyFr"
 
   :hook
   (ivy-mode . ivy-posframe-mode)
@@ -827,12 +830,12 @@
   (prescient-persist-mode))
 
 (use-package ivy-prescient
-  :hook
-  (ivy-mode . ivy-prescient-mode))
+  :config
+  (ivy-prescient-mode))
 
 (use-package company-prescient
-  :hook
-  (company-mode . company-prescient-mode))
+  :config
+  (company-prescient-mode))
 
 (provide 'init)
 ;;; init ends here
