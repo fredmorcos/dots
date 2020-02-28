@@ -135,7 +135,7 @@
   (fringe ((t (:background "Gray97"))))
 
   :config
-  (set-fringe-style '(8 . 8)))
+  (set-fringe-style '(4 . 4)))
 
 (use-package saveplace
   :ensure nil

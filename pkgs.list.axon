@@ -71,7 +71,6 @@ hyphen-en
 hyphen-fr
 i2c-tools
 i3lock
-icons-in-terminal
 idle3-tools
 intltool
 iotop
@@ -159,7 +158,6 @@ python-xdg
 radeontool
 read-edid
 redshift
-restic
 rink
 ripgrep
 rsync
