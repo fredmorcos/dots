@@ -414,6 +414,10 @@
 (use-package dash)
 (use-package diminish)
 (use-package bind-key)
+;; (use-package flx)
+;; (use-package amx)
+;; (use-package smex)
+;; (use-package lv)
 (use-package pkgbuild-mode)
 
 (use-package org-bullets
@@ -822,20 +826,20 @@
   (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
   (ivy-posframe-border-width 2))
 
-(use-package prescient
-  :commands
-  prescient-persist-mode
+;; (use-package prescient
+;;   :commands
+;;   prescient-persist-mode
 
-  :config
-  (prescient-persist-mode))
+;;   :config
+;;   (prescient-persist-mode))
 
-(use-package ivy-prescient
-  :config
-  (ivy-prescient-mode))
+;; (use-package ivy-prescient
+;;   :config
+;;   (ivy-prescient-mode))
 
-(use-package company-prescient
-  :config
-  (company-prescient-mode))
+;; (use-package company-prescient
+;;   :config
+;;   (company-prescient-mode))
 
 (provide 'init)
 ;;; init ends here
