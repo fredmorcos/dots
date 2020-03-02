@@ -1,10 +1,12 @@
 acpid
 adobe-source-sans-pro-fonts
 amd-ucode
+arch-audit
 aspell-en
 atool
 autoconf
 automake
+awesome-terminal-fonts
 base
 bash-completion
 bat
@@ -71,6 +73,7 @@ hyphen-en
 hyphen-fr
 i2c-tools
 i3lock
+icons-in-terminal
 idle3-tools
 intltool
 iotop
@@ -187,7 +190,9 @@ tokei
 tor-browser
 transmission-gtk
 trash-cli
+ttf-font-awesome
 ttf-go-mono-git
+ttf-nerd-fonts-symbols
 tup
 unace
 unoconv
