@@ -89,11 +89,11 @@ cmerge () {
 
 XFCONF=~/.config/xfce4/xfconf/xfce-perchannel-xml
 
+# cmerge xfce4/thunar.xml              $XFCONF/thunar.xml
 cmerge xfce4/displays.xml            $XFCONF/displays.xml
 cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
 cmerge xfce4/keyboards.xml           $XFCONF/keyboards.xml
 cmerge xfce4/pointers.xml            $XFCONF/pointers.xml
-cmerge xfce4/thunar.xml              $XFCONF/thunar.xml
 cmerge xfce4/appfinder.xml           $XFCONF/xfce4-appfinder.xml
 cmerge xfce4/desktop.xml             $XFCONF/xfce4-desktop.xml
 cmerge xfce4/keyboard-shortcuts.xml  $XFCONF/xfce4-keyboard-shortcuts.xml
