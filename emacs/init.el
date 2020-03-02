@@ -135,7 +135,7 @@
   (fringe ((t (:background "Gray97"))))
 
   :config
-  (set-fringe-style '(4 . 4)))
+  (set-fringe-style '(8 . 8)))
 
 (use-package saveplace
   :ensure nil
@@ -345,7 +345,7 @@
      tab-mark))
 
   :hook
-  ((prog-mode hledger-mode) . whitespace-mode))
+  (hledger-mode . whitespace-mode))
 
 (use-package emacs-lisp-mode
   :ensure nil
@@ -414,9 +414,9 @@
 (use-package dash)
 (use-package diminish)
 (use-package bind-key)
+(use-package smex)
 ;; (use-package flx)
 ;; (use-package amx)
-;; (use-package smex)
 ;; (use-package lv)
 (use-package pkgbuild-mode)
 
@@ -667,7 +667,13 @@
 
 (use-package lsp-mode
   :commands
-  (lsp lsp-deferred)
+  lsp
+  lsp-deferred
+  lsp-organize-imports
+  lsp-rust-analyzer-initialized?
+  lsp-request-async
+  lsp--text-document-identifier
+  lsp--range-to-region
 
   :bind
   (:map lsp-mode-map
@@ -683,6 +689,7 @@
   (lsp-prefer-capf t)
   (lsp-auto-guess-root t)
   (lsp-enable-semantic-highlighting t)
+  (lsp-file-watch-threshold nil)
 
   (lsp-rust-full-docs t)
   (lsp-rust-racer-completion nil)
@@ -694,12 +701,6 @@
 
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
-
-  :commands
-  lsp-rust-analyzer-initialized?
-  lsp-request-async
-  lsp--text-document-identifier
-  lsp--range-to-region
 
   :config
   (defface lsp-rust-inlay-type-face
@@ -786,14 +787,21 @@
   (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
+(use-package treemacs
+  :config
+  (treemacs-resize-icons 16)
+
+  :hook
+  (treemacs-mode . treemacs-follow-mode)
+  (treemacs-mode . treemacs-filewatch-mode)
+  (treemacs-mode . treemacs-fringe-indicator-mode))
+
 (use-package lsp-treemacs
   :commands
   lsp-treemacs-errors-list
 
   :hook
   (lsp-mode . lsp-treemacs-sync-mode))
-
-(use-package dap-mode)
 
 (use-package posframe
   :pin melpa)
@@ -825,6 +833,22 @@
   (ivy-posframe-mode t)
   (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
   (ivy-posframe-border-width 2))
+
+(use-package all-the-icons-dired
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+
+(use-package all-the-icons
+  :custom
+  (all-the-icons-scale-factor 1))
+
+(use-package all-the-icons-ivy
+  :config
+  (all-the-icons-ivy-setup))
+
+(use-package all-the-icons-ivy-rich
+  :custom
+  (all-the-icons-ivy-rich-mode t))
 
 ;; (use-package prescient
 ;;   :commands

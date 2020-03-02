@@ -27,6 +27,7 @@ autoconf-archive
 autogen
 automake
 autopep8
+awesome-terminal-fonts
 badvpn
 base
 bash-completion
@@ -205,6 +206,7 @@ i2c-tools
 i3lock
 i7z
 icmake
+icons-in-terminal
 id3v2
 idle3-tools
 ifenslave
@@ -526,8 +528,10 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
+ttf-font-awesome
 ttf-go-mono-git
 ttf-jetbrains-mono
+ttf-nerd-fonts-symbols
 tup
 udevil
 udftools
