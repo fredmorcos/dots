@@ -31,7 +31,7 @@ alias pacremove="yay -Qeq | fzf -m --preview 'pacman -Qi {1}' | xargs -ro pacman
 
 gitall() {
   for i in *; do
-    if [ -e "$i/.git" ] || [ -d "$i/.git" ]; then
+    if [ -d "$i/.git" ]; then
       cd "$i" || exit
       echo ">>> git $*: $i"
       git "$@"
