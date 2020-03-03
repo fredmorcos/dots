@@ -646,9 +646,8 @@
   (indent-guide-face ((t (:foreground "gray80")))))
 
 (use-package rustic
-  :load-path emacs-extra-dir
-
   :init
+  (push emacs-extra-dir load-path)
   (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
 
   :bind
