@@ -14,6 +14,7 @@
 (defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
+(push emacs-extra-dir load-path)
 
 (package-initialize)
 
@@ -415,6 +416,7 @@
 (use-package diminish)
 (use-package bind-key)
 (use-package smex)
+(use-package lv)
 (use-package pkgbuild-mode)
 
 (use-package org-bullets
@@ -436,7 +438,12 @@
   (org-mode . org-indent-mode)
 
   :custom-face
-  (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod")))))
+  (org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod"))))
+  (org-level-1 ((t (:height 1.3 :inherit (outline-1)))))
+  (org-level-2 ((t (:height 1.2 :inherit (outline-2)))))
+  (org-level-3 ((t (:height 1.1 :inherit (outline-3)))))
+  (org-todo ((t (:foreground "Red1" :height 0.9))))
+  (org-done ((t (:foreground "ForestGreen" :height 0.9)))))
 
 (use-package which-key
   :diminish "Wk"
@@ -449,7 +456,10 @@
   :diminish "Csel"
 
   :custom
-  (counsel-mode t))
+  (counsel-mode t)
+
+  :config
+  (put 'counsel-find-symbol 'no-counsel-M-x t))
 
 (use-package swiper
   :bind
@@ -627,8 +637,6 @@
 (use-package llvm-mode
   :ensure nil
 
-  :load-path emacs-extra-dir
-
   :mode
   "\\.ll\\'"
 
@@ -644,7 +652,6 @@
 
 (use-package rustic
   :init
-  (push emacs-extra-dir load-path)
   (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
 
   :bind
@@ -656,6 +663,7 @@
   :custom
   (rustic-lsp-server 'rust-analyzer)
   (rustic-analyzer-command '("/usr/bin/rust-analyzer"))
+  (rustic-lsp-format t)
 
   :config
   (eval-after-load 'flycheck
@@ -784,6 +792,9 @@
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
 
 (use-package treemacs
+  :commands
+  treemacs-resize-icons
+
   :config
   (treemacs-resize-icons 16)
 
