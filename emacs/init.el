@@ -774,6 +774,7 @@
   ;; (lsp-ui-doc-border "black")
   ;; (lsp-ui-doc-alignment 'window)
 
+  (lsp-ui-sideline-enable nil)
   ;; (lsp-ui-sideline-delay 0.1)
   (lsp-ui-sideline-update-mode 'line)
   (lsp-ui-sideline-ignore-duplicate t)
@@ -828,7 +829,10 @@
 
   :custom
   (flycheck-posframe-border-width 2)
-  (flycheck-posframe-position 'window-bottom-right-corner))
+  (flycheck-posframe-position 'window-bottom-right-corner)
+
+  :custom-face
+  (flycheck-posframe-background-face ((t (:background "CornSilk")))))
 
 (use-package ivy-posframe
   :diminish "IvyFr"
@@ -839,7 +843,20 @@
   :custom
   (ivy-posframe-mode t)
   (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-  (ivy-posframe-border-width 2))
+  (ivy-posframe-border-width 2)
+
+  :config
+  (defun ivy-posframe-get-size ()
+    "The default functon used by `ivy-posframe-size-function'."
+    (list
+     :height ivy-posframe-height
+     :width ivy-posframe-width
+     :min-height (or ivy-posframe-min-height
+                     (let ((height (+ ivy-height 1)))
+                       (min height (or ivy-posframe-height height))))
+     :min-width (or ivy-posframe-min-width
+                    (let ((width (round (* (frame-width) 0.98))))
+                      (min width (or ivy-posframe-width width)))))))
 
 (use-package all-the-icons-dired
   :hook
