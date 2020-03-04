@@ -415,9 +415,6 @@
 (use-package diminish)
 (use-package bind-key)
 (use-package smex)
-;; (use-package flx)
-;; (use-package amx)
-;; (use-package lv)
 (use-package pkgbuild-mode)
 
 (use-package org-bullets
