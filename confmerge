@@ -171,6 +171,8 @@ cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 
+cmerge udev/99-mount.rules           /etc/udev/rules.d/99-mount.rules
+
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
 cmerge "pkgs-cargo.list" "$pkgs_cargo_tmp_file"
