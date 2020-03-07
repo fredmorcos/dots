@@ -88,6 +88,7 @@ lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
 lib32-mesa-vdpau
 lib32-ocl-icd
+lib32-opencl-mesa
 lib32-simplescreenrecorder
 lib32-vkd3d
 lib32-vulkan-radeon
@@ -185,7 +186,8 @@ tensorflow-opt
 time
 tmux
 tokei
-tor-browser
+torbrowser-launcher
+torsocks
 transmission-gtk
 trash-cli
 ttf-font-awesome
