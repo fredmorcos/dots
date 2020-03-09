@@ -259,6 +259,7 @@ libnsutils
 liboggz
 libopenraw
 libosinfo
+libproxy-mozjs
 libraw
 libsidplayfp
 libunrar
@@ -377,6 +378,7 @@ perl-locale-gettext
 picard
 picom
 pigz
+pipewire-pulse
 pixiewps
 pkgconf
 pkgdiff
@@ -425,7 +427,6 @@ python-pydocstyle
 python-pylast
 python-pyopenssl
 python-pysmbc
-python-pysocks
 python-pystemmer
 python-pyudev
 python-requests-hawk
@@ -514,7 +515,7 @@ tlsh
 tmux
 toastify
 tokei
-tor-browser
+torbrowser-launcher
 torsocks
 tpm2-abrmd
 tpm2-tools
