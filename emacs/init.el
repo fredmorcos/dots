@@ -571,8 +571,9 @@
   :diminish "Sy"
 
   :bind
-  ("M->" . symbol-overlay-jump-next)
-  ("M-<" . symbol-overlay-just-prev)
+  (:map symbol-overlay-mode-map
+        ("M->" . symbol-overlay-jump-next)
+        ("M-<" . symbol-overlay-jump-prev))
 
   :custom
   (symbol-overlay-idle-time 0.1)
@@ -874,20 +875,10 @@
   :custom
   (all-the-icons-ivy-rich-mode t))
 
-;; (use-package prescient
-;;   :commands
-;;   prescient-persist-mode
-
+;; (use-package company-tabnine
 ;;   :config
-;;   (prescient-persist-mode))
-
-;; (use-package ivy-prescient
-;;   :config
-;;   (ivy-prescient-mode))
-
-;; (use-package company-prescient
-;;   :config
-;;   (company-prescient-mode))
+;;   (eval-after-load 'company
+;;     '(push #'company-tabnine 'company-backends)))
 
 (provide 'init)
 ;;; init ends here
