@@ -62,4 +62,9 @@
     <property name="Threshold" type="int" value="1"/>
     <property name="Acceleration" type="double" value="6.000000"/>
   </property>
+  <property name="HID_Keyboard_HID_Keyboard_Consumer_Control" type="empty">
+    <property name="RightHanded" type="bool" value="true"/>
+    <property name="Threshold" type="int" value="4"/>
+    <property name="Acceleration" type="double" value="2.500000"/>
+  </property>
 </channel>
