@@ -605,8 +605,8 @@
   :config
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
   (diminish 'yas-minor-mode " Y")
-  (eval-after-load 'company
-    '(push #'company-yasnippet company-backends))
+  ;; (eval-after-load 'company
+  ;;   '(push #'company-yasnippet company-backends))
 
   :hook
   ((hledger-mode prog-mode) . yas-minor-mode)
@@ -860,7 +860,7 @@
   :custom
   (company-tabnine-install-static-binary t)
 
-  :config
+  :init
   (eval-after-load 'company
     '(push #'company-tabnine company-backends)))
 
