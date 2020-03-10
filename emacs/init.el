@@ -228,6 +228,7 @@
 
   :commands
   split-window-horizontally
+  window-width
 
   :custom
   (split-height-threshold 160)
@@ -346,7 +347,7 @@
      tab-mark))
 
   :hook
-  (hledger-mode . whitespace-mode))
+  ((hledger-mode emacs-lisp-mode) . whitespace-mode))
 
 (use-package emacs-lisp-mode
   :ensure nil
@@ -604,6 +605,8 @@
   :config
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
   (diminish 'yas-minor-mode " Y")
+  (eval-after-load 'company
+    '(push #'company-yasnippet company-backends))
 
   :hook
   ((hledger-mode prog-mode) . yas-minor-mode)
@@ -652,6 +655,9 @@
   (indent-guide-face ((t (:foreground "gray80")))))
 
 (use-package rustic
+  :commands
+  rustic-clippy
+
   :init
   (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
 
@@ -668,7 +674,7 @@
 
   :config
   (eval-after-load 'flycheck
-    '(push 'rustic-clippy flycheck-checkers)))
+    '(push #'rustic-clippy flycheck-checkers)))
 
 (use-package lsp-mode
   :commands
@@ -738,7 +744,7 @@
                     (overlay-put overlay
                                  'after-string
                                  (concat (propertize ": " 'font-lock-face
-                                                     '((t :foreground "darkgray")))
+                                                     '(:foreground "darkgray"))
                                          (propertize label 'font-lock-face
                                                      'lsp-rust-inlay-type-face))))
                    ((string= kind "ParameterHint")
@@ -747,7 +753,7 @@
                                  (concat (propertize label 'font-lock-face
                                                      'lsp-rust-inlay-param-face)
                                          (propertize ": " 'font-lock-face
-                                                     '((t :foreground "darkgray"))))))))))
+                                                     '(:foreground "darkgray")))))))))
             :mode 'tick))
        nil)))
 
@@ -761,25 +767,25 @@
         ("M-?"   . lsp-ui-peek-find-references)
         ("C-c h" . lsp-ui-doc-glance))
 
-  :custom
-  (lsp-ui-flycheck-enable t)
-  (lsp-ui-flycheck-list-mode t)
+  ;; :custom
+  ;; (lsp-ui-flycheck-enable t)
+  ;; (lsp-ui-flycheck-list-mode t)
 
-  (lsp-ui-peek-always-show t)
-  (lsp-ui-peek-show-directory nil)
+  ;; (lsp-ui-peek-always-show t)
+  ;; (lsp-ui-peek-show-directory nil)
 
-  (lsp-ui-doc-enable nil)
+  ;; (lsp-ui-doc-enable nil)
   ;; (lsp-ui-doc-header t)
   ;; (lsp-ui-doc-include-signature t)
   ;; (lsp-ui-doc-delay 0.5)
   ;; (lsp-ui-doc-border "black")
   ;; (lsp-ui-doc-alignment 'window)
 
-  (lsp-ui-sideline-enable nil)
+  ;; (lsp-ui-sideline-enable nil)
   ;; (lsp-ui-sideline-delay 0.1)
-  (lsp-ui-sideline-update-mode 'line)
-  (lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-sideline-show-hover t)
+  ;; (lsp-ui-sideline-update-mode 'line)
+  ;; (lsp-ui-sideline-ignore-duplicate t)
+  ;; (lsp-ui-sideline-show-hover t)
 
   :custom-face
   (lsp-lens-face ((t (:inherit shadow))))
@@ -792,25 +798,6 @@
   (lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
   (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
   (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
-
-(use-package treemacs
-  :commands
-  treemacs-resize-icons
-
-  :config
-  (treemacs-resize-icons 16)
-
-  :hook
-  (treemacs-mode . treemacs-follow-mode)
-  (treemacs-mode . treemacs-filewatch-mode)
-  (treemacs-mode . treemacs-fringe-indicator-mode))
-
-(use-package lsp-treemacs
-  :commands
-  lsp-treemacs-errors-list
-
-  :hook
-  (lsp-mode . lsp-treemacs-sync-mode))
 
 (use-package posframe
   :pin melpa)
@@ -838,26 +825,20 @@
 (use-package ivy-posframe
   :diminish "IvyFr"
 
-  :hook
-  (ivy-mode . ivy-posframe-mode)
-
   :custom
   (ivy-posframe-mode t)
-  (ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+  (ivy-posframe-display-functions-alist
+   '((t . ivy-posframe-display-at-frame-bottom-window-center)))
   (ivy-posframe-border-width 2)
 
   :config
   (defun ivy-posframe-get-size ()
     "The default functon used by `ivy-posframe-size-function'."
-    (list
-     :height ivy-posframe-height
-     :width ivy-posframe-width
-     :min-height (or ivy-posframe-min-height
-                     (let ((height (+ ivy-height 1)))
-                       (min height (or ivy-posframe-height height))))
-     :min-width (or ivy-posframe-min-width
-                    (let ((width (round (* (frame-width) 0.98))))
-                      (min width (or ivy-posframe-width width)))))))
+    (let ((width (round (* (window-width) 0.90))))
+      (list :height nil :width width :min-height ivy-height :min-width width)))
+
+  :hook
+  (ivy-mode . ivy-posframe-mode))
 
 (use-package all-the-icons-dired
   :hook
@@ -875,10 +856,13 @@
   :custom
   (all-the-icons-ivy-rich-mode t))
 
-;; (use-package company-tabnine
-;;   :config
-;;   (eval-after-load 'company
-;;     '(push #'company-tabnine 'company-backends)))
+(use-package company-tabnine
+  :custom
+  (company-tabnine-install-static-binary t)
+
+  :config
+  (eval-after-load 'company
+    '(push #'company-tabnine company-backends)))
 
 (provide 'init)
 ;;; init ends here
