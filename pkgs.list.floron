@@ -269,6 +269,8 @@ libwmf
 linux-firmware
 linux-headers
 linux-tools-meta
+linux-zen
+linux-zen-headers
 live-media
 lld
 lldb
