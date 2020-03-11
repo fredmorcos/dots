@@ -90,6 +90,7 @@ if [ -d $DATA ]; then
         cmd "$DATA/Common/" "$EXTERNAL/Common/"
         cmd "$DATA/Fred/"   "$EXTERNAL/Fred/"
         cmd "$DATA/Hilda/"  "$EXTERNAL/Hilda/"
+        cmd "$DATA/Media/"  "$EXTERNAL/Media/"
     else
         printf ">>> %s is not mounted\n" $EXTERNAL
         exit 0
