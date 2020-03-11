@@ -26,13 +26,12 @@ CMD=("rsync"
      "-zz"
      "$@")
 
-echo "Rsync command: " "${CMD[@]}"
+printf "Rsync command: %s\n" "${CMD[@]}"
 
 cmd () {
-    echo ">>> ------ $1 --> $2:"
+    printf ">>> %s --> %s\n" "$1" "$2"
     "${CMD[@]}" "$1" "$2"
-    echo ""
-    echo ""
+    printf "\n\n"
 }
 
 HOME=/home/fred
@@ -91,5 +90,11 @@ if [ -d $DATA ]; then
         cmd "$DATA/Common/" "$EXTERNAL/Common/"
         cmd "$DATA/Fred/"   "$EXTERNAL/Fred/"
         cmd "$DATA/Hilda/"  "$EXTERNAL/Hilda/"
+    else
+        printf ">>> %s is not mounted\n" $EXTERNAL
+        exit 0
     fi
+else
+    printf ">>> %s is not mounted\n" $DATA
+    exit 1
 fi
