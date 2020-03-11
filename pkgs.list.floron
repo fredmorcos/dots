@@ -3,8 +3,6 @@ acpi
 acpica
 acpi_call
 acpid
-adobe-source-sans-pro-fonts
-adobe-source-serif-pro-fonts
 afl-utils
 afpfs-ng
 alacritty
@@ -27,7 +25,6 @@ autoconf-archive
 autogen
 automake
 autopep8
-awesome-terminal-fonts
 badvpn
 base
 bash-completion
@@ -102,9 +99,11 @@ dhcpcd
 dhcping
 dhex
 dialog
+diffpdf
 diff-so-fancy
 discount
 diskus
+dmenu
 dnsmasq
 dnssec-tools
 docx2txt
@@ -205,7 +204,6 @@ i2c-tools
 i3lock
 i7z
 icmake
-icons-in-terminal
 id3v2
 idle3-tools
 ifenslave
@@ -338,8 +336,6 @@ nfs-utils
 nilfs-utils
 nordvpn-bin
 notion
-noto-fonts-cjk
-noto-fonts-extra
 numix-gtk-theme-git
 nvme-cli
 odt2txt
@@ -449,7 +445,6 @@ restic
 rink
 ripgrep
 rlwrap
-rofimoji
 rofi-pass
 rtirq
 rust-analyzer-bin
@@ -483,7 +478,6 @@ socat
 soundconverter
 source-highlight
 sparsehash
-spectrwm
 speech-dispatcher
 spike
 spirv-headers
@@ -526,10 +520,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
-ttf-font-awesome
 ttf-go-mono-git
-ttf-jetbrains-mono
-ttf-nerd-fonts-symbols
 tup
 udftools
 unace
@@ -591,9 +582,9 @@ xkeycaps
 xmldiff
 xmlto
 xorg-appres
+xorg-bdftopcf
 xorg-docs
-xorg-fonts-100dpi
-xorg-fonts-75dpi
+xorg-font-util
 xorg-luit
 xorg-server-devel
 xorg-server-xephyr
@@ -625,6 +616,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xsel
 xsettings-client
 xsettingsd
 xss-lock
