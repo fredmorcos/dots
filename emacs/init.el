@@ -547,7 +547,10 @@
   (prog-mode . company-mode)
   (company-mode . (lambda () (setq company-backends '((company-tabnine company-capf
                                                        company-yasnippet company-keywords
-                                                       company-files))))))
+                                                       company-files)))))
+
+  :custom-face
+  (company-tooltip ((t (:background "gray95")))))
 
 (use-package diff-hl
   :custom
@@ -799,7 +802,11 @@
   :diminish "CoFr"
 
   :hook
-  (company-mode . company-posframe-mode))
+  (company-mode . company-posframe-mode)
+
+  :custom
+  (company-posframe-show-params
+   (list :internal-border-width 1 :internal-border-color "gray60")))
 
 (use-package flycheck-posframe
   :hook
