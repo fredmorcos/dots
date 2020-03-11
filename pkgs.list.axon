@@ -221,7 +221,9 @@ xfce4-session
 xfce4-settings
 xfce4-terminal
 xfdesktop
+xorg-bdftopcf
 xorg-docs
+xorg-font-util
 xorg-luit
 xorg-server-devel
 xorg-server-xephyr
