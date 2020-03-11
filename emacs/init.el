@@ -331,26 +331,19 @@
   (show-trailing-whitespace nil)
   (whitespace-action '(cleanup))
   (whitespace-style
-   '(face
-     tabs
-     lines
-     empty
-     indentation::tab
-     indentation::space
-     indentation
-     space-after-tab::tab
-     space-after-tab::space
-     space-after-tab
-     space-before-tab::tab
-     space-before-tab::space
-     space-before-tab
-     tab-mark))
+   '(face tabs lines empty tab-mark
+     indentation indentation::tab indentation::space
+     space-after-tab space-after-tab::tab space-after-tab::space
+     space-before-tab space-before-tab::tab space-before-tab::space))
 
   :hook
   ((hledger-mode emacs-lisp-mode) . whitespace-mode))
 
 (use-package emacs-lisp-mode
   :ensure nil
+
+  :custom
+  (lisp-indent-function #'common-lisp-indent-function)
 
   :mode
   "\\emacs\\'"
@@ -540,7 +533,6 @@
   :diminish "Co"
 
   :custom
-  (company-backends '(company-capf company-keywords company-files))
   (company-frontends '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
   (completion-ignore-case t)
   (company-echo-truncate-lines nil)
@@ -552,7 +544,10 @@
   ;; (company-idle-delay 0.1)
 
   :hook
-  (prog-mode . company-mode))
+  (prog-mode . company-mode)
+  (company-mode . (lambda () (setq company-backends '((company-tabnine company-capf
+                                                       company-yasnippet company-keywords
+                                                       company-files))))))
 
 (use-package diff-hl
   :custom
@@ -605,8 +600,6 @@
   :config
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
   (diminish 'yas-minor-mode " Y")
-  ;; (eval-after-load 'company
-  ;;   '(push #'company-yasnippet company-backends))
 
   :hook
   ((hledger-mode prog-mode) . yas-minor-mode)
@@ -858,11 +851,7 @@
 
 (use-package company-tabnine
   :custom
-  (company-tabnine-install-static-binary t)
-
-  :init
-  (eval-after-load 'company
-    '(push #'company-tabnine company-backends)))
+  (company-tabnine-install-static-binary t))
 
 (provide 'init)
 ;;; init ends here

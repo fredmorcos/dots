@@ -175,6 +175,7 @@ gst-python
 gstreamer-vaapi
 gst-transcoder
 gtest
+gtksourceview3
 gucharmap
 gumbo-parser
 gvfs
@@ -192,7 +193,6 @@ hledger-web
 hsetroot
 htop
 httptunnel
-hub
 hunspell-de
 hunspell-en_US
 hunspell-fr
