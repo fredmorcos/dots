@@ -6,7 +6,6 @@ aspell-en
 atool
 autoconf
 automake
-awesome-terminal-fonts
 base
 bash-completion
 bat
@@ -128,9 +127,6 @@ mythes-en
 ncdu
 nnn
 nordvpn-bin
-noto-fonts-cjk
-noto-fonts-emoji
-noto-fonts-extra
 ntfs-3g
 numix-gtk-theme-git
 nvme-cli
@@ -192,9 +188,7 @@ torbrowser-launcher
 torsocks
 transmission-gtk
 trash-cli
-ttf-font-awesome
 ttf-go-mono-git
-ttf-nerd-fonts-symbols
 tup
 unace
 unoconv
@@ -228,8 +222,6 @@ xfce4-settings
 xfce4-terminal
 xfdesktop
 xorg-docs
-xorg-fonts-100dpi
-xorg-fonts-75dpi
 xorg-luit
 xorg-server-devel
 xorg-server-xephyr
