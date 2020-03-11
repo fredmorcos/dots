@@ -224,7 +224,6 @@ jfsutils
 jp2a
 jwm
 kcov
-khal
 kmscon
 laptop-detect
 lbzip2
@@ -401,7 +400,6 @@ python-cssselect
 python-diff-match-patch
 python-discid
 python-distutils-extra
-python-etesync
 python-evdev
 python-genshi
 python-httplib2
@@ -538,7 +536,6 @@ valgrind
 vbindiff
 vcdimager
 vde2
-vdirsyncer
 vdpauinfo
 vi
 vim-colorsamplerpack

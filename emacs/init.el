@@ -694,7 +694,6 @@
   (lsp-keymap-prefix "C-c")
   (lsp-prefer-flymake nil)
   (lsp-prefer-capf t)
-  (lsp-auto-guess-root t)
   (lsp-file-watch-threshold nil)
   (lsp-enable-semantic-highlighting t)
   (lsp-enable-indentation t)
@@ -841,7 +840,7 @@
   (defun ivy-posframe-get-size ()
     "The default functon used by `ivy-posframe-size-function'."
     (let ((width (round (* (window-width) 0.90))))
-      (list :height nil :width width :min-height ivy-height :min-width width)))
+      (list :height ivy-height :width width :min-height ivy-height :min-width width)))
 
   :hook
   (ivy-mode . ivy-posframe-mode))
