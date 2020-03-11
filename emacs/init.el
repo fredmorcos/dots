@@ -695,8 +695,12 @@
   (lsp-prefer-flymake nil)
   (lsp-prefer-capf t)
   (lsp-auto-guess-root t)
-  (lsp-enable-semantic-highlighting t)
   (lsp-file-watch-threshold nil)
+  (lsp-enable-semantic-highlighting t)
+  (lsp-enable-indentation t)
+  (lsp-enable-on-type-formatting t)
+  (lsp-before-save-edits t)
+  (lsp-auto-configure t)
 
   (lsp-rust-full-docs t)
   (lsp-rust-racer-completion nil)
@@ -763,6 +767,9 @@
         ("M-?"   . lsp-ui-peek-find-references)
         ("C-c h" . lsp-ui-doc-glance))
 
+  :custom
+  (lsp-ui-sideline-enable nil)
+
   ;; :custom
   ;; (lsp-ui-flycheck-enable t)
   ;; (lsp-ui-flycheck-list-mode t)
@@ -816,7 +823,6 @@
   (flycheck-posframe-configure-pretty-defaults)
 
   :custom
-  (flycheck-posframe-border-width 2)
   (flycheck-posframe-position 'window-bottom-right-corner)
 
   :custom-face
