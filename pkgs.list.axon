@@ -72,7 +72,6 @@ hyphen-en
 hyphen-fr
 i2c-tools
 i3lock
-icons-in-terminal
 idle3-tools
 intltool
 iotop
@@ -107,6 +106,7 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvterm
 libwmf
+linux
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -119,7 +119,6 @@ lrzip
 lsof
 lxdm-gtk3
 lzop
-make
 mediainfo
 mesa-demos
 mesa-vdpau
@@ -140,7 +139,6 @@ p7zip
 pacman-contrib
 papirus-icon-theme
 par2cmdline
-patch
 pavucontrol
 picard
 picom
