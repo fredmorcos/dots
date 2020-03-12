@@ -42,6 +42,7 @@ bolt
 bonnie++
 boost
 bridge-utils
+brook
 bs1770gain
 bsdiff
 bspwm
@@ -554,7 +555,7 @@ wavemon
 when
 whois
 whowatch
-wireguard-arch
+wireguard-dkms
 wireguard-tools
 wmctrl
 words

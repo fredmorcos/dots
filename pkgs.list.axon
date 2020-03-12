@@ -206,7 +206,7 @@ vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
-wireguard-arch
+wireguard-dkms
 wireguard-tools
 wmctrl
 xclip
