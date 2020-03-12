@@ -845,17 +845,9 @@
   :hook
   (ivy-mode . ivy-posframe-mode))
 
-(use-package all-the-icons-dired
-  :hook
-  (dired-mode . all-the-icons-dired-mode))
-
 (use-package all-the-icons
   :custom
   (all-the-icons-scale-factor 1))
-
-(use-package all-the-icons-ivy
-  :config
-  (all-the-icons-ivy-setup))
 
 (use-package all-the-icons-ivy-rich
   :custom
