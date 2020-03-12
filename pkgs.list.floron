@@ -29,7 +29,7 @@ badvpn
 base
 bash-completion
 bat
-bbswitch
+bbswitch-dkms
 beets
 bin2iso
 binwalk
@@ -289,7 +289,6 @@ lzop
 m17n-lib
 mailutils
 mairix
-make
 man-pages
 marisa
 masscan
@@ -362,7 +361,6 @@ par2cmdline
 parallel
 pass-otp
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
