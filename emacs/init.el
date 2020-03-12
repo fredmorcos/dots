@@ -188,12 +188,6 @@
   (coding-system-for-read 'utf-8-unix)
   (coding-system-for-write 'utf-8-unix))
 
-(use-package keyboard
-  :ensure nil
-
-  :custom
-  (suggest-key-bindings 10))
-
 (use-package electric
   :ensure nil
 
@@ -247,6 +241,7 @@
   (before-save . delete-trailing-whitespace)
 
   :custom
+  (suggest-key-bindings 10)
   (column-number-mode t)
   (line-number-mode nil)
   (auto-save-mode t)
@@ -339,15 +334,15 @@
   :hook
   ((hledger-mode emacs-lisp-mode) . whitespace-mode))
 
-(use-package emacs-lisp-mode
+(use-package elisp-mode
   :ensure nil
 
   :custom
   (lisp-indent-function #'common-lisp-indent-function)
 
   :mode
-  "\\emacs\\'"
-  "\\.config/emacs/init\\'")
+  ("\\emacs\\'" . emacs-lisp-mode)
+  ("\\.config/emacs/init\\'" . emacs-lisp-mode))
 
 (use-package text-mode
   :ensure nil
@@ -545,7 +540,7 @@
 
   :hook
   (prog-mode . company-mode)
-  (company-mode . (lambda () (setq company-backends '((company-tabnine company-capf
+  (company-mode . (lambda () (setq company-backends '((company-capf company-tabnine
                                                        company-yasnippet company-keywords
                                                        company-files)))))
 
@@ -628,11 +623,11 @@
 (use-package toml-mode)
 (use-package json-mode)
 
-(use-package js-mode
+(use-package js
   :ensure nil
 
   :mode
-  "\\.hocon\\'")
+  ("\\.hocon\\'" . js-mode))
 
 (use-package llvm-mode
   :ensure nil
@@ -856,6 +851,10 @@
 (use-package company-tabnine
   :custom
   (company-tabnine-install-static-binary t))
+
+(use-package systemd
+  :hook
+  (systemd-mode . company-mode))
 
 (provide 'init)
 ;;; init ends here
