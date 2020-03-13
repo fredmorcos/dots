@@ -333,6 +333,7 @@ networkmanager-openconnect
 networkmanager-openvpn
 networkmanager-strongswan
 nfs-utils
+ngrep
 nilfs-utils
 nordvpn-bin
 notion
