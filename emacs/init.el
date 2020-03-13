@@ -332,7 +332,7 @@
      space-before-tab space-before-tab::tab space-before-tab::space))
 
   :hook
-  ((hledger-mode emacs-lisp-mode) . whitespace-mode))
+  ((hledger-mode emacs-lisp-mode makefile-mode) . whitespace-mode))
 
 (use-package elisp-mode
   :ensure nil
