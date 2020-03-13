@@ -28,6 +28,7 @@ alias up='yay --devel -Syu'
 alias pac="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --needed"
 alias aur="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
 alias pacremove="yay -Qeq | fzf -m --preview 'pacman -Qi {1}' | xargs -ro pacman -Rcsn"
+alias duplicates="fdupes -rdSnA -o name"
 
 gitall() {
   for i in *; do
