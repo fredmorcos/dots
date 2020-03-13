@@ -187,7 +187,6 @@ herbstluftwm
 hexchat
 hexyl
 highlight
-hledger-ui
 hledger-web
 hsetroot
 htop
@@ -208,7 +207,6 @@ id3v2
 idle3-tools
 ifenslave
 ifplugd
-intel-compute-runtime
 intel-gpu-tools
 intel-ucode
 iotop
@@ -231,6 +229,13 @@ lbzip2
 leatherman
 ledger
 lhasa
+lib32-libavtp
+lib32-libsamplerate
+lib32-libva-intel-driver
+lib32-libva-vdpau-driver
+lib32-mesa-vdpau
+lib32-opencl-nvidia
+lib32-primus_vk
 libappindicator-gtk3
 libc++
 libcue
@@ -281,7 +286,6 @@ lockfile-progs
 logrotate
 lostfiles
 lrzip
-lsb-release
 lsof
 lua-alt-getopt
 lua-filesystem
@@ -322,6 +326,7 @@ mythes-de
 mythes-en
 mythes-fr
 nano
+nccl
 ncdu
 ncftp
 neofetch
@@ -338,11 +343,14 @@ nilfs-utils
 nordvpn-bin
 notion
 numix-gtk-theme-git
+nvidia-dkms
+nvidia-prime
+nvidia-settings
 nvme-cli
+nvtop
 odt2txt
 ogmtools
 openbsd-netcat
-opencl-mesa
 openldap
 openmp
 openpyn-nordvpn
@@ -381,6 +389,7 @@ pkgfile
 plantri
 ponymix
 powertop
+primus_vk
 privoxy
 progress
 proxytunnel
@@ -455,11 +464,7 @@ schedtool
 screen
 screenfetch
 sdl2_gfx
-sdl2_image
-sdl2_mixer
 sdl2_net
-sdl2_ttf
-sdl_image
 seahorse
 shadowsocks
 shairplay
@@ -482,6 +487,7 @@ spike
 spirv-headers
 squashfs-tools
 sshfs
+steam-native-runtime
 strace
 stress
 stunnel
@@ -531,7 +537,6 @@ unrtf
 unshield
 upx
 uriparser
-usbutils
 usleep
 uthash
 valgrind
@@ -565,7 +570,6 @@ x11-ssh-askpass
 xcape
 xcompmgr
 xdelta3
-xdg-dbus-proxy
 xdg-desktop-portal
 xfce4-appfinder
 xfce4-notifyd
