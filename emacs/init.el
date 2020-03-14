@@ -406,7 +406,6 @@
 (use-package bind-key)
 (use-package smex)
 (use-package lv)
-(use-package pkgbuild-mode)
 
 (use-package org-bullets
   :custom
