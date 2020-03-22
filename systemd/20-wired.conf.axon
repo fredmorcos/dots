@@ -13,7 +13,9 @@ Address=192.168.0.105/24
 Gateway=192.168.0.1
 # DNS=https://doh.libredns.gr/ads
 # DNS=127.0.0.53
-DNS=192.168.0.1
+# DNS=192.168.0.1
+# DNS=116.202.176.26
+# DNSOverTLS=yes
 
 [Link]
 MTUBytes=9000
