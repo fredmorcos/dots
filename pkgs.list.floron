@@ -29,7 +29,7 @@ badvpn
 base
 bash-completion
 bat
-bbswitch-dkms
+bbswitch
 beets
 bin2iso
 binwalk
@@ -275,8 +275,6 @@ libwmf
 linux-firmware
 linux-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 live-media
 lld
 lldb
@@ -294,6 +292,7 @@ lzop
 m17n-lib
 mailutils
 mairix
+make
 man-pages
 marisa
 masscan
@@ -343,7 +342,7 @@ nilfs-utils
 nordvpn-bin
 notion
 numix-gtk-theme-git
-nvidia-dkms
+nvidia
 nvidia-prime
 nvidia-settings
 nvme-cli
@@ -371,6 +370,7 @@ par2cmdline
 parallel
 pass-otp
 pastebinit
+patch
 patchelf
 pavucontrol
 pbzip2
@@ -561,7 +561,7 @@ wavemon
 when
 whois
 whowatch
-wireguard-dkms
+wireguard-arch
 wireguard-tools
 wmctrl
 words
