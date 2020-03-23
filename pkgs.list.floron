@@ -507,6 +507,7 @@ the_silver_searcher
 thunar-archive-plugin
 thunderbird
 tig
+tigervnc
 time
 tinc
 tinyemu
@@ -615,7 +616,6 @@ xorg-xlsclients
 xorg-xmessage
 xorg-xpr
 xorg-xrefresh
-xorg-xsetroot
 xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
