@@ -4,6 +4,7 @@ amd-ucode
 arch-audit
 aspell-en
 atool
+audacious
 autoconf
 automake
 base
@@ -22,6 +23,7 @@ cargo-outdated
 cargo-tree
 cbindgen
 ccache
+chromium
 clinfo
 cmake
 cmus
@@ -93,15 +95,18 @@ lib32-vkd3d
 lib32-vulkan-radeon
 lib32-vulkan-validation-layers
 libao
+libcue
 libfido2
 libgnome-keyring
 libheif
 libmad
 libmp4v2
+libmtp
 libmythes
 libpipewire02
 libproxy-mozjs
 libraw
+libsidplayfp
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
@@ -199,6 +204,7 @@ upx
 valgrind
 vdpauinfo
 vi
+vice
 vim-colorsamplerpack
 vim-spell-en
 vkd3d
