@@ -115,7 +115,6 @@ cmerge autostart/xrgb.desktop        ~/.config/autostart/xrgb.desktop
 cmerge autostart/xnocaps.desktop     ~/.config/autostart/xnocaps.desktop
 
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
-cmerge applications/Eclipse.desktop  ~/.local/share/applications/Eclipse.desktop
 
 # cmerge gtk/gtkrc-2.0                 ~/.gtkrc-2.0
 # cmerge gtk/filechooser.ini           ~/.config/gtk-2.0/gtkfilechooser.ini
