@@ -20,6 +20,7 @@ aspell-en
 aspell-fr
 astyle
 atool
+audacious
 augeas
 autoconf-archive
 autogen
@@ -174,6 +175,7 @@ gst-python
 gstreamer-vaapi
 gst-transcoder
 gtest
+gtk-engine-murrine
 gtksourceview3
 gucharmap
 gumbo-parser
