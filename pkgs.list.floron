@@ -260,6 +260,7 @@ libnsutils
 liboggz
 libopenraw
 libosinfo
+libpipewire02
 libproxy-mozjs
 libraw
 libsidplayfp
@@ -480,7 +481,6 @@ s-nail
 snap-sync
 socat
 soundconverter
-source-highlight
 sparsehash
 speech-dispatcher
 spike
