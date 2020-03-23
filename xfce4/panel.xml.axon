@@ -94,7 +94,7 @@
     </property>
     <property name="plugin-7" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="cmus;vlc"/>
+      <property name="mpris-players" type="string" value="audacious;cmus;vlc"/>
       <property name="enable-multimedia-keys" type="bool" value="false"/>
       <property name="enable-wnck" type="bool" value="false"/>
       <property name="enable-mpris" type="bool" value="false"/>
