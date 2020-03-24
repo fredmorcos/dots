@@ -150,7 +150,6 @@ cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 cmerge systemd/coredump.conf         /etc/systemd/coredump.conf
 cmerge systemd/system.conf           /etc/systemd/system.conf
 cmerge systemd/journald.conf         /etc/systemd/journald.conf
-cmerge systemd/resolved.conf         /etc/systemd/resolved.conf
 cmerge systemd/boot-override.conf    /etc/systemd/system/boot.mount.d/override.conf
 cmerge systemd/fstrim@.service       /etc/systemd/system/fstrim@.service
 cmerge systemd/fstrim@.timer         /etc/systemd/system/fstrim@.timer
