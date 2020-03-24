@@ -190,7 +190,7 @@ subdl
 syncthing
 sysstat
 tensorflow-opt
-thunderbird
+tigervnc
 time
 tmux
 tokei
@@ -260,7 +260,6 @@ xorg-xlsatoms
 xorg-xlsclients
 xorg-xpr
 xorg-xrefresh
-xorg-xsetroot
 xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
