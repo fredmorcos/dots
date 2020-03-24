@@ -833,7 +833,7 @@
   :config
   (defun ivy-posframe-get-size ()
     "The default functon used by `ivy-posframe-size-function'."
-    (let ((width (round (* (window-width) 0.90))))
+    (let ((width (round (* (window-width) 0.95))))
       (list :height ivy-height :width width :min-height ivy-height :min-width width)))
 
   :hook

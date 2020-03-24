@@ -3,6 +3,7 @@ acpi
 acpica
 acpi_call
 acpid
+acpilight
 afl-utils
 afpfs-ng
 alacritty
@@ -599,7 +600,6 @@ xorg-server-xwayland
 xorg-sessreg
 xorg-smproxy
 xorg-x11perf
-xorg-xbacklight
 xorg-xclipboard
 xorg-xcmsdb
 xorg-xcursorgen
