@@ -115,6 +115,7 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvterm
 libwmf
+linux
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -216,8 +217,6 @@ vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
-wireguard-arch
-wireguard-tools
 wmctrl
 xclip
 xf86-input-evdev
