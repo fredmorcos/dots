@@ -67,6 +67,11 @@
     <property name="Threshold" type="int" value="4"/>
     <property name="Acceleration" type="double" value="2.500000"/>
   </property>
+  <property name="SYNA239300_06CB7A13_Mouse" type="empty">
+    <property name="RightHanded" type="bool" value="true"/>
+    <property name="Threshold" type="int" value="1"/>
+    <property name="Acceleration" type="double" value="5.000000"/>
+  </property>
   <property name="ROCCAT_ROCCAT_Kova_Aimo_Consumer_Control" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
     <property name="Threshold" type="int" value="10"/>
