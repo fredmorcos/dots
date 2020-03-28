@@ -29,6 +29,7 @@ PATH="$HOME/Oracle/opt/idea-IU-193.5233.102/bin:$PATH"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 
 # Rust
 RUSTC_WRAPPER=sccache

@@ -1,6 +1,7 @@
 acpid
 adobe-source-sans-pro-fonts
 amd-ucode
+amdvlk
 arch-audit
 aspell-en
 atool
@@ -33,6 +34,7 @@ curlftpfs
 dateutils
 dbus-broker
 dconf-editor
+dialog
 discord
 dnsmasq
 duperemove
@@ -78,12 +80,16 @@ hyphen-fr
 i2c-tools
 i3lock
 idle3-tools
+innoextract
 intltool
 iotop
 irqbalance
 ispell
 kcov
 lhasa
+lib32-amdvlk
+lib32-gst-plugins-base-libs
+lib32-gtk3
 lib32-libavtp
 lib32-libsamplerate
 lib32-libva-mesa-driver
@@ -93,6 +99,7 @@ lib32-mesa-vdpau
 lib32-ocl-icd
 lib32-opencl-mesa
 lib32-simplescreenrecorder
+lib32-v4l-utils
 lib32-vkd3d
 lib32-vulkan-radeon
 lib32-vulkan-validation-layers
@@ -100,6 +107,7 @@ libao
 libcue
 libfido2
 libgnome-keyring
+libgphoto2
 libheif
 libmad
 libmp4v2
@@ -119,6 +127,8 @@ linux
 linux-firmware
 linux-headers
 linux-tools-meta
+linux-zen
+linux-zen-headers
 lld
 lldb
 lrzip
@@ -162,6 +172,7 @@ pulseaudio
 pwgen
 python-beautifulsoup4
 python-discid
+python-pip
 python-pyacoustid
 python-pycryptodome
 python-pylast
@@ -217,6 +228,7 @@ vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
+wine-staging
 wmctrl
 xclip
 xf86-input-evdev
@@ -245,6 +257,7 @@ xorg-sessreg
 xorg-smproxy
 xorg-x11perf
 xorg-xbacklight
+xorg-xclipboard
 xorg-xcmsdb
 xorg-xcursorgen
 xorg-xdpyinfo
