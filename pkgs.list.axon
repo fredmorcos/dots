@@ -228,7 +228,6 @@ vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
-wine-staging
 wmctrl
 xclip
 xf86-input-evdev
@@ -257,7 +256,6 @@ xorg-sessreg
 xorg-smproxy
 xorg-x11perf
 xorg-xbacklight
-xorg-xclipboard
 xorg-xcmsdb
 xorg-xcursorgen
 xorg-xdpyinfo
@@ -277,6 +275,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xsel
 xss-lock
 yay-bin
 youtube-dl
