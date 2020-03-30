@@ -24,7 +24,6 @@ cargo-outdated
 cargo-tree
 cbindgen
 ccache
-chromium
 clinfo
 cmake
 cmus
