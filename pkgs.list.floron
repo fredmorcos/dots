@@ -468,7 +468,7 @@ screenfetch
 sdl2_gfx
 sdl2_net
 seahorse
-shadowsocks
+shadowsocks-libev
 shairplay
 shake
 shellcheck-static
