@@ -31,7 +31,7 @@ badvpn
 base
 bash-completion
 bat
-bbswitch
+bbswitch-dkms
 beets
 bin2iso
 binwalk
@@ -279,6 +279,8 @@ libwmf
 linux-firmware
 linux-headers
 linux-tools-meta
+linux-zen
+linux-zen-headers
 live-media
 lld
 lldb
@@ -296,7 +298,6 @@ lzop
 m17n-lib
 mailutils
 mairix
-make
 man-pages
 marisa
 masscan
@@ -372,7 +373,6 @@ par2cmdline
 parallel
 pass-otp
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
