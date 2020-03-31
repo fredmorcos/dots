@@ -6,6 +6,7 @@ arch-audit
 aspell-en
 atool
 audacious
+audacious-plugins
 autoconf
 automake
 base
@@ -15,6 +16,7 @@ beets
 bison
 bonnie++
 boost
+bridge-utils
 bs1770gain
 cargo-audit
 cargo-crev
@@ -25,6 +27,7 @@ cargo-tree
 cbindgen
 ccache
 clinfo
+clipgrab
 cmake
 cmus
 compsize
@@ -35,9 +38,11 @@ dbus-broker
 dconf-editor
 dialog
 discord
+dmidecode
 dnsmasq
 duperemove
 easy-rsa
+ebtables
 ecm-tools
 efibootmgr
 emacs-git
@@ -150,9 +155,11 @@ ntfs-3g
 numix-gtk-theme-git
 nvme-cli
 odt2txt
+openbsd-netcat
 opencl-mesa
 openmp
 openresolv
+ovmf
 p7zip
 pacman-contrib
 papirus-icon-theme
@@ -179,6 +186,7 @@ python-xdg
 qbittorrent
 radeontool
 read-edid
+realtime-privileges
 redshift
 rink
 ripgrep
@@ -277,4 +285,5 @@ xorg-xwud
 xsel
 xss-lock
 yay-bin
+you-get
 youtube-dl

@@ -155,6 +155,7 @@ cmerge systemd/fstrim@.service       /etc/systemd/system/fstrim@.service
 cmerge systemd/fstrim@.timer         /etc/systemd/system/fstrim@.timer
 
 cmerge pulse/default.pa              /etc/pulse/default.pa
+cmerge pulse/daemon.conf             ~/.config/pulse/daemon.conf
 
 cmerge archlinux/makepkg.conf        /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
