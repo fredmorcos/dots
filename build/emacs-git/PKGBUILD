@@ -70,11 +70,11 @@ provides=('emacs' 'emacs-seq')
 conflicts=('emacs' 'emacs26-git' 'emacs-27-git' 'emacs-seq')
 replaces=('emacs26-git' 'emacs27-git' 'emacs-seq')
 source=("emacs-git::git://git.savannah.gnu.org/emacs.git")
+md5sums=('SKIP')
 # If Savannah access is blocked for reasons, use Github instead.
 # Edit the config file of your local repo copy as well.
 #source=("emacs-git::git://github.com/emacs-mirror/emacs.git")
 options=(!strip)
-md5sums=('SKIP')
 ################################################################################
 
 ################################################################################
@@ -174,61 +174,61 @@ build() {
   cd "$srcdir/emacs-git"
 
   local _conf=(
-    --prefix=/usr
-    --sysconfdir=/etc
-    --libexecdir=/usr/lib
-    --localstatedir=/var
-    --mandir=/usr/share/man
-    --with-gameuser=:games
-    --enable-checking=no
-    --enable-link-time-optimization
-    --disable-acl
-    --without-mailutils
-    --without-pop
-    --without-kerberos
-    --without-kerberos5
-    --without-hesiod
-    --without-mail-unlink
-    --without-wide-int
-    --without-xpm
-    --without-jpeg
-    --without-tiff
-    --without-gif
-    --without-rsvg
-    --without-png
-    --without-imagemagick
-    --without-lcms2
-    --without-libsystemd
-    --without-m17n-flt
-    --without-toolkit-scroll-bars
-    --without-xaw3d
-    --without-xim
-    --without-gpm
-    --without-dbus
-    --without-selinux
-    --without-xwidgets
-    --without-compress-install
-    --without-sound
-    --with-sound=no
-    --with-cairo
-    --with-json
-    --with-xml2
-    --with-xft
-    --with-harfbuzz
-    --with-libotf
-    --with-gnutls
-    --with-zlib
-    --with-modules
-    --with-threads
-    --with-file-notification=yes
-    --with-x-toolkit=gtk3
-    --with-x
+    "--prefix=/usr"
+    "--sysconfdir=/etc"
+    "--libexecdir=/usr/lib"
+    "--localstatedir=/var"
+    "--mandir=/usr/share/man"
+    "--with-gameuser=:games"
+    "--enable-checking=no"
+    "--enable-link-time-optimization"
+    "--disable-acl"
+    "--without-mailutils"
+    "--without-pop"
+    "--without-kerberos"
+    "--without-kerberos5"
+    "--without-hesiod"
+    "--without-mail-unlink"
+    "--without-wide-int"
+    "--without-xpm"
+    "--without-jpeg"
+    "--without-tiff"
+    "--without-gif"
+    "--without-rsvg"
+    "--without-png"
+    "--without-imagemagick"
+    "--without-lcms2"
+    "--without-libsystemd"
+    "--without-m17n-flt"
+    "--without-toolkit-scroll-bars"
+    "--without-xaw3d"
+    "--without-xim"
+    "--without-gpm"
+    "--without-dbus"
+    "--without-selinux"
+    "--without-xwidgets"
+    "--without-compress-install"
+    "--without-sound"
+    "--with-sound=no"
+    "--with-cairo"
+    "--with-json"
+    "--with-xml2"
+    "--with-xft"
+    "--with-harfbuzz"
+    "--with-libotf"
+    "--with-gnutls"
+    "--with-zlib"
+    "--with-modules"
+    "--with-threads"
+    "--with-file-notification=yes"
+    "--with-x-toolkit=gtk3"
+    "--with-x"
 # Beware https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25228
 # dconf and gconf break font settings you set in ~/.emacs.
 # If you insist you'll need to read that bug report in *full*.
 # Good luck!
-   --without-gconf
-   --without-gsettings
+    "--without-gconf"
+    "--without-gsettings"
   )
 
 ################################################################################
@@ -338,7 +338,7 @@ package() {
   fi
 
   # fix user/root permissions on usr/share files
-  find "$pkgdir"/usr/share/emacs/ | xargs chown root:root
+  find "$pkgdir"/usr/share/emacs/ -print0 | xargs chown root:root
 
   # fix permssions on /var/games
   mkdir -p "$pkgdir"/var/games/emacs
