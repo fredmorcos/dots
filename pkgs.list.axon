@@ -98,6 +98,7 @@ lib32-libavtp
 lib32-libsamplerate
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
+lib32-libxslt
 lib32-llvm
 lib32-mesa-vdpau
 lib32-ocl-icd
@@ -236,6 +237,7 @@ vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
+whois
 wmctrl
 xclip
 xf86-input-evdev
