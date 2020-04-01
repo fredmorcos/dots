@@ -73,6 +73,7 @@
         <value type="string" value="vlc"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="discord"/>
         <value type="string" value="gpick"/>
         <value type="string" value="vokoscreenng"/>
         <value type="string" value="claws-mail"/>
