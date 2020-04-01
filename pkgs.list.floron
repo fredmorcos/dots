@@ -440,6 +440,7 @@ python-requests-oauthlib
 python-setproctitle
 python-tlsh
 python-virtualenv
+qemu
 radamsa
 radvd
 razor
@@ -545,14 +546,12 @@ uthash
 valgrind
 vbindiff
 vcdimager
-vde2
 vdpauinfo
 vi
 vim-colorsamplerpack
 vim-spell-de
 vim-spell-en
 vim-spell-fr
-virglrenderer
 virtualbox-ext-oracle
 vkd3d
 vulkan-intel
