@@ -158,6 +158,7 @@ nvme-cli
 odt2txt
 openbsd-netcat
 opencl-mesa
+opendoas
 openmp
 openresolv
 ovmf
