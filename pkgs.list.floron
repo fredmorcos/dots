@@ -221,7 +221,6 @@ isync
 iucode-tool
 iverilog
 iwd
-jemalloc
 jfsutils
 jp2a
 jwm
@@ -258,7 +257,6 @@ libmaa
 libmirage
 libmp4v2
 libmythes
-libnfs
 libnsutils
 liboggz
 libopenraw
@@ -330,7 +328,6 @@ mythes-de
 mythes-en
 mythes-fr
 nano
-nccl
 ncdu
 ncftp
 neofetch
