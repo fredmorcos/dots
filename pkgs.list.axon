@@ -184,6 +184,7 @@ python-pycryptodome
 python-pylast
 python-xdg
 qbittorrent
+qemu
 radeontool
 read-edid
 realtime-privileges
