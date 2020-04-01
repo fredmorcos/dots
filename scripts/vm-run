@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+CMD=("qemu-system-x86_64"
+     "-enable-kvm"
+     "-machine type=pc,accel=kvm"
+     "-m 4G"
+     "-cpu host"
+     "-smp 16"
+     "-vga virtio"
+     "-display sdl,gl=on"
+     "-net nic,model=virtio"
+     "-net user"
+     "-boot menu=on"
+     "-usb"
+     "-device usb-tablet"
+     "-drive file=ubuntu.img,format=qcow2,media=disk,if=virtio")
+
+if [ -z "$DRIVE" ]; then
+    echo "Pass a drive image using DRIVE=... vm-run"
+    exit 1
+fi
+
+if [ -z "CDROM" ]; then
+
+                   # -cdrom ubuntu.iso
+
+# -bios /usr/share/qemu/vgabios-ati.bin \
+# -smp 8,sockets=1,cores=4,threads=2 \
+
+# qemu-system-x86_64 \
+#   -drive file=/mnt/data/vm/qemu/fs/xubuntu-17.10.zlib.qcow2 \
+#   -m 8192 -enable-kvm -M q35 -cpu host -smp 4,sockets=1,cores=4,threads=1 \
+#   -bios /usr/share/qemu/bios.bin -vga virtio -display gtk,gl=on \
+#   -usb -device usb-tablet -show-cursor
+
+# disk_flags="format=raw,media=disk,if=virtio"
+
+# if [ -z "$VM_RUN_DRIVE1" ]; then
+#     echo "Provide at least 1 drive with VM_RUN_DRIVE1"
+#     exit 1
+# else
+#     qemu_flags="$qemu_flags -drive file=$VM_RUN_DRIVE1,$disk_flags"
+# fi
+
+# if [ -z "$VM_RUN_DRIVE2" ]; then
+#     true
+# else
+#     qemu_flags="$qemu_flags -drive file=$VM_RUN_DRIVE2,$disk_flags"
+# fi
+
+# if [ -z "$VM_RUN_CDROM" ]; then
+#     true
+# else
+#     qemu_flags="$qemu_flags -cdrom $VM_RUN_CDROM"
+# fi
