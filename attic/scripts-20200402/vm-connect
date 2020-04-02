@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+CMD=("spicy"
+     "--uri='spice+unix:///tmp/vm_spice.socket'")
+
+echo ">>> Command: " "${CMD[@]}"
+
+"${CMD[@]}"

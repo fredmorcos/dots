@@ -221,6 +221,7 @@ isync
 iucode-tool
 iverilog
 iwd
+jemalloc
 jfsutils
 jp2a
 jwm
@@ -257,6 +258,7 @@ libmaa
 libmirage
 libmp4v2
 libmythes
+libnfs
 libnsutils
 liboggz
 libopenraw
@@ -437,7 +439,7 @@ python-requests-oauthlib
 python-setproctitle
 python-tlsh
 python-virtualenv
-qemu
+qbittorrent
 radamsa
 radvd
 razor
@@ -483,6 +485,7 @@ socat
 soundconverter
 sparsehash
 speech-dispatcher
+spice-gtk
 spike
 spirv-headers
 squashfs-tools
@@ -543,12 +546,14 @@ uthash
 valgrind
 vbindiff
 vcdimager
+vde2
 vdpauinfo
 vi
 vim-colorsamplerpack
 vim-spell-de
 vim-spell-en
 vim-spell-fr
+virglrenderer
 virtualbox-ext-oracle
 vkd3d
 vulkan-intel
