@@ -140,7 +140,6 @@ lrzip
 lsof
 lxdm-gtk3
 lzop
-make
 mediainfo
 mesa-demos
 mesa-vdpau
@@ -166,7 +165,6 @@ p7zip
 pacman-contrib
 papirus-icon-theme
 par2cmdline
-patch
 pavucontrol
 picard
 picom
@@ -186,7 +184,6 @@ python-pycryptodome
 python-pylast
 python-xdg
 qbittorrent
-qemu
 radeontool
 read-edid
 realtime-privileges
@@ -228,11 +225,13 @@ unoconv
 unrar
 upx
 valgrind
+vde2
 vdpauinfo
 vi
 vice
 vim-colorsamplerpack
 vim-spell-en
+virtualbox-ext-oracle
 vkd3d
 vulkan-extra-layers
 vulkan-mesa-layer
