@@ -338,7 +338,7 @@ package() {
   fi
 
   # fix user/root permissions on usr/share files
-  find "$pkgdir"/usr/share/emacs/ -print0 | xargs chown root:root
+  find "$pkgdir"/usr/share/emacs/ -print0 | xargs -0 chown root:root
 
   # fix permssions on /var/games
   mkdir -p "$pkgdir"/var/games/emacs
