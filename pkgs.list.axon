@@ -18,6 +18,7 @@ bonnie++
 boost
 bridge-utils
 bs1770gain
+btfs
 cargo-audit
 cargo-crev
 cargo-edit
