@@ -280,6 +280,8 @@ libvterm
 libwmf
 linux-firmware
 linux-headers
+linux-lts
+linux-lts-headers
 linux-tools-meta
 linux-zen
 linux-zen-headers
