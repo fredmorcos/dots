@@ -185,7 +185,7 @@ python-pip
 python-pyacoustid
 python-pycryptodome
 python-pylast
-python-xdg
+python-pyxdg
 qbittorrent
 radeontool
 read-edid
