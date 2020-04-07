@@ -6,7 +6,6 @@ arch-audit
 aspell-en
 atool
 audacious
-audacious-plugins
 autoconf
 automake
 base
@@ -157,6 +156,7 @@ nnn
 ntfs-3g
 numix-gtk-theme-git
 nvme-cli
+obs-studio
 odt2txt
 openbsd-netcat
 opencl-mesa
