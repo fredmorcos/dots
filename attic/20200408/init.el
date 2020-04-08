@@ -69,7 +69,7 @@
   :ensure nil
 
   :custom-face
-  (default ((t (:font "Monospace 11" :foreground "Gray25" :background "Gray96"))))
+  (default ((t (:font "Monospace 11"))))
   (cursor ((t (:background "SlateGray3"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line ((t (:foreground "Gray30" :background "Gray90" :box nil))))
@@ -114,8 +114,8 @@
   (display-line-numbers-width-start t)
 
   :custom-face
-  (line-number ((t (:foreground "Gray85"))))
-  (line-number-current-line ((t (:foreground "Gray70"))))
+  (line-number ((t (:foreground "Gray90"))))
+  (line-number-current-line ((t (:foreground "Gray60"))))
 
   :hook
   (prog-mode . display-line-numbers-mode))
@@ -124,8 +124,7 @@
   :ensure nil
 
   :custom-face
-  (hl-line ((t (:background "Wheat"))))
-  (mode-line-highlight ((t (:background "PowderBlue"))))
+  (hl-line ((t (:background "CornSilk"))))
 
   :hook
   ((prog-mode text-mode) . hl-line-mode))
@@ -134,7 +133,7 @@
   :ensure nil
 
   :custom-face
-  (fringe ((t (:background "Gray96"))))
+  (fringe ((t (:background "Gray97"))))
 
   :config
   (set-fringe-style '(8 . 8)))
@@ -366,13 +365,14 @@
   :ensure nil
 
   :custom
+  (show-paren-delay 0.2)
   (show-paren-when-point-inside-paren t)
   (show-paren-style 'mixed)
   (show-paren-highlight-openparen t)
 
   :custom-face
   (show-paren-match ((t (:background "PowderBlue"))))
-  (show-paren-match-expression ((t (:background "Lavender"))))
+  (show-paren-match-expression ((t (:background "AliceBlue"))))
   (show-paren-mismatch ((t (:background "LightSalmon"))))
 
   :hook
@@ -539,8 +539,9 @@
 
   :hook
   (prog-mode . company-mode)
-  (company-mode . (lambda () (setq company-backends
-                                   '((company-capf company-keywords company-files)))))
+  (company-mode . (lambda () (setq company-backends '((company-capf company-tabnine
+                                                       company-yasnippet company-keywords
+                                                       company-files)))))
 
   :custom-face
   (company-tooltip ((t (:background "gray95")))))
@@ -589,6 +590,19 @@
   :custom-face
   (mc/cursor-bar-face ((t (:background "Gray40" :foreground "White"))))
   (mc/cursor-face ((t (:background "Gray50" :foreground "White")))))
+
+(use-package yasnippet
+  :diminish "YS"
+
+  :config
+  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
+  (diminish 'yas-minor-mode " Y")
+
+  :hook
+  ((hledger-mode prog-mode) . yas-minor-mode)
+  (yas-minor-mode . yas-reload-all))
+
+(use-package yasnippet-snippets)
 
 (use-package hledger-mode
   :mode
@@ -832,6 +846,10 @@
 (use-package all-the-icons-ivy-rich
   :custom
   (all-the-icons-ivy-rich-mode t))
+
+(use-package company-tabnine
+  :custom
+  (company-tabnine-install-static-binary t))
 
 (use-package systemd
   :hook
