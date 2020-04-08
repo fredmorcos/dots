@@ -129,6 +129,7 @@ cmerge bash/rc_graalvm               ~/.bashrc_graalvm
 cmerge bash/rc_extras                ~/.bashrc_extras
 cmerge bash/profile                  ~/.bash_profile
 
+cmerge alacritty.yml                 ~/.config/alacritty/alacritty.yml
 cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
 cmerge htoprc                        ~/.config/htop/htoprc
 cmerge redshift.conf                 ~/.config/redshift.conf
