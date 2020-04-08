@@ -23,6 +23,7 @@ CMD=("rsync"
      "--delete-excluded"
      "--exclude=*/target"
      "--exclude=*/build"
+     "--exclude=*/__pycache__"
      "-zz"
      "$@")
 
