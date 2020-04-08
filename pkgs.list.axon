@@ -128,11 +128,7 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvterm
 libwmf
-linux
 linux-firmware
-linux-headers
-linux-lts
-linux-lts-headers
 linux-tools-meta
 linux-zen
 linux-zen-headers
@@ -142,6 +138,7 @@ lrzip
 lsof
 lxdm-gtk3
 lzop
+make
 mediainfo
 mesa-demos
 mesa-vdpau
@@ -168,6 +165,7 @@ p7zip
 pacman-contrib
 papirus-icon-theme
 par2cmdline
+patch
 pavucontrol
 picard
 picom
@@ -234,13 +232,13 @@ vi
 vice
 vim-colorsamplerpack
 vim-spell-en
-virtualbox-ext-oracle
 vkd3d
 vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
 vulkan-tools
 whois
+wireguard-tools
 wmctrl
 xclip
 xf86-input-evdev
