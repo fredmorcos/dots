@@ -671,6 +671,7 @@
         ("M-RET" . lsp-execute-code-action))
 
   :custom
+  (lsp-enable-snippet nil)
   (lsp-keymap-prefix "C-c")
   (lsp-prefer-flymake nil)
   (lsp-prefer-capf t)
@@ -681,7 +682,7 @@
   (lsp-before-save-edits t)
   (lsp-auto-configure t)
 
-  (lsp-rust-full-docs t)
+  ;; (lsp-rust-full-docs t)
   (lsp-rust-racer-completion nil)
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
@@ -689,36 +690,39 @@
   (lsp-rust-server 'rust-analyzer)
   (lsp-rust-analyzer-server-display-inlay-hints t)
 
+  (lsp-diagnostics-attributes `((unnecessary :background "Gray90")
+                                (deprecated  :strike-through t)))
+
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
 
   :config
   (defface lsp-rust-inlay-type-face
-    '((t :background "old lace" :foreground "darkgray"))
+      '((t :background "OldLace" :foreground "DarkGray"))
     "Face for inlay type hints (e.g. inferred types)."
     :group 'lsp-rust)
 
   (defface lsp-rust-inlay-param-face
-    '((t :background "azure" :foreground "darkgray"))
+      '((t :background "Azure" :foreground "DarkGray"))
     "Face for inlay parameter hints (e.g. function parameter names at call-site)."
     :group 'lsp-rust)
 
   (eval-after-load 'lsp-rust
     '(defun lsp-rust-analyzer-update-inlay-hints (buffer)
-       (if (and (lsp-rust-analyzer-initialized?)
-                (eq buffer (current-buffer)))
-           (lsp-request-async
-            "rust-analyzer/inlayHints"
-            (list :textDocument (lsp--text-document-identifier))
-            (lambda (res)
-              (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
-              (dolist (hint res)
-                (-let* (((&hash "range" "label" "kind") hint)
-                        ((beg . end) (lsp--range-to-region range))
-                        (overlay (make-overlay beg end)))
-                  (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
-                  (overlay-put overlay 'evaporate t)
-                  (cond
+      (if (and (lsp-rust-analyzer-initialized?)
+               (eq buffer (current-buffer)))
+          (lsp-request-async
+           "rust-analyzer/inlayHints"
+           (list :textDocument (lsp--text-document-identifier))
+           (lambda (res)
+             (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
+             (dolist (hint res)
+               (-let* (((&hash "range" "label" "kind") hint)
+                       ((beg . end) (lsp--range-to-region range))
+                       (overlay (make-overlay beg end)))
+                 (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
+                 (overlay-put overlay 'evaporate t)
+                 (cond
                    ((string= kind "TypeHint")
                     (overlay-put overlay
                                  'after-string
@@ -733,8 +737,12 @@
                                                      'lsp-rust-inlay-param-face)
                                          (propertize ": " 'font-lock-face
                                                      '(:foreground "darkgray")))))))))
-            :mode 'tick))
-       nil)))
+           :mode 'tick))
+      nil))
+
+  :custom-face
+  (lsp-lens-face ((t (:inherit shadow))))
+  (lsp-lens-mouse-face ((t (:inherit link)))))
 
 (use-package lsp-ui
   :commands
@@ -748,6 +756,7 @@
 
   :custom
   (lsp-ui-sideline-enable nil)
+  (lsp-ui-doc-enable nil)
 
   ;; :custom
   ;; (lsp-ui-flycheck-enable t)
@@ -770,8 +779,6 @@
   ;; (lsp-ui-sideline-show-hover t)
 
   :custom-face
-  (lsp-lens-face ((t (:inherit shadow))))
-  (lsp-lens-mouse-face ((t (:inherit link))))
   (lsp-ui-doc-background ((t (:background "Gray95"))))
   (lsp-ui-doc-header ((t (:background "Pale Turquoise"))))
   (lsp-ui-doc-border ((t (:background "Gray70"))))
@@ -798,14 +805,18 @@
   :hook
   (flycheck-mode . flycheck-posframe-mode)
 
-  :config
-  (flycheck-posframe-configure-pretty-defaults)
-
   :custom
   (flycheck-posframe-position 'window-bottom-right-corner)
+  (flycheck-posframe-border-width 1)
+  (flycheck-posframe-warnings-prefix "Warning: ")
+  (flycheck-posframe-error-prefix "Error: ")
+  (flycheck-posframe-prefix "Info: ")
 
   :custom-face
-  (flycheck-posframe-background-face ((t (:background "CornSilk")))))
+  (flycheck-posframe-background-face ((t (:background "CornSilk"))))
+  (flycheck-posframe-border-face ((t (:background "Wheat" :foreground "Wheat"))))
+  (flycheck-posframe-error-face ((t (:foreground "DarkRed"))))
+  (flycheck-posframe-warning-face ((t (:foreground "DarkOrange")))))
 
 (use-package ivy-posframe
   :diminish "IvyFr"
@@ -824,14 +835,6 @@
 
   :hook
   (ivy-mode . ivy-posframe-mode))
-
-(use-package all-the-icons
-  :custom
-  (all-the-icons-scale-factor 1))
-
-(use-package all-the-icons-ivy-rich
-  :custom
-  (all-the-icons-ivy-rich-mode t))
 
 (use-package systemd
   :hook
