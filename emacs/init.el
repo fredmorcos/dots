@@ -434,14 +434,14 @@
   (org-done ((t (:foreground "ForestGreen" :height 0.9)))))
 
 (use-package which-key
-  :diminish "Wk"
+  :diminish
 
   :custom
   (which-key-idle-delay 0.3)
   (which-key-mode t))
 
 (use-package counsel
-  :diminish "Csel"
+  :diminish
 
   :custom
   (counsel-mode t)
@@ -457,7 +457,7 @@
   ("C-r"         . swiper-isearch-backward))
 
 (use-package ivy
-  :diminish "Ivy"
+  :diminish
 
   :bind
   (:map ivy-minibuffer-map ("RET" . ivy-alt-done))
@@ -693,6 +693,10 @@
   (lsp-diagnostics-attributes `((unnecessary :background "Gray90")
                                 (deprecated  :strike-through t)))
 
+  (lsp-signature-auto-activate t)
+  (lsp-signature-doc-lines 1)
+  ;; (lsp-signature-render-documentation nil)
+
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
 
@@ -792,7 +796,7 @@
   :pin melpa)
 
 (use-package company-posframe
-  :diminish "CoFr"
+  :diminish
 
   :hook
   (company-mode . company-posframe-mode)
@@ -819,7 +823,7 @@
   (flycheck-posframe-warning-face ((t (:foreground "DarkOrange")))))
 
 (use-package ivy-posframe
-  :diminish "IvyFr"
+  :diminish
 
   :custom
   (ivy-posframe-mode t)
