@@ -1,3 +1,0 @@
-sys-apps/pciutils -zlib
-dev-scheme/guile deprecated discouraged threads
-dev-libs/gdl gnome

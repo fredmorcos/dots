@@ -1,9 +1,0 @@
-/dev/hda1 / reiserfs rw,noatime,notail 0 0
-proc /proc proc rw,noexec,nosuid,nodev 0 0
-sysfs /sys sysfs rw,nosuid,nodev,noexec 0 0
-udev /dev tmpfs rw,nosuid 0 0
-devpts /dev/pts devpts rw,nosuid,noexec 0 0
-/dev/hda4 /home ext3 rw,noatime 0 0
-shm /dev/shm tmpfs rw,noexec,nosuid,nodev 0 0
-usbfs /proc/bus/usb usbfs rw,noexec,nosuid,devmode=0664,devgid=85 0 0
-binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc rw,noexec,nosuid,nodev 0 0

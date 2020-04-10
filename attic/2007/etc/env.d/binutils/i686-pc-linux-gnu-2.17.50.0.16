@@ -1,4 +1,0 @@
-TARGET="i686-pc-linux-gnu"
-VER="2.17.50.0.16"
-LIBPATH="/usr/lib/binutils/i686-pc-linux-gnu/2.17.50.0.16"
-FAKE_TARGETS="i686-pc-linux-gnu"

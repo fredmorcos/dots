@@ -1,1 +1,0 @@
-..//usr/portage/profiles/default-linux/x86/2007.0
