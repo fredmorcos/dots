@@ -29,7 +29,7 @@
   <property name="log-level" type="uint" value="0"/>
   <property name="log-level-apps" type="uint" value="0"/>
   <property name="initial-opacity" type="double" value="1.000000"/>
-  <property name="theme" type="string" value="Retro"/>
+  <property name="theme" type="string" value="Smoke"/>
   <property name="expire-timeout" type="int" value="4"/>
   <property name="do-slideout" type="bool" value="false"/>
   <property name="do-fadeout" type="bool" value="true"/>
