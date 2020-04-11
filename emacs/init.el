@@ -69,7 +69,6 @@
   :ensure nil
 
   :custom-face
-  (default ((t (:font "Monospace 11" :foreground "Gray25" :background "Gray96"))))
   (cursor ((t (:background "SlateGray3"))))
   (region ((t (:background "LightSteelBlue1"))))
   (mode-line ((t (:foreground "Gray30" :background "Gray90" :box nil))))
@@ -79,24 +78,11 @@
   :ensure nil
 
   :custom
-  (scroll-bar-mode nil)
   (horizontal-scroll-bar-mode nil)
   (scroll-conservatively 4)
   (hscroll-margin 1)
   (hscroll-step 1)
   (auto-hscroll-mode 'current-line))
-
-(use-package tool-bar
-  :ensure nil
-
-  :custom
-  (tool-bar-mode nil))
-
-(use-package menu-bar
-  :ensure nil
-
-  :custom
-  (menu-bar-mode nil))
 
 (use-package frame
   :ensure nil
@@ -843,6 +829,9 @@
 (use-package systemd
   :hook
   (systemd-mode . company-mode))
+
+(use-package esup
+  :commands esup)
 
 (provide 'init)
 ;;; init ends here

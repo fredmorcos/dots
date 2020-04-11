@@ -1,5 +1,11 @@
 let &t_ut=''
 
+set expandtab
+set laststatus=2
+set shiftwidth=2
+set tabstop=2
+set encoding=utf-8
+
 set number          " Show line numbers.
 set cursorline      " Highlight the current line.
 set wildmenu        " Show an autocompletion bar at the bottom.
