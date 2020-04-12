@@ -13,6 +13,7 @@ base
 bash-completion
 bat
 beets
+bind-tools
 bison
 bonnie++
 boost
@@ -47,6 +48,8 @@ ecm-tools
 efibootmgr
 emacs-git
 eom
+epiphany
+ethtool
 evince
 exa
 fd
@@ -114,21 +117,18 @@ libcue
 libfido2
 libgnome-keyring
 libgphoto2
-libheif
 libmad
 libmp4v2
 libmtp
 libmythes
 libpipewire02
 libproxy-mozjs
-libraw
 libsidplayfp
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvterm
-libwmf
 linux
 linux-firmware
 linux-headers
@@ -238,6 +238,7 @@ vice
 vim-colorsamplerpack
 vim-spell-en
 vkd3d
+vmtouch
 vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
