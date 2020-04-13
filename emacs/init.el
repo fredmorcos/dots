@@ -833,5 +833,23 @@
 (use-package esup
   :commands esup)
 
+(use-package projectile
+  :bind
+  (:map projectile-mode-map
+        ("C-x p" . projectile-command-map))
+
+  :init
+  (projectile-mode)
+
+  :custom
+  (projectile-project-search-path '("~/Workspace"))
+  (projectile-sort-order '(recently-active))
+  (projectile-enable-caching t)
+  (projectile-completion-system 'ivy))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
+
 (provide 'init)
 ;;; init ends here
