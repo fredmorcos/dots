@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+rsync_put () {
+  echo ">>> PC::$1 --> Phone::$2"
+  rsync -ahH --no-p --delete --progress -e 'ssh -p 2222' \
+        /home/fred/"$1" fred-phone:SDCard/"$2"
+}
+
+rsync_put_notimes () {
+  echo ">>> PC::$1 --> Phone::$2"
+  rsync -ahH --no-p --no-t --delete --progress -e 'ssh -p 2222' \
+        /home/fred/"$1" fred-phone:SDCard/"$2"
+}
+
+rsync_get () {
+  echo ">>> Phone::$1 --> PC::$2"
+  rsync -ahH --delete --progress -e 'ssh -p 2222' \
+        fred-phone:SDCard/"$1" /home/fred/"$2"
+}
+
+rsync_put_notimes "Phone/Extras" Extras
+rsync_put_notimes "CommonDocs/Other" Other
+rsync_put "Media/Wallpapers/Phone" Wallpapers/
+rsync_put "Media/Wallpapers/Patterns" Wallpapers/
+
+rsync_get Download Phone/
+rsync_get DCIM Phone/
+rsync_get Pictures Phone/
+rsync_get Movies Phone/
+rsync_get Viber Phone/
+rsync_get WhatsApp Phone/
