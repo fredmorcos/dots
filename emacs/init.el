@@ -228,6 +228,7 @@
   (before-save . delete-trailing-whitespace)
 
   :custom
+  (undo-limit (* 1024 1024))
   (suggest-key-bindings 10)
   (column-number-mode t)
   (line-number-mode nil)
