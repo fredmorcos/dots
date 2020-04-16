@@ -114,7 +114,7 @@
   (mode-line-highlight ((t (:background "PowderBlue"))))
 
   :hook
-  ((prog-mode text-mode) . hl-line-mode))
+  ((hledger-mode prog-mode text-mode) . hl-line-mode))
 
 (use-package fringe
   :ensure nil
@@ -809,24 +809,6 @@
   (flycheck-posframe-border-face ((t (:background "Wheat" :foreground "Wheat"))))
   (flycheck-posframe-error-face ((t (:foreground "DarkRed"))))
   (flycheck-posframe-warning-face ((t (:foreground "DarkOrange")))))
-
-(use-package ivy-posframe
-  :diminish
-
-  :custom
-  (ivy-posframe-mode t)
-  (ivy-posframe-display-functions-alist
-   '((t . ivy-posframe-display-at-frame-bottom-window-center)))
-  (ivy-posframe-border-width 2)
-
-  :config
-  (defun ivy-posframe-get-size ()
-    "The default functon used by `ivy-posframe-size-function'."
-    (let ((width (round (* (window-width) 0.95))))
-      (list :height ivy-height :width width :min-height ivy-height :min-width width)))
-
-  :hook
-  (ivy-mode . ivy-posframe-mode))
 
 (use-package systemd
   :hook
