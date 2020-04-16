@@ -7,6 +7,8 @@ acpilight
 afl-utils
 afpfs-ng
 alacritty
+alsa-firmware
+alsa-tools
 android-tools
 android-udev
 antiword
@@ -431,6 +433,7 @@ python-pexpect
 python-pip
 python-progressbar
 python-pyacoustid
+python-pyalsa
 python-pycryptodome
 python-pydocstyle
 python-pylast
