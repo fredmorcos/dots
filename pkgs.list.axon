@@ -1,6 +1,8 @@
 acpid
 adobe-source-sans-pro-fonts
 alacritty
+alsa-firmware
+alsa-tools
 amd-ucode
 amdvlk
 arch-audit
@@ -190,6 +192,7 @@ python-beautifulsoup4
 python-discid
 python-pip
 python-pyacoustid
+python-pyalsa
 python-pycryptodome
 python-pylast
 python-pyxdg
@@ -203,6 +206,7 @@ ripgrep
 rsync
 rust-analyzer-bin
 rust-bindgen
+sc-controller
 screen
 seahorse
 shellcheck-static
