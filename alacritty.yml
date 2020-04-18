@@ -64,4 +64,6 @@ mouse:
   hide_when_typing: true
 
 key_bindings:
-  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: N,     mods: Control|Shift, action: SpawnNewInstance             }
+  - { key: Up,    mods: Shift,         action: ScrollLineUp,    mode: ~Alt  }
+  - { key: Down,  mods: Shift,         action: ScrollLineDown,  mode: ~Alt  }

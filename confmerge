@@ -138,6 +138,7 @@ cmerge gitconfig                     ~/.config/git/config
 cmerge hunspell_en_US                ~/.hunspell_en_US
 cmerge profile                       ~/.profile
 cmerge vimrc                         ~/.vimrc
+cmerge inputrc                       ~/.inputrc
 
 cmerge tabnine/config.toml           ~/.config/TabNine/TabNine.toml
 cmerge tabnine/config.json           ~/.config/TabNine/tabnine_config.json

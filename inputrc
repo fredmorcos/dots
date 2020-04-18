@@ -1,0 +1,29 @@
+# Enable Control-Left and Control-Right.
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+# When typing something and pressing the Up arrow
+# key, show the last command starting with what is
+# typed in.
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Color files by types in completions.
+set colored-stats On
+
+# Append char to indicate type of file in
+# completions.
+set visible-stats On
+
+# Mark symlinked directories in completions.
+set mark-symlinked-directories On
+
+# Color the common prefix in completions.
+set colored-completion-prefix On
+
+# Color the common prefix in menu-complete.
+set menu-complete-display-prefix On
+
+# Disable the printing of control characters on
+# the terminal.
+set echo-control-characters off
