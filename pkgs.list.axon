@@ -49,6 +49,7 @@ ebtables
 ecm-tools
 efibootmgr
 emacs-git
+entr
 eom
 epiphany
 ethtool
@@ -79,6 +80,7 @@ hddtemp
 hdparm
 hexchat
 hledger-web
+htmlmin
 htop
 hunspell-de
 hunspell-en_US
@@ -196,6 +198,8 @@ python-pyalsa
 python-pycryptodome
 python-pylast
 python-pyxdg
+python-rcssmin
+python-rjsmin
 qbittorrent
 radeontool
 read-edid
@@ -213,6 +217,7 @@ shellcheck-static
 shfmt
 simplescreenrecorder
 skim
+slimit
 slimmy-xfwm-theme-git
 smartmontools
 snap-sync
