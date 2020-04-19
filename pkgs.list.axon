@@ -155,6 +155,7 @@ make
 mediainfo
 mesa-demos
 mesa-vdpau
+mkvtoolnix-gui
 mpv
 musl
 mythes-en
