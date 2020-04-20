@@ -47,6 +47,7 @@ duperemove
 easy-rsa
 ebtables
 ecm-tools
+edk2-ovmf
 efibootmgr
 emacs-git
 entr
@@ -174,7 +175,6 @@ opencl-mesa
 opendoas
 openmp
 openresolv
-ovmf
 p7zip
 pacman-contrib
 papirus-icon-theme
