@@ -120,6 +120,7 @@ ebook-tools
 ebtables
 ecm-tools
 ed
+edk2-ovmf
 efitools
 eigen
 ell
@@ -366,7 +367,6 @@ oprofile
 optipng
 osinfo-db-tools
 os-prober
-ovmf
 p7zip
 pacgraph
 pacman-contrib
