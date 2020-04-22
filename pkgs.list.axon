@@ -39,6 +39,7 @@ curlftpfs
 dateutils
 dbus-broker
 dconf-editor
+dhclient
 dialog
 discord
 dmidecode

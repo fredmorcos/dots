@@ -3,7 +3,6 @@ cargo-asm
 cargo-expand
 cargo-geiger
 cargo-watch
-dbus-codegen
 kmon
 sccache
 titlecase
