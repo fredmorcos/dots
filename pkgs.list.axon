@@ -193,10 +193,12 @@ pulseaudio
 pwgen
 python-beautifulsoup4
 python-discid
+python-docutils
 python-pip
 python-pyacoustid
 python-pyalsa
 python-pycryptodome
+python-pyenchant
 python-pylast
 python-pyxdg
 python-rcssmin
@@ -206,6 +208,7 @@ radeontool
 read-edid
 realtime-privileges
 redshift
+retext
 rink
 ripgrep
 rsync
@@ -214,6 +217,7 @@ rust-bindgen
 sc-controller
 screen
 seahorse
+shake
 shellcheck-static
 shfmt
 simplescreenrecorder

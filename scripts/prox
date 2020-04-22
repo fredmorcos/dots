@@ -3,8 +3,7 @@
 set -o errexit
 set -o nounset
 
-PROXY=$(pw get Oracle:Proxy1 "%L")
-
+PROXY=$OPROX1
 echo "Proxy = $PROXY"
 
 HTTP_PROXY="$PROXY" HTTPS_PROXY="$PROXY" FTP_PROXY="$PROXY" RSYNC_PROXY="$PROXY" NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com" "$@"

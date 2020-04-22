@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 # shellcheck source=/home/fred/.bashrc_extras
-[[ -f ~/.bashrc_extras ]] && . ~/.bashrc_extras
+. ~/.bashrc_extras
 
 GRAALVM_HOME="$(pwd)"
 PS1="\[\e[7;34m\]\w\[\e[0m\] (\[\e[32m\]$(basename "$GRAALVM_HOME")\[\e[0m\]) >  "

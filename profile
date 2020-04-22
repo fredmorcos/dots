@@ -1,6 +1,13 @@
 # User-related
 umask 077
 
+OS_NAME=$(head -1 ~/Documents/Important/Passwords/_os.txt)
+OS_PASS=$(tail -1 ~/Documents/Important/Passwords/_os.txt)
+
+OPROX1=$(head -1 ~/Documents/Important/Passwords/_oprox1.txt)
+
+export OS_NAME OS_PASS OPROX1
+
 # export AMD_DEBUG="nongg,nodma"
 export RADV_PERFTEST="aco"
 

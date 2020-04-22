@@ -5,7 +5,6 @@ cargo-geiger
 cargo-watch
 dbus-codegen
 kmon
-pw
 sccache
 titlecase
 what

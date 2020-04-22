@@ -1,6 +1,9 @@
 #
-# ~/.bash_extras
+# ~/.bash_settings
 #
+
+[[ -f /usr/share/fzf/key-bindings.bash ]] && . /usr/share/fzf/key-bindings.bash
+[[ -f /usr/share/fzf/completion.bash ]] && . /usr/share/fzf/completion.bash
 
 HISTCONTROL=ignoredups
 HISTSIZE=1000
@@ -22,7 +25,10 @@ alias bat='bat --theme GitHub'
 alias cat='bat'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 alias up='yay --devel -Syu'
-alias dupes="fdupes -rdSnA -o name"
+alias pac="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --needed"
+alias aur="yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S"
+alias pacremove="yay -Qeq | fzf -m --preview 'pacman -Qi {1}' | xargs -ro pacman -Rcsn"
+alias duplicates="fdupes -rdSnA -o name"
 
 gitall() {
   for i in *; do
