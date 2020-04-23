@@ -12,6 +12,7 @@ export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
 alias fsysctl='ssh fred@floron sudo systemctl'
 alias fpoweroff='fsysctl poweroff'
+alias freboot='fsysctl reboot'
 
 alias nsysctl='ssh root@neuron systemctl'
 alias nreboot='nsysctl reboot'
