@@ -23,6 +23,7 @@ alias cat='bat'
 alias largest="find . -type f -printf '%s %p\n' | sort -nr | head -20"
 alias up='yay --devel -Syu'
 alias dupes="fdupes -rdSnA -o name"
+alias genpw="pwgen -c -n -y -s -B -1 34 1"
 
 gitall() {
   for i in *; do
