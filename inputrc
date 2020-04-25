@@ -27,3 +27,14 @@ set menu-complete-display-prefix On
 # Disable the printing of control characters on
 # the terminal.
 set echo-control-characters off
+
+# Those two together will allow hyphens (-) and
+# underscores (_) to match each other.
+set completion-ignore-case on
+set completion-map-case on
+
+# When a line gets longer than the terminal,
+# scroll instead of wrapping.
+set horizontal-scroll-mode on
+
+set blink-matching-paren on
