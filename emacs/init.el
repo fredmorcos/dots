@@ -818,6 +818,8 @@
   :commands esup)
 
 (use-package projectile
+  :diminish "Prj"
+
   :bind
   (:map projectile-mode-map
         ("C-x p" . projectile-command-map))
@@ -834,6 +836,8 @@
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode))
+
+(use-package cmake-mode)
 
 (provide 'init)
 ;;; init ends here

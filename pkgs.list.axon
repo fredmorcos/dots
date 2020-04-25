@@ -215,6 +215,7 @@ ripgrep
 rsync
 rust-analyzer-bin
 rust-bindgen
+sakura
 sc-controller
 screen
 seahorse
