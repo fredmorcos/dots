@@ -35,6 +35,6 @@ set completion-map-case on
 
 # When a line gets longer than the terminal,
 # scroll instead of wrapping.
-set horizontal-scroll-mode on
+# set horizontal-scroll-mode on
 
 set blink-matching-paren on
