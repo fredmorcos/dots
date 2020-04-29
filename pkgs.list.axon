@@ -194,7 +194,6 @@ pulseaudio
 pwgen
 python-beautifulsoup4
 python-discid
-python-docutils
 python-pip
 python-pyacoustid
 python-pyalsa
