@@ -501,8 +501,8 @@
 (use-package flycheck
   :bind
   (:map flycheck-mode-map
-        ("M-n" . flycheck-next-error)
-        ("M-p" . flycheck-previous-error))
+    ("M-n" . flycheck-next-error)
+    ("M-p" . flycheck-previous-error))
 
   :custom
   (flycheck-checker-error-threshold nil)
@@ -552,8 +552,8 @@
 
   :bind
   (:map symbol-overlay-mode-map
-        ("M->" . symbol-overlay-jump-next)
-        ("M-<" . symbol-overlay-jump-prev))
+    ("M->" . symbol-overlay-jump-next)
+    ("M-<" . symbol-overlay-jump-prev))
 
   :custom
   (symbol-overlay-idle-time 0.1)
@@ -627,9 +627,10 @@
 
   :bind
   (:map rustic-mode-map
-        ("<f5>" . rust-dbg-wrap-or-unwrap)
-        ("<f6>" . lsp-rust-analyzer-expand-macro)
-        ("<f7>" . lsp-rust-analyzer-join-lines))
+    ("<f5>" . rust-dbg-wrap-or-unwrap)
+    ("<f6>" . lsp-rust-analyzer-expand-macro)
+    ("<f7>" . lsp-rust-analyzer-join-lines)
+    ("<f8>" . lsp-rust-analyzer-inlay-hints-mode))
 
   :custom
   (rustic-lsp-server 'rust-analyzer)
@@ -742,9 +743,9 @@
 
   :bind
   (:map lsp-mode-map
-        ("M-."   . lsp-ui-peek-find-definitions)
-        ("M-?"   . lsp-ui-peek-find-references)
-        ("C-c h" . lsp-ui-doc-glance))
+    ("M-."   . lsp-ui-peek-find-definitions)
+    ("M-?"   . lsp-ui-peek-find-references)
+    ("C-c h" . lsp-ui-doc-glance))
 
   :custom
   (lsp-ui-sideline-enable nil)
@@ -821,8 +822,7 @@
   :diminish "Prj"
 
   :bind
-  (:map projectile-mode-map
-        ("C-x p" . projectile-command-map))
+  (:map projectile-mode-map ("C-x p" . projectile-command-map))
 
   :init
   (projectile-mode)
