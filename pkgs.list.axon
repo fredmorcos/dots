@@ -176,6 +176,7 @@ opencl-mesa
 opendoas
 openmp
 openresolv
+oprofile
 p7zip
 pacman-contrib
 papirus-icon-theme
@@ -200,7 +201,6 @@ python-pyalsa
 python-pycryptodome
 python-pyenchant
 python-pylast
-python-pyxdg
 python-rcssmin
 python-rjsmin
 qbittorrent
@@ -208,9 +208,12 @@ radeontool
 read-edid
 realtime-privileges
 redshift
+remake
 retext
 rink
 ripgrep
+rofi-calc
+rofimoji
 rsync
 rust-analyzer-bin
 rust-bindgen
@@ -312,7 +315,6 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
-xsel
 xss-lock
 yay-bin
 you-get
