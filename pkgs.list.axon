@@ -215,7 +215,7 @@ ripgrep
 rofi-calc
 rofimoji
 rsync
-rust-analyzer-bin
+rust-analyzer
 rust-bindgen
 sakura
 sc-controller
