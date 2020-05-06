@@ -140,8 +140,7 @@ cmerge profile                       ~/.profile
 cmerge vimrc                         ~/.vimrc
 cmerge inputrc                       ~/.inputrc
 
-cmerge tabnine/config.toml           ~/.config/TabNine/TabNine.toml
-cmerge tabnine/config.json           ~/.config/TabNine/tabnine_config.json
+cmerge cargo.conf                    ~/.cargo/config
 
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf

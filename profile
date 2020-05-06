@@ -40,7 +40,7 @@ PATH="$HOME/.local/bin:$PATH"
 
 # Rust
 RUSTC_WRAPPER=sccache
-RUSTFLAGS="-C link-arg=-fuse-ld=lld"
+RUSTFLAGS="-C link-arg=-fuse-ld=lld -C target-cpu=native"
 
 export RUSTC_WRAPPER RUSTFLAGS
 
