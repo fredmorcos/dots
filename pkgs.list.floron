@@ -465,7 +465,7 @@ ripgrep
 rlwrap
 rofi-pass
 rtirq
-rust-analyzer-bin
+rust-analyzer
 rust-bindgen
 samurai
 sassc
