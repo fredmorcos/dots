@@ -222,7 +222,7 @@ sc-controller
 screen
 seahorse
 shake
-shellcheck-static
+shellcheck
 shfmt
 simplescreenrecorder
 skim
