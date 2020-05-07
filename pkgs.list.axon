@@ -216,7 +216,6 @@ rsync
 rust-analyzer
 rust-bindgen
 sakura
-sc-controller
 screen
 seahorse
 shake
@@ -259,7 +258,6 @@ vice
 vim-colorsamplerpack
 vim-spell-en
 vkd3d
-vmtouch
 vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon
