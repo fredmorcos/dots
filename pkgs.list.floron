@@ -281,11 +281,7 @@ libvterm
 libwmf
 linux-firmware
 linux-headers
-linux-lts
-linux-lts-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 live-media
 lld
 lldb
@@ -560,7 +556,7 @@ vim-spell-de
 vim-spell-en
 vim-spell-fr
 virglrenderer
-virtualbox-ext-oracle
+virtualbox
 vkd3d
 vulkan-intel
 vulkan-mesa-layer
