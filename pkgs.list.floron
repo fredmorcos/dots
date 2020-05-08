@@ -243,7 +243,6 @@ lib32-mesa-vdpau
 lib32-opencl-nvidia
 lib32-primus_vk
 libappindicator-gtk3
-libc++
 libcue
 libdvdcss
 libemf
