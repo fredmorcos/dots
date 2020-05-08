@@ -33,7 +33,7 @@ badvpn
 base
 bash-completion
 bat
-bbswitch-dkms
+bbswitch
 beets
 bin2iso
 binwalk
