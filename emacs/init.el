@@ -843,5 +843,7 @@
 
 (use-package cmake-mode)
 
+(use-package dockerfile-mode)
+
 (provide 'init)
 ;;; init ends here

@@ -19,7 +19,6 @@ bind-tools
 bison
 bonnie++
 boost
-bridge-utils
 bs1770gain
 btfs
 cargo-audit
@@ -44,6 +43,7 @@ dialog
 discord
 dmidecode
 dnsmasq
+docker
 duperemove
 easy-rsa
 ebtables
@@ -179,6 +179,7 @@ patch
 pavucontrol
 picard
 picom
+pigz
 pipewire-pulse
 pkgconf
 powertop
