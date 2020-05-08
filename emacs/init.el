@@ -148,7 +148,9 @@
   recentf-cleanup
 
   :init
-  (setq recentf-exclude `(,emacs-elpa-dir ,(expand-file-name "~/Oracle")))
+  (setq recentf-exclude `(,emacs-elpa-dir
+                          ,(expand-file-name "~/Oracle")
+                          ,(expand-file-name "~/OracleWorkTrees")))
 
   :config
   (recentf-cleanup)
@@ -492,7 +494,9 @@
   :custom
   (magit-auto-revert-tracked-only nil)
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-  (magit-repository-directories '(("~/Workspace" . 3) ("~/Oracle" . 3))))
+  (magit-repository-directories '(("~/Workspace" . 3)
+                                  ("~/Oracle" . 3)
+                                  ("~/OracleWorkTrees" . 3))))
 
 (use-package expand-region
   :bind
