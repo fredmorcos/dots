@@ -140,11 +140,7 @@ libvterm
 linux
 linux-firmware
 linux-headers
-linux-lts
-linux-lts-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 lld
 lldb
 lrzip
@@ -189,7 +185,6 @@ powertop
 progress
 pstoedit
 psutils
-pulseaudio
 pwgen
 python-beautifulsoup4
 python-discid
@@ -258,6 +253,7 @@ vice
 vim-colorsamplerpack
 vim-spell-en
 vkd3d
+vokoscreen
 vulkan-extra-layers
 vulkan-mesa-layer
 vulkan-radeon

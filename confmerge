@@ -135,6 +135,7 @@ cmerge htoprc                        ~/.config/htop/htoprc
 cmerge redshift.conf                 ~/.config/redshift.conf
 cmerge youtube-dl.conf               ~/.config/youtube-dl/config
 cmerge gitconfig                     ~/.config/git/config
+cmerge vokoscreen.ini                ~/.config/vokoscreenNG/vokoscreenNG.ini
 cmerge hunspell_en_US                ~/.hunspell_en_US
 cmerge profile                       ~/.profile
 cmerge vimrc                         ~/.vimrc
