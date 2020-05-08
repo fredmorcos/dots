@@ -299,6 +299,7 @@ lzop
 m17n-lib
 mailutils
 mairix
+make
 man-pages
 marisa
 masscan
@@ -346,7 +347,6 @@ ngrep
 nilfs-utils
 notion
 numix-gtk-theme-git
-nvidia-dkms
 nvidia-prime
 nvidia-settings
 nvme-cli
@@ -374,6 +374,7 @@ par2cmdline
 parallel
 pass-otp
 pastebinit
+patch
 patchelf
 pavucontrol
 pbzip2
