@@ -69,6 +69,7 @@
         <value type="string" value="vlc"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="obs"/>
         <value type="string" value="gpick"/>
         <value type="string" value="audacious"/>
         <value type="string" value="qbittorrent"/>
