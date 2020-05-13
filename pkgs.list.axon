@@ -4,7 +4,6 @@ alacritty
 alsa-firmware
 alsa-tools
 amd-ucode
-amdvlk
 arch-audit
 aspell-en
 atool
@@ -103,7 +102,6 @@ ispell
 jq
 kcov
 lhasa
-lib32-amdvlk
 lib32-gst-plugins-base-libs
 lib32-gtk3
 lib32-libavtp
@@ -118,7 +116,6 @@ lib32-opencl-mesa
 lib32-simplescreenrecorder
 lib32-v4l-utils
 lib32-vkd3d
-lib32-vulkan-radeon
 lib32-vulkan-validation-layers
 libao
 libcue
@@ -144,7 +141,6 @@ linux-tools-meta
 lld
 lldb
 lrzip
-lsof
 lxdm-gtk3
 lzop
 make
@@ -259,7 +255,6 @@ vkd3d
 vokoscreen
 vulkan-extra-layers
 vulkan-mesa-layer
-vulkan-radeon
 vulkan-tools
 whois
 wireguard-tools
