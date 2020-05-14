@@ -291,7 +291,6 @@ lockfile-progs
 logrotate
 lostfiles
 lrzip
-lsof
 lua-alt-getopt
 lua-filesystem
 lxdm-gtk3
@@ -559,7 +558,6 @@ vim-spell-fr
 virglrenderer
 virtualbox
 vkd3d
-vulkan-intel
 vulkan-mesa-layer
 vulkan-tools
 w3m
