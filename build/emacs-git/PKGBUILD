@@ -22,10 +22,8 @@
 ################################################################################
 CHECK=            # Run tests. May fail, this is developement after all.
 CLANG=            # Use clang.
-GOLD=             # Use the gold linker.
-LTO="YES"         # Enable link-time optimization. Not that experimental anymore.
-                  # Seems fixed in GCC, so I've reenabled binutils support, please
-                  # report any bug, to make it use clang by default again.
+GOLD="YES"        # Use the gold linker.
+LTO="YES"         # Enable link-time optimization.
 CLI=              # CLI only binary.
 NOTKIT=           # Use no toolkit widgets. Like B&W Twm (001d sk00l).
 LUCID=            # Use the lucid, a.k.a athena, toolkit. Like XEmacs, sorta.
@@ -49,7 +47,7 @@ NOGZ="YES"        # Don't compress .el files.
 
 ################################################################################
 pkgname="emacs-git"
-pkgver=28.0.50.141106
+pkgver=28.0.50.141170
 pkgrel=1
 pkgdesc="GNU Emacs. Development master branch."
 arch=('x86_64' )
@@ -61,21 +59,24 @@ provides=('emacs' 'emacs-seq')
 conflicts=('emacs' 'emacs26-git' 'emacs-27-git' 'emacs-seq')
 replaces=('emacs26-git' 'emacs27-git' 'emacs-seq')
 source=("emacs-git::git://git.savannah.gnu.org/emacs.git")
+md5sums=('SKIP')
 # If Savannah access is blocked for reasons, use Github instead.
 # Edit the config file of your local repo copy as well.
 #source=("emacs-git::git://github.com/emacs-mirror/emacs.git")
 options=(!strip)
-md5sums=('SKIP')
 ################################################################################
 
 ################################################################################
 
-if [[ $LTO == "YES" ]] && [[ $CLANG != "YES" ]]; then
-  CFLAGS+=" -g -flto -fuse-linker-plugin"
-  CXXFLAGS+=" -g -flto -fuse-linker-plugin"
-else
-  CFLAGS+=" -g -flto"
-  CXXFLAGS+=" -g -flto"
+if [[ $GOLD == "YES" && ! $CLANG == "YES" ]]; then
+  export LD=/usr/bin/ld.gold
+  export CFLAGS+=" -fuse-ld=gold";
+  export CXXFLAGS+=" -fuse-ld=gold";
+elif [[ $GOLD == "YES" && $CLANG == "YES" ]]; then
+  echo "";
+  echo "Clang rather uses its own linker.";
+  echo "";
+  exit 1;
 fi
 
 if [[ $CLANG == "YES" ]]; then
@@ -90,13 +91,22 @@ if [[ $CLANG == "YES" ]]; then
   makedepends+=( 'clang' 'lld' 'llvm') ;
 fi
 
+if [[ $LTO == "YES" ]] && [[ $CLANG != "YES" ]]; then
+  CFLAGS+=" -flto -fuse-linker-plugin"
+  CXXFLAGS+=" -flto -fuse-linker-plugin"
+else
+  CFLAGS+=" -flto"
+  CXXFLAGS+=" -flto"
+fi
+
 if [[ $NOTKIT == "YES" ]]; then
-  depends+=( 'dbus' 'hicolor-icon-theme' 'libxinerama' 'libxrandr' 'lcms2' 'librsvg' );
+  depends+=( 'dbus' 'hicolor-icon-theme' 'libxinerama' 'libxrandr' 'lcms2' 'librsvg' 'libxfixes' );
+  makedepends+=( 'xorgproto' );
 elif [[ $LUCID == "YES" ]]; then
-  depends+=( 'dbus' 'hicolor-icon-theme' 'libxinerama' 'libxfixes' 'lcms2' 'librsvg' 'xaw3d' 'xorgproto' );
+  depends+=( 'dbus' 'hicolor-icon-theme' 'libxinerama' 'libxfixes' 'lcms2' 'librsvg' 'xaw3d' 'libxrandr' );
   makedepends+=( 'xorgproto' );
 elif [[ $GTK2 == "YES" ]]; then
-  depends+=( 'gtk2' );
+  depends+=( 'gtk2' 'lcms2' );
   makedepends+=( 'xorgproto' );
 else
   depends+=( 'gtk3' );
@@ -111,9 +121,7 @@ else
   depends+=();
 fi
 
-if [[ $NOCAIRO == "YES" ]]; then
-  depends+=( '' );
-else
+if [[ ! $NOCAIRO == "YES" ]]; then
   depends+=( 'cairo' );
 fi
 
@@ -163,61 +171,60 @@ build() {
   cd "$srcdir/emacs-git"
 
   local _conf=(
-    "--prefix=/usr"
-    "--sysconfdir=/etc"
-    "--libexecdir=/usr/lib"
-    "--localstatedir=/var"
-    "--mandir=/usr/share/man"
-    "--with-gameuser=:games"
-    "--enable-checking=no"
-    "--enable-link-time-optimization"
-    "--disable-acl"
-    "--without-mailutils"
-    "--without-pop"
-    "--without-kerberos"
-    "--without-kerberos5"
-    "--without-hesiod"
-    "--without-mail-unlink"
-    "--without-wide-int"
-    "--without-xpm"
-    "--without-jpeg"
-    "--without-tiff"
-    "--without-gif"
-    "--without-rsvg"
-    "--without-png"
-    "--without-imagemagick"
-    "--without-lcms2"
-    "--without-libsystemd"
-    "--without-m17n-flt"
-    "--without-toolkit-scroll-bars"
-    "--without-xaw3d"
-    "--without-xim"
-    "--without-gpm"
-    "--without-dbus"
-    "--without-selinux"
-    "--without-xwidgets"
-    "--without-compress-install"
-    "--without-sound"
-    "--with-sound=no"
-    "--with-cairo"
-    "--with-json"
-    "--with-xml2"
-    "--with-xft"
-    "--with-harfbuzz"
-    "--with-libotf"
-    "--with-gnutls"
-    "--with-zlib"
-    "--with-modules"
-    "--with-threads"
-    "--with-file-notification=yes"
-    "--with-x-toolkit=gtk3"
-    "--with-x"
-# Beware https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25228
-# dconf and gconf break font settings you set in ~/.emacs.
-# If you insist you'll need to read that bug report in *full*.
-# Good luck!
-    "--without-gconf"
-    "--without-gsettings"
+    --prefix=/usr
+    --sysconfdir=/etc
+    --libexecdir=/usr/lib
+    --localstatedir=/var
+    --mandir=/usr/share/man
+    --with-gameuser=:games
+    --enable-checking=no
+    --enable-link-time-optimization
+    --disable-acl
+    --without-mailutils
+    --without-pop
+    --without-kerberos
+    --without-kerberos5
+    --without-hesiod
+    --without-mail-unlink
+    --without-wide-int
+    --without-xpm
+    --without-jpeg
+    --without-tiff
+    --without-gif
+    --without-rsvg
+    # --without-png # Needed for PNG support for treemacs icons
+    --without-imagemagick
+    --without-lcms2
+    --without-libsystemd
+    --without-m17n-flt
+    --without-toolkit-scroll-bars
+    --without-xaw3d
+    --without-xim
+    --without-gpm
+    --without-dbus
+    --without-selinux
+    --without-xwidgets
+    --without-compress-install
+    --without-sound
+    --with-sound=no
+    --with-cairo
+    --with-json
+    --with-xml2
+    --with-xft
+    --with-harfbuzz
+    --with-libotf
+    --with-gnutls
+    --with-zlib
+    --with-modules
+    --with-threads
+    --with-file-notification=yes
+    --with-x-toolkit=gtk3
+    --with-x
+# Beware https://debbugs.gnu.org/cgi/bugreport.cgi?bug=25228 dconf and gconf break font
+# settings you set in ~/.emacs.  If you insist you'll need to read that bug report in
+# *full*.  Good luck!
+    --without-gconf
+    --without-gsettings
   )
 
 ################################################################################
@@ -269,18 +276,6 @@ fi
 
 ################################################################################
 
-  # Use the gold linker with gcc.
-  #
-  if [[ $GOLD == "YES" && ! $CLANG == "YES" ]]; then
-    export LD=/usr/bin/ld.gold
-    export CFLAGS+=" -fuse-ld=gold";
-    export CXXFLAGS+=" -fuse-ld=gold";
-  elif [[ $GOLD == "YES" && $CLANG == "YES" ]]; then
-    echo "";
-    echo "Clang doesn't use gold.ld in this setup.";
-    echo "";
-  fi
-
   ./configure "${_conf[@]}"
 
   # Using "make" instead of "make bootstrap" enables incremental
@@ -327,7 +322,7 @@ package() {
   fi
 
   # fix user/root permissions on usr/share files
-  find "$pkgdir"/usr/share/emacs/ -print0 | xargs -0 chown root:root
+  find "$pkgdir"/usr/share/emacs/ | xargs chown root:root
 
   # fix permssions on /var/games
   mkdir -p "$pkgdir"/var/games/emacs
