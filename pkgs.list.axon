@@ -16,6 +16,7 @@ bat
 beets
 bind-tools
 bison
+blender
 bonnie++
 boost
 bs1770gain
@@ -65,6 +66,7 @@ fwupd
 fzf
 gdb
 gimp
+glfw-x11
 gmp-ecm
 gnome-calculator
 gnome-dictionary
@@ -196,6 +198,7 @@ python-rcssmin
 python-rjsmin
 qbittorrent
 radeontool
+rav1e
 read-edid
 realtime-privileges
 redshift
@@ -226,6 +229,7 @@ sshfs
 steam-native-runtime
 strace
 subdl
+svt-av1
 syncthing
 sysstat
 tensorflow-opt
