@@ -5,3 +5,5 @@
 [color]
   ui = true
 
+[merge]
+  conflictstyle = diff3

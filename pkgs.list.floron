@@ -156,6 +156,8 @@ fwupd
 fzf
 fzy
 gifski
+gimagereader-gtk
+gimp
 git-crypt
 gitolite
 gitprompt-rs
@@ -181,7 +183,6 @@ gstreamer-vaapi
 gst-transcoder
 gtest
 gtk-engine-murrine
-gtksourceview3
 gucharmap
 gumbo-parser
 gvfs
@@ -254,7 +255,6 @@ libgnome-keyring
 libgooglepinyin
 libgrss
 libgsf
-libheif
 libiptcdata
 libiscsi
 libisoburn
@@ -269,7 +269,6 @@ libopenraw
 libosinfo
 libpipewire02
 libproxy-mozjs
-libraw
 libsidplayfp
 libunrar
 libva1-intel-driver
@@ -279,7 +278,6 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvterm
-libwmf
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -505,6 +503,9 @@ tarsnap
 tcc
 tcpdump
 tepl
+tesseract-data-deu
+tesseract-data-eng
+tesseract-data-fra
 testdisk
 the_silver_searcher
 thunar-archive-plugin
@@ -623,6 +624,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xournalpp
 xsel
 xsettings-client
 xsettingsd
