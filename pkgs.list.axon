@@ -65,6 +65,7 @@ flex
 fwupd
 fzf
 gdb
+gimagereader-gtk
 gimp
 glfw-x11
 gmp-ecm
@@ -123,7 +124,6 @@ libao
 libcue
 libfido2
 libgnome-keyring
-libgphoto2
 libmad
 libmp4v2
 libmtp
@@ -233,6 +233,9 @@ svt-av1
 syncthing
 sysstat
 tensorflow-opt
+tesseract-data-deu
+tesseract-data-eng
+tesseract-data-fra
 tigervnc
 time
 tmux
@@ -309,6 +312,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xournalpp
 xss-lock
 yay-bin
 you-get
