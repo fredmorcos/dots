@@ -203,6 +203,7 @@ hunspell-de
 hunspell-en_US
 hunspell-fr
 hwdetect
+hwinfo
 hyperfine
 hyphen-de
 hyphen-en
@@ -229,7 +230,6 @@ iwd
 jemalloc
 jfsutils
 jp2a
-jwm
 kcov
 kmscon
 laptop-detect
@@ -242,8 +242,7 @@ lib32-libsamplerate
 lib32-libva-intel-driver
 lib32-libva-vdpau-driver
 lib32-mesa-vdpau
-lib32-opencl-nvidia
-lib32-primus_vk
+lib32-virtualgl
 libappindicator-gtk3
 libcue
 libdvdcss
@@ -290,6 +289,7 @@ lockfile-progs
 logrotate
 lostfiles
 lrzip
+lshw
 lua-alt-getopt
 lua-filesystem
 lxdm-gtk3
@@ -391,7 +391,6 @@ pkgfile
 plantri
 ponymix
 powertop
-primus_vk
 privoxy
 progress
 proxytunnel

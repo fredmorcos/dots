@@ -6,3 +6,7 @@ blacklist rivatv
 blacklist nvidia
 
 options bbswitch load_state=0 unload_state=1
+
+options nvidia NVreg_UsePageAttributeTable=1
+options nvidia NVreg_RegisterForACPIEvents=1
+options nvidia NVreg_EnableMSI=0
