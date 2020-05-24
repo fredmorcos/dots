@@ -9,7 +9,6 @@ afpfs-ng
 alacritty
 alsa-firmware
 alsa-tools
-android-tools
 android-udev
 antiword
 arch-audit
@@ -38,6 +37,7 @@ beets
 bin2iso
 binwalk
 bison
+blender
 bluez-cups
 bluez-hid2hci
 bluez-tools
@@ -87,6 +87,7 @@ corkscrew
 cpio
 crda
 ctags
+cuda
 cuetools
 cups-pdf
 cups-pk-helper
@@ -217,6 +218,7 @@ idle3-tools
 ifenslave
 ifplugd
 intel-gpu-tools
+intel-mkl
 intel-ucode
 iotop
 ipset
@@ -227,7 +229,6 @@ isync
 iucode-tool
 iverilog
 iwd
-jemalloc
 jfsutils
 jp2a
 kcov
@@ -400,9 +401,6 @@ pstotext
 psutils
 ptunnel
 pulsemixer
-purple-facebook
-purple-plugin-pack
-purple-skypeweb
 python-argcomplete
 python-beautifulsoup4
 python-brotlipy
