@@ -198,6 +198,7 @@ hexyl
 highlight
 hledger-web
 hsetroot
+htmlmin
 htop
 httptunnel
 hunspell-de
@@ -433,8 +434,10 @@ python-pyopenssl
 python-pysmbc
 python-pystemmer
 python-pyudev
+python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
+python-rjsmin
 python-setproctitle
 python-tlsh
 python-virtualenv
