@@ -45,7 +45,6 @@ bluez-utils
 bolt
 bonnie++
 boost
-bridge-utils
 brook
 bs1770gain
 bsdiff
@@ -113,6 +112,7 @@ diskus
 dmenu
 dnsmasq
 dnssec-tools
+docker
 docx2txt
 duperemove
 dwdiff
