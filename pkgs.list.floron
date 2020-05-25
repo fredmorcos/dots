@@ -404,7 +404,6 @@ ptunnel
 pulsemixer
 python-argcomplete
 python-beautifulsoup4
-python-brotlipy
 python-cairocffi
 python-capstone
 python-cjkwrap
