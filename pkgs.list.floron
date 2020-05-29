@@ -247,7 +247,6 @@ lib32-libva-vdpau-driver
 lib32-mesa-vdpau
 lib32-virtualgl
 libappindicator-gtk3
-libcue
 libdvdcss
 libemf
 libffado
@@ -271,7 +270,6 @@ libopenraw
 libosinfo
 libpipewire02
 libproxy-mozjs
-libsidplayfp
 libunrar
 libva1-intel-driver
 libva-intel-driver
