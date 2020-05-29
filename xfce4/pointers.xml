@@ -84,8 +84,8 @@
   </property>
   <property name="ROCCAT_ROCCAT_Kain_120_Consumer_Control" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
-    <property name="Threshold" type="int" value="4"/>
-    <property name="Acceleration" type="double" value="2.100000"/>
+    <property name="Threshold" type="int" value="30"/>
+    <property name="Acceleration" type="double" value="10.000000"/>
   </property>
   <property name="ROCCAT_ROCCAT_Kain_120" type="empty">
     <property name="RightHanded" type="bool" value="true"/>
