@@ -10,6 +10,7 @@ afpfs-ng
 alacritty
 alsa-firmware
 alsa-tools
+android-tools
 android-udev
 antiword
 arch-audit
@@ -189,7 +190,7 @@ gtest
 gtk-engine-murrine
 gucharmap
 gumbo-parser
-gvfs
+gvfs-mtp
 hardinfo
 hashcat-utils
 hcxtools
