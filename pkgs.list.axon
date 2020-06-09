@@ -10,6 +10,7 @@ atool
 audacious
 autoconf
 automake
+avisynthplus
 base
 bash-completion
 bat
@@ -26,7 +27,6 @@ cargo-crev
 cargo-edit
 cargo-fuzz
 cargo-outdated
-cargo-tree
 cbindgen
 ccache
 clinfo
