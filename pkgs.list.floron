@@ -30,6 +30,7 @@ autoconf-archive
 autogen
 automake
 autopep8
+avisynthplus
 badvpn
 base
 bash-completion

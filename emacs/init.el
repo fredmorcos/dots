@@ -640,6 +640,7 @@
   (rustic-lsp-server 'rust-analyzer)
   (rustic-analyzer-command '("/usr/bin/rust-analyzer"))
   (rustic-lsp-format t)
+  (rustic-indent-offset 2)
 
   :config
   (eval-after-load 'flycheck
