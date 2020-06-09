@@ -4,6 +4,7 @@ cargo-audit
 cargo-expand
 cargo-geiger
 cargo-tarpaulin
+cargo-tree
 cargo-watch
 kmon
 sccache
