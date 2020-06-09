@@ -116,9 +116,6 @@ cmerge autostart/xnocaps.desktop     ~/.config/autostart/xnocaps.desktop
 
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
 
-# cmerge gtk/gtkrc-2.0                 ~/.gtkrc-2.0
-# cmerge gtk/filechooser.ini           ~/.config/gtk-2.0/gtkfilechooser.ini
-# cmerge gtk/settings.ini              ~/.config/gtk-3.0/settings.ini
 cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
 
 cmerge emacs/init.el                 ~/.config/emacs/init
@@ -145,7 +142,7 @@ cmerge cargo.conf                    ~/.cargo/config
 
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
-# cmerge x11/vnc.conf                  /etc/X11/xorg.conf.d/10-vnc.conf
+cmerge x11/vnc.conf                  /etc/X11/xorg.conf.d/10-vnc.conf
 cmerge x11/nvidia-prime.conf         /etc/X11/xorg.conf.d/20-nvidia-prime.conf
 
 cmerge loader/loader.conf            /boot/loader/loader.conf
