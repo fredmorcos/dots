@@ -120,6 +120,7 @@ lib32-opencl-mesa
 lib32-simplescreenrecorder
 lib32-v4l-utils
 lib32-vkd3d
+lib32-vulkan-mesa-layers
 lib32-vulkan-validation-layers
 libao
 libfido2
@@ -164,7 +165,6 @@ nvme-cli
 obs-studio
 odt2txt
 openbsd-netcat
-opencl-mesa
 opendoas
 openmp
 openresolv
@@ -260,7 +260,6 @@ vim-spell-en
 vkd3d
 vokoscreen
 vulkan-extra-layers
-vulkan-mesa-layer
 vulkan-tools
 whois
 wireguard-tools
