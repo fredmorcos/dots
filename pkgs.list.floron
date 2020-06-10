@@ -247,9 +247,11 @@ lhasa
 lib32-libavtp
 lib32-libsamplerate
 lib32-libva-intel-driver
+lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
 lib32-mesa-vdpau
 lib32-virtualgl
+lib32-vulkan-mesa-layers
 libappindicator-gtk3
 libdvdcss
 libemf
@@ -563,7 +565,6 @@ vim-spell-fr
 virglrenderer
 virtualbox
 vkd3d
-vulkan-mesa-layer
 vulkan-tools
 w3m
 watchexec
