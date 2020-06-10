@@ -7,3 +7,6 @@
 
 [merge]
   conflictstyle = diff3
+
+[pull]
+	rebase = true
