@@ -3,6 +3,7 @@ cargo-asm
 cargo-audit
 cargo-expand
 cargo-geiger
+cargo-spellcheck
 cargo-tarpaulin
 cargo-watch
 kmon
