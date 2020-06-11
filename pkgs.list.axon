@@ -57,6 +57,8 @@ epiphany
 ethtool
 evince
 exa
+exfat-utils
+f2fs-tools
 fd
 fdupes
 file-roller
@@ -72,6 +74,8 @@ gmp-ecm
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
+gpart
+gparted
 gpick
 gst-libav
 gst-plugins-ugly
@@ -103,6 +107,7 @@ iotop
 irqbalance
 ispell
 jdk-openjdk
+jfsutils
 jq
 kcov
 lhasa
@@ -151,12 +156,14 @@ mesa-vdpau
 mkvtoolnix-gui
 mlocate
 mpv
+mtools
 musl
 mythes-en
 ncdu
 net-tools
 network-manager-applet
 networkmanager-openvpn
+nilfs-utils
 nnn
 ntfs-3g
 numix-gtk-theme-git
@@ -245,6 +252,7 @@ transmission-gtk
 trash-cli
 ttf-go-mono-git
 tup
+udftools
 unace
 unoconv
 unrar
