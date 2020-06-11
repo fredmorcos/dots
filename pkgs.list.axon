@@ -182,6 +182,9 @@ papirus-icon-theme
 par2cmdline
 patch
 pavucontrol
+pdfarranger
+pdfmixtool
+pdfslicer
 picard
 picom
 pigz
@@ -193,6 +196,7 @@ pstoedit
 psutils
 pwgen
 python-beautifulsoup4
+python-cssselect
 python-discid
 python-pip
 python-pyacoustid

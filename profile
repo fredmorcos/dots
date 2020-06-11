@@ -9,7 +9,7 @@ OPROX1=$(head -1 ~/Documents/Important/Passwords/_oprox1.txt)
 export OS_NAME OS_PASS OPROX1
 
 # export AMD_DEBUG="nongg,nodma"
-export RADV_PERFTEST="aco"
+# export RADV_PERFTEST="aco"
 
 # Qt
 # export QT_AUTO_SCREEN_SCALE_FACTOR=1
