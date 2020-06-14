@@ -683,6 +683,11 @@
   (lsp-rust-clippy-preference "on")
   (lsp-rust-server 'rust-analyzer)
   (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-rust-analyzer-display-chaining-hints t)
+  (lsp-rust-analyzer-display-parameter-hints t)
+  (lsp-rust-all-features t)
+  (lsp-rust-all-targets t)
+  ;; (lsp-rust-analyzer-max-inlay-hint-length 10)
 
   (lsp-diagnostics-attributes `((unnecessary :background "Gray90")
                                 (deprecated  :strike-through t)))
@@ -845,6 +850,8 @@
 (use-package cmake-mode)
 
 (use-package dockerfile-mode)
+
+(use-package yasnippet)
 
 (provide 'init)
 ;;; init ends here
