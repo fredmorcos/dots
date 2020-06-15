@@ -83,7 +83,7 @@ gst-python
 gstreamer-vaapi
 gtk-engine-murrine
 gucharmap
-gvfs
+gvfs-mtp
 hardinfo
 hddtemp
 hdparm
@@ -128,6 +128,7 @@ lib32-vkd3d
 lib32-vulkan-mesa-layers
 lib32-vulkan-validation-layers
 libao
+libdmapsharing
 libfido2
 libgnome-keyring
 libmad
