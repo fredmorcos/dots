@@ -389,6 +389,10 @@
   :hook
   (dired-mode . auto-revert-mode))
 
+(use-package subword
+  :ensure nil
+  :diminish "SW")
+
 (use-package f)
 (use-package ht)
 (use-package dash)
@@ -511,6 +515,10 @@
   :custom
   (flycheck-checker-error-threshold nil)
   (flycheck-mode-line-prefix "FC")
+  (flycheck-check-syntax-automatically
+    '(idle-change new-line mode-enabled idle-buffer-switch))
+  (flycheck-idle-change-delay 0.1)
+  (flycheck-idle-buffer-switch-delay 0.1)
 
   :hook
   (prog-mode . flycheck-mode))
@@ -527,7 +535,7 @@
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
   ;; (company-transformers '(company-sort-by-backend-importance))
-  ;; (company-idle-delay 0.1)
+  (company-idle-delay 0.1)
 
   :hook
   (prog-mode . company-mode)
@@ -644,7 +652,11 @@
 
   :config
   (eval-after-load 'flycheck
-    '(push #'rustic-clippy flycheck-checkers)))
+    '(push #'rustic-clippy flycheck-checkers))
+
+  :hook
+  (rustic-mode . (lambda () (electric-quote-local-mode -1)))
+  (rustic-mode . subword-mode))
 
 (use-package lsp-mode
   :commands
@@ -852,7 +864,11 @@
 
 (use-package dockerfile-mode)
 
-(use-package yasnippet)
+(use-package yasnippet
+  :diminish "YS"
+
+  :hook
+  (rustic-mode . yas-minor-mode))
 
 (provide 'init)
 ;;; init ends here
