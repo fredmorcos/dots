@@ -687,6 +687,7 @@
   (lsp-rust-analyzer-display-parameter-hints t)
   (lsp-rust-all-features t)
   (lsp-rust-all-targets t)
+  ;; (lsp-rust-build-on-save t)
   ;; (lsp-rust-analyzer-max-inlay-hint-length 10)
 
   (lsp-diagnostics-attributes `((unnecessary :background "Gray90")
