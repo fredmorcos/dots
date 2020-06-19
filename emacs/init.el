@@ -534,7 +534,7 @@
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
-  ;; (company-transformers '(company-sort-by-backend-importance))
+  (company-transformers '(company-sort-by-backend-importance))
   (company-idle-delay 0.1)
 
   :hook
@@ -656,7 +656,8 @@
 
   :hook
   (rustic-mode . (lambda () (electric-quote-local-mode -1)))
-  (rustic-mode . subword-mode))
+  (rustic-mode . subword-mode)
+  (before-save . lsp-format-buffer))
 
 (use-package lsp-mode
   :commands
