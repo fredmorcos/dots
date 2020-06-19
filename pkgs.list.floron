@@ -465,6 +465,7 @@ rink
 ripgrep
 rlwrap
 rofi-pass
+rshijack
 rtirq
 rust-analyzer
 rust-bindgen
@@ -543,6 +544,7 @@ ttf-go-mono-git
 tup
 udftools
 unace
+uncrustify
 unicode-emoji
 units
 unoconv
