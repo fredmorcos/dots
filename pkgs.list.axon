@@ -23,10 +23,12 @@ boost
 bs1770gain
 btfs
 cargo-audit
+cargo-c
 cargo-crev
 cargo-edit
 cargo-fuzz
 cargo-outdated
+cargo-watch
 cbindgen
 ccache
 clinfo

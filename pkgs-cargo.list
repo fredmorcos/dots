@@ -5,7 +5,6 @@ cargo-expand
 cargo-geiger
 cargo-spellcheck
 cargo-tarpaulin
-cargo-watch
 kmon
 sccache
 titlecase

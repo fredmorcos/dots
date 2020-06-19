@@ -59,10 +59,12 @@ cadaver
 calcurse
 capnproto
 cargo-audit
+cargo-c
 cargo-crev
 cargo-edit
 cargo-fuzz
 cargo-outdated
+cargo-watch
 catdoc
 catimg
 cbindgen
