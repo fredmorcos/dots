@@ -671,11 +671,12 @@
 
   :bind
   (:map lsp-mode-map
-        ("C-c f" . lsp-format-buffer)
-        ("C-c r" . lsp-rename)
-        ("C-c t" . lsp-describe-thing-at-point)
-        ("C-="   . lsp-extend-selection)
-        ("M-RET" . lsp-execute-code-action))
+    ("C-c f" . lsp-format-buffer)
+    ("C-c r" . lsp-rename)
+    ("C-c t" . lsp-describe-thing-at-point)
+    ("C-="   . lsp-extend-selection)
+    ("C-c e" . lsp-rust-analyzer-expand-macro)
+    ("M-RET" . lsp-execute-code-action))
 
   :custom
   (lsp-enable-snippet nil)
