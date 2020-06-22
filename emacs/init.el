@@ -534,8 +534,12 @@
   (company-tooltip-minimum 10)
   (company-tooltip-limit 20)
   (company-tooltip-align-annotations t)
-  (company-transformers '(company-sort-by-backend-importance))
   (company-idle-delay 0.1)
+  (company-occurence-weight-function 'company-occurrence-prefer-any-closest)
+  (company-transformers
+    '(company-sort-by-occurrence
+      company-sort-by-backend-importance
+      company-sort-prefer-same-case-prefix))
 
   :hook
   (prog-mode . company-mode)
@@ -651,13 +655,13 @@
   (rustic-indent-offset 2)
 
   :config
-  (eval-after-load 'flycheck
-    '(push #'rustic-clippy flycheck-checkers))
+  (eval-after-load 'flycheck '(push #'rustic-clippy flycheck-checkers))
 
   :hook
-  (rustic-mode . (lambda () (electric-quote-local-mode -1)))
-  (rustic-mode . subword-mode)
-  (before-save . lsp-format-buffer))
+  (rustic-mode . (lambda ()
+                   (electric-quote-local-mode -1)
+                   (add-hook 'before-save-hook #'lsp-format-buffer 10 t)))
+  (rustic-mode . subword-mode))
 
 (use-package lsp-mode
   :commands
@@ -679,7 +683,7 @@
     ("M-RET" . lsp-execute-code-action))
 
   :custom
-  (lsp-enable-snippet nil)
+  (lsp-enable-snippet t)
   (lsp-keymap-prefix "C-c")
   (lsp-prefer-flymake nil)
   (lsp-prefer-capf t)
@@ -690,7 +694,6 @@
   (lsp-before-save-edits t)
   (lsp-auto-configure t)
 
-  ;; (lsp-rust-full-docs t)
   (lsp-rust-racer-completion nil)
   (lsp-rust-build-bin t)
   (lsp-rust-build-lib t)
@@ -701,18 +704,20 @@
   (lsp-rust-analyzer-display-parameter-hints t)
   (lsp-rust-all-features t)
   (lsp-rust-all-targets t)
-  ;; (lsp-rust-build-on-save t)
+  (lsp-rust-build-on-save t)
+  ;; (lsp-rust-full-docs t)
   ;; (lsp-rust-analyzer-max-inlay-hint-length 10)
 
   (lsp-diagnostics-attributes `((unnecessary :background "Gray90")
                                 (deprecated  :strike-through t)))
 
-  (lsp-signature-auto-activate t)
-  (lsp-signature-doc-lines 1)
-  ;; (lsp-signature-render-documentation nil)
+  ;; (lsp-signature-doc-lines 1)
+  ;; (lsp-signature-auto-activate t)
+  ;; (lsp-signature-render-documentation t)
 
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
+  (lsp-mode . lsp-headerline-breadcrumb-mode)
 
   :config
   (defface lsp-rust-inlay-type-face
@@ -773,38 +778,41 @@
     ("C-c h" . lsp-ui-doc-glance))
 
   :custom
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-doc-enable nil)
-
-  ;; :custom
-  ;; (lsp-ui-flycheck-enable t)
-  ;; (lsp-ui-flycheck-list-mode t)
+  (lsp-ui-flycheck-enable t)
+  (lsp-ui-flycheck-list-mode t)
 
   ;; (lsp-ui-peek-always-show t)
   ;; (lsp-ui-peek-show-directory nil)
 
-  ;; (lsp-ui-doc-enable nil)
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-doc-delay 0.1)
+  (lsp-ui-doc-border "black")
+  (lsp-ui-doc-alignment 'window)
   ;; (lsp-ui-doc-header t)
   ;; (lsp-ui-doc-include-signature t)
-  ;; (lsp-ui-doc-delay 0.5)
-  ;; (lsp-ui-doc-border "black")
-  ;; (lsp-ui-doc-alignment 'window)
 
-  ;; (lsp-ui-sideline-enable nil)
+  (lsp-ui-sideline-enable nil)
   ;; (lsp-ui-sideline-delay 0.1)
   ;; (lsp-ui-sideline-update-mode 'line)
   ;; (lsp-ui-sideline-ignore-duplicate t)
   ;; (lsp-ui-sideline-show-hover t)
 
   :custom-face
+  ;; (lsp-ui-sideline-code-action ((t (:foreground "Sienna"))))
+  ;; (lsp-ui-sideline-global ((t (:foreground "Gray70"))))
+  ;; (lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
+  ;; (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
+  ;; (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75"))))
   (lsp-ui-doc-background ((t (:background "Gray95"))))
   (lsp-ui-doc-header ((t (:background "Pale Turquoise"))))
-  (lsp-ui-doc-border ((t (:background "Gray70"))))
-  (lsp-ui-sideline-code-action ((t (:foreground "Sienna"))))
-  (lsp-ui-sideline-global ((t (:foreground "Gray70"))))
-  (lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
-  (lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
-  (lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75")))))
+  (lsp-ui-doc-border ((t (:background "Gray70")))))
+
+(use-package lsp-ivy
+  :ensure t
+
+  :bind
+  (:map lsp-mode-map
+    ("C-c x" . lsp-ivy-workspace-symbol)))
 
 (use-package posframe
   :pin melpa)
