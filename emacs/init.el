@@ -673,6 +673,12 @@
   lsp--text-document-identifier
   lsp--range-to-region
 
+  :init
+  (defun lsp-ivy-helper ()
+    "Call LSP-IVY-WORKSPACE-SYMBOL with symbol at point"
+    (interactive)
+    (lsp-ivy-workspace-symbol t))
+
   :bind
   (:map lsp-mode-map
     ("C-c f" . lsp-format-buffer)
@@ -680,7 +686,8 @@
     ("C-c t" . lsp-describe-thing-at-point)
     ("C-="   . lsp-extend-selection)
     ("C-c e" . lsp-rust-analyzer-expand-macro)
-    ("M-RET" . lsp-execute-code-action))
+    ("M-RET" . lsp-execute-code-action)
+    ("C-c x" . lsp-ivy-helper))
 
   :custom
   (lsp-enable-snippet t)
@@ -785,9 +792,9 @@
   ;; (lsp-ui-peek-show-directory nil)
 
   (lsp-ui-doc-enable nil)
-  (lsp-ui-doc-delay 0.1)
   (lsp-ui-doc-border "black")
   (lsp-ui-doc-alignment 'window)
+  ;; (lsp-ui-doc-delay 0.1)
   ;; (lsp-ui-doc-header t)
   ;; (lsp-ui-doc-include-signature t)
 
@@ -808,11 +815,8 @@
   (lsp-ui-doc-border ((t (:background "Gray70")))))
 
 (use-package lsp-ivy
-  :ensure t
-
-  :bind
-  (:map lsp-mode-map
-    ("C-c x" . lsp-ivy-workspace-symbol)))
+  :commands
+  lsp-ivy-workspace-symbol)
 
 (use-package posframe
   :pin melpa)
