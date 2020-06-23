@@ -254,7 +254,6 @@ lib32-libva-vdpau-driver
 lib32-mesa-vdpau
 lib32-virtualgl
 lib32-vulkan-mesa-layers
-libappindicator-gtk3
 libdvdcss
 libemf
 libffado
