@@ -30,7 +30,7 @@
       </property>
     </property>
     <property name="eDP-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="false"/>
+      <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="2704bd3e6e30265d29d3139ebdab40b9216b92fb"/>
       <property name="Resolution" type="string" value="1920x1080"/>
       <property name="RefreshRate" type="double" value="59.962844"/>
@@ -56,7 +56,7 @@
       </property>
     </property>
     <property name="DP-1" type="string" value="Dell 30&quot;">
-      <property name="Active" type="bool" value="true"/>
+      <property name="Active" type="bool" value="false"/>
       <property name="EDID" type="string" value="51a1217efb0838b50c1b709545094a37b7484158"/>
       <property name="Resolution" type="string" value="2560x1600"/>
       <property name="RefreshRate" type="double" value="59.971589"/>
