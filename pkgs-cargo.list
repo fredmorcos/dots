@@ -2,9 +2,11 @@ bottom
 cargo-asm
 cargo-audit
 cargo-expand
+cargo-flamegraph
 cargo-geiger
 cargo-spellcheck
 cargo-tarpaulin
+cargo-udeps
 kmon
 sccache
 titlecase
