@@ -1,6 +1,5 @@
 acpid
 adobe-source-sans-pro-fonts
-alacritty
 alsa-firmware
 alsa-tools
 amd-ucode
@@ -225,7 +224,6 @@ rofimoji
 rsync
 rust-analyzer
 rust-bindgen
-sakura
 screen
 seahorse
 shake
