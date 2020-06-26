@@ -19,6 +19,7 @@ bison
 blender
 bonnie++
 boost
+breeze-icons
 bs1770gain
 btfs
 cargo-audit
@@ -48,6 +49,7 @@ dnsmasq
 docker
 duperemove
 easy-rsa
+ebook-tools
 ebtables
 ecm-tools
 edk2-ovmf
@@ -112,6 +114,7 @@ jdk-openjdk
 jfsutils
 jq
 kcov
+khtml
 lhasa
 lib32-gst-plugins-base-libs
 lib32-gtk3
@@ -175,6 +178,7 @@ nuspell
 nvme-cli
 obs-studio
 odt2txt
+okular
 openbsd-netcat
 opendoas
 openmp
