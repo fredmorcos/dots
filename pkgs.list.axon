@@ -30,6 +30,7 @@ cargo-outdated
 cargo-watch
 cbindgen
 ccache
+chmlib
 clinfo
 clipgrab
 cmus
