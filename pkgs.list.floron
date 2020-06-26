@@ -75,6 +75,7 @@ cgdb
 chafa
 checksec
 cheese
+chmlib
 chromium
 chrpath
 clazy
@@ -544,6 +545,7 @@ ttf-go-mono-git
 tup
 udftools
 unace
+unarchiver
 uncrustify
 unicode-emoji
 units
