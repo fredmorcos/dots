@@ -202,6 +202,7 @@ powertop
 progress
 pstoedit
 psutils
+pulseaudio
 pwgen
 python-beautifulsoup4
 python-cssselect
@@ -277,7 +278,6 @@ vice
 vim-colorsamplerpack
 vim-spell-en
 vkd3d
-vokoscreen
 vulkan-extra-layers
 vulkan-tools
 whois
