@@ -41,9 +41,11 @@ bin2iso
 binwalk
 bison
 blender
+blueberry
+blueman
 bluez-cups
 bluez-hid2hci
-bluez-tools
+bluez-plugins
 bluez-utils
 bolt
 bonnie++
@@ -447,7 +449,6 @@ python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
 python-rjsmin
-python-setproctitle
 python-tlsh
 python-virtualenv
 qbittorrent
