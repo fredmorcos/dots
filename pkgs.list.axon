@@ -59,7 +59,6 @@ entr
 eom
 epiphany
 ethtool
-evince
 exa
 exfat-utils
 f2fs-tools
@@ -193,6 +192,7 @@ pavucontrol
 pdfarranger
 pdfmixtool
 pdfslicer
+perl-net-libidn2
 picard
 picom
 pigz
