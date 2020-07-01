@@ -142,8 +142,8 @@ cmerge cargo.conf                    ~/.cargo/config
 
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
-cmerge x11/vnc.conf                  /etc/X11/xorg.conf.d/10-vnc.conf
-# cmerge x11/nvidia-prime.conf         /etc/X11/xorg.conf.d/20-nvidia-prime.conf
+# cmerge x11/vnc.conf                  /etc/X11/xorg.conf.d/10-vnc.conf
+cmerge x11/nvidia-prime.conf         /etc/X11/xorg.conf.d/20-nvidia-prime.conf
 
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
