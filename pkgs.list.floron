@@ -193,6 +193,7 @@ gstreamer-vaapi
 gst-transcoder
 gtest
 gtk-engine-murrine
+gtkglext
 gucharmap
 gumbo-parser
 gvfs-mtp
@@ -380,6 +381,7 @@ pacman-contrib
 pacrunner
 pacutils
 pamixer
+pangox-compat
 papirus-icon-theme
 paprefs
 par2cmdline
@@ -608,6 +610,7 @@ xorg-bdftopcf
 xorg-docs
 xorg-font-util
 xorg-luit
+xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
