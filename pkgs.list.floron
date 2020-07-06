@@ -57,7 +57,6 @@ bsdiff
 bspwm
 bully
 byzanz
-cabextract
 cadaver
 calcurse
 capnproto
@@ -121,6 +120,7 @@ dnsmasq
 dnssec-tools
 docker
 docx2txt
+dosbox
 duperemove
 dwdiff
 easy-rsa
@@ -251,13 +251,17 @@ lbzip2
 leatherman
 ledger
 lhasa
+lib32-gtk3
 lib32-libavtp
 lib32-libsamplerate
 lib32-libva-intel-driver
 lib32-libva-mesa-driver
 lib32-libva-vdpau-driver
+lib32-libxslt
 lib32-mesa-vdpau
+lib32-v4l-utils
 lib32-virtualgl
+lib32-vkd3d
 lib32-vulkan-mesa-layers
 libdvdcss
 libemf
@@ -583,6 +587,10 @@ wget
 when
 whois
 whowatch
+wine-gecko
+wine-mono
+wine-nine
+winetricks
 wireguard-tools
 wmctrl
 words
@@ -632,7 +640,6 @@ xorg-xkbutils
 xorg-xkill
 xorg-xlsatoms
 xorg-xlsclients
-xorg-xmessage
 xorg-xpr
 xorg-xrefresh
 xorg-xvinfo
