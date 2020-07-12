@@ -21,8 +21,8 @@ export OS_NAME OS_PASS OPROX1
 
 # Java-specific
 PATH="$HOME/Oracle/mx:$PATH"
-PATH="$HOME/Oracle/opt/oraclejdk/bin:$PATH"
-PATH="$HOME/Oracle/opt/oraclejdk/jre/bin:$PATH"
+PATH="$HOME/Oracle/opt/oraclejdk-jvmci/bin:$PATH"
+PATH="$HOME/Oracle/opt/oraclejdk-jvmci/jre/bin:$PATH"
 PATH="$HOME/Oracle/opt/eclipse:$PATH"
 
 export MX_PYTHON_VERSION=3
