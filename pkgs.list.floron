@@ -39,7 +39,6 @@ bbswitch
 beets
 binwalk
 bison
-blender
 blueberry
 blueman
 bluez-cups
@@ -50,6 +49,7 @@ bolt
 bonnie++
 boost
 breeze-icons
+bridge-utils
 brook
 bs1770gain
 bsdiff
@@ -117,7 +117,6 @@ diskus
 dmenu
 dnsmasq
 dnssec-tools
-docker
 docx2txt
 dosbox
 duperemove
@@ -240,6 +239,7 @@ isync
 iucode-tool
 iverilog
 iwd
+jemalloc
 jfsutils
 jp2a
 kcov
@@ -374,7 +374,6 @@ openbsd-netcat
 opendoas
 openldap
 openmp
-oprofile
 optipng
 osinfo-db-tools
 os-prober
