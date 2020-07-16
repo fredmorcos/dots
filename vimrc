@@ -43,7 +43,7 @@ set directory=/tmp
 set writebackup
 
 if &diff
-  colorscheme sienna
+  " colorscheme sienna
   :map n ]c
   :map pp dp
   :map oo do

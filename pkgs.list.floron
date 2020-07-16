@@ -231,6 +231,7 @@ intel-gpu-tools
 intel-mkl
 intel-ucode
 iotop
+ipp-usb
 ipset
 irqbalance
 ispc
@@ -570,7 +571,6 @@ vcdimager
 vde2
 vdpauinfo
 vi
-vim-colorsamplerpack
 vim-spell-de
 vim-spell-en
 vim-spell-fr
