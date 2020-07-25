@@ -7,7 +7,6 @@ acpilight
 adobe-source-sans-pro-fonts
 afl-utils
 afpfs-ng
-alacritty
 alsa-firmware
 alsa-tools
 android-tools
@@ -50,12 +49,12 @@ bonnie++
 boost
 breeze-icons
 bridge-utils
-brook
 bs1770gain
 bsdiff
 bspwm
 bully
 byzanz
+cabextract
 cadaver
 calcurse
 capnproto
@@ -92,7 +91,6 @@ corkscrew
 cpio
 crda
 ctags
-cuda
 cuetools
 cups-pdf
 cups-pk-helper
@@ -134,7 +132,6 @@ emacs-git
 enjarify
 entr
 eom
-epiphany
 espeak-ng
 exa
 exfat-utils
@@ -175,6 +172,9 @@ gmp-ecm
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
+gnome-recipes
+gnome-system-monitor
+gnome-todo
 gnu-efi
 gpart
 gparted
@@ -182,7 +182,6 @@ gperf
 gperftools
 gpick
 graphviz
-gspell
 gst-editing-services
 gst-libav
 gst-plugins-ugly
@@ -195,7 +194,6 @@ gtkglext
 gucharmap
 gumbo-parser
 gvfs-mtp
-hardinfo
 hashcat-utils
 hcxtools
 hddtemp
@@ -228,7 +226,6 @@ idle3-tools
 ifenslave
 ifplugd
 intel-gpu-tools
-intel-mkl
 intel-ucode
 iotop
 ipp-usb
@@ -417,6 +414,7 @@ pstoedit
 pstotext
 psutils
 ptunnel
+pulseaudio-alsa
 pulsemixer
 python-argcomplete
 python-beautifulsoup4
@@ -455,7 +453,6 @@ python-requests-oauthlib
 python-rjsmin
 python-tlsh
 python-virtualenv
-qbittorrent
 radamsa
 radvd
 razor
@@ -468,7 +465,6 @@ refind
 reiserfsprogs
 remind
 reptyr
-restic
 rink
 ripgrep
 rlwrap
@@ -512,6 +508,7 @@ stress
 stunnel
 subdl
 syncthing
+sysprof
 sysstat
 system-config-printer
 t1utils
@@ -561,6 +558,7 @@ unrtf
 unshield
 upx
 uriparser
+usbguard
 usleep
 uthash
 uutils-coreutils
@@ -584,10 +582,7 @@ wget
 when
 whois
 whowatch
-wine-gecko
-wine-mono
-wine-nine
-winetricks
+wine-staging
 wireguard-tools
 wmctrl
 words
@@ -596,7 +591,7 @@ x11-ssh-askpass
 xcape
 xcompmgr
 xdelta3
-xdg-desktop-portal
+xdg-user-dirs-gtk
 xfce4-appfinder
 xfce4-clipman-plugin
 xfce4-notifyd
@@ -637,6 +632,7 @@ xorg-xkbutils
 xorg-xkill
 xorg-xlsatoms
 xorg-xlsclients
+xorg-xmessage
 xorg-xpr
 xorg-xrefresh
 xorg-xvinfo
