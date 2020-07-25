@@ -38,12 +38,6 @@ bbswitch
 beets
 binwalk
 bison
-blueberry
-blueman
-bluez-cups
-bluez-hid2hci
-bluez-plugins
-bluez-utils
 bolt
 bonnie++
 boost
@@ -143,7 +137,6 @@ fd
 fdupes
 file-roller
 firefox
-firewalld
 fish
 flake8
 flawfinder
@@ -172,9 +165,7 @@ gmp-ecm
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
-gnome-recipes
 gnome-system-monitor
-gnome-todo
 gnu-efi
 gpart
 gparted
@@ -182,6 +173,7 @@ gperf
 gperftools
 gpick
 graphviz
+gspell
 gst-editing-services
 gst-libav
 gst-plugins-ugly
@@ -451,6 +443,7 @@ python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
 python-rjsmin
+python-setproctitle
 python-tlsh
 python-virtualenv
 radamsa
