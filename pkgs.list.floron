@@ -25,7 +25,6 @@ astyle
 atool
 audacious
 augeas
-autoconf-archive
 autogen
 automake
 autopep8
@@ -82,9 +81,7 @@ colordiff
 colorgcc
 compsize
 corkscrew
-cpio
 crda
-ctags
 cuetools
 cups-pdf
 cups-pk-helper
@@ -162,9 +159,12 @@ git-repair
 git-review
 glyr
 gmp-ecm
+gnome-builder
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
+gnome-icon-theme
+gnome-icon-theme-extras
 gnome-system-monitor
 gnu-efi
 gpart
@@ -172,8 +172,6 @@ gparted
 gperf
 gperftools
 gpick
-graphviz
-gspell
 gst-editing-services
 gst-libav
 gst-plugins-ugly
@@ -256,7 +254,6 @@ libdvdcss
 libemf
 libffado
 libfido2
-libgit2-glib
 libgnome-keyring
 libgooglepinyin
 libgrss
@@ -315,7 +312,6 @@ mediainfo
 mediastreamer
 mesa-demos
 mesa-vdpau
-meson
 mg
 mhash
 minisign
@@ -350,6 +346,9 @@ nfs-utils
 ngrep
 nilfs-utils
 notion
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
 numix-gtk-theme-git
 nvidia
 nvidia-prime
@@ -379,7 +378,6 @@ par2cmdline
 parallel
 pass-otp
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
@@ -393,7 +391,6 @@ picom
 pigz
 pipewire-pulse
 pixiewps
-pkgconf
 pkgdiff
 pkgfile
 plantri
@@ -501,7 +498,6 @@ stress
 stunnel
 subdl
 syncthing
-sysprof
 sysstat
 system-config-printer
 t1utils
@@ -538,6 +534,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
+ttf-font-awesome
 ttf-go-mono-git
 tup
 udftools
