@@ -18,6 +18,11 @@
 (scroll-bar-mode -1)
 (set-fringe-style '(8 . 8))
 
+;; Ignore X resources; its settings would be redundant with the other settings in this
+;; file and can conflict with later config (particularly where the cursor color is
+;; concerned).
+(advice-add #'x-apply-session-resources :override #'ignore)
+
 ;; faces
 (custom-set-faces
  '(default            ((t . (:family     "Monospace"
@@ -37,11 +42,6 @@
 
 (fset 'display-startup-echo-area-message 'ignore)
 (run-with-idle-timer 5 t #'garbage-collect)
-
-;; Ignore X resources; its settings would be redundant with the other settings in this
-;; file and can conflict with later config (particularly where the cursor color is
-;; concerned).
-(advice-add #'x-apply-session-resources :override #'ignore)
 
 (setq-default
  custom-file (concat temporary-file-directory "emacs/custom.el")

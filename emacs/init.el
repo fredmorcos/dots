@@ -53,7 +53,7 @@
 (defun fm/diminish-helper (mode text)
  "Diminish MODE to TEXT helper."
  (let ((element (seq-find (lambda (x) (eq (car x) mode)) minor-mode-alist))
-       (new-text (if (stringp text) (concat " " text) "")))
+       (new-text (if text (concat " " text) "")))
   (if element
    (setf (nth 1 element) new-text)
    (push `(,mode ,new-text) minor-mode-alist))))
@@ -63,7 +63,6 @@
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
   (symbolp hook)
   (add-hook hook (lambda () (progn
-                             (message "DIMINISH %s" hook)
                              (fm/diminish-helper mode text))))))
 
 ;; subr
@@ -160,10 +159,6 @@
  '(load-prefer-newer t)
  '(coding-system-for-read 'utf-8-unix)
  '(coding-system-for-write 'utf-8-unix))
-
-;; electric
-(custom-set-variables
- '())
 
 ;; cua-base
 (cua-selection-mode 1)
@@ -308,6 +303,14 @@
 
 ;; subword
 (fm/diminish 'subword-mode "Sw")
+
+;; spell
+(custom-set-variables
+ '(ispell-program-name "aspell")
+ '(ispell-extra-args '("--sug-mode=ultra")))
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
 
 ;; org-bullets
 (custom-set-variables
