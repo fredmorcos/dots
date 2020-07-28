@@ -118,6 +118,7 @@ ed
 edk2-ovmf
 efitools
 eigen
+elementary-wallpapers
 ell
 emacs-git
 enjarify
@@ -159,6 +160,7 @@ git-repair
 git-review
 glyr
 gmp-ecm
+gnome-backgrounds
 gnome-builder
 gnome-calculator
 gnome-dictionary
@@ -349,7 +351,6 @@ notion
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
-numix-gtk-theme-git
 nvidia
 nvidia-prime
 nvidia-settings
