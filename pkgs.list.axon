@@ -3,6 +3,7 @@ adobe-source-sans-pro-fonts
 alsa-firmware
 alsa-tools
 amd-ucode
+arc-gtk-theme
 arch-audit
 aspell-en
 atool
@@ -14,7 +15,7 @@ base
 bash-completion
 bat
 beets
-bind-tools
+bind
 bison
 blender
 bonnie++
@@ -54,6 +55,7 @@ ebtables
 ecm-tools
 edk2-ovmf
 efibootmgr
+elementary-wallpapers
 emacs-git
 entr
 eom
@@ -74,6 +76,7 @@ gimagereader-gtk
 gimp
 glfw-x11
 gmp-ecm
+gnome-backgrounds
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
@@ -172,7 +175,6 @@ networkmanager-openvpn
 nilfs-utils
 nnn
 ntfs-3g
-numix-gtk-theme-git
 nuspell
 nvme-cli
 obs-studio
@@ -182,7 +184,6 @@ openbsd-netcat
 opendoas
 openmp
 openresolv
-oprofile
 p7zip
 pacman-contrib
 papirus-icon-theme
@@ -217,7 +218,6 @@ python-rcssmin
 python-rjsmin
 qbittorrent
 radeontool
-rav1e
 read-edid
 realtime-privileges
 redshift
@@ -275,7 +275,6 @@ vde2
 vdpauinfo
 vi
 vice
-vim-colorsamplerpack
 vim-spell-en
 vkd3d
 vulkan-extra-layers
@@ -300,6 +299,7 @@ xorg-bdftopcf
 xorg-docs
 xorg-font-util
 xorg-luit
+xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
