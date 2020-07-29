@@ -28,7 +28,7 @@
                       ("org"   . "https://orgmode.org/elpa/")))
  '(package-selected-packages
    '(f ht dash smex lv which-key org org-bullets counsel swiper ivy ivy-rich fzf deadgrep
-     transient magit expand-region systemd cmake-mode dockerfile-mode esup projectile mwim
+     transient magit expand-region systemd cmake-mode dockerfile-mode esup projectile
      counsel-projectile yasnippet diff-hl rustic toml-mode json-mode indent-guide posframe
      lsp-mode lsp-ui lsp-ivy symbol-overlay multiple-cursors hledger-mode company-posframe
      flycheck flycheck-posframe)))
@@ -77,21 +77,16 @@
 
 (global-set-key (kbd "C-x e") #'fm/replace-escapes)
 
-(defun fm/move-line-up ()
- "Move a line up."
+(defun fm/beginning-of-line ()
+ "Move point to beginning of text or beginning of line."
  (interactive)
- (transpose-lines 1)
- (forward-line -2))
+ (let ((current-point (point)))
+  (progn
+   (back-to-indentation)
+   (when (equal current-point (point))
+    (beginning-of-line)))))
 
-(defun fm/move-line-down ()
- "Move a line down."
- (interactive)
- (forward-line 1)
- (transpose-lines 1)
- (forward-line -1))
-
-(global-set-key (kbd "<M-up>")   #'fm/move-line-up)
-(global-set-key (kbd "<M-down>") #'fm/move-line-down)
+(global-set-key (kbd "C-a") #'fm/beginning-of-line)
 
 (defun fm/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
@@ -231,6 +226,22 @@
  '(line-number-mode nil)
  '(auto-save-mode t)
  '(save-interprogram-paste-before-kill t))
+
+(defun fm/move-line-up ()
+ "Move a line up."
+ (interactive)
+ (transpose-lines 1)
+ (forward-line -2))
+
+(defun fm/move-line-down ()
+ "Move a line down."
+ (interactive)
+ (forward-line 1)
+ (transpose-lines 1)
+ (forward-line -1))
+
+(global-set-key (kbd "<M-up>")   #'fm/move-line-up)
+(global-set-key (kbd "<M-down>") #'fm/move-line-down)
 
 ;; bindings
 (custom-set-variables
@@ -407,10 +418,6 @@
 
 ;; deadgrep
 (global-set-key (kbd "M-G") #'deadgrep)
-
-;; mwim
-(global-set-key (kbd "C-a") 'mwim-beginning)
-(global-set-key (kbd "C-e") 'mwim-end)
 
 ;; transient - magit-related
 (custom-set-variables
