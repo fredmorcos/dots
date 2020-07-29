@@ -28,10 +28,10 @@
                       ("org"   . "https://orgmode.org/elpa/")))
  '(package-selected-packages
    '(f ht dash smex lv which-key org org-bullets counsel swiper ivy ivy-rich fzf deadgrep
-     transient magit expand-region expand-region systemd cmake-mode dockerfile-mode esup
-     projectile counsel-projectile yasnippet diff-hl rustic toml-mode json-mode
-     indent-guide flycheck flycheck-posframe symbol-overlay multiple-cursors hledger-mode
-     posframe company-posframe lsp-mode lsp-ui lsp-ivy)))
+     transient magit expand-region systemd cmake-mode dockerfile-mode esup projectile
+     counsel-projectile yasnippet diff-hl rustic toml-mode json-mode indent-guide posframe
+     lsp-mode lsp-ui lsp-ivy symbol-overlay multiple-cursors hledger-mode company-posframe
+     flycheck flycheck-posframe)))
 
 (catch 'finished
  (cl-dolist (pkg package-selected-packages)
@@ -90,7 +90,6 @@
 
 (defun fm/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
- (interactive)
  (if (use-region-p)
   (let ((begin (region-beginning))
         (end (region-end)))
@@ -106,6 +105,7 @@
      (insert-char right)
      (backward-char))))))
 
+(eval-when-compile (defvar c-mode-map))
 (add-hook 'c-mode-hook (lambda () (define-key c-mode-map (kbd "(") nil)))
 (global-set-key (kbd "(")  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
 (global-set-key (kbd "'")  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
