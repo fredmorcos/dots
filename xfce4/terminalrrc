@@ -39,4 +39,5 @@ TabActivityColor=#dc322f
 FontName=Monospace 11
 FontUseSystem=TRUE
 TitleMode=TERMINAL_TITLE_PREPEND
+WordChars=-A-Za-z0-9,./?%&#_=+@~
 
