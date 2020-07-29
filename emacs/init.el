@@ -88,6 +88,35 @@
 
 (global-set-key (kbd "C-a") #'fm/beginning-of-line)
 
+(defun fm/insert-pair (left right &optional region-only)
+ "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
+ (interactive)
+ (if (use-region-p)
+  (let ((begin (region-beginning))
+        (end (region-end)))
+   (progn
+    (goto-char begin)
+    (insert-char left)
+    (goto-char (+ 1 end))
+    (insert-char right)))
+  (progn
+   (insert-char left)
+   (when (not region-only)
+    (progn
+     (insert-char right)
+     (backward-char))))))
+
+(add-hook 'c-mode-hook (lambda () (define-key c-mode-map (kbd "(") nil)))
+(global-set-key (kbd "(")  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
+(global-set-key (kbd "'")  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
+(global-set-key (kbd "\"") (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
+
+;; electric
+(custom-set-variables
+ '(electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\})))
+ '(electric-layout-mode t)
+ '(electric-pair-mode t))
+
 ;; subr
 (setq read-process-output-max (* 1024 1024))
 (defalias 'yes-or-no-p 'y-or-n-p)

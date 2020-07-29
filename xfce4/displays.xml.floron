@@ -175,4 +175,7 @@
       </property>
     </property>
   </property>
+  <property name="Notify" type="bool" value="false"/>
+  <property name="AutoEnableProfiles" type="bool" value="false"/>
+  <property name="IdentityPopups" type="bool" value="true"/>
 </channel>

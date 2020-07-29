@@ -48,7 +48,7 @@ NOGZ="YES"        # Don't compress .el files.
 
 ################################################################################
 pkgname="emacs-git"
-pkgver=28.0.50.141598
+pkgver=28.0.50.141763
 pkgrel=1
 pkgdesc="GNU Emacs. Development master branch."
 arch=('x86_64' )
@@ -188,7 +188,6 @@ build() {
     --without-hesiod
     --without-mail-unlink
     --without-wide-int
-    --without-xpm
     --without-jpeg
     --without-tiff
     --without-gif
@@ -209,6 +208,7 @@ build() {
     --without-sound
     --with-sound=no
     --with-cairo
+    --with-xpm
     --with-json
     --with-xml2
     --with-xft
