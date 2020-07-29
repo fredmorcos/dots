@@ -62,14 +62,10 @@
  "Diminish MODE to TEXT."
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
   (symbolp hook)
-  (add-hook hook (lambda () (progn
-                             (fm/diminish-helper mode text))))))
+  (add-hook hook
+   (lambda () (progn (fm/diminish-helper mode text))))))
 
-;; subr
-(setq read-process-output-max (* 1024 1024))
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; startup
+;; qol
 (defun fm/replace-escapes ()
  "Replace strange newline escapes with proper UNIX newlines."
  (interactive)
@@ -81,6 +77,22 @@
 
 (global-set-key (kbd "C-x e") #'fm/replace-escapes)
 
+(defun fm/beginning-of-line ()
+ "Move point to beginning of text or beginning of line."
+ (interactive)
+ (let ((current-point (point)))
+  (progn
+   (back-to-indentation)
+   (when (equal current-point (point))
+    (beginning-of-line)))))
+
+(global-set-key (kbd "C-a") #'fm/beginning-of-line)
+
+;; subr
+(setq read-process-output-max (* 1024 1024))
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; startup
 (setq-default
  inhibit-startup-screen t
  inhibit-startup-message t
