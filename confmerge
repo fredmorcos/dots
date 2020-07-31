@@ -110,10 +110,6 @@ cmerge xfce4/help.rc                 ~/.config/xfce4/help.rc
 cmerge xfce4/helpers.rc              ~/.config/xfce4/helpers.rc
 cmerge xfce4/screenshooter           ~/.config/xfce4/xfce4-screenshooter
 
-cmerge autostart/redshift.desktop    ~/.config/autostart/redshift.desktop
-cmerge autostart/xrgb.desktop        ~/.config/autostart/xrgb.desktop
-cmerge autostart/xnocaps.desktop     ~/.config/autostart/xnocaps.desktop
-
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
 
 cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
@@ -142,6 +138,9 @@ cmerge cargo.conf                    ~/.cargo/config
 
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
+cmerge x11/00-keyboard.conf          /etc/X11/xorg.conf.d/00-keyboard.conf
+
+cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
 
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
