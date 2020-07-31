@@ -87,7 +87,8 @@ cmerge () {
   fi
 }
 
-XFCONF=~/.config/xfce4/xfconf/xfce-perchannel-xml
+XFCE=~/.config/xfce4
+XFCONF=$XFCE/xfconf/xfce-perchannel-xml
 
 cmerge xfce4/displays.xml            $XFCONF/displays.xml
 cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
@@ -105,10 +106,10 @@ cmerge xfce4/settings-manager.xml    $XFCONF/xfce4-settings-manager.xml
 cmerge xfce4/xfwm4.xml               $XFCONF/xfwm4.xml
 cmerge xfce4/xsettings.xml           $XFCONF/xsettings.xml
 
-cmerge xfce4/terminalrrc             ~/.config/xfce4/terminal/terminalrc
-cmerge xfce4/help.rc                 ~/.config/xfce4/help.rc
-cmerge xfce4/helpers.rc              ~/.config/xfce4/helpers.rc
-cmerge xfce4/screenshooter           ~/.config/xfce4/xfce4-screenshooter
+cmerge xfce4/terminalrrc             $XFCE/terminal/terminalrc
+cmerge xfce4/help.rc                 $XFCE/help.rc
+cmerge xfce4/helpers.rc              $XFCE/helpers.rc
+cmerge xfce4/screenshooter           $XFCE/xfce4-screenshooter
 
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
 
@@ -145,12 +146,14 @@ cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.ma
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 
-cmerge systemd/coredump.conf         /etc/systemd/coredump.conf
-cmerge systemd/system.conf           /etc/systemd/system.conf
-cmerge systemd/journald.conf         /etc/systemd/journald.conf
-cmerge systemd/boot-override.conf    /etc/systemd/system/boot.mount.d/override.conf
-cmerge systemd/fstrim@.service       /etc/systemd/system/fstrim@.service
-cmerge systemd/fstrim@.timer         /etc/systemd/system/fstrim@.timer
+SYSD=/etc/systemd
+
+cmerge systemd/coredump.conf         $SYSD/coredump.conf
+cmerge systemd/system.conf           $SYSD/system.conf
+cmerge systemd/journald.conf         $SYSD/journald.conf
+cmerge systemd/boot-override.conf    $SYSD/system/boot.mount.d/override.conf
+cmerge systemd/fstrim@.service       $SYSD/system/fstrim@.service
+cmerge systemd/fstrim@.timer         $SYSD/system/fstrim@.timer
 
 cmerge pulse/default.pa              /etc/pulse/default.pa
 cmerge pulse/daemon.conf             ~/.config/pulse/daemon.conf
@@ -171,8 +174,10 @@ cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 
-cmerge udev/99-mount.rules           /etc/udev/rules.d/99-mount.rules
-cmerge udev/99-steam-cont.rules      /etc/udev/rules.d/99-steam-controller-perms.rules
+UDEV=/etc/udev/rules.d
+
+cmerge udev/99-mount.rules           $UDEV/99-mount.rules
+cmerge udev/99-steam-cont.rules      $UDEV/99-steam-controller-perms.rules
 
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
