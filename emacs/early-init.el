@@ -28,15 +28,16 @@
  '(default            ((t . (:family     "Monospace"
                              :height     130
                              :background "Gray97"
-                             :foreground "Gray25"))))
+                             :foreground "Gray40"))))
  '(cursor             ((t . (:background "SlateGray3"))))
  '(region             ((t . (:background "LightSteelBlue1"))))
  '(mode-line          ((t . (:height     110
-                             :background "Gray90"
-                             :foreground "Gray30"
-                             :box        nil))))
- '(mode-line-inactive ((t . (:background "Gray90"
+                             :background "Gray95"
                              :foreground "Gray50"
+                             :box        nil))))
+ '(mode-line-inactive ((t . (:height     110
+                             :background "Gray95"
+                             :foreground "Gray80"
                              :box        nil))))
  '(fringe             ((t (:background "Gray96")))))
 
