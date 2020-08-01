@@ -364,8 +364,13 @@
   </property>
   <property name="desktop-icons" type="empty">
     <property name="show-thumbnails" type="bool" value="false"/>
-    <property name="style" type="int" value="0"/>
-    <property name="show-tooltips" type="bool" value="false"/>
+    <property name="style" type="int" value="2"/>
+    <property name="show-tooltips" type="bool" value="true"/>
+    <property name="icon-size" type="uint" value="48"/>
+    <property name="use-custom-font-size" type="bool" value="true"/>
+    <property name="font-size" type="double" value="10.000000"/>
+    <property name="tooltip-size" type="double" value="48.000000"/>
+    <property name="show-hidden-files" type="bool" value="false"/>
   </property>
   <property name="last" type="empty">
     <property name="window-width" type="int" value="896"/>

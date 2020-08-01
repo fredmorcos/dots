@@ -497,8 +497,9 @@
 (custom-set-faces
  '(symbol-overlay-default-face ((t (:background "HoneyDew2")))))
 
-(add-hook 'hledger-mode-hook    #'symbol-overlay-mode)
-(add-hook 'emacs-lisp-mode-hook #'symbol-overlay-mode)
+(add-hook 'shell-script-mode-hook #'symbol-overlay-mode)
+(add-hook 'hledger-mode-hook      #'symbol-overlay-mode)
+(add-hook 'emacs-lisp-mode-hook   #'symbol-overlay-mode)
 
 ;; multiple-cursors
 (global-set-key (kbd "C-c C-v")       #'mc/edit-lines)
