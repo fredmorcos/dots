@@ -8,7 +8,6 @@ arch-audit
 aspell-en
 atool
 audacious
-autoconf
 automake
 avisynthplus
 base
@@ -37,7 +36,6 @@ clinfo
 clipgrab
 cmus
 compsize
-cpio
 curlftpfs
 dateutils
 dbus-broker
@@ -77,6 +75,7 @@ gimp
 glfw-x11
 gmp-ecm
 gnome-backgrounds
+gnome-builder
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
@@ -190,7 +189,6 @@ p7zip
 pacman-contrib
 papirus-icon-theme
 par2cmdline
-patch
 pavucontrol
 pdfarranger
 pdfmixtool
@@ -200,7 +198,6 @@ picard
 picom
 pigz
 pipewire-pulse
-pkgconf
 powertop
 progress
 pstoedit
@@ -210,6 +207,9 @@ pwgen
 python-beautifulsoup4
 python-cssselect
 python-discid
+python-dulwich
+python-fastimport
+python-paramiko
 python-pip
 python-pyacoustid
 python-pyalsa
