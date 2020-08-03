@@ -543,9 +543,9 @@
 (add-hook 'prog-mode-hook #'flycheck-mode)
 
 (custom-set-faces
- '(flycheck-error   ((t (:underline (:style line :color Red1)))))
- '(flycheck-warning ((t (:underline (:style line :color DarkOrange)))))
- '(flycheck-info    ((t (:underline (:style line :color ForestGreen))))))
+ '(flycheck-error   ((t (:underline "Red1"))))
+ '(flycheck-warning ((t (:underline "DarkOrange"))))
+ '(flycheck-info    ((t (:underline "ForestGreen")))))
 
 ;; flycheck-posframe
 (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
