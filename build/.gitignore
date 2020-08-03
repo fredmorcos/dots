@@ -1,7 +1,0 @@
-pkg
-poppler-lcd-patch
-src
-*.tar
-*.bz2
-*.xz
-.SRCINFO
