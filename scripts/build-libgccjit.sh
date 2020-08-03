@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./configure  --prefix="/home/fred/.local"  --libexecdir="/home/fred/.local/lib"  --with-system-zlib  --with-bugurl='https://github.com/jashandeep-sohi/libgccjit-pkg/issues'  --with-linker-hash-style=gnu  --enable-host-shared  --enable-shared  --enable-checking=release  --enable-languages=jit  --enable-linker-build-id  --enable-checking=release  --disable-multilib  --disable-bootstrap  --disable-libssp  --disable-lto  --disable-libquadmath  --disable-liboffloadmic  --disable-libada  --disable-libsanitizer  --disable-libquadmath-support  --disable-libgomp  --disable-libvtv  --disable-libsanitizer
