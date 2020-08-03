@@ -3,11 +3,11 @@ adobe-source-sans-pro-fonts
 alsa-firmware
 alsa-tools
 amd-ucode
-arc-gtk-theme
 arch-audit
 aspell-en
 atool
 audacious
+autoconf
 automake
 avisynthplus
 base
@@ -36,6 +36,7 @@ clinfo
 clipgrab
 cmus
 compsize
+cpio
 curlftpfs
 dateutils
 dbus-broker
@@ -54,7 +55,6 @@ ecm-tools
 edk2-ovmf
 efibootmgr
 elementary-wallpapers
-emacs-git
 entr
 eom
 epiphany
@@ -75,7 +75,6 @@ gimp
 glfw-x11
 gmp-ecm
 gnome-backgrounds
-gnome-builder
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
@@ -86,7 +85,7 @@ gst-libav
 gst-plugins-ugly
 gst-python
 gstreamer-vaapi
-gtk-engine-murrine
+gtk-theme-numix-solarized
 gucharmap
 gvfs-mtp
 hardinfo
@@ -140,6 +139,7 @@ libgnome-keyring
 libmad
 libmp4v2
 libmythes
+libotf
 libpipewire02
 libproxy-mozjs
 libva-mesa-driver
@@ -189,6 +189,7 @@ p7zip
 pacman-contrib
 papirus-icon-theme
 par2cmdline
+patch
 pavucontrol
 pdfarranger
 pdfmixtool
@@ -198,6 +199,7 @@ picard
 picom
 pigz
 pipewire-pulse
+pkgconf
 powertop
 progress
 pstoedit
