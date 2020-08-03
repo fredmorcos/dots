@@ -17,33 +17,37 @@
 (make-directory emacs-backups-dir t)
 (push emacs-extra-dir load-path)
 
+;; helpers
+(autoload 'cl-dolist "cl-lib")
+
 ;; package
 (package-initialize)
 (custom-set-variables
  '(package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
                       ("melpa" . "https://melpa.org/packages/")
-                      ("org"   . "https://orgmode.org/elpa/"))))
+                      ("org"   . "https://orgmode.org/elpa/")))
+ '(package-selected-packages
+   '(f ht dash smex lv which-key org org-bullets counsel swiper ivy ivy-rich fzf deadgrep
+     transient magit expand-region systemd cmake-mode dockerfile-mode esup projectile mwim
+     counsel-projectile yasnippet diff-hl rustic toml-mode json-mode indent-guide posframe
+     lsp-mode lsp-ui lsp-ivy symbol-overlay multiple-cursors hledger-mode company-posframe
+     flycheck flycheck-posframe)))
 
-(defmacro fm/pkg (pkg)
- "Install PKG if not already installed."
- `(progn
-   (defvar packages-refreshed nil)
-   (if (not (package-installed-p ',pkg))
-    (progn
-     (when (not packages-refreshed)
-      (progn
-       (package-refresh-contents)
-       (setq packages-refreshed t)))
-     (package-install ',pkg))
-    (push ',pkg package-selected-packages))))
+(catch 'finished
+ (cl-dolist (pkg package-selected-packages)
+  (if (not (package-installed-p pkg))
+   (progn
+    (package-refresh-contents)
+    (package-install-selected-packages)
+    (throw 'finished nil)))))
 
 ;; bind keys
 (defmacro fm/key (pkg pkg-keymap key func)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
  `(progn
    (eval-when-compile (defvar ,pkg-keymap))
-   ,(when func `(autoload ',func ,pkg))
-   (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))
+   (autoload ',func ,pkg)
+   (define-key ,pkg-keymap (kbd ,key) #',func)))
 
 ;; diminish
 (defun fm/diminish-helper (mode text)
@@ -106,14 +110,11 @@
      (insert-char right)
      (backward-char))))))
 
-;; (fm/key "c-mode" c-mode-map "(" nil)
+(eval-when-compile (defvar c-mode-map))
+(add-hook 'c-mode-hook (lambda () (define-key c-mode-map (kbd "(") nil)))
 (global-set-key (kbd "(")  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
 (global-set-key (kbd "'")  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
 (global-set-key (kbd "\"") (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
-
-;; subr
-(setq read-process-output-max (* 1024 1024))
-(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; electric
 (custom-set-variables
@@ -121,7 +122,11 @@
  '(electric-layout-mode t)
  '(electric-pair-mode t))
 
- ;; startup
+;; subr
+(setq read-process-output-max (* 1024 1024))
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; startup
 (setq-default
  inhibit-startup-screen t
  inhibit-startup-message t
@@ -541,11 +546,6 @@
  '(flycheck-idle-buffer-switch-delay 0.1))
 
 (add-hook 'prog-mode-hook #'flycheck-mode)
-
-(custom-set-faces
- '(flycheck-error   ((t (:underline (:style line :color Red1)))))
- '(flycheck-warning ((t (:underline (:style line :color DarkOrange)))))
- '(flycheck-info    ((t (:underline (:style line :color ForestGreen))))))
 
 ;; flycheck-posframe
 (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)

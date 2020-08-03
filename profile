@@ -40,6 +40,8 @@ PATH="$HOME/Documents/Workspace:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 
+LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+
 # Rust
 RUSTC_WRAPPER=sccache
 RUSTFLAGS="-C opt-level=2 -C link-arg=-fuse-ld=lld -C target-cpu=native"
@@ -50,4 +52,4 @@ export RUSTC_WRAPPER RUSTFLAGS
 EDITOR='emacs -nw'
 GIT_EDITOR=$EDITOR
 
-export PATH EDITOR GIT_EDITOR
+export PATH LD_LIBRARY_PATH EDITOR GIT_EDITOR
