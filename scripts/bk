@@ -24,7 +24,6 @@ CMD=("rsync"
      "--delete"
      "--delete-excluded"
      "--exclude=*/target"
-     "--exclude=*/build/emacs-git"
      "--exclude=*/__pycache__"
      "$@")
 
