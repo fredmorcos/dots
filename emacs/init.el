@@ -17,33 +17,17 @@
 (make-directory emacs-backups-dir t)
 (push emacs-extra-dir load-path)
 
-;; package
-(package-initialize)
-(custom-set-variables
- '(package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
-                      ("melpa" . "https://melpa.org/packages/")
-                      ("org"   . "https://orgmode.org/elpa/"))))
-
-(defmacro fm/pkg (pkg)
- "Install PKG if not already installed."
- `(progn
-   (defvar packages-refreshed nil)
-   (if (not (package-installed-p ',pkg))
-    (progn
-     (when (not packages-refreshed)
-      (progn
-       (package-refresh-contents)
-       (setq packages-refreshed t)))
-     (package-install ',pkg))
-    (push ',pkg package-selected-packages))))
-
 ;; bind keys
-(defmacro fm/key (pkg pkg-keymap key func)
+(defmacro fm/key (key func &optional pkg pkg-keymap)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
- `(progn
-   (eval-when-compile (defvar ,pkg-keymap))
-   ,(when func `(autoload ',func ,pkg))
-   (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))
+ (cond
+  ((and (not pkg) (not pkg-keymap))
+   `(global-set-key (kbd ,key) ,(if func `#',func nil)))
+  (t
+   `(progn
+     (eval-when-compile (defvar ,pkg-keymap))
+     ,(when func `(autoload ',func ,pkg))
+     (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))))
 
 ;; diminish
 (defun fm/diminish-helper (mode text)
@@ -61,17 +45,33 @@
   (add-hook hook
    (lambda () (progn (fm/diminish-helper mode text))))))
 
+;; faces
+(defmacro fm/face (face props)
+ "Set FACE properties to PROPS."
+ `(custom-set-faces '(,face ((t ,props)))))
+
+;; vars
+(defmacro fm/var (var val)
+ "Custom-Set VAR to VAL."
+ `(custom-set-variables '(,var ,val)))
+
+;; lazy loading
+(defmacro fm/after (file &rest body)
+ "Execute BODY when FILE is loaded."
+ `(eval-after-load ',file (progn ,@body)))
+
 ;; qol
 (defun fm/replace-escapes ()
  "Replace strange newline escapes with proper UNIX newlines."
  (interactive)
  (goto-char (point-min))
- (while (search-forward "\\n" nil t)
-  (replace-match (char-to-string ?\n) nil t))
- (while (search-forward "\\t" nil t)
-  (replace-match (char-to-string ?\t) nil t)))
+ (while (search-forward "\\n" nil t) (replace-match (char-to-string ?\n) nil t))
+ (goto-char (point-min))
+ (while (search-forward "\\t" nil t) (replace-match (char-to-string ?\t) nil t))
+ (goto-char (point-min))
+ (while (search-forward "" nil t) (replace-match "" nil t)))
 
-(global-set-key (kbd "C-x e") #'fm/replace-escapes)
+(fm/key "C-x e" fm/replace-escapes)
 
 (defun fm/move-line-up ()
  "Move a line up."
@@ -86,8 +86,8 @@
  (transpose-lines 1)
  (forward-line -1))
 
-(global-set-key (kbd "<M-up>")   #'fm/move-line-up)
-(global-set-key (kbd "<M-down>") #'fm/move-line-down)
+(fm/key "<M-up>"   fm/move-line-up)
+(fm/key "<M-down>" fm/move-line-down)
 
 (defun fm/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
@@ -106,112 +106,117 @@
      (insert-char right)
      (backward-char))))))
 
-;; (fm/key "c-mode" c-mode-map "(" nil)
-(global-set-key (kbd "(")  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
-(global-set-key (kbd "'")  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
-(global-set-key (kbd "\"") (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
+;; (fm/key "(" nil "c-mode" c-mode-map)
+(fm/key "("  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
+(fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
+(fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
+
+;; package
+(fm/var package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
+                           ("melpa" . "https://melpa.org/packages/")
+                           ("org"   . "https://orgmode.org/elpa/")))
+
+(defmacro fm/pkg (pkg)
+ "Install PKG if not already installed."
+ `(progn
+   (defvar packages-refreshed nil)
+   (if (not (package-installed-p ',pkg))
+    (progn
+     (when (not packages-refreshed)
+      (progn
+       (package-refresh-contents)
+       (setq packages-refreshed t)))
+     (package-install ',pkg))
+    (push ',pkg package-selected-packages))))
 
 ;; subr
 (setq read-process-output-max (* 1024 1024))
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; electric
-(custom-set-variables
- '(electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\})))
- '(electric-layout-mode t)
- '(electric-pair-mode t))
+(fm/var electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\})))
+(fm/var electric-layout-mode t)
+(fm/var electric-pair-mode t)
 
- ;; startup
-(setq-default
- inhibit-startup-screen t
- inhibit-startup-message t
- inhibit-startup-buffer-menu t
- initial-scratch-message nil
- initial-major-mode 'fundamental-mode
- auto-save-list-file-prefix nil)
+;; startup
+(fm/var inhibit-startup-screen t)
+(fm/var inhibit-startup-message t)
+(fm/var inhibit-startup-buffer-menu t)
+(fm/var initial-scratch-message nil)
+(fm/var initial-major-mode 'fundamental-mode)
+(fm/var auto-save-list-file-prefix nil)
 
 ;; scroll-bar
-(setq-default
- horizontal-scroll-bar-mode nil
- scroll-conservatively 4
- hscroll-margin 1
- hscroll-step 1
- auto-hscroll-mode 'current-line)
+(fm/var horizontal-scroll-bar-mode nil)
+(fm/var scroll-conservatively 4)
+(fm/var hscroll-margin 1)
+(fm/var hscroll-step 1)
+(fm/var auto-hscroll-mode 'current-line)
 
 ;; frame
-(setq-default
- blink-cursor-mode nil
- frame-resize-pixelwise t
- frame-title-format "%b - emacs")
+(fm/var blink-cursor-mode nil)
+(fm/var frame-resize-pixelwise t)
+(fm/var frame-title-format "%b - emacs")
 
 ;; display-line-numbers
-(setq-default
- display-line-numbers-grow-only t
- display-line-numbers-width-start t)
-
-(custom-set-faces
- '(line-number              ((t (:foreground "Gray85"))))
- '(line-number-current-line ((t (:foreground "Gray70")))))
+(fm/var display-line-numbers-grow-only t)
+(fm/var display-line-numbers-width-start t)
+(fm/face line-number              (:foreground "Gray85"))
+(fm/face line-number-current-line (:foreground "Gray70"))
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;; hl-line
-(custom-set-faces
- '(hl-line             ((t (:background "Wheat"))))
- '(mode-line-highlight ((t (:background "PowderBlue")))))
+(fm/face hl-line             (:background "Wheat"))
+(fm/face mode-line-highlight (:background "PowderBlue"))
 
 (global-hl-line-mode)
 
 ;; saveplace
-(custom-set-variables
- '(save-place t)
- '(save-place-mode t)
- '(save-place-file emacs-places-file))
+(fm/var save-place t)
+(fm/var save-place-mode t)
+(fm/var save-place-file emacs-places-file)
 
 ;; savehist
-(custom-set-variables
- '(savehist-mode t)
- '(history-delete-duplicates t)
- '(history-length 100))
+(fm/var savehist-mode t)
+(fm/var history-delete-duplicates t)
+(fm/var history-length 100)
 
 ;; recentf
-(custom-set-variables
- '(recentf-save-file emacs-recentf-file)
- '(recentf-max-menu-items 50)
- '(recentf-max-saved-items 100)
- '(recentf-mode t)
- '(recentf-exclude `(,emacs-elpa-dir
-                     ,(expand-file-name "~/Oracle")
-                     ,(expand-file-name "~/OracleWorkTrees"))))
+(fm/var recentf-save-file emacs-recentf-file)
+(fm/var recentf-max-menu-items 50)
+(fm/var recentf-max-saved-items 100)
+(fm/var recentf-mode t)
+(fm/var recentf-exclude
+ `(,emacs-elpa-dir
+   ,(expand-file-name "~/Oracle")
+   ,(expand-file-name "~/OracleWorkTrees")))
 
 (autoload 'recentf-cleanup "recentf")
 (add-hook 'kill-emacs-hook #'recentf-cleanup)
 
 ;; files
-(custom-set-variables
- '(confirm-kill-processes nil)
- '(auto-save-file-name-transforms `((".*" ,emacs-autosaves-pattern t)))
- '(backup-directory-alist `((".*" . ,emacs-backups-pattern)))
- '(backup-inhibited nil)
- '(make-backup-files t)
- '(delete-old-versions t)
- '(mode-require-final-newline 'visit-save)
- '(require-final-newline 'visit-save)
- '(load-prefer-newer t)
- '(coding-system-for-read 'utf-8-unix)
- '(coding-system-for-write 'utf-8-unix))
+(fm/var confirm-kill-processes nil)
+(fm/var auto-save-file-name-transforms `((".*" ,emacs-autosaves-pattern t)))
+(fm/var backup-directory-alist `((".*" . ,emacs-backups-pattern)))
+(fm/var backup-inhibited nil)
+(fm/var make-backup-files t)
+(fm/var delete-old-versions t)
+(fm/var mode-require-final-newline 'visit-save)
+(fm/var require-final-newline 'visit-save)
+(fm/var load-prefer-newer t)
+(fm/var coding-system-for-read 'utf-8-unix)
+(fm/var coding-system-for-write 'utf-8-unix)
 
 ;; cua-base
 (cua-selection-mode 1)
 
 ;; help
-(custom-set-variables
- '(help-window-select t))
+(fm/var help-window-select t)
 
 ;; window
-(custom-set-variables
- '(split-height-threshold 160)
- '(even-window-sizes 'width-only))
+(fm/var split-height-threshold 160)
+(fm/var even-window-sizes 'width-only)
 
 ;; windmove
 (windmove-default-keybindings)
@@ -219,69 +224,59 @@
 ;; simple
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
-(custom-set-variables
- '(undo-limit (* 1024 1024))
- '(suggest-key-bindings 10)
- '(column-number-mode t)
- '(line-number-mode nil)
- '(auto-save-mode t)
- '(save-interprogram-paste-before-kill t))
+(fm/var undo-limit (* 1024 1024))
+(fm/var suggest-key-bindings 10)
+(fm/var column-number-mode t)
+(fm/var line-number-mode nil)
+(fm/var auto-save-mode t)
+(fm/var save-interprogram-paste-before-kill t)
 
 ;; bindings
-(custom-set-variables
- '(column-number-indicator-zero-based nil))
+(fm/var column-number-indicator-zero-based nil)
 
 ;; uniquify
-(custom-set-variables
- '(uniquify-buffer-name-style 'forward))
+(fm/var uniquify-buffer-name-style 'forward)
 
 ;; vc
-(custom-set-variables
- '(vc-make-backup-files t))
+(fm/var vc-make-backup-files t)
 
 ;; abbrev
 (fm/diminish 'abbrev-mode "Ab")
 
 ;; newcomment
-(custom-set-variables
- '(comment-fill-column 80))
+(fm/var comment-fill-column 80)
 
 ;; fill
-(custom-set-variables
- '(fill-column 90)
- '(colon-double-space t)
- '(default-justification 'left))
+(fm/var fill-column 90)
+(fm/var colon-double-space t)
+(fm/var default-justification 'left)
 
 ;; indent
-(custom-set-variables
- '(indent-tabs-mode nil))
+(fm/var indent-tabs-mode nil)
 
 ;; ediff-wind
-(custom-set-variables
- '(ediff-split-window-function #'split-window-horizontally)
- '(ediff-window-setup-function #'ediff-setup-windows-plain))
+(fm/var ediff-split-window-function #'split-window-horizontally)
+(fm/var ediff-window-setup-function #'ediff-setup-windows-plain)
 
 ;; whitespace
-(custom-set-variables
- '(whitespace-line-column 90)
- '(show-trailing-whitespace nil)
- '(whitespace-action '(cleanup))
- '(whitespace-style
-   '(face tabs lines empty tab-mark
-     indentation indentation::tab indentation::space
-     space-after-tab space-after-tab::tab space-after-tab::space
-     space-before-tab space-before-tab::tab space-before-tab::space)))
-
 (fm/diminish 'whitespace-mode "Ws")
+
+(fm/var whitespace-line-column 90)
+(fm/var show-trailing-whitespace nil)
+(fm/var whitespace-action '(cleanup))
+(fm/var whitespace-style
+ '(face tabs lines empty tab-mark
+   indentation indentation::tab indentation::space
+   space-after-tab space-after-tab::tab space-after-tab::space
+   space-before-tab space-before-tab::tab space-before-tab::space))
 
 (add-hook 'hledger-mode-hook    #'whitespace-mode)
 (add-hook 'emacs-lisp-mode-hook #'whitespace-mode)
 (add-hook 'makefile-mode-hook   #'whitespace-mode)
 
 ;; elisp-mode
-(custom-set-variables
- '(lisp-indent-offset 1)
- '(lisp-indent-function #'common-lisp-indent-function))
+(fm/var lisp-indent-offset 1)
+(fm/var lisp-indent-function #'common-lisp-indent-function)
 
 (push '("\\emacs\\'"              . emacs-lisp-mode) auto-mode-alist)
 (push '("\\.config/emacs/init\\'" . emacs-lisp-mode) auto-mode-alist)
@@ -294,18 +289,16 @@
 
 ;; eldoc
 (fm/diminish 'eldoc-mode "Ed")
+
 (add-hook 'prog-mode-hook #'eldoc-mode)
 
 ;; paren
-(custom-set-variables
- '(show-paren-when-point-inside-paren t)
- '(show-paren-style 'mixed)
- '(show-paren-highlight-openparen t))
-
-(custom-set-faces
- '(show-paren-match            ((t (:background "PowderBlue"))))
- '(show-paren-match-expression ((t (:background "Lavender"))))
- '(show-paren-mismatch         ((t (:background "LightSalmon")))))
+(fm/var show-paren-when-point-inside-paren t)
+(fm/var show-paren-style 'mixed)
+(fm/var show-paren-highlight-openparen t)
+(fm/face show-paren-match            (:background "PowderBlue"))
+(fm/face show-paren-match-expression (:background "Lavender"))
+(fm/face show-paren-mismatch         (:background "LightSalmon"))
 
 (add-hook 'prog-mode-hook #'show-paren-mode)
 
@@ -313,16 +306,14 @@
 (autoload 'dired-hide-details-mode "dired")
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
-(custom-set-variables
- '(dired-listing-switches "-l --group-directories-first")
- '(dired-hide-details-hide-symlink-targets nil))
+(fm/var dired-listing-switches "-l --group-directories-first")
+(fm/var dired-hide-details-hide-symlink-targets nil)
 
 ;; autorevert
 (fm/diminish 'autorevert-mode "Ar")
 
-(custom-set-variables
- '(auto-revert-interval 1)
- '(auto-revert-mode-text " Ar"))
+(fm/var auto-revert-interval 1)
+(fm/var auto-revert-mode-text " Ar")
 
 (add-hook 'dired-mode-hook #'auto-revert-mode)
 
@@ -330,67 +321,59 @@
 (fm/diminish 'subword-mode "Sw")
 
 ;; spell
-(custom-set-variables
- '(ispell-program-name "aspell")
- '(ispell-extra-args '("--sug-mode=ultra")))
+(fm/var ispell-program-name "aspell")
+(fm/var ispell-extra-args '("--sug-mode=ultra"))
 
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 
 ;; org-bullets
-(custom-set-variables
- '(org-bullets-bullet-list '("●" "○")))
+(fm/var org-bullets-bullet-list '("●" "○"))
 
 (add-hook 'org-mode-hook #'org-bullets-mode)
 
 ;; org
-(custom-set-variables
- '(org-cycle-separator-lines 0)
- '(org-startup-folded nil)
- '(org-ellipsis "   ▾"))
-
 (autoload 'org-indent-mode "org")
 (add-hook 'org-mode #'org-indent-mode)
 
-(custom-set-faces
- '(org-ellipsis ((t (:underline nil :foreground "DarkGoldenRod"))))
- '(org-level-1 ((t (:height 1.3 :inherit (outline-1)))))
- '(org-level-2 ((t (:height 1.2 :inherit (outline-2)))))
- '(org-level-3 ((t (:height 1.1 :inherit (outline-3)))))
- '(org-todo ((t (:foreground "Red1" :height 0.9))))
- '(org-done ((t (:foreground "ForestGreen" :height 0.9)))))
+(fm/var org-cycle-separator-lines 0)
+(fm/var org-startup-folded nil)
+(fm/var org-ellipsis "   ▾")
+(fm/face org-ellipsis (:underline nil :foreground "DarkGoldenRod"))
+(fm/face org-level-1  (:height 1.3 :inherit (outline-1)))
+(fm/face org-level-2  (:height 1.2 :inherit (outline-2)))
+(fm/face org-level-3  (:height 1.1 :inherit (outline-3)))
+(fm/face org-todo     (:foreground "Red1" :height 0.9))
+(fm/face org-done     (:foreground "ForestGreen" :height 0.9))
 
 ;; which-key
 (fm/diminish 'which-key-mode)
+(fm/var which-key-idle-delay 0.3)
 (which-key-mode)
-
-(custom-set-variables
- '(which-key-idle-delay 0.3))
 
 ;; counsel
 (fm/diminish 'counsel-mode)
-(counsel-mode t)
 (put 'counsel-find-symbol 'no-counsel-M-x t)
+(counsel-mode t)
 
 ;; swiper
-(global-set-key (kbd "C-s")         #'swiper-isearch)
-(global-set-key (kbd "C-c C-c C-s") #'swiper-all)
-(global-set-key (kbd "C-c C-s")     #'swiper-thing-at-point)
-(global-set-key (kbd "C-r")         #'swiper-isearch-backward)
+(fm/key "C-s"         swiper-isearch)
+(fm/key "C-c C-c C-s" swiper-all)
+(fm/key "C-c C-s"     swiper-thing-at-point)
+(fm/key "C-r"         swiper-isearch-backward)
 
 ;; ivy
 (fm/diminish 'ivy-mode)
-(fm/key "ivy" ivy-minibuffer-map "<RET>" ivy-alt-done)
+;; (fm/key "ivy" ivy-minibuffer-map "<RET>" ivy-alt-done)
 
-(custom-set-variables
- '(ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
- '(ivy-wrap t)
- '(ivy-use-selectable-prompt t)
- '(ivy-use-virtual-buffers t)
- '(ivy-count-format "(%d/%d) ")
- '(ivy-virtual-abbreviate 'full)
- '(ivy-initial-inputs-alist nil)
- '(ivy-extra-directories nil))
+(fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
+(fm/var ivy-wrap t)
+(fm/var ivy-use-selectable-prompt t)
+(fm/var ivy-use-virtual-buffers t)
+(fm/var ivy-count-format "(%d/%d) ")
+(fm/var ivy-virtual-abbreviate 'full)
+(fm/var ivy-initial-inputs-alist nil)
+(fm/var ivy-extra-directories nil)
 
 (ivy-mode)
 
@@ -398,33 +381,31 @@
 (ivy-rich-mode)
 
 ;; fzf
-(global-set-key (kbd "M-F") #'fzf-git-files)
+(fm/key "M-F" fzf-git-files)
 
 ;; deadgrep
-(global-set-key (kbd "M-G") #'deadgrep)
+(fm/key "M-G" deadgrep)
 
 ;; mwim
-(global-set-key (kbd "C-a") 'mwim-beginning)
-(global-set-key (kbd "C-e") 'mwim-end)
+(fm/key "C-a" mwim-beginning)
+(fm/key "C-e" mwim-end)
 
 ;; transient - magit-related
-(custom-set-variables
- '(transient-default-level 7))
+(fm/var transient-default-level 7)
 
 ;; magit
-(global-set-key (kbd "C-x g") #'magit-status)
+(fm/key "C-x g" magit-status)
 (add-hook 'after-save-hook #'magit-after-save-refresh-status)
 (autoload 'magit-after-save-refresh-status "magit")
 
-(custom-set-variables
- '(magit-auto-revert-tracked-only nil)
- '(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
- '(magit-repository-directories '(("~/Workspace" . 3)
-                                  ("~/Oracle" . 3)
-                                  ("~/OracleWorkTrees" . 3))))
+(fm/var magit-auto-revert-tracked-only nil)
+(fm/var magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+(fm/var magit-repository-directories '(("~/Workspace" . 3)
+                                       ("~/Oracle" . 3)
+                                       ("~/OracleWorkTrees" . 3)))
 
 ;; expand-region
-(global-set-key (kbd "C-=") #'er/expand-region)
+(fm/key "C-=" er/expand-region)
 
 ;; esup
 (autoload 'esup "esup")
@@ -438,24 +419,24 @@
 
 ;; indent-guide
 (add-hook 'json-mode-hook #'indent-guide-mode)
-
-(custom-set-faces
- '(indent-guide-face ((t (:foreground "gray80")))))
+(fm/face indent-guide-face (:foreground "gray80"))
 
 ;; projectile
 (fm/diminish 'projectile-mode "Prj")
-(eval-when-compile (defvar projectile-mode-map))
-(autoload 'projectile-command-map "projectile")
-(add-hook 'projectile-mode-hook
- (lambda ()
-  (define-key projectile-mode-map (kbd "C-x p") #'projectile-command-map)))
+
+;; TODO (fm/key "C-x p" projectile-command-map "projectile" projectile-mode-map)
+;; (autoload 'projectile-command-map "projectile")
+;; (eval-when-compile (defvar projectile-mode-map))
+;; (add-hook 'projectile-mode-hook
+;;  (lambda ()
+;;   (define-key projectile-mode-map (kbd "C-x p") #'projectile-command-map)))
+
 (projectile-mode)
 
-(custom-set-variables
- '(projectile-project-search-path '("~/Workspace"))
- '(projectile-sort-order '(recently-active))
- '(projectile-enable-caching t)
- '(projectile-completion-system 'ivy))
+(fm/var projectile-project-search-path '("~/Workspace"))
+(fm/var projectile-sort-order '(recently-active))
+(fm/var projectile-enable-caching t)
+(fm/var projectile-completion-system 'ivy)
 
 ;; counsel-projectile
 (counsel-projectile-mode)
@@ -465,58 +446,53 @@
 (add-hook 'rustic-mode-hook #'yas-minor-mode)
 
 ;; diff-hl
-(custom-set-variables
- '(diff-hl-draw-borders nil)
- '(diff-hl-flydiff-delay 0.1))
+(fm/var diff-hl-draw-borders nil)
+(fm/var diff-hl-flydiff-delay 0.1)
 
 (autoload 'diff-hl-magit-post-refresh "diff-hl")
 (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
 (add-hook 'prog-mode-hook #'diff-hl-mode)
 
-(custom-set-faces
- '(diff-hl-delete ((t (:background "RosyBrown1"))))
- '(diff-hl-insert ((t (:background "DarkSeaGreen2"))))
- '(diff-hl-change ((t (:background "PowderBlue")))))
+(fm/face diff-hl-delete (:background "RosyBrown1"))
+(fm/face diff-hl-insert (:background "DarkSeaGreen2"))
+(fm/face diff-hl-change (:background "PowderBlue"))
 
 ;; symbol-overlay
 (fm/diminish 'symbol-overlay-mode "Sy")
-(eval-when-compile (defvar symbol-overlay-mode-map))
-(add-hook 'symbol-overlay-mode-hook
- (lambda ()
-  (define-key symbol-overlay-mode-map (kbd "M->") #'symbol-overlay-jump-next)
-  (define-key symbol-overlay-mode-map (kbd "M-<") #'symbol-overlay-jump-prev)))
 
-(custom-set-variables
- '(symbol-overlay-idle-time 0.1))
+;; TODO (fm/key "M->" symbol-overlay-jump-next "symbol-overlay" symbol-overlay-mode-map)
+;; TODO (fm/key "M-<" symbol-overlay-jump-prev "symbol-overlay" symbol-overlay-mode-map)
+;; (eval-when-compile (defvar symbol-overlay-mode-map))
+;; (add-hook 'symbol-overlay-mode-hook
+;;  (lambda ()
+;;   (define-key symbol-overlay-mode-map (kbd "M->") #'symbol-overlay-jump-next)
+;;   (define-key symbol-overlay-mode-map (kbd "M-<") #'symbol-overlay-jump-prev)))
 
-(custom-set-faces
- '(symbol-overlay-default-face ((t (:background "HoneyDew2")))))
+(fm/var symbol-overlay-idle-time 0.1)
+(fm/face symbol-overlay-default-face (:background "HoneyDew2"))
 
 (add-hook 'shell-script-mode-hook #'symbol-overlay-mode)
 (add-hook 'hledger-mode-hook      #'symbol-overlay-mode)
 (add-hook 'emacs-lisp-mode-hook   #'symbol-overlay-mode)
 
 ;; multiple-cursors
-(global-set-key (kbd "C-c C-v")       #'mc/edit-lines)
-(global-set-key (kbd "C->")           #'mc/mark-next-like-this)
-(global-set-key (kbd "C-<")           #'mc/mark-previous-like-this)
-(global-set-key (kbd "C-S-<mouse-1>") #'mc/add-cursor-on-click)
+(fm/key "C-c C-v"       mc/edit-lines)
+(fm/key "C->"           mc/mark-next-like-this)
+(fm/key "C-<"           mc/mark-previous-like-this)
+(fm/key "C-S-<mouse-1>" mc/add-cursor-on-click)
 
-(custom-set-variables
- '(mc/always-run-for-all t))
+(fm/var mc/always-run-for-all t)
 
-(custom-set-faces
- '(mc/cursor-bar-face ((t (:background "Gray40" :foreground "White"))))
- '(mc/cursor-face ((t (:background "Gray50" :foreground "White")))))
+(fm/face mc/cursor-bar-face (:background "Gray40" :foreground "White"))
+(fm/face mc/cursor-face     (:background "Gray50" :foreground "White"))
 
 ;; hledger-mode
 (push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
 (push '("\\.ledger\\'"  . hledger-mode) auto-mode-alist)
 
-(custom-set-variables
- '(hledger-currency-string "EUR")
- '(hledger-current-overlay t)
- '(hledger-comments-column 1))
+(fm/var hledger-currency-string "EUR")
+(fm/var hledger-current-overlay t)
+(fm/var hledger-comments-column 1)
 
 (add-hook 'hledger-mode-hook
  (lambda ()
@@ -532,64 +508,61 @@
   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)))
 
-(custom-set-variables
- '(flycheck-checker-error-threshold nil)
- '(flycheck-mode-line-prefix "Fc")
- '(flycheck-check-syntax-automatically '(idle-change new-line
-                                         mode-enabled idle-buffer-switch))
- '(flycheck-idle-change-delay 0.1)
- '(flycheck-idle-buffer-switch-delay 0.1))
+(fm/var flycheck-checker-error-threshold nil)
+(fm/var flycheck-mode-line-prefix "Fc")
+(fm/var flycheck-check-syntax-automatically
+ '(idle-change new-line mode-enabled idle-buffer-switch))
+(fm/var flycheck-idle-change-delay 0.1)
+(fm/var flycheck-idle-buffer-switch-delay 0.1)
 
 (add-hook 'prog-mode-hook #'flycheck-mode)
 
-(custom-set-faces
- '(flycheck-error   ((t (:underline "Red1"))))
- '(flycheck-warning ((t (:underline "DarkOrange"))))
- '(flycheck-info    ((t (:underline "ForestGreen")))))
+(fm/face flycheck-error   (:underline "Red1"))
+(fm/face flycheck-warning (:underline "DarkOrange"))
+(fm/face flycheck-info    (:underline "ForestGreen"))
 
 ;; flycheck-posframe
 (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
 
-(custom-set-variables
- '(flycheck-posframe-position 'window-bottom-right-corner)
- '(flycheck-posframe-border-width 1)
- '(flycheck-posframe-warnings-prefix "Warning: ")
- '(flycheck-posframe-error-prefix "Error: ")
- '(flycheck-posframe-prefix "Info: "))
+(fm/var flycheck-posframe-position 'window-bottom-right-corner)
+(fm/var flycheck-posframe-border-width 1)
+(fm/var flycheck-posframe-warnings-prefix "Warning: ")
+(fm/var flycheck-posframe-error-prefix "Error: ")
+(fm/var flycheck-posframe-prefix "Info: ")
 
-(custom-set-faces
- '(flycheck-posframe-background-face ((t (:background "CornSilk"))))
- '(flycheck-posframe-border-face     ((t (:background "Wheat" :foreground "Wheat"))))
- '(flycheck-posframe-error-face      ((t (:foreground "DarkRed"))))
- '(flycheck-posframe-warning-face    ((t (:foreground "DarkOrange")))))
+(fm/face flycheck-posframe-background-face (:background "CornSilk"))
+(fm/face flycheck-posframe-border-face     (:background "Wheat" :foreground "Wheat"))
+(fm/face flycheck-posframe-error-face      (:foreground "DarkRed"))
+(fm/face flycheck-posframe-warning-face    (:foreground "DarkOrange"))
 
 ;; company
 (fm/diminish 'company-mode "Co")
 
-(custom-set-variables
- '(company-frontends '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
- '(completion-ignore-case t)
- '(company-echo-truncate-lines nil)
- '(company-selection-wrap-around t)
- '(company-tooltip-minimum 10)
- '(company-tooltip-limit 20)
- '(company-tooltip-align-annotations t)
- '(company-idle-delay 0.1)
- '(company-occurence-weight-function 'company-occurrence-prefer-any-closest)
- '(company-transformers
-   '(company-sort-by-occurrence
-     company-sort-by-backend-importance
-     company-sort-prefer-same-case-prefix)))
+(fm/var completion-ignore-case t)
+(fm/var company-echo-truncate-lines nil)
+(fm/var company-selection-wrap-around t)
+(fm/var company-tooltip-minimum 10)
+(fm/var company-tooltip-limit 20)
+(fm/var company-tooltip-align-annotations t)
+(fm/var company-idle-delay 0.1)
+(fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
+(fm/var company-frontends
+ '(company-echo-metadata-frontend
+   company-pseudo-tooltip-frontend))
+(fm/var company-transformers
+ '(company-sort-by-occurrence
+   company-sort-by-backend-importance
+   company-sort-prefer-same-case-prefix))
 
 (add-hook 'prog-mode-hook    #'company-mode)
 (add-hook 'systemd-mode-hook #'company-mode)
 
+;; TODO setq-default?
 (eval-when-compile (defvar company-backends))
 (add-hook 'company-mode-hook
  (lambda () (setq company-backends '((company-capf company-keywords company-files)))))
 
-(custom-set-faces
- '(company-tooltip ((t (:background "gray95")))))
+(fm/face company-tooltip (:background "gray95"))
 
 ;; company-posframe
 (fm/diminish 'company-posframe-mode)
@@ -597,9 +570,8 @@
 (autoload 'company-posframe-mode "company-posframe")
 (add-hook 'company-mode-hook #'company-posframe-mode)
 
-(custom-set-variables
- '(company-posframe-show-params
-   (list :internal-border-width 1 :internal-border-color "gray60")))
+(fm/var company-posframe-show-params
+ (list :internal-border-width 1 :internal-border-color "gray60"))
 
 ;; rustic
 (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
@@ -615,12 +587,11 @@
    (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
    (define-key rustic-mode-map (kbd "<f8>") #'lsp-rust-analyzer-inlay-hints-mode)))
 
-(custom-set-variables
- '(rustic-lsp-server 'rust-analyzer)
- '(rustic-analyzer-command '("/usr/bin/rust-analyzer"))
- '(rustic-lsp-format t)
- '(rustic-indent-offset 2)
- '(rustic-always-locate-project-on-open t))
+(fm/var rustic-lsp-server 'rust-analyzer)
+(fm/var rustic-analyzer-command '("/usr/bin/rust-analyzer"))
+(fm/var rustic-lsp-format t)
+(fm/var rustic-indent-offset 2)
+(fm/var rustic-always-locate-project-on-open t)
 
 (add-hook 'rustic-mode-hook
  (lambda ()
@@ -663,36 +634,36 @@
    (define-key lsp-mode-map (kbd "M-RET") #'lsp-execute-code-action)
    (define-key lsp-mode-map (kbd "C-c x") #'fm/lsp-ivy-helper)))
 
-(custom-set-variables
- '(lsp-enable-snippet t)
- '(lsp-keymap-prefix "C-c")
- '(lsp-prefer-flymake nil)
- '(lsp-prefer-capf t)
- '(lsp-file-watch-threshold nil)
- '(lsp-enable-semantic-highlighting t)
- '(lsp-enable-indentation t)
- '(lsp-enable-on-type-formatting t)
- '(lsp-before-save-edits t)
- '(lsp-auto-configure t)
+(fm/var lsp-enable-snippet t)
+(fm/var lsp-keymap-prefix "C-c")
+(fm/var lsp-prefer-flymake nil)
+(fm/var lsp-prefer-capf t)
+(fm/var lsp-file-watch-threshold nil)
+(fm/var lsp-enable-semantic-highlighting t)
+(fm/var lsp-enable-indentation t)
+(fm/var lsp-enable-on-type-formatting t)
+(fm/var lsp-before-save-edits t)
+(fm/var lsp-auto-configure t)
 
- '(lsp-rust-racer-completion nil)
- '(lsp-rust-build-bin t)
- '(lsp-rust-build-lib t)
- '(lsp-rust-clippy-preference "on")
- '(lsp-rust-server 'rust-analyzer)
- '(lsp-rust-analyzer-server-display-inlay-hints t)
- '(lsp-rust-analyzer-display-chaining-hints t)
- '(lsp-rust-analyzer-display-parameter-hints t)
- '(lsp-rust-all-features t)
- '(lsp-rust-all-targets t)
- '(lsp-rust-build-on-save t)
- ;; '(lsp-rust-full-docs t)
- ;; '(lsp-rust-analyzer-max-inlay-hint-length 10)
- ;; '(lsp-signature-doc-lines 1)
- ;; '(lsp-signature-auto-activate t)
- ;; '(lsp-signature-render-documentation t)
- '(lsp-diagnostics-attributes `((unnecessary :background "Gray90")
-                                (deprecated  :strike-through t))))
+(fm/var lsp-rust-racer-completion nil)
+(fm/var lsp-rust-build-bin t)
+(fm/var lsp-rust-build-lib t)
+(fm/var lsp-rust-clippy-preference "on")
+(fm/var lsp-rust-server 'rust-analyzer)
+(fm/var lsp-rust-analyzer-server-display-inlay-hints t)
+(fm/var lsp-rust-analyzer-display-chaining-hints t)
+(fm/var lsp-rust-analyzer-display-parameter-hints t)
+(fm/var lsp-rust-all-features t)
+(fm/var lsp-rust-all-targets t)
+(fm/var lsp-rust-build-on-save t)
+(fm/var lsp-diagnostics-attributes
+ '((unnecessary :background "Gray90")
+   (deprecated  :strike-through t)))
+;; (fm/var lsp-rust-full-docs t)
+;; (fm/var lsp-rust-analyzer-max-inlay-hint-length 10)
+;; (fm/var lsp-signature-doc-lines 1)
+;; (fm/var lsp-signature-auto-activate t)
+;; (fm/var lsp-signature-render-documentation t)
 
 (add-hook 'lsp-mode-hook #'lsp-flycheck-enable)
 (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
@@ -742,9 +713,8 @@
 ;;        :mode 'tick))
 ;;      nil)))
 
-(custom-set-faces
- '(lsp-lens-face ((t (:inherit shadow))))
- '(lsp-lens-mouse-face ((t (:inherit link)))))
+(fm/face lsp-lens-face       (:inherit shadow))
+(fm/face lsp-lens-mouse-face (:inherit link))
 
 ;; lsp-ui
 (eval-after-load 'lsp-ui
@@ -755,35 +725,33 @@
      (define-key lsp-mode-map (kbd "M-?") #'lsp-ui-peek-find-references)
      (define-key lsp-mode-map (kbd "C-c h") #'lsp-ui-doc-glance))))
 
-(custom-set-variables
- '(lsp-ui-flycheck-enable t)
- '(lsp-ui-flycheck-list-mode t)
+(fm/var lsp-ui-flycheck-enable t)
+(fm/var lsp-ui-flycheck-list-mode t)
 
- ;; '(lsp-ui-peek-always-show t)
- ;; '(lsp-ui-peek-show-directory nil)
+ ;; (fm/var lsp-ui-peek-always-show t)
+ ;; (fm/var lsp-ui-peek-show-directory nil)
 
- '(lsp-ui-doc-enable nil)
- '(lsp-ui-doc-border "black")
- '(lsp-ui-doc-alignment 'window)
- ;; '(lsp-ui-doc-delay 0.1)
- ;; '(lsp-ui-doc-header t)
- ;; '(lsp-ui-doc-include-signature t)
+ (fm/var lsp-ui-doc-enable nil)
+ (fm/var lsp-ui-doc-border "black")
+ (fm/var lsp-ui-doc-alignment 'window)
+ ;; (fm/var lsp-ui-doc-delay 0.1)
+ ;; (fm/var lsp-ui-doc-header t)
+ ;; (fm/var lsp-ui-doc-include-signature t)
 
- ;; '(lsp-ui-sideline-delay 0.1)
- ;; '(lsp-ui-sideline-update-mode 'line)
- ;; '(lsp-ui-sideline-ignore-duplicate t)
- ;; '(lsp-ui-sideline-show-hover t)
- '(lsp-ui-sideline-enable nil))
+ ;; (fm/var lsp-ui-sideline-delay 0.1)
+ ;; (fm/var lsp-ui-sideline-update-mode 'line)
+ ;; (fm/var lsp-ui-sideline-ignore-duplicate t)
+ ;; (fm/var lsp-ui-sideline-show-hover t)
+ (fm/var lsp-ui-sideline-enable nil)
 
-(custom-set-faces
- ;; '(lsp-ui-sideline-code-action ((t (:foreground "Sienna"))))
- ;; '(lsp-ui-sideline-global ((t (:foreground "Gray70"))))
- ;; '(lsp-ui-sideline-symbol-info ((t (:foreground "Gray70" :slant italic))))
- ;; '(lsp-ui-sideline-current-symbol ((t (:foreground "White" :background "Gray75"))))
- ;; '(lsp-ui-sideline-symbol ((t (:foreground "White" :background "Gray75"))))
- '(lsp-ui-doc-background ((t (:background "Gray95"))))
- '(lsp-ui-doc-header ((t (:background "Pale Turquoise"))))
- '(lsp-ui-doc-border ((t (:background "Gray70")))))
+;; (fm/face lsp-ui-sideline-code-action    (:foreground "Sienna"))
+;; (fm/face lsp-ui-sideline-global         (:foreground "Gray70"))
+;; (fm/face lsp-ui-sideline-symbol-info    (:foreground "Gray70" :slant italic))
+;; (fm/face lsp-ui-sideline-current-symbol (:foreground "White" :background "Gray75"))
+;; (fm/face lsp-ui-sideline-symbol         (:foreground "White" :background "Gray75"))
+(fm/face lsp-ui-doc-background          (:background "Gray95"))
+(fm/face lsp-ui-doc-header              (:background "Pale Turquoise"))
+(fm/face lsp-ui-doc-border              (:background "Gray70"))
 
 ;; lsp-ivy
 (autoload 'lsp-ivy-workspace-symbol "lsp-ivy")
