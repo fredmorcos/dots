@@ -29,6 +29,13 @@
      ,(when func `(autoload ',func ,pkg))
      (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))))
 
+;; hooks
+(defmacro fm/hook (hook func &optional file)
+ "Autoload FUNC from FILE and add it to HOOK."
+ `(progn
+   ,(when file `(autoload ',func ,file))
+   (add-hook ',hook #',func)))
+
 ;; diminish
 (defun fm/diminish-helper (mode text)
  "Diminish MODE to TEXT helper."
@@ -38,6 +45,7 @@
    (setf (nth 1 element) new-text)
    (push `(,mode ,new-text) minor-mode-alist))))
 
+;; TODO Turn that into a macro maybe?
 (defun fm/diminish (mode &optional text)
  "Diminish MODE to TEXT."
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
@@ -59,6 +67,13 @@
 (defmacro fm/after (file &rest body)
  "Execute BODY when FILE is loaded."
  `(eval-after-load ',file (progn ,@body)))
+
+;; modes
+(defmacro fm/mode (ext mode &optional pkg)
+ "Autoload and enable MODE from PKG for file extension EXT."
+ `(progn
+   ,(when pkg `(autoload ',mode ,pkg))
+   (push '(,(concat "\\" ext "\\'") . ,mode) auto-mode-alist)))
 
 ;; qol
 (defun fm/replace-escapes ()
@@ -106,7 +121,7 @@
      (insert-char right)
      (backward-char))))))
 
-;; (fm/key "(" nil "c-mode" c-mode-map)
+;; TODO (fm/key "(" nil "c-mode" c-mode-map)
 (fm/key "("  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
 (fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
 (fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
@@ -116,8 +131,8 @@
                            ("melpa" . "https://melpa.org/packages/")
                            ("org"   . "https://orgmode.org/elpa/")))
 
-(defmacro fm/pkg (pkg)
- "Install PKG if not already installed."
+(defmacro fm/pkg (pkg &rest body)
+ "Install PKG if not already installed and execute BODY."
  `(progn
    (defvar packages-refreshed nil)
    (if (not (package-installed-p ',pkg))
@@ -127,7 +142,8 @@
        (package-refresh-contents)
        (setq packages-refreshed t)))
      (package-install ',pkg))
-    (push ',pkg package-selected-packages))))
+    (push ',pkg package-selected-packages))
+   (progn ,@body)))
 
 ;; subr
 (setq read-process-output-max (* 1024 1024))
@@ -163,14 +179,12 @@
 (fm/var display-line-numbers-width-start t)
 (fm/face line-number              (:foreground "Gray85"))
 (fm/face line-number-current-line (:foreground "Gray70"))
-
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(fm/hook prog-mode-hook display-line-numbers-mode)
 
 ;; hl-line
 (fm/face hl-line             (:background "Wheat"))
 (fm/face mode-line-highlight (:background "PowderBlue"))
-
-(global-hl-line-mode)
+(fm/hook prog-mode-hook hl-line-mode)
 
 ;; saveplace
 (fm/var save-place t)
@@ -192,8 +206,7 @@
    ,(expand-file-name "~/Oracle")
    ,(expand-file-name "~/OracleWorkTrees")))
 
-(autoload 'recentf-cleanup "recentf")
-(add-hook 'kill-emacs-hook #'recentf-cleanup)
+(fm/hook kill-emacs-hook recentf-cleanup "recentf")
 
 ;; files
 (fm/var confirm-kill-processes nil)
@@ -222,14 +235,13 @@
 (windmove-default-keybindings)
 
 ;; simple
-(add-hook 'before-save-hook #'delete-trailing-whitespace)
-
 (fm/var undo-limit (* 1024 1024))
 (fm/var suggest-key-bindings 10)
 (fm/var column-number-mode t)
 (fm/var line-number-mode nil)
 (fm/var auto-save-mode t)
 (fm/var save-interprogram-paste-before-kill t)
+(fm/hook before-save-hook delete-trailing-whitespace)
 
 ;; bindings
 (fm/var column-number-indicator-zero-based nil)
@@ -260,7 +272,6 @@
 
 ;; whitespace
 (fm/diminish 'whitespace-mode "Ws")
-
 (fm/var whitespace-line-column 90)
 (fm/var show-trailing-whitespace nil)
 (fm/var whitespace-action '(cleanup))
@@ -269,28 +280,24 @@
    indentation indentation::tab indentation::space
    space-after-tab space-after-tab::tab space-after-tab::space
    space-before-tab space-before-tab::tab space-before-tab::space))
-
-(add-hook 'hledger-mode-hook    #'whitespace-mode)
-(add-hook 'emacs-lisp-mode-hook #'whitespace-mode)
-(add-hook 'makefile-mode-hook   #'whitespace-mode)
+(fm/hook hledger-mode-hook    whitespace-mode)
+(fm/hook emacs-lisp-mode-hook whitespace-mode)
+(fm/hook makefile-mode-hook   whitespace-mode)
 
 ;; elisp-mode
 (fm/var lisp-indent-offset 1)
 (fm/var lisp-indent-function #'common-lisp-indent-function)
-
-(push '("\\emacs\\'"              . emacs-lisp-mode) auto-mode-alist)
-(push '("\\.config/emacs/init\\'" . emacs-lisp-mode) auto-mode-alist)
+(fm/mode "emacs"              emacs-lisp-mode)
+(fm/mode ".config/emacs/init" emacs-lisp-mode)
 
 ;; text-mode
-(push '("\\Passwords.txt\\'"     . text-mode) auto-mode-alist)
-(push '("\\Passwords_old.txt\\'" . text-mode) auto-mode-alist)
-
-(add-hook 'text-mode-hook (lambda () (toggle-truncate-lines t)))
+(fm/mode "Passwords.txt"     text-mode)
+(fm/mode "Passwords_old.txt" text-mode)
+(fm/hook text-mode-hook (lambda () (toggle-truncate-lines t)))
 
 ;; eldoc
 (fm/diminish 'eldoc-mode "Ed")
-
-(add-hook 'prog-mode-hook #'eldoc-mode)
+(fm/hook prog-mode-hook eldoc-mode)
 
 ;; paren
 (fm/var show-paren-when-point-inside-paren t)
@@ -299,23 +306,18 @@
 (fm/face show-paren-match            (:background "PowderBlue"))
 (fm/face show-paren-match-expression (:background "Lavender"))
 (fm/face show-paren-mismatch         (:background "LightSalmon"))
-
-(add-hook 'prog-mode-hook #'show-paren-mode)
+(fm/hook prog-mode-hook show-paren-mode)
 
 ;; dired
-(autoload 'dired-hide-details-mode "dired")
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
-
 (fm/var dired-listing-switches "-l --group-directories-first")
 (fm/var dired-hide-details-hide-symlink-targets nil)
+(fm/hook dired-mode-hook dired-hide-details-mode "dired")
 
 ;; autorevert
 (fm/diminish 'autorevert-mode "Ar")
-
 (fm/var auto-revert-interval 1)
 (fm/var auto-revert-mode-text " Ar")
-
-(add-hook 'dired-mode-hook #'auto-revert-mode)
+(fm/hook dired-mode-hook auto-revert-mode)
 
 ;; subword
 (fm/diminish 'subword-mode "Sw")
@@ -323,281 +325,244 @@
 ;; spell
 (fm/var ispell-program-name "aspell")
 (fm/var ispell-extra-args '("--sug-mode=ultra"))
+(fm/hook text-mode-hook flyspell-mode)
+(fm/hook prog-mode-hook flyspell-prog-mode)
 
-(add-hook 'text-mode-hook #'flyspell-mode)
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
-
-;; org-bullets
-(fm/var org-bullets-bullet-list '("●" "○"))
-
-(add-hook 'org-mode-hook #'org-bullets-mode)
-
-;; org
-(autoload 'org-indent-mode "org")
-(add-hook 'org-mode #'org-indent-mode)
-
-(fm/var org-cycle-separator-lines 0)
-(fm/var org-startup-folded nil)
-(fm/var org-ellipsis "   ▾")
-(fm/face org-ellipsis (:underline nil :foreground "DarkGoldenRod"))
-(fm/face org-level-1  (:height 1.3 :inherit (outline-1)))
-(fm/face org-level-2  (:height 1.2 :inherit (outline-2)))
-(fm/face org-level-3  (:height 1.1 :inherit (outline-3)))
-(fm/face org-todo     (:foreground "Red1" :height 0.9))
-(fm/face org-done     (:foreground "ForestGreen" :height 0.9))
-
-;; which-key
-(fm/diminish 'which-key-mode)
-(fm/var which-key-idle-delay 0.3)
-(which-key-mode)
-
-;; counsel
-(fm/diminish 'counsel-mode)
-(put 'counsel-find-symbol 'no-counsel-M-x t)
-(counsel-mode t)
-
-;; swiper
-(fm/key "C-s"         swiper-isearch)
-(fm/key "C-c C-c C-s" swiper-all)
-(fm/key "C-c C-s"     swiper-thing-at-point)
-(fm/key "C-r"         swiper-isearch-backward)
-
-;; ivy
-(fm/diminish 'ivy-mode)
-;; (fm/key "ivy" ivy-minibuffer-map "<RET>" ivy-alt-done)
-
-(fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
-(fm/var ivy-wrap t)
-(fm/var ivy-use-selectable-prompt t)
-(fm/var ivy-use-virtual-buffers t)
-(fm/var ivy-count-format "(%d/%d) ")
-(fm/var ivy-virtual-abbreviate 'full)
-(fm/var ivy-initial-inputs-alist nil)
-(fm/var ivy-extra-directories nil)
-
-(ivy-mode)
-
-;; ivy-rich
-(ivy-rich-mode)
-
-;; fzf
-(fm/key "M-F" fzf-git-files)
-
-;; deadgrep
-(fm/key "M-G" deadgrep)
-
-;; mwim
-(fm/key "C-a" mwim-beginning)
-(fm/key "C-e" mwim-end)
-
-;; transient - magit-related
-(fm/var transient-default-level 7)
-
-;; magit
-(fm/key "C-x g" magit-status)
-(add-hook 'after-save-hook #'magit-after-save-refresh-status)
-(autoload 'magit-after-save-refresh-status "magit")
-
-(fm/var magit-auto-revert-tracked-only nil)
-(fm/var magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-(fm/var magit-repository-directories '(("~/Workspace" . 3)
-                                       ("~/Oracle" . 3)
-                                       ("~/OracleWorkTrees" . 3)))
-
-;; expand-region
-(fm/key "C-=" er/expand-region)
-
-;; esup
-(autoload 'esup "esup")
-
-;; js
-(push '("\\.hocon\\'" . js-mode) auto-mode-alist)
+;; js-mode
+(fm/mode ".hocon" js-mode)
 
 ;; llvm-mode
-(push '("\\.ll\\'" . llvm-mode) auto-mode-alist)
-(add-hook 'llvm-mode-hook (lambda () (toggle-truncate-lines t)))
+(fm/mode ".ll" llvm-mode "llvm-mode")
+(fm/hook llvm-mode-hook (lambda () (toggle-truncate-lines t)))
 
-;; indent-guide
-(add-hook 'json-mode-hook #'indent-guide-mode)
-(fm/face indent-guide-face (:foreground "gray80"))
+(fm/pkg org-bullets
+ (fm/var org-bullets-bullet-list '("●" "○"))
+ (fm/hook org-mode-hook org-bullets-mode))
 
-;; projectile
-(fm/diminish 'projectile-mode "Prj")
+(fm/pkg org
+ (fm/var org-cycle-separator-lines 0)
+ (fm/var org-startup-folded nil)
+ (fm/var org-ellipsis "   ▾")
+ (fm/face org-ellipsis (:underline nil :foreground "DarkGoldenRod"))
+ (fm/face org-level-1  (:height 1.3 :inherit (outline-1)))
+ (fm/face org-level-2  (:height 1.2 :inherit (outline-2)))
+ (fm/face org-level-3  (:height 1.1 :inherit (outline-3)))
+ (fm/face org-todo     (:foreground "Red1" :height 0.9))
+ (fm/face org-done     (:foreground "ForestGreen" :height 0.9))
+ (fm/hook org-mode org-indent-mode "org"))
 
-;; TODO (fm/key "C-x p" projectile-command-map "projectile" projectile-mode-map)
-;; (autoload 'projectile-command-map "projectile")
-;; (eval-when-compile (defvar projectile-mode-map))
-;; (add-hook 'projectile-mode-hook
-;;  (lambda ()
-;;   (define-key projectile-mode-map (kbd "C-x p") #'projectile-command-map)))
+(fm/pkg which-key
+ (fm/diminish 'which-key-mode)
+ (fm/var which-key-idle-delay 0.3)
+ (which-key-mode))
 
-(projectile-mode)
+(fm/pkg counsel
+ (fm/diminish 'counsel-mode)
+ (put 'counsel-find-symbol 'no-counsel-M-x t)
+ (counsel-mode t))
 
-(fm/var projectile-project-search-path '("~/Workspace"))
-(fm/var projectile-sort-order '(recently-active))
-(fm/var projectile-enable-caching t)
-(fm/var projectile-completion-system 'ivy)
+(fm/pkg swiper
+ (fm/key "C-s"         swiper-isearch)
+ (fm/key "C-c C-c C-s" swiper-all)
+ (fm/key "C-c C-s"     swiper-thing-at-point)
+ (fm/key "C-r"         swiper-isearch-backward))
 
-;; counsel-projectile
-(counsel-projectile-mode)
+(fm/pkg ivy
+ (fm/diminish 'ivy-mode)
+ (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
+ (fm/var ivy-wrap t)
+ (fm/var ivy-use-selectable-prompt t)
+ (fm/var ivy-use-virtual-buffers t)
+ (fm/var ivy-count-format "(%d/%d) ")
+ (fm/var ivy-virtual-abbreviate 'full)
+ (fm/var ivy-initial-inputs-alist nil)
+ (fm/var ivy-extra-directories nil)
+ ;; TODO (fm/key "ivy" ivy-minibuffer-map "<RET>" ivy-alt-done)
+ (ivy-mode))
 
-;; yasnippet
-(fm/diminish 'yasnippet-mode "Ys")
-(add-hook 'rustic-mode-hook #'yas-minor-mode)
+(fm/pkg ivy-rich (ivy-rich-mode))
+(fm/pkg fzf (fm/key "M-F" fzf-git-files))
+(fm/pkg deadgrep (fm/key "M-G" deadgrep))
 
-;; diff-hl
-(fm/var diff-hl-draw-borders nil)
-(fm/var diff-hl-flydiff-delay 0.1)
+(fm/pkg mwim
+ (fm/key "C-a" mwim-beginning)
+ (fm/key "C-e" mwim-end))
 
-(autoload 'diff-hl-magit-post-refresh "diff-hl")
-(add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
-(add-hook 'prog-mode-hook #'diff-hl-mode)
+(fm/pkg expand-region (fm/key "C-=" er/expand-region))
+(fm/pkg esup (autoload 'esup "esup"))
+(fm/pkg transient (fm/var transient-default-level 7))
 
-(fm/face diff-hl-delete (:background "RosyBrown1"))
-(fm/face diff-hl-insert (:background "DarkSeaGreen2"))
-(fm/face diff-hl-change (:background "PowderBlue"))
+(fm/pkg magit
+ (fm/var magit-auto-revert-tracked-only nil)
+ (fm/var magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+ (fm/var magit-repository-directories '(("~/Workspace" . 3)
+                                        ("~/Oracle" . 3)
+                                        ("~/OracleWorkTrees" . 3)))
+ (fm/key "C-x g" magit-status)
+ (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
 
-;; symbol-overlay
-(fm/diminish 'symbol-overlay-mode "Sy")
+(fm/pkg indent-guide
+ (fm/face indent-guide-face (:foreground "gray80"))
+ (fm/hook json-mode-hook indent-guide-mode))
 
-;; TODO (fm/key "M->" symbol-overlay-jump-next "symbol-overlay" symbol-overlay-mode-map)
-;; TODO (fm/key "M-<" symbol-overlay-jump-prev "symbol-overlay" symbol-overlay-mode-map)
-;; (eval-when-compile (defvar symbol-overlay-mode-map))
-;; (add-hook 'symbol-overlay-mode-hook
-;;  (lambda ()
-;;   (define-key symbol-overlay-mode-map (kbd "M->") #'symbol-overlay-jump-next)
-;;   (define-key symbol-overlay-mode-map (kbd "M-<") #'symbol-overlay-jump-prev)))
+(fm/pkg projectile
+ (fm/diminish 'projectile-mode "Prj")
 
-(fm/var symbol-overlay-idle-time 0.1)
-(fm/face symbol-overlay-default-face (:background "HoneyDew2"))
+ ;; TODO (fm/key "C-x p" projectile-command-map "projectile" projectile-mode-map)
+ ;; (autoload 'projectile-command-map "projectile")
+ ;; (eval-when-compile (defvar projectile-mode-map))
+ ;; (add-hook 'projectile-mode-hook
+ ;;  (lambda ()
+ ;;   (define-key projectile-mode-map (kbd "C-x p") #'projectile-command-map)))
 
-(add-hook 'shell-script-mode-hook #'symbol-overlay-mode)
-(add-hook 'hledger-mode-hook      #'symbol-overlay-mode)
-(add-hook 'emacs-lisp-mode-hook   #'symbol-overlay-mode)
+ (fm/var projectile-project-search-path '("~/Workspace"))
+ (fm/var projectile-sort-order '(recently-active))
+ (fm/var projectile-enable-caching t)
+ (fm/var projectile-completion-system 'ivy)
+ (projectile-mode))
 
-;; multiple-cursors
-(fm/key "C-c C-v"       mc/edit-lines)
-(fm/key "C->"           mc/mark-next-like-this)
-(fm/key "C-<"           mc/mark-previous-like-this)
-(fm/key "C-S-<mouse-1>" mc/add-cursor-on-click)
+(fm/pkg counsel-projectile (counsel-projectile-mode))
 
-(fm/var mc/always-run-for-all t)
+(fm/pkg yasnippet
+ (fm/diminish 'yasnippet-mode "Ys")
+ (fm/hook rustic-mode-hook yas-minor-mode))
 
-(fm/face mc/cursor-bar-face (:background "Gray40" :foreground "White"))
-(fm/face mc/cursor-face     (:background "Gray50" :foreground "White"))
+(fm/pkg diff-hl
+ (fm/var diff-hl-draw-borders nil)
+ (fm/var diff-hl-flydiff-delay 0.1)
+ (fm/face diff-hl-delete (:background "RosyBrown1"))
+ (fm/face diff-hl-insert (:background "DarkSeaGreen2"))
+ (fm/face diff-hl-change (:background "PowderBlue"))
+ (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")
+ (fm/hook prog-mode-hook diff-hl-mode))
 
-;; hledger-mode
-(push '("\\.journal\\'" . hledger-mode) auto-mode-alist)
-(push '("\\.ledger\\'"  . hledger-mode) auto-mode-alist)
+(fm/pkg symbol-overlay
+ (fm/diminish 'symbol-overlay-mode "Sy")
+ (fm/var symbol-overlay-idle-time 0.1)
+ (fm/face symbol-overlay-default-face (:background "HoneyDew2"))
 
-(fm/var hledger-currency-string "EUR")
-(fm/var hledger-current-overlay t)
-(fm/var hledger-comments-column 1)
+ ;; TODO (fm/key "M->" symbol-overlay-jump-next "symbol-overlay" symbol-overlay-mode-map)
+ ;; TODO (fm/key "M-<" symbol-overlay-jump-prev "symbol-overlay" symbol-overlay-mode-map)
+ ;; (eval-when-compile (defvar symbol-overlay-mode-map))
+ ;; (add-hook 'symbol-overlay-mode-hook
+ ;;  (lambda ()
+ ;;   (define-key symbol-overlay-mode-map (kbd "M->") #'symbol-overlay-jump-next)
+ ;;   (define-key symbol-overlay-mode-map (kbd "M-<") #'symbol-overlay-jump-prev)))
 
-(add-hook 'hledger-mode-hook
- (lambda ()
-  (toggle-truncate-lines t)
-  (setq tab-width 1)))
+ (fm/hook shell-script-mode-hook symbol-overlay-mode)
+ (fm/hook hledger-mode-hook      symbol-overlay-mode)
+ (fm/hook emacs-lisp-mode-hook   symbol-overlay-mode))
 
-;; flycheck
-(eval-when-compile (defvar flycheck-mode-map))
-(autoload 'flycheck-next-error     "flycheck")
-(autoload 'flycheck-previous-error "flycheck")
-(add-hook 'flycheck-mode-hook
- (lambda ()
-  (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
-  (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)))
+(fm/pkg multiple-cursors
+ (fm/var mc/always-run-for-all t)
+ (fm/face mc/cursor-bar-face (:background "Gray40" :foreground "White"))
+ (fm/face mc/cursor-face     (:background "Gray50" :foreground "White"))
+ (fm/key "C-c C-v"       mc/edit-lines)
+ (fm/key "C->"           mc/mark-next-like-this)
+ (fm/key "C-<"           mc/mark-previous-like-this)
+ (fm/key "C-S-<mouse-1>" mc/add-cursor-on-click))
 
-(fm/var flycheck-checker-error-threshold nil)
-(fm/var flycheck-mode-line-prefix "Fc")
-(fm/var flycheck-check-syntax-automatically
- '(idle-change new-line mode-enabled idle-buffer-switch))
-(fm/var flycheck-idle-change-delay 0.1)
-(fm/var flycheck-idle-buffer-switch-delay 0.1)
+(fm/pkg hledger-mode
+ (fm/mode ".journal" hledger-mode)
+ (fm/mode ".ledger"  hledger-mode)
+ (fm/var hledger-currency-string "EUR")
+ (fm/var hledger-current-overlay t)
+ (fm/var hledger-comments-column 1)
+ (fm/hook hledger-mode-hook (lambda ()
+                             (toggle-truncate-lines t)
+                             (setq tab-width 1))))
 
-(add-hook 'prog-mode-hook #'flycheck-mode)
+(fm/pkg flycheck
+ (fm/var flycheck-checker-error-threshold nil)
+ (fm/var flycheck-mode-line-prefix "Fc")
+ (fm/var flycheck-check-syntax-automatically
+  '(idle-change new-line mode-enabled idle-buffer-switch))
+ (fm/var flycheck-idle-change-delay 0.1)
+ (fm/var flycheck-idle-buffer-switch-delay 0.1)
+ (fm/face flycheck-error   (:underline "Red1"))
+ (fm/face flycheck-warning (:underline "DarkOrange"))
+ (fm/face flycheck-info    (:underline "ForestGreen"))
 
-(fm/face flycheck-error   (:underline "Red1"))
-(fm/face flycheck-warning (:underline "DarkOrange"))
-(fm/face flycheck-info    (:underline "ForestGreen"))
+ ;; TODO
+ ;; (eval-when-compile (defvar flycheck-mode-map))
+ ;; (autoload 'flycheck-next-error     "flycheck")
+ ;; (autoload 'flycheck-previous-error "flycheck")
+ ;; (add-hook 'flycheck-mode-hook
+ ;;  (lambda ()
+ ;;   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+ ;;   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)))
 
-;; flycheck-posframe
-(add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
+ (fm/hook prog-mode-hook flycheck-mode))
 
-(fm/var flycheck-posframe-position 'window-bottom-right-corner)
-(fm/var flycheck-posframe-border-width 1)
-(fm/var flycheck-posframe-warnings-prefix "Warning: ")
-(fm/var flycheck-posframe-error-prefix "Error: ")
-(fm/var flycheck-posframe-prefix "Info: ")
+(fm/pkg flycheck-posframe
+ (fm/hook flycheck-mode-hook flycheck-posframe-mode)
+ (fm/var flycheck-posframe-position 'window-bottom-right-corner)
+ (fm/var flycheck-posframe-border-width 1)
+ (fm/var flycheck-posframe-warnings-prefix "Warning: ")
+ (fm/var flycheck-posframe-error-prefix "Error: ")
+ (fm/var flycheck-posframe-prefix "Info: ")
+ (fm/face flycheck-posframe-background-face (:background "CornSilk"))
+ (fm/face flycheck-posframe-border-face     (:background "Wheat" :foreground "Wheat"))
+ (fm/face flycheck-posframe-error-face      (:foreground "DarkRed"))
+ (fm/face flycheck-posframe-warning-face    (:foreground "DarkOrange")))
 
-(fm/face flycheck-posframe-background-face (:background "CornSilk"))
-(fm/face flycheck-posframe-border-face     (:background "Wheat" :foreground "Wheat"))
-(fm/face flycheck-posframe-error-face      (:foreground "DarkRed"))
-(fm/face flycheck-posframe-warning-face    (:foreground "DarkOrange"))
+(fm/pkg company
+ (fm/diminish 'company-mode "Co")
+ (fm/var completion-ignore-case t)
+ (fm/var company-echo-truncate-lines nil)
+ (fm/var company-selection-wrap-around t)
+ (fm/var company-tooltip-minimum 10)
+ (fm/var company-tooltip-limit 20)
+ (fm/var company-tooltip-align-annotations t)
+ (fm/var company-idle-delay 0.1)
+ (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
+ (fm/var company-frontends
+  '(company-echo-metadata-frontend
+    company-pseudo-tooltip-frontend))
+ (fm/var company-transformers
+  '(company-sort-by-occurrence
+    company-sort-by-backend-importance
+    company-sort-prefer-same-case-prefix))
+ (fm/face company-tooltip (:background "gray95"))
+ (fm/hook prog-mode-hook    company-mode)
+ (fm/hook systemd-mode-hook company-mode)
 
-;; company
-(fm/diminish 'company-mode "Co")
+ ;; TODO setq-default?
+ (eval-when-compile (defvar company-backends))
+ (add-hook 'company-mode-hook
+  (lambda () (setq company-backends '((company-capf company-keywords company-files))))))
 
-(fm/var completion-ignore-case t)
-(fm/var company-echo-truncate-lines nil)
-(fm/var company-selection-wrap-around t)
-(fm/var company-tooltip-minimum 10)
-(fm/var company-tooltip-limit 20)
-(fm/var company-tooltip-align-annotations t)
-(fm/var company-idle-delay 0.1)
-(fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
-(fm/var company-frontends
- '(company-echo-metadata-frontend
-   company-pseudo-tooltip-frontend))
-(fm/var company-transformers
- '(company-sort-by-occurrence
-   company-sort-by-backend-importance
-   company-sort-prefer-same-case-prefix))
+(fm/pkg company-posframe
+ (fm/diminish 'company-posframe-mode)
+ (fm/var company-posframe-show-params
+  (list :internal-border-width 1 :internal-border-color "gray60"))
+ (fm/hook company-mode-hook company-posframe-mode "company-posframe"))
 
-(add-hook 'prog-mode-hook    #'company-mode)
-(add-hook 'systemd-mode-hook #'company-mode)
+(fm/pkg rustic
+ (fm/var rustic-lsp-server 'rust-analyzer)
+ (fm/var rustic-analyzer-command '("/usr/bin/rust-analyzer"))
+ (fm/var rustic-lsp-format t)
+ (fm/var rustic-indent-offset 2)
+ (fm/var rustic-always-locate-project-on-open t)
 
-;; TODO setq-default?
-(eval-when-compile (defvar company-backends))
-(add-hook 'company-mode-hook
- (lambda () (setq company-backends '((company-capf company-keywords company-files)))))
+ ;; TODO fm/key
+ (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
+ (autoload 'lsp-rust-analyzer-expand-macro "lsp-mode")
+ (autoload 'lsp-rust-analyzer-join-lines "lsp-mode")
+ (autoload 'lsp-rust-analyzer-inlay-hints-mode "lsp-mode")
+ (eval-after-load 'rustic-mode
+  '(progn
+    (eval-when-compile (defvar rustic-mode-map))
+    (define-key rustic-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
+    (define-key rustic-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
+    (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
+    (define-key rustic-mode-map (kbd "<f8>") #'lsp-rust-analyzer-inlay-hints-mode)))
 
-(fm/face company-tooltip (:background "gray95"))
-
-;; company-posframe
-(fm/diminish 'company-posframe-mode)
-
-(autoload 'company-posframe-mode "company-posframe")
-(add-hook 'company-mode-hook #'company-posframe-mode)
-
-(fm/var company-posframe-show-params
- (list :internal-border-width 1 :internal-border-color "gray60"))
-
-;; rustic
-(autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
-(autoload 'lsp-rust-analyzer-expand-macro "lsp-mode")
-(autoload 'lsp-rust-analyzer-join-lines "lsp-mode")
-(autoload 'lsp-rust-analyzer-inlay-hints-mode "lsp-mode")
-
-(eval-after-load 'rustic-mode
- '(progn
-   (eval-when-compile (defvar rustic-mode-map))
-   (define-key rustic-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
-   (define-key rustic-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
-   (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
-   (define-key rustic-mode-map (kbd "<f8>") #'lsp-rust-analyzer-inlay-hints-mode)))
-
-(fm/var rustic-lsp-server 'rust-analyzer)
-(fm/var rustic-analyzer-command '("/usr/bin/rust-analyzer"))
-(fm/var rustic-lsp-format t)
-(fm/var rustic-indent-offset 2)
-(fm/var rustic-always-locate-project-on-open t)
-
-(add-hook 'rustic-mode-hook
- (lambda ()
-  (electric-quote-local-mode -1)
-  (add-hook 'before-save-hook #'lsp-format-buffer 10 t)))
-(add-hook 'rustic-mode-hook #'subword-mode)
+ ;; TODO Clean this up.
+ (fm/hook rustic-mode-hook (lambda ()
+                            (electric-quote-local-mode -1)
+                            (add-hook 'before-save-hook #'lsp-format-buffer 10 t)))
+ (fm/hook rustic-mode-hook subword-mode))
 
 ;; lsp-mode
 (autoload 'lsp-format-buffer "lsp-mode")
@@ -757,7 +722,7 @@
 (autoload 'lsp-ivy-workspace-symbol "lsp-ivy")
 
 (setq file-name-handler-alist nil)
-;; (message "Startup in %s" (emacs-init-time))
+(message "Startup in %s" (emacs-init-time))
 
 (provide 'init)
 ;;; init ends here
