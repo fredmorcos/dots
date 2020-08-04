@@ -184,8 +184,8 @@ gst-python
 gstreamer-vaapi
 gst-transcoder
 gtest
-gtk-engine-murrine
 gtkglext
+gtk-theme-numix-solarized
 gucharmap
 gumbo-parser
 gvfs-mtp

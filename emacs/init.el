@@ -606,7 +606,6 @@
 (autoload 'lsp-rust-analyzer-expand-macro "lsp-mode")
 (autoload 'lsp-rust-analyzer-join-lines "lsp-mode")
 (autoload 'lsp-rust-analyzer-inlay-hints-mode "lsp-mode")
-(autoload 'rustic-clippy "rustic-mode")
 
 (eval-after-load 'rustic-mode
  '(progn
@@ -622,10 +621,6 @@
  '(rustic-lsp-format t)
  '(rustic-indent-offset 2)
  '(rustic-always-locate-project-on-open t))
-
-(eval-when-compile (defvar flycheck-checkers))
-(eval-after-load 'flycheck
- '(eval-after-load 'rustic '(push #'rustic-clippy flycheck-checkers)))
 
 (add-hook 'rustic-mode-hook
  (lambda ()
@@ -650,6 +645,7 @@
 (autoload 'lsp-ui-peek-find-definitions "lsp-mode")
 (autoload 'lsp-ui-peek-find-references "lsp-mode")
 (autoload 'lsp-ui-doc-glance "lsp-mode")
+(autoload 'lsp-flycheck-enable "lsp-mode")
 
 (defun fm/lsp-ivy-helper ()
  "Call LSP-IVY-WORKSPACE-SYMBOL with symbol at point."
@@ -698,6 +694,7 @@
  '(lsp-diagnostics-attributes `((unnecessary :background "Gray90")
                                 (deprecated  :strike-through t))))
 
+(add-hook 'lsp-mode-hook #'lsp-flycheck-enable)
 (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
 (add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
 
