@@ -17,24 +17,28 @@
 (make-directory emacs-backups-dir t)
 (push emacs-extra-dir load-path)
 
+;; hooks
+(defmacro fm/hook (hook func &optional pkg local)
+ "Autoload FUNC from PKG and add it to LOCAL HOOK."
+ `(progn
+   ,(when pkg `(autoload ',func ,pkg))
+   ,(if local
+     `(add-hook ',hook #',func 10 t)
+     `(add-hook ',hook #',func))))
+
 ;; bind keys
-(defmacro fm/key (key func &optional pkg pkg-keymap)
+(defmacro fm/key (key func &optional pkg-keymap pkg)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
  (cond
-  ((and (not pkg) (not pkg-keymap))
+  ((not pkg-keymap)
    `(global-set-key (kbd ,key) ,(if func `#',func nil)))
   (t
    `(progn
      (eval-when-compile (defvar ,pkg-keymap))
-     ,(when func `(autoload ',func ,pkg))
+     ,(when (and func pkg)
+       `(autoload ',func ,pkg)
+       `(declare-function ,func ,pkg))
      (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))))
-
-;; hooks
-(defmacro fm/hook (hook func &optional file)
- "Autoload FUNC from FILE and add it to HOOK."
- `(progn
-   ,(when file `(autoload ',func ,file))
-   (add-hook ',hook #',func)))
 
 ;; diminish
 (defun fm/diminish-helper (mode text)
@@ -64,9 +68,9 @@
  `(custom-set-variables '(,var ,val)))
 
 ;; lazy loading
-(defmacro fm/after (file &rest body)
- "Execute BODY when FILE is loaded."
- `(eval-after-load ',file (progn ,@body)))
+(defmacro fm/after (pkg &rest body)
+ "Execute BODY when PKG is loaded."
+ `(eval-after-load ',pkg '(progn ,@body)))
 
 ;; modes
 (defmacro fm/mode (ext mode &optional pkg)
@@ -121,7 +125,6 @@
      (insert-char right)
      (backward-char))))))
 
-;; TODO (fm/key "(" nil "c-mode" c-mode-map)
 (fm/key "("  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
 (fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
 (fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
@@ -335,6 +338,9 @@
 (fm/mode ".ll" llvm-mode "llvm-mode")
 (fm/hook llvm-mode-hook (lambda () (toggle-truncate-lines t)))
 
+;; c-mode
+(fm/hook c-mode-hook (lambda () (fm/key "(" nil c-mode-map)))
+
 (fm/pkg org-bullets
  (fm/var org-bullets-bullet-list '("●" "○"))
  (fm/hook org-mode-hook org-bullets-mode))
@@ -377,8 +383,8 @@
  (fm/var ivy-virtual-abbreviate 'full)
  (fm/var ivy-initial-inputs-alist nil)
  (fm/var ivy-extra-directories nil)
- ;; TODO (fm/key "ivy" ivy-minibuffer-map "<RET>" ivy-alt-done)
- (ivy-mode))
+ (ivy-mode)
+ (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
 
 (fm/pkg ivy-rich (ivy-rich-mode))
 (fm/pkg fzf (fm/key "M-F" fzf-git-files))
@@ -407,19 +413,12 @@
 
 (fm/pkg projectile
  (fm/diminish 'projectile-mode "Prj")
-
- ;; TODO (fm/key "C-x p" projectile-command-map "projectile" projectile-mode-map)
- ;; (autoload 'projectile-command-map "projectile")
- ;; (eval-when-compile (defvar projectile-mode-map))
- ;; (add-hook 'projectile-mode-hook
- ;;  (lambda ()
- ;;   (define-key projectile-mode-map (kbd "C-x p") #'projectile-command-map)))
-
  (fm/var projectile-project-search-path '("~/Workspace"))
  (fm/var projectile-sort-order '(recently-active))
  (fm/var projectile-enable-caching t)
  (fm/var projectile-completion-system 'ivy)
- (projectile-mode))
+ (projectile-mode)
+ (fm/key "C-x p" projectile-command-map projectile-mode-map "projectile"))
 
 (fm/pkg counsel-projectile (counsel-projectile-mode))
 
@@ -440,15 +439,11 @@
  (fm/diminish 'symbol-overlay-mode "Sy")
  (fm/var symbol-overlay-idle-time 0.1)
  (fm/face symbol-overlay-default-face (:background "HoneyDew2"))
-
- ;; TODO (fm/key "M->" symbol-overlay-jump-next "symbol-overlay" symbol-overlay-mode-map)
- ;; TODO (fm/key "M-<" symbol-overlay-jump-prev "symbol-overlay" symbol-overlay-mode-map)
- ;; (eval-when-compile (defvar symbol-overlay-mode-map))
- ;; (add-hook 'symbol-overlay-mode-hook
- ;;  (lambda ()
- ;;   (define-key symbol-overlay-mode-map (kbd "M->") #'symbol-overlay-jump-next)
- ;;   (define-key symbol-overlay-mode-map (kbd "M-<") #'symbol-overlay-jump-prev)))
-
+ (fm/hook symbol-overlay-mode-hook
+  (lambda ()
+   (progn
+    (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
+    (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map))))
  (fm/hook shell-script-mode-hook symbol-overlay-mode)
  (fm/hook hledger-mode-hook      symbol-overlay-mode)
  (fm/hook emacs-lisp-mode-hook   symbol-overlay-mode))
@@ -482,16 +477,11 @@
  (fm/face flycheck-error   (:underline "Red1"))
  (fm/face flycheck-warning (:underline "DarkOrange"))
  (fm/face flycheck-info    (:underline "ForestGreen"))
-
- ;; TODO
- ;; (eval-when-compile (defvar flycheck-mode-map))
- ;; (autoload 'flycheck-next-error     "flycheck")
- ;; (autoload 'flycheck-previous-error "flycheck")
- ;; (add-hook 'flycheck-mode-hook
- ;;  (lambda ()
- ;;   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
- ;;   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)))
-
+ (fm/hook flycheck-mode-hook
+  (lambda ()
+   (progn
+    (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
+    (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck"))))
  (fm/hook prog-mode-hook flycheck-mode))
 
 (fm/pkg flycheck-posframe
@@ -524,13 +514,9 @@
     company-sort-by-backend-importance
     company-sort-prefer-same-case-prefix))
  (fm/face company-tooltip (:background "gray95"))
+ (setq-default company-backends '((company-capf company-keywords company-files)))
  (fm/hook prog-mode-hook    company-mode)
- (fm/hook systemd-mode-hook company-mode)
-
- ;; TODO setq-default?
- (eval-when-compile (defvar company-backends))
- (add-hook 'company-mode-hook
-  (lambda () (setq company-backends '((company-capf company-keywords company-files))))))
+ (fm/hook systemd-mode-hook company-mode))
 
 (fm/pkg company-posframe
  (fm/diminish 'company-posframe-mode)
@@ -544,154 +530,131 @@
  (fm/var rustic-lsp-format t)
  (fm/var rustic-indent-offset 2)
  (fm/var rustic-always-locate-project-on-open t)
-
- ;; TODO fm/key
- (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
- (autoload 'lsp-rust-analyzer-expand-macro "lsp-mode")
- (autoload 'lsp-rust-analyzer-join-lines "lsp-mode")
- (autoload 'lsp-rust-analyzer-inlay-hints-mode "lsp-mode")
- (eval-after-load 'rustic-mode
-  '(progn
-    (eval-when-compile (defvar rustic-mode-map))
-    (define-key rustic-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
-    (define-key rustic-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
-    (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
-    (define-key rustic-mode-map (kbd "<f8>") #'lsp-rust-analyzer-inlay-hints-mode)))
-
- ;; TODO Clean this up.
- (fm/hook rustic-mode-hook (lambda ()
-                            (electric-quote-local-mode -1)
-                            (add-hook 'before-save-hook #'lsp-format-buffer 10 t)))
+ (fm/hook rustic-mode-hook
+  (lambda ()
+   (progn
+    (fm/key "<f5>" rust-dbg-wrap-or-unwrap            rustic-mode-map "rust-mode")
+    (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "rustic-mode")
+    (fm/key "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "rustic-mode")
+    (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "rustic-mode")
+    (electric-quote-local-mode -1))))
  (fm/hook rustic-mode-hook subword-mode))
 
-;; lsp-mode
-(autoload 'lsp-format-buffer "lsp-mode")
-(autoload 'lsp-rename "lsp-mode")
-(autoload 'lsp-describe-thing-at-point "lsp-mode")
-(autoload 'lsp-extend-selection "lsp-mode")
-(autoload 'lsp-execute-code-action "lsp-mode")
-(autoload 'lsp-enable-which-key-integration "lsp-mode")
-(autoload 'lsp-headerline-breadcrumb-mode "lsp-mode")
-(autoload 'lsp-rust-analyzer-initialized? "lsp-mode")
-(autoload 'lsp-request-async "lsp-mode")
-(autoload 'lsp--text-document-identifier "lsp-mode")
-(autoload '-let* "lsp-mode")
-(autoload 'lsp--range-to-region "lsp-mode")
-(autoload 'overlay "lsp-mode")
-(autoload 'lsp-ui-peek-find-definitions "lsp-mode")
-(autoload 'lsp-ui-peek-find-references "lsp-mode")
-(autoload 'lsp-ui-doc-glance "lsp-mode")
-(autoload 'lsp-flycheck-enable "lsp-mode")
+(fm/pkg lsp-mode
+ (fm/var lsp-enable-snippet t)
+ (fm/var lsp-keymap-prefix "C-c")
+ (fm/var lsp-prefer-flymake nil)
+ (fm/var lsp-prefer-capf t)
+ (fm/var lsp-file-watch-threshold nil)
+ (fm/var lsp-enable-semantic-highlighting t)
+ (fm/var lsp-enable-indentation t)
+ (fm/var lsp-enable-on-type-formatting t)
+ (fm/var lsp-before-save-edits t)
+ (fm/var lsp-auto-configure t)
+ (fm/var lsp-rust-racer-completion nil)
+ (fm/var lsp-rust-build-bin t)
+ (fm/var lsp-rust-build-lib t)
+ (fm/var lsp-rust-clippy-preference "on")
+ (fm/var lsp-rust-server 'rust-analyzer)
+ (fm/var lsp-rust-analyzer-server-display-inlay-hints t)
+ (fm/var lsp-rust-analyzer-display-chaining-hints t)
+ (fm/var lsp-rust-analyzer-display-parameter-hints t)
+ (fm/var lsp-rust-all-features t)
+ (fm/var lsp-rust-all-targets t)
+ (fm/var lsp-rust-build-on-save t)
+ (fm/var lsp-diagnostics-attributes
+  '((unnecessary :background "Gray90")
+    (deprecated  :strike-through t)))
+ ;; (fm/var lsp-rust-full-docs t)
+ ;; (fm/var lsp-rust-analyzer-max-inlay-hint-length 10)
+ ;; (fm/var lsp-signature-doc-lines 1)
+ ;; (fm/var lsp-signature-auto-activate t)
+ ;; (fm/var lsp-signature-render-documentation t)
+ (fm/face lsp-lens-face       (:inherit shadow))
+ (fm/face lsp-lens-mouse-face (:inherit link))
 
-(defun fm/lsp-ivy-helper ()
- "Call LSP-IVY-WORKSPACE-SYMBOL with symbol at point."
- (interactive)
- (lsp-ivy-workspace-symbol t))
+ ;; (autoload 'lsp-request-async "lsp-mode")
+ ;; (autoload 'lsp--text-document-identifier "lsp-mode")
+ ;; (autoload '-let* "lsp-mode")
+ ;; (autoload 'lsp--range-to-region "lsp-mode")
+ ;; (autoload 'overlay "lsp-mode")
+ ;; (autoload 'lsp-make-rust-analyzer-inlay-hints-parasm "lsp-rust")
+ ;; (autoload 'lsp-rust-analyzer-initialized? "lsp-rust")
 
-(eval-after-load 'lsp-mode
- '(progn
-   (eval-when-compile (defvar lsp-mode-map))
-   (define-key lsp-mode-map (kbd "C-c f") #'lsp-format-buffer)
-   (define-key lsp-mode-map (kbd "C-c r") #'lsp-rename)
-   (define-key lsp-mode-map (kbd "C-c t") #'lsp-describe-thing-at-point)
-   (define-key lsp-mode-map (kbd "C-=")   #'lsp-extend-selection)
-   (define-key lsp-mode-map (kbd "C-c e") #'lsp-rust-analyzer-expand-macro)
-   (define-key lsp-mode-map (kbd "M-RET") #'lsp-execute-code-action)
-   (define-key lsp-mode-map (kbd "C-c x") #'fm/lsp-ivy-helper)))
+ (fm/after lsp-rust
+  (eval-when-compile
+   (defvar lsp/rust-analyzer-inlay-hint-kind-chaining-hint)
+   (defvar lsp/rust-analyzer-inlay-hint-kind-param-hint)
+   (defvar lsp/rust-analyzer-inlay-hint-kind-type-hint))
 
-(fm/var lsp-enable-snippet t)
-(fm/var lsp-keymap-prefix "C-c")
-(fm/var lsp-prefer-flymake nil)
-(fm/var lsp-prefer-capf t)
-(fm/var lsp-file-watch-threshold nil)
-(fm/var lsp-enable-semantic-highlighting t)
-(fm/var lsp-enable-indentation t)
-(fm/var lsp-enable-on-type-formatting t)
-(fm/var lsp-before-save-edits t)
-(fm/var lsp-auto-configure t)
+  (defface fm/lsp-rust-analyzer-inlay-type-face
+   '((t (:height 0.7 :foreground "DimGray" :background "Gray92")))
+   "Face for inlay type hints (e.g. inferred types)."
+   :group 'lsp-rust)
 
-(fm/var lsp-rust-racer-completion nil)
-(fm/var lsp-rust-build-bin t)
-(fm/var lsp-rust-build-lib t)
-(fm/var lsp-rust-clippy-preference "on")
-(fm/var lsp-rust-server 'rust-analyzer)
-(fm/var lsp-rust-analyzer-server-display-inlay-hints t)
-(fm/var lsp-rust-analyzer-display-chaining-hints t)
-(fm/var lsp-rust-analyzer-display-parameter-hints t)
-(fm/var lsp-rust-all-features t)
-(fm/var lsp-rust-all-targets t)
-(fm/var lsp-rust-build-on-save t)
-(fm/var lsp-diagnostics-attributes
- '((unnecessary :background "Gray90")
-   (deprecated  :strike-through t)))
-;; (fm/var lsp-rust-full-docs t)
-;; (fm/var lsp-rust-analyzer-max-inlay-hint-length 10)
-;; (fm/var lsp-signature-doc-lines 1)
-;; (fm/var lsp-signature-auto-activate t)
-;; (fm/var lsp-signature-render-documentation t)
+  (defface fm/lsp-rust-analyzer-inlay-param-face
+   '((t (:height 0.7 :foreground "DimGray" :background "Azure")))
+   "Face for inlay parameter hints (e.g. function parameter names at call-site)."
+   :group 'lsp-rust)
 
-(add-hook 'lsp-mode-hook #'lsp-flycheck-enable)
-(add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-(add-hook 'lsp-mode-hook #'lsp-headerline-breadcrumb-mode)
+  (defface fm/lsp-rust-analyzer-inlay-chaining-face
+   '((t (:height 0.7 :foreground "DimGray" :background "PaleGoldenrod")))
+   "Face for inlay chaining hints (e.g. inferred chain return types)."
+   :group 'lsp-rust)
 
-(defface fm/lsp-rust-inlay-type-face
- '((t :background "OldLace" :foreground "DarkGray"))
- "Face for inlay type hints (e.g. inferred types)."
- :group 'lsp-rust)
+  (defun lsp-rust-analyzer-update-inlay-hints (buffer)
+   (if (and (lsp-rust-analyzer-initialized?) (eq buffer (current-buffer)))
+    (lsp-request-async
+     "rust-analyzer/inlayHints"
+     (lsp-make-rust-analyzer-inlay-hints-params
+      :text-document (lsp--text-document-identifier))
+     (lambda (res)
+      (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
+      (dolist (hint res)
+       (-let* (((&rust-analyzer:InlayHint :range :label :kind) hint)
+               ((&RangeToPoint :start :end) range)
+               (overlay (make-overlay start end nil 'front-advance 'end-advance)))
+        (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
+        (overlay-put overlay 'evaporate t)
+        (cond
+         ((equal kind lsp/rust-analyzer-inlay-hint-kind-type-hint)
+          (overlay-put overlay 'after-string
+           (concat " " (propertize label
+            'font-lock-face 'fm/lsp-rust-analyzer-inlay-type-face))))
+         ((equal kind lsp/rust-analyzer-inlay-hint-kind-param-hint)
+          (overlay-put overlay 'before-string
+           (concat (propertize label
+            'font-lock-face 'fm/lsp-rust-analyzer-inlay-param-face) " ")))
+         ((equal kind lsp/rust-analyzer-inlay-hint-kind-chaining-hint)
+          (overlay-put overlay 'after-string
+           (concat " " (propertize label
+            'font-lock-face 'fm/lsp-rust-analyzer-inlay-chaining-face))))))))
+     :mode 'tick))
+   nil))
 
-(defface fm/lsp-rust-inlay-param-face
- '((t :background "Azure" :foreground "DarkGray"))
- "Face for inlay parameter hints (e.g. function parameter names at call-site)."
- :group 'lsp-rust)
+ (defun fm/lsp-ivy-helper ()
+  "Call LSP-IVY-WORKSPACE-SYMBOL with symbol at point."
+  (interactive)
+  (lsp-ivy-workspace-symbol t))
 
-;; (eval-after-load 'lsp-rust
-;;  '(eval-after-load 'lsp-mode
-;;    '(defun lsp-rust-analyzer-update-inlay-hints (buffer)
-;;      (if (and (lsp-rust-analyzer-initialized?)
-;;           (eq buffer (current-buffer)))
-;;       (lsp-request-async
-;;        "rust-analyzer/inlayHints"
-;;        (list :textDocument (lsp--text-document-identifier))
-;;        (lambda (res)
-;;         (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
-;;         (dolist (hint res)
-;;          (-let* (((&hash "range" "label" "kind") hint)
-;;                  ((beg . end) (lsp--range-to-region range))
-;;                  (overlay (make-overlay beg end)))
-;;           (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
-;;           (overlay-put overlay 'evaporate t)
-;;           (cond
-;;            ((string= kind "TypeHint")
-;;             (overlay-put overlay
-;;              'after-string
-;;              (concat (propertize ": " 'font-lock-face
-;;                       '(:foreground "darkgray"))
-;;               (propertize label 'font-lock-face
-;;                'fm/lsp-rust-inlay-type-face))))
-;;            ((string= kind "ParameterHint")
-;;             (overlay-put overlay
-;;              'before-string
-;;              (concat (propertize label 'font-lock-face
-;;                       'fm/lsp-rust-inlay-param-face)
-;;               (propertize ": " 'font-lock-face
-;;                '(:foreground "darkgray")))))))))
-;;        :mode 'tick))
-;;      nil)))
+ (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
+ (fm/hook lsp-mode-hook lsp-flycheck-enable "lsp-mode")
+ (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")
+ (fm/hook lsp-mode-hook lsp-headerline-breadcrumb-mode)
+ (fm/hook lsp-mode-hook
+  (lambda ()
+   (progn
+    (fm/key "C-c f" lsp-format-buffer              lsp-mode-map "lsp-mode")
+    (fm/key "C-c r" lsp-rename                     lsp-mode-map "lsp-mode")
+    (fm/key "C-c t" lsp-describe-thing-at-point    lsp-mode-map "lsp-mode")
+    (fm/key "C-="   lsp-extend-selection           lsp-mode-map "lsp-mode")
+    (fm/key "C-c e" lsp-rust-analyzer-expand-macro lsp-mode-map "lsp-mode")
+    (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")
+    (fm/key "C-c x" fm/lsp-ivy-helper)))))
 
-(fm/face lsp-lens-face       (:inherit shadow))
-(fm/face lsp-lens-mouse-face (:inherit link))
-
-;; lsp-ui
-(eval-after-load 'lsp-ui
- '(eval-after-load 'lsp-mode
-   '(progn
-     (eval-when-compile (defvar lsp-mode-map))
-     (define-key lsp-mode-map (kbd "M-.") #'lsp-ui-peek-find-definitions)
-     (define-key lsp-mode-map (kbd "M-?") #'lsp-ui-peek-find-references)
-     (define-key lsp-mode-map (kbd "C-c h") #'lsp-ui-doc-glance))))
-
-(fm/var lsp-ui-flycheck-enable t)
-(fm/var lsp-ui-flycheck-list-mode t)
+(fm/pkg lsp-ui
+ (fm/var lsp-ui-flycheck-enable t)
+ (fm/var lsp-ui-flycheck-list-mode t)
 
  ;; (fm/var lsp-ui-peek-always-show t)
  ;; (fm/var lsp-ui-peek-show-directory nil)
@@ -699,27 +662,34 @@
  (fm/var lsp-ui-doc-enable nil)
  (fm/var lsp-ui-doc-border "black")
  (fm/var lsp-ui-doc-alignment 'window)
+
  ;; (fm/var lsp-ui-doc-delay 0.1)
  ;; (fm/var lsp-ui-doc-header t)
  ;; (fm/var lsp-ui-doc-include-signature t)
 
+ (fm/var lsp-ui-sideline-enable nil)
  ;; (fm/var lsp-ui-sideline-delay 0.1)
  ;; (fm/var lsp-ui-sideline-update-mode 'line)
  ;; (fm/var lsp-ui-sideline-ignore-duplicate t)
  ;; (fm/var lsp-ui-sideline-show-hover t)
- (fm/var lsp-ui-sideline-enable nil)
 
-;; (fm/face lsp-ui-sideline-code-action    (:foreground "Sienna"))
-;; (fm/face lsp-ui-sideline-global         (:foreground "Gray70"))
-;; (fm/face lsp-ui-sideline-symbol-info    (:foreground "Gray70" :slant italic))
-;; (fm/face lsp-ui-sideline-current-symbol (:foreground "White" :background "Gray75"))
-;; (fm/face lsp-ui-sideline-symbol         (:foreground "White" :background "Gray75"))
-(fm/face lsp-ui-doc-background          (:background "Gray95"))
-(fm/face lsp-ui-doc-header              (:background "Pale Turquoise"))
-(fm/face lsp-ui-doc-border              (:background "Gray70"))
+ ;; (fm/face lsp-ui-sideline-code-action    (:foreground "Sienna"))
+ ;; (fm/face lsp-ui-sideline-global         (:foreground "Gray70"))
+ ;; (fm/face lsp-ui-sideline-symbol-info    (:foreground "Gray70" :slant italic))
+ ;; (fm/face lsp-ui-sideline-current-symbol (:foreground "White" :background "Gray75"))
+ ;; (fm/face lsp-ui-sideline-symbol         (:foreground "White" :background "Gray75"))
+ (fm/face lsp-ui-doc-background          (:background "Gray95"))
+ (fm/face lsp-ui-doc-header              (:background "Pale Turquoise"))
+ (fm/face lsp-ui-doc-border              (:background "Gray70"))
 
-;; lsp-ivy
-(autoload 'lsp-ivy-workspace-symbol "lsp-ivy")
+ (fm/hook lsp-ui-mode-hook
+  (lambda ()
+   (progn
+    (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
+    (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
+    (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc")))))
+
+(fm/pkg lsp-ivy (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
