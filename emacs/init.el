@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+;; TODO
+;; - Fix ivy/counsel not sorting most used commands to top
+;; - Fix warnings in the lsp-rust type hint inlay overload
+
 ;; Directories
 (defconst emacs-extra-dir "/home/fred/Workspace/dots/emacs/extra")
 (defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
@@ -330,6 +334,8 @@
 (fm/var ispell-extra-args '("--sug-mode=ultra"))
 (fm/hook text-mode-hook flyspell-mode)
 (fm/hook prog-mode-hook flyspell-prog-mode)
+(fm/face flyspell-duplicate (:underline "YellowGreen"))
+(fm/face flyspell-incorrect (:underline "Orchid"))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -340,6 +346,12 @@
 
 ;; c-mode
 (fm/hook c-mode-hook (lambda () (fm/key "(" nil c-mode-map)))
+
+(fm/pkg json-mode)
+(fm/pkg toml-mode)
+(fm/pkg cmake-mode)
+(fm/pkg dockerfile-mode)
+(fm/pkg systemd (fm/hook systemd-mode-hook company-mode))
 
 (fm/pkg org-bullets
  (fm/var org-bullets-bullet-list '("●" "○"))
@@ -362,6 +374,8 @@
  (fm/var which-key-idle-delay 0.3)
  (which-key-mode))
 
+(fm/pkg flx)
+
 (fm/pkg counsel
  (fm/diminish 'counsel-mode)
  (put 'counsel-find-symbol 'no-counsel-M-x t)
@@ -383,6 +397,7 @@
  (fm/var ivy-virtual-abbreviate 'full)
  (fm/var ivy-initial-inputs-alist nil)
  (fm/var ivy-extra-directories nil)
+ (fm/var ivy-sort-max-size nil)
  (ivy-mode)
  (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
 
@@ -498,6 +513,7 @@
 
 (fm/pkg company
  (fm/diminish 'company-mode "Co")
+ (setq-default company-backends '((company-capf company-keywords company-files)))
  (fm/var completion-ignore-case t)
  (fm/var company-echo-truncate-lines nil)
  (fm/var company-selection-wrap-around t)
@@ -514,7 +530,6 @@
     company-sort-by-backend-importance
     company-sort-prefer-same-case-prefix))
  (fm/face company-tooltip (:background "gray95"))
- (setq-default company-backends '((company-capf company-keywords company-files)))
  (fm/hook prog-mode-hook    company-mode)
  (fm/hook systemd-mode-hook company-mode))
 
@@ -573,64 +588,65 @@
  (fm/face lsp-lens-face       (:inherit shadow))
  (fm/face lsp-lens-mouse-face (:inherit link))
 
- ;; (autoload 'lsp-request-async "lsp-mode")
- ;; (autoload 'lsp--text-document-identifier "lsp-mode")
- ;; (autoload '-let* "lsp-mode")
- ;; (autoload 'lsp--range-to-region "lsp-mode")
- ;; (autoload 'overlay "lsp-mode")
- ;; (autoload 'lsp-make-rust-analyzer-inlay-hints-parasm "lsp-rust")
- ;; (autoload 'lsp-rust-analyzer-initialized? "lsp-rust")
-
  (fm/after lsp-rust
-  (eval-when-compile
-   (defvar lsp/rust-analyzer-inlay-hint-kind-chaining-hint)
-   (defvar lsp/rust-analyzer-inlay-hint-kind-param-hint)
-   (defvar lsp/rust-analyzer-inlay-hint-kind-type-hint))
+   ;; (eval-when-compile
+   ;;  (defvar lsp/rust-analyzer-inlay-hint-kind-chaining-hint)
+   ;;  (defvar lsp/rust-analyzer-inlay-hint-kind-param-hint)
+   ;;  (defvar lsp/rust-analyzer-inlay-hint-kind-type-hint))
 
-  (defface fm/lsp-rust-analyzer-inlay-type-face
-   '((t (:height 0.7 :foreground "DimGray" :background "Gray92")))
-   "Face for inlay type hints (e.g. inferred types)."
-   :group 'lsp-rust)
+   ;; (autoload 'lsp-request-async "lsp-mode")
+   ;; (autoload 'lsp--text-document-identifier "lsp-mode")
+   ;; (autoload '-let* "lsp-mode")
+   ;; (autoload 'lsp--range-to-region "lsp-mode")
+   ;; (autoload 'overlay "lsp-mode")
+   ;; (autoload 'lsp-make-rust-analyzer-inlay-hints-parasm "lsp-rust")
+   ;; (autoload 'lsp-rust-analyzer-initialized? "lsp-rust")
 
-  (defface fm/lsp-rust-analyzer-inlay-param-face
-   '((t (:height 0.7 :foreground "DimGray" :background "Azure")))
-   "Face for inlay parameter hints (e.g. function parameter names at call-site)."
-   :group 'lsp-rust)
+   (defface fm/lsp-rust-analyzer-inlay-type-face
+    '((t (:height 0.7 :foreground "DimGray" :background "Gray92")))
+    "Face for inlay type hints (e.g. inferred types)."
+    :group 'lsp-rust)
 
-  (defface fm/lsp-rust-analyzer-inlay-chaining-face
-   '((t (:height 0.7 :foreground "DimGray" :background "PaleGoldenrod")))
-   "Face for inlay chaining hints (e.g. inferred chain return types)."
-   :group 'lsp-rust)
+   (defface fm/lsp-rust-analyzer-inlay-param-face
+    '((t (:height 0.7 :foreground "DimGray" :background "Azure")))
+    "Face for inlay parameter hints (e.g. function parameter names at call-site)."
+    :group 'lsp-rust)
+
+   (defface fm/lsp-rust-analyzer-inlay-chaining-face
+    '((t (:height 0.7 :foreground "DimGray" :background "PaleGoldenrod")))
+    "Face for inlay chaining hints (e.g. inferred chain return types)."
+    :group 'lsp-rust)
 
   (defun lsp-rust-analyzer-update-inlay-hints (buffer)
-   (if (and (lsp-rust-analyzer-initialized?) (eq buffer (current-buffer)))
-    (lsp-request-async
-     "rust-analyzer/inlayHints"
-     (lsp-make-rust-analyzer-inlay-hints-params
-      :text-document (lsp--text-document-identifier))
-     (lambda (res)
-      (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
-      (dolist (hint res)
-       (-let* (((&rust-analyzer:InlayHint :range :label :kind) hint)
-               ((&RangeToPoint :start :end) range)
-               (overlay (make-overlay start end nil 'front-advance 'end-advance)))
-        (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
-        (overlay-put overlay 'evaporate t)
-        (cond
-         ((equal kind lsp/rust-analyzer-inlay-hint-kind-type-hint)
-          (overlay-put overlay 'after-string
-           (concat " " (propertize label
-            'font-lock-face 'fm/lsp-rust-analyzer-inlay-type-face))))
-         ((equal kind lsp/rust-analyzer-inlay-hint-kind-param-hint)
-          (overlay-put overlay 'before-string
-           (concat (propertize label
-            'font-lock-face 'fm/lsp-rust-analyzer-inlay-param-face) " ")))
-         ((equal kind lsp/rust-analyzer-inlay-hint-kind-chaining-hint)
-          (overlay-put overlay 'after-string
-           (concat " " (propertize label
-            'font-lock-face 'fm/lsp-rust-analyzer-inlay-chaining-face))))))))
-     :mode 'tick))
-   nil))
+   (with-no-warnings
+    (if (and (lsp-rust-analyzer-initialized?) (eq buffer (current-buffer)))
+     (lsp-request-async
+      "rust-analyzer/inlayHints"
+      (lsp-make-rust-analyzer-inlay-hints-params
+       :text-document (lsp--text-document-identifier))
+      (lambda (res)
+       (remove-overlays (point-min) (point-max) 'lsp-rust-analyzer-inlay-hint t)
+       (dolist (hint res)
+        (-let* (((&rust-analyzer:InlayHint :range :label :kind) hint)
+                ((&RangeToPoint :start :end) range)
+                (overlay (make-overlay start end nil 'front-advance 'end-advance)))
+         (overlay-put overlay 'lsp-rust-analyzer-inlay-hint t)
+         (overlay-put overlay 'evaporate t)
+         (cond
+          ((equal kind lsp/rust-analyzer-inlay-hint-kind-type-hint)
+           (overlay-put overlay 'after-string
+            (concat " " (propertize label
+                         'font-lock-face 'fm/lsp-rust-analyzer-inlay-type-face))))
+          ((equal kind lsp/rust-analyzer-inlay-hint-kind-param-hint)
+           (overlay-put overlay 'before-string
+            (concat (propertize label
+                     'font-lock-face 'fm/lsp-rust-analyzer-inlay-param-face) " ")))
+          ((equal kind lsp/rust-analyzer-inlay-hint-kind-chaining-hint)
+           (overlay-put overlay 'after-string
+            (concat " " (propertize label
+                         'font-lock-face 'fm/lsp-rust-analyzer-inlay-chaining-face))))))))
+      :mode 'tick))
+    nil)))
 
  (defun fm/lsp-ivy-helper ()
   "Call LSP-IVY-WORKSPACE-SYMBOL with symbol at point."
