@@ -3,8 +3,8 @@
 ;;; Code:
 
 ;; TODO
-;; - Fix ivy/counsel not sorting most used commands to top
 ;; - Fix warnings in the lsp-rust type hint inlay overload
+;; - Fix problem with counsel-describe-face and describe-face not showing ivy menu
 
 ;; Directories
 (defconst emacs-extra-dir "/home/fred/Workspace/dots/emacs/extra")
@@ -30,6 +30,10 @@
      `(add-hook ',hook #',func 10 t)
      `(add-hook ',hook #',func))))
 
+(defmacro fm/hook-lambda (hook &rest body)
+ "Hook (lambda () BODY) to HOOK."
+ `(add-hook ',hook (lambda () (progn ,@body))))
+
 ;; bind keys
 (defmacro fm/key (key func &optional pkg-keymap pkg)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
@@ -45,7 +49,7 @@
      (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))))
 
 ;; diminish
-(defun fm/diminish-helper (mode text)
+(defun fm/dim-helper (mode text)
  "Diminish MODE to TEXT helper."
  (let ((element (seq-find (lambda (x) (eq (car x) mode)) minor-mode-alist))
        (new-text (if text (concat " " text) "")))
@@ -53,13 +57,10 @@
    (setf (nth 1 element) new-text)
    (push `(,mode ,new-text) minor-mode-alist))))
 
-;; TODO Turn that into a macro maybe?
-(defun fm/diminish (mode &optional text)
+(defmacro fm/dim (mode &optional text)
  "Diminish MODE to TEXT."
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
-  (symbolp hook)
-  (add-hook hook
-   (lambda () (progn (fm/diminish-helper mode text))))))
+  `(fm/hook-lambda ,hook (fm/dim-helper ',mode ,text))))
 
 ;; faces
 (defmacro fm/face (face props)
@@ -260,7 +261,7 @@
 (fm/var vc-make-backup-files t)
 
 ;; abbrev
-(fm/diminish 'abbrev-mode "Ab")
+(fm/dim abbrev-mode "Ab")
 
 ;; newcomment
 (fm/var comment-fill-column 80)
@@ -278,7 +279,7 @@
 (fm/var ediff-window-setup-function #'ediff-setup-windows-plain)
 
 ;; whitespace
-(fm/diminish 'whitespace-mode "Ws")
+(fm/dim whitespace-mode "Ws")
 (fm/var whitespace-line-column 90)
 (fm/var show-trailing-whitespace nil)
 (fm/var whitespace-action '(cleanup))
@@ -300,10 +301,10 @@
 ;; text-mode
 (fm/mode "Passwords.txt"     text-mode)
 (fm/mode "Passwords_old.txt" text-mode)
-(fm/hook text-mode-hook (lambda () (toggle-truncate-lines t)))
+(fm/hook-lambda text-mode-hook (toggle-truncate-lines t))
 
 ;; eldoc
-(fm/diminish 'eldoc-mode "Ed")
+(fm/dim eldoc-mode "Ed")
 (fm/hook prog-mode-hook eldoc-mode)
 
 ;; paren
@@ -321,13 +322,13 @@
 (fm/hook dired-mode-hook dired-hide-details-mode "dired")
 
 ;; autorevert
-(fm/diminish 'autorevert-mode "Ar")
+(fm/dim autorevert-mode "Ar")
 (fm/var auto-revert-interval 1)
 (fm/var auto-revert-mode-text " Ar")
 (fm/hook dired-mode-hook auto-revert-mode)
 
 ;; subword
-(fm/diminish 'subword-mode "Sw")
+(fm/dim subword-mode "Sw")
 
 ;; spell
 (fm/var ispell-program-name "aspell")
@@ -342,10 +343,10 @@
 
 ;; llvm-mode
 (fm/mode ".ll" llvm-mode "llvm-mode")
-(fm/hook llvm-mode-hook (lambda () (toggle-truncate-lines t)))
+(fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t))
 
 ;; c-mode
-(fm/hook c-mode-hook (lambda () (fm/key "(" nil c-mode-map)))
+(fm/hook-lambda c-mode-hook (fm/key "(" nil c-mode-map))
 
 (fm/pkg json-mode)
 (fm/pkg toml-mode)
@@ -370,14 +371,14 @@
  (fm/hook org-mode org-indent-mode "org"))
 
 (fm/pkg which-key
- (fm/diminish 'which-key-mode)
+ (fm/dim which-key-mode)
  (fm/var which-key-idle-delay 0.3)
  (which-key-mode))
 
-(fm/pkg flx)
+(fm/pkg smex)
 
 (fm/pkg counsel
- (fm/diminish 'counsel-mode)
+ (fm/dim counsel-mode)
  (put 'counsel-find-symbol 'no-counsel-M-x t)
  (counsel-mode t))
 
@@ -388,7 +389,7 @@
  (fm/key "C-r"         swiper-isearch-backward))
 
 (fm/pkg ivy
- (fm/diminish 'ivy-mode)
+ (fm/dim ivy-mode)
  (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
  (fm/var ivy-wrap t)
  (fm/var ivy-use-selectable-prompt t)
@@ -402,6 +403,7 @@
  (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
 
 (fm/pkg ivy-rich (ivy-rich-mode))
+
 (fm/pkg fzf (fm/key "M-F" fzf-git-files))
 (fm/pkg deadgrep (fm/key "M-G" deadgrep))
 
@@ -427,7 +429,7 @@
  (fm/hook json-mode-hook indent-guide-mode))
 
 (fm/pkg projectile
- (fm/diminish 'projectile-mode "Prj")
+ (fm/dim projectile-mode "Prj")
  (fm/var projectile-project-search-path '("~/Workspace"))
  (fm/var projectile-sort-order '(recently-active))
  (fm/var projectile-enable-caching t)
@@ -438,7 +440,7 @@
 (fm/pkg counsel-projectile (counsel-projectile-mode))
 
 (fm/pkg yasnippet
- (fm/diminish 'yasnippet-mode "Ys")
+ (fm/dim yasnippet-mode "Ys")
  (fm/hook rustic-mode-hook yas-minor-mode))
 
 (fm/pkg diff-hl
@@ -451,7 +453,7 @@
  (fm/hook prog-mode-hook diff-hl-mode))
 
 (fm/pkg symbol-overlay
- (fm/diminish 'symbol-overlay-mode "Sy")
+ (fm/dim symbol-overlay-mode "Sy")
  (fm/var symbol-overlay-idle-time 0.1)
  (fm/face symbol-overlay-default-face (:background "HoneyDew2"))
  (fm/hook symbol-overlay-mode-hook
@@ -478,9 +480,9 @@
  (fm/var hledger-currency-string "EUR")
  (fm/var hledger-current-overlay t)
  (fm/var hledger-comments-column 1)
- (fm/hook hledger-mode-hook (lambda ()
-                             (toggle-truncate-lines t)
-                             (setq tab-width 1))))
+ (fm/hook-lambda hledger-mode-hook
+  (toggle-truncate-lines t)
+  (setq tab-width 1)))
 
 (fm/pkg flycheck
  (fm/var flycheck-checker-error-threshold nil)
@@ -512,7 +514,7 @@
  (fm/face flycheck-posframe-warning-face    (:foreground "DarkOrange")))
 
 (fm/pkg company
- (fm/diminish 'company-mode "Co")
+ (fm/dim company-mode "Co")
  (setq-default company-backends '((company-capf company-keywords company-files)))
  (fm/var completion-ignore-case t)
  (fm/var company-echo-truncate-lines nil)
@@ -534,7 +536,7 @@
  (fm/hook systemd-mode-hook company-mode))
 
 (fm/pkg company-posframe
- (fm/diminish 'company-posframe-mode)
+ (fm/dim company-posframe-mode)
  (fm/var company-posframe-show-params
   (list :internal-border-width 1 :internal-border-color "gray60"))
  (fm/hook company-mode-hook company-posframe-mode "company-posframe"))
