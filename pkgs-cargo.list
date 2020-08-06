@@ -8,6 +8,7 @@ cargo-spellcheck
 cargo-tarpaulin
 cargo-udeps
 kmon
+rust-analyzer
 sccache
 titlecase
 what
