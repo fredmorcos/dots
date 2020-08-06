@@ -152,6 +152,7 @@ fuseiso
 fwupd
 fzf
 fzy
+gcc-ada
 ghex
 gifski
 gimagereader-gtk
@@ -352,7 +353,6 @@ networkmanager-strongswan
 nfs-utils
 ngrep
 nilfs-utils
-notion
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
@@ -631,7 +631,6 @@ xorg-xkbutils
 xorg-xkill
 xorg-xlsatoms
 xorg-xlsclients
-xorg-xmessage
 xorg-xpr
 xorg-xrefresh
 xorg-xvinfo
