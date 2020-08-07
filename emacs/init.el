@@ -542,20 +542,21 @@
  (fm/hook company-mode-hook company-posframe-mode "company-posframe"))
 
 (fm/pkg rustic
- (fm/var rustic-lsp-server 'rust-analyzer)
- (fm/var rustic-analyzer-command '("/usr/bin/rust-analyzer"))
- (fm/var rustic-lsp-format t)
- (fm/var rustic-indent-offset 2)
- (fm/var rustic-always-locate-project-on-open t)
- (fm/hook rustic-mode-hook
-  (lambda ()
-   (progn
-    (fm/key "<f5>" rust-dbg-wrap-or-unwrap            rustic-mode-map "rust-mode")
-    (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "rustic-mode")
-    (fm/key "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "rustic-mode")
-    (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "rustic-mode")
-    (electric-quote-local-mode -1))))
- (fm/hook rustic-mode-hook subword-mode))
+ (fm/after rustic
+  (fm/var rustic-lsp-server 'rust-analyzer)
+  (fm/var rustic-analyzer-command '("/usr/bin/rust-analyzer"))
+  (fm/var rustic-lsp-format t)
+  (fm/var rustic-indent-offset 2)
+  (fm/var rustic-always-locate-project-on-open t)
+  (fm/hook rustic-mode-hook
+   (lambda ()
+    (progn
+     (fm/key "<f5>" rust-dbg-wrap-or-unwrap            rustic-mode-map "rust-mode")
+     (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "rustic-mode")
+     (fm/key "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "rustic-mode")
+     (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "rustic-mode")
+     (electric-quote-local-mode -1))))
+  (fm/hook rustic-mode-hook subword-mode)))
 
 ;; (fm/pkg lsp-mode
 (push "~/Workspace/tmp/lsp-mode" load-path)
@@ -587,18 +588,20 @@
 (fm/var lsp-rust-all-targets t)
 (fm/var lsp-rust-build-on-save t)
 (fm/var lsp-rust-full-docs t)
-(fm/var lsp-rust-analyzer-max-inlay-hint-length 10)
+(fm/var lsp-rust-analyzer-max-inlay-hint-length 15)
 (fm/var lsp-signature-doc-lines 1)
 (fm/var lsp-signature-auto-activate t)
 (fm/var lsp-signature-render-documentation t)
+(fm/var lsp-rust-analyzer-inlay-chaining-prefix "➔ ")
+(fm/var lsp-rust-analyzer-inlay-chaining-space-prefix " ")
 (fm/face lsp-lens-face :inherit shadow)
 (fm/face lsp-lens-mouse-face :inherit link)
 (fm/face lsp-rust-analyzer-inlay-type-face
- :height 0.7 :foreground "DimGray" :background "Gray92")
-(fm/face fm/lsp-rust-analyzer-inlay-param-face
- :height 0.7 :foreground "DimGray" :background "Azure")
-(fm/face fm/lsp-rust-analyzer-inlay-chaining-face
- :height 0.7 :foreground "DimGray" :background "PaleGoldenrod")
+ :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
+(fm/face lsp-rust-analyzer-inlay-param-face
+ :height 0.7 :weight semibold :foreground "DimGray" :background "Azure")
+(fm/face lsp-rust-analyzer-inlay-chaining-face
+ :height 0.7 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")
 
 ;; (fm/var lsp-diagnostics-attributes
 ;;  '((unnecessary :background "Gray90")
