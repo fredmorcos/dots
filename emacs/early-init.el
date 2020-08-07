@@ -45,7 +45,8 @@
 (run-with-idle-timer 5 t #'garbage-collect)
 
 (setq-default
- custom-file (concat temporary-file-directory "emacs/custom.el")
+ custom-file "/dev/null"
+ ;; custom-file (concat temporary-file-directory "emacs/custom.el")
  file-name-handler-alist nil
  auto-window-vscroll nil
  vc-handled-backends '(Git)

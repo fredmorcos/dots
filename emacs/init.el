@@ -3,16 +3,16 @@
 ;;; Code:
 
 ;; Directories
-(defconst emacs-extra-dir "/home/fred/Workspace/dots/emacs/extra")
+(defconst emacs-extra-dir         "/home/fred/Workspace/dots/emacs/extra")
 (defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
-(defconst emacs-elpa-dir (concat expanded-user-emacs-dir "elpa"))
-(defconst emacs-places-file (concat expanded-user-emacs-dir "places"))
-(defconst emacs-recentf-file (concat expanded-user-emacs-dir "recentf"))
-(defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
-(defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
+(defconst emacs-elpa-dir          (concat expanded-user-emacs-dir "elpa"))
+(defconst emacs-places-file       (concat expanded-user-emacs-dir "places"))
+(defconst emacs-recentf-file      (concat expanded-user-emacs-dir "recentf"))
+(defconst emacs-temp-dir          (concat temporary-file-directory "emacs/"))
+(defconst emacs-autosaves-dir     (concat emacs-temp-dir "autosaves"))
 (defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
-(defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
+(defconst emacs-backups-dir       (concat emacs-temp-dir "backups"))
+(defconst emacs-backups-pattern   (concat emacs-backups-dir "/"))
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
 (push emacs-extra-dir load-path)
@@ -64,6 +64,14 @@
  `(custom-set-faces '(,face ((t ,props)))))
 
 ;; vars
+(defmacro fm/vars (&rest customs)
+ "Custom-Set the CUSTOMS list of var-val pairs."
+ `(custom-set-variables
+   ,@(let ((exps nil))
+     (while customs
+      (push `(quote (,(pop customs) ,(pop customs))) exps))
+     exps)))
+
 (defmacro fm/var (var val)
  "Custom-Set VAR to VAL."
  `(custom-set-variables '(,var ,val)))
@@ -150,7 +158,7 @@
    (progn ,@body)))
 
 ;; subr
-(setq read-process-output-max (* 1024 1024))
+(fm/var read-process-output-max (* 1024 1024))
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; electric
@@ -206,11 +214,9 @@
 (fm/var recentf-max-menu-items 50)
 (fm/var recentf-max-saved-items 100)
 (fm/var recentf-mode t)
-(fm/var recentf-exclude
- `(,emacs-elpa-dir
-   ,(expand-file-name "~/Oracle")
-   ,(expand-file-name "~/OracleWorkTrees")))
-
+(fm/var recentf-exclude `(,emacs-elpa-dir
+                          ,(expand-file-name "~/Oracle")
+                          ,(expand-file-name "~/OracleWorkTrees")))
 (fm/hook kill-emacs-hook recentf-cleanup "recentf")
 
 ;; files
@@ -282,11 +288,10 @@
 (fm/var whitespace-line-column 90)
 (fm/var show-trailing-whitespace nil)
 (fm/var whitespace-action '(cleanup))
-(fm/var whitespace-style
- '(face tabs lines empty tab-mark
-   indentation indentation::tab indentation::space
-   space-after-tab space-after-tab::tab space-after-tab::space
-   space-before-tab space-before-tab::tab space-before-tab::space))
+(fm/var whitespace-style '(face tabs lines empty tab-mark indentation indentation::tab
+                           indentation::space space-after-tab space-after-tab::tab
+                           space-after-tab::space space-before-tab space-before-tab::tab
+                           space-before-tab::space))
 (fm/hook hledger-mode-hook    whitespace-mode)
 (fm/hook emacs-lisp-mode-hook whitespace-mode)
 (fm/hook makefile-mode-hook   whitespace-mode)
@@ -372,7 +377,7 @@
 
 (fm/pkg which-key
  (fm/dim which-key-mode)
- (fm/var which-key-idle-delay 0.3)
+ (fm/var which-key-idle-delay 0.2)
  (which-key-mode))
 
 (fm/pkg smex)
@@ -390,7 +395,6 @@
 
 (fm/pkg ivy
  (fm/dim ivy-mode)
- (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
  (fm/var ivy-wrap t)
  (fm/var ivy-use-selectable-prompt t)
  (fm/var ivy-use-virtual-buffers t)
@@ -399,6 +403,7 @@
  (fm/var ivy-initial-inputs-alist nil)
  (fm/var ivy-extra-directories nil)
  (fm/var ivy-sort-max-size nil)
+ (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
  (ivy-mode)
  (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
 
@@ -456,11 +461,9 @@
  (fm/dim symbol-overlay-mode "Sy")
  (fm/var symbol-overlay-idle-time 0.1)
  (fm/face symbol-overlay-default-face (:background "HoneyDew2"))
- (fm/hook symbol-overlay-mode-hook
-  (lambda ()
-   (progn
-    (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
-    (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map))))
+ (fm/hook-lambda symbol-overlay-mode-hook
+  (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
+  (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map))
  (fm/hook shell-script-mode-hook symbol-overlay-mode)
  (fm/hook hledger-mode-hook      symbol-overlay-mode)
  (fm/hook emacs-lisp-mode-hook   symbol-overlay-mode))
@@ -494,11 +497,9 @@
  (fm/face flycheck-error   (:underline "Red1"))
  (fm/face flycheck-warning (:underline "DarkOrange"))
  (fm/face flycheck-info    (:underline "ForestGreen"))
- (fm/hook flycheck-mode-hook
-  (lambda ()
-   (progn
-    (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
-    (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck"))))
+ (fm/hook-lambda flycheck-mode-hook
+  (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
+  (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck"))
  (fm/hook prog-mode-hook flycheck-mode))
 
 (fm/pkg flycheck-posframe
@@ -524,13 +525,11 @@
  (fm/var company-tooltip-align-annotations t)
  (fm/var company-idle-delay 0.1)
  (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
- (fm/var company-frontends
-  '(company-echo-metadata-frontend
-    company-pseudo-tooltip-frontend))
- (fm/var company-transformers
-  '(company-sort-by-occurrence
-    company-sort-by-backend-importance
-    company-sort-prefer-same-case-prefix))
+ (fm/var company-frontends '(company-echo-metadata-frontend
+                             company-pseudo-tooltip-frontend))
+ (fm/var company-transformers '(company-sort-by-occurrence
+                                company-sort-by-backend-importance
+                                company-sort-prefer-same-case-prefix))
  (fm/face company-tooltip (:background "gray95"))
  (fm/hook prog-mode-hook    company-mode)
  (fm/hook systemd-mode-hook company-mode))
@@ -605,11 +604,6 @@
 ;;  '((unnecessary :background "Gray90")
 ;;    (deprecated  :strike-through t)))
 
-(defun fm/lsp-ivy-helper ()
- "Call LSP-IVY-WORKSPACE-SYMBOL with symbol at point."
- (interactive)
- (lsp-ivy-workspace-symbol t))
-
 (fm/hook-lambda lsp-mode-hook (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t))
 (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")
 (fm/hook-lambda lsp-mode-hook
@@ -619,7 +613,9 @@
  (fm/key "C-="   lsp-extend-selection           lsp-mode-map "lsp-mode")
  (fm/key "C-c e" lsp-rust-analyzer-expand-macro lsp-mode-map "lsp-mode")
  (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")
- (fm/key "C-c x" fm/lsp-ivy-helper              lsp-mode-map))
+ (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t))))
+
+(fm/pkg lsp-ivy (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
 ;; (fm/pkg lsp-ui
 ;;  (fm/var lsp-ui-flycheck-enable t)
@@ -657,8 +653,6 @@
 ;;     (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
 ;;     (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
 ;;     (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc")))))
-
-;; (fm/pkg lsp-ivy (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
