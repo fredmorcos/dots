@@ -59,9 +59,9 @@
   `(fm/hook-lambda ,hook (fm/dim-helper ',mode ,text))))
 
 ;; faces
-(defmacro fm/face (face props)
+(defmacro fm/face (face &rest props)
  "Set FACE properties to PROPS."
- `(custom-set-faces '(,face ((t ,props)))))
+ `(custom-set-faces '(,face ((t ,@props)))))
 
 ;; vars
 (defmacro fm/vars (&rest customs)
@@ -190,13 +190,13 @@
 ;; display-line-numbers
 (fm/var display-line-numbers-grow-only t)
 (fm/var display-line-numbers-width-start t)
-(fm/face line-number              (:foreground "Gray85"))
-(fm/face line-number-current-line (:foreground "Gray70"))
+(fm/face line-number :foreground "Gray85")
+(fm/face line-number-current-line :foreground "Gray70")
 (fm/hook prog-mode-hook display-line-numbers-mode)
 
 ;; hl-line
-(fm/face hl-line             (:background "Wheat"))
-(fm/face mode-line-highlight (:background "PowderBlue"))
+(fm/face hl-line :background "Wheat")
+(fm/face mode-line-highlight :background "PowderBlue")
 (fm/hook prog-mode-hook hl-line-mode)
 
 ;; saveplace
@@ -292,9 +292,9 @@
                            indentation::space space-after-tab space-after-tab::tab
                            space-after-tab::space space-before-tab space-before-tab::tab
                            space-before-tab::space))
-(fm/hook hledger-mode-hook    whitespace-mode)
+(fm/hook hledger-mode-hook whitespace-mode)
 (fm/hook emacs-lisp-mode-hook whitespace-mode)
-(fm/hook makefile-mode-hook   whitespace-mode)
+(fm/hook makefile-mode-hook whitespace-mode)
 
 ;; elisp-mode
 (fm/var lisp-indent-offset 1)
@@ -315,9 +315,9 @@
 (fm/var show-paren-when-point-inside-paren t)
 (fm/var show-paren-style 'mixed)
 (fm/var show-paren-highlight-openparen t)
-(fm/face show-paren-match            (:background "PowderBlue"))
-(fm/face show-paren-match-expression (:background "Lavender"))
-(fm/face show-paren-mismatch         (:background "LightSalmon"))
+(fm/face show-paren-match :background "PowderBlue")
+(fm/face show-paren-mismatch :background "LightSalmon")
+(fm/face show-paren-match-expression :background "Lavender")
 (fm/hook prog-mode-hook show-paren-mode)
 
 ;; dired
@@ -339,8 +339,8 @@
 (fm/var ispell-extra-args '("--sug-mode=ultra"))
 (fm/hook text-mode-hook flyspell-mode)
 (fm/hook prog-mode-hook flyspell-prog-mode)
-(fm/face flyspell-duplicate (:underline "YellowGreen"))
-(fm/face flyspell-incorrect (:underline "Orchid"))
+(fm/face flyspell-duplicate :underline "YellowGreen")
+(fm/face flyspell-incorrect :underline "Orchid")
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -367,12 +367,12 @@
  (fm/var org-cycle-separator-lines 0)
  (fm/var org-startup-folded nil)
  (fm/var org-ellipsis "   ▾")
- (fm/face org-ellipsis (:underline nil :foreground "DarkGoldenRod"))
- (fm/face org-level-1  (:height 1.3 :inherit (outline-1)))
- (fm/face org-level-2  (:height 1.2 :inherit (outline-2)))
- (fm/face org-level-3  (:height 1.1 :inherit (outline-3)))
- (fm/face org-todo     (:foreground "Red1" :height 0.9))
- (fm/face org-done     (:foreground "ForestGreen" :height 0.9))
+ (fm/face org-ellipsis :underline nil :foreground "DarkGoldenRod")
+ (fm/face org-level-1 :height 1.3 :inherit (outline-1))
+ (fm/face org-level-2 :height 1.2 :inherit (outline-2))
+ (fm/face org-level-3 :height 1.1 :inherit (outline-3))
+ (fm/face org-todo :foreground "Red1" :height 0.9)
+ (fm/face org-done :foreground "ForestGreen" :height 0.9)
  (fm/hook org-mode org-indent-mode "org"))
 
 (fm/pkg which-key
@@ -430,7 +430,7 @@
  (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
 
 (fm/pkg indent-guide
- (fm/face indent-guide-face (:foreground "gray80"))
+ (fm/face indent-guide-face :foreground "gray80")
  (fm/hook json-mode-hook indent-guide-mode))
 
 (fm/pkg projectile
@@ -451,30 +451,30 @@
 (fm/pkg diff-hl
  (fm/var diff-hl-draw-borders nil)
  (fm/var diff-hl-flydiff-delay 0.1)
- (fm/face diff-hl-delete (:background "RosyBrown1"))
- (fm/face diff-hl-insert (:background "DarkSeaGreen2"))
- (fm/face diff-hl-change (:background "PowderBlue"))
+ (fm/face diff-hl-delete :background "RosyBrown1")
+ (fm/face diff-hl-insert :background "DarkSeaGreen2")
+ (fm/face diff-hl-change :background "PowderBlue")
  (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")
  (fm/hook prog-mode-hook diff-hl-mode))
 
 (fm/pkg symbol-overlay
  (fm/dim symbol-overlay-mode "Sy")
  (fm/var symbol-overlay-idle-time 0.1)
- (fm/face symbol-overlay-default-face (:background "HoneyDew2"))
+ (fm/face symbol-overlay-default-face :background "HoneyDew2")
  (fm/hook-lambda symbol-overlay-mode-hook
   (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
   (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map))
  (fm/hook shell-script-mode-hook symbol-overlay-mode)
- (fm/hook hledger-mode-hook      symbol-overlay-mode)
- (fm/hook emacs-lisp-mode-hook   symbol-overlay-mode))
+ (fm/hook hledger-mode-hook symbol-overlay-mode)
+ (fm/hook emacs-lisp-mode-hook symbol-overlay-mode))
 
 (fm/pkg multiple-cursors
  (fm/var mc/always-run-for-all t)
- (fm/face mc/cursor-bar-face (:background "Gray40" :foreground "White"))
- (fm/face mc/cursor-face     (:background "Gray50" :foreground "White"))
- (fm/key "C-c C-v"       mc/edit-lines)
- (fm/key "C->"           mc/mark-next-like-this)
- (fm/key "C-<"           mc/mark-previous-like-this)
+ (fm/face mc/cursor-bar-face :background "Gray40" :foreground "White")
+ (fm/face mc/cursor-face :background "Gray50" :foreground "White")
+ (fm/key "C-c C-v" mc/edit-lines)
+ (fm/key "C->" mc/mark-next-like-this)
+ (fm/key "C-<" mc/mark-previous-like-this)
  (fm/key "C-S-<mouse-1>" mc/add-cursor-on-click))
 
 (fm/pkg hledger-mode
@@ -494,9 +494,9 @@
   '(idle-change new-line mode-enabled idle-buffer-switch))
  (fm/var flycheck-idle-change-delay 0.1)
  (fm/var flycheck-idle-buffer-switch-delay 0.1)
- (fm/face flycheck-error   (:underline "Red1"))
- (fm/face flycheck-warning (:underline "DarkOrange"))
- (fm/face flycheck-info    (:underline "ForestGreen"))
+ (fm/face flycheck-error :underline "Red1")
+ (fm/face flycheck-info :underline "ForestGreen")
+ (fm/face flycheck-warning :underline "DarkOrange")
  (fm/hook-lambda flycheck-mode-hook
   (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
   (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck"))
@@ -509,10 +509,10 @@
  (fm/var flycheck-posframe-warnings-prefix "Warning: ")
  (fm/var flycheck-posframe-error-prefix "Error: ")
  (fm/var flycheck-posframe-prefix "Info: ")
- (fm/face flycheck-posframe-background-face (:background "CornSilk"))
- (fm/face flycheck-posframe-border-face     (:background "Wheat" :foreground "Wheat"))
- (fm/face flycheck-posframe-error-face      (:foreground "DarkRed"))
- (fm/face flycheck-posframe-warning-face    (:foreground "DarkOrange")))
+ (fm/face flycheck-posframe-background-face :background "CornSilk")
+ (fm/face flycheck-posframe-warning-face :foreground "DarkOrange")
+ (fm/face flycheck-posframe-border-face :background "Wheat" :foreground "Wheat")
+ (fm/face flycheck-posframe-error-face :foreground "DarkRed"))
 
 (fm/pkg company
  (fm/dim company-mode "Co")
@@ -530,8 +530,8 @@
  (fm/var company-transformers '(company-sort-by-occurrence
                                 company-sort-by-backend-importance
                                 company-sort-prefer-same-case-prefix))
- (fm/face company-tooltip (:background "gray95"))
- (fm/hook prog-mode-hook    company-mode)
+ (fm/face company-tooltip :background "gray95")
+ (fm/hook prog-mode-hook company-mode)
  (fm/hook systemd-mode-hook company-mode))
 
 (fm/pkg company-posframe
@@ -591,14 +591,14 @@
 (fm/var lsp-signature-doc-lines 1)
 (fm/var lsp-signature-auto-activate t)
 (fm/var lsp-signature-render-documentation t)
-(fm/face lsp-lens-face       (:inherit shadow))
-(fm/face lsp-lens-mouse-face (:inherit link))
+(fm/face lsp-lens-face :inherit shadow)
+(fm/face lsp-lens-mouse-face :inherit link)
 (fm/face lsp-rust-analyzer-inlay-type-face
- (:height 0.7 :foreground "DimGray" :background "Gray92"))
+ :height 0.7 :foreground "DimGray" :background "Gray92")
 (fm/face fm/lsp-rust-analyzer-inlay-param-face
- (:height 0.7 :foreground "DimGray" :background "Azure"))
+ :height 0.7 :foreground "DimGray" :background "Azure")
 (fm/face fm/lsp-rust-analyzer-inlay-chaining-face
- (:height 0.7 :foreground "DimGray" :background "PaleGoldenrod"))
+ :height 0.7 :foreground "DimGray" :background "PaleGoldenrod")
 
 ;; (fm/var lsp-diagnostics-attributes
 ;;  '((unnecessary :background "Gray90")
