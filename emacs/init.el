@@ -594,11 +594,12 @@
   (fm/face lsp-lens-face :inherit shadow)
   (fm/face lsp-lens-mouse-face :inherit link)
   (fm/face lsp-rust-analyzer-inlay-type-face
-   :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
+   ;; :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
+   :inherit font-lock-type-face :height 0.8)
   (fm/face lsp-rust-analyzer-inlay-param-face
-   :height 0.7 :weight semibold :foreground "DimGray" :background "Azure")
+   :height 0.8 :weight semibold :foreground "DimGray" :background "Azure")
   (fm/face lsp-rust-analyzer-inlay-chain-face
-   :height 0.7 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")
+   :height 0.8 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")
 
   ;; (fm/var lsp-diagnostics-attributes
   ;;  '((unnecessary :background "Gray90")
