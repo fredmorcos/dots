@@ -592,15 +592,15 @@
 (fm/var lsp-signature-doc-lines 1)
 (fm/var lsp-signature-auto-activate t)
 (fm/var lsp-signature-render-documentation t)
-(fm/var lsp-rust-analyzer-inlay-chaining-prefix "➔ ")
-(fm/var lsp-rust-analyzer-inlay-chaining-space-prefix " ")
+(fm/var lsp-rust-analyzer-inlay-chain-format "➔ %s")
+(fm/var lsp-rust-analyzer-inlay-chain-space-format " %s")
 (fm/face lsp-lens-face :inherit shadow)
 (fm/face lsp-lens-mouse-face :inherit link)
 (fm/face lsp-rust-analyzer-inlay-type-face
  :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
 (fm/face lsp-rust-analyzer-inlay-param-face
  :height 0.7 :weight semibold :foreground "DimGray" :background "Azure")
-(fm/face lsp-rust-analyzer-inlay-chaining-face
+(fm/face lsp-rust-analyzer-inlay-chain-face
  :height 0.7 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")
 
 ;; (fm/var lsp-diagnostics-attributes
