@@ -22,6 +22,7 @@
  "Autoload FUNC from PKG and add it to LOCAL HOOK."
  `(progn
    ,(when pkg `(autoload ',func ,pkg))
+   ,(when pkg `(declare-function ,func ,pkg))
    ,(if local
      `(add-hook ',hook #',func 10 t)
      `(add-hook ',hook #',func))))
@@ -335,12 +336,13 @@
 (fm/dim subword-mode "Sw")
 
 ;; spell
-(fm/var ispell-program-name "aspell")
-(fm/var ispell-extra-args '("--sug-mode=ultra"))
+(fm/after flyspell
+ (fm/var ispell-program-name "aspell")
+ (fm/var ispell-extra-args '("--sug-mode=ultra"))
+ (fm/face flyspell-duplicate :underline "YellowGreen")
+ (fm/face flyspell-incorrect :underline "Orchid"))
 (fm/hook text-mode-hook flyspell-mode)
 (fm/hook prog-mode-hook flyspell-prog-mode)
-(fm/face flyspell-duplicate :underline "YellowGreen")
-(fm/face flyspell-incorrect :underline "Orchid")
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -558,57 +560,59 @@
   (fm/hook rustic-mode-hook subword-mode)))
 
 (fm/pkg lsp-mode
- (fm/var lsp-headerline-breadcrumb-enable t)
- (fm/var lsp-restart 'ignore)
- (fm/var lsp-enable-snippet t)
- (fm/var lsp-keymap-prefix "C-c")
- (fm/var lsp-prefer-capf t)
- (fm/var lsp-idle-delay 0.1)
- (fm/var lsp-file-watch-threshold nil)
- (fm/var lsp-enable-semantic-highlighting t)
- (fm/var lsp-enable-indentation t)
- (fm/var lsp-enable-on-type-formatting t)
- (fm/var lsp-before-save-edits t)
- (fm/var lsp-auto-configure t)
- (fm/var lsp-rust-racer-completion nil)
- (fm/var lsp-rust-build-bin t)
- (fm/var lsp-rust-build-lib t)
- (fm/var lsp-rust-clippy-preference "on")
- (fm/var lsp-rust-analyzer-server-display-inlay-hints t)
- (fm/var lsp-rust-analyzer-display-chaining-hints t)
- (fm/var lsp-rust-analyzer-display-parameter-hints t)
- (fm/var lsp-rust-all-features t)
- (fm/var lsp-rust-all-targets t)
- (fm/var lsp-rust-build-on-save t)
- (fm/var lsp-rust-full-docs t)
- (fm/var lsp-rust-analyzer-max-inlay-hint-length 15)
- (fm/var lsp-signature-doc-lines 1)
- (fm/var lsp-signature-auto-activate t)
- (fm/var lsp-signature-render-documentation t)
- (fm/var lsp-rust-analyzer-inlay-chain-format "➔ %s")
- (fm/var lsp-rust-analyzer-inlay-chain-space-format " %s")
- (fm/face lsp-lens-face :inherit shadow)
- (fm/face lsp-lens-mouse-face :inherit link)
- (fm/face lsp-rust-analyzer-inlay-type-face
-  :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
- (fm/face lsp-rust-analyzer-inlay-param-face
-  :height 0.7 :weight semibold :foreground "DimGray" :background "Azure")
- (fm/face lsp-rust-analyzer-inlay-chain-face
-  :height 0.7 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")
+ (fm/after lsp-mode
+  (fm/var lsp-headerline-breadcrumb-enable t)
+  (fm/var lsp-restart 'ignore)
+  (fm/var lsp-enable-snippet t)
+  (fm/var lsp-keymap-prefix "C-c")
+  (fm/var lsp-prefer-capf t)
+  (fm/var lsp-idle-delay 0.1)
+  (fm/var lsp-file-watch-threshold nil)
+  (fm/var lsp-enable-semantic-highlighting t)
+  (fm/var lsp-enable-indentation t)
+  (fm/var lsp-enable-on-type-formatting t)
+  (fm/var lsp-before-save-edits t)
+  (fm/var lsp-auto-configure t)
+  (fm/var lsp-signature-doc-lines 1)
+  (fm/var lsp-signature-auto-activate t)
+  (fm/var lsp-signature-render-documentation t)
+  (fm/var lsp-rust-racer-completion nil)
+  (fm/var lsp-rust-build-bin t)
+  (fm/var lsp-rust-build-lib t)
+  (fm/var lsp-rust-clippy-preference "on")
+  (fm/var lsp-rust-analyzer-server-display-inlay-hints t)
+  (fm/var lsp-rust-analyzer-display-chaining-hints t)
+  (fm/var lsp-rust-analyzer-display-parameter-hints t)
+  (fm/var lsp-rust-all-features t)
+  (fm/var lsp-rust-all-targets t)
+  (fm/var lsp-rust-build-on-save t)
+  (fm/var lsp-rust-full-docs t)
+  (fm/var lsp-rust-analyzer-cargo-watch-command "clippy")
+  (fm/var lsp-rust-analyzer-max-inlay-hint-length 15)
+  (fm/var lsp-rust-analyzer-inlay-chain-format "➔ %s")
+  (fm/var lsp-rust-analyzer-inlay-chain-space-format " %s")
+  (fm/face lsp-lens-face :inherit shadow)
+  (fm/face lsp-lens-mouse-face :inherit link)
+  (fm/face lsp-rust-analyzer-inlay-type-face
+   :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
+  (fm/face lsp-rust-analyzer-inlay-param-face
+   :height 0.7 :weight semibold :foreground "DimGray" :background "Azure")
+  (fm/face lsp-rust-analyzer-inlay-chain-face
+   :height 0.7 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")
 
- ;; (fm/var lsp-diagnostics-attributes
- ;;  '((unnecessary :background "Gray90")
- ;;    (deprecated  :strike-through t)))
+  ;; (fm/var lsp-diagnostics-attributes
+  ;;  '((unnecessary :background "Gray90")
+  ;;    (deprecated  :strike-through t)))
 
- (fm/hook-lambda lsp-mode-hook (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t))
- (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")
- (fm/hook-lambda lsp-mode-hook
-  (fm/key "C-c f" lsp-format-buffer              lsp-mode-map "lsp-mode")
-  (fm/key "C-c r" lsp-rename                     lsp-mode-map "lsp-mode")
-  (fm/key "C-c t" lsp-describe-thing-at-point    lsp-mode-map "lsp-mode")
-  (fm/key "C-="   lsp-extend-selection           lsp-mode-map "lsp-mode")
-  (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")
-  (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))))
+  (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")
+  (fm/hook-lambda lsp-mode-hook
+   (fm/key "C-c f" lsp-format-buffer              lsp-mode-map "lsp-mode")
+   (fm/key "C-c r" lsp-rename                     lsp-mode-map "lsp-mode")
+   (fm/key "C-c t" lsp-describe-thing-at-point    lsp-mode-map "lsp-mode")
+   (fm/key "C-="   lsp-extend-selection           lsp-mode-map "lsp-mode")
+   (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")
+   (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
+   (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t))))
 
 (fm/pkg lsp-ivy (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
