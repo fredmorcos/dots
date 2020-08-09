@@ -585,7 +585,7 @@
   (fm/var lsp-rust-analyzer-display-parameter-hints t)
   (fm/var lsp-rust-all-features t)
   (fm/var lsp-rust-all-targets t)
-  (fm/var lsp-rust-build-on-save t)
+  ;; (fm/var lsp-rust-build-on-save t)
   (fm/var lsp-rust-full-docs t)
   (fm/var lsp-rust-analyzer-cargo-watch-command "clippy")
   (fm/var lsp-rust-analyzer-max-inlay-hint-length 15)
