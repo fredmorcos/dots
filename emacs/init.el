@@ -523,7 +523,7 @@
  (fm/var company-echo-truncate-lines nil)
  (fm/var company-selection-wrap-around t)
  (fm/var company-tooltip-minimum 10)
- (fm/var company-tooltip-limit 20)
+ (fm/var company-tooltip-limit nil)
  (fm/var company-tooltip-align-annotations t)
  (fm/var company-idle-delay 0.1)
  (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
@@ -533,8 +533,7 @@
                                 company-sort-by-backend-importance
                                 company-sort-prefer-same-case-prefix))
  (fm/face company-tooltip :background "gray95")
- (fm/hook prog-mode-hook company-mode)
- (fm/hook systemd-mode-hook company-mode))
+ (fm/hook prog-mode-hook company-mode))
 
 (fm/pkg company-posframe
  (fm/dim company-posframe-mode)
