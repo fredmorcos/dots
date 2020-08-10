@@ -55,7 +55,7 @@ if [ -d $DATA ]; then
     cmd "$FLORON/.config/youtube-dl/"     "$LAPTOP/Configs/config-youtube-dl/"
     cmd "$FLORON/.local/share/keyrings"   "$LAPTOP/Configs/local-share-keyrings/"
     cmd "$FLORON/.face"                   "$LAPTOP/Configs/face.png"
-    cmd "$FLORON/.wallpaper.jpg"          "$LAPTOP/Configs/wallpaper.jpg"
+    # cmd "$FLORON/.wallpaper.jpg"          "$LAPTOP/Configs/wallpaper.jpg"
     cmd "$FLORON/.thunderbird/"           "$LAPTOP/Configs/oracle-thunderbird/"
     cmd "$FLORON/.idealgraphvisualizer/"  "$LAPTOP/Configs/oracle-idealgraphvisualizer/"
     cmd "$FLORON/.eclipse/"               "$LAPTOP/Configs/oracle-eclipse/"
