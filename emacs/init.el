@@ -344,6 +344,9 @@
 (fm/hook text-mode-hook flyspell-mode)
 (fm/hook prog-mode-hook flyspell-prog-mode)
 
+;; sh-script
+(fm/hook after-save-hook executable-make-buffer-file-executable-if-script-p)
+
 ;; js-mode
 (fm/mode ".hocon" js-mode)
 
@@ -523,7 +526,7 @@
  (fm/var company-echo-truncate-lines nil)
  (fm/var company-selection-wrap-around t)
  (fm/var company-tooltip-minimum 10)
- (fm/var company-tooltip-limit nil)
+ (fm/var company-tooltip-limit 15)
  (fm/var company-tooltip-align-annotations t)
  (fm/var company-idle-delay 0.1)
  (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
