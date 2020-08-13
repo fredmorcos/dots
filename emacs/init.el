@@ -59,7 +59,6 @@
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
   (if enforce
    `(fm/dim-helper ',mode ,text)
-   ;; TODO Maybe this shouldn't be a hook and instead happen in fm/after?
    `(fm/hook-lambda ,hook (fm/dim-helper ',mode ,text)))))
 
 ;; faces
