@@ -36,6 +36,7 @@ base
 bash-completion
 bat
 bbswitch
+bear-git
 beets
 binwalk
 bison
@@ -425,6 +426,7 @@ python-evdev
 python-genshi
 python-httplib2
 python-jsbeautifier
+python-language-server
 python-libevdev
 python-llfuse
 python-logbook
@@ -439,6 +441,7 @@ python-pyalsa
 python-pycryptodome
 python-pydocstyle
 python-pylast
+python-pylint
 python-pyopenssl
 python-pysmbc
 python-pystemmer
@@ -447,6 +450,7 @@ python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
 python-rjsmin
+python-rope
 python-setproctitle
 python-tlsh
 python-virtualenv

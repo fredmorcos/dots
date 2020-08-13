@@ -355,6 +355,7 @@
 (fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t))
 
 ;; c-mode
+;; (fm/hook c-mode-hook lsp-deferred)
 (fm/hook-lambda c-mode-hook (fm/key "(" nil c-mode-map))
 
 (fm/pkg json-mode)
@@ -388,29 +389,33 @@
 (fm/pkg smex)
 
 (fm/pkg counsel
- (fm/dim counsel-mode)
- (counsel-mode)
- (put 'counsel-find-symbol 'no-counsel-M-x t))
+ (fm/after ivy
+  (fm/after counsel
+   (fm/dim counsel-mode)
+   (put 'counsel-find-symbol 'no-counsel-M-x t)))
+ (counsel-mode))
 
 (fm/pkg swiper
- (fm/key "C-s"         swiper-isearch)
- (fm/key "C-c C-c C-s" swiper-all)
- (fm/key "C-c C-s"     swiper-thing-at-point)
- (fm/key "C-r"         swiper-isearch-backward))
+ (fm/after ivy
+  (fm/key "C-s"         swiper-isearch)
+  (fm/key "C-c C-c C-s" swiper-all)
+  (fm/key "C-c C-s"     swiper-thing-at-point)
+  (fm/key "C-r"         swiper-isearch-backward)))
 
 (fm/pkg ivy
- (fm/dim ivy-mode)
- (fm/var ivy-wrap t)
- (fm/var ivy-use-selectable-prompt t)
- (fm/var ivy-use-virtual-buffers t)
- (fm/var ivy-count-format "(%d/%d) ")
- (fm/var ivy-virtual-abbreviate 'full)
- (fm/var ivy-initial-inputs-alist nil)
- (fm/var ivy-extra-directories nil)
- (fm/var ivy-sort-max-size nil)
- (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
- (ivy-mode)
- (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
+ (fm/after ivy
+  (fm/dim ivy-mode)
+  (fm/var ivy-wrap t)
+  (fm/var ivy-use-selectable-prompt t)
+  (fm/var ivy-use-virtual-buffers t)
+  (fm/var ivy-count-format "(%d/%d) ")
+  (fm/var ivy-virtual-abbreviate 'full)
+  (fm/var ivy-initial-inputs-alist nil)
+  (fm/var ivy-extra-directories nil)
+  (fm/var ivy-sort-max-size nil)
+  (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
+  (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
+ (ivy-mode))
 
 (fm/pkg ivy-rich (ivy-rich-mode))
 
@@ -451,7 +456,7 @@
 
 (fm/pkg yasnippet
  (fm/dim yasnippet-mode "Ys")
- (fm/hook rustic-mode-hook yas-minor-mode))
+ (fm/hook prog-mode-hook yas-minor-mode))
 
 (fm/pkg diff-hl
  (fm/var diff-hl-draw-borders nil)
