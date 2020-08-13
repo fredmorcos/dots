@@ -54,10 +54,12 @@
    (setf (nth 1 element) new-text)
    (push `(,mode ,new-text) minor-mode-alist))))
 
-(defmacro fm/dim (mode &optional text)
- "Diminish MODE to TEXT."
+(defmacro fm/dim (mode &optional text enforce)
+ "Diminish MODE to TEXT, this happens on mode hook unless ENFORCE is set."
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
-  `(fm/hook-lambda ,hook (fm/dim-helper ',mode ,text))))
+  (if enforce
+   `(fm/dim-helper ',mode ,text)
+   `(fm/hook-lambda ,hook (fm/dim-helper ',mode ,text)))))
 
 ;; faces
 (defmacro fm/face (face &rest props)
@@ -267,7 +269,7 @@
 (fm/var vc-make-backup-files t)
 
 ;; abbrev
-(fm/dim abbrev-mode "Ab")
+(fm/after abbrev (fm/dim abbrev-mode "Ab" t))
 
 ;; newcomment
 (fm/var comment-fill-column 80)
@@ -412,7 +414,6 @@
   (fm/var ivy-virtual-abbreviate 'full)
   (fm/var ivy-initial-inputs-alist nil)
   (fm/var ivy-extra-directories nil)
-  (fm/var ivy-sort-max-size nil)
   (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
   (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
  (ivy-mode))
