@@ -144,6 +144,9 @@
 (fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
 (fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
 
+;; nativecomp
+(fm/var comp-deferred-compilation t)
+
 ;; package
 (fm/var package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
                            ("melpa" . "https://melpa.org/packages/")
