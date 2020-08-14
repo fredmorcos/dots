@@ -33,7 +33,6 @@
     --without-gconf \
     --without-gsettings \
     --without-sound \
-    --without-harfbuzz \
     --without-imagemagick \
     --with-native-image-api \
     --with-jpeg \
@@ -44,6 +43,7 @@
     --with-xpm \
     --with-pdumper=yes \
     --with-sound=no \
+    --with-harfbuzz \
     --with-cairo \
     --with-json \
     --with-xml2 \
