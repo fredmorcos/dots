@@ -294,6 +294,7 @@ xf86-input-vmmouse
 xf86-input-void
 xf86-video-amdgpu
 xfce4-appfinder
+xfce4-clipman-plugin
 xfce4-notifyd
 xfce4-pulseaudio-plugin
 xfce4-screenshooter

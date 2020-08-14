@@ -17,6 +17,7 @@
         <value type="int" value="4"/>
         <value type="int" value="5"/>
         <value type="int" value="7"/>
+        <value type="int" value="6"/>
         <value type="int" value="8"/>
       </property>
       <property name="icon-size" type="uint" value="0"/>
@@ -108,6 +109,6 @@
       <property name="timezone" type="string" value="Europe/Vienna"/>
       <property name="digital-format" type="string" value="%R %Y-%m-%d"/>
     </property>
-    <property name="plugin-6" type="string" value="power-manager-plugin"/>
+    <property name="plugin-6" type="string" value="xfce4-clipman-plugin"/>
   </property>
 </channel>
