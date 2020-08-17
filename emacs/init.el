@@ -247,29 +247,29 @@
 (fm/key "<mouse-5>" next-line)
 (fm/hook before-save-hook delete-trailing-whitespace)
 
-;; bindings
-(fm/var column-number-indicator-zero-based nil)
-
-;; uniquify
-(fm/var uniquify-buffer-name-style 'forward)
-
-;; vc
-(fm/var vc-make-backup-files t)
-
-;; newcomment
-(fm/var comment-fill-column 80)
-
-;; fill
-(fm/var fill-column 90)
-(fm/var colon-double-space t)
-(fm/var default-justification 'left)
-
 ;; indent
 (fm/var indent-tabs-mode nil)
 
-;; ediff-wind
-(fm/var ediff-split-window-function #'split-window-horizontally)
-(fm/var ediff-window-setup-function #'ediff-setup-windows-plain)
+(fm/after bindings
+ (fm/var column-number-indicator-zero-based nil))
+
+(fm/after uniquify
+ (fm/var uniquify-buffer-name-style 'forward))
+
+(fm/after vc
+ (fm/var vc-make-backup-files t))
+
+(fm/after newcomment
+ (fm/var comment-fill-column 80))
+
+(fm/after fill
+ (fm/var fill-column 90)
+ (fm/var colon-double-space t)
+ (fm/var default-justification 'left))
+
+(fm/after ediff-wind
+ (fm/var ediff-split-window-function #'split-window-horizontally)
+ (fm/var ediff-window-setup-function #'ediff-setup-windows-plain))
 
 (fm/after elec-pair (fm/var electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\}))))
 (electric-pair-mode)
@@ -348,15 +348,15 @@
  (fm/hook-lambda sh-mode-hook
   (fm/hook after-save-hook executable-make-buffer-file-executable-if-script-p)))
 
-;; js-mode
-(fm/mode ".hocon" js-mode)
-
 (fm/after llvm-mode (fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
-;; c-mode
-;; (fm/hook c-mode-hook lsp-deferred)
-(fm/hook-lambda c-mode-hook (fm/key "(" nil c-mode-map))
+(fm/after c-mode
+ ;; (fm/hook c-mode-hook lsp-deferred)
+ (fm/hook-lambda c-mode-hook (fm/key "(" nil c-mode-map)))
+
+;; js-mode
+(fm/mode ".hocon" js-mode)
 
 (fm/pkg json-mode)
 (fm/pkg toml-mode)
@@ -364,6 +364,7 @@
 (fm/pkg dockerfile-mode)
 (fm/pkg markdown-mode)
 (fm/pkg systemd (fm/hook systemd-mode-hook company-mode))
+(fm/pkg smex)
 
 (fm/pkg org-bullets
  (fm/var org-bullets-bullet-list '("●" "○"))
@@ -386,8 +387,6 @@
  (fm/dim which-key-mode)
  (fm/var which-key-idle-delay 0.2)
  (which-key-mode))
-
-(fm/pkg smex)
 
 (fm/pkg counsel
  (fm/after counsel
@@ -413,12 +412,12 @@
   (fm/var ivy-virtual-abbreviate 'full)
   (fm/var ivy-initial-inputs-alist nil)
   (fm/var ivy-extra-directories nil)
-  (fm/var ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
+  (fm/var ivy-re-builders-alist
+   '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
   (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
  (ivy-mode))
 
 (fm/pkg ivy-rich (ivy-rich-mode))
-
 (fm/pkg fzf (fm/key "M-F" fzf-git-files))
 (fm/pkg deadgrep (fm/key "M-G" deadgrep))
 
@@ -427,13 +426,13 @@
  (fm/key "C-e" mwim-end))
 
 (fm/pkg expand-region (fm/key "C-=" er/expand-region))
-(fm/pkg esup (autoload 'esup "esup"))
-(fm/pkg transient (fm/var transient-default-level 7))
+(fm/pkg transient (fm/after transient (fm/var transient-default-level 7)))
 
 (fm/pkg magit
  (fm/after magit-mode
   (fm/var magit-auto-revert-tracked-only nil)
-  (fm/var magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (fm/var magit-display-buffer-function
+   #'magit-display-buffer-same-window-except-diff-v1)
   (fm/var magit-repository-directories
    '(("~/Workspace" . 3) ("~/Oracle" . 3) ("~/OracleWorkTrees" . 3)))
   (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
