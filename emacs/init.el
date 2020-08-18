@@ -337,6 +337,7 @@
 (fm/after subword (fm/dim subword-mode "Sw"))
 
 (fm/after flyspell
+ (fm/dim flyspell "Fs")
  (fm/var ispell-program-name "aspell")
  (fm/var ispell-extra-args '("--sug-mode=ultra"))
  (fm/face flyspell-duplicate :underline "YellowGreen")
@@ -455,7 +456,7 @@
 (fm/pkg counsel-projectile (fm/after counsel (counsel-projectile-mode)))
 
 (fm/pkg yasnippet
- (fm/after yasnippet (fm/dim yasnippet-mode "Ys"))
+ (fm/after yasnippet (fm/dim yas-minor-mode "Ys"))
  (fm/hook prog-mode-hook yas-minor-mode))
 
 (fm/pkg diff-hl
@@ -598,13 +599,13 @@
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hook-lambda lsp-mode-hook
+   ;; (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
+   (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
    (fm/key "C-c f" lsp-format-buffer              lsp-mode-map "lsp-mode")
    (fm/key "C-c r" lsp-rename                     lsp-mode-map "lsp-mode")
    (fm/key "C-c t" lsp-describe-thing-at-point    lsp-mode-map "lsp-mode")
    (fm/key "C-="   lsp-extend-selection           lsp-mode-map "lsp-mode")
-   (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")
-   (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
-   (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
+   (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")))
  (fm/after lsp-diagnostics
   (fm/var lsp-diagnostics-attributes
    '((unnecessary :background "Gray90") (deprecated  :strike-through t))))

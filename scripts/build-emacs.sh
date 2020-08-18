@@ -59,3 +59,5 @@
     --with-libgmp \
     --with-nativecomp \
     CFLAGS="-O3 -mtune=native -march=native -pipe -fno-plt -fomit-frame-pointer"
+
+make -j4 CFLAGS="-O3 -mtune=native -march=native -pipe -fno-plt -fomit-frame-pointer"
