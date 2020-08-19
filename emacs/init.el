@@ -24,7 +24,7 @@
    ,(when pkg `(autoload ',func ,pkg))
    ,(when pkg `(declare-function ,func ,pkg))
    ,(if local
-     `(add-hook ',hook #',func 10 t)
+     `(add-hook ',hook #',func 0 t)
      `(add-hook ',hook #',func))))
 
 (defmacro fm/hook-lambda (hook &rest body)
@@ -190,6 +190,9 @@
 (fm/var frame-resize-pixelwise t)
 (fm/var frame-title-format "%b - emacs")
 
+;; faces
+(fm/face mode-line-highlight :background "PowderBlue")
+
 ;; saveplace
 (fm/var save-place t)
 (fm/var save-place-mode t)
@@ -235,6 +238,7 @@
 
 ;; windmove
 (windmove-default-keybindings)
+(windmove-delete-default-keybindings)
 
 ;; simple
 (fm/var undo-limit (* 1024 1024))
@@ -249,6 +253,9 @@
 
 ;; indent
 (fm/var indent-tabs-mode nil)
+
+(fm/after xref
+ (fm/var xref-backend-functions '()))
 
 (fm/after bindings
  (fm/var column-number-indicator-zero-based nil))
@@ -283,8 +290,7 @@
 (fm/after prog-mode (fm/hook prog-mode-hook display-line-numbers-mode))
 
 (fm/after hl-line
- (fm/face hl-line :background "Wheat")
- (fm/face mode-line-highlight :background "PowderBlue"))
+ (fm/face hl-line :background "Wheat" :extend nil))
 (fm/after prog-mode (fm/hook prog-mode-hook hl-line-mode))
 
 (fm/after abbrev (fm/dim abbrev-mode "Ab" t))
@@ -331,6 +337,8 @@
 (fm/after autorevert
  (fm/dim autorevert-mode "Ar")
  (fm/var auto-revert-interval 1)
+ (fm/var auto-revert-avoid-polling t)
+ (fm/var buffer-auto-revert-by-notification t)
  (fm/var auto-revert-mode-text " Ar"))
 (fm/after dired (fm/hook dired-mode-hook auto-revert-mode))
 
@@ -354,6 +362,7 @@
 
 (fm/after c-mode
  ;; (fm/hook c-mode-hook lsp-deferred)
+ (fm/var c-mark-wrong-style-of-comment t)
  (fm/hook-lambda c-mode-hook (fm/key "(" nil c-mode-map)))
 
 ;; js-mode
@@ -599,7 +608,7 @@
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hook-lambda lsp-mode-hook
-   ;; (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
+   (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
    (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
    (fm/key "C-c f" lsp-format-buffer              lsp-mode-map "lsp-mode")
    (fm/key "C-c r" lsp-rename                     lsp-mode-map "lsp-mode")
@@ -634,7 +643,14 @@
   (fm/face lsp-rust-analyzer-inlay-param-face
    :height 0.8 :weight semibold :foreground "DimGray" :background "Azure")
   (fm/face lsp-rust-analyzer-inlay-chain-face
-   :height 0.8 :weight semibold :foreground "DimGray" :background "PaleGoldenrod")))
+   :height 0.8 :weight semibold :foreground "DimGray" :background "PaleGoldenrod"))
+ (fm/after lsp-clangd
+  (message "Loading lsp-clangd")
+  (fm/var lsp-clients-clangd-args
+   (append lsp-clients-clangd-args
+    '("--background-index" "--clang-tidy" "--completion-style=detailed"
+      "--header-insertion=iwyu" "--header-insertion-decorators"
+      "--suggest-missing-includes" "-j=6" "--pch-storage=memory")))))
 
 (fm/pkg lsp-ivy (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
@@ -668,6 +684,14 @@
    (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc"))))
+
+(fm/pkg dumb-jump
+ (fm/after dumb-jump
+  (fm/var dumb-jump-selector 'ivy)
+  (fm/var dumb-jump-window 'other))
+ (fm/after python
+  (fm/hook-lambda python-mode-hook
+   (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t))))
 
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))

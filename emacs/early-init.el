@@ -52,6 +52,7 @@
  vc-handled-backends '(Git)
  recentf-auto-cleanup 'never
  after-init-hook nil
+ package-quickstart t
  ;; package--init-file-ensured t
  auto-save-list-file-prefix nil
 

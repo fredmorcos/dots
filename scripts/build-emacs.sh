@@ -25,6 +25,7 @@
     --without-toolkit-scroll-bars \
     --without-xaw3d \
     --without-xim \
+    --without-xft \
     --without-gpm \
     --without-dbus \
     --without-selinux \
@@ -47,7 +48,6 @@
     --with-cairo \
     --with-json \
     --with-xml2 \
-    --with-xft \
     --with-libotf \
     --with-gnutls \
     --with-zlib \
