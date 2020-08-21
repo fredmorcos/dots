@@ -290,7 +290,7 @@
 (fm/after prog-mode (fm/hook prog-mode-hook display-line-numbers-mode))
 
 (fm/after hl-line
- (fm/face hl-line :background "Wheat" :extend nil))
+ (fm/face hl-line :background "Gray95" :extend nil))
 (fm/after prog-mode (fm/hook prog-mode-hook hl-line-mode))
 
 (fm/after abbrev (fm/dim abbrev-mode "Ab" t))
@@ -635,11 +635,13 @@
   (fm/var lsp-rust-full-docs t)
   (fm/var lsp-rust-analyzer-cargo-watch-command "clippy")
   (fm/var lsp-rust-analyzer-max-inlay-hint-length 15)
+  (fm/var lsp-rust-analyzer-inlay-type-format "%s")
+  (fm/var lsp-rust-analyzer-inlay-type-space-format ": %s")
   (fm/var lsp-rust-analyzer-inlay-chain-format "➔ %s")
   (fm/var lsp-rust-analyzer-inlay-chain-space-format " %s")
   (fm/face lsp-rust-analyzer-inlay-type-face
    ;; :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
-   :inherit font-lock-type-face :height 0.8)
+   :inherit font-lock-type-face :height 0.8 :background "HoneyDew1")
   (fm/face lsp-rust-analyzer-inlay-param-face
    :height 0.8 :weight semibold :foreground "DimGray" :background "Azure")
   (fm/face lsp-rust-analyzer-inlay-chain-face
