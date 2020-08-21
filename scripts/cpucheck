@@ -1,0 +1,12 @@
+#!/bin/sh
+
+read -r cpu a b c previdle rest < /proc/stat
+prevtotal=$((a+b+c+previdle))
+sleep 0.5
+read -r cpu a b c idle rest < /proc/stat
+total=$((a+b+c+idle))
+cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+freq=$(grep -i mhz /proc/cpuinfo | sort | tail -n1 | awk -F':' '{ print $2}')
+temp=$(sensors | grep Tdie | awk -F' ' '{ print $2 }')
+vcore=$(sensors | grep Vcore | awk -F' ' '{ print $2 }')
+printf "%3s%% %.1f %s %.2fV\n" $cpu "$freq" "$temp" "$vcore"
