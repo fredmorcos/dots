@@ -19,8 +19,6 @@
         <value type="int" value="6"/>
         <value type="int" value="7"/>
         <value type="int" value="11"/>
-        <value type="int" value="9"/>
-        <value type="int" value="10"/>
         <value type="int" value="8"/>
       </property>
       <property name="icon-size" type="uint" value="0"/>
@@ -112,17 +110,6 @@
       <property name="digital-format" type="string" value="%R %Y-%m-%d"/>
     </property>
     <property name="plugin-6" type="string" value="power-manager-plugin"/>
-    <property name="plugin-9" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="15850627451.desktop"/>
-      </property>
-      <property name="show-label" type="bool" value="false"/>
-    </property>
-    <property name="plugin-10" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="15850628862.desktop"/>
-      </property>
-    </property>
     <property name="plugin-11" type="string" value="xfce4-clipman-plugin"/>
     <property name="clipman" type="empty">
       <property name="settings" type="empty">
