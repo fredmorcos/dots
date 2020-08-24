@@ -360,10 +360,18 @@
 (fm/after llvm-mode (fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
-(fm/after c-mode
+(fm/after cc-mode
  ;; (fm/hook c-mode-hook lsp-deferred)
+ (fm/hook-lambda c-mode-hook
+  (fm/key "(" nil c-mode-map)
+  (fm/after newcomment
+   (message "newcomment being loaded...")
+   (fm/var comment-style 'extra-line))))
+
+(fm/after cc-vars
  (fm/var c-mark-wrong-style-of-comment t)
- (fm/hook-lambda c-mode-hook (fm/key "(" nil c-mode-map)))
+ (fm/var c-default-style
+  '((other . "user"))))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
