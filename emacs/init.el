@@ -278,7 +278,8 @@
  (fm/var ediff-split-window-function #'split-window-horizontally)
  (fm/var ediff-window-setup-function #'ediff-setup-windows-plain))
 
-(fm/after elec-pair (fm/var electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\}))))
+(fm/after elec-pair
+ (fm/var electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\}))))
 (electric-pair-mode)
 (electric-layout-mode)
 
@@ -287,13 +288,16 @@
  (fm/var display-line-numbers-width-start t)
  (fm/face line-number :foreground "Gray85")
  (fm/face line-number-current-line :foreground "Gray70"))
-(fm/after prog-mode (fm/hook prog-mode-hook display-line-numbers-mode))
+(fm/after prog-mode
+ (fm/hook prog-mode-hook display-line-numbers-mode))
 
 (fm/after hl-line
  (fm/face hl-line :background "Gray95" :extend nil))
-(fm/after prog-mode (fm/hook prog-mode-hook hl-line-mode))
+(fm/after prog-mode
+ (fm/hook prog-mode-hook hl-line-mode))
 
-(fm/after abbrev (fm/dim abbrev-mode "Ab" t))
+(fm/after abbrev
+ (fm/dim abbrev-mode "Ab" t))
 
 (fm/after whitespace
  (fm/dim whitespace-mode "Ws")
@@ -304,9 +308,12 @@
   '(face tabs lines empty tab-mark indentation indentation::tab indentation::space
     space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
     space-before-tab::tab space-before-tab::space)))
-(fm/after elisp-mode (fm/hook emacs-lisp-mode-hook whitespace-mode))
-(fm/after make-mode (fm/hook makefile-mode-hook whitespace-mode))
-(fm/after hledger-mode (fm/hook hledger-mode-hook whitespace-mode))
+(fm/after elisp-mode
+ (fm/hook emacs-lisp-mode-hook whitespace-mode))
+(fm/after make-mode
+ (fm/hook makefile-mode-hook whitespace-mode))
+(fm/after hledger-mode
+ (fm/hook hledger-mode-hook whitespace-mode))
 
 (fm/after elisp-mode
  (fm/var lisp-indent-offset 1)
@@ -314,20 +321,26 @@
 (fm/mode "emacs"              emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
 
-(fm/after text-mode (fm/hook-lambda text-mode-hook (toggle-truncate-lines t)))
+(fm/after text-mode
+ (fm/hook-lambda text-mode-hook (toggle-truncate-lines t)))
 (fm/mode "Passwords.txt"     text-mode)
 (fm/mode "Passwords_old.txt" text-mode)
 
-(fm/after eldoc (fm/dim eldoc-mode "Ed"))
-(fm/after prog-mode (fm/hook prog-mode-hook eldoc-mode))
+(fm/after eldoc
+ (fm/dim eldoc-mode "Ed"))
 
-(fm/after paren (fm/var show-paren-when-point-inside-paren t)
+(fm/after prog-mode
+ (fm/hook prog-mode-hook eldoc-mode))
+
+(fm/after paren
+ (fm/var show-paren-when-point-inside-paren t)
  (fm/var show-paren-style 'mixed)
  (fm/var show-paren-highlight-openparen t)
  (fm/face show-paren-match :background "PowderBlue")
  (fm/face show-paren-mismatch :background "LightSalmon")
  (fm/face show-paren-match-expression :background "Lavender"))
-(fm/after prog-mode (fm/hook prog-mode-hook show-paren-mode))
+(fm/after prog-mode
+ (fm/hook prog-mode-hook show-paren-mode))
 
 (fm/after dired
  (fm/var dired-listing-switches "-l --group-directories-first")
@@ -340,9 +353,11 @@
  (fm/var auto-revert-avoid-polling t)
  (fm/var buffer-auto-revert-by-notification t)
  (fm/var auto-revert-mode-text " Ar"))
-(fm/after dired (fm/hook dired-mode-hook auto-revert-mode))
+(fm/after dired
+ (fm/hook dired-mode-hook auto-revert-mode))
 
-(fm/after subword (fm/dim subword-mode "Sw"))
+(fm/after subword
+ (fm/dim subword-mode "Sw"))
 
 (fm/after flyspell
  (fm/dim flyspell "Fs")
@@ -350,14 +365,17 @@
  (fm/var ispell-extra-args '("--sug-mode=ultra"))
  (fm/face flyspell-duplicate :underline "YellowGreen")
  (fm/face flyspell-incorrect :underline "Orchid"))
-(fm/after text-mode (fm/hook text-mode-hook flyspell-mode))
-(fm/after prog-mode (fm/hook prog-mode-hook flyspell-prog-mode))
+(fm/after text-mode
+ (fm/hook text-mode-hook flyspell-mode))
+(fm/after prog-mode
+ (fm/hook prog-mode-hook flyspell-prog-mode))
 
 (fm/after sh-script
  (fm/hook-lambda sh-mode-hook
   (fm/hook after-save-hook executable-make-buffer-file-executable-if-script-p)))
 
-(fm/after llvm-mode (fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t)))
+(fm/after llvm-mode
+ (fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
 (fm/after cc-mode
@@ -381,8 +399,10 @@
 (fm/pkg cmake-mode)
 (fm/pkg dockerfile-mode)
 (fm/pkg markdown-mode)
-(fm/pkg systemd (fm/hook systemd-mode-hook company-mode))
 (fm/pkg smex)
+
+(fm/pkg systemd
+ (fm/hook systemd-mode-hook company-mode))
 
 (fm/pkg org-bullets
  (fm/var org-bullets-bullet-list '("●" "○"))
@@ -435,16 +455,25 @@
   (fm/key "<RET>" ivy-alt-done ivy-minibuffer-map "ivy"))
  (ivy-mode))
 
-(fm/pkg ivy-rich (ivy-rich-mode))
-(fm/pkg fzf (fm/key "M-F" fzf-git-files))
-(fm/pkg deadgrep (fm/key "M-G" deadgrep))
+(fm/pkg ivy-rich
+ (ivy-rich-mode))
+
+(fm/pkg fzf
+ (fm/key "M-F" fzf-git-files))
+
+(fm/pkg deadgrep
+ (fm/key "M-G" deadgrep))
 
 (fm/pkg mwim
  (fm/key "C-a" mwim-beginning)
  (fm/key "C-e" mwim-end))
 
-(fm/pkg expand-region (fm/key "C-=" er/expand-region))
-(fm/pkg transient (fm/after transient (fm/var transient-default-level 7)))
+(fm/pkg expand-region
+ (fm/key "C-=" er/expand-region))
+
+(fm/pkg transient
+ (fm/after transient
+  (fm/var transient-default-level 7)))
 
 (fm/pkg magit
  (fm/after magit-mode
@@ -457,8 +486,10 @@
  (fm/key "C-x g" magit-status))
 
 (fm/pkg indent-guide
- (fm/after indent-guide (fm/face indent-guide-face :foreground "gray80"))
- (fm/after json-mode (fm/hook json-mode-hook indent-guide-mode)))
+ (fm/after indent-guide
+  (fm/face indent-guide-face :foreground "gray80"))
+ (fm/after json-mode
+  (fm/hook json-mode-hook indent-guide-mode)))
 
 (fm/pkg projectile
  (fm/after projectile
@@ -470,11 +501,13 @@
   (fm/key "C-x p" projectile-command-map projectile-mode-map "projectile"))
  (projectile-mode))
 
-(fm/pkg counsel-projectile (fm/after counsel (counsel-projectile-mode)))
+(fm/pkg counsel-projectile
+ (fm/after counsel (counsel-projectile-mode)))
 
 (fm/pkg yasnippet
- (fm/after yasnippet (fm/dim yas-minor-mode "Ys"))
- (fm/hook prog-mode-hook yas-minor-mode))
+ (fm/hook prog-mode-hook yas-minor-mode)
+ (fm/after yasnippet
+  (fm/dim yas-minor-mode "Ys")))
 
 (fm/pkg diff-hl
  (fm/after diff-hl
@@ -483,7 +516,8 @@
   (fm/face diff-hl-delete :background "RosyBrown1")
   (fm/face diff-hl-insert :background "DarkSeaGreen2")
   (fm/face diff-hl-change :background "PowderBlue"))
- (fm/after prog-mode (fm/hook prog-mode-hook diff-hl-mode))
+ (fm/after prog-mode
+  (fm/hook prog-mode-hook diff-hl-mode))
  (fm/after magit-mode
   (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")))
 
@@ -495,9 +529,12 @@
   (fm/hook-lambda symbol-overlay-mode-hook
    (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
    (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)))
- (fm/after sh-script (fm/hook sh-mode-hook symbol-overlay-mode))
- (fm/after elisp-mode (fm/hook emacs-lisp-mode-hook symbol-overlay-mode))
- (fm/after hledger-mode (fm/hook hledger-mode-hook symbol-overlay-mode)))
+ (fm/after sh-script
+  (fm/hook sh-mode-hook symbol-overlay-mode))
+ (fm/after elisp-mode
+  (fm/hook emacs-lisp-mode-hook symbol-overlay-mode))
+ (fm/after hledger-mode
+  (fm/hook hledger-mode-hook symbol-overlay-mode)))
 
 (fm/pkg multiple-cursors
  (fm/after multiple-cursors
@@ -537,7 +574,8 @@
   (fm/hook-lambda flycheck-mode-hook
    (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
    (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck")))
- (fm/after prog-mode (fm/hook prog-mode-hook flycheck-mode)))
+ (fm/after prog-mode
+  (fm/hook prog-mode-hook flycheck-mode)))
 
 (fm/pkg flycheck-posframe
  (fm/after flycheck-posframe
@@ -550,7 +588,8 @@
   (fm/face flycheck-posframe-warning-face :foreground "DarkOrange")
   (fm/face flycheck-posframe-border-face :background "Wheat" :foreground "Wheat")
   (fm/face flycheck-posframe-error-face :foreground "DarkRed"))
- (fm/after flycheck (fm/hook flycheck-mode-hook flycheck-posframe-mode)))
+ (fm/after flycheck
+  (fm/hook flycheck-mode-hook flycheck-posframe-mode)))
 
 (fm/pkg company
  (fm/after company
@@ -564,20 +603,23 @@
   (fm/var company-tooltip-align-annotations t)
   (fm/var company-idle-delay 0.1)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
+  (fm/var company-auto-complete-chars '(32 95 41 46 39 47))
   (fm/var company-frontends
    '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
   (fm/var company-transformers
    '(company-sort-by-occurrence company-sort-by-backend-importance
      company-sort-prefer-same-case-prefix))
   (fm/face company-tooltip :background "gray95"))
- (fm/after prog-mode (fm/hook prog-mode-hook company-mode)))
+ (fm/after prog-mode
+  (fm/hook prog-mode-hook company-mode)))
 
 (fm/pkg company-posframe
  (fm/after company-posframe
   (fm/dim company-posframe-mode)
   (fm/var company-posframe-show-params
    '(:internal-border-width 1 :internal-border-color "gray60")))
- (fm/after company (fm/hook company-mode-hook company-posframe-mode "company-posframe")))
+ (fm/after company
+  (fm/hook company-mode-hook company-posframe-mode "company-posframe")))
 
 (fm/pkg rustic
  (fm/after rustic
@@ -658,11 +700,12 @@
   (message "Loading lsp-clangd")
   (fm/var lsp-clients-clangd-args
    (append lsp-clients-clangd-args
-    '("--background-index" "--clang-tidy" "--completion-style=detailed"
-      "--header-insertion=iwyu" "--header-insertion-decorators"
-      "--suggest-missing-includes" "-j=6" "--pch-storage=memory")))))
+    '("--background-index" "--completion-style=detailed" "--pch-storage=memory"
+      "--clang-tidy" "--header-insertion=iwyu" "--header-insertion-decorators"
+      "-j=6" "--suggest-missing-includes" "--completion-parse=always")))))
 
-(fm/pkg lsp-ivy (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
+(fm/pkg lsp-ivy
+ (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
 (fm/pkg lsp-ui
  (fm/after lsp-ui
