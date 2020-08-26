@@ -360,7 +360,7 @@
  (fm/dim subword-mode "Sw"))
 
 (fm/after flyspell
- (fm/dim flyspell "Fs")
+ (fm/dim flyspell-mode "Fs")
  (fm/var ispell-program-name "aspell")
  (fm/var ispell-extra-args '("--sug-mode=ultra"))
  (fm/face flyspell-duplicate :underline "YellowGreen")
