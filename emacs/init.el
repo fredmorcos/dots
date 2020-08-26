@@ -383,7 +383,6 @@
  (fm/hook-lambda c-mode-hook
   (fm/key "(" nil c-mode-map)
   (fm/after newcomment
-   (message "newcomment being loaded...")
    (fm/var comment-style 'extra-line))))
 
 (fm/after cc-vars
@@ -697,7 +696,6 @@
   (fm/face lsp-rust-analyzer-inlay-chain-face
    :height 0.8 :weight semibold :foreground "DimGray" :background "PaleGoldenrod"))
  (fm/after lsp-clangd
-  (message "Loading lsp-clangd")
   (fm/var lsp-clients-clangd-args
    (append lsp-clients-clangd-args
     '("--background-index" "--completion-style=detailed" "--pch-storage=memory"
