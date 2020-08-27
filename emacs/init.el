@@ -24,12 +24,12 @@
    ,(when pkg `(autoload ',func ,pkg))
    ,(when pkg `(declare-function ,func ,pkg))
    ,(if local
-     `(add-hook ',hook #',func 0 t)
+     `(add-hook ',hook #',func 10 t)
      `(add-hook ',hook #',func))))
 
 (defmacro fm/hook-lambda (hook &rest body)
  "Hook (lambda () BODY) to HOOK."
- `(add-hook ',hook (lambda () (progn ,@body))))
+ `(add-hook ',hook (lambda () (progn ,@body)) 10))
 
 ;; bind keys
 (defmacro fm/key (key func &optional pkg-keymap pkg)
@@ -231,10 +231,16 @@
 
 ;; help
 (fm/var help-window-select t)
+(fm/hook help-mode-hook variable-pitch-mode "face-remap")
+(fm/hook-lambda help-mode-hook
+ (setq-local cursor-type 'bar))
 
 ;; window
 (fm/var split-height-threshold 160)
 (fm/var even-window-sizes 'width-only)
+
+;; mouse
+(fm/var mouse-yank-at-point t)
 
 ;; windmove
 (windmove-default-keybindings)
@@ -390,6 +396,10 @@
  (fm/var c-default-style
   '((other . "user"))))
 
+(fm/after face-remap
+ (fm/dim buffer-face-mode)
+ (fm/face variable-pitch :family "Noto Serif"))
+
 ;; js-mode
 (fm/mode ".hocon" js-mode)
 
@@ -404,21 +414,37 @@
  (fm/hook systemd-mode-hook company-mode))
 
 (fm/pkg org-bullets
- (fm/var org-bullets-bullet-list '("●" "○"))
+ (fm/var org-bullets-bullet-list '(" "))
  (fm/hook org-mode-hook org-bullets-mode))
 
 (fm/pkg org
  (fm/after org
   (fm/var org-cycle-separator-lines 0)
   (fm/var org-startup-folded nil)
-  (fm/var org-ellipsis "   ▾")
-  (fm/face org-ellipsis :underline nil :foreground "DarkGoldenRod")
-  (fm/face org-level-1 :height 1.3 :inherit (outline-1))
-  (fm/face org-level-2 :height 1.2 :inherit (outline-2))
-  (fm/face org-level-3 :height 1.1 :inherit (outline-3))
+  (fm/var org-ellipsis "  ▾")
+  (fm/var org-hide-leading-stars t)
+  (fm/var org-hide-emphasis-markers t)
+  (fm/var org-fontify-whole-heading-line t)
+  (fm/var org-fontify-done-headline t)
+  (fm/var org-startup-indented t)
+  (fm/face org-ellipsis :foreground "SteelBlue")
+  (fm/face org-level-1 :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
+  (fm/face org-level-2 :foreground "IndianRed3" :height 1.1 :inherit (outline-2))
+  (fm/face org-level-3 :foreground "SteelBlue" :inherit (outline-3))
   (fm/face org-todo :foreground "Red1" :height 0.9)
   (fm/face org-done :foreground "ForestGreen" :height 0.9)
-  (fm/hook org-mode org-indent-mode "org")))
+  (fm/hook-lambda org-mode-hook
+   (setq-local left-margin-width 2)
+   (setq-local right-margin-width 2)
+   (setq-local scroll-margin 0))))
+
+(fm/pkg org-variable-pitch
+ (fm/after org-variable-pitch
+  (fm/dim org-variable-pitch-minor-mode)
+  (fm/hook-lambda org-variable-pitch-minor-mode-hook
+   (setq-local cursor-type 'bar)))
+ (fm/after org
+  (fm/hook org-mode-hook org-variable-pitch-minor-mode)))
 
 (fm/pkg which-key
  (fm/dim which-key-mode)
