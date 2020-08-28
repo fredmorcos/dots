@@ -231,9 +231,6 @@
 
 ;; help
 (fm/var help-window-select t)
-(fm/hook help-mode-hook variable-pitch-mode "face-remap")
-(fm/hook-lambda help-mode-hook
- (setq-local cursor-type 'bar))
 
 ;; window
 (fm/var split-height-threshold 160)
