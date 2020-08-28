@@ -37,7 +37,6 @@ bash-completion
 bat
 bbswitch
 bear-git
-beets
 binwalk
 bison
 bolt
@@ -392,7 +391,6 @@ pdfcrack
 perl-archive-zip
 perl-image-exiftool
 perl-locale-gettext
-picard
 picom
 pigz
 pipewire-pulse
@@ -452,6 +450,7 @@ python-rjsmin
 python-rope
 python-setproctitle
 python-tlsh
+python-unidecode
 python-virtualenv
 radamsa
 radvd
@@ -524,7 +523,6 @@ the_silver_searcher
 thunar-archive-plugin
 thunderbird
 tig
-tigervnc
 time
 tinc
 tinyemu
@@ -635,6 +633,7 @@ xorg-xlsatoms
 xorg-xlsclients
 xorg-xpr
 xorg-xrefresh
+xorg-xsetroot
 xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
