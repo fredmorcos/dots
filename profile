@@ -10,7 +10,7 @@ OPROX1=$(head -1 ~/Documents/Important/Passwords/_oprox1.txt)
 
 export OS_NAME OS_PASS OPROX1
 
-# MPV
+# Applications
 export MPV_HOME="$HOME/.config/mpv"
 
 # AMD
