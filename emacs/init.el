@@ -202,7 +202,7 @@
 (fm/face font-lock-type-face :foreground "DarkGreen")
 (fm/face font-lock-variable-name-face :foreground "DarkCyan")
 (fm/face font-lock-string-face :foreground "OliveDrab")
-(fm/face font-lock-comment-end-skip :foreground "DarkMagenta")
+(fm/face font-lock-comment-face :foreground "DarkMagenta")
 (fm/face font-lock-warning-face :foreground "Orange3")
 
 ;; saveplace
@@ -689,17 +689,21 @@
   (fm/var lsp-signature-doc-lines 1)
   (fm/var lsp-signature-auto-activate t)
   (fm/var lsp-signature-render-documentation t)
+  (fm/var lsp-modeline-code-actions-enable nil)
   (fm/face lsp-face-highlight-read :inherit highlight)
+  (fm/face lsp-face-semhl-namespace :foreground "CadetBlue")
+  (fm/face lsp-face-semhl-enum :foreground "MediumPurple")
+  (fm/face lsp-face-semhl-struct :foreground "BlueViolet")
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hook-lambda lsp-mode-hook
    (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
    (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
-   (fm/key "C-c f" lsp-format-buffer              lsp-mode-map "lsp-mode")
-   (fm/key "C-c r" lsp-rename                     lsp-mode-map "lsp-mode")
-   (fm/key "C-c t" lsp-describe-thing-at-point    lsp-mode-map "lsp-mode")
-   (fm/key "C-="   lsp-extend-selection           lsp-mode-map "lsp-mode")
-   (fm/key "M-RET" lsp-execute-code-action        lsp-mode-map "lsp-mode")))
+   (fm/key "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
+   (fm/key "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
+   (fm/key "C-c t" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
+   (fm/key "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
+   (fm/key "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")))
  (fm/after lsp-diagnostics
   (fm/var lsp-diagnostics-attributes
    '((unnecessary :background "Gray90") (deprecated  :strike-through t))))
