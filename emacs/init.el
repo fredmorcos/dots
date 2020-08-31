@@ -192,6 +192,7 @@
 
 ;; faces
 (fm/face mode-line-highlight :background "PowderBlue")
+(fm/face highlight :background "AliceBlue")
 
 ;; saveplace
 (fm/var save-place t)
@@ -677,6 +678,7 @@
   (fm/var lsp-signature-doc-lines 1)
   (fm/var lsp-signature-auto-activate t)
   (fm/var lsp-signature-render-documentation t)
+  (fm/face lsp-face-highlight-read :inherit highlight)
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hook-lambda lsp-mode-hook
