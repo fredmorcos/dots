@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Steam (Runtime)
 Comment=Application for managing and playing games on Steam
-Exec=sh -c 'sudo cpupower -c all frequency-set -g performance && /usr/bin/prime-run nvidia-settings && /usr/bin/prime-run /usr/bin/steam-runtime %U && sudo cpupower -c all frequency-set -g powersave && prime-run nvidia-settings'
+Exec=sh -c 'sudo cpupower -c all frequency-set -g performance && /usr/bin/prime-run nvidia-settings && /usr/bin/prime-run /usr/bin/steam-runtime %U && sudo cpupower -c all frequency-set -g schedutil && prime-run nvidia-settings'
 Icon=steam
 Terminal=false
 Type=Application

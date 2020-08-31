@@ -4,7 +4,6 @@ acpica
 acpi_call
 acpid
 acpilight
-adobe-source-sans-pro-fonts
 afl-utils
 afpfs-ng
 alsa-firmware
@@ -220,6 +219,7 @@ id3v2
 idle3-tools
 ifenslave
 ifplugd
+img2pdf
 intel-gpu-tools
 intel-ucode
 iotop
@@ -352,9 +352,6 @@ networkmanager-strongswan
 nfs-utils
 ngrep
 nilfs-utils
-noto-fonts-cjk
-noto-fonts-emoji
-noto-fonts-extra
 nvidia
 nvidia-prime
 nvidia-settings
@@ -371,6 +368,8 @@ openmp
 optipng
 osinfo-db-tools
 os-prober
+otf-fira-mono
+otf-fira-sans
 p7zip
 pacgraph
 pacman-contrib
@@ -544,7 +543,6 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
-ttf-font-awesome
 ttf-go-mono-git
 tup
 udftools

@@ -192,7 +192,18 @@
 
 ;; faces
 (fm/face mode-line-highlight :background "PowderBlue")
-(fm/face highlight :background "AliceBlue")
+(fm/face link :foreground "RoyalBlue3" :underline (:color "LightSteelBlue3"))
+(fm/face highlight :inverse-video t)
+(fm/face error :foreground "Red3")
+
+;; font-lock
+(fm/face font-lock-function-name-face :inherit font-lock-builtin-face)
+(fm/face font-lock-keyword-face :foreground "MediumSlateBlue")
+(fm/face font-lock-type-face :foreground "DarkGreen")
+(fm/face font-lock-variable-name-face :foreground "DarkCyan")
+(fm/face font-lock-string-face :foreground "OliveDrab")
+(fm/face font-lock-comment-end-skip :foreground "DarkMagenta")
+(fm/face font-lock-warning-face :foreground "Orange3")
 
 ;; saveplace
 (fm/var save-place t)
@@ -396,7 +407,7 @@
 
 (fm/after face-remap
  (fm/dim buffer-face-mode)
- (fm/face variable-pitch :family "Noto Serif"))
+ (fm/face variable-pitch :family "Fira Sans Condensed Book"))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -426,9 +437,9 @@
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/face org-ellipsis :foreground "SteelBlue")
-  (fm/face org-level-1 :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
-  (fm/face org-level-2 :foreground "IndianRed3" :height 1.1 :inherit (outline-2))
-  (fm/face org-level-3 :foreground "SteelBlue" :inherit (outline-3))
+  (fm/face org-level-1 :foreground "SlateBlue" :height 1.2 :inherit (outline-1) :bold t)
+  (fm/face org-level-2 :foreground "IndianRed3" :height 1.1 :inherit (outline-2) :bold t)
+  (fm/face org-level-3 :foreground "SteelBlue" :inherit (outline-3) :bold t)
   (fm/face org-todo :foreground "Red1" :height 0.9)
   (fm/face org-done :foreground "ForestGreen" :height 0.9)
   (fm/hook-lambda org-mode-hook
