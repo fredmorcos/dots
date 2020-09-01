@@ -211,6 +211,7 @@
 (fm/face font-lock-string-face :foreground "OliveDrab")
 (fm/face font-lock-comment-face :foreground "DarkMagenta")
 (fm/face font-lock-warning-face :foreground "Orange3")
+(fm/face font-lock-constant-face :foreground "CornflowerBlue")
 
 ;; saveplace
 (fm/var save-place t)
@@ -737,11 +738,11 @@
   (fm/var lsp-rust-analyzer-inlay-chain-space-format " %s")
   (fm/face lsp-rust-analyzer-inlay-type-face
    ;; :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
-   :inherit font-lock-type-face :height 0.8 :background "HoneyDew1")
+   :inherit font-lock-type-face :height 0.8 :background "HoneyDew2")
   (fm/face lsp-rust-analyzer-inlay-param-face
-   :height 0.8 :weight semibold :foreground "DimGray" :background "Azure")
+   :height 0.8 :weight semibold :foreground "DimGray" :background "Azure2")
   (fm/face lsp-rust-analyzer-inlay-chain-face
-   :height 0.8 :weight semibold :foreground "DimGray" :background "PaleGoldenrod"))
+   :height 0.8 :weight semibold :foreground "DimGray" :background "Khaki"))
  (fm/after lsp-clangd
   (fm/var lsp-clients-clangd-args
    (append lsp-clients-clangd-args
