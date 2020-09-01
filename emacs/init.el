@@ -190,8 +190,15 @@
 (fm/var frame-resize-pixelwise t)
 (fm/var frame-title-format "%b - emacs")
 
+;; mode-line
+(fm/var mode-line-format
+ ("    " mode-line-mule-info mode-line-modified mode-line-remote " "
+  mode-line-buffer-identification " " mode-line-position (vc-mode vc-mode) " "
+  mode-line-modes mode-line-misc-info))
+(fm/face mode-line-buffer-id :foreground "RoyalBlue")
+(fm/face mode-line-highlight :inherit mode-line-emphasis :background "PowderBlue")
+
 ;; faces
-(fm/face mode-line-highlight :background "PowderBlue")
 (fm/face link :foreground "RoyalBlue3" :underline (:color "LightSteelBlue3"))
 (fm/face highlight :inverse-video t)
 (fm/face error :foreground "Red3")
@@ -407,7 +414,7 @@
 
 (fm/after face-remap
  (fm/dim buffer-face-mode)
- (fm/face variable-pitch :family "Fira Sans Condensed Book"))
+ (fm/face variable-pitch :family "Fira Sans Condensed" :height 130))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)

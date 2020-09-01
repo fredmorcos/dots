@@ -69,7 +69,6 @@ chafa
 checksec
 cheese
 chmlib
-chromium
 chrpath
 clazy
 clinfo
@@ -368,7 +367,7 @@ openmp
 optipng
 osinfo-db-tools
 os-prober
-otf-fira-mono
+otf-cascadia-code
 otf-fira-sans
 p7zip
 pacgraph
@@ -543,7 +542,6 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
-ttf-go-mono-git
 tup
 udftools
 unace

@@ -12,34 +12,35 @@
  gc-cons-threshold most-positive-fixnum
  gc-cons-percentage 0.6)
 
-;; Prevent the glimpse of un-styled Emacs by disabling these UI elements early.
+;; Prevent the glimpse of un-styled Emacs by disabling these UI
+;; elements early.
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (set-fringe-style '(8 . 8))
 
-;; Ignore X resources; its settings would be redundant with the other settings in this
-;; file and can conflict with later config (particularly where the cursor color is
-;; concerned).
+;; Ignore X resources; its settings would be redundant with the other
+;; settings in this file and can conflict with later config
+;; (particularly where the cursor color is concerned).
 (advice-add #'x-apply-session-resources :override #'ignore)
 
 ;; faces
 (custom-set-faces
- '(default            ((t (:family     "Monospace"
-                           :height     130
+ '(default            ((t (:family     "Cascadia Code"
+                           :height     120
                            :background "Gray98"
                            :foreground "Gray40"))))
  '(fringe             ((t (:background "Gray98"))))
  '(cursor             ((t (:background "SlateGray3"))))
  '(region             ((t (:background "LightSteelBlue1"))))
- '(mode-line          ((t (:height     110
+ '(mode-line          ((t (:family     "Fira Sans Condensed"
+                           :height     130
+                           :line-height 3
                            :background "Gray95"
                            :foreground "Gray50"
-                           :box        nil))))
- '(mode-line-inactive ((t (:height     110
-                           :background "Gray95"
-                           :foreground "Gray80"
-                           :box        nil)))))
+                           :box        (:color "Lavender")))))
+ '(mode-line-inactive ((t (:inherit    mode-line
+                           :foreground "Gray80")))))
 
 (fset 'display-startup-echo-area-message 'ignore)
 (run-with-idle-timer 5 t #'garbage-collect)
@@ -56,9 +57,9 @@
  ;; package--init-file-ensured t
  auto-save-list-file-prefix nil
 
- ;; Resizing the Emacs frame can be a terribly expensive part of changing the font. By
- ;; inhibiting this, we easily halve startup times with fonts that are larger than the
- ;; system default.
+ ;; Resizing the Emacs frame can be a terribly expensive part of
+ ;; changing the font. By inhibiting this, we easily halve startup
+ ;; times with fonts that are larger than the system default.
  frame-inhibit-implied-resize t
 
  url-privacy-level 'high
