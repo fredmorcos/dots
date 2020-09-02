@@ -445,9 +445,12 @@
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/face org-ellipsis :foreground "SteelBlue")
-  (fm/face org-level-1 :foreground "SlateBlue" :height 1.2 :inherit (outline-1) :bold t)
-  (fm/face org-level-2 :foreground "IndianRed3" :height 1.1 :inherit (outline-2) :bold t)
-  (fm/face org-level-3 :foreground "SteelBlue" :inherit (outline-3) :bold t)
+  (fm/face org-level-1 :family "Fira Sans Condensed"
+   :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
+  (fm/face org-level-2 :family "Fira Sans Condensed"
+   :foreground "IndianRed3" :height 1.1 :inherit (outline-2))
+  (fm/face org-level-3 :family "Fira Sans Condensed"
+   :foreground "SteelBlue" :inherit (outline-3))
   (fm/face org-todo :foreground "Red1" :height 0.9)
   (fm/face org-done :foreground "ForestGreen" :height 0.9)
   (fm/hook-lambda org-mode-hook
