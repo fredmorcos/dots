@@ -66,7 +66,9 @@
  "Set FACE properties to PROPS."
  `(if (facep ',face)
    (custom-set-faces '(,face ((t ,@props))))
-   (fm/var ,face '((t ,@props)))))
+   (if (stringp (car ',props))
+    (fm/var ,face (car ',props))
+    (fm/var ,face '((t ,@props))))))
 
 ;; vars
 (defmacro fm/vars (&rest customs)
@@ -579,7 +581,11 @@
  (fm/after elisp-mode
   (fm/hook emacs-lisp-mode-hook symbol-overlay-mode))
  (fm/after hledger-mode
-  (fm/hook hledger-mode-hook symbol-overlay-mode)))
+  (fm/hook hledger-mode-hook symbol-overlay-mode))
+ (fm/after cc-mode
+  (fm/hook java-mode-hook symbol-overlay-mode))
+ (fm/after python
+  (fm/hook python-mode-hook symbol-overlay-mode)))
 
 (fm/pkg multiple-cursors
  (fm/after multiple-cursors
@@ -620,7 +626,13 @@
    (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
    (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck")))
  (fm/after prog-mode
-  (fm/hook prog-mode-hook flycheck-mode)))
+  (fm/hook prog-mode-hook flycheck-mode))
+ (fm/after cc-mode
+  (fm/hook-lambda java-mode-hook
+   (flycheck-mode -1)))
+ (fm/after python
+  (fm/hook-lambda python-mode-hook
+   (flycheck-mode -1))))
 
 (fm/pkg flycheck-posframe
  (fm/after flycheck-posframe
@@ -757,31 +769,25 @@
  (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
 
 (fm/pkg lsp-ui
- (fm/after lsp-ui
+ (fm/after lsp-ui-flycheck
   (fm/var lsp-ui-flycheck-enable t)
-  (fm/var lsp-ui-flycheck-list-mode t)
+  (fm/var lsp-ui-flycheck-list-mode t))
+ (fm/after lsp-ui-doc
   (fm/var lsp-ui-doc-enable nil)
-  (fm/var lsp-ui-doc-border "black")
   (fm/var lsp-ui-doc-alignment 'window)
-  ;; (fm/var lsp-ui-peek-always-show t)
-  ;; (fm/var lsp-ui-peek-show-directory nil)
-  ;; (fm/var lsp-ui-doc-delay 0.1)
-  ;; (fm/var lsp-ui-doc-header t)
-  ;; (fm/var lsp-ui-doc-include-signature t)
-  (fm/var lsp-ui-sideline-enable nil)
-  ;; (fm/var lsp-ui-sideline-delay 0.1)
-  ;; (fm/var lsp-ui-sideline-update-mode 'line)
-  ;; (fm/var lsp-ui-sideline-ignore-duplicate t)
-  ;; (fm/var lsp-ui-sideline-show-hover t)
-  ;; (fm/face lsp-ui-sideline-code-action    :foreground "Sienna")
-  ;; (fm/face lsp-ui-sideline-global         :foreground "Gray70")
-  ;; (fm/face lsp-ui-sideline-symbol-info    :foreground "Gray70" :slant italic)
-  ;; (fm/face lsp-ui-sideline-current-symbol :foreground "White" :background "Gray75")
-  ;; (fm/face lsp-ui-sideline-symbol         :foreground "White" :background "Gray75")
-  (fm/face lsp-ui-doc-background          :background "Gray95")
-  (fm/face lsp-ui-doc-header              :background "Pale Turquoise")
-  (fm/face lsp-ui-doc-border              :background "Gray70")
-
+  (fm/var lsp-ui-doc-header t)
+  (fm/var lsp-ui-doc-include-signature t)
+  (fm/face lsp-ui-doc-border "Gray70")
+  (fm/face lsp-ui-doc-background :background "Gray95")
+  (fm/face lsp-ui-doc-header :background "Pale Turquoise"))
+ (fm/after lsp-ui-peek
+  (fm/face lsp-ui-peek-list :background "Gray95")
+  (fm/face lsp-ui-peek-peek :background "Gray95")
+  (fm/face lsp-ui-peek-header :foreground "Gray95" :background "Gray40")
+  (fm/face lsp-ui-peek-filename :foreground "RoyalBlue"))
+ (fm/after lsp-ui-sideline
+  (fm/var lsp-ui-sideline-enable nil))
+ (fm/after lsp-ui
   (fm/hook-lambda lsp-ui-mode-hook
    (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
@@ -793,6 +799,9 @@
   (fm/var dumb-jump-window 'other))
  (fm/after python
   (fm/hook-lambda python-mode-hook
+   (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t)))
+ (fm/after cc-mode
+  (fm/hook-lambda java-mode-hook
    (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t))))
 
 (setq file-name-handler-alist nil)
