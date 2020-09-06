@@ -124,6 +124,11 @@
 (fm/key "<M-up>"   fm/move-line-up)
 (fm/key "<M-down>" fm/move-line-down)
 
+(defun fm/generate-password ()
+ "Generate a password and insert it."
+ (interactive)
+ (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer)))
+
 (defun fm/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
  (if (use-region-p)
@@ -455,6 +460,7 @@
    :foreground "SteelBlue" :inherit (outline-3))
   (fm/face org-todo :foreground "Red1" :height 0.9)
   (fm/face org-done :foreground "ForestGreen" :height 0.9)
+  (fm/key "M-p" fm/generate-password)
   (fm/hook-lambda org-mode-hook
    (setq-local left-margin-width 2)
    (setq-local right-margin-width 2)
@@ -707,7 +713,7 @@
   (fm/var lsp-enable-semantic-highlighting t)
   (fm/var lsp-enable-indentation t)
   (fm/var lsp-enable-on-type-formatting t)
-  (fm/var lsp-before-save-edits t)
+  (fm/var lsp-before-save-edits nil)
   (fm/var lsp-auto-configure t)
   (fm/var lsp-signature-doc-lines 1)
   (fm/var lsp-signature-auto-activate t)

@@ -175,6 +175,8 @@ cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 
+cmerge mount_options.conf            /etc/udisks2/mount_options.conf
+
 UDEV=/etc/udev/rules.d
 
 cmerge udev/99-mount.rules           $UDEV/99-mount.rules
