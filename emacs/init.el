@@ -568,11 +568,7 @@
  (fm/after yasnippet
   (fm/dim yas-minor-mode "Ys")
   (defvar yas-snippet-dirs)
-  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
-  (fm/hook-lambda yas-minor-mode-hook
-   (fm/after company
-    (defvar company-backends)
-    (push 'company-yasnippet (car company-backends))))))
+  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)))
 
 (fm/pkg yasnippet-snippets)
 
@@ -637,8 +633,8 @@
   (fm/var flycheck-mode-line-prefix "Fc")
   (fm/var flycheck-check-syntax-automatically
    '(idle-change new-line mode-enabled idle-buffer-switch))
-  (fm/var flycheck-idle-change-delay 0.1)
-  (fm/var flycheck-idle-buffer-switch-delay 0.1)
+  (fm/var flycheck-idle-change-delay 0.25)
+  (fm/var flycheck-idle-buffer-switch-delay 0.25)
   (fm/face flycheck-error :underline "Red1")
   (fm/face flycheck-info :underline "ForestGreen")
   (fm/face flycheck-warning :underline "DarkOrange")
@@ -666,12 +662,17 @@
   (fm/face flycheck-posframe-border-face :background "Wheat" :foreground "Wheat")
   (fm/face flycheck-posframe-error-face :foreground "DarkRed"))
  (fm/after flycheck
-  (fm/hook flycheck-mode-hook flycheck-posframe-mode)))
+  (fm/hook flycheck-mode-hook flycheck-posframe-mode))
+ (fm/after company
+  (fm/hook flycheck-posframe-inhibit-functions company--active-p "company")
+  (fm/hook flycheck-posframe-inhibit-functions
+   (lambda (&rest _) (bound-and-true-p company-backend)))))
 
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends '((company-capf company-keywords company-files)))
+  (setq-default company-backends
+   '((company-capf company-keywords company-files company-yasnippet)))
   (fm/var completion-ignore-case t)
   (fm/var company-echo-truncate-lines nil)
   (fm/var company-selection-wrap-around t)
@@ -680,7 +681,7 @@
   (fm/var company-tooltip-align-annotations t)
   (fm/var company-idle-delay 0.1)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
-  (fm/var company-auto-complete-chars '(32 95 41 46 39 47))
+  (fm/var company-auto-commit-chars '(32 95 41 46 39 47))
   (fm/var company-frontends
    '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
   (fm/var company-transformers
@@ -717,12 +718,12 @@
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
+  (fm/var lsp-completion-provider :none)  ; Company-capf is already set
   (fm/var lsp-headerline-breadcrumb-enable t)
   (fm/var lsp-restart 'ignore)
   (fm/var lsp-enable-snippet t)
   (fm/var lsp-keymap-prefix "C-c")
-  (fm/var lsp-prefer-capf t)
-  (fm/var lsp-idle-delay 0.1)
+  (fm/var lsp-idle-delay 0.25)
   (fm/var lsp-file-watch-threshold nil)
   (fm/var lsp-enable-semantic-highlighting t)
   (fm/var lsp-enable-indentation t)
