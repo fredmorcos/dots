@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Properties
+# key: props
+# --
+:properties:
+:link: ${1:link}
+:username: ${2:username}
+:password: ${3:password}
+:end:

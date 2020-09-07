@@ -451,6 +451,7 @@
   (fm/var org-fontify-whole-heading-line t)
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
+  (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
   (fm/face org-ellipsis :foreground "SteelBlue")
   (fm/face org-level-1 :family "Fira Sans Condensed"
    :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
@@ -558,9 +559,22 @@
  (fm/after counsel (counsel-projectile-mode)))
 
 (fm/pkg yasnippet
- (fm/hook prog-mode-hook yas-minor-mode)
+ (fm/after prog-mode
+  (fm/hook prog-mode-hook yas-minor-mode))
+ (fm/after org
+  (fm/hook org-mode-hook yas-minor-mode))
+ (fm/after hledger-mode
+  (fm/hook hledger-mode-hook yas-minor-mode))
  (fm/after yasnippet
-  (fm/dim yas-minor-mode "Ys")))
+  (fm/dim yas-minor-mode "Ys")
+  (defvar yas-snippet-dirs)
+  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
+  (fm/hook-lambda yas-minor-mode-hook
+   (fm/after company
+    (defvar company-backends)
+    (push 'company-yasnippet (car company-backends))))))
+
+(fm/pkg yasnippet-snippets)
 
 (fm/pkg diff-hl
  (fm/after diff-hl
