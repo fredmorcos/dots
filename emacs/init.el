@@ -27,7 +27,22 @@
      `(add-hook ',hook #',func 10 t)
      `(add-hook ',hook #',func))))
 
-(defmacro fm/hook-lambda (hook &rest body)
+(defmacro fm/hooks (hooks func &optional pkg local)
+ "Autoload FUNC from PKG and it to LOCAL HOOKS."
+ `(progn
+   ,(when pkg `(autoload ',func ,pkg))
+   ,(when pkg `(declare-function ,func ,pkg))
+   ,@(let ((exps nil))
+      (progn (if local
+              (while hooks
+               (push `(add-hook ',(pop hooks) #',func 10 t) exps)
+               exps)
+              (while hooks
+               (push `(add-hook ',(pop hooks) #',func) exps)
+               exps))
+       exps))))
+
+(defmacro fm/hookn (hook &rest body)
  "Hook (lambda () BODY) to HOOK."
  `(add-hook ',hook (lambda () (progn ,@body)) 10))
 
@@ -59,7 +74,7 @@
  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
   (if enforce
    `(fm/dim-helper ',mode ,text)
-   `(fm/hook-lambda ,hook (fm/dim-helper ',mode ,text)))))
+   `(fm/hookn ,hook (fm/dim-helper ',mode ,text)))))
 
 ;; faces
 (defmacro fm/face (face &rest props)
@@ -154,9 +169,10 @@
 (fm/var comp-deferred-compilation t)
 
 ;; package
-(fm/var package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
-                           ("melpa" . "https://melpa.org/packages/")
-                           ("org"   . "https://orgmode.org/elpa/")))
+(fm/var package-archives
+ '(("gnu"   . "https://elpa.gnu.org/packages/")
+   ("melpa" . "https://melpa.org/packages/")
+   ("org"   . "https://orgmode.org/elpa/")))
 
 (defmacro fm/pkg (pkg &rest body)
  "Install PKG if not already installed and execute BODY."
@@ -198,10 +214,6 @@
 (fm/var frame-title-format "%b - emacs")
 
 ;; mode-line
-(fm/var mode-line-format
- ("    " mode-line-mule-info mode-line-modified mode-line-remote " "
-  mode-line-buffer-identification " " mode-line-position (vc-mode vc-mode) " "
-  mode-line-modes mode-line-misc-info))
 (fm/face mode-line-buffer-id :foreground "RoyalBlue")
 (fm/face mode-line-highlight :inherit mode-line-emphasis :background "PowderBlue")
 
@@ -348,12 +360,12 @@
 (fm/after elisp-mode
  (fm/var lisp-indent-offset 1)
  (fm/var lisp-indent-function #'common-lisp-indent-function))
-(fm/mode "emacs"              emacs-lisp-mode)
+(fm/mode "emacs" emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
 
 (fm/after text-mode
- (fm/hook-lambda text-mode-hook (toggle-truncate-lines t)))
-(fm/mode "Passwords.txt"     text-mode)
+ (fm/hookn text-mode-hook (toggle-truncate-lines t)))
+(fm/mode "Passwords.txt" text-mode)
 (fm/mode "Passwords_old.txt" text-mode)
 
 (fm/after eldoc
@@ -401,16 +413,16 @@
  (fm/hook prog-mode-hook flyspell-prog-mode))
 
 (fm/after sh-script
- (fm/hook-lambda sh-mode-hook
+ (fm/hookn sh-mode-hook
   (fm/hook after-save-hook executable-make-buffer-file-executable-if-script-p)))
 
 (fm/after llvm-mode
- (fm/hook-lambda llvm-mode-hook (toggle-truncate-lines t)))
+ (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
 (fm/after cc-mode
  ;; (fm/hook c-mode-hook lsp-deferred)
- (fm/hook-lambda c-mode-hook
+ (fm/hookn c-mode-hook
   (fm/key "(" nil c-mode-map)
   (fm/after newcomment
    (fm/var comment-style 'extra-line))))
@@ -462,7 +474,7 @@
   (fm/face org-todo :foreground "Red1" :height 0.9)
   (fm/face org-done :foreground "ForestGreen" :height 0.9)
   (fm/key "M-p" fm/generate-password)
-  (fm/hook-lambda org-mode-hook
+  (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
    (setq-local right-margin-width 2)
    (setq-local scroll-margin 0))))
@@ -470,7 +482,7 @@
 (fm/pkg org-variable-pitch
  (fm/after org-variable-pitch
   (fm/dim org-variable-pitch-minor-mode)
-  (fm/hook-lambda org-variable-pitch-minor-mode-hook
+  (fm/hookn org-variable-pitch-minor-mode-hook
    (setq-local cursor-type 'bar)))
  (fm/after org
   (fm/hook org-mode-hook org-variable-pitch-minor-mode)))
@@ -589,7 +601,7 @@
   (fm/dim symbol-overlay-mode "Sy")
   (fm/var symbol-overlay-idle-time 0.1)
   (fm/face symbol-overlay-default-face :background "HoneyDew2")
-  (fm/hook-lambda symbol-overlay-mode-hook
+  (fm/hookn symbol-overlay-mode-hook
    (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
    (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)))
  (fm/after sh-script
@@ -621,7 +633,7 @@
   (fm/face hledger-description-face :inherit font-lock-keyword-face)
   (fm/face hledger-amount-face :inherit font-lock-constant-face :inverse-video t)
   ;; (fm/face hledger-date-face :inherit font-lock-string-face :inverse-video t)
-  (fm/hook-lambda hledger-mode-hook
+  (fm/hookn hledger-mode-hook
    (toggle-truncate-lines t)
    (setq tab-width 1)))
  (fm/mode ".journal" hledger-mode)
@@ -638,16 +650,16 @@
   (fm/face flycheck-error :underline "Red1")
   (fm/face flycheck-info :underline "ForestGreen")
   (fm/face flycheck-warning :underline "DarkOrange")
-  (fm/hook-lambda flycheck-mode-hook
+  (fm/hookn flycheck-mode-hook
    (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
    (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck")))
  (fm/after prog-mode
   (fm/hook prog-mode-hook flycheck-mode))
  (fm/after cc-mode
-  (fm/hook-lambda java-mode-hook
+  (fm/hookn java-mode-hook
    (flycheck-mode -1)))
  (fm/after python
-  (fm/hook-lambda python-mode-hook
+  (fm/hookn python-mode-hook
    (flycheck-mode -1))))
 
 (fm/pkg flycheck-posframe
@@ -706,7 +718,7 @@
   (fm/var rustic-lsp-format t)
   (fm/var rustic-indent-offset 2)
   (fm/var rustic-always-locate-project-on-open t)
-  (fm/hook-lambda rustic-mode-hook
+  (fm/hookn rustic-mode-hook
    (fm/key "<f5>" rust-dbg-wrap-or-unwrap            rustic-mode-map "rust-mode")
    (fm/after lsp-rust
     (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust")
@@ -740,7 +752,7 @@
   (fm/face lsp-face-semhl-struct :foreground "BlueViolet")
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
-  (fm/hook-lambda lsp-mode-hook
+  (fm/hookn lsp-mode-hook
    (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
    (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
    (fm/key "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
@@ -809,7 +821,7 @@
  (fm/after lsp-ui-sideline
   (fm/var lsp-ui-sideline-enable nil))
  (fm/after lsp-ui
-  (fm/hook-lambda lsp-ui-mode-hook
+  (fm/hookn lsp-ui-mode-hook
    (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc"))))
@@ -819,10 +831,10 @@
   (fm/var dumb-jump-selector 'ivy)
   (fm/var dumb-jump-window 'other))
  (fm/after python
-  (fm/hook-lambda python-mode-hook
+  (fm/hookn python-mode-hook
    (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t)))
  (fm/after cc-mode
-  (fm/hook-lambda java-mode-hook
+  (fm/hookn java-mode-hook
    (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t))))
 
 (setq file-name-handler-alist nil)
