@@ -130,7 +130,6 @@ espeak-ng
 exa
 exfat-utils
 ext4magic
-extundelete
 f2fs-tools
 fcrackzip
 fd
@@ -279,7 +278,6 @@ libosinfo
 libpipewire02
 libproxy-mozjs
 libunrar
-libva1-intel-driver
 libva-intel-driver
 libva-mesa-driver
 libva-utils

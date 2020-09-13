@@ -737,7 +737,7 @@
   (fm/var lsp-keymap-prefix "C-c")
   (fm/var lsp-idle-delay 0.25)
   (fm/var lsp-file-watch-threshold nil)
-  (fm/var lsp-enable-semantic-highlighting t)
+  (fm/var lsp-enable-semantic-highlighting nil)
   (fm/var lsp-enable-indentation t)
   (fm/var lsp-enable-on-type-formatting t)
   (fm/var lsp-before-save-edits nil)
