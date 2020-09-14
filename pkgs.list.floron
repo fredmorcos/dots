@@ -180,7 +180,6 @@ gst-editing-services
 gst-plugins-ugly
 gst-python
 gstreamer-vaapi
-gst-transcoder
 gtest
 gtkglext
 gtk-theme-numix-solarized
