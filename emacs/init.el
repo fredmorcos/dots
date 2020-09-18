@@ -46,6 +46,10 @@
  "Hook (lambda () BODY) to HOOK."
  `(add-hook ',hook (lambda () (progn ,@body)) 10))
 
+(defmacro fm/hookn-interactive (hook &rest body)
+ "Hook (lambda () BODY) to HOOK."
+ `(add-hook ',hook (lambda () (interactive) (progn ,@body)) 10))
+
 ;; bind keys
 (defmacro fm/key (key func &optional pkg-keymap pkg)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
@@ -471,8 +475,10 @@
    :foreground "IndianRed3" :height 1.1 :inherit (outline-2))
   (fm/face org-level-3 :family "Fira Sans Condensed"
    :foreground "SteelBlue" :inherit (outline-3))
-  (fm/face org-todo :foreground "Red1" :height 0.9)
-  (fm/face org-done :foreground "ForestGreen" :height 0.9)
+  (fm/face org-todo :foreground "Maroon" :height 0.8 :bold t)
+  (fm/face org-done :foreground "ForestGreen" :height 0.8 :bold t)
+  (fm/face org-drawer :foreground "Snow3" :height 0.8)
+  (fm/face org-special-keyword :inherit font-lock-keyword-face :height 0.8 :bold t)
   (fm/key "M-p" fm/generate-password)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
@@ -579,6 +585,7 @@
   (fm/hook hledger-mode-hook yas-minor-mode))
  (fm/after yasnippet
   (fm/dim yas-minor-mode "Ys")
+  (fm/hook yas-minor-mode-hook yas-reload-all "yasnippet")
   (defvar yas-snippet-dirs)
   (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)))
 
