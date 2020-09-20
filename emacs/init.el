@@ -479,6 +479,7 @@
   (fm/face org-done :foreground "ForestGreen" :height 0.8 :bold t)
   (fm/face org-drawer :foreground "Snow3" :height 0.8)
   (fm/face org-special-keyword :inherit font-lock-keyword-face :height 0.8 :bold t)
+  (fm/face org-table :foreground "RoyalBlue")
   (fm/key "M-p" fm/generate-password)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
