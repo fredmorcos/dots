@@ -467,6 +467,7 @@
   (fm/var org-fontify-whole-heading-line t)
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
+  (fm/var org-property-format "%s %s")
   (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
   (fm/face org-ellipsis :foreground "SteelBlue")
   (fm/face org-level-1 :family "Fira Sans Condensed"
