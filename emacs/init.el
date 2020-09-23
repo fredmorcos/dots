@@ -469,6 +469,7 @@
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
   (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
+  (fm/face org-table :height 0.8 :foreground "NavyBlue")
   (fm/face org-ellipsis :foreground "SteelBlue")
   (fm/face org-level-1 :family "Fira Sans Condensed"
    :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
@@ -739,7 +740,8 @@
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
-  (fm/var lsp-completion-provider :none)  ; Company-capf is already set
+  ;; (fm/var lsp-use-plists t)
+  (fm/var lsp-completion-provider :none) ; Company-capf is already set
   (fm/var lsp-headerline-breadcrumb-enable t)
   (fm/var lsp-restart 'ignore)
   (fm/var lsp-enable-snippet t)
