@@ -453,12 +453,20 @@
 (fm/pkg systemd
  (fm/hook systemd-mode-hook company-mode))
 
+(fm/pkg bbdb
+ (fm/after bbdb
+  (fm/var bbdb-file "~/Documents/Important/Contacts")))
+
 (fm/pkg org-bullets
  (fm/var org-bullets-bullet-list '(" "))
  (fm/hook org-mode-hook org-bullets-mode))
 
 (fm/pkg org
  (fm/after org
+  (fm/var org-agenda-include-diary t)
+  (fm/var org-agenda-files
+   `(,(expand-file-name "~/Documents/Important/Agenda.org")
+     ,(expand-file-name "~/Documents/Important/Passwords/Passwords.org")))
   (fm/var org-cycle-separator-lines 0)
   (fm/var org-startup-folded nil)
   (fm/var org-ellipsis "  ▾")
@@ -468,6 +476,7 @@
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
+  (fm/face org-document-title :foreground "MidnightBlue" :height 1.4)
   (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
   (fm/face org-table :height 0.8 :foreground "NavyBlue")
   (fm/face org-ellipsis :foreground "SteelBlue")
@@ -483,6 +492,7 @@
   (fm/face org-special-keyword :inherit font-lock-keyword-face :height 0.8 :bold t)
   (fm/face org-table :foreground "RoyalBlue")
   (fm/key "M-p" fm/generate-password)
+  (fm/key "C-c a" org-agenda)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
    (setq-local right-margin-width 2)
