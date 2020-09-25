@@ -711,9 +711,10 @@
   (fm/var company-tooltip-minimum 10)
   (fm/var company-tooltip-limit 15)
   (fm/var company-tooltip-align-annotations t)
-  (fm/var company-idle-delay 0.1)
+  ;; (fm/var company-idle-delay 0.1)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
-  (fm/var company-auto-commit-chars '(32 95 41 46 39 47))
+  ;; (fm/var company-auto-commit t)
+  ;; (fm/var company-auto-commit-chars '(32 95 41 46 39 47))
   (fm/var company-frontends
    '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
   (fm/var company-transformers
@@ -775,7 +776,7 @@
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hookn lsp-mode-hook
    (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)
-   (fm/key "C-c x" (lambda () (interactive) (lsp-ivy-workspace-symbol t)))
+   (fm/key "C-c x" lsp-ivy-workspace-symbol)
    (fm/key "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
    (fm/key "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
    (fm/key "C-c t" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
