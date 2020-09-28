@@ -590,17 +590,17 @@
  (fm/after counsel (counsel-projectile-mode)))
 
 (fm/pkg yasnippet
+ (fm/after yasnippet
+  (fm/dim yas-minor-mode "Ys")
+  (defvar yas-snippet-dirs)
+  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
+  (fm/hook yas-minor-mode-hook yas-reload-all "yasnippet"))
  (fm/after prog-mode
   (fm/hook prog-mode-hook yas-minor-mode))
  (fm/after org
   (fm/hook org-mode-hook yas-minor-mode))
  (fm/after hledger-mode
-  (fm/hook hledger-mode-hook yas-minor-mode))
- (fm/after yasnippet
-  (fm/dim yas-minor-mode "Ys")
-  (fm/hook yas-minor-mode-hook yas-reload-all "yasnippet")
-  (defvar yas-snippet-dirs)
-  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)))
+  (fm/hook hledger-mode-hook yas-minor-mode)))
 
 (fm/pkg yasnippet-snippets)
 
@@ -781,7 +781,8 @@
    (fm/key "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
    (fm/key "C-c t" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
    (fm/key "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
-   (fm/key "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")))
+   (fm/key "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
+   (fm/face lsp-lsp-flycheck-warning-unnecessary-face :underline "DarkOrange")))
  (fm/after lsp-diagnostics
   (fm/var lsp-diagnostics-attributes
    '((unnecessary :background "Gray90") (deprecated  :strike-through t))))

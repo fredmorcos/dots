@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Pragma
+# key: pragma
+# --
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-W$1"
+#pragma clang diagnostic pop
