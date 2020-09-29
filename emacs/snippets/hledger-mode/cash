@@ -3,5 +3,5 @@
 # key: cash
 # --
 * ${1:note}
-	Assets:Cash                                       EUR -${2:amount}
-	${3:category}
+ Assets:Cash                                       EUR -${2:amount}
+ ${3:category}
