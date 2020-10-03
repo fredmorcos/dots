@@ -34,12 +34,12 @@
  '(cursor             ((t (:background "SlateGray3"))))
  '(region             ((t (:background "LightSteelBlue1"))))
  '(mode-line          ((t (:family     "Iosevka Fixed Slab"
-                           :height     100
                            :background "Gray95"
                            :foreground "Gray50"
                            :box        (:color "Lavender")))))
  '(mode-line-inactive ((t (:inherit    mode-line
-                           :foreground "Gray80")))))
+                           :foreground "Gray80"))))
+ '(bold               ((t (:weight medium)))))
 
 (fset 'display-startup-echo-area-message 'ignore)
 (run-with-idle-timer 5 t #'garbage-collect)

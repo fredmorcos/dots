@@ -4,6 +4,7 @@ acpica
 acpi_call
 acpid
 acpilight
+adobe-source-sans-pro-fonts
 afl-utils
 afpfs-ng
 alsa-firmware
@@ -149,7 +150,6 @@ fuseiso
 fwupd
 fzf
 fzy
-gcc-ada
 ghex
 gifski
 gimagereader-gtk

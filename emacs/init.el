@@ -196,6 +196,10 @@
 (fm/var read-process-output-max (* 1024 1024))
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; perf
+(fm/var bidi-paragraph-direction 'left-to-right)
+(fm/var bidi-inhibit-bpa t)
+
 ;; startup
 (fm/var inhibit-startup-screen t)
 (fm/var inhibit-startup-message t)
@@ -593,14 +597,23 @@
  (fm/after yasnippet
   (fm/dim yas-minor-mode "Ys")
   (defvar yas-snippet-dirs)
-  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs)
-  (fm/hook yas-minor-mode-hook yas-reload-all "yasnippet"))
+  (push (expand-file-name "~/Workspace/dots/emacs/snippets") yas-snippet-dirs))
+ (defvar yas-snippets-loaded nil
+  "Defined in init file to avoid loading snippets multiple times.")
+ (defun fm/yas-minor-mode ()
+  "Ensure snippets are loaded then load the yasnippet minor mode."
+  (require 'yasnippet)
+  (when (not yas-snippets-loaded)
+   (declare-function yas-reload-all 'yasnippet)
+   (yas-reload-all)
+   (setq yas-snippets-loaded t))
+  (yas-minor-mode))
  (fm/after prog-mode
-  (fm/hook prog-mode-hook yas-minor-mode))
+  (fm/hook prog-mode-hook fm/yas-minor-mode))
  (fm/after org
-  (fm/hook org-mode-hook yas-minor-mode))
+  (fm/hook org-mode-hook fm/yas-minor-mode))
  (fm/after hledger-mode
-  (fm/hook hledger-mode-hook yas-minor-mode)))
+  (fm/hook hledger-mode-hook fm/yas-minor-mode)))
 
 (fm/pkg yasnippet-snippets)
 
