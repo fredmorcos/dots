@@ -5,7 +5,6 @@ cargo-expand
 cargo-flamegraph
 cargo-geiger
 cargo-spellcheck
-cargo-tarpaulin
 cargo-udeps
 hors
 kmon

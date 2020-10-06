@@ -28,6 +28,7 @@ cargo-crev
 cargo-edit
 cargo-fuzz
 cargo-outdated
+cargo-tarpaulin
 cargo-watch
 cbindgen
 ccache

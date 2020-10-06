@@ -48,7 +48,6 @@ if [ -d $DATA ]; then
     cmd "$FLORON/Workspace/"              "$LAPTOP/Workspace/"
     cmd "$FLORON/.gnupg/"                 "$LAPTOP/Configs/gnupg/"
     cmd "$FLORON/.ssh/"                   "$LAPTOP/Configs/ssh/"
-    cmd "$FLORON/.config/beets/"          "$LAPTOP/Configs/config-beets/"
     cmd "$FLORON/.config/hexchat/"        "$LAPTOP/Configs/config-hexchat/"
     cmd "$FLORON/.config/MusicBrainz/"    "$LAPTOP/Configs/config-MusicBrainz/"
     cmd "$FLORON/.config/transmission/"   "$LAPTOP/Configs/config-transmission/"
