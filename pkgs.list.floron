@@ -58,6 +58,7 @@ cargo-crev
 cargo-edit
 cargo-fuzz
 cargo-outdated
+cargo-tarpaulin
 cargo-watch
 catdoc
 catimg
@@ -165,10 +166,6 @@ gnome-backgrounds
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
-gnome-font-viewer
-gnome-icon-theme
-gnome-icon-theme-extras
-gnome-system-monitor
 gnu-efi
 gpart
 gparted
@@ -191,7 +188,6 @@ hashcat-utils
 hcxtools
 hddtemp
 hdparm
-herbstluftwm
 hexchat
 hexedit
 hexyl
