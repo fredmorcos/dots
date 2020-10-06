@@ -209,7 +209,6 @@ pulseaudio
 pwgen
 python-beautifulsoup4
 python-cssselect
-python-discid
 python-dulwich
 python-fastimport
 python-paramiko
@@ -306,7 +305,6 @@ xorg-bdftopcf
 xorg-docs
 xorg-font-util
 xorg-luit
-xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
