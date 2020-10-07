@@ -72,7 +72,6 @@ fwupd
 fzf
 gdb
 gimagereader-gtk
-gimp
 glfw-x11
 gmp-ecm
 gnome-backgrounds
@@ -137,6 +136,7 @@ libao
 libdmapsharing
 libfido2
 libgnome-keyring
+libheif
 libmad
 libmp4v2
 libmythes
@@ -155,6 +155,7 @@ linux-tools-meta
 lld
 lldb
 lrzip
+luajit
 luit
 lxdm-gtk3
 lzop
@@ -202,6 +203,7 @@ picom
 pigz
 pipewire-pulse
 pkgconf
+poppler-data
 powertop
 progress
 pstoedit
