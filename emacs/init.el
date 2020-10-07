@@ -442,7 +442,7 @@
 
 (fm/after face-remap
  (fm/dim buffer-face-mode)
- (fm/face variable-pitch :family "Fira Sans Condensed" :height 130))
+ (fm/face variable-pitch :family "Sans" :height 130))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -484,11 +484,11 @@
   (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
   (fm/face org-table :height 0.8 :foreground "NavyBlue")
   (fm/face org-ellipsis :foreground "SteelBlue")
-  (fm/face org-level-1 :family "Fira Sans Condensed"
+  (fm/face org-level-1 :family "Sans"
    :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
-  (fm/face org-level-2 :family "Fira Sans Condensed"
+  (fm/face org-level-2 :family "Sans"
    :foreground "IndianRed3" :height 1.1 :inherit (outline-2))
-  (fm/face org-level-3 :family "Fira Sans Condensed"
+  (fm/face org-level-3 :family "Sans"
    :foreground "SteelBlue" :inherit (outline-3))
   (fm/face org-todo :foreground "Maroon" :height 0.8 :bold t)
   (fm/face org-done :foreground "ForestGreen" :height 0.8 :bold t)

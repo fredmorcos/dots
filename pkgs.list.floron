@@ -154,7 +154,6 @@ fzy
 ghex
 gifski
 gimagereader-gtk
-gimp
 git-crypt
 gitolite
 gitprompt-rs
@@ -172,7 +171,6 @@ gparted
 gperf
 gperftools
 gpick
-graphviz
 gspell
 gst-editing-services
 gst-plugins-ugly
@@ -259,6 +257,7 @@ libgnome-keyring
 libgooglepinyin
 libgrss
 libgsf
+libheif
 libiptcdata
 libiscsi
 libisoburn
@@ -272,6 +271,7 @@ liboggz
 libopenraw
 libosinfo
 libpipewire02
+libraw
 libunrar
 libva-intel-driver
 libva-mesa-driver
@@ -294,6 +294,7 @@ lrzip
 lshw
 lua-alt-getopt
 lua-filesystem
+luajit
 luit
 lxdm-gtk3
 lzop
@@ -392,6 +393,7 @@ pkgdiff
 pkgfile
 plantri
 ponymix
+poppler-data
 powertop
 privoxy
 progress

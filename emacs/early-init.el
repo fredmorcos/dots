@@ -26,15 +26,13 @@
 
 ;; faces
 (custom-set-faces
- '(default            ((t (:family     "Iosevka Fixed Slab"
-                           :height     120
+ '(default            ((t (:height     110
                            :background "Gray98"
                            :foreground "Gray40"))))
  '(fringe             ((t (:background "Gray98"))))
  '(cursor             ((t (:background "SlateGray3"))))
  '(region             ((t (:background "LightSteelBlue1"))))
- '(mode-line          ((t (:family     "Iosevka Fixed Slab"
-                           :background "Gray95"
+ '(mode-line          ((t (:background "Gray95"
                            :foreground "Gray50"
                            :box        (:color "Lavender")))))
  '(mode-line-inactive ((t (:inherit    mode-line
