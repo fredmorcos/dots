@@ -294,6 +294,7 @@ lrzip
 lshw
 lua-alt-getopt
 lua-filesystem
+luit
 lxdm-gtk3
 lzop
 m17n-lib
@@ -597,7 +598,6 @@ xorg-appres
 xorg-bdftopcf
 xorg-docs
 xorg-font-util
-xorg-luit
 xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
