@@ -59,7 +59,6 @@ efibootmgr
 elementary-wallpapers
 entr
 eom
-epiphany
 ethtool
 exa
 exfat-utils
@@ -156,6 +155,7 @@ linux-tools-meta
 lld
 lldb
 lrzip
+luit
 lxdm-gtk3
 lzop
 make
@@ -267,7 +267,6 @@ torsocks
 transmission-gtk
 trash-cli
 ttf-font-awesome
-ttf-go-mono-git
 tup
 udftools
 unace
@@ -305,7 +304,7 @@ xfdesktop
 xorg-bdftopcf
 xorg-docs
 xorg-font-util
-xorg-luit
+xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
