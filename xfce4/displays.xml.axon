@@ -120,7 +120,7 @@
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="DisplayPort-0" type="string" value="Acer 27&quot;">
+    <property name="DisplayPort-0" type="string" value="Acer Technologies 27&quot;">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="8a7ed2337d71a9935665f3205b90aa0c93213ceb"/>
       <property name="Resolution" type="string" value="2560x1440"/>
@@ -148,7 +148,7 @@
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="DisplayPort-0" type="string" value="Acer 27&quot;">
+    <property name="DisplayPort-0" type="string" value="Acer Technologies 27&quot;">
       <property name="Active" type="bool" value="true"/>
       <property name="EDID" type="string" value="8a7ed2337d71a9935665f3205b90aa0c93213ceb"/>
       <property name="Resolution" type="string" value="2560x1440"/>
