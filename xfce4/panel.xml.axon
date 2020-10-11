@@ -70,6 +70,7 @@
         <value type="string" value="vlc"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="mpz v1.0.1"/>
         <value type="string" value="obs"/>
         <value type="string" value="gpick"/>
         <value type="string" value="audacious"/>
@@ -98,7 +99,6 @@
     </property>
     <property name="plugin-7" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="audacious;"/>
       <property name="enable-multimedia-keys" type="bool" value="false"/>
       <property name="enable-wnck" type="bool" value="false"/>
       <property name="enable-mpris" type="bool" value="false"/>

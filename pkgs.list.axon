@@ -6,7 +6,6 @@ amd-ucode
 arch-audit
 aspell-en
 atool
-audacious
 autoconf
 automake
 avisynthplus
@@ -133,7 +132,9 @@ lib32-vkd3d
 lib32-vulkan-mesa-layers
 lib32-vulkan-validation-layers
 libao
+libcue
 libdmapsharing
+libdwarf
 libfido2
 libgnome-keyring
 libheif
@@ -143,6 +144,7 @@ libmythes
 libotf
 libpipewire02
 libproxy-mozjs
+libsidplayfp
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
@@ -166,6 +168,7 @@ mesa-vdpau
 mkvtoolnix-gui
 mlocate
 mpv
+mpz-git
 mtools
 musl
 mutt
@@ -287,7 +290,6 @@ vulkan-tools
 whois
 wireguard-tools
 wmctrl
-xclip
 xf86-input-evdev
 xf86-input-vmmouse
 xf86-input-void
@@ -334,6 +336,7 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 xournalpp
+xsel
 xss-lock
 yay-bin
 you-get

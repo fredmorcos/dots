@@ -442,7 +442,7 @@
 
 (fm/after face-remap
  (fm/dim buffer-face-mode)
- (fm/face variable-pitch :family "Sans" :height 130))
+ (fm/face variable-pitch :family "Sans" :height 110))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -480,16 +480,16 @@
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
-  (fm/face org-document-title :foreground "MidnightBlue" :height 1.4)
+  (fm/face org-document-title :foreground "MidnightBlue" :height 1.4 :bold t)
   (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
   (fm/face org-table :height 0.8 :foreground "NavyBlue")
   (fm/face org-ellipsis :foreground "SteelBlue")
   (fm/face org-level-1 :family "Sans"
-   :foreground "SlateBlue" :height 1.2 :inherit (outline-1))
+   :foreground "SlateBlue" :height 1.2 :inherit (outline-1) :bold t)
   (fm/face org-level-2 :family "Sans"
-   :foreground "IndianRed3" :height 1.1 :inherit (outline-2))
+   :foreground "IndianRed3" :height 1.1 :inherit (outline-2) :bold t)
   (fm/face org-level-3 :family "Sans"
-   :foreground "SteelBlue" :inherit (outline-3))
+   :foreground "SteelBlue" :inherit (outline-3) :bold t)
   (fm/face org-todo :foreground "Maroon" :height 0.8 :bold t)
   (fm/face org-done :foreground "ForestGreen" :height 0.8 :bold t)
   (fm/face org-drawer :foreground "Snow3" :height 0.8)
