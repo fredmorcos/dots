@@ -24,7 +24,6 @@ aspell-en
 aspell-fr
 astyle
 atool
-audacious
 augeas
 autoconf-archive
 autogen
@@ -248,6 +247,7 @@ lib32-v4l-utils
 lib32-virtualgl
 lib32-vkd3d
 lib32-vulkan-mesa-layers
+libcue
 libdvdcss
 libemf
 libffado
@@ -272,6 +272,7 @@ libopenraw
 libosinfo
 libpipewire02
 libraw
+libsidplayfp
 libunrar
 libva-intel-driver
 libva-mesa-driver
@@ -325,6 +326,7 @@ movit
 mp3unicode
 mpop
 mpv
+mpz-git
 mtd-utils
 mtools
 muparser
