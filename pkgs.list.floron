@@ -65,6 +65,7 @@ cbindgen
 ccache
 cdrdao
 cdrtools
+celluloid
 cgdb
 chafa
 checksec
@@ -74,7 +75,6 @@ chromium
 chrpath
 clazy
 clinfo
-cmake
 cmus
 codespell
 coin-or-mp
@@ -325,8 +325,7 @@ mousetweaks
 movit
 mp3unicode
 mpop
-mpv
-mpz-git
+mpz
 mtd-utils
 mtools
 muparser
