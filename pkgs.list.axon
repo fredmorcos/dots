@@ -32,6 +32,7 @@ cargo-watch
 cbindgen
 ccache
 cclive
+celluloid
 chmlib
 clinfo
 clipgrab
@@ -168,8 +169,7 @@ mesa-demos
 mesa-vdpau
 mkvtoolnix-gui
 mlocate
-mpv
-mpz-git
+mpz
 mtools
 musl
 mutt
