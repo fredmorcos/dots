@@ -75,6 +75,7 @@ chromium
 chrpath
 clazy
 clinfo
+cmake
 cmus
 codespell
 coin-or-mp
@@ -212,6 +213,7 @@ idle3-tools
 ifenslave
 ifplugd
 img2pdf
+inetutils
 intel-gpu-tools
 intel-ucode
 iotop
