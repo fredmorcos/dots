@@ -227,7 +227,7 @@
 
 ;; faces
 (fm/face link :foreground "RoyalBlue3" :underline (:color "LightSteelBlue3"))
-(fm/face highlight :inverse-video t)
+(fm/face highlight :background "Wheat")
 (fm/face error :foreground "Red3")
 
 ;; font-lock
