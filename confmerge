@@ -138,6 +138,7 @@ cmerge inputrc                       ~/.inputrc
 
 cmerge cargo.conf                    ~/.cargo/config
 
+cmerge x11/Xresources                ~/.Xresources
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
 cmerge x11/00-system.conf            /etc/X11/xorg.conf.d/00-system.conf
