@@ -8,6 +8,7 @@ cargo-spellcheck
 cargo-udeps
 hors
 kmon
+lfs
 sccache
 titlecase
 what
