@@ -65,7 +65,6 @@ cbindgen
 ccache
 cdrdao
 cdrtools
-celluloid
 cgdb
 chafa
 checksec
@@ -328,6 +327,7 @@ mousetweaks
 movit
 mp3unicode
 mpop
+mpv
 mpz
 mtd-utils
 mtools
@@ -541,6 +541,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
+ttf-juliamono
 tup
 udftools
 unace
