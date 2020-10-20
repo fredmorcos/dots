@@ -3,13 +3,14 @@ bottom
 cargo-asm
 cargo-audit
 cargo-expand
-cargo-flamegraph
 cargo-geiger
 cargo-spellcheck
 cargo-udeps
+flamegraph
 hors
 kmon
 lfs
+rustfilt
 sccache
 titlecase
 what

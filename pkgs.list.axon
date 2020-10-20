@@ -90,6 +90,7 @@ gvfs-mtp
 hardinfo
 hddtemp
 hdparm
+heaptrack
 hexchat
 hledger-web
 htmlmin
@@ -113,6 +114,7 @@ ispell
 jdk-openjdk
 jfsutils
 jq
+kcachegrind
 kcov
 khtml
 lhasa
