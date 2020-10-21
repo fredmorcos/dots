@@ -191,6 +191,7 @@ hexedit
 hexyl
 highlight
 hledger-web
+hotspot-git
 hsetroot
 htmlmin
 htop
@@ -229,6 +230,7 @@ iwd
 jemalloc
 jfsutils
 jp2a
+kcachegrind
 kcov
 khtml
 kmscon
@@ -530,6 +532,7 @@ toastify
 tokei
 torbrowser-launcher
 torsocks
+tracy
 tpm2-abrmd
 tpm2-tools
 tpm2-totp
