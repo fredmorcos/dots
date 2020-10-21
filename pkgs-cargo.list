@@ -8,6 +8,7 @@ cargo-spellcheck
 cargo-udeps
 flamegraph
 hors
+inferno
 kmon
 lfs
 rustfilt

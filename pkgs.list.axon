@@ -71,12 +71,12 @@ fwupd
 fzf
 gdb
 gimagereader-gtk
-glfw-x11
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
 gnome-dictionary
 gnome-disk-utility
+gnuplot
 gpart
 gparted
 gpick
@@ -93,6 +93,7 @@ hdparm
 heaptrack
 hexchat
 hledger-web
+hotspot-git
 htmlmin
 htop
 hunspell-de
@@ -271,6 +272,7 @@ tmux
 tokei
 torbrowser-launcher
 torsocks
+tracy
 transmission-gtk
 trash-cli
 ttf-font-awesome
@@ -292,6 +294,7 @@ vim-spell-en
 vkd3d
 vulkan-extra-layers
 vulkan-tools
+wget
 whois
 wireguard-tools
 wmctrl
