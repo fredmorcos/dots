@@ -14,7 +14,7 @@
     <property name="EnableInputFeedbackSounds" type="empty"/>
   </property>
   <property name="Xft" type="empty">
-    <property name="DPI" type="int" value="101"/>
+    <property name="DPI" type="int" value="109"/>
     <property name="Antialias" type="int" value="1"/>
     <property name="Hinting" type="int" value="1"/>
     <property name="HintStyle" type="string" value="hintslight"/>
@@ -23,8 +23,8 @@
   <property name="Gtk" type="empty">
     <property name="CanChangeAccels" type="empty"/>
     <property name="ColorPalette" type="empty"/>
-    <property name="FontName" type="string" value="Sans 10"/>
-    <property name="MonospaceFontName" type="string" value="Monospace 11"/>
+    <property name="FontName" type="string" value="Sans 9"/>
+    <property name="MonospaceFontName" type="string" value="Monospace 10"/>
     <property name="IconSizes" type="string" value="gtk-large-toolbar=16,16:gtk-small-toolbar=16,16:gtk-menu=16,16:gtk-button=16,16:gtk-dialog=16,16:gtk-dnd=16,16:panel-menu=16,16:panel=16,16"/>
     <property name="KeyThemeName" type="empty"/>
     <property name="ToolbarStyle" type="empty"/>
@@ -40,6 +40,6 @@
     <property name="WindowScalingFactor" type="int" value="1"/>
   </property>
   <property name="Xfce" type="empty">
-    <property name="LastCustomDPI" type="int" value="101"/>
+    <property name="LastCustomDPI" type="int" value="109"/>
   </property>
 </channel>

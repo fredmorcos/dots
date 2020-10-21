@@ -442,7 +442,7 @@
 
 (fm/after face-remap
  (fm/dim buffer-face-mode)
- (fm/face variable-pitch :family "Sans" :height 110))
+ (fm/face variable-pitch :family "Sans" :height 100))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)

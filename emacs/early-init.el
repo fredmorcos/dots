@@ -26,7 +26,7 @@
 
 ;; faces
 (custom-set-faces
- '(default            ((t (:height     110
+ '(default            ((t (:height     100
                            :background "Gray98"
                            :foreground "Gray40"))))
  '(fringe             ((t (:background "Gray98"))))
