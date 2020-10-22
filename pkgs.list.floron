@@ -74,7 +74,6 @@ chromium
 chrpath
 clazy
 clinfo
-cmake
 cmus
 codespell
 coin-or-mp
@@ -186,6 +185,7 @@ hashcat-utils
 hcxtools
 hddtemp
 hdparm
+heaptrack
 hexchat
 hexedit
 hexyl
@@ -532,12 +532,12 @@ toastify
 tokei
 torbrowser-launcher
 torsocks
-tracy
 tpm2-abrmd
 tpm2-tools
 tpm2-totp
 tpm2-tss-engine
 traceroute
+tracy
 transcode
 translate-shell
 transmission-cli
