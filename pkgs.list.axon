@@ -61,6 +61,7 @@ eom
 ethtool
 exa
 exfat-utils
+extra-cmake-modules
 f2fs-tools
 fd
 fdupes
