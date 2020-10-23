@@ -130,6 +130,7 @@ espeak-ng
 exa
 exfat-utils
 ext4magic
+extra-cmake-modules
 f2fs-tools
 fcrackzip
 fd
