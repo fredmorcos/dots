@@ -259,6 +259,7 @@ libdvdcss
 libemf
 libffado
 libfido2
+libgccjit
 libgit2-glib
 libgnome-keyring
 libgooglepinyin
