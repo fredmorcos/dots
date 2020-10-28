@@ -219,6 +219,7 @@ img2pdf
 inetutils
 intel-gpu-tools
 intel-ucode
+intel-vtune-profiler
 iotop
 ipp-usb
 ipset

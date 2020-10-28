@@ -27,10 +27,10 @@ export MPV_HOME="$HOME/.config/mpv"
 
 # Java-specific
 PATH="$HOME/Oracle/mx:$PATH"
-# PATH="$HOME/Oracle/opt/oraclejdk-jvmci/bin:$PATH"
-# PATH="$HOME/Oracle/opt/oraclejdk-jvmci/jre/bin:$PATH"
-PATH="$HOME/Oracle/opt/jdk-15/bin:$PATH"
-PATH="$HOME/Oracle/opt/jdk-15/jre/bin:$PATH"
+PATH="$HOME/Oracle/opt/oraclejdk-jvmci/bin:$PATH"
+PATH="$HOME/Oracle/opt/oraclejdk-jvmci/jre/bin:$PATH"
+# PATH="$HOME/Oracle/opt/jdk-15/bin:$PATH"
+# PATH="$HOME/Oracle/opt/jdk-15/jre/bin:$PATH"
 PATH="$HOME/Oracle/opt/eclipse:$PATH"
 
 export MX_PYTHON_VERSION=3
