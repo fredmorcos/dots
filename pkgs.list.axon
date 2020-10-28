@@ -141,6 +141,7 @@ libcue
 libdmapsharing
 libdwarf
 libfido2
+libgccjit
 libgnome-keyring
 libheif
 libmad
