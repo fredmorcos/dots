@@ -35,7 +35,7 @@ base
 bash-completion
 bat
 bbswitch
-bear-git
+bear
 binwalk
 bison
 bolt
@@ -178,8 +178,8 @@ gst-plugins-ugly
 gst-python
 gstreamer-vaapi
 gtest
+gtk-engine-murrine
 gtkglext
-gtk-theme-numix-solarized
 gucharmap
 gumbo-parser
 gvfs-mtp
@@ -356,6 +356,7 @@ networkmanager-strongswan
 nfs-utils
 ngrep
 nilfs-utils
+numix-gtk-theme-git
 nvidia
 nvidia-prime
 nvidia-settings
@@ -382,6 +383,7 @@ papirus-icon-theme
 paprefs
 par2cmdline
 parallel
+paru-bin
 pass-otp
 pastebinit
 patch
@@ -509,6 +511,7 @@ strace
 stress
 stunnel
 subdl
+sudo
 syncthing
 sysprof
 sysstat
@@ -648,7 +651,6 @@ xss-lock
 xssstate
 yamllint
 yapf
-yay-bin
 you-get
 youtube-dl
 z3

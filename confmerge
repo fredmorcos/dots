@@ -224,9 +224,9 @@ if [ -f /etc/os-release ]; then
 
     echo "Update System"
     if [ $install_happened == 0 ]; then
-      yay -Syu
+      paru -Syu
     else
-      yay -Su
+      paru -Su
     fi
   fi
 fi
