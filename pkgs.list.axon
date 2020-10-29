@@ -4,6 +4,7 @@ alsa-firmware
 alsa-tools
 amd-ucode
 arch-audit
+asp
 aspell-en
 atool
 autoconf
@@ -85,7 +86,7 @@ gst-libav
 gst-plugins-ugly
 gst-python
 gstreamer-vaapi
-gtk-theme-numix-solarized
+gtk-engine-murrine
 gucharmap
 gvfs-mtp
 hardinfo
@@ -115,7 +116,6 @@ irqbalance
 ispell
 jdk-openjdk
 jfsutils
-jq
 kcachegrind
 kcov
 khtml
@@ -187,6 +187,7 @@ networkmanager-openvpn
 nilfs-utils
 nnn
 ntfs-3g
+numix-gtk-theme-git
 nuspell
 nvme-cli
 obs-studio
@@ -200,6 +201,7 @@ p7zip
 pacman-contrib
 papirus-icon-theme
 par2cmdline
+paru-bin
 patch
 pavucontrol
 pdfarranger
@@ -245,6 +247,7 @@ rofimoji
 rsync
 rust-analyzer
 rust-bindgen
+sassc
 screen
 seahorse
 shake
@@ -262,6 +265,7 @@ sshfs
 steam-native-runtime
 strace
 subdl
+sudo
 svt-av1
 syncthing
 sysstat
@@ -348,7 +352,6 @@ xorg-xwud
 xournalpp
 xsel
 xss-lock
-yay-bin
 you-get
 youtube-dl
 z3
