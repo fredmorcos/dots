@@ -59,8 +59,8 @@ HOOKS=(base systemd autodetect keyboard sd-vconsole modconf block sd-encrypt fil
 #COMPRESSION="lzma"
 #COMPRESSION="xz"
 #COMPRESSION="lzop"
-COMPRESSION="lz4"
-#COMPRESSION="cat"
+#COMPRESSION="lz4"
+COMPRESSION="zstd"
 
 # COMPRESSION_OPTIONS
 # Additional options for the compressor

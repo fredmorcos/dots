@@ -428,7 +428,6 @@ python-evdev
 python-genshi
 python-httplib2
 python-jsbeautifier
-python-language-server
 python-libevdev
 python-llfuse
 python-logbook

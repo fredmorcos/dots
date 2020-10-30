@@ -105,7 +105,7 @@
 ;; lazy loading
 (defmacro fm/after (pkg &rest body)
  "Execute BODY when PKG is loaded."
- `(eval-after-load ',pkg '(progn ,@body)))
+ `(with-eval-after-load ',pkg ,@body))
 
 ;; modes
 (defmacro fm/mode (ext mode &optional pkg)
