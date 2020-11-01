@@ -7,6 +7,7 @@ arch-audit
 asp
 aspell-en
 atool
+audiofile
 autoconf
 automake
 avisynthplus
@@ -140,6 +141,7 @@ libao
 libcue
 libdmapsharing
 libdwarf
+libebur128
 libfido2
 libgccjit
 libgnome-keyring
@@ -147,10 +149,13 @@ libheif
 libmad
 libmp4v2
 libmythes
+libnfs
 libotf
 libpipewire02
 libproxy-mozjs
 libsidplayfp
+libupnp
+liburing
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
