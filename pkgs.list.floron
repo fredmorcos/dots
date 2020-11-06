@@ -415,7 +415,6 @@ psutils
 ptunnel
 pulseaudio-alsa
 pulsemixer
-python-argcomplete
 python-beautifulsoup4
 python-cairocffi
 python-capstone
