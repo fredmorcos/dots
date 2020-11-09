@@ -219,7 +219,6 @@ img2pdf
 inetutils
 intel-gpu-tools
 intel-ucode
-intel-vtune-profiler
 iotop
 ipp-usb
 ipset
@@ -356,6 +355,7 @@ networkmanager-strongswan
 nfs-utils
 ngrep
 nilfs-utils
+nlohmann-json
 numix-gtk-theme-git
 nvidia
 nvidia-prime
