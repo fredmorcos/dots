@@ -1,5 +1,3 @@
-# source /etc/profile.d/vte.sh
-
 # User-related
 umask 077
 
