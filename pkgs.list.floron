@@ -25,7 +25,6 @@ aspell-fr
 astyle
 atool
 augeas
-autoconf-archive
 autogen
 automake
 autopep8
@@ -135,6 +134,7 @@ f2fs-tools
 fcrackzip
 fd
 fdupes
+fig2dev
 file-roller
 firefox
 flake8
@@ -142,6 +142,7 @@ flawfinder
 flex
 foomatic-db
 foomatic-db-engine
+foomatic-db-gutenprint-ppds
 foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foremost
@@ -153,6 +154,7 @@ fzy
 ghex
 gifski
 gimagereader-gtk
+gimp
 git-crypt
 gitolite
 gitprompt-rs
@@ -182,6 +184,7 @@ gtk-engine-murrine
 gtkglext
 gucharmap
 gumbo-parser
+gutenprint
 gvfs-mtp
 hashcat-utils
 hcxtools
@@ -264,7 +267,6 @@ libgnome-keyring
 libgooglepinyin
 libgrss
 libgsf
-libheif
 libiptcdata
 libiscsi
 libisoburn
@@ -278,7 +280,6 @@ liboggz
 libopenraw
 libosinfo
 libpipewire02
-libraw
 libsidplayfp
 libunrar
 libva-intel-driver
@@ -302,7 +303,6 @@ lrzip
 lshw
 lua-alt-getopt
 lua-filesystem
-luajit
 luit
 lxdm-gtk3
 lzop
@@ -404,7 +404,6 @@ pkgdiff
 pkgfile
 plantri
 ponymix
-poppler-data
 powertop
 privoxy
 progress
@@ -431,6 +430,7 @@ python-libevdev
 python-llfuse
 python-logbook
 python-nose
+python-numpy
 python-olefile
 python-opengl
 python-pexpect
@@ -479,6 +479,7 @@ samurai
 sassc
 sbsigntools
 schedtool
+scour
 screen
 screenfetch
 sdl2_gfx
