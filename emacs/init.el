@@ -798,7 +798,8 @@
    (fm/face lsp-lsp-flycheck-warning-unnecessary-face :underline "DarkOrange")))
  (fm/after lsp-diagnostics
   (fm/var lsp-diagnostics-attributes
-   '((unnecessary :underline "DarkOrange") (deprecated  :strike-through t))))
+   '((unnecessary :underline "DarkOrange")
+     (deprecated :strike-through t))))
  (fm/after lsp-lens-face
   (fm/face lsp-lens-face :inherit shadow)
   (fm/face lsp-lens-mouse-face :inherit link))
