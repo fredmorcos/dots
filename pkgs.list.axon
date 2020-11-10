@@ -68,6 +68,7 @@ extra-cmake-modules
 f2fs-tools
 fd
 fdupes
+fig2dev
 file-roller
 firefox
 flex
@@ -75,6 +76,7 @@ fwupd
 fzf
 gdb
 gimagereader-gtk
+gimp
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
@@ -111,6 +113,7 @@ i2c-tools
 i3lock
 idle3-tools
 inetutils
+inkscape
 innoextract
 intltool
 iotop
@@ -146,7 +149,6 @@ libebur128
 libfido2
 libgccjit
 libgnome-keyring
-libheif
 libmad
 libmp4v2
 libmythes
@@ -169,7 +171,6 @@ linux-tools-meta
 lld
 lldb
 lrzip
-luajit
 luit
 lxdm-gtk3
 lzop
@@ -219,7 +220,6 @@ picom
 pigz
 pipewire-pulse
 pkgconf
-poppler-data
 powertop
 progress
 pstoedit
@@ -254,6 +254,7 @@ rsync
 rust-analyzer
 rust-bindgen
 sassc
+scour
 screen
 seahorse
 shake
