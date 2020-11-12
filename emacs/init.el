@@ -753,6 +753,7 @@
   (fm/var rustic-indent-offset 2)
   (fm/var rustic-always-locate-project-on-open t)
   (fm/hookn rustic-mode-hook
+   (autoload 'rust-dbg-wrap-or-unwrap "rust-mode")
    (fm/key "<f5>" rust-dbg-wrap-or-unwrap rustic-mode-map "rust-mode")
    (fm/after lsp-rust
     (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust")
