@@ -753,12 +753,11 @@
   (fm/var rustic-indent-offset 2)
   (fm/var rustic-always-locate-project-on-open t)
   (fm/hookn rustic-mode-hook
-   (fm/key "<f5>" rust-dbg-wrap-or-unwrap            rustic-mode-map "rust-mode")
+   (fm/key "<f5>" rust-dbg-wrap-or-unwrap rustic-mode-map "rust-mode")
    (fm/after lsp-rust
     (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust")
     (fm/key "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "lsp-rust")
-    (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "lsp-rust")
-    (fm/key "<f9>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust"))
+    (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "lsp-rust"))
    (electric-quote-local-mode -1))
   (fm/hook rustic-mode-hook subword-mode)))
 
