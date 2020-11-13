@@ -50,6 +50,7 @@ if [ -d $EXTERNAL ]; then
     cmd "$HOME/Documents/"              "$EXTERNAL/Documents/"
     cmd "$HOME/Downloads/"              "$EXTERNAL/Downloads/"
     cmd "$HOME/GMail/"                  "$EXTERNAL/GMail/"
+    cmd "$HOME/ProtonMail/"             "$EXTERNAL/ProtonMail/"
     cmd "$HOME/Media/Torrents/"         "$EXTERNAL/Torrents/"
     cmd "$HOME/Oracle/"                 "$EXTERNAL/Oracle/"
     cmd "$HOME/Phone/"                  "$EXTERNAL/Phone/"
