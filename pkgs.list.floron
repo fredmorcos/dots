@@ -445,7 +445,6 @@ python-pycryptodome
 python-pydocstyle
 python-pylast
 python-pylint
-python-pyopenssl
 python-pysmbc
 python-pystemmer
 python-pyudev
