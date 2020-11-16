@@ -297,6 +297,7 @@
 (fm/var line-number-mode nil)
 (fm/var auto-save-mode t)
 (fm/var save-interprogram-paste-before-kill t)
+(fm/var backward-delete-char-untabify-method 'all)
 (fm/key "<mouse-4>" previous-line)
 (fm/key "<mouse-5>" next-line)
 (fm/hook before-save-hook delete-trailing-whitespace)
@@ -536,7 +537,7 @@
   (fm/var ivy-use-selectable-prompt t)
   (fm/var ivy-use-virtual-buffers t)
   (fm/var ivy-count-format "(%d/%d) ")
-  (fm/var ivy-virtual-abbreviate 'full)
+  (fm/var ivy-virtual-abbreviate 'abbreviate)
   (fm/var ivy-initial-inputs-alist nil)
   (fm/var ivy-extra-directories nil)
   (fm/var ivy-re-builders-alist
@@ -545,6 +546,8 @@
  (ivy-mode))
 
 (fm/pkg ivy-rich
+ (fm/after ivy-rich
+  (fm/var ivy-rich-path-style 'abbrev))
  (ivy-rich-mode))
 
 (fm/pkg fzf
