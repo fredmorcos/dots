@@ -508,6 +508,7 @@ spike
 spirv-headers
 squashfs-tools
 sshfs
+sshuttle
 steam-native-runtime
 strace
 stress
