@@ -469,9 +469,9 @@
 (fm/pkg org
  (fm/after org
   (fm/var org-agenda-include-diary t)
-  (fm/var org-agenda-files
-   `(,(expand-file-name "~/Documents/Important/Agenda.org")
-     ,(expand-file-name "~/Documents/Important/Passwords/Passwords.org")))
+  ;; (fm/var org-agenda-files
+  ;;  `(,(expand-file-name "~/Documents/Important/Agenda.org")
+  ;;    ,(expand-file-name "~/Documents/Important/Passwords/Passwords.org")))
   (fm/var org-cycle-separator-lines 0)
   (fm/var org-startup-folded nil)
   (fm/var org-ellipsis "  ▾")
