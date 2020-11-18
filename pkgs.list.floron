@@ -400,6 +400,7 @@ perl-image-exiftool
 perl-locale-gettext
 picom
 pigz
+pipesocks
 pipewire-pulse
 pixiewps
 pkgconf
@@ -488,7 +489,10 @@ screenfetch
 sdl2_gfx
 sdl2_net
 seahorse
+shadowsocks
 shadowsocks-libev
+shadowsocks-qt5
+shadowsocks-v2ray-plugin
 shairplay
 shake
 shellcheck
