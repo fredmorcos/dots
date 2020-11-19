@@ -2,6 +2,7 @@ amp
 bottom
 cargo-asm
 cargo-audit
+cargo-deadlinks
 cargo-expand
 cargo-geiger
 cargo-spellcheck
@@ -11,7 +12,10 @@ hors
 inferno
 kmon
 lfs
+procs
 rustfilt
 sccache
+tealdeer
 titlecase
 what
+ytop

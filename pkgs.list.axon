@@ -11,6 +11,7 @@ audiofile
 autoconf
 automake
 avisynthplus
+bandwhich
 base
 bash-completion
 bat
@@ -40,6 +41,7 @@ clinfo
 clipgrab
 cmus
 compsize
+conntrack-tools
 cpio
 curlftpfs
 dateutils
@@ -256,6 +258,7 @@ rust-bindgen
 sassc
 scour
 screen
+sd
 seahorse
 shake
 shellcheck
