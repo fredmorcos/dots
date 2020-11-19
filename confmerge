@@ -164,6 +164,9 @@ cmerge archlinux/makepkg.conf        /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
 cmerge archlinux/pacman.conf         /etc/pacman.conf
 
+cmerge or/ov.service                 ~/.config/systemd/ov.service
+cmerge or/privoxy.conf               /etc/privoxy/config
+
 cmerge hostname                      /etc/hostname
 cmerge hosts                         /etc/hosts
 cmerge locale.conf                   /etc/locale.conf
