@@ -90,6 +90,7 @@ cuetools
 cups-pdf
 cups-pk-helper
 curlftpfs
+dante
 davfs2
 dbus-broker
 dconf-editor
@@ -163,6 +164,7 @@ gitolite
 gitprompt-rs
 git-repair
 git-review
+glider
 glyr
 gmp-ecm
 gnome-2048
@@ -412,6 +414,7 @@ powertop
 privoxy
 progress
 protonmail-import-export-app-bin
+proxychains-ng
 proxytunnel
 pstoedit
 pstotext
@@ -557,6 +560,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
+tsocks
 ttf-juliamono
 tup
 udftools
@@ -662,6 +666,7 @@ you-get
 youtube-dl
 z3
 zile
+ziproxy
 zssh
 zsync
 zzuf
