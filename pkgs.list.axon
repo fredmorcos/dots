@@ -61,6 +61,7 @@ ecm-tools
 edk2-ovmf
 efibootmgr
 elementary-wallpapers
+emacs
 entr
 eom
 ethtool
@@ -149,13 +150,11 @@ libdmapsharing
 libdwarf
 libebur128
 libfido2
-libgccjit
 libgnome-keyring
 libmad
 libmp4v2
 libmythes
 libnfs
-libotf
 libpipewire02
 libproxy-mozjs
 libsidplayfp
