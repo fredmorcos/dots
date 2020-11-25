@@ -116,7 +116,7 @@ load-module module-intended-roles
 # load-module module-suspend-on-idle
 
 ### Switch to new device when connected
-load-module module-switch-on-connect
+load-module module-switch-on-connect blacklist=""
 
 ### If autoexit on idle is enabled we want to make sure we only quit
 ### when no local session needs us anymore.
