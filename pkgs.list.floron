@@ -484,7 +484,6 @@ rshijack
 rtirq
 rust-analyzer
 rust-bindgen
-rustc-demangle
 samurai
 sassc
 sbsigntools
