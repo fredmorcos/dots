@@ -32,5 +32,5 @@
   <property name="theme" type="string" value="Retro"/>
   <property name="expire-timeout" type="int" value="4"/>
   <property name="do-slideout" type="bool" value="false"/>
-  <property name="do-fadeout" type="bool" value="true"/>
+  <property name="do-fadeout" type="bool" value="false"/>
 </channel>
