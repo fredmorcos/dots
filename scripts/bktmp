@@ -44,7 +44,7 @@ cmd () {
 }
 
 HOME=/home/fred
-EXTERNAL=/run/media/fred/External/TMP
+EXTERNAL=/run/media/fred/External/TMP-Laptop
 
 if [ -d $EXTERNAL ]; then
     cmd "$HOME/Documents/"              "$EXTERNAL/Documents/"

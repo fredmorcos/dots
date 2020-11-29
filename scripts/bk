@@ -69,8 +69,6 @@ if [ -d $DATA ]; then
     cmd "$HOME/Music/"                    "$FRED/Music/"
     cmd "$HOME/Music.New/"                "$FRED/Music.New/"
 
-    cmd "$HOME/Hilda/"                    "$DATA/Hilda/"
-
     cmd "$HOME/Documents/"                "$FRED/Documents/"
     cmd "$HOME/Downloads/"                "$FRED/Downloads/"
     cmd "$HOME/Phone/"                    "$FRED/Phone/"
