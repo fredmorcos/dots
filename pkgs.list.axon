@@ -22,6 +22,7 @@ blender
 bonnie++
 boost
 breeze-icons
+bridge-utils
 bs1770gain
 btfs
 capitaine-cursors
@@ -52,7 +53,6 @@ dialog
 discord
 dmidecode
 dnsmasq
-docker
 duperemove
 easy-rsa
 ebook-tools
@@ -74,6 +74,7 @@ fdupes
 fig2dev
 file-roller
 firefox
+flatpak
 flex
 fwupd
 fzf
