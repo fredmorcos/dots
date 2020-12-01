@@ -132,7 +132,6 @@ emacs
 enjarify
 entr
 eom
-espeak-ng
 exa
 exfat-utils
 ext4magic
@@ -282,7 +281,6 @@ libmaa
 libmirage
 libmp4v2
 libmythes
-libnfs
 libnsutils
 liboggz
 libopenraw
@@ -456,6 +454,7 @@ python-pylint
 python-pysmbc
 python-pystemmer
 python-pyudev
+python-pyxdg
 python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
@@ -465,6 +464,7 @@ python-setproctitle
 python-tlsh
 python-unidecode
 python-virtualenv
+qemu
 radamsa
 radvd
 razor
@@ -514,7 +514,6 @@ snap-sync
 socat
 soundconverter
 sparsehash
-speech-dispatcher
 spike
 spirv-headers
 squashfs-tools
@@ -586,13 +585,11 @@ uutils-coreutils
 valgrind
 vbindiff
 vcdimager
-vde2
 vdpauinfo
 vi
 vim-spell-de
 vim-spell-en
 vim-spell-fr
-virglrenderer
 virtualbox
 vkd3d
 vulkan-tools
