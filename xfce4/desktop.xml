@@ -158,8 +158,8 @@
       <property name="monitorDP-3" type="empty">
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/wallpapers/elementary/Mr. Lee.jpg"/>
+          <property name="image-style" type="int" value="1"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/gnome/Icetwigs.jpg"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>
@@ -364,7 +364,7 @@
   </property>
   <property name="desktop-icons" type="empty">
     <property name="show-thumbnails" type="bool" value="false"/>
-    <property name="style" type="int" value="2"/>
+    <property name="style" type="int" value="0"/>
     <property name="show-tooltips" type="bool" value="true"/>
     <property name="icon-size" type="uint" value="48"/>
     <property name="use-custom-font-size" type="bool" value="true"/>
