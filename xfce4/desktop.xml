@@ -334,8 +334,8 @@
       <property name="monitorDisplayPort-0" type="empty">
         <property name="workspace0" type="empty">
           <property name="color-style" type="int" value="0"/>
-          <property name="image-style" type="int" value="5"/>
-          <property name="last-image" type="string" value="/usr/share/wallpapers/elementary/Mr. Lee.jpg"/>
+          <property name="image-style" type="int" value="1"/>
+          <property name="last-image" type="string" value="/usr/share/backgrounds/gnome/Icetwigs.jpg"/>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>
