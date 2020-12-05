@@ -4,6 +4,7 @@ alsa-firmware
 alsa-tools
 amd-ucode
 arch-audit
+arp-scan
 asp
 aspell-en
 atool
@@ -50,7 +51,6 @@ dbus-broker
 dconf-editor
 dhclient
 dialog
-discord
 dmidecode
 dnsmasq
 duperemove
