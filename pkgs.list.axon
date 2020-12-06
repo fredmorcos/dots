@@ -237,6 +237,7 @@ python-pyalsa
 python-pycryptodome
 python-pyenchant
 python-pylast
+python-pyxdg
 python-rcssmin
 python-rjsmin
 qbittorrent
@@ -248,8 +249,6 @@ remake
 retext
 rink
 ripgrep
-rofi-calc
-rofimoji
 rsync
 rust-analyzer
 rust-bindgen
@@ -312,6 +311,7 @@ wget
 whois
 wireguard-tools
 wmctrl
+xclip
 xf86-input-evdev
 xf86-input-vmmouse
 xf86-input-void
