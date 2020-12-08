@@ -881,6 +881,8 @@
   (fm/hookn java-mode-hook
    (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t))))
 
+(fm/pkg crux)
+
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
 

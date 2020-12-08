@@ -83,7 +83,7 @@ if [ -d $DATA ]; then
     cmd "$HOME/.config/youtube-dl/"       "$FRED/Configs/config-youtube-dl/"
     cmd "$HOME/.local/share/keyrings"     "$FRED/Configs/local-share-keyrings/"
     cmd "$HOME/.face"                     "$FRED/Configs/face.jpg"
-    cmd "$HOME/.wallpaper.jpg"            "$FRED/Configs/wallpaper.jpg"
+    # cmd "$HOME/.wallpaper.jpg"            "$FRED/Configs/wallpaper.jpg"
 
     if [ -d $EXTERNAL ]; then
         cmd "$DATA/Common/" "$EXTERNAL/Common/"
