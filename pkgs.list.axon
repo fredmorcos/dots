@@ -303,6 +303,7 @@ vkd3d
 vokoscreen
 vulkan-extra-layers
 vulkan-tools
+webp-pixbuf-loader
 wget
 whois
 wireguard-tools
