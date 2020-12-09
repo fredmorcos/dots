@@ -2,7 +2,7 @@
 Name=Zoom
 Comment=Zoom Video Conference
 Exec=/home/fred/Oracle/opt/zoom/ZoomLauncher %U
-Icon=Zoom.png
+Icon=/usr/share/icons/Papirus/64x64/apps/us.zoom.Zoom.svg
 Terminal=false
 Type=Application
 Encoding=UTF-8
