@@ -37,6 +37,7 @@ bbswitch
 bear
 binwalk
 bison
+blender
 bonnie++
 boost
 breeze-icons
@@ -243,7 +244,6 @@ isync
 iucode-tool
 iverilog
 iwd
-jemalloc
 jfsutils
 jp2a
 kcov
@@ -426,7 +426,6 @@ python-libevdev
 python-llfuse
 python-logbook
 python-nose
-python-numpy
 python-olefile
 python-opengl
 python-pexpect
@@ -508,6 +507,7 @@ stunnel
 subdl
 sudo
 sushi
+switcheroo-control
 syncthing
 sysprof
 sysstat
