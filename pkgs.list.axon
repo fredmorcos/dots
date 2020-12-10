@@ -135,9 +135,8 @@ ispell
 jfsutils
 kcov
 lhasa
-lib32-gst-plugins-base-libs
 lib32-gamemode
-lib32-gtk3
+lib32-gst-plugins-base-libs
 lib32-libavtp
 lib32-libsamplerate
 lib32-libva-mesa-driver
