@@ -147,10 +147,12 @@ foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foremost
 fprintd
+fragments
 fuseiso
 fwupd
 fzf
 fzy
+gamemode
 gdm
 ghex
 gifski
@@ -176,6 +178,7 @@ gnome-icon-theme-extras
 gnome-screenshot
 gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
+gnome-shell-extension-sound-output-device-chooser
 gnome-shell-extension-topicons-plus-git
 gnome-terminal
 gnome-tweaks
@@ -252,6 +255,7 @@ lbzip2
 leatherman
 ledger
 lhasa
+lib32-gamemode
 lib32-gtk3
 lib32-libavtp
 lib32-libsamplerate

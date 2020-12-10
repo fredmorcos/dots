@@ -73,8 +73,10 @@ file-roller
 firefox
 flatpak
 flex
+fragments
 fwupd
 fzf
+gamemode
 gdb
 gdm
 gimp
@@ -92,6 +94,7 @@ gnome-icon-theme-extras
 gnome-screenshot
 gnome-shell-extension-pixel-saver
 gnome-shell-extensions
+gnome-shell-extension-sound-output-device-chooser
 gnome-shell-extension-topicons-plus-git
 gnome-terminal
 gnome-tweaks
@@ -133,6 +136,8 @@ jfsutils
 kcov
 lhasa
 lib32-gst-plugins-base-libs
+lib32-gamemode
+lib32-gtk3
 lib32-libavtp
 lib32-libsamplerate
 lib32-libva-mesa-driver
