@@ -20,7 +20,6 @@ bind
 bison
 blender
 bonnie++
-boost
 bridge-utils
 bs1770gain
 btfs
@@ -247,6 +246,7 @@ ripgrep
 rsync
 rust-analyzer
 rust-bindgen
+rustc-demangle
 sassc
 scour
 screen
