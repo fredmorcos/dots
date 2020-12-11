@@ -176,6 +176,8 @@ gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-screenshot
+gnome-shell-extension-dash-to-dock
+gnome-shell-extension-freon-git
 gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
 gnome-shell-extension-sound-output-device-chooser
