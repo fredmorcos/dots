@@ -58,7 +58,7 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="thunderbird">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Super&gt;l" type="string" value="i3lock -e -c 333333"/>
+      <property name="&lt;Super&gt;l" type="string" value="xfce4-screensaver-command --lock"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

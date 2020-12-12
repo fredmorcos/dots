@@ -14,7 +14,7 @@
     <property name="general-notification" type="bool" value="true"/>
     <property name="show-tray-icon" type="bool" value="false"/>
     <property name="critical-power-action" type="uint" value="3"/>
-    <property name="lock-screen-suspend-hibernate" type="bool" value="false"/>
+    <property name="lock-screen-suspend-hibernate" type="bool" value="true"/>
     <property name="inactivity-sleep-mode-on-battery" type="uint" value="1"/>
     <property name="dpms-enabled" type="bool" value="true"/>
     <property name="brightness-on-battery" type="uint" value="9"/>

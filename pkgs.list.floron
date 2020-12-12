@@ -147,7 +147,6 @@ foomatic-db-nonfree
 foomatic-db-nonfree-ppds
 foremost
 fprintd
-fragments
 fuseiso
 fwupd
 fzf
@@ -176,8 +175,6 @@ gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-screenshot
-gnome-shell-extension-dash-to-dock
-gnome-shell-extension-freon-git
 gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
 gnome-shell-extension-sound-output-device-chooser
@@ -227,7 +224,6 @@ hyphen-de
 hyphen-en
 hyphen-fr
 i2c-tools
-i3lock
 i7z
 icmake
 id3v2
@@ -238,6 +234,7 @@ img2pdf
 inetutils
 intel-gpu-tools
 intel-ucode
+intel-undervolt
 iotop
 ipp-usb
 ipset
@@ -512,7 +509,6 @@ stunnel
 subdl
 sudo
 sushi
-switcheroo-control
 syncthing
 sysprof
 sysstat

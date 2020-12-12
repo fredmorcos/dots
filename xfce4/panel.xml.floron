@@ -18,7 +18,6 @@
         <value type="int" value="5"/>
         <value type="int" value="6"/>
         <value type="int" value="7"/>
-        <value type="int" value="11"/>
         <value type="int" value="8"/>
       </property>
       <property name="icon-size" type="uint" value="0"/>
@@ -72,6 +71,7 @@
         <value type="string" value="vlc"/>
       </property>
       <property name="names-ordered" type="array">
+        <value type="string" value="redshift-gtk"/>
         <value type="string" value="audacious"/>
         <value type="string" value="discord"/>
         <value type="string" value="gpick"/>

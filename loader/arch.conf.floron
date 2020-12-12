@@ -2,7 +2,10 @@ title   Archlinux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options rw add_efi_memmap nmi_watchdog=0 mitigations=off ipv6.disable=1 quiet intel_pstate=passive
+options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet
 
-# mem_sleep_default=deep 
+# nvidia-drm.modeset=1
+# intel_pstate=passive
+# ipv6.disable=1
+# mem_sleep_default=deep
 # rd.log=all loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3

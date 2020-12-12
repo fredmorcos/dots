@@ -112,7 +112,6 @@ cmerge () {
 # cmerge xfce4/screenshooter           $XFCE/xfce4-screenshooter
 
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
-cmerge applications/steam.desktop     ~/.local/share/applications/steam.desktop
 
 cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
 cmerge gtk/gtk3.css                  ~/.config/gtk-3.0/gtk.css
