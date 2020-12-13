@@ -379,7 +379,6 @@ pacman-contrib
 pacrunner
 pacutils
 pamixer
-papirus-icon-theme
 par2cmdline
 parallel
 paru-bin
@@ -510,7 +509,6 @@ subdl
 sudo
 sushi
 syncthing
-sysprof
 sysstat
 system-config-printer
 t1utils
