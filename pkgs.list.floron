@@ -124,6 +124,7 @@ emacs
 enjarify
 entr
 eog-plugins
+evince
 exa
 exfat-utils
 ext4magic
@@ -189,6 +190,7 @@ gperftools
 gpick
 gst-editing-services
 gst-libav
+gst-plugin-gtk
 gst-plugins-ugly
 gstreamer-vaapi
 gtest
@@ -506,7 +508,6 @@ stress
 stunnel
 subdl
 sudo
-sushi
 syncthing
 sysstat
 system-config-printer
