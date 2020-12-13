@@ -39,7 +39,6 @@ binwalk
 bison
 blender
 bonnie++
-breeze-icons
 bridge-utils
 bs1770gain
 bsdiff
@@ -72,7 +71,7 @@ chromium
 chrpath
 clazy
 clinfo
-cmus
+cmake
 codespell
 coin-or-mp
 colordiff
@@ -128,7 +127,6 @@ eog-plugins
 exa
 exfat-utils
 ext4magic
-extra-cmake-modules
 f2fs-tools
 fcrackzip
 fd
