@@ -106,7 +106,6 @@ discount
 diskus
 dmenu
 dnsmasq
-dnssec-tools
 docx2txt
 duperemove
 dwdiff
@@ -177,7 +176,6 @@ gnome-screenshot
 gnome-shell-extension-pixel-saver-git
 gnome-shell-extensions
 gnome-shell-extension-sound-output-device-chooser
-gnome-shell-extension-topicons-plus-git
 gnome-terminal
 gnome-tweaks
 gnome-weather
@@ -218,7 +216,6 @@ hunspell-de
 hunspell-en_US
 hunspell-fr
 hwdetect
-hwinfo
 hyperfine
 hyphen-de
 hyphen-en
@@ -419,7 +416,6 @@ python-cjkwrap
 python-cssselect
 python-diff-match-patch
 python-discid
-python-distutils-extra
 python-evdev
 python-genshi
 python-httplib2
