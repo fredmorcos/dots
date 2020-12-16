@@ -186,6 +186,7 @@ gparted
 gperf
 gperftools
 gpick
+grilo-plugins
 gst-editing-services
 gst-libav
 gst-plugin-gtk
@@ -312,6 +313,7 @@ make
 man-pages
 marisa
 masscan
+mat2
 mate-utils
 mb2md
 mcpp
@@ -390,7 +392,6 @@ pdfarranger
 pdfcrack
 peek
 perl-archive-zip
-perl-image-exiftool
 perl-locale-gettext
 pigz
 pixiewps
@@ -438,7 +439,6 @@ python-pylint
 python-pysmbc
 python-pystemmer
 python-pyudev
-python-pyxdg
 python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
@@ -529,6 +529,7 @@ toastify
 tokei
 torbrowser-launcher
 torsocks
+totem
 tpm2-abrmd
 tpm2-tools
 tpm2-totp
