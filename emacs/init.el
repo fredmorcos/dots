@@ -215,6 +215,7 @@
 (fm/var hscroll-margin 3)
 (fm/var hscroll-step 1)
 (fm/var auto-hscroll-mode 'current-line)
+(fm/var fast-but-imprecise-scrolling t)
 
 ;; frame
 (fm/var blink-cursor-mode nil)
