@@ -753,6 +753,7 @@
  (fm/after rustic
   (fm/var rustic-lsp-server 'rust-analyzer)
   (fm/var rustic-analyzer-command '("/usr/bin/rust-analyzer"))
+  (fm/var rustic-format-on-save nil)
   (fm/var rustic-lsp-format t)
   (fm/var rustic-indent-offset 2)
   (fm/var rustic-always-locate-project-on-open t)
@@ -811,6 +812,7 @@
   (fm/var lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
   (fm/var lsp-rust-analyzer-proc-macro-enable t)
   (fm/var lsp-rust-analyzer-use-client-watching nil)
+  (fm/var lsp-rust-analyzer-server-command "/usr/bin/rust-analyzer")
   (fm/var lsp-rust-racer-completion nil)
   (fm/var lsp-rust-build-bin t)
   (fm/var lsp-rust-build-lib t)
