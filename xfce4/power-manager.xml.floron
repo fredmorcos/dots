@@ -22,7 +22,7 @@
     <property name="brightness-on-battery" type="uint" value="60"/>
     <property name="brightness-level-on-ac" type="uint" value="80"/>
     <property name="blank-on-ac" type="int" value="5"/>
-    <property name="dpms-enabled" type="bool" value="false"/>
+    <property name="dpms-enabled" type="bool" value="true"/>
     <property name="lock-screen-suspend-hibernate" type="bool" value="true"/>
     <property name="show-panel-label" type="int" value="2"/>
   </property>

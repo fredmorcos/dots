@@ -301,6 +301,7 @@ lockfile-progs
 logrotate
 lostfiles
 lrzip
+lshw
 lua-alt-getopt
 lua-filesystem
 luit
