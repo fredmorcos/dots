@@ -59,6 +59,7 @@
       <property name="single-row" type="bool" value="true"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
+        <value type="string" value="transmission"/>
         <value type="string" value="discord1"/>
         <value type="string" value="steam"/>
       </property>
@@ -67,6 +68,7 @@
         <value type="string" value="clipman"/>
         <value type="string" value="xfce4-power-manager"/>
       </property>
+      <property name="hide-new-items" type="bool" value="false"/>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>

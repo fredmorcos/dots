@@ -101,8 +101,6 @@ cmerge xfce4/notifyd.xml             $XFCONF/xfce4-notifyd.xml
 cmerge xfce4/panel.xml               $XFCONF/xfce4-panel.xml
 cmerge xfce4/power-manager.xml       $XFCONF/xfce4-power-manager.xml
 cmerge xfce4/session.xml             $XFCONF/xfce4-session.xml
-cmerge xfce4/settings-editor.xml     $XFCONF/xfce4-settings-editor.xml
-cmerge xfce4/settings-manager.xml    $XFCONF/xfce4-settings-manager.xml
 cmerge xfce4/xfwm4.xml               $XFCONF/xfwm4.xml
 cmerge xfce4/xsettings.xml           $XFCONF/xsettings.xml
 

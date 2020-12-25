@@ -41,8 +41,6 @@
       <property name="&lt;Alt&gt;F3" type="empty">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="Print" type="string" value="xfce4-screenshooter"/>
-      <property name="&lt;Shift&gt;Print" type="string" value="xfce4-screenshooter -r"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="override" type="bool" value="true"/>
@@ -64,6 +62,8 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;s" type="string" value="/usr/bin/steam-runtime %U">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
+      <property name="&lt;Primary&gt;Print" type="string" value="xfce4-screenshooter -r"/>
+      <property name="Print" type="string" value="xfce4-screenshooter -f"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
