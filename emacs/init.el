@@ -721,7 +721,8 @@
  (fm/after company
   (fm/dim company-mode "Co")
   (setq-default company-backends
-   '((company-capf company-keywords company-files company-yasnippet)))
+   ;; '((company-capf company-keywords company-files company-yasnippet)))
+   '((company-capf company-files)))
   (fm/var completion-ignore-case t)
   (fm/var company-echo-truncate-lines nil)
   (fm/var company-selection-wrap-around t)

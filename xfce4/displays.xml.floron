@@ -4,52 +4,34 @@
   <property name="ActiveProfile" type="string" value="Default"/>
   <property name="Default" type="empty">
     <property name="eDP-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="true"/>
+      <property name="Active" type="bool" value="false"/>
       <property name="EDID" type="string" value="2704bd3e6e30265d29d3139ebdab40b9216b92fb"/>
       <property name="Resolution" type="string" value="1920x1080"/>
       <property name="RefreshRate" type="double" value="120.015505"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
+      </property>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="DP-3" type="string" value="Acer Technologies 27&quot;">
+    <property name="DP-3" type="string" value="BenQ 24&quot;">
       <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="2e6d7cdc16a7e52acf8fdd0666dcd28274c3bcd9"/>
-      <property name="Resolution" type="string" value="2560x1440"/>
-      <property name="RefreshRate" type="double" value="143.999210"/>
-      <property name="Rotation" type="int" value="0"/>
-      <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="true"/>
-      <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
-        <property name="Y" type="int" value="0"/>
-      </property>
-    </property>
-    <property name="DP-1" type="string" value="Dell Inc. 30&quot;">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="51a1217efb0838b50c1b709545094a37b7484158"/>
-      <property name="Resolution" type="string" value="2560x1600"/>
-      <property name="RefreshRate" type="double" value="59.971589"/>
-      <property name="Rotation" type="int" value="0"/>
-      <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
-      <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
-        <property name="Y" type="int" value="0"/>
-      </property>
-    </property>
-    <property name="eDP-1-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="2704bd3e6e30265d29d3139ebdab40b9216b92fb"/>
+      <property name="EDID" type="string" value="ee510e2ba4aab5c7320dd8aacf5fef56141ed093"/>
       <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="59.962844"/>
+      <property name="RefreshRate" type="double" value="60.000000"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
+      </property>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
@@ -65,45 +47,27 @@
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
+      </property>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="DP-3" type="string" value="Acer Technologies 27&quot;">
+    <property name="DP-3" type="string" value="BenQ 24&quot;">
       <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="2e6d7cdc16a7e52acf8fdd0666dcd28274c3bcd9"/>
-      <property name="Resolution" type="string" value="2560x1440"/>
-      <property name="RefreshRate" type="double" value="143.999210"/>
-      <property name="Rotation" type="int" value="0"/>
-      <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="true"/>
-      <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
-        <property name="Y" type="int" value="0"/>
-      </property>
-    </property>
-    <property name="DP-1" type="string" value="Dell Inc. 30&quot;">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="51a1217efb0838b50c1b709545094a37b7484158"/>
-      <property name="Resolution" type="string" value="2560x1600"/>
-      <property name="RefreshRate" type="double" value="59.971589"/>
-      <property name="Rotation" type="int" value="0"/>
-      <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
-      <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
-        <property name="Y" type="int" value="0"/>
-      </property>
-    </property>
-    <property name="eDP-1-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="2704bd3e6e30265d29d3139ebdab40b9216b92fb"/>
+      <property name="EDID" type="string" value="ee510e2ba4aab5c7320dd8aacf5fef56141ed093"/>
       <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="59.962844"/>
+      <property name="RefreshRate" type="double" value="60.000000"/>
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
+      </property>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
@@ -111,36 +75,7 @@
     </property>
   </property>
   <property name="Notify" type="bool" value="true"/>
-  <property name="AutoEnableProfiles" type="bool" value="true"/>
   <property name="IdentityPopups" type="bool" value="false"/>
-  <property name="5f9a85846f336c86f75ac0c5a7e806a58af3e4a8" type="string" value="Desk">
-    <property name="eDP-1" type="string" value="Laptop">
-      <property name="Active" type="bool" value="false"/>
-      <property name="EDID" type="string" value="2704bd3e6e30265d29d3139ebdab40b9216b92fb"/>
-      <property name="Resolution" type="string" value="1920x1080"/>
-      <property name="RefreshRate" type="double" value="120.015505"/>
-      <property name="Rotation" type="int" value="0"/>
-      <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="false"/>
-      <property name="Position" type="empty">
-        <property name="X" type="int" value="2560"/>
-        <property name="Y" type="int" value="0"/>
-      </property>
-    </property>
-    <property name="DP-3" type="string" value="Acer Technologies 27&quot;">
-      <property name="Active" type="bool" value="true"/>
-      <property name="EDID" type="string" value="2e6d7cdc16a7e52acf8fdd0666dcd28274c3bcd9"/>
-      <property name="Resolution" type="string" value="2560x1440"/>
-      <property name="RefreshRate" type="double" value="143.999210"/>
-      <property name="Rotation" type="int" value="0"/>
-      <property name="Reflection" type="string" value="0"/>
-      <property name="Primary" type="bool" value="true"/>
-      <property name="Position" type="empty">
-        <property name="X" type="int" value="0"/>
-        <property name="Y" type="int" value="0"/>
-      </property>
-    </property>
-  </property>
   <property name="ed91cd89f3c81b3fc8af5ae2c32334b0371765d8" type="string" value="Laptop">
     <property name="eDP-1" type="string" value="Laptop">
       <property name="Active" type="bool" value="true"/>
@@ -150,14 +85,15 @@
       <property name="Rotation" type="int" value="0"/>
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
+      <property name="Scale" type="empty">
+        <property name="X" type="double" value="1.000000"/>
+        <property name="Y" type="double" value="1.000000"/>
+      </property>
       <property name="Position" type="empty">
         <property name="X" type="int" value="0"/>
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="DP-3" type="string" value="Acer Technologies 27&quot;">
-      <property name="Active" type="bool" value="false"/>
-      <property name="EDID" type="string" value="2e6d7cdc16a7e52acf8fdd0666dcd28274c3bcd9"/>
-    </property>
   </property>
+  <property name="AutoEnableProfiles" type="bool" value="true"/>
 </channel>

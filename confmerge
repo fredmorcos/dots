@@ -87,29 +87,30 @@ cmerge () {
   fi
 }
 
-# XFCE=~/.config/xfce4
-# XFCONF=$XFCE/xfconf/xfce-perchannel-xml
+XFCE=~/.config/xfce4
+XFCONF=$XFCE/xfconf/xfce-perchannel-xml
 
-# cmerge xfce4/displays.xml            $XFCONF/displays.xml
-# cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
-# cmerge xfce4/keyboards.xml           $XFCONF/keyboards.xml
-# cmerge xfce4/pointers.xml            $XFCONF/pointers.xml
-# cmerge xfce4/appfinder.xml           $XFCONF/xfce4-appfinder.xml
-# cmerge xfce4/desktop.xml             $XFCONF/xfce4-desktop.xml
-# cmerge xfce4/keyboard-shortcuts.xml  $XFCONF/xfce4-keyboard-shortcuts.xml
-# cmerge xfce4/notifyd.xml             $XFCONF/xfce4-notifyd.xml
-# cmerge xfce4/panel.xml               $XFCONF/xfce4-panel.xml
-# cmerge xfce4/power-manager.xml       $XFCONF/xfce4-power-manager.xml
-# cmerge xfce4/session.xml             $XFCONF/xfce4-session.xml
-# cmerge xfce4/settings-editor.xml     $XFCONF/xfce4-settings-editor.xml
-# cmerge xfce4/settings-manager.xml    $XFCONF/xfce4-settings-manager.xml
-# cmerge xfce4/xfwm4.xml               $XFCONF/xfwm4.xml
-# cmerge xfce4/xsettings.xml           $XFCONF/xsettings.xml
+cmerge xfce4/displays.xml            $XFCONF/displays.xml
+cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
+cmerge xfce4/keyboards.xml           $XFCONF/keyboards.xml
+cmerge xfce4/pointers.xml            $XFCONF/pointers.xml
+cmerge xfce4/appfinder.xml           $XFCONF/xfce4-appfinder.xml
+cmerge xfce4/desktop.xml             $XFCONF/xfce4-desktop.xml
+cmerge xfce4/keyboard-shortcuts.xml  $XFCONF/xfce4-keyboard-shortcuts.xml
+cmerge xfce4/notifyd.xml             $XFCONF/xfce4-notifyd.xml
+cmerge xfce4/panel.xml               $XFCONF/xfce4-panel.xml
+cmerge xfce4/power-manager.xml       $XFCONF/xfce4-power-manager.xml
+cmerge xfce4/session.xml             $XFCONF/xfce4-session.xml
+cmerge xfce4/settings-editor.xml     $XFCONF/xfce4-settings-editor.xml
+cmerge xfce4/settings-manager.xml    $XFCONF/xfce4-settings-manager.xml
+cmerge xfce4/xfwm4.xml               $XFCONF/xfwm4.xml
+cmerge xfce4/xsettings.xml           $XFCONF/xsettings.xml
 
-# cmerge xfce4/terminalrrc             $XFCE/terminal/terminalrc
-# cmerge xfce4/help.rc                 $XFCE/help.rc
-# cmerge xfce4/helpers.rc              $XFCE/helpers.rc
-# cmerge xfce4/screenshooter           $XFCE/xfce4-screenshooter
+cmerge xfce4/help.rc                 "$XFCE/help.rc"
+cmerge xfce4/helpers.rc              "$XFCE/helpers.rc"
+cmerge xfce4/terminal/rc             "$XFCE/terminal/terminalrc"
+cmerge xfce4/terminal/accels.scm     "$XFCE/terminal/accels.scm"
+cmerge xfce4/screenshooter           "$XFCE/xfce4-screenshooter"
 
 cmerge applications/Zoom.desktop     ~/.local/share/applications/Zoom.desktop
 
@@ -127,7 +128,7 @@ cmerge bash/profile                  ~/.bash_profile
 
 cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
 cmerge htoprc                        ~/.config/htop/htoprc
-# cmerge redshift.conf                 ~/.config/redshift.conf
+cmerge redshift.conf                 ~/.config/redshift.conf
 cmerge youtube-dl.conf               ~/.config/youtube-dl/config
 cmerge gitconfig                     ~/.config/git/config
 cmerge vokoscreen.ini                ~/.config/vokoscreenNG/vokoscreenNG.ini
@@ -140,8 +141,8 @@ cmerge inputrc                       ~/.inputrc
 cmerge cargo.conf                    ~/.cargo/config
 
 cmerge x11/Xresources                ~/.Xresources
-# cmerge x11/dmrc                      ~/.dmrc
-# cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
+cmerge x11/dmrc                      ~/.dmrc
+cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
 cmerge x11/00-system.conf            /etc/X11/xorg.conf.d/00-system.conf
 
 cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map

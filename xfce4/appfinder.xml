@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <channel name="xfce4-appfinder" version="1.0">
-  <property name="last" type="empty">
-    <property name="window-height" type="int" value="634"/>
-    <property name="window-width" type="int" value="690"/>
-    <property name="pane-position" type="int" value="180"/>
-  </property>
   <property name="actions" type="array">
     <value type="int" value="5"/>
     <value type="int" value="4"/>
@@ -32,7 +27,7 @@
     </property>
     <property name="action-2" type="empty">
       <property name="type" type="int" value="0"/>
-      <property name="pattern" type="string" value="!"/>
+      <property name="pattern" type="string" value="$"/>
       <property name="command" type="string" value="exo-open --launch TerminalEmulator %s"/>
       <property name="save" type="bool" value="true"/>
     </property>
@@ -42,5 +37,14 @@
       <property name="command" type="string" value="exo-open \0"/>
       <property name="save" type="bool" value="false"/>
     </property>
+  </property>
+  <property name="always-center" type="bool" value="true"/>
+  <property name="sort-by-frecency" type="bool" value="true"/>
+  <property name="icon-view" type="bool" value="false"/>
+  <property name="hide-category-pane" type="bool" value="true"/>
+  <property name="last" type="empty">
+    <property name="window-height" type="int" value="486"/>
+    <property name="window-width" type="int" value="642"/>
+    <property name="pane-position" type="int" value="180"/>
   </property>
 </channel>
