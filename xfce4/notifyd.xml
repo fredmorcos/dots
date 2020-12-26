@@ -21,4 +21,7 @@
   <property name="expire-timeout" type="int" value="6"/>
   <property name="do-fadeout" type="bool" value="true"/>
   <property name="do-slideout" type="bool" value="true"/>
+  <property name="plugin" type="empty">
+    <property name="hide-clear-prompt" type="bool" value="true"/>
+  </property>
 </channel>
