@@ -25,8 +25,6 @@
         <value type="int" value="11"/>
         <value type="int" value="12"/>
         <value type="int" value="15"/>
-        <value type="int" value="16"/>
-        <value type="int" value="17"/>
       </property>
     </property>
   </property>
@@ -87,7 +85,5 @@
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-16" type="string" value="separator"/>
-    <property name="plugin-17" type="string" value="separator"/>
   </property>
 </channel>
