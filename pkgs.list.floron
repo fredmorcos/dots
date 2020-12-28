@@ -128,6 +128,7 @@ entr
 eom
 evince
 exa
+exfalso
 exfat-utils
 ext4magic
 f2fs-tools
@@ -331,6 +332,7 @@ moc
 modest
 mousetweaks
 movit
+mp3info
 mp3unicode
 mpop
 mpv
@@ -425,9 +427,11 @@ python-evdev
 python-genshi
 python-httplib2
 python-jsbeautifier
+python-levenshtein
 python-libevdev
 python-llfuse
 python-logbook
+python-musicbrainzngs
 python-nose
 python-olefile
 python-opengl
@@ -507,6 +511,7 @@ sshfs
 sshuttle
 steam-native-runtime
 strace
+strawberry
 stress
 stunnel
 subdl
