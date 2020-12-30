@@ -7,15 +7,20 @@
   <property name="log-level-apps" type="uint" value="0"/>
   <property name="applications" type="empty">
     <property name="known_applications" type="array">
+      <value type="string" value="blueman"/>
+      <value type="string" value="clementine"/>
       <value type="string" value="com.github.alainm23.planner"/>
       <value type="string" value="discord"/>
       <value type="string" value="Firefox"/>
       <value type="string" value="nm-applet"/>
+      <value type="string" value="notify-send"/>
       <value type="string" value="Strawberry"/>
       <value type="string" value="thunar"/>
       <value type="string" value="Xfce volume control"/>
       <value type="string" value="Xfce4-notifyd settings"/>
       <value type="string" value="xfce4-power-manager"/>
+    </property>
+    <property name="muted_applications" type="array">
     </property>
   </property>
   <property name="initial-opacity" type="double" value="1.000000"/>

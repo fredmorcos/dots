@@ -60,6 +60,7 @@
         <value type="string" value="networkmanager applet"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="Clementine"/>
         <value type="string" value="strawberry"/>
         <value type="string" value="transmission"/>
         <value type="string" value="steam"/>
@@ -72,7 +73,11 @@
     <property name="plugin-8" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="show-notifications" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="strawberry"/>
+      <property name="mpris-players" type="string" value="clementine"/>
+      <property name="blacklisted-players" type="string" value=""/>
+      <property name="enable-wnck" type="bool" value="false"/>
+      <property name="enable-multimedia-keys" type="bool" value="true"/>
+      <property name="enable-mpris" type="bool" value="true"/>
     </property>
     <property name="plugin-9" type="string" value="power-manager-plugin"/>
     <property name="plugin-10" type="string" value="notification-plugin"/>

@@ -72,6 +72,7 @@ chmlib
 chromium
 chrpath
 clazy
+clementine
 clinfo
 cmake
 codespell
@@ -511,7 +512,6 @@ sshfs
 sshuttle
 steam-native-runtime
 strace
-strawberry
 stress
 stunnel
 subdl
