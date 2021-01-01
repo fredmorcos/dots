@@ -35,7 +35,7 @@
     <property name="CursorThemeName" type="string" value="capitaine-cursors"/>
     <property name="CursorThemeSize" type="int" value="16"/>
     <property name="DecorationLayout" type="string" value=":"/>
-    <property name="DialogsUseHeader" type="bool" value="true"/>
+    <property name="DialogsUseHeader" type="bool" value="false"/>
     <property name="TitlebarMiddleClick" type="empty"/>
   </property>
   <property name="Gdk" type="empty">
