@@ -22,7 +22,6 @@ blender
 bonnie++
 bridge-utils
 bs1770gain
-btfs
 capitaine-cursors
 cargo-audit
 cargo-c
@@ -81,7 +80,6 @@ fwupd
 fzf
 gamemode
 gdb
-gdm
 gimp
 glfw-x11
 gmp-ecm
@@ -172,7 +170,6 @@ linux-headers
 linux-tools-meta
 lld
 lldb
-lollypop
 lrzip
 luit
 lzop
@@ -187,7 +184,6 @@ mtools
 musl
 mutt
 mythes-en
-nautilus-image-converter
 ncdu
 net-tools
 network-manager-applet
