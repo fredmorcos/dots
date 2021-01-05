@@ -61,6 +61,7 @@
         <value type="string" value="networkmanager applet"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="zoom"/>
         <value type="string" value="Clementine"/>
         <value type="string" value="strawberry"/>
         <value type="string" value="transmission"/>
