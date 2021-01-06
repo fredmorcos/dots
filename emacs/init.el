@@ -887,6 +887,9 @@
 
 (fm/pkg crux)
 
+(fm/pkg yaml-mode)
+(fm/pkg flycheck-yamllint)
+
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
 
