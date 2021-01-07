@@ -19,6 +19,7 @@
         <value type="int" value="6"/>
         <value type="int" value="10"/>
         <value type="int" value="8"/>
+        <value type="int" value="17"/>
         <value type="int" value="9"/>
         <value type="int" value="11"/>
         <value type="int" value="12"/>
@@ -81,11 +82,12 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-12" type="string" value="clock">
-      <property name="digital-format" type="string" value="%Y-%m-%d  %H:%M"/>
+      <property name="digital-format" type="string" value="%R  %Y-%m-%d"/>
       <property name="timezone" type="string" value="Europe/Vienna"/>
     </property>
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
+    <property name="plugin-17" type="string" value="xfce4-clipman-plugin"/>
   </property>
 </channel>
