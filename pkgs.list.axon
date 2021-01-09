@@ -96,6 +96,7 @@ gnuplot
 gpart
 gparted
 gpick
+gputest
 gst-libav
 gst-plugins-ugly
 gst-python
@@ -241,6 +242,7 @@ python-rcssmin
 python-rjsmin
 qbittorrent
 radeontool
+radeontop
 read-edid
 realtime-privileges
 recordmydesktop
@@ -271,7 +273,7 @@ soundconverter
 sshfs
 steam-native-runtime
 strace
-stress
+s-tui
 subdl
 sudo
 svt-av1
