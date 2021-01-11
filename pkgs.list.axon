@@ -96,7 +96,6 @@ gnuplot
 gpart
 gparted
 gpick
-gputest
 gst-libav
 gst-plugins-ugly
 gst-python
@@ -180,7 +179,6 @@ lzop
 make
 man-pages
 mediainfo
-memtest86-efi
 mesa-demos
 mesa-vdpau
 mlocate
@@ -242,7 +240,6 @@ python-rcssmin
 python-rjsmin
 qbittorrent
 radeontool
-radeontop
 read-edid
 realtime-privileges
 recordmydesktop
