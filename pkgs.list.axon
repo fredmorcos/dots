@@ -92,7 +92,6 @@ gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-sound-recorder
-gnuplot
 gpart
 gparted
 gpick
@@ -276,6 +275,7 @@ sudo
 svt-av1
 syncthing
 sysstat
+telegram-desktop
 tesseract-data-deu
 tesseract-data-eng
 tesseract-data-fra
