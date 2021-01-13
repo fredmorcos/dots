@@ -174,6 +174,7 @@ gnome-disk-utility
 gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
+gnome-logs
 gnome-sound-recorder
 gnu-efi
 gnuplot
@@ -328,6 +329,7 @@ meson
 mg
 mhash
 minisign
+mkinitcpio-systemd-tool
 mlocate
 moc
 modest
@@ -520,6 +522,7 @@ sudo
 syncthing
 sysstat
 system-config-printer
+systemd-ui
 t1utils
 tarsnap
 tcc
