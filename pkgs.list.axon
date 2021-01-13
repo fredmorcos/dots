@@ -91,6 +91,7 @@ gnome-disk-utility
 gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
+gnome-logs
 gnome-sound-recorder
 gpart
 gparted
@@ -180,6 +181,7 @@ man-pages
 mediainfo
 mesa-demos
 mesa-vdpau
+mkinitcpio-systemd-tool
 mlocate
 mpv
 mtools
@@ -200,7 +202,6 @@ odt2txt
 openbsd-netcat
 opendoas
 openmp
-openresolv
 p7zip
 pacman-contrib
 papirus-icon-theme
@@ -275,6 +276,8 @@ sudo
 svt-av1
 syncthing
 sysstat
+systemd-resolvconf
+systemd-ui
 tesseract-data-deu
 tesseract-data-eng
 tesseract-data-fra
