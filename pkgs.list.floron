@@ -386,7 +386,6 @@ pacutils
 pamixer
 papirus-icon-theme
 par2cmdline
-parallel
 paru-bin
 pass-otp
 pastebinit
@@ -408,7 +407,9 @@ plantri
 ponymix
 powertop
 privoxy
+profile-cleaner
 progress
+protobuf-c
 protonmail-import-export-app-bin
 proxychains-ng
 proxytunnel
@@ -510,6 +511,7 @@ soundconverter
 sparsehash
 spike
 spirv-headers
+sqlitebrowser
 squashfs-tools
 sshfs
 sshuttle
