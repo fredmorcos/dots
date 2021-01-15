@@ -203,6 +203,8 @@ if [ "$flatpak_install" != "" ]; then
   $SHELL -c "flatpak install $flatpak_install"
 fi
 
+flatpak update
+
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
 cmerge "pkgs-cargo.list" "$pkgs_cargo_tmp_file"
