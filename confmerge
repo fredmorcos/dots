@@ -186,6 +186,8 @@ UDEV=/etc/udev/rules.d
 cmerge udev/99-mount.rules           $UDEV/99-mount.rules
 cmerge udev/99-steam-cont.rules      $UDEV/99-steam-controller-perms.rules
 
+cmerge gvfs-network.mount            /usr/share/gvfs/mounts/network.mount
+
 flatpak_tmp_file=$(mktemp)
 flatpak list --app --columns=application > "$flatpak_tmp_file"
 cmerge "pkgs-flatpak.list" "$flatpak_tmp_file"
