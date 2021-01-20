@@ -778,7 +778,7 @@
   (fm/var lsp-keymap-prefix "C-c")
   (fm/var lsp-idle-delay 0.25)
   (fm/var lsp-file-watch-threshold nil)
-  (fm/var lsp-enable-semantic-highlighting t)
+  ;; (fm/var lsp-enable-semantic-highlighting t)
   (fm/var lsp-enable-indentation t)
   (fm/var lsp-enable-on-type-formatting t)
   (fm/var lsp-before-save-edits nil)
@@ -802,6 +802,8 @@
    (fm/key "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
    (fm/key "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
    (fm/face lsp-lsp-flycheck-warning-unnecessary-face :underline "DarkOrange")))
+ (fm/after lsp-semantic-tokens
+  (fm/var lsp-semantic-tokens-apply-modifiers t))
  (fm/after lsp-diagnostics
   (fm/var lsp-diagnostics-attributes
    '((unnecessary :underline "DarkOrange")
