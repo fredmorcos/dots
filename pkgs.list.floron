@@ -8,6 +8,7 @@ adobe-source-sans-pro-fonts
 afl-utils
 afpfs-ng
 alsa-firmware
+android-tools
 android-udev
 antiword
 arch-audit
@@ -489,7 +490,6 @@ sassc
 sbsigntools
 schedtool
 scour
-scrcpy
 screen
 screenfetch
 sd
