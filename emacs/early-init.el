@@ -10,10 +10,19 @@
 ;; A big contributor to startup times is garbage collection.
 (setq-default
  gc-cons-threshold most-positive-fixnum
- gc-cons-percentage 0.6)
+ gc-cons-percentage 0.6
+
+ tab-line-close-button-show nil
+ tab-line-new-button-show nil
+
+ tab-line-tab-name-function
+ (lambda (buffer &optional buffers)
+  (let ((tab-name (tab-line-tab-name-buffer buffer buffers)))
+   (concat "  " tab-name "  "))))
 
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI
 ;; elements early.
+(global-tab-line-mode 1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -26,19 +35,27 @@
 
 ;; faces
 (custom-set-faces
- '(default            ((t (:family     "Monospace"
-                           :height     100
-                           :background "Gray98"
-                           :foreground "Gray40"))))
- '(fringe             ((t (:background "Gray98"))))
- '(cursor             ((t (:background "SlateGray3"))))
- '(region             ((t (:background "LightSteelBlue1"))))
- '(mode-line          ((t (:background "Gray95"
-                           :foreground "Gray50"
-                           :box        (:color "Lavender")))))
- '(mode-line-inactive ((t (:inherit    mode-line
-                           :foreground "Gray80"))))
- '(bold               ((t (:weight medium)))))
+ '(default                ((t (:family     "Monospace"
+                               :height     100
+                               :background "Gray98"
+                               :foreground "Gray40"))))
+ '(fringe                 ((t (:background "Gray98"))))
+ '(cursor                 ((t (:background "SlateGray3"))))
+ '(region                 ((t (:background "LightSteelBlue1"))))
+ '(mode-line              ((t (:background "Gray95"
+                               :foreground "Gray50"
+                               :box        (:color "Lavender")))))
+ '(mode-line-inactive     ((t (:inherit    mode-line
+                               :foreground "Gray80"))))
+ '(bold                   ((t (:weight     medium))))
+ '(tab-line               ((t (:background "Gray85"
+                               :box        (:color "Lavender")
+                               :inherit    'variable-pitch))))
+ '(tab-line-tab           ((t (:inherit    'tab-line
+                               :box        (:color "Lavender")))))
+ '(tab-line-tab-current   ((t (:inherit    'tab-line-tab
+                               :background "Gray90"))))
+ '(tab-line-tab-inactive  ((t (:inherit    'tab-line-tab)))))
 
 (fset 'display-startup-echo-area-message 'ignore)
 (run-with-idle-timer 5 t #'garbage-collect)
