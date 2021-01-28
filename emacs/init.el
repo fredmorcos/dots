@@ -283,6 +283,8 @@
 ;; window
 (fm/var split-height-threshold 160)
 (fm/var even-window-sizes 'width-only)
+(fm/key "<M-S-right>" next-buffer)
+(fm/key "<M-S-left>" previous-buffer)
 
 ;; mouse
 (fm/var mouse-yank-at-point t)
