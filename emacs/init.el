@@ -165,6 +165,7 @@
      (insert-char right)
      (backward-char))))))
 
+(fm/key "{"  (lambda () (interactive) (fm/insert-pair ?\{ ?\} nil)))
 (fm/key "("  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
 (fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
 (fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
@@ -333,7 +334,7 @@
  (fm/var ediff-window-setup-function #'ediff-setup-windows-plain))
 
 (fm/after elec-pair
- (fm/var electric-pair-pairs '((?\[ . ?\]) (?\{ . ?\}))))
+ (fm/var electric-pair-pairs '((?\[ . ?\])))) ;; (?\{ . ?\})
 (electric-pair-mode)
 (electric-layout-mode)
 
@@ -849,6 +850,9 @@
     '("--background-index" "--completion-style=detailed" "--pch-storage=memory"
       "--clang-tidy" "--header-insertion=iwyu" "--header-insertion-decorators"
       "-j=6" "--suggest-missing-includes" "--completion-parse=always")))))
+
+(fm/pkg lsp-treemacs
+ (fm/key "<f2>" lsp-treemacs-errors-list))
 
 (fm/pkg lsp-ivy
  (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
