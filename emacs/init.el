@@ -588,7 +588,7 @@
 
 (fm/pkg projectile
  (fm/after projectile
-  (fm/dim projectile-mode "Prj")
+  (fm/dim projectile-mode "Pr")
   (fm/var projectile-project-search-path '("~/Workspace"))
   (fm/var projectile-sort-order '(recently-active))
   (fm/var projectile-enable-caching t)
