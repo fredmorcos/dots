@@ -222,6 +222,7 @@ progress
 pstoedit
 psutils
 pulseaudio
+pv
 pwgen
 python-beautifulsoup4
 python-cssselect
@@ -264,7 +265,6 @@ slimit
 slimmy-xfwm-theme-git
 sloccount
 smartmontools
-snap-sync
 soundconverter
 sshfs
 steam-native-runtime
