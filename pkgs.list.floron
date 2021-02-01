@@ -37,7 +37,6 @@ bbswitch
 bear
 binwalk
 bison
-blender
 bluez-tools
 bolt
 bonnie++
@@ -243,6 +242,7 @@ isync
 iucode-tool
 iverilog
 iwd
+jemalloc
 jfsutils
 jp2a
 kcov
@@ -423,6 +423,7 @@ ptunnel
 pulseaudio-alsa
 pulseaudio-bluetooth
 pulsemixer
+pv
 python-beautifulsoup4
 python-cairocffi
 python-capstone
@@ -440,6 +441,7 @@ python-llfuse
 python-logbook
 python-musicbrainzngs
 python-nose
+python-numpy
 python-olefile
 python-opengl
 python-pexpect
