@@ -1,6 +1,6 @@
-#        Sample Configuration File for Privoxy 3.0.29
+#        Sample Configuration File for Privoxy 3.0.30
 #
-# Copyright (C) 2001-2020 Privoxy Developers https://www.privoxy.org/
+# Copyright (C) 2001-2021 Privoxy Developers https://www.privoxy.org/
 #
 #####################################################################
 #                                                                   #
@@ -385,6 +385,7 @@ logdir /var/log/privoxy
 actionsfile match-all.action # Actions that are applied to all sites and maybe overruled later on.
 actionsfile default.action   # Main actions file
 actionsfile user.action      # User customizations
+#actionsfile regression-tests.action     # Tests for privoxy-regression-test
 #
 #  2.6. filterfile
 #  ================
@@ -569,7 +570,7 @@ logfile logfile
 #
 #        debug     1 # Log the destination for each request. See also debug 1024.
 #        debug     2 # show each connection status
-#        debug     4 # show I/O status
+#        debug     4 # show tagging-related messages
 #        debug     8 # show header parsing
 #        debug    16 # log all data written to the network
 #        debug    32 # debug force feature
@@ -2216,7 +2217,7 @@ socket-timeout 300
 #
 #      Note that sorting headers in an uncommon way will make
 #      fingerprinting actually easier. Encrypted headers are not
-#      affected by this directive.
+#      affected by this directive unless https-inspection is enabled.
 #
 #client-header-order Host \
 #   User-Agent \
@@ -2227,11 +2228,14 @@ socket-timeout 300
 #   Referer \
 #   Cookie \
 #   DNT \
+#   Connection \
+#   Pragma \
+#   Upgrade-Insecure-Requests \
 #   If-Modified-Since \
 #   Cache-Control \
 #   Content-Length \
+#   Origin \
 #   Content-Type
-#
 #
 #  6.16. client-specific-tag
 #  ==========================
@@ -2251,13 +2255,6 @@ socket-timeout 300
 #      None
 #
 #  Notes:
-#
-#      +-----------------------------------------------------+
-#      |                       Warning                       |
-#      |-----------------------------------------------------|
-#      |This is an experimental feature. The syntax is likely|
-#      |to change in future versions.                        |
-#      +-----------------------------------------------------+
 #
 #      Client-specific tags allow Privoxy admins to create different
 #      profiles and let the users chose which one they want without
@@ -2287,7 +2284,7 @@ socket-timeout 300
 #      Clients can request tags to be set by using the CGI interface
 #      http://config.privoxy.org/client-tags. The specific tag
 #      description is only used on the web page and should be phrased
-#      in away that the user understand the effect of the tag.
+#      in away that the user understands the effect of the tag.
 #
 #  Examples:
 #
@@ -2295,6 +2292,11 @@ socket-timeout 300
 #          # that are enabled based on CLIENT-TAG patterns.
 #          client-specific-tag circumvent-blocks Overrule blocks but do not affect other actions
 #          client-specific-tag disable-content-filters Disable content-filters but do not affect other actions
+#          client-specific-tag overrule-redirects Overrule redirect sections
+#          client-specific-tag allow-cookies Do not crunch cookies in either direction
+#          client-specific-tag change-tor-socks-port Change forward-socks5 settings to use a different Tor socks port (and circuits)
+#          client-specific-tag no-https-inspection Disable HTTPS inspection
+#          client-specific-tag no-tls-verification Don't verify certificates when http-inspection is enabled
 #
 #
 #  6.17. client-tag-lifetime
@@ -2313,13 +2315,6 @@ socket-timeout 300
 #      60
 #
 #  Notes:
-#
-#      +-----------------------------------------------------+
-#      |                       Warning                       |
-#      |-----------------------------------------------------|
-#      |This is an experimental feature. The syntax is likely|
-#      |to change in future versions.                        |
-#      +-----------------------------------------------------+
 #
 #      In case of some tags users may not want to enable them
 #      permanently, but only for a short amount of time, for example
@@ -2355,13 +2350,6 @@ socket-timeout 300
 #      0
 #
 #  Notes:
-#
-#      +-----------------------------------------------------+
-#      |                       Warning                       |
-#      |-----------------------------------------------------|
-#      |This is an experimental feature. The syntax is likely|
-#      |to change in future versions.                        |
-#      +-----------------------------------------------------+
 #
 #      If clients reach Privoxy through another proxy, for example a
 #      load balancer, Privoxy can't tell the client's IP address from
@@ -2442,9 +2430,10 @@ socket-timeout 300
 #  7. HTTPS INSPECTION (EXPERIMENTAL)
 #  ===================================
 #
-#  HTTPS inspection allows to filter encrypted requests. This is only
-#  supported when Privoxy has been built with
-#  FEATURE_HTTPS_INSPECTION.
+#  HTTPS inspection allows to filter encrypted requests and
+#  responses. This is only supported when Privoxy has been built with
+#  FEATURE_HTTPS_INSPECTION. If you aren't sure if your version
+#  supports it, have a look at http://config.privoxy.org/show-status.
 #
 #
 #  7.1. ca-directory
@@ -2543,7 +2532,12 @@ socket-timeout 300
 #  Notes:
 #
 #      This directive specifies the name of the CA key file in ".pem"
-#      format. See the ca-cert-file for a command to generate it.
+#      format. The ca-cert-file section contains a command to
+#      generate it.
+#
+#      The CA key is used by Privoxy to sign generated certificates.
+#
+#      Access to the key should be limited to Privoxy.
 #
 #  Example:
 #
@@ -2757,8 +2751,9 @@ socket-timeout 300
 #      This directive specifies the trusted CAs file that is used
 #      when validating certificates for intercepted TLS/SSL requests.
 #
-#      An example file can be downloaded from https://curl.haxx.se/ca
-#      /cacert.pem.
+#      An example file can be downloaded from https://curl.se/ca/cacert.pem.
+#      If you want to create the file yourself, please
+#      see: https://curl.se/docs/caextract.html.
 #
 #  Example:
 #
@@ -2852,3 +2847,4 @@ forward-socks5t www-sites.oracle.com 127.0.0.1:8472 .
 forward-socks5t my.oracle.com 127.0.0.1:8472 .
 forward-socks5t people.oracle.com 127.0.0.1:8472 .
 forward-socks5t .oraclecloud.com 127.0.0.1:8472 .
+forward-socks5t gxpap.oracle.com 127.0.0.1:8472 .
