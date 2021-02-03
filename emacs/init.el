@@ -805,6 +805,8 @@
    (fm/key "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
    (fm/key "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
    (fm/face lsp-lsp-flycheck-warning-unnecessary-face :underline "DarkOrange")))
+ (fm/after lsp-headerline
+  (fm/var lsp-headerline-breadcrumb-icons-enable nil))
  (fm/after lsp-semantic-tokens
   (fm/var lsp-semantic-tokens-apply-modifiers t))
  (fm/after lsp-diagnostics
