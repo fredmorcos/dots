@@ -29,7 +29,7 @@
     <property name="KeyThemeName" type="empty"/>
     <property name="ToolbarStyle" type="empty"/>
     <property name="ToolbarIconSize" type="empty"/>
-    <property name="MenuImages" type="empty"/>
+    <property name="MenuImages" type="bool" value="true"/>
     <property name="ButtonImages" type="bool" value="true"/>
     <property name="MenuBarAccel" type="empty"/>
     <property name="CursorThemeName" type="string" value="capitaine-cursors"/>
