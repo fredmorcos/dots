@@ -274,7 +274,6 @@ libgit2-glib
 libgnome-keyring
 libgooglepinyin
 libgrss
-libgsf
 libiptcdata
 libiscsi
 libisoburn
@@ -502,6 +501,7 @@ shairplay
 shake
 shellcheck
 shfmt
+signal-desktop
 simplescreenrecorder
 skim
 sleuthkit
