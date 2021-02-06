@@ -104,6 +104,7 @@
       </property>
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="steam"/>
         <value type="string" value="thunar"/>
         <value type="string" value="networkmanager applet"/>
       </property>
@@ -111,6 +112,7 @@
       <property name="icon-size" type="int" value="0"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
+        <value type="string" value="obs"/>
         <value type="string" value="SimpleScreenRecorder"/>
         <value type="string" value="TelegramDesktop"/>
         <value type="string" value="redshift"/>
