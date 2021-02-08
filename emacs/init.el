@@ -732,7 +732,7 @@
   (fm/var company-tooltip-minimum 10)
   (fm/var company-tooltip-limit 15)
   (fm/var company-tooltip-align-annotations t)
-  ;; (fm/var company-idle-delay 0.1)
+  (fm/var company-idle-delay 0.1)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
   ;; (fm/var company-auto-commit t)
   ;; (fm/var company-auto-commit-chars '(32 95 41 46 39 47))
@@ -768,11 +768,13 @@
     (fm/key "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust")
     (fm/key "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "lsp-rust")
     (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "lsp-rust"))
+   (fm/var buffer-save-without-query t)
    (electric-quote-local-mode -1))
   (fm/hook rustic-mode-hook subword-mode)))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
+  (fm/var lsp-eldoc-render-all t)
   ;; (fm/var lsp-use-plists t)
   (fm/var lsp-completion-provider :none) ; Company-capf is already set
   (fm/var lsp-headerline-breadcrumb-enable t)
@@ -786,8 +788,8 @@
   (fm/var lsp-enable-on-type-formatting t)
   (fm/var lsp-before-save-edits nil)
   (fm/var lsp-auto-configure t)
-  (fm/var lsp-signature-doc-lines 1)
-  (fm/var lsp-signature-auto-activate t)
+  ;; (fm/var lsp-signature-doc-lines 1)
+  ;; (fm/var lsp-signature-auto-activate t)
   (fm/var lsp-signature-render-documentation t)
   (fm/var lsp-modeline-code-actions-enable nil)
   (fm/face lsp-face-highlight-read :inherit highlight)
@@ -854,7 +856,8 @@
       "-j=6" "--suggest-missing-includes" "--completion-parse=always")))))
 
 (fm/pkg lsp-treemacs
- (fm/key "<f2>" lsp-treemacs-errors-list))
+ (fm/key "C-c e" lsp-treemacs-errors-list)
+ (fm/key "C-c s" lsp-treemacs-symbols))
 
 (fm/pkg lsp-ivy
  (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
@@ -872,6 +875,7 @@
   (fm/face lsp-ui-doc-background :background "Gray95")
   (fm/face lsp-ui-doc-header :background "Pale Turquoise"))
  (fm/after lsp-ui-peek
+  (fm/var lsp-ui-peek-always-show t)
   (fm/face lsp-ui-peek-list :background "Gray95")
   (fm/face lsp-ui-peek-peek :background "Gray95")
   (fm/face lsp-ui-peek-header :foreground "Gray95" :background "Gray40")
