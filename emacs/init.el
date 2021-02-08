@@ -634,6 +634,7 @@
  (fm/after prog-mode
   (fm/hook prog-mode-hook diff-hl-mode))
  (fm/after magit-mode
+  (fm/hook magit-pre-refresh-hook diff-hl-magit-pre-refresh "diff-hl")
   (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")))
 
 (fm/pkg symbol-overlay
