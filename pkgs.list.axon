@@ -32,6 +32,7 @@ cargo-watch
 cbindgen
 ccache
 cclive
+cgdb
 chmlib
 clementine
 clinfo
@@ -78,7 +79,7 @@ fragments
 fwupd
 fzf
 gamemode
-gdb
+gdb-dashboard
 gimp
 glfw-x11
 gmp-ecm
@@ -224,6 +225,7 @@ psutils
 pulseaudio
 pv
 pwgen
+pwndbg
 python-beautifulsoup4
 python-cssselect
 python-docutils
