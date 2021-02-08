@@ -28,5 +28,6 @@
     <property name="dpms-on-ac-sleep" type="uint" value="0"/>
     <property name="dpms-on-ac-off" type="uint" value="0"/>
     <property name="blank-on-battery" type="int" value="4"/>
+    <property name="presentation-mode" type="bool" value="false"/>
   </property>
 </channel>
