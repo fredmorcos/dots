@@ -195,6 +195,8 @@ gtest
 gtk-engine-murrine
 gtk-engines
 gtkglext
+gtksourceview3
+gtkspell3
 gucharmap
 gumbo-parser
 gutenprint
@@ -456,7 +458,6 @@ python-pylint
 python-pysmbc
 python-pystemmer
 python-pyudev
-python-pyxdg
 python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
@@ -539,6 +540,7 @@ tesseract-data-deu
 tesseract-data-eng
 tesseract-data-fra
 testdisk
+texlive-bin
 the_silver_searcher
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -614,6 +616,7 @@ xcape
 xcompmgr
 xdelta3
 xdg-user-dirs-gtk
+xdot
 xfce4-appfinder
 xfce4-clipman-plugin
 xfce4-notifyd
@@ -673,6 +676,7 @@ you-get
 youtube-dl
 z3
 zile
+zim
 ziproxy
 zssh
 zsync
