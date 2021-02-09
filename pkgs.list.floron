@@ -156,6 +156,7 @@ fwupd
 fzf
 fzy
 gamemode
+gdb-dashboard
 ghex
 gifski
 gimp
@@ -352,6 +353,7 @@ mythes-fr
 nano
 ncdu
 ncftp
+ncurses5-compat-libs
 neofetch
 netcdf
 netctl
@@ -422,9 +424,9 @@ pulseaudio-alsa
 pulseaudio-bluetooth
 pulsemixer
 pv
+pwndbg
 python-beautifulsoup4
 python-cairocffi
-python-capstone
 python-cjkwrap
 python-cssselect
 python-diff-match-patch
