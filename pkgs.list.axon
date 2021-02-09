@@ -93,6 +93,7 @@ gnome-icon-theme
 gnome-icon-theme-extras
 gnome-logs
 gnome-sound-recorder
+gnuplot
 gpart
 gparted
 gpick
@@ -102,6 +103,7 @@ gst-python
 gstreamer-vaapi
 gtk-engine-murrine
 gtk-engines
+gtksourceview3
 gucharmap
 gvfs-mtp
 hddtemp
@@ -238,7 +240,6 @@ python-pyalsa
 python-pycryptodome
 python-pyenchant
 python-pylast
-python-pyxdg
 python-rcssmin
 python-rjsmin
 radeontool
@@ -256,6 +257,7 @@ rustc-demangle
 sassc
 scour
 screen
+scrot
 sd
 seahorse
 shake
@@ -324,6 +326,7 @@ wireguard-tools
 wmctrl
 xclip
 xdg-user-dirs-gtk
+xdot
 xf86-input-evdev
 xf86-input-vmmouse
 xf86-input-void
@@ -376,3 +379,4 @@ xsel
 xss-lock
 you-get
 z3
+zim
