@@ -90,7 +90,6 @@ cmerge () {
 XFCE=~/.config/xfce4
 XFCONF=$XFCE/xfconf/xfce-perchannel-xml
 
-cmerge xfce4/displays.xml            $XFCONF/displays.xml
 cmerge xfce4/keyboard-layout.xml     $XFCONF/keyboard-layout.xml
 cmerge xfce4/keyboards.xml           $XFCONF/keyboards.xml
 cmerge xfce4/pointers.xml            $XFCONF/pointers.xml
