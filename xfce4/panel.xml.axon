@@ -112,6 +112,7 @@
       <property name="icon-size" type="int" value="0"/>
       <property name="symbolic-icons" type="bool" value="true"/>
       <property name="known-items" type="array">
+        <value type="string" value="flameshot"/>
         <value type="string" value="zoom"/>
         <value type="string" value="obs"/>
         <value type="string" value="SimpleScreenRecorder"/>
