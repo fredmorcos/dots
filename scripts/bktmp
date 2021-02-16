@@ -62,10 +62,8 @@ if [ -d $EXTERNAL ]; then
     cmd "$HOME/.local/share/keyrings"   "$EXTERNAL/Configs/local-share-keyrings/"
     cmd "$HOME/.local/share/fonts"      "$EXTERNAL/Configs/local-share-fonts/"
     cmd "$HOME/.face"                   "$EXTERNAL/Configs/face.png"
-    cmd "$HOME/.thunderbird/"           "$EXTERNAL/Configs/oracle-thunderbird/"
     cmd "$HOME/.idealgraphvisualizer/"  "$EXTERNAL/Configs/oracle-idealgraphvisualizer/"
     cmd "$HOME/.eclipse/"               "$EXTERNAL/Configs/oracle-eclipse/"
-    cmd "$HOME/.zoom/"                  "$EXTERNAL/Configs/oracle-zoom/"
 else
     printf ">>> %s is not mounted\n" $EXTERNAL
     exit 1

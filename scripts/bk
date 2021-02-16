@@ -54,10 +54,8 @@ if [ -d $DATA ]; then
     cmd "$FLORON/.local/share/keyrings"   "$LAPTOP/Configs/local-share-keyrings/"
     cmd "$FLORON/.face"                   "$LAPTOP/Configs/face.png"
     # cmd "$FLORON/.wallpaper.jpg"          "$LAPTOP/Configs/wallpaper.jpg"
-    cmd "$FLORON/.thunderbird/"           "$LAPTOP/Configs/oracle-thunderbird/"
     cmd "$FLORON/.idealgraphvisualizer/"  "$LAPTOP/Configs/oracle-idealgraphvisualizer/"
     cmd "$FLORON/.eclipse/"               "$LAPTOP/Configs/oracle-eclipse/"
-    cmd "$FLORON/.zoom/"                  "$LAPTOP/Configs/oracle-zoom/"
 
     cmd "$HOME/Archive/"                  "$FLORON/Archive/"
     cmd "$HOME/Music/"                    "$FLORON/Music/"
