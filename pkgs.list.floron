@@ -45,7 +45,6 @@ bs1770gain
 bsdiff
 bully
 byzanz
-cabextract
 cadaver
 calcurse
 capitaine-cursors
@@ -113,6 +112,7 @@ diskus
 dmenu
 dnsmasq
 docx2txt
+dosbox
 duperemove
 dwdiff
 easy-rsa
@@ -144,6 +144,7 @@ flake8
 flatpak
 flawfinder
 flex
+fontforge
 foomatic-db
 foomatic-db-engine
 foomatic-db-gutenprint-ppds
@@ -186,7 +187,6 @@ gperf
 gperftools
 gpick
 gst-editing-services
-gst-libav
 gst-plugin-gtk
 gst-plugins-ugly
 gst-python
@@ -256,7 +256,7 @@ leatherman
 ledger
 lhasa
 lib32-gamemode
-lib32-gtk3
+lib32-gst-plugins-base-libs
 lib32-libavtp
 lib32-libsamplerate
 lib32-libva-intel-driver
@@ -489,7 +489,9 @@ rtirq
 rust-analyzer
 rust-bindgen
 rustc-demangle
+samba
 samurai
+sane
 sassc
 sbsigntools
 schedtool
@@ -606,6 +608,7 @@ wget
 when
 whois
 whowatch
+winetricks
 wireguard-tools
 wmctrl
 words
@@ -672,6 +675,7 @@ yapf
 yodl
 you-get
 youtube-dl
+z
 z3
 zile
 zim
