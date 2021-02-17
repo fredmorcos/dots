@@ -78,6 +78,7 @@ firefox
 flameshot
 flatpak
 flex
+fontforge
 fragments
 fwupd
 fzf
@@ -157,7 +158,6 @@ libdwarf
 libebur128
 libfido2
 libgnome-keyring
-libgphoto2
 libmad
 libmp4v2
 libmythes
@@ -256,6 +256,7 @@ rust-analyzer
 rust-bindgen
 rustc-demangle
 samba
+sane
 sassc
 scour
 screen
