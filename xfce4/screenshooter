@@ -1,7 +1,7 @@
 app=eom
 last_user=
-screenshot_dir=file:/home/fred
-action=2
+screenshot_dir=file:/home/fred/Temp
+action=1
 delay=2
 region=1
 show_mouse=1
