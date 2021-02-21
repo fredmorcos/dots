@@ -37,7 +37,6 @@ bbswitch
 bear
 binwalk
 bison
-bluez-tools
 bolt
 bonnie++
 bridge-utils
@@ -423,7 +422,6 @@ pstotext
 psutils
 ptunnel
 pulseaudio-alsa
-pulseaudio-bluetooth
 pulsemixer
 pv
 pwndbg
