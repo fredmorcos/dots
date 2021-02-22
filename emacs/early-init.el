@@ -10,15 +10,7 @@
 ;; A big contributor to startup times is garbage collection.
 (setq-default
  gc-cons-threshold most-positive-fixnum
- gc-cons-percentage 0.6
-
- tab-line-close-button-show nil
- tab-line-new-button-show nil
-
- tab-line-tab-name-function
- (lambda (buffer &optional buffers)
-  (let ((tab-name (tab-line-tab-name-buffer buffer buffers)))
-   (concat "  " tab-name "  "))))
+ gc-cons-percentage 0.6)
 
 ;; Prevent the glimpse of un-styled Emacs by disabling these UI
 ;; elements early.

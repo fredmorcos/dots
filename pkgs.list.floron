@@ -564,6 +564,7 @@ translate-shell
 transmission-cli
 transmission-gtk
 trash-cli
+tree-sitter
 tsocks
 ttf-jetbrains-mono
 ttf-juliamono

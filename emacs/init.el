@@ -55,7 +55,11 @@
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
  (cond
   ((not pkg-keymap)
-   `(global-set-key (kbd ,key) ,(if func `#',func nil)))
+   `(progn
+     ,(when (and func pkg)
+       `(autoload ',func ,pkg)
+       `(declare-function ,func ,pkg))
+     (global-set-key (kbd ,key) ,(if func `#',func nil))))
   (t
    `(progn
      (eval-when-compile (defvar ,pkg-keymap))
@@ -308,6 +312,16 @@
 
 ;; indent
 (fm/var indent-tabs-mode nil)
+
+(fm/after tab-line
+ (fm/var tab-line-close-button-show nil)
+ (fm/var tab-line-new-button-show nil)
+ (fm/var tab-line-tab-name-function
+  (lambda (buffer &optional buffers)
+   (let ((tab-name (tab-line-tab-name-buffer buffer buffers)))
+    (concat "  " tab-name "  "))))
+ (fm/key "<C-prior>" tab-line-switch-to-prev-tab nil "tab-line")
+ (fm/key "<C-next>" tab-line-switch-to-next-tab nil "tab-line"))
 
 (fm/after xref
  (fm/var xref-backend-functions '()))
@@ -903,6 +917,15 @@
 
 (fm/pkg yaml-mode)
 (fm/pkg flycheck-yamllint)
+
+(fm/pkg tree-sitter
+ (fm/after tree-sitter
+  (require 'tree-sitter-langs)
+  (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode))
+ (fm/after rustic
+  (fm/hook rustic-mode-hook tree-sitter-mode)))
+
+(fm/pkg tree-sitter-langs)
 
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
