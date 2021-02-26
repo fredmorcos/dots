@@ -918,14 +918,16 @@
 (fm/pkg yaml-mode)
 (fm/pkg flycheck-yamllint)
 
+(fm/pkg tree-sitter-langs)
 (fm/pkg tree-sitter
  (fm/after tree-sitter
+  (fm/dim tree-sitter-mode "Ts")
   (require 'tree-sitter-langs)
   (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode))
  (fm/after rustic
-  (fm/hook rustic-mode-hook tree-sitter-mode)))
-
-(fm/pkg tree-sitter-langs)
+  (fm/hook rustic-mode-hook tree-sitter-mode))
+ (fm/after cc-vars
+  (fm/hook c-mode-common-hook tree-sitter-mode)))
 
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
