@@ -747,7 +747,7 @@
   (fm/var company-tooltip-minimum 10)
   (fm/var company-tooltip-limit 15)
   (fm/var company-tooltip-align-annotations t)
-  (fm/var company-idle-delay 0.1)
+  (fm/var company-idle-delay 0.3)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
   ;; (fm/var company-auto-commit t)
   ;; (fm/var company-auto-commit-chars '(32 95 41 46 39 47))
