@@ -1,4 +1,5 @@
 abook
+accountsservice
 acpi
 acpica
 acpi_call
@@ -296,6 +297,7 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvterm
+lightdm-gtk-greeter
 linssid
 linux-firmware
 linux-headers
@@ -327,7 +329,6 @@ mb2md
 mcpp
 mda.lv2
 mediainfo
-mesa-demos
 mesa-vdpau
 meson
 mg
@@ -381,6 +382,7 @@ openbsd-netcat
 opendoas
 openldap
 openmp
+optimus-manager-git
 optipng
 osinfo-db-tools
 os-prober

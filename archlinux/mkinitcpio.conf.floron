@@ -4,8 +4,8 @@
 # run.  Advanced users may wish to specify all system modules
 # in this array.  For instance:
 #     MODULES=(piix ide_disk reiserfs)
-MODULES=(crc32c_intel aesni_intel intel_agp i915 bbswitch)
-# nvidia nvidia_modeset nvidia_uvm nvidia_drm
+MODULES=(crc32c_intel aesni_intel intel_agp i915)
+# nvidia nvidia_modeset nvidia_uvm nvidia_drm bbswitch
 
 # BINARIES
 # This setting includes any additional binaries a given user may
