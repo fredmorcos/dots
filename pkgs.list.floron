@@ -407,6 +407,7 @@ peek
 perl-archive-zip
 perl-locale-gettext
 pigz
+pipewire-alsa
 pixiewps
 pkgconf
 pkgdiff

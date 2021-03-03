@@ -788,7 +788,8 @@
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
-  (fm/var lsp-eldoc-render-all t)
+  (fm/dim lsp-mode "Lsp")
+  ;; (fm/var lsp-eldoc-render-all t)
   ;; (fm/var lsp-use-plists t)
   (fm/var lsp-completion-provider :none) ; Company-capf is already set
   (fm/var lsp-headerline-breadcrumb-enable t)
