@@ -319,7 +319,6 @@ lxdm-gtk3
 lzop
 mailutils
 mairix
-make
 man-pages
 marisa
 masscan
@@ -397,7 +396,6 @@ par2cmdline
 paru-bin
 pass-otp
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
@@ -470,7 +468,6 @@ python-virtualenv
 qemu
 radamsa
 radvd
-razor
 read-edid
 realtime-privileges
 reaver
@@ -513,7 +510,6 @@ sleuthkit
 slimmy-xfwm-theme-git
 smartmontools
 s-nail
-snap-sync
 socat
 soundconverter
 sparsehash
