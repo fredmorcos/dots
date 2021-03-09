@@ -322,6 +322,7 @@ lxdm-gtk3
 lzop
 mailutils
 mairix
+make
 man-pages
 marisa
 masscan
@@ -398,6 +399,7 @@ par2cmdline
 paru-bin
 pass-otp
 pastebinit
+patch
 patchelf
 pavucontrol
 pbzip2
