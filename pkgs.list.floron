@@ -322,7 +322,6 @@ lxdm-gtk3
 lzop
 mailutils
 mairix
-make
 man-pages
 marisa
 masscan
@@ -373,6 +372,7 @@ nilfs-utils
 nlohmann-json
 numix-gtk-theme-git
 nvidia
+nvidia-dkms
 nvidia-prime
 nvidia-settings
 nvme-cli
@@ -399,7 +399,6 @@ par2cmdline
 paru-bin
 pass-otp
 pastebinit
-patch
 patchelf
 pavucontrol
 pbzip2
