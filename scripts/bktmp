@@ -32,6 +32,8 @@ CMD=("rsync"
      '--exclude=discord/Code Cache/*'
      '--exclude=discord/0.0.11/*'
      '--exclude=.incomplete/*'
+     '--exclude=emacs/elpa/*'
+     '--exclude=node_modules/*'
      "$@")
 
 echo "Rsync command:" "${CMD[@]}"

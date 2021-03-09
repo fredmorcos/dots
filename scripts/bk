@@ -25,6 +25,8 @@ CMD=("rsync"
      "--delete-excluded"
      "--exclude=*/target"
      "--exclude=*/__pycache__"
+     '--exclude=emacs/elpa/*'
+     '--exclude=node_modules/*'
      "$@")
 
 echo "Rsync command:" "${CMD[@]}"
