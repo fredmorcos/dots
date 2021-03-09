@@ -34,7 +34,7 @@ bandwhich
 base
 bash-completion
 bat
-bbswitch
+bbswitch-dkms
 bear
 binwalk
 bison
