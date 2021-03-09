@@ -154,6 +154,14 @@ cmerge systemd/boot-override.conf    $SYSD/system/boot.mount.d/override.conf
 cmerge systemd/fstrim@.service       $SYSD/system/fstrim@.service
 cmerge systemd/fstrim@.timer         $SYSD/system/fstrim@.timer
 
+# UDEV=/etc/udev/rules.d
+
+# cmerge udev/99-mount.rules           $UDEV/99-mount.rules
+# cmerge udev/99-steam-cont.rules      $UDEV/99-steam-controller-perms.rules
+
+# cmerge mount_options.conf            /etc/udisks2/mount_options.conf
+cmerge gvfs-network.mount            /usr/share/gvfs/mounts/network.mount
+
 cmerge archlinux/makepkg.conf        /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
 cmerge archlinux/pacman.conf         /etc/pacman.conf
@@ -172,15 +180,6 @@ cmerge doas.conf                     /etc/doas.conf
 cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
-
-cmerge mount_options.conf            /etc/udisks2/mount_options.conf
-
-UDEV=/etc/udev/rules.d
-
-cmerge udev/99-mount.rules           $UDEV/99-mount.rules
-cmerge udev/99-steam-cont.rules      $UDEV/99-steam-controller-perms.rules
-
-cmerge gvfs-network.mount            /usr/share/gvfs/mounts/network.mount
 
 flatpak_tmp_file=$(mktemp)
 flatpak list --app --columns=application > "$flatpak_tmp_file"

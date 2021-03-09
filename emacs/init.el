@@ -172,6 +172,7 @@
 (fm/key "{"  (lambda () (interactive) (fm/insert-pair ?\{ ?\} nil)))
 (fm/key "("  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
 (fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
+(fm/key "`"  (lambda () (interactive) (fm/insert-pair ?\` ?\` t)))
 (fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
 
 ;; nativecomp
@@ -883,22 +884,25 @@
   (fm/var lsp-ui-flycheck-list-mode t))
  (fm/after lsp-ui-doc
   (fm/var lsp-ui-doc-enable nil)
-  (fm/var lsp-ui-doc-alignment 'window)
+  (fm/var lsp-ui-doc-alignment 'frame)
   (fm/var lsp-ui-doc-header t)
   (fm/var lsp-ui-doc-include-signature t)
-  (fm/face lsp-ui-doc-border "Gray70")
-  (fm/face lsp-ui-doc-background :background "Gray95")
-  (fm/face lsp-ui-doc-header :background "Pale Turquoise"))
+  (fm/var lsp-ui-doc-max-height 30)
+  (fm/face lsp-ui-doc-background :background "Gray92")
+  (fm/face lsp-ui-doc-header :foreground "Gray98" :background "RoyalBlue"))
  (fm/after lsp-ui-peek
+  (fm/var lsp-ui-peek-list-width 30)
   (fm/var lsp-ui-peek-always-show t)
-  (fm/face lsp-ui-peek-list :background "Gray95")
-  (fm/face lsp-ui-peek-peek :background "Gray95")
-  (fm/face lsp-ui-peek-header :foreground "Gray95" :background "Gray40")
+  (fm/face lsp-ui-peek-list :background "Gray96")
+  (fm/face lsp-ui-peek-peek :background "Gray92")
+  (fm/face lsp-ui-peek-selection :background "LightSkyBlue1")
+  (fm/face lsp-ui-peek-header :foreground "Gray98" :background "RoyalBlue")
   (fm/face lsp-ui-peek-filename :foreground "RoyalBlue"))
  (fm/after lsp-ui-sideline
   (fm/var lsp-ui-sideline-enable nil))
  (fm/after lsp-ui
   (fm/hookn lsp-ui-mode-hook
+   (fm/face lsp-ui-doc-border "Gray50")
    (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc"))))

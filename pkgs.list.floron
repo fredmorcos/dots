@@ -130,7 +130,6 @@ entr
 eom
 evince
 exa
-exfalso
 exfat-utils
 ext4magic
 f2fs-tools
@@ -249,6 +248,7 @@ iwd
 jemalloc
 jfsutils
 jp2a
+kakasi
 kcov
 kmscon
 laptop-detect
@@ -303,6 +303,8 @@ linssid
 linux-firmware
 linux-headers
 linux-tools-meta
+linux-zen
+linux-zen-headers
 live-media
 lld
 lldb
@@ -451,6 +453,7 @@ python-pyacoustid
 python-pyalsa
 python-pycryptodome
 python-pydocstyle
+python-pyinotify
 python-pylast
 python-pylint
 python-pysmbc
@@ -466,6 +469,7 @@ python-tlsh
 python-unidecode
 python-virtualenv
 qemu
+quodlibet
 radamsa
 radvd
 read-edid
