@@ -319,6 +319,7 @@ lua-alt-getopt
 lua-filesystem
 luit
 lxdm-gtk3
+lzip
 lzop
 mailutils
 mairix
@@ -576,6 +577,7 @@ tup
 udftools
 udiskie
 unace
+unarj
 uncrustify
 unicode-emoji
 units
