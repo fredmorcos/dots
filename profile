@@ -40,7 +40,6 @@ PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/Documents/Workspace:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
-PATH="$HOME/node_modules/.bin:$PATH"
 
 LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 

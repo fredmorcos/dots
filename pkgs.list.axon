@@ -128,6 +128,7 @@ idle3-tools
 inetutils
 inkscape
 innoextract
+inter-font
 intltool
 iotop
 irqbalance
@@ -174,6 +175,8 @@ linux
 linux-firmware
 linux-headers
 linux-tools-meta
+linux-zen
+linux-zen-headers
 lld
 lldb
 lrzip
@@ -220,12 +223,13 @@ peek
 perl-net-libidn2
 picard
 pigz
+pipewire-alsa
+pipewire-pulse
 pkgconf
 powertop
 progress
 pstoedit
 psutils
-pulseaudio
 pv
 pwgen
 pwndbg
@@ -280,7 +284,6 @@ strace
 s-tui
 subdl
 sudo
-svt-av1
 syncthing
 sysstat
 systemd-resolvconf
