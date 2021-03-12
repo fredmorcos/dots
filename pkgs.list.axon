@@ -224,12 +224,12 @@ perl-net-libidn2
 picard
 pigz
 pipewire-alsa
-pipewire-pulse
 pkgconf
 powertop
 progress
 pstoedit
 psutils
+pulseaudio-alsa
 pv
 pwgen
 pwndbg
