@@ -17,12 +17,14 @@ alias fpoweroff='fsysctl poweroff'
 alias freboot='fsysctl reboot'
 alias fsuspend='fsysctl suspend'
 
-alias nsysctl='ssh root@neuron systemctl'
-alias nreboot='nsysctl reboot'
-alias npoweroff='nsysctl poweroff'
+# alias nsysctl='ssh root@neuron systemctl'
+# alias nreboot='nsysctl reboot'
+# alias npoweroff='nsysctl poweroff'
+# alias krestart='nsysctl restart kodi'
+# alias kstop='nsysctl stop kodi'
 alias nup='ssh root@neuron pacman -Syu'
-alias krestart='nsysctl restart kodi'
-alias kstop='nsysctl stop kodi'
+alias nreboot='ssh root@neuron kodi-send -a Reboot'
+alias npoweroff='ssh root@neuron kodi-send -a "ShutDown()"'
 
 enter-graalvm() {
   if [ -f ~/.bashrc_graalvm ]; then
