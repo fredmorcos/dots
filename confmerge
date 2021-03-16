@@ -135,6 +135,8 @@ cmerge inputrc                       ~/.inputrc
 
 cmerge cargo.conf                    ~/.cargo/config
 
+cmerge mpv/input.conf                ~/.config/mpv/input.conf
+
 cmerge x11/Xresources                ~/.Xresources
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
