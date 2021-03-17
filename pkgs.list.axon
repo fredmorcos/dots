@@ -237,6 +237,7 @@ python-beautifulsoup4
 python-cssselect
 python-docutils
 python-dulwich
+python-ecdsa
 python-fastimport
 python-paramiko
 python-pip
