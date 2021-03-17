@@ -435,6 +435,7 @@ python-cjkwrap
 python-cssselect
 python-diff-match-patch
 python-discid
+python-ecdsa
 python-evdev
 python-genshi
 python-httplib2
