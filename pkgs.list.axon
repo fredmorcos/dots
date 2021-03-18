@@ -32,6 +32,7 @@ cargo-watch
 cbindgen
 ccache
 cclive
+ccls
 cgdb
 chmlib
 clementine
