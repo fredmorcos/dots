@@ -934,6 +934,8 @@
  (fm/after cc-vars
   (fm/hook c-mode-common-hook tree-sitter-mode)))
 
+(fm/pkg ccls)
+
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
 

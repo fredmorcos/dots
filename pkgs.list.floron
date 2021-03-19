@@ -61,6 +61,7 @@ catdoc
 catimg
 cbindgen
 ccache
+ccls
 cdrdao
 cdrtools
 cgdb
@@ -274,6 +275,7 @@ libcue
 libdvdcss
 libemf
 libfido2
+libgepub
 libgit2-glib
 libgnome-keyring
 libgooglepinyin
