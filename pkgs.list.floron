@@ -75,6 +75,7 @@ clazy
 clementine
 clinfo
 cmake
+cmake-format
 codespell
 coin-or-mp
 colordiff
@@ -431,6 +432,7 @@ ptunnel
 pulseaudio-alsa
 pv
 pwndbg
+python-babel
 python-beautifulsoup4
 python-cairocffi
 python-cjkwrap
@@ -441,6 +443,7 @@ python-ecdsa
 python-evdev
 python-genshi
 python-httplib2
+python-jinja
 python-jsbeautifier
 python-levenshtein
 python-libevdev
@@ -456,6 +459,7 @@ python-pip
 python-progressbar
 python-pyacoustid
 python-pyalsa
+python-pyaml
 python-pycryptodome
 python-pydocstyle
 python-pyinotify
