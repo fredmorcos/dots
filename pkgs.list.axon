@@ -38,6 +38,7 @@ chmlib
 clementine
 clinfo
 clipgrab
+cmake-format
 cmus
 compsize
 conntrack-tools
@@ -234,16 +235,19 @@ pulseaudio-alsa
 pv
 pwgen
 pwndbg
+python-babel
 python-beautifulsoup4
 python-cssselect
 python-docutils
 python-dulwich
 python-ecdsa
 python-fastimport
+python-jinja
 python-paramiko
 python-pip
 python-pyacoustid
 python-pyalsa
+python-pyaml
 python-pycryptodome
 python-pyenchant
 python-pylast
