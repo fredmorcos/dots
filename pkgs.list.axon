@@ -190,6 +190,7 @@ man-pages
 mediainfo
 mesa-demos
 mesa-vdpau
+meson
 mkinitcpio-systemd-tool
 mlocate
 mpv
