@@ -448,12 +448,18 @@
  (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
-(fm/after cc-mode
- ;; (fm/hook c-mode-hook lsp-deferred)
- (fm/hookn c-mode-hook
-  (fm/key "(" nil c-mode-map)
+(fm/after css-mode
+ (fm/hookn css-mode-hook
   (fm/after newcomment
    (fm/var comment-style 'extra-line))))
+
+(fm/after cc-mode
+ ;; (fm/hook c-mode-hook lsp-deferred)
+ (fm/after cc-vars
+  (fm/hookn c-mode-common-hook
+   (fm/key "(" nil c-mode-base-map)
+   (fm/after newcomment
+    (fm/var comment-style 'extra-line)))))
 
 (fm/after cc-vars
  (fm/var c-mark-wrong-style-of-comment t)
@@ -863,13 +869,19 @@
   (fm/face lsp-rust-analyzer-inlay-param-face
    :height 0.8 :weight semibold :foreground "DimGray" :background "Azure2")
   (fm/face lsp-rust-analyzer-inlay-chain-face
-   :height 0.8 :weight semibold :foreground "DimGray" :background "Khaki"))
- (fm/after lsp-clangd
-  (fm/var lsp-clients-clangd-args
-   (append lsp-clients-clangd-args
-    '("--background-index" "--completion-style=detailed" "--pch-storage=memory"
-      "--clang-tidy" "--header-insertion=iwyu" "--header-insertion-decorators"
-      "-j=6" "--suggest-missing-includes" "--completion-parse=always")))))
+   :height 0.8 :weight semibold :foreground "DimGray" :background "Khaki")))
+ ;; (fm/after lsp-clangd
+ ;;  (fm/var lsp-clients-clangd-args
+ ;;   (append lsp-clients-clangd-args
+ ;;    '("--background-index" "--completion-style=detailed" "--pch-storage=memory"
+ ;;      "--clang-tidy" "--header-insertion=iwyu" "--header-insertion-decorators"
+ ;;      "-j=6" "--suggest-missing-includes" "--completion-parse=always")))))
+
+(fm/pkg ccls
+ (fm/after cc-vars
+  (fm/hookn c-mode-common-hook
+   (require 'ccls)
+   (lsp))))
 
 (fm/pkg lsp-treemacs
  (fm/key "C-c e" lsp-treemacs-errors-list)
@@ -933,8 +945,6 @@
   (fm/hook rustic-mode-hook tree-sitter-mode))
  (fm/after cc-vars
   (fm/hook c-mode-common-hook tree-sitter-mode)))
-
-(fm/pkg ccls)
 
 (setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))

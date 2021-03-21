@@ -1,4 +1,28 @@
+/* Inner terminal borders */
 vte-terminal, terminal-window {
-  padding: 3px 3px 3px 3px;
-  -vte-terminal-inner-border: 3px 3px 3px 3px;
+    padding: 3px 3px 3px 3px;
+    -vte-terminal-inner-border: 3px 3px 3px 3px;
 }
+
+/* Resize tray icons */
+/*
+ * #pulseaudio-button image {
+ *     -gtk-icon-transform: scale(0.8);
+ * }
+ *
+ * #xfce-panel-button image {
+ *     -gtk-icon-transform: scale(0.8);
+ * }
+ *
+ * #xfce4-clipman-plugin image {
+ *     -gtk-icon-transform: scale(0.8);
+ * }
+ *
+ * #xfce4-power-manager-plugin image {
+ *     -gtk-icon-transform: scale(0.8);
+ * }
+ *
+ * #xfce4-notification-plugin image {
+ *     -gtk-icon-transform: scale(0.8);
+ * }
+ */
