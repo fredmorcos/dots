@@ -879,7 +879,7 @@
 
 (fm/pkg ccls
  (fm/after cc-vars
-  (fm/hookn c-mode-common-hook
+  (fm/hookn c++-mode-hook
    (require 'ccls)
    (lsp))))
 
