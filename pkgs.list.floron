@@ -68,6 +68,7 @@ cgdb
 chafa
 checksec
 cheese
+cherrytree
 chmlib
 chromium
 chrpath
@@ -196,7 +197,6 @@ gtest
 gtk-engine-murrine
 gtk-engines
 gtkglext
-gtksourceview3
 gtkspell3
 gucharmap
 gumbo-parser
@@ -615,6 +615,7 @@ w3m
 watchexec
 wavemon
 webp-pixbuf-loader
+wezterm-bin
 wget
 when
 whois
