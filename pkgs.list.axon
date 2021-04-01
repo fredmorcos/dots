@@ -103,8 +103,6 @@ gnuplot
 gpart
 gparted
 gpick
-gst-plugins-ugly
-gst-python
 gstreamer-vaapi
 gtk-engine-murrine
 gtk-engines
@@ -203,6 +201,7 @@ net-tools
 network-manager-applet
 networkmanager-openvpn
 nilfs-utils
+nmap
 ntfs-3g
 numix-gtk-theme-git
 nuspell
@@ -334,6 +333,7 @@ vokoscreen
 vulkan-extra-layers
 vulkan-tools
 webp-pixbuf-loader
+wezterm-git
 wget
 whois
 winetricks
