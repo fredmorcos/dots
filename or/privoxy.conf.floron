@@ -2839,6 +2839,7 @@ socket-timeout 300
 #
 #
 
+forward-socks5t .oracle.com 127.0.0.1:8472 .
 forward-socks5t .us.oracle.com 127.0.0.1:8472 .
 forward-socks5t .oraclecorp.com 127.0.0.1:8472 .
 forward-socks5t .oraclevcn.com 127.0.0.1:8472 .
@@ -2846,5 +2847,6 @@ forward-socks5t login.oracle.com 127.0.0.1:8472 .
 forward-socks5t www-sites.oracle.com 127.0.0.1:8472 .
 forward-socks5t my.oracle.com 127.0.0.1:8472 .
 forward-socks5t people.oracle.com 127.0.0.1:8472 .
+forward-socks5t .ocecdn.oraclecloud.com 127.0.0.1:8472 .
 forward-socks5t .oraclecloud.com 127.0.0.1:8472 .
 forward-socks5t gxpap.oracle.com 127.0.0.1:8472 .
