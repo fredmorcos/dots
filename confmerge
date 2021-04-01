@@ -139,6 +139,7 @@ cmerge mpv/input.conf                ~/.config/mpv/input.conf
 
 cmerge wezterm/wezterm.lua           ~/.config/wezterm/wezterm.lua
 echo "Installing wezterm terminfo file..."
+mkdir -p ~/.terminfo/w/
 cp -f wezterm/terminfo ~/.terminfo/w/wezterm
 
 cmerge user-dirs.dirs                ~/.config/user-dirs.dirs
