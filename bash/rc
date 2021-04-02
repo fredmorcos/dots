@@ -24,7 +24,7 @@ alias fsuspend='fsysctl suspend'
 # alias kstop='nsysctl stop kodi'
 alias nup='ssh root@neuron pacman -Syu'
 alias nreboot='ssh root@neuron kodi-send -a Reboot'
-alias npoweroff='ssh root@neuron kodi-send -a "ShutDown()"'
+alias npoweroff='ssh root@neuron kodi-send -a "ShutDown"'
 
 enter-graalvm() {
   if [ -f ~/.bashrc_graalvm ]; then
