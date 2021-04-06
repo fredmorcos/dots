@@ -27,7 +27,7 @@ alias nup='nssh pacman -Syu'
 # alias nreboot='nssh kodi-send -a Reboot'
 # alias npoweroff='nssh kodi-send -a ShutDown'
 alias nreboot='kstop && sleep 5 && nssh systemctl reboot'
-alias npoweroff='kstop && sleep 5 && nssh systemct poweroff'
+alias npoweroff='kstop && sleep 5 && nssh systemctl poweroff'
 
 enter-graalvm() {
   if [ -f ~/.bashrc_graalvm ]; then
