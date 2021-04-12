@@ -137,8 +137,6 @@ cmerge cargo.conf                    ~/.cargo/config
 
 cmerge mpv/input.conf                ~/.config/mpv/input.conf
 
-cmerge user-dirs.dirs                ~/.config/user-dirs.dirs
-
 cmerge x11/Xresources                ~/.Xresources
 cmerge x11/dmrc                      ~/.dmrc
 cmerge x11/lxdm.conf                 /etc/lxdm/lxdm.conf
