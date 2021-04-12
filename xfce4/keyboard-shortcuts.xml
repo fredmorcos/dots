@@ -52,7 +52,6 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;w" type="string" value="exo-open --launch WebBrowser">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="exo-open --launch MailReader"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;o" type="string" value="pavucontrol">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
@@ -64,6 +63,12 @@
       </property>
       <property name="&lt;Primary&gt;Print" type="string" value="xfce4-screenshooter -r"/>
       <property name="Print" type="string" value="xfce4-screenshooter -f"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="clementine">
+        <property name="startup-notify" type="bool" value="true"/>
+      </property>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;c" type="string" value="signal-desktop">
+        <property name="startup-notify" type="bool" value="true"/>
+      </property>
     </property>
   </property>
   <property name="xfwm4" type="empty">
