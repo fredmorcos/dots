@@ -135,6 +135,7 @@ irqbalance
 ispell
 jfsutils
 kcov
+kexec-tools
 lhasa
 lib32-gamemode
 lib32-gst-plugins-base-libs
