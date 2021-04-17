@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Disable tramp when loading .el and .elc files
+(setq file-name-handler-alist nil)
+
+;; Disable vc when opening files
+(remove-hook 'find-file-hook 'vc-find-file-hook)
+
 ;; Directories
 (defconst emacs-extra-dir "/home/fred/Workspace/dots/emacs/extra")
 (defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
@@ -946,7 +952,6 @@
  (fm/after cc-vars
   (fm/hook c-mode-common-hook tree-sitter-mode)))
 
-(setq file-name-handler-alist nil)
 (message "Startup in %s" (emacs-init-time))
 
 (provide 'init)
