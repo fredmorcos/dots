@@ -34,7 +34,7 @@ bandwhich
 base
 bash-completion
 bat
-bbswitch-dkms
+bbswitch
 bear
 binwalk
 bison
@@ -45,6 +45,7 @@ bs1770gain
 bsdiff
 bully
 byzanz
+cabextract
 cadaver
 calcurse
 capitaine-cursors
@@ -188,6 +189,7 @@ gperf
 gperftools
 gpick
 gst-editing-services
+gst-libav
 gst-plugin-gtk
 gstreamer-vaapi
 gtest
@@ -304,8 +306,6 @@ linssid
 linux-firmware
 linux-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 live-media
 lld
 lldb
@@ -324,6 +324,7 @@ lzip
 lzop
 mailutils
 mairix
+make
 man-pages
 marisa
 masscan
@@ -375,7 +376,6 @@ nlohmann-json
 nmap
 numix-gtk-theme-git
 nvidia
-nvidia-dkms
 nvidia-prime
 nvidia-settings
 nvme-cli
@@ -402,6 +402,7 @@ par2cmdline
 paru-bin
 pass-otp
 pastebinit
+patch
 patchelf
 pavucontrol
 pbzip2
@@ -618,7 +619,6 @@ wget
 when
 whois
 whowatch
-winetricks
 wireguard-tools
 wmctrl
 words
