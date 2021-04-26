@@ -102,6 +102,7 @@ gnuplot
 gpart
 gparted
 gpick
+gst-libav
 gstreamer-vaapi
 gtk-engine-murrine
 gtk-engines
@@ -175,8 +176,6 @@ linux
 linux-firmware
 linux-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 lld
 lldb
 lrzip
@@ -335,7 +334,6 @@ vulkan-tools
 webp-pixbuf-loader
 wget
 whois
-winetricks
 wireguard-tools
 wmctrl
 xclip
@@ -373,7 +371,6 @@ xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
 xorg-xgamma
-xorg-xhost
 xorg-xinput
 xorg-xkbevd
 xorg-xkbutils
