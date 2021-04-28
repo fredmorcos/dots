@@ -294,6 +294,7 @@ libopenraw
 libosinfo
 libpipewire02
 libsidplayfp
+libtraceevent
 libunrar
 libva-intel-driver
 libva-mesa-driver
