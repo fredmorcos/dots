@@ -24,7 +24,7 @@
     <property name="CanChangeAccels" type="empty"/>
     <property name="ColorPalette" type="empty"/>
     <property name="FontName" type="string" value="Sans 9"/>
-    <property name="MonospaceFontName" type="string" value="Monospace 10"/>
+    <property name="MonospaceFontName" type="string" value="Monospace 10.5"/>
     <property name="IconSizes" type="string" value="gtk-large-toolbar=16,16:gtk-small-toolbar=16,16:gtk-menu=16,16:gtk-button=16,16:gtk-dialog=16,16:gtk-dnd=16,16:panel-menu=16,16:panel=16,16"/>
     <property name="KeyThemeName" type="empty"/>
     <property name="ToolbarStyle" type="empty"/>
