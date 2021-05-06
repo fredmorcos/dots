@@ -683,6 +683,7 @@ xorg-xcursorgen
 xorg-xdriinfo
 xorg-xev
 xorg-xgamma
+xorg-xhost
 xorg-xinput
 xorg-xkbevd
 xorg-xkbutils
