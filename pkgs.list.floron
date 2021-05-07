@@ -56,6 +56,8 @@ cargo-crev
 cargo-edit
 cargo-fuzz
 cargo-outdated
+cargo-release
+cargo-spellcheck
 cargo-tarpaulin
 cargo-watch
 catdoc
@@ -186,6 +188,7 @@ gitolite
 gitprompt-rs
 git-repair
 git-review
+gitui
 glider
 glyr
 gmp-ecm
@@ -440,6 +443,7 @@ pkgfile
 plantri
 powertop
 privoxy
+procs
 profile-cleaner
 progress
 protobuf-c
