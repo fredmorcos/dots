@@ -187,6 +187,7 @@ ghex
 gifski
 gimp
 git-crypt
+git-lfs
 gitolite
 gitprompt-rs
 git-repair
@@ -432,6 +433,7 @@ patch
 patchelf
 pavucontrol
 pbzip2
+pcmanfm-gtk3
 pdfarranger
 pdfcrack
 peek

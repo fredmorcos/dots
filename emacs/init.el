@@ -863,7 +863,7 @@
   (fm/var lsp-rust-build-on-save t)
   (fm/var lsp-rust-unstable-features t)
   (fm/var lsp-rust-full-docs t)
-  (fm/var lsp-rust-analyzer-cargo-watch-command "clippy")
+  ;; (fm/var lsp-rust-analyzer-cargo-watch-command "clippy")
   (fm/var lsp-rust-analyzer-max-inlay-hint-length 15)
   (fm/var lsp-rust-analyzer-inlay-type-format "%s")
   (fm/var lsp-rust-analyzer-inlay-type-space-format ": %s")
