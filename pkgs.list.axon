@@ -22,12 +22,16 @@ bridge-utils
 bs1770gain
 capitaine-cursors
 cargo-audit
+cargo-bloat
 cargo-c
 cargo-crev
+cargo-depgraph
 cargo-edit
 cargo-fuzz
 cargo-outdated
+cargo-spellcheck
 cargo-tarpaulin
+cargo-udeps
 cargo-watch
 cbindgen
 ccache
@@ -51,6 +55,7 @@ dconf-editor
 ddcutil
 d-feet
 dhclient
+dhcpcd
 dialog
 dmidecode
 dnsmasq
@@ -105,6 +110,8 @@ gambas3-script
 gamemode
 gdb-dashboard
 gimp
+git-lfs
+gitui
 glfw-x11
 gmp-ecm
 gnome-backgrounds
@@ -237,6 +244,7 @@ par2cmdline
 paru-bin
 patch
 pavucontrol
+pcmanfm-gtk3
 pdfarranger
 pdfmixtool
 pdfslicer
@@ -247,6 +255,7 @@ pigz
 pipewire-alsa
 pkgconf
 powertop
+procs
 progress
 pstoedit
 psutils
@@ -331,7 +340,6 @@ transmission-gtk
 trash-cli
 ttf-font-awesome
 ttf-jetbrains-mono
-ttf-juliamono
 tup
 udftools
 udiskie
@@ -391,6 +399,7 @@ xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
 xorg-xgamma
+xorg-xhost
 xorg-xinput
 xorg-xkbevd
 xorg-xkbutils
