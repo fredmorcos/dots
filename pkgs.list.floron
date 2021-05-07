@@ -77,7 +77,6 @@ clazy
 clementine
 clinfo
 cmake
-cmake-format
 codespell
 coin-or-mp
 colordiff
@@ -381,7 +380,6 @@ mythes-fr
 nano
 ncdu
 ncftp
-ncurses5-compat-libs
 neofetch
 netcdf
 netctl
@@ -601,7 +599,6 @@ trash-cli
 tree-sitter
 tsocks
 ttf-jetbrains-mono
-ttf-juliamono
 tup
 udftools
 udiskie
