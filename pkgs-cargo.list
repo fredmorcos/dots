@@ -5,8 +5,6 @@ cargo-audit
 cargo-deadlinks
 cargo-expand
 cargo-geiger
-cargo-spellcheck
-cargo-udeps
 flamegraph
 hors
 inferno

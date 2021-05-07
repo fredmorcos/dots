@@ -51,14 +51,17 @@ calcurse
 capitaine-cursors
 capnproto
 cargo-audit
+cargo-bloat
 cargo-c
 cargo-crev
+cargo-depgraph
 cargo-edit
 cargo-fuzz
 cargo-outdated
 cargo-release
 cargo-spellcheck
 cargo-tarpaulin
+cargo-udeps
 cargo-watch
 catdoc
 catimg
