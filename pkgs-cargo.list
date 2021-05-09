@@ -5,6 +5,7 @@ cargo-audit
 cargo-deadlinks
 cargo-expand
 cargo-geiger
+czkawka_gui
 flamegraph
 hors
 inferno

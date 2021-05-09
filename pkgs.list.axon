@@ -56,6 +56,7 @@ ddcutil
 d-feet
 dhclient
 dhcpcd
+dhex
 dialog
 dmidecode
 dnsmasq
@@ -138,6 +139,7 @@ gvfs-mtp
 hddtemp
 hdparm
 hexchat
+hexedit
 hledger-web
 htmlmin
 htop
