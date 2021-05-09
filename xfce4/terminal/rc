@@ -40,4 +40,5 @@ ColorBold=#073642
 ColorBoldUseDefault=FALSE
 TabActivityColor=#dc322f
 TitleMode=TERMINAL_TITLE_PREPEND
+ScrollingUnlimited=TRUE
 
