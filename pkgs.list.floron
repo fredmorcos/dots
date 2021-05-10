@@ -167,6 +167,7 @@ ghex
 gifski
 gimp
 git-crypt
+git-filter-repo
 git-lfs
 gitolite
 gitprompt-rs
