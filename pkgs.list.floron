@@ -90,6 +90,7 @@ corkscrew
 cpio
 cppcheck
 crda
+cross
 ctags
 cuetools
 cups-pdf
@@ -340,6 +341,7 @@ mate-utils
 mb2md
 mcpp
 mda.lv2
+mdbook
 mediainfo
 mesa-vdpau
 meson
