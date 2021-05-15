@@ -28,7 +28,7 @@
 ;; faces
 (custom-set-faces
  '(default                ((t (:family     "Monospace"
-                               :height     105
+                               :height     120
                                :background "Gray98"
                                :foreground "Gray40"))))
  '(fringe                 ((t (:background "Gray98"))))
