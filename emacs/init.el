@@ -235,23 +235,38 @@
 (fm/var frame-title-format "%b - emacs")
 
 ;; mode-line
-(fm/face mode-line-buffer-id :foreground "RoyalBlue")
-(fm/face mode-line-highlight :inherit mode-line-emphasis :background "PowderBlue")
+(fm/face mode-line-buffer-id
+ :foreground "RoyalBlue")
+(fm/face mode-line-highlight
+ :inherit mode-line-emphasis
+ :background "PowderBlue")
 
 ;; faces
-(fm/face link :foreground "RoyalBlue3" :underline (:color "LightSteelBlue3"))
-(fm/face highlight :background "Wheat")
-(fm/face error :foreground "Red3")
+(fm/face link
+ :foreground "RoyalBlue3"
+ :underline (:color "LightSteelBlue3"))
+(fm/face highlight
+ :background "Wheat")
+(fm/face error
+ :foreground "Red3")
 
 ;; font-lock
-(fm/face font-lock-function-name-face :inherit font-lock-builtin-face)
-(fm/face font-lock-keyword-face :foreground "MediumSlateBlue")
-(fm/face font-lock-type-face :foreground "DarkGreen")
-(fm/face font-lock-variable-name-face :foreground "DarkCyan")
-(fm/face font-lock-string-face :foreground "OliveDrab")
-(fm/face font-lock-comment-face :foreground "DarkMagenta")
-(fm/face font-lock-warning-face :foreground "Orange3")
-(fm/face font-lock-constant-face :foreground "CornflowerBlue")
+(fm/face font-lock-function-name-face
+ :inherit font-lock-builtin-face)
+(fm/face font-lock-keyword-face
+ :foreground "MediumSlateBlue")
+(fm/face font-lock-type-face
+ :foreground "DarkGreen")
+(fm/face font-lock-variable-name-face
+ :foreground "DarkCyan")
+(fm/face font-lock-string-face
+ :foreground "OliveDrab")
+(fm/face font-lock-comment-face
+ :foreground "DarkMagenta")
+(fm/face font-lock-warning-face
+ :foreground "Orange3")
+(fm/face font-lock-constant-face
+ :foreground "CornflowerBlue")
 
 ;; saveplace
 (fm/var save-place t)
@@ -362,13 +377,19 @@
 (fm/after display-line-numbers
  (fm/var display-line-numbers-grow-only t)
  (fm/var display-line-numbers-width-start t)
- (fm/face line-number :foreground "Gray85")
- (fm/face line-number-current-line :foreground "Gray70"))
+ (fm/face line-number
+  :foreground "Gray85")
+ (fm/face line-number-current-line
+  :foreground "Gray70"))
+
 (fm/after prog-mode
  (fm/hook prog-mode-hook display-line-numbers-mode))
 
 (fm/after hl-line
- (fm/face hl-line :background "Gray95" :extend nil))
+ (fm/face hl-line
+  :background "Gray95"
+  :extend nil))
+
 (fm/after prog-mode
  (fm/hook prog-mode-hook hl-line-mode))
 
@@ -412,9 +433,12 @@
  (fm/var show-paren-when-point-inside-paren t)
  (fm/var show-paren-style 'mixed)
  (fm/var show-paren-highlight-openparen t)
- (fm/face show-paren-match :background "PowderBlue")
- (fm/face show-paren-mismatch :background "LightSalmon")
- (fm/face show-paren-match-expression :background "Lavender"))
+ (fm/face show-paren-match
+  :background "PowderBlue")
+ (fm/face show-paren-mismatch
+  :background "LightSalmon")
+ (fm/face show-paren-match-expression
+  :background "Lavender"))
 (fm/after prog-mode
  (fm/hook prog-mode-hook show-paren-mode))
 
@@ -439,8 +463,10 @@
  (fm/dim flyspell-mode "Fs")
  (fm/var ispell-program-name "aspell")
  (fm/var ispell-extra-args '("--sug-mode=ultra"))
- (fm/face flyspell-duplicate :underline "YellowGreen")
- (fm/face flyspell-incorrect :underline "Orchid"))
+ (fm/face flyspell-duplicate
+  :underline "YellowGreen")
+ (fm/face flyspell-incorrect
+  :underline "Orchid"))
 (fm/after text-mode
  (fm/hook text-mode-hook flyspell-mode))
 (fm/after prog-mode
@@ -474,7 +500,9 @@
 
 (fm/after face-remap
  (fm/dim buffer-face-mode)
- (fm/face variable-pitch :family "Sans" :height 100))
+ (fm/face variable-pitch
+  :family "Sans"
+  :height 100))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -499,10 +527,6 @@
 
 (fm/pkg org
  (fm/after org
-  (fm/var org-agenda-include-diary t)
-  ;; (fm/var org-agenda-files
-  ;;  `(,(expand-file-name "~/Documents/Important/Agenda.org")
-  ;;    ,(expand-file-name "~/Documents/Important/Passwords/Passwords.org")))
   (fm/var org-cycle-separator-lines 0)
   (fm/var org-startup-folded nil)
   (fm/var org-ellipsis "  ▾")
@@ -512,23 +536,54 @@
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
-  (fm/face org-document-title :foreground "MidnightBlue" :height 1.4 :bold t)
-  (fm/face org-target :slant italic :foreground "Tan" :height 0.8)
-  (fm/face org-table :height 0.8 :foreground "NavyBlue")
-  (fm/face org-ellipsis :foreground "SteelBlue")
-  (fm/face org-level-1 :family "Sans"
-   :foreground "SlateBlue" :height 1.2 :inherit (outline-1) :bold t)
-  (fm/face org-level-2 :family "Sans"
-   :foreground "IndianRed3" :height 1.1 :inherit (outline-2) :bold t)
-  (fm/face org-level-3 :family "Sans"
-   :foreground "SteelBlue" :inherit (outline-3) :bold t)
-  (fm/face org-todo :foreground "Maroon" :height 0.8 :bold t)
-  (fm/face org-done :foreground "ForestGreen" :height 0.8 :bold t)
-  (fm/face org-drawer :foreground "Snow3" :height 0.8)
-  (fm/face org-special-keyword :inherit font-lock-keyword-face :height 0.8 :bold t)
-  (fm/face org-table :foreground "RoyalBlue")
+  (fm/face org-document-title
+   :foreground "MidnightBlue"
+   :height 1.4
+   :bold t)
+  (fm/face org-target
+   :slant italic
+   :foreground "Tan"
+   :height 0.8)
+  (fm/face org-table
+   :height 0.8
+   :foreground "NavyBlue")
+  (fm/face org-ellipsis
+   :foreground "SteelBlue")
+  (fm/face org-level-1
+   :family "Sans"
+   :foreground "SlateBlue"
+   :height 1.2
+   :inherit (outline-1)
+   :bold t)
+  (fm/face org-level-2
+   :family "Sans"
+   :foreground "IndianRed3"
+   :height 1.1
+   :inherit (outline-2)
+   :bold t)
+  (fm/face org-level-3
+   :family "Sans"
+   :foreground "SteelBlue"
+   :inherit (outline-3)
+   :bold t)
+  (fm/face org-todo
+   :foreground "Maroon"
+   :height 0.8
+   :bold t)
+  (fm/face org-done
+   :foreground "ForestGreen"
+   :height 0.8
+   :bold t)
+  (fm/face org-drawer
+   :foreground "Snow3"
+   :height 0.8)
+  (fm/face org-special-keyword
+   :inherit font-lock-keyword-face
+   :height 0.8
+   :bold t)
+  (fm/face org-table
+   :foreground "RoyalBlue")
   (fm/key "M-p" fm/generate-password)
-  (fm/key "C-c a" org-agenda)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
    (setq-local right-margin-width 2)
@@ -610,7 +665,8 @@
 
 (fm/pkg indent-guide
  (fm/after indent-guide
-  (fm/face indent-guide-face :foreground "gray80"))
+  (fm/face indent-guide-face
+   :foreground "gray80"))
  (fm/after json-mode
   (fm/hook json-mode-hook indent-guide-mode)))
 
@@ -655,9 +711,12 @@
  (fm/after diff-hl
   (fm/var diff-hl-draw-borders nil)
   (fm/var diff-hl-flydiff-delay 0.1)
-  (fm/face diff-hl-delete :background "RosyBrown1")
-  (fm/face diff-hl-insert :background "DarkSeaGreen2")
-  (fm/face diff-hl-change :background "PowderBlue"))
+  (fm/face diff-hl-delete
+   :background "RosyBrown1")
+  (fm/face diff-hl-insert
+   :background "DarkSeaGreen2")
+  (fm/face diff-hl-change
+   :background "PowderBlue"))
  (fm/after prog-mode
   (fm/hook prog-mode-hook diff-hl-mode))
  (fm/after magit-mode
@@ -668,7 +727,8 @@
  (fm/after symbol-overlay
   (fm/dim symbol-overlay-mode "Sy")
   (fm/var symbol-overlay-idle-time 0.1)
-  (fm/face symbol-overlay-default-face :background "HoneyDew2")
+  (fm/face symbol-overlay-default-face
+   :background "HoneyDew2")
   (fm/hookn symbol-overlay-mode-hook
    (fm/key "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
    (fm/key "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)))
@@ -686,8 +746,12 @@
 (fm/pkg multiple-cursors
  (fm/after multiple-cursors
   (fm/var mc/always-run-for-all t)
-  (fm/face mc/cursor-bar-face :background "Gray40" :foreground "White")
-  (fm/face mc/cursor-face :background "Gray50" :foreground "White"))
+  (fm/face mc/cursor-bar-face
+   :background "Gray40"
+   :foreground "White")
+  (fm/face mc/cursor-face
+   :background "Gray50"
+   :foreground "White"))
  (fm/key "C-c C-v" mc/edit-lines)
  (fm/key "C->" mc/mark-next-like-this)
  (fm/key "C-<" mc/mark-previous-like-this)
@@ -698,9 +762,11 @@
   (fm/var hledger-currency-string "EUR")
   (fm/var hledger-current-overlay t)
   (fm/var hledger-comments-column 1)
-  (fm/face hledger-description-face :inherit font-lock-keyword-face)
-  (fm/face hledger-amount-face :inherit font-lock-constant-face :inverse-video t)
-  ;; (fm/face hledger-date-face :inherit font-lock-string-face :inverse-video t)
+  (fm/face hledger-description-face
+   :inherit font-lock-keyword-face)
+  (fm/face hledger-amount-face
+   :inherit font-lock-constant-face
+   :inverse-video t)
   (fm/hookn hledger-mode-hook
    (toggle-truncate-lines t)
    (setq tab-width 1)))
@@ -715,9 +781,12 @@
    '(idle-change new-line mode-enabled idle-buffer-switch))
   (fm/var flycheck-idle-change-delay 0.25)
   (fm/var flycheck-idle-buffer-switch-delay 0.25)
-  (fm/face flycheck-error :underline "Red1")
-  (fm/face flycheck-info :underline "ForestGreen")
-  (fm/face flycheck-warning :underline "DarkOrange")
+  (fm/face flycheck-error
+   :underline "Red1")
+  (fm/face flycheck-info
+   :underline "ForestGreen")
+  (fm/face flycheck-warning
+   :underline "DarkOrange")
   (fm/hookn flycheck-mode-hook
    (fm/key "M-n" flycheck-next-error flycheck-mode-map "flycheck")
    (fm/key "M-p" flycheck-previous-error flycheck-mode-map "flycheck")))
@@ -737,10 +806,14 @@
   (fm/var flycheck-posframe-warnings-prefix "Warning: ")
   (fm/var flycheck-posframe-error-prefix "Error: ")
   (fm/var flycheck-posframe-prefix "Info: ")
-  (fm/face flycheck-posframe-background-face :background "CornSilk")
-  (fm/face flycheck-posframe-warning-face :foreground "DarkOrange")
-  (fm/face flycheck-posframe-border-face :background "Wheat" :foreground "Wheat")
-  (fm/face flycheck-posframe-error-face :foreground "DarkRed"))
+  (fm/face flycheck-posframe-background-face
+   :background "CornSilk")
+  (fm/face flycheck-posframe-warning-face
+   :foreground "DarkOrange")
+  (fm/face flycheck-posframe-border-face
+   :background "Wheat" :foreground "Wheat")
+  (fm/face flycheck-posframe-error-face
+   :foreground "DarkRed"))
  (fm/after flycheck
   (fm/hook flycheck-mode-hook flycheck-posframe-mode))
  (fm/after company
@@ -769,7 +842,8 @@
   (fm/var company-transformers
    '(company-sort-by-occurrence company-sort-by-backend-importance
      company-sort-prefer-same-case-prefix))
-  (fm/face company-tooltip :background "gray95"))
+  (fm/face company-tooltip
+   :background "gray95"))
  (fm/after prog-mode
   (fm/hook prog-mode-hook company-mode)))
 
@@ -820,10 +894,14 @@
   ;; (fm/var lsp-signature-auto-activate t)
   (fm/var lsp-signature-render-documentation t)
   (fm/var lsp-modeline-code-actions-enable nil)
-  (fm/face lsp-face-highlight-read :inherit highlight)
-  (fm/face lsp-face-semhl-namespace :foreground "CadetBlue")
-  (fm/face lsp-face-semhl-enum :foreground "MediumPurple")
-  (fm/face lsp-face-semhl-struct :foreground "BlueViolet")
+  (fm/face lsp-face-highlight-read
+   :inherit highlight)
+  (fm/face lsp-face-semhl-namespace
+   :foreground "CadetBlue")
+  (fm/face lsp-face-semhl-enum
+   :foreground "MediumPurple")
+  (fm/face lsp-face-semhl-struct
+   :foreground "BlueViolet")
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hookn lsp-mode-hook
@@ -834,7 +912,8 @@
    (fm/key "C-c t" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
    (fm/key "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
    (fm/key "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
-   (fm/face lsp-lsp-flycheck-warning-unnecessary-face :underline "DarkOrange")))
+   (fm/face lsp-lsp-flycheck-warning-unnecessary-face
+    :underline "DarkOrange")))
  (fm/after lsp-headerline
   (fm/var lsp-headerline-breadcrumb-icons-enable nil))
  (fm/after lsp-semantic-tokens
@@ -844,8 +923,10 @@
    '((unnecessary :underline "DarkOrange")
      (deprecated :strike-through t))))
  (fm/after lsp-lens-face
-  (fm/face lsp-lens-face :inherit shadow)
-  (fm/face lsp-lens-mouse-face :inherit link))
+  (fm/face lsp-lens-face
+   :inherit shadow)
+  (fm/face lsp-lens-mouse-face
+   :inherit link))
  (fm/after lsp-rust
   (fm/var lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
   (fm/var lsp-rust-analyzer-proc-macro-enable t)
@@ -870,18 +951,19 @@
   (fm/var lsp-rust-analyzer-inlay-chain-format "➔ %s")
   (fm/var lsp-rust-analyzer-inlay-chain-space-format " %s")
   (fm/face lsp-rust-analyzer-inlay-type-face
-   ;; :height 0.7 :weight semibold :foreground "DimGray" :background "Gray92")
-   :inherit font-lock-type-face :height 0.8 :background "HoneyDew2")
+   :inherit font-lock-type-face
+   :height 0.8
+   :background "HoneyDew2")
   (fm/face lsp-rust-analyzer-inlay-param-face
-   :height 0.8 :weight semibold :foreground "DimGray" :background "Azure2")
+   :height 0.8
+   :weight semibold
+   :foreground "DimGray"
+   :background "Azure2")
   (fm/face lsp-rust-analyzer-inlay-chain-face
-   :height 0.8 :weight semibold :foreground "DimGray" :background "Khaki")))
- ;; (fm/after lsp-clangd
- ;;  (fm/var lsp-clients-clangd-args
- ;;   (append lsp-clients-clangd-args
- ;;    '("--background-index" "--completion-style=detailed" "--pch-storage=memory"
- ;;      "--clang-tidy" "--header-insertion=iwyu" "--header-insertion-decorators"
- ;;      "-j=6" "--suggest-missing-includes" "--completion-parse=always")))))
+   :height 0.8
+   :weight semibold
+   :foreground "DimGray"
+   :background "Khaki")))
 
 (fm/pkg ccls
  (fm/after cc-vars
@@ -906,16 +988,25 @@
   (fm/var lsp-ui-doc-header t)
   (fm/var lsp-ui-doc-include-signature t)
   (fm/var lsp-ui-doc-max-height 30)
-  (fm/face lsp-ui-doc-background :background "Gray92")
-  (fm/face lsp-ui-doc-header :foreground "Gray98" :background "RoyalBlue"))
+  (fm/face lsp-ui-doc-background
+   :background "Gray92")
+  (fm/face lsp-ui-doc-header
+   :foreground "Gray98"
+   :background "RoyalBlue"))
  (fm/after lsp-ui-peek
   (fm/var lsp-ui-peek-list-width 30)
   (fm/var lsp-ui-peek-always-show t)
-  (fm/face lsp-ui-peek-list :background "Gray96")
-  (fm/face lsp-ui-peek-peek :background "Gray92")
-  (fm/face lsp-ui-peek-selection :background "LightSkyBlue1")
-  (fm/face lsp-ui-peek-header :foreground "Gray98" :background "RoyalBlue")
-  (fm/face lsp-ui-peek-filename :foreground "RoyalBlue"))
+  (fm/face lsp-ui-peek-list
+   :background "Gray96")
+  (fm/face lsp-ui-peek-peek
+   :background "Gray92")
+  (fm/face lsp-ui-peek-selection
+   :background "LightSkyBlue1")
+  (fm/face lsp-ui-peek-header
+   :foreground "Gray98"
+   :background "RoyalBlue")
+  (fm/face lsp-ui-peek-filename
+   :foreground "RoyalBlue"))
  (fm/after lsp-ui-sideline
   (fm/var lsp-ui-sideline-enable nil))
  (fm/after lsp-ui
