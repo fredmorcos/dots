@@ -179,6 +179,7 @@ libnfs
 libpipewire02
 libsidplayfp
 libupnp
+liburing
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
@@ -282,7 +283,6 @@ rsync
 rust-analyzer
 rust-bindgen
 rustc-demangle
-samba
 sane
 sassc
 scour

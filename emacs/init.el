@@ -506,12 +506,6 @@
  (fm/var c-default-style
   '((other . "user"))))
 
-(fm/after face-remap
- (fm/dim buffer-face-mode)
- (fm/face variable-pitch
-  :family "Sans"
-  :height 100))
-
 ;; js-mode
 (fm/mode ".hocon" js-mode)
 
@@ -537,16 +531,13 @@
  (fm/after org
   (fm/var org-cycle-separator-lines 0)
   (fm/var org-startup-folded 'content)
-  (fm/var org-ellipsis "  ↓")
+  (fm/var org-ellipsis "  ⤵")
   (fm/var org-hide-leading-stars t)
   (fm/var org-hide-emphasis-markers t)
   (fm/var org-fontify-whole-heading-line t)
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
-  (fm/face org-default
-   :family "Sans"
-   :inherit (default))
   (fm/face org-document-title
    :foreground "MidnightBlue"
    :height 1.4
@@ -561,24 +552,20 @@
   (fm/face org-ellipsis
    :foreground "SteelBlue")
   (fm/face org-level-1
-   :family "Sans"
    :foreground "SlateBlue"
    :height 1.2
    :inherit (outline-1)
    :bold t)
   (fm/face org-level-2
-   :family "Sans"
    :foreground "IndianRed3"
    :height 1.1
    :inherit (outline-2)
    :bold t)
   (fm/face org-level-3
-   :family "Sans"
    :foreground "SteelBlue"
    :inherit (outline-3)
    :bold t)
   (fm/face org-level-4
-   :family "Sans"
    :inherit (outline-4))
   (fm/face org-todo
    :foreground "Maroon"
@@ -602,13 +589,14 @@
    (setq-local left-margin-width 2)
    (setq-local right-margin-width 2)
    (setq-local scroll-margin 0)
-   (setq-local cursor-type 'bar))))
-
-(fm/pkg org-variable-pitch
- (fm/after org-variable-pitch
-  (fm/dim org-variable-pitch-minor-mode))
- (fm/after org
-  (fm/hook org-mode-hook org-variable-pitch-minor-mode)))
+   (setq-local cursor-type 'bar)
+   ;; Change the default font used for org-mode to a serif font
+   ;; (Caladea), but keep the fixed-pitch fonts so that alignments and
+   ;; indentations stay consistent.
+   (face-remap-add-relative 'default :family "Caladea")
+   (face-remap-add-relative 'fixed-pitch :family "Monospace" :height 120)
+   (face-remap-add-relative 'fixed-pitch-serif :family "Monospace" :height 120)
+   (face-remap-add-relative 'org-indent :inherit '(org-hide fixed-pitch)))))
 
 (fm/pkg which-key
  (fm/dim which-key-mode)

@@ -42,6 +42,7 @@
  '(bold                   ((t (:weight     medium))))
  '(tab-line               ((t (:background "Gray85"
                                :box        (:color "Lavender")
+                               :height     0.9
                                :inherit    'variable-pitch))))
  '(tab-line-tab           ((t (:inherit    'tab-line
                                :box        (:color "Lavender")))))
