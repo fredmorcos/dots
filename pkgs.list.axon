@@ -2,6 +2,7 @@ acpid
 adobe-source-sans-pro-fonts
 alsa-firmware
 amd-ucode
+amdvlk
 arch-audit
 arp-scan
 asp
@@ -42,7 +43,6 @@ chmlib
 clementine
 clinfo
 clipgrab
-cmake-format
 cmus
 compsize
 conntrack-tools
@@ -165,22 +165,6 @@ jfsutils
 kcov
 kexec-tools
 lhasa
-lib32-gamemode
-lib32-gst-plugins-base-libs
-lib32-libavtp
-lib32-libsamplerate
-lib32-libva-mesa-driver
-lib32-libva-vdpau-driver
-lib32-libxslt
-lib32-llvm
-lib32-mesa-vdpau
-lib32-ocl-icd
-lib32-opencl-mesa
-lib32-simplescreenrecorder
-lib32-v4l-utils
-lib32-vkd3d
-lib32-vulkan-mesa-layers
-lib32-vulkan-validation-layers
 libao
 libcue
 libdmapsharing
@@ -206,7 +190,9 @@ linux-headers
 linux-tools-meta
 lld
 lldb
+llvm
 lrzip
+lsof
 luit
 lxdm-gtk3
 lzop
@@ -236,6 +222,7 @@ nvme-cli
 obs-studio
 odt2txt
 openbsd-netcat
+opencl-mesa
 opendoas
 openmp
 otf-cascadia-code
@@ -316,7 +303,6 @@ sloccount
 smartmontools
 soundconverter
 sshfs
-steam-native-runtime
 strace
 s-tui
 subdl
@@ -362,6 +348,7 @@ vim-spell-en
 vkd3d
 vokoscreen
 vulkan-extra-layers
+vulkan-radeon
 vulkan-tools
 webp-pixbuf-loader
 wget

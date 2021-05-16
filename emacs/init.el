@@ -405,10 +405,13 @@
   '(face tabs lines empty tab-mark indentation indentation::tab indentation::space
     space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
     space-before-tab::tab space-before-tab::space)))
+
 (fm/after elisp-mode
  (fm/hook emacs-lisp-mode-hook whitespace-mode))
+
 (fm/after make-mode
  (fm/hook makefile-mode-hook whitespace-mode))
+
 (fm/after hledger-mode
  (fm/hook hledger-mode-hook whitespace-mode))
 
@@ -439,6 +442,7 @@
   :background "LightSalmon")
  (fm/face show-paren-match-expression
   :background "Lavender"))
+
 (fm/after prog-mode
  (fm/hook prog-mode-hook show-paren-mode))
 
@@ -453,6 +457,7 @@
  (fm/var auto-revert-avoid-polling t)
  (fm/var buffer-auto-revert-by-notification t)
  (fm/var auto-revert-mode-text " Ar"))
+
 (fm/after dired
  (fm/hook dired-mode-hook auto-revert-mode))
 
