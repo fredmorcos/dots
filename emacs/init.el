@@ -251,22 +251,23 @@
  :foreground "Red3")
 
 ;; font-lock
-(fm/face font-lock-function-name-face
- :inherit font-lock-builtin-face)
-(fm/face font-lock-keyword-face
- :foreground "MediumSlateBlue")
-(fm/face font-lock-type-face
- :foreground "DarkGreen")
-(fm/face font-lock-variable-name-face
- :foreground "DarkCyan")
-(fm/face font-lock-string-face
- :foreground "OliveDrab")
-(fm/face font-lock-comment-face
- :foreground "DarkMagenta")
-(fm/face font-lock-warning-face
- :foreground "Orange3")
-(fm/face font-lock-constant-face
- :foreground "CornflowerBlue")
+(fm/after font-lock
+ (fm/face font-lock-function-name-face
+  :inherit font-lock-builtin-face)
+ (fm/face font-lock-keyword-face
+  :foreground "MediumSlateBlue")
+ (fm/face font-lock-type-face
+  :foreground "DarkGreen")
+ (fm/face font-lock-variable-name-face
+  :foreground "DarkCyan")
+ (fm/face font-lock-string-face
+  :foreground "OliveDrab")
+ (fm/face font-lock-comment-face
+  :foreground "DarkMagenta")
+ (fm/face font-lock-warning-face
+  :foreground "Orange3")
+ (fm/face font-lock-constant-face
+  :foreground "CornflowerBlue"))
 
 ;; saveplace
 (fm/var save-place t)
@@ -472,8 +473,10 @@
   :underline "YellowGreen")
  (fm/face flyspell-incorrect
   :underline "Orchid"))
+
 (fm/after text-mode
  (fm/hook text-mode-hook flyspell-mode))
+
 (fm/after prog-mode
  (fm/hook prog-mode-hook flyspell-prog-mode))
 
@@ -533,14 +536,17 @@
 (fm/pkg org
  (fm/after org
   (fm/var org-cycle-separator-lines 0)
-  (fm/var org-startup-folded nil)
-  (fm/var org-ellipsis "  ▾")
+  (fm/var org-startup-folded 'content)
+  (fm/var org-ellipsis "  ↓")
   (fm/var org-hide-leading-stars t)
   (fm/var org-hide-emphasis-markers t)
   (fm/var org-fontify-whole-heading-line t)
   (fm/var org-fontify-done-headline t)
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
+  (fm/face org-default
+   :family "Sans"
+   :inherit (default))
   (fm/face org-document-title
    :foreground "MidnightBlue"
    :height 1.4
@@ -571,6 +577,9 @@
    :foreground "SteelBlue"
    :inherit (outline-3)
    :bold t)
+  (fm/face org-level-4
+   :family "Sans"
+   :inherit (outline-4))
   (fm/face org-todo
    :foreground "Maroon"
    :height 0.8
@@ -592,13 +601,12 @@
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
    (setq-local right-margin-width 2)
-   (setq-local scroll-margin 0))))
+   (setq-local scroll-margin 0)
+   (setq-local cursor-type 'bar))))
 
 (fm/pkg org-variable-pitch
  (fm/after org-variable-pitch
-  (fm/dim org-variable-pitch-minor-mode)
-  (fm/hookn org-variable-pitch-minor-mode-hook
-   (setq-local cursor-type 'bar)))
+  (fm/dim org-variable-pitch-minor-mode))
  (fm/after org
   (fm/hook org-mode-hook org-variable-pitch-minor-mode)))
 
@@ -783,7 +791,10 @@
   (fm/var flycheck-checker-error-threshold nil)
   (fm/var flycheck-mode-line-prefix "Fc")
   (fm/var flycheck-check-syntax-automatically
-   '(idle-change new-line mode-enabled idle-buffer-switch))
+   '(idle-change
+     new-line
+     mode-enabled
+     idle-buffer-switch))
   (fm/var flycheck-idle-change-delay 0.25)
   (fm/var flycheck-idle-buffer-switch-delay 0.25)
   (fm/face flycheck-error
@@ -829,9 +840,7 @@
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends
-   ;; '((company-capf company-keywords company-files company-yasnippet)))
-   '(company-capf company-files))
+  (setq-default company-backends '(company-capf company-files))
   (fm/var completion-ignore-case t)
   (fm/var company-echo-truncate-lines nil)
   (fm/var company-selection-wrap-around t)
@@ -840,12 +849,12 @@
   (fm/var company-tooltip-align-annotations t)
   (fm/var company-idle-delay 0.3)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
-  ;; (fm/var company-auto-commit t)
-  ;; (fm/var company-auto-commit-chars '(32 95 41 46 39 47))
   (fm/var company-frontends
-   '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
+   '(company-echo-metadata-frontend
+     company-pseudo-tooltip-frontend))
   (fm/var company-transformers
-   '(company-sort-by-occurrence company-sort-by-backend-importance
+   '(company-sort-by-occurrence
+     company-sort-by-backend-importance
      company-sort-prefer-same-case-prefix))
   (fm/face company-tooltip
    :background "gray95"))
@@ -856,7 +865,8 @@
  (fm/after company-posframe
   (fm/dim company-posframe-mode)
   (fm/var company-posframe-show-params
-   '(:internal-border-width 1 :internal-border-color "gray60")))
+   '(:internal-border-width 1
+     :internal-border-color "gray60")))
  (fm/after company
   (fm/hook company-mode-hook company-posframe-mode "company-posframe")))
 
@@ -970,12 +980,6 @@
    :foreground "DimGray"
    :background "Khaki")))
 
-(fm/pkg ccls
- (fm/after cc-vars
-  (fm/hookn c++-mode-hook
-   (require 'ccls)
-   (lsp))))
-
 (fm/pkg lsp-treemacs
  (fm/key "C-c e" lsp-treemacs-errors-list)
  (fm/key "C-c s" lsp-treemacs-symbols))
@@ -1020,17 +1024,6 @@
    (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
    (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc"))))
-
-(fm/pkg dumb-jump
- (fm/after dumb-jump
-  (fm/var dumb-jump-selector 'ivy)
-  (fm/var dumb-jump-window 'other))
- (fm/after python
-  (fm/hookn python-mode-hook
-   (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t)))
- (fm/after cc-mode
-  (fm/hookn java-mode-hook
-   (fm/hook xref-backend-functions dumb-jump-xref-activate "dumb-jump" t))))
 
 (fm/pkg crux)
 

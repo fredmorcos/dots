@@ -311,9 +311,6 @@ syncthing
 sysstat
 systemd-resolvconf
 systemd-ui
-tesseract-data-deu
-tesseract-data-eng
-tesseract-data-fra
 texlive-bin
 thunar-archive-plugin
 thunar-media-tags-plugin
@@ -327,6 +324,7 @@ torsocks
 transmission-gtk
 trash-cli
 tree-sitter
+ttf-caladea
 ttf-font-awesome
 ttf-inconsolata
 ttf-jetbrains-mono
