@@ -284,9 +284,10 @@
 (fm/var recentf-max-menu-items 50)
 (fm/var recentf-max-saved-items 100)
 (fm/var recentf-mode t)
-(fm/var recentf-exclude `(,emacs-elpa-dir
-                          ,(expand-file-name "~/Oracle")
-                          ,(expand-file-name "~/OracleWorkTrees")))
+(fm/var recentf-exclude
+ `(,emacs-elpa-dir
+   ,(expand-file-name "~/Oracle")
+   ,(expand-file-name "~/OracleWorkTrees")))
 (fm/hook kill-emacs-hook recentf-cleanup "recentf")
 
 ;; files
@@ -770,9 +771,15 @@
    :inverse-video t)
   (fm/hookn hledger-mode-hook
    (toggle-truncate-lines t)
-   (setq tab-width 1)))
+   (setq tab-width 1))
+  (fm/hook hledger-mode-hook whitespace-mode))
  (fm/mode ".journal" hledger-mode)
  (fm/mode ".ledger"  hledger-mode))
+
+(fm/pkg flycheck-hledger
+ (fm/after hledger-mode
+  (require 'flycheck-hledger)
+  (fm/hook hledger-mode-hook flycheck-mode)))
 
 (fm/pkg flycheck
  (fm/after flycheck
