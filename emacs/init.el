@@ -551,7 +551,8 @@
    :height 0.8
    :foreground "NavyBlue")
   (fm/face org-ellipsis
-   :foreground "SteelBlue")
+   :foreground "SteelBlue"
+   :height 0.7)
   (fm/face org-level-1
    :foreground "SlateBlue"
    :height 1.2
@@ -594,7 +595,7 @@
    ;; Change the default font used for org-mode to a serif font
    ;; (Caladea), but keep the fixed-pitch fonts so that alignments and
    ;; indentations stay consistent.
-   (face-remap-add-relative 'default :family "Caladea")
+   (face-remap-add-relative 'default :family "Iosevka Aile")
    (face-remap-add-relative 'fixed-pitch :family "Monospace" :height 120)
    (face-remap-add-relative 'fixed-pitch-serif :family "Monospace" :height 120)
    (face-remap-add-relative 'org-indent :inherit '(org-hide fixed-pitch)))))
