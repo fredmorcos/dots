@@ -238,6 +238,7 @@ ifenslave
 ifplugd
 img2pdf
 inetutils
+intel-compute-runtime
 intel-gpu-tools
 intel-ucode
 intel-undervolt
@@ -264,19 +265,6 @@ lbzip2
 leatherman
 ledger
 lhasa
-lib32-gamemode
-lib32-gst-plugins-base-libs
-lib32-libavtp
-lib32-libsamplerate
-lib32-libva-intel-driver
-lib32-libva-mesa-driver
-lib32-libva-vdpau-driver
-lib32-libxslt
-lib32-mesa-vdpau
-lib32-v4l-utils
-lib32-virtualgl
-lib32-vkd3d
-lib32-vulkan-mesa-layers
 libappindicator-gtk2
 libcue
 libdvdcss
@@ -323,7 +311,9 @@ lockfile-progs
 logrotate
 lostfiles
 lrzip
+lsb-release
 lshw
+lsof
 lua-alt-getopt
 lua-filesystem
 luit
@@ -392,11 +382,14 @@ obs-studio
 odt2txt
 ogmtools
 openbsd-netcat
+opencl-mesa
+opencl-nvidia
 opendoas
 openldap
 openmp
 optimus-manager-git
 optipng
+opusfile
 osinfo-db-tools
 os-prober
 otf-cascadia-code
@@ -508,7 +501,6 @@ rtirq
 rust-analyzer
 rust-bindgen
 rustc-demangle
-samba
 samurai
 sane
 sassc
@@ -542,7 +534,6 @@ sqlitebrowser
 squashfs-tools
 sshfs
 sshuttle
-steam-native-runtime
 strace
 stress
 stunnel
@@ -557,9 +548,6 @@ tarsnap
 tcc
 tcpdump
 tepl
-tesseract-data-deu
-tesseract-data-eng
-tesseract-data-fra
 testdisk
 texlive-core
 the_silver_searcher
@@ -589,6 +577,7 @@ transmission-gtk
 trash-cli
 tree-sitter
 tsocks
+ttf-caladea
 ttf-inconsolata
 ttf-jetbrains-mono
 tup
@@ -622,6 +611,8 @@ virglrenderer
 virtualbox
 vkd3d
 vokoscreen
+vulkan-intel
+vulkan-mesa-layers
 vulkan-tools
 w3m
 watchexec
