@@ -540,6 +540,7 @@
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
   (fm/face org-document-title
+   :family "Iosevka Aile"
    :foreground "MidnightBlue"
    :height 1.4
    :bold t)
@@ -549,31 +550,39 @@
    :height 0.8)
   (fm/face org-table
    :height 0.8
-   :foreground "NavyBlue")
+   ;; :foreground "NavyBlue")
+   :foreground "RoyalBlue")
   (fm/face org-ellipsis
+   :family "Iosevka Aile"
    :foreground "SteelBlue"
    :height 0.7)
   (fm/face org-level-1
+   :family "Iosevka Aile"
    :foreground "SlateBlue"
    :height 1.2
    :inherit (outline-1)
    :bold t)
   (fm/face org-level-2
+   :family "Iosevka Aile"
    :foreground "IndianRed3"
    :height 1.1
    :inherit (outline-2)
    :bold t)
   (fm/face org-level-3
+   :family "Iosevka Aile"
    :foreground "SteelBlue"
    :inherit (outline-3)
    :bold t)
   (fm/face org-level-4
+   :family "Iosevka Aile"
    :inherit (outline-4))
   (fm/face org-todo
+   :family "Iosevka Aile"
    :foreground "Maroon"
    :height 0.8
    :bold t)
   (fm/face org-done
+   :family "Iosevka Aile"
    :foreground "ForestGreen"
    :height 0.8
    :bold t)
@@ -584,8 +593,6 @@
    :inherit font-lock-keyword-face
    :height 0.8
    :bold t)
-  (fm/face org-table
-   :foreground "RoyalBlue")
   (fm/key "M-p" fm/generate-password)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
@@ -595,10 +602,16 @@
    ;; Change the default font used for org-mode to a serif font
    ;; (Caladea), but keep the fixed-pitch fonts so that alignments and
    ;; indentations stay consistent.
-   (face-remap-add-relative 'default :family "Iosevka Aile")
-   (face-remap-add-relative 'fixed-pitch :family "Monospace" :height 120)
-   (face-remap-add-relative 'fixed-pitch-serif :family "Monospace" :height 120)
-   (face-remap-add-relative 'org-indent :inherit '(org-hide fixed-pitch)))))
+   (face-remap-add-relative 'default
+    :family "Caladea")
+   (face-remap-add-relative 'fixed-pitch
+    :family "Monospace"
+    :height 120)
+   (face-remap-add-relative 'fixed-pitch-serif
+    :family "Monospace"
+    :height 120)
+   (face-remap-add-relative 'org-indent
+    :inherit '(org-hide fixed-pitch)))))
 
 (fm/pkg which-key
  (fm/dim which-key-mode)

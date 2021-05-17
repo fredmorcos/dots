@@ -40,7 +40,8 @@
  '(mode-line-inactive     ((t (:inherit    mode-line
                                :foreground "Gray80"))))
  '(bold                   ((t (:weight     medium))))
- '(tab-line               ((t (:background "Gray85"
+ '(tab-line               ((t (:family     "Iosevka Aile"
+                               :background "Gray85"
                                :box        (:color "Lavender")
                                :height     0.9
                                :inherit    'variable-pitch))))
