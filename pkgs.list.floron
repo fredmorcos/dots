@@ -27,6 +27,7 @@ autogen
 automake
 autopep8
 avisynthplus
+awesome-terminal-fonts
 badvpn
 bandwhich
 base
@@ -393,6 +394,7 @@ opusfile
 osinfo-db-tools
 os-prober
 otf-cascadia-code
+otf-font-awesome
 p7zip
 pacgraph
 pacman-contrib

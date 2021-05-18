@@ -34,7 +34,7 @@
      `(add-hook ',hook #',func))))
 
 (defmacro fm/hooks (hooks func &optional pkg local)
- "Autoload FUNC from PKG and it to LOCAL HOOKS."
+ "Autoload FUNC from PKG and add it to LOCAL HOOKS."
  `(progn
    ,(when pkg `(autoload ',func ,pkg))
    ,(when pkg `(declare-function ,func ,pkg))
@@ -489,23 +489,24 @@
  (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
+(defmacro setup-c-style-comments ()
+ "Setup C-style /* ... */ comments."
+ `(fm/after newcomment
+   (fm/var comment-style 'extra-line)))
+
 (fm/after css-mode
  (fm/hookn css-mode-hook
-  (fm/after newcomment
-   (fm/var comment-style 'extra-line))))
+  (setup-c-style-comments)))
 
 (fm/after cc-mode
- ;; (fm/hook c-mode-hook lsp-deferred)
- (fm/after cc-vars
-  (fm/hookn c-mode-common-hook
-   (fm/key "(" nil c-mode-base-map)
-   (fm/after newcomment
-    (fm/var comment-style 'extra-line)))))
+ (fm/key "(" nil c-mode-base-map))
 
 (fm/after cc-vars
  (fm/var c-mark-wrong-style-of-comment t)
  (fm/var c-default-style
-  '((other . "user"))))
+  '((other . "user")))
+ (fm/hookn c-mode-common-hook
+  (setup-c-style-comments)))
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
@@ -1047,10 +1048,13 @@
   (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode))
  (fm/after rustic
   (fm/hook rustic-mode-hook tree-sitter-mode))
- (fm/after cc-vars
-  (fm/hook c-mode-common-hook tree-sitter-mode)))
+ (fm/after cc-mode
+  (fm/hook c-mode-hook tree-sitter-mode)))
 
-(message "Startup in %s" (emacs-init-time))
+(fm/pkg glsl-mode
+ (fm/hookn glsl-mode-hook (setup-c-style-comments)))
+
+(message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
 
 (provide 'init)
 ;;; init ends here
