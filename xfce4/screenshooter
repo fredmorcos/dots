@@ -7,4 +7,5 @@ region=1
 show_mouse=1
 last_extension=png
 enable_imgur_upload=true
+show_border=1
 
