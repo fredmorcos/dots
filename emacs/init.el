@@ -184,10 +184,6 @@
 (fm/after elec-pair
  (fm/var electric-pair-pairs '((?\[ . ?\])))) ;; (?\{ . ?\})
 
-(fm/after prog-mode
- (fm/hook prog-mode-hook electric-pair-mode)
- (fm/hook prog-mode-hook electric-layout-mode))
-
 (fm/after display-line-numbers
  (fm/var display-line-numbers-grow-only t)
  (fm/var display-line-numbers-width-start t)
@@ -196,16 +192,10 @@
  (fm/face line-number-current-line
   :foreground "Gray70"))
 
-(fm/after prog-mode
- (fm/hook prog-mode-hook display-line-numbers-mode))
-
 (fm/after hl-line
  (fm/face hl-line
   :background "Gray95"
   :extend nil))
-
-(fm/after prog-mode
- (fm/hook prog-mode-hook hl-line-mode))
 
 (fm/after abbrev
  (fm/dim abbrev-mode "Ab" t))
@@ -311,7 +301,8 @@
   (fm/setup-c-style-comments)))
 
 (fm/after cc-mode
- (fm/key "(" nil c-mode-base-map))
+ (fm/key "(" nil c-mode-base-map)
+ (fm/hook c-mode-hook tree-sitter-mode))
 
 (fm/after cc-vars
  (fm/var c-mark-wrong-style-of-comment t)
@@ -677,10 +668,13 @@
  (fm/hook prog-mode-hook flyspell-prog-mode)
  (fm/hook prog-mode-hook symbol-overlay-mode)
  (fm/hook prog-mode-hook flycheck-mode)
- (fm/hook prog-mode-hook tree-sitter-mode)
  (fm/hook prog-mode-hook fm/yas-minor-mode)
  (fm/hook prog-mode-hook flyspell-prog-mode)
- (fm/hook prog-mode-hook company-mode))
+ (fm/hook prog-mode-hook company-mode)
+ (fm/hook prog-mode-hook electric-pair-mode)
+ (fm/hook prog-mode-hook electric-layout-mode)
+ (fm/hook prog-mode-hook display-line-numbers-mode)
+ (fm/hook prog-mode-hook hl-line-mode))
 
 (fm/pkg rustic
  (fm/after rustic
@@ -699,9 +693,7 @@
     (fm/key "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "lsp-rust"))
    (electric-quote-local-mode -1))
   (fm/hook rustic-mode-hook subword-mode)
-  (fm/hook rustic-mode-hook tree-sitter-mode)
-  (fm/hook rustic-mode-hook fm/yas-minor-mode)
-  (fm/hook rustic-mode-hook flyspell-prog-mode)))
+  (fm/hook rustic-mode-hook tree-sitter-mode)))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode

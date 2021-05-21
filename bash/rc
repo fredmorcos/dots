@@ -38,10 +38,15 @@ enter-graalvm() {
   fi
 }
 
-DLSUB_CMD="subdl -i --output={m}.{L}.{S} --username $OS_NAME --password $OS_PASS"
-# shellcheck disable=SC2139
-alias dlsub="$DLSUB_CMD"
-unset DLSUB_CMD
+dlsub() {
+  OS_NAME=$(head -1 ~/Documents/Important/Passwords/_os.txt)
+  OS_PASS=$(tail -1 ~/Documents/Important/Passwords/_os.txt)
+  subdl -i --output='{m}.{L}.{S}' --username "$OS_NAME" --password "$OS_PASS" "$1"
+  OS_NAME=
+  OS_PASS=
+  unset OS_NAME
+  unset OS_PASS
+}
 
 dirdlsub() {
   for i in *; do
