@@ -302,7 +302,8 @@
 
 (fm/after cc-mode
  (fm/key "(" nil c-mode-base-map)
- (fm/hook c-mode-hook tree-sitter-mode))
+ (fm/hook c-mode-hook tree-sitter-mode)
+ (fm/hook c-mode-hook symbol-overlay-mode))
 
 (fm/after cc-vars
  (fm/var c-mark-wrong-style-of-comment t)
@@ -666,7 +667,6 @@
  (fm/hook prog-mode-hook eldoc-mode)
  (fm/hook prog-mode-hook show-paren-mode)
  (fm/hook prog-mode-hook flyspell-prog-mode)
- (fm/hook prog-mode-hook symbol-overlay-mode)
  (fm/hook prog-mode-hook flycheck-mode)
  (fm/hook prog-mode-hook fm/yas-minor-mode)
  (fm/hook prog-mode-hook flyspell-prog-mode)
