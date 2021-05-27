@@ -1,6 +1,6 @@
 app=eom
 last_user=
-screenshot_dir=file:/home/fred/
+screenshot_dir=file:/home/fred
 action=1
 delay=2
 region=1
