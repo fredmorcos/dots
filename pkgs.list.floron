@@ -199,11 +199,9 @@ gst-editing-services
 gst-libav
 gst-plugin-gtk
 gstreamer-vaapi
-gtest
 gtk-engine-murrine
 gtk-engines
 gtkglext
-gtkspell3
 gucharmap
 gumbo-parser
 gutenprint
@@ -239,6 +237,7 @@ ifenslave
 ifplugd
 img2pdf
 inetutils
+inkscape
 intel-compute-runtime
 intel-gpu-tools
 intel-ucode
