@@ -34,7 +34,6 @@ base
 bash-completion
 bat
 bbswitch
-bear
 binwalk
 bison
 bolt
@@ -202,6 +201,7 @@ gstreamer-vaapi
 gtk-engine-murrine
 gtk-engines
 gtkglext
+gtkspell3
 gucharmap
 gumbo-parser
 gutenprint
