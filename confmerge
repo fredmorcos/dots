@@ -161,7 +161,7 @@ cmerge systemd/fstrim@.timer         $SYSD/system/fstrim@.timer
 # cmerge udev/99-mount.rules           $UDEV/99-mount.rules
 # cmerge udev/99-steam-cont.rules      $UDEV/99-steam-controller-perms.rules
 
-# cmerge mount_options.conf            /etc/udisks2/mount_options.conf
+cmerge mount_options.conf            /etc/udisks2/mount_options.conf
 cmerge gvfs-network.mount            /usr/share/gvfs/mounts/network.mount
 
 cmerge archlinux/makepkg.conf        /etc/makepkg.conf
