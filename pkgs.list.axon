@@ -170,6 +170,7 @@ libcue
 libdmapsharing
 libdwarf
 libebur128
+libertinus-font
 libfido2
 libgnome-keyring
 libmad
@@ -227,6 +228,10 @@ opencl-mesa
 opendoas
 openmp
 otf-cascadia-code
+otf-fantasque-sans-mono
+otf-fira-mono
+otf-fira-sans
+otf-hermit
 p7zip
 pacman-contrib
 papirus-icon-theme
@@ -243,6 +248,7 @@ perl-net-libidn2
 picard
 pigz
 pipewire-alsa
+pipewire-zeroconf
 pkgconf
 powertop
 procs
@@ -268,6 +274,7 @@ python-pyalsa
 python-pyaml
 python-pycryptodome
 python-pyenchant
+python-pyinotify
 python-pylast
 python-rcssmin
 python-rjsmin
@@ -324,10 +331,18 @@ torsocks
 transmission-gtk
 trash-cli
 tree-sitter
+ttc-iosevka-aile
+ttc-iosevka-etoile
 ttf-caladea
+ttf-cascadia-code
+ttf-fantasque-sans-mono
 ttf-font-awesome
 ttf-inconsolata
 ttf-jetbrains-mono
+ttf-lato
+ttf-opensans
+ttf-proggy-clean
+ttf-sarasa-gothic
 tup
 udftools
 udiskie
