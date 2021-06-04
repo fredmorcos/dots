@@ -269,6 +269,7 @@ libappindicator-gtk2
 libcue
 libdvdcss
 libemf
+libertinus-font
 libfido2
 libgepub
 libgit2-glib
@@ -388,7 +389,11 @@ opusfile
 osinfo-db-tools
 os-prober
 otf-cascadia-code
+otf-fantasque-sans-mono
+otf-fira-mono
+otf-fira-sans
 otf-font-awesome
+otf-hermit
 p7zip
 pacgraph
 pacman-contrib
@@ -577,8 +582,14 @@ tsocks
 ttc-iosevka-aile
 ttc-iosevka-etoile
 ttf-caladea
+ttf-fantasque-sans-mono
+ttf-fira-code
 ttf-inconsolata
 ttf-jetbrains-mono
+ttf-lato
+ttf-opensans
+ttf-proggy-clean
+ttf-sarasa-gothic
 tup
 udftools
 udiskie
