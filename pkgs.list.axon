@@ -286,6 +286,7 @@ redshift
 remake
 rink
 ripgrep
+rmlint
 rsync
 rust-analyzer
 rust-bindgen
@@ -308,6 +309,7 @@ slimit
 slimmy-xfwm-theme-git
 sloccount
 smartmontools
+sndio
 soundconverter
 sshfs
 strace
