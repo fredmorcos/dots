@@ -107,6 +107,7 @@
  "Install PKG if not already installed and execute BODY."
  `(progn
    (defvar packages-refreshed nil)
+   (autoload 'package-installed-p "package")
    (if (not (package-installed-p ',pkg))
     (progn
      (when (not packages-refreshed)
