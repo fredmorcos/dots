@@ -6,6 +6,7 @@
 127.0.1.1 axon.localdomain axon
 
 192.168.0.1   router
-192.168.0.104 neuron
+# 192.168.0.104 neuron # Raspberry PI
+192.167.0.107 neuron
 192.168.0.106 floron
 192.168.0.101 phone
