@@ -829,6 +829,10 @@
   (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
   (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc")))
 
+(when (string-equal (system-name) "neuron")
+ (fm/pkg atom-dark-theme
+  (load-theme 'atom-dark-theme t)))
+
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
 
