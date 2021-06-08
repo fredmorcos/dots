@@ -321,7 +321,6 @@
     ("melpa" . "https://melpa.org/packages/")
     ("org"   . "https://orgmode.org/elpa/"))))
 
-(fm/pkg glsl-mode)
 (fm/pkg toml-mode)
 (fm/pkg cmake-mode)
 (fm/pkg dockerfile-mode)
