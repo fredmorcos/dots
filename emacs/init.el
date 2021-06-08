@@ -831,7 +831,7 @@
 
 (when (string-equal (system-name) "neuron")
  (fm/pkg atom-dark-theme
-  (load-theme 'atom-dark-theme t)))
+  (load-theme 'atom-dark t)))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
