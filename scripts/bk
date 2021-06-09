@@ -46,6 +46,7 @@ FRED="$DATA/Fred"
 LAPTOP="$FRED/Laptop"
 
 if [ -d $DATA ]; then
+    cmd "$FLORON/Build/"                  "$LAPTOP/Build/"
     cmd "$FLORON/Workspace/"              "$LAPTOP/Workspace/"
     cmd "$FLORON/.gnupg/"                 "$LAPTOP/Configs/gnupg/"
     cmd "$FLORON/.ssh/"                   "$LAPTOP/Configs/ssh/"

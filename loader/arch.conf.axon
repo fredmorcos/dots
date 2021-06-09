@@ -2,7 +2,7 @@ title   Archlinux
 linux   /vmlinuz-linux
 initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
-options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet
+options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet nordrand
 
 # ipv6.disable=1
 # rd.log=all loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3
