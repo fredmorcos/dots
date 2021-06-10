@@ -1,0 +1,57 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
+
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+# shellcheck source=/home/fred/.bashrc_extras
+. ~/.bashrc_extras
+
+alias fsysctl='ssh fred@floron sudo systemctl'
+alias fpoweroff='fsysctl poweroff'
+alias freboot='fsysctl reboot'
+alias fsuspend='fsysctl suspend'
+
+alias nssh='ssh root@neuron'
+alias nsysctl='nssh systemctl'
+# alias nreboot='nsysctl reboot'
+# alias npoweroff='nsysctl poweroff'
+alias krestart='nsysctl restart kodi'
+alias kstop='nsysctl stop kodi'
+alias nup='nssh pacman -Syu'
+# alias nreboot='nssh kodi-send -a Reboot'
+# alias npoweroff='nssh kodi-send -a ShutDown'
+alias nreboot='kstop && sleep 5 && nssh systemctl reboot'
+alias npoweroff='kstop && sleep 5 && nssh systemctl poweroff'
+
+enter-graalvm() {
+  if [ -f ~/.bashrc_graalvm ]; then
+    cd "$1" || exit
+    exec bash --rcfile ~/.bashrc_graalvm
+  else
+    echo "Error: Could not find ~/.bashrc_graalvm"
+  fi
+}
+
+dlsub() {
+  OS_NAME=$(head -1 ~/Documents/Important/Passwords/_os.txt)
+  OS_PASS=$(tail -1 ~/Documents/Important/Passwords/_os.txt)
+  subdl -i --output='{m}.{L}.{S}' --username "$OS_NAME" --password "$OS_PASS" "$1"
+  OS_NAME=
+  OS_PASS=
+  unset OS_NAME
+  unset OS_PASS
+}
+
+dirdlsub() {
+  for i in *; do
+    echo ">>> $i";
+    dlsub "$i";
+    echo "-----------------------------------------";
+  done
+}

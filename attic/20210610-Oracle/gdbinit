@@ -1,0 +1,6 @@
+add-auto-load-safe-path ./svmhelpers.py
+set history save
+set print array on
+set print pretty on
+set disable-randomization
+
