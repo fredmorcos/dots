@@ -9,7 +9,7 @@
   conflictstyle = diff3
 
 [pull]
-	rebase = true
+  rebase = true
 
 [status]
-	showUntrackedFiles = all
+  showUntrackedFiles = all
