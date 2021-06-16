@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+printf "Loading v4l2loopback"
+sudo modprobe v4l2loopback
+
+v4l2-ctl --list-devices
+
+# video0 is the source, video2 is the dummy
+printf "Redirecting video0 to video2"
+ffmpeg -f v4l2 -i /dev/video0 -vf "vflip" -f v4l2 /dev/video2
