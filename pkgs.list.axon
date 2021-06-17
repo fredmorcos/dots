@@ -83,6 +83,7 @@ fdupes
 fig2dev
 file-roller
 firefox
+firewalld
 flameshot
 flatpak
 flex
@@ -160,6 +161,7 @@ innoextract
 inter-font
 intltool
 iotop
+ipset
 irqbalance
 ispell
 jfsutils
