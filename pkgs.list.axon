@@ -47,6 +47,7 @@ cmus
 compsize
 conntrack-tools
 cpio
+crun
 cups
 curlftpfs
 dateutils
@@ -311,6 +312,7 @@ sloccount
 smartmontools
 sndio
 soundconverter
+squashfs-tools
 sshfs
 strace
 s-tui
