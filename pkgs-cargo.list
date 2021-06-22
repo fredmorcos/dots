@@ -3,8 +3,10 @@ bottom
 cargo-asm
 cargo-audit
 cargo-deadlinks
+cargo-edit
 cargo-expand
 cargo-geiger
+cargo-web
 czkawka_gui
 flamegraph
 hors
@@ -17,5 +19,6 @@ sccache
 signal-backup-decode
 tealdeer
 titlecase
+wasm-pack
 what
 ytop
