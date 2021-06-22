@@ -103,10 +103,7 @@
 (fm/var recentf-save-file emacs-recentf-file)
 (fm/var recentf-max-menu-items 50)
 (fm/var recentf-max-saved-items 100)
-(fm/var recentf-exclude
- `(,emacs-elpa-dir
-   ,(expand-file-name "~/Oracle")
-   ,(expand-file-name "~/OracleWorkTrees")))
+(fm/var recentf-exclude `(,emacs-elpa-dir))
 
 (fm/hook kill-emacs-hook recentf-cleanup "recentf")
 
@@ -314,6 +311,8 @@
 
 ;; js-mode
 (fm/mode ".hocon" js-mode)
+(fm/after js
+ (fm/hook js-mode-hook tree-sitter-mode))
 
 (fm/after package
  (fm/var package-archives
@@ -475,8 +474,7 @@
   (fm/var magit-auto-revert-tracked-only nil)
   (fm/var magit-display-buffer-function
    #'magit-display-buffer-same-window-except-diff-v1)
-  (fm/var magit-repository-directories
-   '(("~/Workspace" . 3) ("~/Oracle" . 3) ("~/OracleWorkTrees" . 3)))
+  (fm/var magit-repository-directories '(("~/Workspace" . 3)))
   (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
  (fm/key "C-x g" magit-status))
 
