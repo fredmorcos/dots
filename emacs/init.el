@@ -309,11 +309,6 @@
  (fm/hookn c-mode-common-hook
   (fm/setup-c-style-comments)))
 
-;; js-mode
-(fm/mode ".hocon" js-mode)
-(fm/after js
- (fm/hook js-mode-hook tree-sitter-mode))
-
 (fm/after package
  (fm/var package-archives
   '(("gnu"   . "https://elpa.gnu.org/packages/")
@@ -321,8 +316,6 @@
     ("org"   . "https://orgmode.org/elpa/"))))
 
 (fm/pkg toml-mode)
-(fm/pkg cmake-mode)
-(fm/pkg dockerfile-mode)
 (fm/pkg markdown-mode)
 (fm/pkg crux)
 (fm/pkg smex)
