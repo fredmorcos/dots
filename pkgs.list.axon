@@ -362,6 +362,7 @@ webp-pixbuf-loader
 wget
 whois
 wireguard-tools
+wireplumber
 wmctrl
 xclip
 xdg-user-dirs-gtk
