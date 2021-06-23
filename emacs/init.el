@@ -10,6 +10,11 @@
 (require 'init-macros)
 (require 'qol)
 
+;; Setup the theme early on.
+(when (string-equal (system-name) "neuron")
+ (fm/pkg atom-dark-theme
+  (load-theme 'atom-dark t)))
+
 (fm/key "C-x e"    fm/replace-escapes)
 (fm/key "<M-up>"   fm/move-line-up)
 (fm/key "<M-down>" fm/move-line-down)
@@ -819,10 +824,6 @@
   (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
   (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
   (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc")))
-
-(when (string-equal (system-name) "neuron")
- (fm/pkg atom-dark-theme
-  (load-theme 'atom-dark t)))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
