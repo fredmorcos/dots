@@ -15,7 +15,6 @@ kmon
 lfs
 procs
 rustfilt
-sccache
 signal-backup-decode
 tealdeer
 titlecase

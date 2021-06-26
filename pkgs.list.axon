@@ -60,7 +60,6 @@ d-feet
 dhclient
 dhcpcd
 dhex
-dialog
 dmidecode
 dnsmasq
 dosbox
@@ -201,7 +200,6 @@ ncdu
 neofetch
 net-tools
 network-manager-applet
-networkmanager-openvpn
 nilfs-utils
 nmap
 ntfs-3g
@@ -241,6 +239,7 @@ podman
 powertop
 procs
 progress
+protonvpn
 pstoedit
 psutils
 pulseaudio-alsa
@@ -254,7 +253,6 @@ python-docutils
 python-dulwich
 python-ecdsa
 python-fastimport
-python-jinja
 python-paramiko
 python-pip
 python-pyacoustid
