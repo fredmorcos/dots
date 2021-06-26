@@ -392,6 +392,14 @@
    :inherit font-lock-keyword-face
    :height 0.8
    :bold t)
+  (fm/face org-block
+   :family "Monospace")
+  (fm/face org-block-begin-line
+   :height 0.8
+   :foreground "thistle")
+  (fm/face org-block-end-line
+   :height 0.8
+   :foreground "thistle")
   (fm/hook org-mode-hook org-bullets-mode)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
