@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+CMD=("rsync"
+     # "--preallocate"
+     # "--sparse"
+     # "--delete-after"
+     # "--safe-links"
+     # "--munge-links"
+     # "--xattrs"
+     # "--acls"
+     # "--one-file-system"
+     # "--hard-links"
+     # "-zz"
+     "--human-readable"
+     "--progress"
+     "--verbose"
+     "--archive"
+     "--skip-compress=zst/jpg/mp[34]/7z/bz2/webm/avi"
+     "--delete"
+     "--delete-excluded"
+     "--exclude=*/target"
+     "--exclude=*/__pycache__"
+     '--exclude=emacs/elpa/*'
+     '--exclude=node_modules/*'
+     "$@")
+
+echo "Rsync command:" "${CMD[@]}"
+printf "\n\n"
+
+cmd () {
+    printf ">>> %s --> %s\n" "$1" "$2"
+    "${CMD[@]}" "$1" "$2"
+    printf "\n\n"
+}
+
+HOME=/home/fred
+LAPTOP=/run/media/fred/External/FredLaptop
+
+if [ -d $LAPTOP ]; then
+    cmd "$HOME/Diving/"                   "$LAPTOP/Diving/"
+    cmd "$HOME/Documents/"                "$LAPTOP/Documents/"
+    cmd "$HOME/Downloads/"                "$LAPTOP/Downloads/"
+    cmd "$HOME/Phone/"                    "$LAPTOP/Phone/"
+    cmd "$HOME/Workspace/"                "$LAPTOP/Workspace/"
+    cmd "$HOME/.gnupg/"                   "$LAPTOP/Configs/gnupg/"
+    cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
+    cmd "$HOME/.config/hexchat/"          "$LAPTOP/Configs/config-hexchat/"
+    cmd "$HOME/.local/share/keyrings"     "$LAPTOP/Configs/local-share-keyrings/"
+else
+    printf ">>> %s is not mounted\n" $LAPTOP
+    exit 1
+fi
