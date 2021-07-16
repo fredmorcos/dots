@@ -1,5 +1,5 @@
 acpid
-adobe-source-sans-pro-fonts
+adobe-source-sans-fonts
 alsa-firmware
 amd-ucode
 amdvlk
@@ -235,11 +235,10 @@ pigz
 pipewire-alsa
 pipewire-zeroconf
 pkgconf
-podman
 powertop
 procs
 progress
-protonvpn
+protonvpn-cli
 pstoedit
 psutils
 pulseaudio-alsa
