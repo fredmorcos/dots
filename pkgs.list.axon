@@ -233,6 +233,7 @@ peek
 perl-net-libidn2
 picard
 pigz
+piper
 pipewire-alsa
 pipewire-zeroconf
 pkgconf
