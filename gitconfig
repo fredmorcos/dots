@@ -13,3 +13,6 @@
 
 [status]
   showUntrackedFiles = all
+
+[init]
+  defaultBranch = main
