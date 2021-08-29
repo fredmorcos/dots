@@ -3,6 +3,7 @@ adobe-source-sans-fonts
 alsa-firmware
 amd-ucode
 amdvlk
+antiword
 arch-audit
 arp-scan
 asp
@@ -22,6 +23,7 @@ bison
 bonnie++
 bridge-utils
 bs1770gain
+cabextract
 capitaine-cursors
 cargo-audit
 cargo-bloat
@@ -35,10 +37,12 @@ cargo-spellcheck
 cargo-tarpaulin
 cargo-udeps
 cargo-watch
+catdoc
 cbindgen
 ccache
 cclive
 ccls
+cdrtools
 cgdb
 chmlib
 chromium
@@ -80,6 +84,7 @@ exa
 exfat-utils
 extra-cmake-modules
 f2fs-tools
+fastjar
 fd
 fdupes
 fig2dev
@@ -150,6 +155,7 @@ ispell
 jfsutils
 kcov
 kexec-tools
+lesspipe
 lhasa
 libao
 libcue
@@ -163,6 +169,7 @@ libmad
 libmp4v2
 libmythes
 libnfs
+libopenraw
 libpipewire02
 libsidplayfp
 libupnp
@@ -274,6 +281,7 @@ remake
 rink
 ripgrep
 rmlint
+rpmextract
 rsync
 rust-analyzer
 rust-bindgen
@@ -340,6 +348,7 @@ unace
 unicode-emoji
 unoconv
 unrar
+unrtf
 upx
 usbguard
 uutils-coreutils
