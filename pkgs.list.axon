@@ -22,7 +22,6 @@ bind
 bison
 bonnie++
 bridge-utils
-bs1770gain
 cabextract
 capitaine-cursors
 cargo-audit
