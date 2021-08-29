@@ -42,7 +42,6 @@ HOME=/home/fred
 LAPTOP=/run/media/fred/External/FredLaptop
 
 if [ -d $LAPTOP ]; then
-    cmd "$HOME/Diving/"                   "$LAPTOP/Diving/"
     cmd "$HOME/Documents/"                "$LAPTOP/Documents/"
     cmd "$HOME/Downloads/"                "$LAPTOP/Downloads/"
     cmd "$HOME/Phone/"                    "$LAPTOP/Phone/"
