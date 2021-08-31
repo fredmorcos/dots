@@ -11,9 +11,15 @@
 (require 'qol)
 
 ;; Setup the theme early on.
-(when (string-equal (system-name) "neuron")
- (fm/pkg atom-dark-theme
-  (load-theme 'atom-dark t)))
+;; (when (string-equal (system-name) "neuron")
+;;  ;; (fm/pkg atom-dark-theme
+;;  ;;   (load-theme 'atom-dark t)))
+;;  ;; (fm/pkg hc-zenburn-theme
+;;  ;;  (load-theme 'hc-zenburn t)))
+;;  (fm/pkg atom-dark-theme)
+;;  (fm/pkg hc-zenburn-theme)
+;;  (fm/pkg solarized-theme
+;;   (load-theme 'solarized-dark-high-contrast t)))
 
 (fm/key "C-x e"    fm/replace-escapes)
 (fm/key "<M-up>"   fm/move-line-up)
@@ -64,6 +70,9 @@
 (fm/var hscroll-step 1)
 (fm/var auto-hscroll-mode 'current-line)
 (fm/var fast-but-imprecise-scrolling t)
+(fm/key "<f10>" (lambda () (interactive) (scroll-other-window 1)))
+(fm/key "<f11>" (lambda () (interactive) (scroll-other-window-down 1)))
+(fm/key "<f12>" treemacs-delete-other-windows)
 
 ;; external processes
 (fm/var read-process-output-max (* 1024 1024))
@@ -663,7 +672,11 @@
  (fm/after tree-sitter
   (fm/dim tree-sitter-mode "Ts")
   (require 'tree-sitter-langs)
-  (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode)))
+  (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode))
+ (fm/after tree-sitter-hl
+  (fm/face tree-sitter-hl-face:property
+   :slant normal
+   :weight regular)))
 
 (fm/after prog-mode
  (fm/hook prog-mode-hook diff-hl-mode)
