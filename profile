@@ -12,9 +12,9 @@ LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 
 # Rust
 # RUSTC_WRAPPER=sccache
-RUSTFLAGS="-C opt-level=2 -C link-arg=-fuse-ld=lld -C target-cpu=native"
+# RUSTFLAGS="-C opt-level=2 -C link-arg=-fuse-ld=lld -C target-cpu=native"
 
-export RUSTC_WRAPPER RUSTFLAGS
+# export RUSTC_WRAPPER RUSTFLAGS
 
 # Editors
 EDITOR='emacs -nw'
