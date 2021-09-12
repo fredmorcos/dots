@@ -20,6 +20,7 @@ beets
 binaryen
 bind
 bison
+blanket
 blender
 bonnie++
 bridge-utils
@@ -95,6 +96,7 @@ firewalld
 flameshot
 flatpak
 flex
+flowblade
 fontforge
 fragments
 fwupd
@@ -154,6 +156,7 @@ ipset
 irqbalance
 ispell
 jfsutils
+john
 kcov
 kexec-tools
 lesspipe
@@ -162,7 +165,6 @@ libao
 libcue
 libdmapsharing
 libdwarf
-libebur128
 libertinus-font
 libfido2
 libgnome-keyring
@@ -194,13 +196,11 @@ lxdm-gtk3
 lzop
 make
 man-pages
-mediainfo
 mesa-demos
 mesa-vdpau
 meson
 mkinitcpio-systemd-tool
 mlocate
-mpv
 mtools
 musl
 mutt
@@ -218,9 +218,12 @@ nvme-cli
 obs-studio
 odt2txt
 openbsd-netcat
+opencl-amd
 opencl-mesa
 opendoas
 openmp
+openshot
+opusfile
 otf-cascadia-code
 otf-fantasque-sans-mono
 otf-fira-mono
@@ -235,6 +238,7 @@ patch
 pavucontrol
 pcmanfm-gtk3
 pdfarranger
+pdfcrack
 pdfmixtool
 pdfslicer
 peek
@@ -244,6 +248,7 @@ pigz
 piper
 pipewire-alsa
 pipewire-zeroconf
+pitivi
 pkgconf
 powertop
 procs
@@ -284,6 +289,7 @@ ripgrep
 rmlint
 rpmextract
 rsync
+rtaudio
 rust-analyzer
 rust-bindgen
 rustc-demangle
@@ -297,6 +303,7 @@ seahorse
 shake
 shellcheck
 shfmt
+shotcut
 signalbackup-tools-git
 signal-desktop
 simplescreenrecorder
@@ -307,6 +314,7 @@ sloccount
 smartmontools
 sndio
 soundconverter
+sox
 squashfs-tools
 sshfs
 strace
@@ -357,11 +365,13 @@ valgrind
 vde2
 vdpauinfo
 vi
+vidcutter
 vim-spell-en
 vivaldi
 vivaldi-ffmpeg-codecs
 vkd3d
 vokoscreen
+vtk
 vulkan-extra-layers
 vulkan-radeon
 vulkan-tools
