@@ -74,7 +74,7 @@
   :family "Iosevka Aile")
  (fm/face default
   :family "Monospace"
-  :height 120
+  :height 90
   :background "Gray98"
   :foreground "Gray40")
  (fm/face fringe

@@ -350,6 +350,8 @@ ttf-caladea
 ttf-cascadia-code
 ttf-fantasque-sans-mono
 ttf-font-awesome
+ttf-go-mono-git
+ttf-go-sans-git
 ttf-inconsolata
 ttf-jetbrains-mono
 ttf-lato
@@ -409,7 +411,6 @@ xfdesktop
 xorg-bdftopcf
 xorg-docs
 xorg-font-util
-xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
