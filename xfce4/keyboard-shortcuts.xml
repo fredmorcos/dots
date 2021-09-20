@@ -41,15 +41,10 @@
       <property name="&lt;Alt&gt;F3" type="empty">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;h" type="string" value="thunar"/>
       <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;e" type="string" value="emacs">
-        <property name="startup-notify" type="bool" value="true"/>
-      </property>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;w" type="string" value="exo-open --launch WebBrowser">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
       <property name="&lt;Primary&gt;&lt;Alt&gt;o" type="string" value="pavucontrol">
@@ -66,7 +61,16 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;m" type="string" value="clementine">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator">
+        <property name="startup-notify" type="bool" value="true"/>
+      </property>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;w" type="string" value="exo-open --launch WebBrowser">
+        <property name="startup-notify" type="bool" value="true"/>
+      </property>
       <property name="&lt;Primary&gt;&lt;Alt&gt;c" type="string" value="signal-desktop">
+        <property name="startup-notify" type="bool" value="true"/>
+      </property>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;h" type="string" value="thunar">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
     </property>
