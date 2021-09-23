@@ -71,7 +71,7 @@
 ;; Specify the variable-pitch and other common faces.
 (fm/after faces
  (fm/face variable-pitch
-  :family "Iosevka Aile")
+  :family "Go Medium")
  (fm/face default
   :family "Monospace"
   :height 90
@@ -92,7 +92,7 @@
   :foreground "Red3")
  (fm/face mode-line
   :inherit 'variable-pitch
-  :height 0.8
+  ;; :height 0.8
   :background "Gray95"
   :foreground "Gray50"
   :box (:color "Lavender"))
@@ -124,7 +124,7 @@
 
  (fm/face tab-line
   :inherit 'variable-pitch
-  :height 0.9
+  ;; :height 0.9
   :background "Gray85"
   :box (:color "Lavender"))
  (fm/face tab-line-tab

@@ -72,7 +72,7 @@
 (fm/var fast-but-imprecise-scrolling t)
 (fm/key "<f10>" (lambda () (interactive) (scroll-other-window 1)))
 (fm/key "<f11>" (lambda () (interactive) (scroll-other-window-down 1)))
-(fm/key "<f12>" treemacs-delete-other-windows)
+(fm/key "<f12>" delete-other-windows)
 
 ;; external processes
 (fm/var read-process-output-max (* 1024 1024))
@@ -357,6 +357,7 @@
   (fm/face org-document-title
    :inherit variable-pitch
    :height 1.2
+   :weight normal
    :foreground "MidnightBlue"
    :bold t)
   (fm/face org-target
@@ -803,7 +804,8 @@
 
 (fm/pkg lsp-treemacs
  (fm/key "C-c e" lsp-treemacs-errors-list)
- (fm/key "C-c s" lsp-treemacs-symbols))
+ (fm/key "C-c s" lsp-treemacs-symbols)
+ (fm/key "<f12>" treemacs-delete-other-windows))
 
 (fm/pkg lsp-ivy
  (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
