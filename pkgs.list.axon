@@ -73,6 +73,7 @@ d-feet
 dhclient
 dhcpcd
 dhex
+dialog
 dmidecode
 dnsmasq
 drawing
@@ -222,6 +223,7 @@ ncdu
 neofetch
 net-tools
 network-manager-applet
+networkmanager-openvpn
 nilfs-utils
 nmap
 ntfs-3g
@@ -267,7 +269,6 @@ pkgconf
 powertop
 procs
 progress
-protonvpn-cli
 pstoedit
 psutils
 pulseaudio-alsa
