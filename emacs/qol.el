@@ -25,11 +25,6 @@
  (transpose-lines 1)
  (forward-line -1))
 
-(defun fm/generate-password ()
- "Generate a password and insert it."
- (interactive)
- (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer)))
-
 (defun fm/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
  (if (use-region-p)
@@ -46,6 +41,36 @@
     (progn
      (insert-char right)
      (backward-char))))))
+
+(defun fm/insert-pair-curly ()
+ "Insert curly braces in or around text."
+ (interactive)
+ (fm/insert-pair ?\{ ?\} nil))
+
+(defun fm/insert-pair-parens ()
+ "Insert parenthesis in or around text."
+ (interactive)
+ (fm/insert-pair ?\( ?\) t))
+
+(defun fm/insert-pair-quote ()
+ "Insert single quotes in or around text."
+ (interactive)
+ (fm/insert-pair ?\' ?\' t))
+
+(defun fm/insert-pair-double-quotes ()
+ "Insert double quotes in or around text."
+ (interactive)
+ (fm/insert-pair ?\" ?\" t))
+
+(defun fm/insert-pair-backtick ()
+ "Insert back-ticks in or around text."
+ (interactive)
+ (fm/insert-pair ?\` ?\` t))
+
+(defun fm/generate-password ()
+ "Generate a password and insert it."
+ (interactive)
+ (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer)))
 
 (provide 'qol)
 ;;; qol.el ends here

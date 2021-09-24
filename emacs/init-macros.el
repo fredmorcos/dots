@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; hooks
+;; Hooks.
 (defmacro fm/hook (hook func &optional pkg local)
  "Autoload FUNC from PKG and add it to LOCAL HOOK."
  `(progn
@@ -35,25 +35,27 @@
  "Hook (lambda () BODY) to HOOK."
  `(add-hook ',hook (lambda () (interactive) (progn ,@body)) 10))
 
-;; bind keys
+;; Bind Keys.
 (defmacro fm/key (key func &optional pkg-keymap pkg)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
  (cond
   ((not pkg-keymap)
    `(progn
      ,(when (and func pkg)
-       `(autoload ',func ,pkg)
-       `(declare-function ,func ,pkg))
+       `(progn
+         (autoload ',func ,pkg)
+         (declare-function ,func ,pkg)))
      (global-set-key (kbd ,key) ,(if func `#',func nil))))
   (t
    `(progn
      (eval-when-compile (defvar ,pkg-keymap))
      ,(when (and func pkg)
-       `(autoload ',func ,pkg)
-       `(declare-function ,func ,pkg))
+       `(progn
+         (autoload ',func ,pkg)
+         (declare-function ,func ,pkg)))
      (define-key ,pkg-keymap (kbd ,key) ,(if func `#',func nil))))))
 
-;; diminish
+;; Diminish.
 (defun fm/dim-helper (mode text)
  "Diminish MODE to TEXT helper."
  (let ((element (seq-find (lambda (x) (eq (car x) mode)) minor-mode-alist))
@@ -69,7 +71,7 @@
    `(fm/dim-helper ',mode ,text)
    `(fm/hookn ,hook (fm/dim-helper ',mode ,text)))))
 
-;; faces
+;; Faces.
 (defmacro fm/face (face &rest props)
  "Set FACE properties to PROPS."
  `(if (facep ',face)
@@ -78,7 +80,7 @@
     (fm/var ,face (car ',props))
     (fm/var ,face '((t ,@props))))))
 
-;; vars
+;; Vars.
 (defmacro fm/vars (&rest customs)
  "Custom-Set the CUSTOMS list of var-val pairs."
  `(custom-set-variables
@@ -91,12 +93,12 @@
  "Custom-Set VAR to VAL."
  `(custom-set-variables '(,var ,val)))
 
-;; lazy loading
+;; Lazy Loading.
 (defmacro fm/after (pkg &rest body)
  "Execute BODY when PKG is loaded."
  `(with-eval-after-load ',pkg ,@body))
 
-;; modes
+;; Modes.
 (defmacro fm/mode (ext mode &optional pkg)
  "Autoload and enable MODE from PKG for file extension EXT."
  `(progn

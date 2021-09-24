@@ -4,21 +4,34 @@
 
 (eval-when-compile
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
- (push emacs-dots-dir load-path))
+ (when (not (seq-contains-p load-path emacs-dots-dir))
+  (push emacs-dots-dir load-path)))
 
 (require 'init-macros)
+(require 'qol)
 
-(fm/key "C-x e"    fm/replace-escapes nil "qol")
-(fm/key "<M-up>"   fm/move-line-up    nil "qol")
-(fm/key "<M-down>" fm/move-line-down  nil "qol")
+;; Setup the theme early on.
+;; (when (string-equal (system-name) "neuron")
+;;  ;; (fm/pkg atom-dark-theme
+;;  ;;   (load-theme 'atom-dark t)))
+;;  ;; (fm/pkg hc-zenburn-theme
+;;  ;;  (load-theme 'hc-zenburn t)))
+;;  (fm/pkg atom-dark-theme)
+;;  (fm/pkg hc-zenburn-theme)
+;;  (fm/pkg solarized-theme
+;;   (load-theme 'solarized-dark-high-contrast t)))
 
-(fm/key "{"  fm/insert-pair-curly         nil "qol")
-(fm/key "("  fm/insert-pair-parens        nil "qol")
-(fm/key "'"  fm/insert-pair-quote         nil "qol")
-(fm/key "\"" fm/insert-pair-double-quotes nil "qol")
-(fm/key "`"  fm/insert-pair-backtick      nil "qol")
+(fm/key "C-x e"    fm/replace-escapes)
+(fm/key "<M-up>"   fm/move-line-up)
+(fm/key "<M-down>" fm/move-line-down)
 
-;; Directories.
+(fm/key "{"  (lambda () (interactive) (fm/insert-pair ?\{ ?\} nil)))
+(fm/key "("  (lambda () (interactive) (fm/insert-pair ?\( ?\) t)))
+(fm/key "'"  (lambda () (interactive) (fm/insert-pair ?\' ?\' t)))
+(fm/key "`"  (lambda () (interactive) (fm/insert-pair ?\` ?\` t)))
+(fm/key "\"" (lambda () (interactive) (fm/insert-pair ?\" ?\" t)))
+
+;; Directories
 (defconst emacs-extra-dir (concat emacs-dots-dir "extra"))
 (push emacs-extra-dir load-path)
 
@@ -43,65 +56,26 @@
 ;; Common User Access.
 (cua-selection-mode 1)
 
-;; Startup.
+;; startup
 (fm/var inhibit-startup-screen t)
 (fm/var inhibit-startup-message t)
 (fm/var inhibit-startup-buffer-menu t)
 (fm/var initial-scratch-message nil)
 (fm/var initial-major-mode 'fundamental-mode)
 
-;; Saveplace.
-(fm/var save-place-mode t)
-(fm/var save-place t)
-(fm/var save-place-file emacs-places-file)
+;; scrolling
+(fm/var scroll-conservatively 4)
+(fm/var scroll-margin 3)
+(fm/var hscroll-margin 3)
+(fm/var hscroll-step 1)
+(fm/var auto-hscroll-mode 'current-line)
+(fm/var fast-but-imprecise-scrolling t)
+(fm/key "<f10>" (lambda () (interactive) (scroll-other-window 1)))
+(fm/key "<f11>" (lambda () (interactive) (scroll-other-window-down 1)))
+(fm/key "<f12>" delete-other-windows)
 
-;; Savehist.
-(fm/var savehist-mode t)
-(fm/var history-delete-duplicates t)
-(fm/var history-length 100)
-
-;; Recentf.
-(fm/var recentf-mode t)
-(fm/var recentf-auto-cleanup 'never)
-(fm/var recentf-save-file emacs-recentf-file)
-(fm/var recentf-max-menu-items 50)
-(fm/var recentf-max-saved-items 100)
-(fm/var recentf-exclude `(,emacs-elpa-dir))
-(fm/hook kill-emacs-hook recentf-cleanup "recentf")
-
-;; Indent.
-(fm/var indent-tabs-mode nil)
-
-;; Xref.
-(fm/after xref
- (fm/var xref-backend-functions '()))
-
-;; Bindings.
-(fm/var column-number-indicator-zero-based nil)
-
-;; Fill.
-(fm/var fill-column 90)
-(fm/var colon-double-space t)
-(fm/var default-justification 'left)
-
-;; Windmove.
-(windmove-default-keybindings)
-(windmove-delete-default-keybindings)
-
-(fm/after emacs
- ;; Scrolling.
- (fm/var scroll-conservatively 4)
- (fm/var scroll-margin 3)
- (fm/var hscroll-margin 3)
- (fm/var hscroll-step 1)
- (fm/var auto-hscroll-mode 'current-line)
- (fm/var fast-but-imprecise-scrolling t)
- (fm/key "<f10>" (lambda () (interactive) (scroll-other-window 1)))
- (fm/key "<f11>" (lambda () (interactive) (scroll-other-window-down 1)))
- (fm/key "<f12>" delete-other-windows)
-
- ;; External Processes.
- (fm/var read-process-output-max (* 1024 1024)))
+;; external processes
+(fm/var read-process-output-max (* 1024 1024))
 
 (fm/after frame
  (fm/var blink-cursor-mode nil))
@@ -126,6 +100,26 @@
   :foreground "Orange3")
  (fm/face font-lock-constant-face
   :foreground "CornflowerBlue"))
+
+;; saveplace
+(fm/var save-place-mode t)
+(fm/var save-place t)
+(fm/var save-place-file emacs-places-file)
+
+;; savehist
+(fm/var savehist-mode t)
+(fm/var history-delete-duplicates t)
+(fm/var history-length 100)
+
+;; recentf
+(fm/var recentf-mode t)
+(fm/var recentf-auto-cleanup 'never)
+(fm/var recentf-save-file emacs-recentf-file)
+(fm/var recentf-max-menu-items 50)
+(fm/var recentf-max-saved-items 100)
+(fm/var recentf-exclude `(,emacs-elpa-dir))
+
+(fm/hook kill-emacs-hook recentf-cleanup "recentf")
 
 (fm/after files
  (fm/var confirm-kill-processes nil)
@@ -153,6 +147,10 @@
 (fm/after mouse
  (fm/var mouse-yank-at-point t))
 
+;; windmove
+(windmove-default-keybindings)
+(windmove-delete-default-keybindings)
+
 (fm/after simple
  (fm/var undo-limit (* 1024 1024))
  (fm/var suggest-key-bindings 10)
@@ -166,6 +164,16 @@
  (fm/after files
   (fm/hook before-save-hook delete-trailing-whitespace)))
 
+;; indent
+(fm/var indent-tabs-mode nil)
+
+;; xref
+(fm/after xref
+ (fm/var xref-backend-functions '()))
+
+;; bindings
+(fm/var column-number-indicator-zero-based nil)
+
 (fm/after uniquify
  (fm/var uniquify-buffer-name-style 'forward))
 
@@ -174,6 +182,11 @@
 
 (fm/after newcomment
  (fm/var comment-fill-column 80))
+
+;; fill
+(fm/var fill-column 90)
+(fm/var colon-double-space t)
+(fm/var default-justification 'left)
 
 (fm/after ediff-wind
  (fm/var ediff-split-window-function #'split-window-horizontally)
@@ -557,7 +570,7 @@
 
 (fm/pkg yaml-mode
  (fm/after yaml-mode
-  (fm/key "C-c p" fm/generate-password yaml-mode-map "qol")
+  (fm/key "M-p" fm/generate-password yaml-mode-map)
   (fm/hook yaml-mode-hook flycheck-mode)))
 
 (fm/pkg flycheck-hledger)
@@ -792,8 +805,7 @@
 (fm/pkg lsp-treemacs
  (fm/key "C-c e" lsp-treemacs-errors-list)
  (fm/key "C-c s" lsp-treemacs-symbols)
- (fm/after treemacs-interface
-  (fm/key "<f12>" treemacs-delete-other-windows nil "treemacs-interface")))
+ (fm/key "<f12>" treemacs-delete-other-windows))
 
 (fm/pkg lsp-ivy
  (autoload 'lsp-ivy-workspace-symbol "lsp-ivy"))
