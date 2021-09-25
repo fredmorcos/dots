@@ -16,22 +16,27 @@
 ;; Custom file (cus-edit).
 (fm/var custom-file "/dev/null")
 
+(setq default-frame-alist
+ '((width . 160)
+   (height . 60)
+   (background-color . "Gray98")))
+
 (fm/after emacs
  ;; A big contributor to startup time is garbage collection.
  (fm/var gc-cons-threshold most-positive-fixnum)
  (fm/var gc-cons-percentage 0.8)
-
- ;; Disable tramp when loading .el and .elc files.
- (fm/var file-name-handler-alist nil)
-
- ;; This slows down normal operation.
- (fm/var auto-window-vscroll nil)
 
  ;; Prevent an early unstyled Emacs by handling UI elements.
  (tool-bar-mode -1)
  (menu-bar-mode -1)
  (set-scroll-bar-mode nil)
  (set-fringe-style '(8 . 8))
+
+ ;; Disable tramp when loading .el and .elc files.
+ (fm/var file-name-handler-alist nil)
+
+ ;; This slows down normal operation.
+ (fm/var auto-window-vscroll nil)
 
  ;; Frame-related improvements.
  (fm/var frame-resize-pixelwise t)
