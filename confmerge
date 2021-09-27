@@ -165,6 +165,7 @@ cmerge gvfs-network.mount            /usr/share/gvfs/mounts/network.mount
 cmerge archlinux/makepkg.conf        /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
 cmerge archlinux/pacman.conf         /etc/pacman.conf
+cmerge archlinux/paru.conf           /etc/paru.conf
 
 cmerge hostname                      /etc/hostname
 cmerge hosts                         /etc/hosts
