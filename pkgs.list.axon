@@ -57,7 +57,6 @@ chromium
 clementine
 clinfo
 clipgrab
-cmus
 codespell
 compsize
 conntrack-tools
@@ -72,6 +71,7 @@ d-feet
 dhclient
 dhcpcd
 dhex
+diffpdf
 dmidecode
 dnsmasq
 drawing
@@ -85,6 +85,7 @@ elementary-wallpapers
 emacs
 entr
 eom
+epiphany
 ethtool
 evince
 exa
@@ -234,7 +235,6 @@ opencl-amd
 opencl-mesa
 opendoas
 openmp
-openshot
 opusfile
 otf-cascadia-code
 otf-fantasque-sans-mono
@@ -261,7 +261,6 @@ pigz
 piper
 pipewire-alsa
 pipewire-zeroconf
-pitivi
 pkgconf
 powertop
 procs
