@@ -334,7 +334,7 @@
  (fm/after org
   (fm/var org-cycle-separator-lines 0)
   (fm/var org-startup-folded 'content)
-  (fm/var org-ellipsis "  ⤵")
+  (fm/var org-ellipsis "  ->")
   (fm/var org-hide-leading-stars t)
   (fm/var org-hide-emphasis-markers t)
   (fm/var org-fontify-whole-heading-line t)
@@ -406,7 +406,7 @@
    ;; Change the default font used for org-mode to a serif font (Caladea), but keep the
    ;; fixed-pitch fonts so that alignments and indentations stay consistent.
    (face-remap-add-relative 'default
-    :family "Caladea")
+    :family "Monospace")
    (face-remap-add-relative 'fixed-pitch
     :family "Monospace"
     :height 120)

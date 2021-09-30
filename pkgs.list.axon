@@ -175,6 +175,7 @@ lesspipe
 lhasa
 libao
 libcue
+libdecor
 libdmapsharing
 libdwarf
 libertinus-font
@@ -262,6 +263,7 @@ piper
 pipewire-alsa
 pipewire-zeroconf
 pkgconf
+power-profiles-daemon
 powertop
 procs
 progress
