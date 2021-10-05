@@ -78,7 +78,7 @@
 (fm/after faces
  (fm/face default
   :family "Monospace"
-  :height 110
+  :height 90
   :background "Gray98"
   :foreground "Gray40")
  (fm/face fringe

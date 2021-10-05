@@ -342,47 +342,60 @@
   (fm/var org-startup-indented t)
   (fm/var org-property-format "%s %s")
   (fm/face org-document-title
+   :inherit variable-pitch
    :height 1.2
    :weight normal
    :foreground "MidnightBlue"
    :bold t)
   (fm/face org-target
    :slant italic
-   :foreground "Tan")
+   :foreground "Tan"
+   :height 0.8)
   (fm/face org-table
+   :height 0.8
    :foreground "RoyalBlue") ;; "NavyBlue"
   (fm/face org-ellipsis
+   :inherit variable-pitch
+   :height 0.7
    :foreground "SteelBlue")
   (fm/face org-level-1
-   :inherit outline-1
+   :inherit (variable-pitch outline-1)
    :foreground "SlateBlue"
    :bold t)
   (fm/face org-level-2
-   :inherit outline-2
+   :inherit (variable-pitch outline-2)
    :foreground "IndianRed3"
    :bold t)
   (fm/face org-level-3
-   :inherit outline-3
+   :inherit (variable-pitch outline-3)
    :foreground "SteelBlue"
    :bold t)
   (fm/face org-level-4
-   :inherit outline-4)
+   :inherit (variable-pitch outline-4))
   (fm/face org-todo
+   :inherit variable-pitch
+   :height 0.8
    :foreground "Maroon"
    :bold t)
   (fm/face org-done
+   :inherit variable-pitch
+   :height 0.8
    :foreground "ForestGreen"
    :bold t)
   (fm/face org-drawer
-   :foreground "Snow3")
+   :foreground "Snow3"
+   :height 0.8)
   (fm/face org-special-keyword
    :inherit font-lock-keyword-face
+   :height 0.8
    :bold t)
   (fm/face org-block
    :family "Monospace")
   (fm/face org-block-begin-line
+   :height 0.8
    :foreground "thistle")
   (fm/face org-block-end-line
+   :height 0.8
    :foreground "thistle")
   (fm/hook org-mode-hook org-bullets-mode)
   (fm/hookn org-mode-hook
@@ -688,8 +701,7 @@
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
-  (fm/dim lsp-mode "Ls")
-  (fm/var lsp-treemacs-sync-mode t)
+  (fm/dim lsp-mode "Lsp")
   ;; (fm/var lsp-eldoc-render-all t)
   ;; (fm/var lsp-use-plists t)
   (fm/var lsp-completion-provider :none) ; Company-capf is already set
@@ -780,7 +792,6 @@
 (fm/pkg lsp-treemacs
  (fm/key "C-c e" lsp-treemacs-errors-list)
  (fm/key "C-c s" lsp-treemacs-symbols)
- (fm/key "C-c c" lsp-treemacs-call-hierarchy)
  (fm/after treemacs-interface
   (fm/key "<f12>" treemacs-delete-other-windows nil "treemacs-interface")))
 
