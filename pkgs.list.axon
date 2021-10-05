@@ -1,5 +1,4 @@
 acpid
-adobe-source-sans-fonts
 alsa-firmware
 amd-ucode
 amdvlk
@@ -154,7 +153,6 @@ i2c-tools
 idle3-tools
 inetutils
 innoextract
-inter-font
 intltool
 iotop
 ipset
@@ -173,7 +171,6 @@ libappindicator-gtk2
 libdecor
 libdwarf
 libebur128
-libertinus-font
 libfido2
 libgnome-keyring
 libmad
@@ -227,7 +224,6 @@ nftables
 nilfs-utils
 nmap
 ntfs-3g
-numix-gtk-theme-git
 nuspell
 nvme-cli
 odt2txt
@@ -348,18 +344,8 @@ trash-cli
 tree-sitter
 ttc-iosevka-aile
 ttc-iosevka-etoile
-ttf-caladea
-ttf-cascadia-code
-ttf-fantasque-sans-mono
-ttf-font-awesome
 ttf-go-mono-git
 ttf-go-sans-git
-ttf-inconsolata
-ttf-jetbrains-mono
-ttf-lato
-ttf-opensans
-ttf-proggy-clean
-ttf-sarasa-gothic
 tup
 udftools
 udiskie
