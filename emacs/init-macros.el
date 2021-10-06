@@ -80,14 +80,22 @@
     (fm/var ,face (car ',props))
     (fm/var ,face '((t ,@props))))))
 
+(defmacro fm/faces (&rest faces)
+ "Set multiple FACES."
+ `(progn
+   ,@(let ((exps nil))
+      (while faces
+       (push `(fm/face ,(pop faces) ,@(pop faces)) exps))
+      (nreverse exps))))
+
 ;; Vars.
 (defmacro fm/vars (&rest customs)
  "Custom-Set the CUSTOMS list of var-val pairs."
  `(custom-set-variables
    ,@(let ((exps nil))
-     (while customs
-      (push `(quote (,(pop customs) ,(pop customs))) exps))
-     exps)))
+      (while customs
+       (push `(quote (,(pop customs) ,(pop customs))) exps))
+      (nreverse exps))))
 
 (defmacro fm/var (var val)
  "Custom-Set VAR to VAL."
