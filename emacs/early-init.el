@@ -163,8 +163,10 @@
 
 (fm/after hledger-mode
  (fm/faces
-  hledger-description-face (:inherit font-lock-keyword-face)
-  hledger-amount-face      (:inherit font-lock-constant-face :inverse-video t)))
+  hledger-description-face (:foreground "RoyalBlue")
+  hledger-account-face     (:inherit default)
+  hledger-amount-face      (:weight semi-bold :background "Gray80" :foreground "Gray40")
+  hledger-date-face        (:weight semi-bold :foreground "Gray40")))
 
 (fm/after flycheck
  (fm/faces
