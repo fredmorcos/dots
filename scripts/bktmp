@@ -48,7 +48,6 @@ if [ -d $LAPTOP ]; then
     cmd "$HOME/Workspace/"                "$LAPTOP/Workspace/"
     cmd "$HOME/.gnupg/"                   "$LAPTOP/Configs/gnupg/"
     cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
-    cmd "$HOME/.config/hexchat/"          "$LAPTOP/Configs/config-hexchat/"
     cmd "$HOME/.local/share/keyrings"     "$LAPTOP/Configs/local-share-keyrings/"
 else
     printf ">>> %s is not mounted\n" $LAPTOP
