@@ -55,13 +55,10 @@ if [ -d $DATA ]; then
     cmd "$HOME/.gnupg/"                   "$DATA/Fred/Configs/gnupg/"
     cmd "$HOME/.ssh/"                     "$DATA/Fred/Configs/ssh/"
     cmd "$HOME/.config/beets/"            "$DATA/Fred/Configs/config-beets/"
-    cmd "$HOME/.config/hexchat/"          "$DATA/Fred/Configs/config-hexchat/"
     cmd "$HOME/.config/MusicBrainz/"      "$DATA/Fred/Configs/config-MusicBrainz/"
     cmd "$HOME/.config/transmission/"     "$DATA/Fred/Configs/config-transmission/"
     cmd "$HOME/.config/youtube-dl/"       "$DATA/Fred/Configs/config-youtube-dl/"
     cmd "$HOME/.local/share/keyrings"     "$DATA/Fred/Configs/local-share-keyrings/"
-    cmd "$HOME/.face"                     "$DATA/Fred/Configs/face.jpg"
-    cmd "$HOME/.wallpaper.jpg"            "$DATA/Fred/Configs/wallpaper.jpg"
 
     if [ -d $EXTERNAL ]; then
         cmd "$DATA/Common/" "$EXTERNAL/Common/"
