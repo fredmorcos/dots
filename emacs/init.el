@@ -273,6 +273,11 @@
  (fm/hookn c-mode-common-hook
   (fm/setup-c-style-comments)))
 
+(fm/after jit-lock
+ (fm/var jit-lock-stealth-time 1)
+ (fm/var jit-lock-chunk-size 5000)
+ (fm/var jit-lock-antiblink-grace 1))
+
 (fm/after package
  (fm/var package-archives
   '(("gnu"   . "https://elpa.gnu.org/packages/")
