@@ -173,6 +173,7 @@ libdwarf
 libebur128
 libfido2
 libgnome-keyring
+libjxl
 libmad
 libmp4v2
 libmythes
