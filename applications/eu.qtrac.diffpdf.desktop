@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=diffpdf
+Icon=/usr/share/icons/Papirus/64x64/mimetypes/application-pdf.svg
+Terminal=false
+Name=DiffPDF
+Comment=DiffPDF is used to compare two PDF files.
+Categories=Qt;Office;
