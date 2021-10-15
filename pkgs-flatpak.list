@@ -1,4 +1,5 @@
 ch.protonmail.protonmail-import-export-app
+com.belmoussaoui.Authenticator
 com.bitstower.Markets
 com.discordapp.Discord
 com.github.gi_lom.dialect
@@ -9,8 +10,10 @@ fr.romainvigier.MetadataCleaner
 info.portfolio_performance.PortfolioPerformance
 io.github.seadve.Kooha
 org.gnome.design.AppIconPreview
+org.gnome.design.Contrast
 org.gnome.design.Emblem
 org.gnome.design.IconLibrary
 org.gnome.design.SymbolicPreview
+org.gnome.gitlab.YaLTeR.VideoTrimmer
 re.sonny.Commit
 us.zoom.Zoom
