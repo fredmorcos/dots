@@ -138,6 +138,7 @@ hddtemp
 hdparm
 heaptrack
 hexedit
+hledger-ui
 hledger-web
 hotspot-appimage
 htmlmin
@@ -254,7 +255,6 @@ pipewire-zeroconf
 pkgconf
 polari
 poppler-data
-power-profiles-daemon
 powertop
 procs
 progress
