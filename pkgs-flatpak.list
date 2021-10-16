@@ -5,10 +5,13 @@ com.discordapp.Discord
 com.github.gi_lom.dialect
 com.github.liferooter.textpieces
 com.github.tchx84.Flatseal
+com.rafaelmardojai.SharePreview
+com.rafaelmardojai.WebfontKitGenerator
 de.haeckerfelix.AudioSharing
 fr.romainvigier.MetadataCleaner
 info.portfolio_performance.PortfolioPerformance
 io.github.seadve.Kooha
+org.gnome.Solanum
 org.gnome.design.AppIconPreview
 org.gnome.design.Contrast
 org.gnome.design.Emblem
