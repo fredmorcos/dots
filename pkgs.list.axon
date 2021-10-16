@@ -127,6 +127,7 @@ gparted
 gperftools
 gst-libav
 gstreamer-vaapi
+gtk4-docs
 gtk-engine-murrine
 gtk-engines
 gtksourceview3
@@ -164,7 +165,6 @@ kcachegrind
 kcov
 kexec-tools
 kgraphviewer
-kgx-git
 lesspipe
 lhasa
 libao
