@@ -111,7 +111,6 @@ gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-logs
-gnome-music
 gnome-screenshot
 gnome-shell-extension-appindicator
 gnome-shell-extension-gtile
@@ -170,6 +169,7 @@ lhasa
 libao
 libappindicator-gtk2
 libdecor
+libdmapsharing
 libdwarf
 libebur128
 libfido2
@@ -287,6 +287,7 @@ radeontool
 read-edid
 realtime-privileges
 remake
+rhythmbox
 rink
 ripgrep
 rmlint
