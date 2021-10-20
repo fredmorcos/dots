@@ -9,6 +9,7 @@ asp
 aspell-en
 atool
 audiofile
+autoconf
 automake
 bandwhich
 base
@@ -54,6 +55,7 @@ clinfo
 codespell
 compsize
 conntrack-tools
+cpio
 curlftpfs
 dateutils
 dbus-broker
@@ -88,7 +90,7 @@ fdupes
 fig2dev
 file-roller
 firefox
-flatpak-builder
+flatpak
 flex
 fwupd
 fzf
@@ -101,7 +103,6 @@ gitui
 glfw-x11
 gmp-ecm
 gnome-backgrounds
-gnome-builder
 gnome-calculator
 gnome-characters
 gnome-clocks
@@ -209,6 +210,7 @@ massif-visualizer
 mediainfo
 mesa-demos
 mesa-vdpau
+meson
 mkinitcpio-systemd-tool
 mlocate
 mpv
@@ -241,6 +243,7 @@ pacman-contrib
 papirus-icon-theme
 par2cmdline
 paru-bin
+patch
 pdfarranger
 pdfcrack
 pdfmixtool
@@ -252,6 +255,7 @@ perl-net-libidn2
 picard
 pigz
 pipewire-zeroconf
+pkgconf
 polari
 poppler-data
 powertop
@@ -303,6 +307,7 @@ rhythmbox
 rink
 ripgrep
 rmlint
+rpmextract
 rsync
 rtaudio
 rust-analyzer
@@ -334,6 +339,7 @@ s-tui
 subdl
 sudo
 syncthing
+sysprof
 sysstat
 texlive-bin
 time
