@@ -98,7 +98,6 @@ fzf
 gamemode
 gdb-dashboard
 gdm
-geary
 git-lfs
 gitui
 glfw-x11
@@ -106,13 +105,10 @@ gmp-ecm
 gnome-backgrounds
 gnome-calculator
 gnome-characters
-gnome-clocks
 gnome-control-center
 gnome-dictionary
-gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
-gnome-logs
 gnome-screenshot
 gnome-shell-extension-appindicator
 gnome-shell-extension-gtile
@@ -121,7 +117,6 @@ gnome-shell-extensions
 gnome-sound-recorder
 gnome-terminal
 gnome-tweaks
-gnome-weather
 gnuplot
 gpart
 gparted
