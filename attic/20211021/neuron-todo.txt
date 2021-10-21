@@ -1,0 +1,37 @@
+gnome pipewire networkmanager emacs git rustup
+
+initrd  /intel-ucode.img
+options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet ipv6.disable=1 pci=nomsi,noaer rootflags=compress=zstd,ssd,discard=async,relatime,space_cache=v2
+
+
+fstrim
+
+modprobe.d/nvidia.conf
+blacklist nouveau
+options bbswitch load_state=0 unload_state=1
+
+MODULES=(btrfs i915 bbswitch)
+BINARIES=(btrfs)
+
+
+add user
+enable systemd-resolved pipewire dbus-broker fstrim sshd gdm
+
+
+
+
+sudo cryptsetup --type luks2 --integrity-no-journal luksFormat
+cryptsetup open /dev/sda2 Root
+mkfs.btrfs -R free-space-tree
+mount -o compress=zstd,discard=async,relatime,ssd,space_cache=v2 /dev/mapper/Root /mnt
+btrfs property set /mnt compression zstd
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
+pacstrap /mnt base linux linux-firmware bash-completion bbswitch vim-minimal btrfs-progs efibootmgr ccache intel-ucode
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Europe/Vienna /etc/localtime
+hwclock --systohc
+
+locale.conf:
+LANG=en_US.UTF-8
+LC_TIME=en_GB.UTF-8
