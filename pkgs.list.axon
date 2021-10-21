@@ -170,7 +170,6 @@ libdmapsharing
 libdwarf
 libebur128
 libfido2
-libgnome-keyring
 libjxl
 libmad
 libmp4v2
@@ -214,7 +213,6 @@ mtools
 musl
 mutt
 mythes-en
-nautilus
 ncdu
 neofetch
 net-tools
@@ -316,6 +314,7 @@ screen
 scrot
 sd
 seahorse
+seahorse-nautilus
 shake
 shellcheck
 shfmt
