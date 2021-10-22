@@ -122,6 +122,9 @@ dconf /org/gnome/settings-daemon/plugins/color/night-light-schedule-to 20.0
 dconf /org/gnome/desktop/peripherals/touchpad/tap-to-click true
 dconf /org/gnome/desktop/peripherals/touchpad/speed 1.0
 
+# Mouse
+dconf /org/gnome/desktop/peripherals/mouse/speed 1.0
+
 # Keyboard
 dconf /org/gnome/desktop/peripherals/keyboard/delay "uint32 250"
 dconf /org/gnome/desktop/peripherals/keyboard/repeat-interval "uint32 15"
