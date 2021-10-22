@@ -234,8 +234,6 @@ cmerge youtube-dl.conf               ~/.config/youtube-dl/config
 cmerge gitconfig                     ~/.config/git/config
 cmerge mpv-input.conf                ~/.config/mpv/input.conf
 
-cmerge cargo.conf                    ~/.cargo/config
-
 cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
 
 cmerge loader/loader.conf            /boot/loader/loader.conf
