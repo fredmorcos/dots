@@ -2,7 +2,7 @@
 
 set -o nounset
 
-HNAME=$(hostname)
+HNAME=$(hostnamectl hostname)
 echo "Status: Hostname $HNAME"
 
 XPATH=$(realpath "$0")
@@ -178,6 +178,8 @@ dconf /org/gnome/settings-daemon/plugins/media-keys/screenshot "['<Shift>Print']
 dconf /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "['Print']"
 dconf /org/gnome/settings-daemon/plugins/media-keys/window-screenshot "['<Shift><Super>Print']"
 dconf /org/gnome/settings-daemon/plugins/media-keys/window-screenshot-clip "['<Alt>Print']"
+
+dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
 
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Primary><Alt>t'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'gnome-terminal'"
