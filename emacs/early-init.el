@@ -23,7 +23,7 @@
 
 (fm/after emacs
  ;; A big contributor to startup time is garbage collection.
- (fm/var gc-cons-threshold most-positive-fixnum)
+ (fm/var gc-cons-threshold (* 100 1024 1024))
  (fm/var gc-cons-percentage 0.8)
 
  ;; Prevent an early unstyled Emacs by handling UI elements.

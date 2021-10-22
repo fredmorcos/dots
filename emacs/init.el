@@ -499,6 +499,7 @@
   (fm/var company-tooltip-limit 15)
   (fm/var company-tooltip-align-annotations t)
   (fm/var company-idle-delay 0.3)
+  (fm/var company-minimum-prefix-length 2)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
   (fm/var company-frontends '(company-echo-metadata-frontend
                               company-pseudo-tooltip-frontend))
@@ -565,7 +566,7 @@
   (fm/var lsp-restart 'ignore)
   (fm/var lsp-enable-snippet t)
   (fm/var lsp-keymap-prefix "C-c")
-  (fm/var lsp-idle-delay 0.25)
+  (fm/var lsp-idle-delay 0.1)
   (fm/var lsp-file-watch-threshold nil)
   ;; (fm/var lsp-enable-semantic-highlighting t)
   (fm/var lsp-enable-indentation t)
