@@ -83,6 +83,109 @@ cmerge () {
   fi
 }
 
+# Disable tracker
+dconf write /org/freedesktop/tracker/miner/files/index-single-directories "@as []"
+dconf write /org/freedesktop/tracker/miner/files/index-recursive-directories "@as []"
+
+# Disable some search providers
+dconf write /org/gnome/desktop/search-providers/disabled "['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
+
+# Privacy
+dconf write /org/gnome/desktop/privacy/remember-recent-files false
+dconf write /org/gnome/desktop/privacy/remove-old-trash-files true
+dconf write /org/gnome/desktop/privacy/remove-old-temp-files true
+dconf write /org/gnome/desktop/privacy/old-files-age "uint32 1"
+
+# Power management
+dconf write /org/gnome/settings-daemon/plugins/power/idle-dim false
+dconf write /org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type 'nothing'
+
+# Night-light
+dconf write /org/gnome/settings-daemon/plugins/color/night-light-enabled true
+dconf write /org/gnome/settings-daemon/plugins/color/night-light-schedule-automatic false
+dconf write /org/gnome/settings-daemon/plugins/color/night-light-schedule-to 20.0
+
+# Touchpad
+dconf write /org/gnome/desktop/peripherals/touchpad/tap-to-click true
+dconf write /org/gnome/desktop/peripherals/touchpad/speed 1.0
+
+# Keyboard
+dconf write /org/gnome/desktop/peripherals/keyboard/delay 250
+dconf write /org/gnome/desktop/peripherals/keyboard/repeat-interval 15
+dconf write /org/gnome/desktop/input-sources/xkb-options "['lv3:ralt_switch', 'ctrl:nocaps', 'compose:ralt']"
+
+# Security
+dconf write /org/gnome/desktop/media-handling/autorun-x-content-ignore "@as []"
+dconf write /org/gnome/desktop/media-handling/autorun-x-content-open-folder "@as []"
+dconf write /org/gnome/desktop/media-handling/autorun-never true
+
+# Language
+dconf write /system/locale/region 'en_GB.UTF-8'
+
+# UI
+dconf write /org/gnome/desktop/interface/cursor-blink false
+dconf write /org/gnome/desktop/interface/show-battery-percentage true
+dconf write /org/gnome/desktop/interface/cursor-theme 'capitaine-cursors'
+dconf write /org/gnome/desktop/interface/font-name 'Sans 11'
+dconf write /org/gnome/desktop/interface/document-font-name 'Sans 11'
+dconf write /org/gnome/desktop/wm/preferences/titlebar-font 'Sans 11'
+dconf write /org/gnome/desktop/interface/monospace-font-name 'Monospace 11'
+dconf write /org/gnome/desktop/interface/font-antialiasing 'rgba'
+dconf write /org/gnome/desktop/interface/clock-show-weekday true
+dconf write /org/gnome/desktop/calendar/show-weekdate true
+dconf write /org/gnome/desktop/wm/preferences/resize-with-right-button true
+
+# Shortcuts
+dconf write /org/gnome/desktop/wm/keybindings/show-desktop "['<Super>d']"
+dconf write /org/gnome/shell/keybindings/toggle-application-view "['<Alt>F2']"
+dconf write /org/gnome/desktop/wm/keybindings/panel-run-dialog "['<Alt>F3']"
+
+dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-left "@as []"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-right "@as []"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-left "['<Shift><Super>Left']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-right "['<Shift><Super>Right']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-left "['<Primary><Alt>Left']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-right "['<Primary><Alt>Right']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-applications "@as []"
+dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "@as []"
+dconf write /org/gnome/desktop/wm/keybindings/switch-windows "['<Alt>Tab']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift><Alt>Tab']"
+
+dconf write /org/gnome/desktop/wm/keybindings/maximize "@as []"
+dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized "['<Super>Up']"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/home "['<Primary><Alt>h']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/www "['<Primary><Alt>w']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/logout "@as []"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/area-screenshot "['<Primary><Shift>Print']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/area-screenshot-clip "['<Primary>Print']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/screencast "['<Super>Print']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot "['<Shift>Print']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "['Print']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/window-screenshot "['<Shift><Super>Print']"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/window-screenshot-clip "['<Alt>Print']"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Primary><Alt>t'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'gnome-terminal'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Terminal'"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding "'<Primary><Alt>e'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command "'emacs'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name "'Emacs'"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding "'<Primary><Alt>d'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command "'flatpak run com.discordapp.Discord'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name "'Discord'"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding "'<Primary><Alt>c'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command "'signal-desktop'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name "'Signal'"
+
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding "'<Primary><Alt>o'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command "'gnome-control-center sound'"
+dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name "'Sound Settings'"
+
 for file in ~/.local/share/applications/*.desktop; do
   cmerge applications/"$(basename "$file")" "$file"
 done
