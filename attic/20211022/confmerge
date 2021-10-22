@@ -205,6 +205,8 @@ dconf /org/gnome/nautilus/list-view/default-zoom-level "'small'"
 
 # Terminal
 dconf /org/gnome/terminal/legacy/theme-variant "'dark'"
+dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows 30
+dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns 110
 dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(34,29,53)'"
 
 for file in ~/.local/share/applications/*.desktop; do
