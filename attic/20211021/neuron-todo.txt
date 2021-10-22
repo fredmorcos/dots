@@ -19,15 +19,21 @@ enable systemd-resolved pipewire dbus-broker fstrim sshd gdm
 
 
 
+ls /sys/firmware/efi/efivars
+timedatectl set-ntp true
+timedatectl set-timezone Europe/Vienna
+wipefs -a /dev/sda
+fdisk /dev/sda
 
-sudo cryptsetup --type luks2 --integrity-no-journal luksFormat
+mkfs.vfat -F 32 /dev/sda1
+cryptsetup --type luks2 luksFormat /dev/sda2
 cryptsetup open /dev/sda2 Root
-mkfs.btrfs -R free-space-tree
-mount -o compress=zstd,discard=async,relatime,ssd,space_cache=v2 /dev/mapper/Root /mnt
-btrfs property set /mnt compression zstd
+mkfs.ext4 -L Root -m 1 -O fast_commit /dev/mapper/Root
+tune2fs -o discard /dev/mapper/Root
+mount /dev/mapper/Root /mnt
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
-pacstrap /mnt base linux linux-firmware bash-completion bbswitch vim-minimal btrfs-progs efibootmgr ccache intel-ucode
+pacstrap /mnt base linux linux-firmware bash-completion bbswitch vim-minimal efibootmgr ccache intel-ucode openssh networkmanager tree
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Europe/Vienna /etc/localtime
 hwclock --systohc
@@ -35,3 +41,5 @@ hwclock --systohc
 locale.conf:
 LANG=en_US.UTF-8
 LC_TIME=en_GB.UTF-8
+
+locale-gen
