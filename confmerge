@@ -150,6 +150,7 @@ dconf /org/gnome/desktop/interface/font-antialiasing "'rgba'"
 dconf /org/gnome/desktop/interface/clock-show-weekday true
 dconf /org/gnome/desktop/calendar/show-weekdate true
 dconf /org/gnome/desktop/wm/preferences/resize-with-right-button true
+dconf /org/gnome/shell/enabled-extensions "['pixel-saver@deadalnix.me']"
 
 # Shortcuts
 dconf /org/gnome/desktop/wm/keybindings/show-desktop "['<Super>d']"
