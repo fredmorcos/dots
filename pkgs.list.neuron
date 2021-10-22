@@ -1,5 +1,5 @@
 argyllcms
-aspell
+aspell-en
 atomicparsley
 autoconf
 automake
@@ -114,6 +114,7 @@ python-libevdev
 python-pycryptodome
 python-pyudev
 realtime-privileges
+rink
 rsync
 rust-analyzer
 rust-bindgen
@@ -130,7 +131,7 @@ sudo
 sushi
 syncthing
 sysprof
-tldr
+tealdeer
 tokei
 torbrowser-launcher
 transmission-gtk
