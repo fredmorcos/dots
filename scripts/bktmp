@@ -6,21 +6,11 @@ set -o nounset
 set -o noglob
 
 CMD=("rsync"
-     # "--preallocate"
-     # "--sparse"
-     # "--delete-after"
-     # "--safe-links"
-     # "--munge-links"
-     # "--xattrs"
-     # "--acls"
-     # "--one-file-system"
-     # "--hard-links"
-     # "-zz"
-     "--human-readable"
-     "--progress"
+     "-hhh"
      "--verbose"
+     "--info=progress2"
      "--archive"
-     "--skip-compress=zst/jpg/mp[34]/7z/bz2/webm/avi"
+     "--executability"
      "--delete"
      "--delete-excluded"
      "--exclude=*/target"
@@ -39,7 +29,7 @@ cmd () {
 }
 
 HOME=/home/fred
-LAPTOP=/run/media/fred/External/FredLaptop
+LAPTOP=/run/media/fred/External/Laptop
 
 if [ -d $LAPTOP ]; then
     cmd "$HOME/Documents/"                "$LAPTOP/Documents/"
@@ -49,7 +39,9 @@ if [ -d $LAPTOP ]; then
     cmd "$HOME/.gnupg/"                   "$LAPTOP/Configs/gnupg/"
     cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
     cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
-    cmd "$HOME/.config/syncthing/"        "$LAPTOP/Configs/syncthing/"
+    cmd "$HOME/.config/transmission/"     "$LAPTOP/Desktop/Configs/config-transmission/"
+    cmd "$HOME/.config/youtube-dl/"       "$LAPTOP/Desktop/Configs/config-youtube-dl/"
+    cmd "$HOME/.config/syncthing/"        "$LAPTOP/Configs/config-syncthing/"
 else
     printf ">>> %s is not mounted\n" $LAPTOP
     exit 1
