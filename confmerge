@@ -208,6 +208,9 @@ dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/n
 # Nautilus
 dconf /org/gnome/nautilus/preferences/default-folder-viewer "'list-view'"
 dconf /org/gnome/nautilus/list-view/default-zoom-level "'small'"
+dconf /org/gtk/settings/file-chooser/sort-directories-first true
+dconf /org/gnome/nautilus/preferences/recursive-search "'never'"
+dconf /org/gnome/nautilus/preferences/show-image-thumbnails "'never'"
 
 # Terminal
 dconf /org/gnome/terminal/legacy/theme-variant "'dark'"
