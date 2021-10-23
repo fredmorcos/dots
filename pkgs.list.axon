@@ -156,7 +156,6 @@ irqbalance
 ispell
 jfsutils
 john
-kcachegrind
 kcov
 kexec-tools
 kgraphviewer
@@ -200,7 +199,6 @@ luit
 lzop
 make
 man-pages
-massif-visualizer
 mediainfo
 mesa-demos
 mesa-vdpau

@@ -1,9 +1,9 @@
 # KDE Config File
 [Desktop Entry]
 Type=Application
-Exec=kcachegrind -qwindowtitle %c %u
+Exec=flatpak run org.kde.kcachegrind -qwindowtitle %c %u
 MimeType=application/x-kcachegrind;
-Icon=/usr/share/icons/Papirus/64x64/apps/kcachegrind.svg
+Icon=/usr/share/icons/Papirus/64x64/apps/org.kde.kcachegrind.svg
 X-DocPath=kcachegrind/index.html
 Terminal=false
 Name=KCachegrind
