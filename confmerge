@@ -152,6 +152,9 @@ dconf /org/gnome/desktop/calendar/show-weekdate true
 dconf /org/gnome/desktop/wm/preferences/resize-with-right-button true
 dconf /org/gnome/shell/enabled-extensions "['pixel-saver@deadalnix.me']"
 
+# Apps
+dconf /org/gnome/shell/favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Polari.desktop', 'rhythmbox.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Characters.desktop', 'gucharmap.desktop', 'org.gnome.Dictionary.desktop', 'com.github.gi_lom.dialect.desktop']"
+
 # Shortcuts
 dconf /org/gnome/desktop/wm/keybindings/show-desktop "['<Super>d']"
 dconf /org/gnome/shell/keybindings/toggle-application-view "['<Alt>F2']"
