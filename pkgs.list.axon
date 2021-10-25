@@ -216,7 +216,6 @@ neofetch
 net-tools
 network-manager-applet
 nftables
-nikola
 nilfs-utils
 nmap
 npm
@@ -242,7 +241,6 @@ pdfcrack
 pdfmixtool
 pdfslicer
 peek
-pelican
 perl-archive-zip
 perl-net-libidn2
 picard
@@ -262,8 +260,10 @@ pv
 pwgen
 pwndbg
 python-aiohttp
+python-babel
 python-beautifulsoup4
 python-cssselect
+python-docutils
 python-dulwich
 python-ecdsa
 python-fastimport
@@ -284,6 +284,7 @@ python-pycryptodome
 python-pycurl
 python-pyenchant
 python-pygal
+python-pyinotify
 python-pylast
 python-pyphen
 python-pyserial
@@ -425,3 +426,4 @@ you-get
 youtube-dl
 z
 z3
+zola
