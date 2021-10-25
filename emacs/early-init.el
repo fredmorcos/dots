@@ -226,6 +226,11 @@
  (fm/hookn lsp-ui-mode-hook
   (fm/faces lsp-ui-doc-border ("Gray50"))))
 
+(fm/after web-mode
+ (fm/faces
+  web-mode-current-column-highlight-face (:background "LightSteelBlue1")
+  web-mode-current-element-highlight-face (:background "LightSkyBlue1")))
+
 ;; -------- END THEME --------
 
 (fm/after package

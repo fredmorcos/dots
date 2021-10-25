@@ -595,6 +595,8 @@
   (fm/var lsp-diagnostics-attributes
    '((unnecessary :underline "DarkOrange")
      (deprecated :strike-through t))))
+ (fm/after lsp-vetur
+  (fm/var lsp-vetur-emmet "inMarkupAndStylesheetFilesOnly"))
  (fm/after lsp-rust
   (fm/var lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
   (fm/var lsp-rust-analyzer-proc-macro-enable t)
@@ -648,6 +650,30 @@
   (fm/key "M-."   lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
   (fm/key "M-?"   lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
   (fm/key "C-c h" lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc")))
+
+(fm/pkg web-mode
+ (fm/mode ".html" web-mode)
+ (fm/mode ".css" web-mode)
+ (fm/mode ".js" web-mode)
+ (fm/var web-mode-markup-indent-offset 2)
+ (fm/var web-mode-css-indent-offset 2)
+ (fm/var web-mode-code-indent-offset 2)
+ (fm/var web-mode-enable-current-column-highlight t)
+ (fm/var web-mode-enable-current-element-highlight t)
+ (fm/var web-mode-auto-close-style 3)
+ (fm/var web-mode-enable-auto-expanding t)
+ (fm/hook web-mode-hook lsp)
+ (fm/hookn web-mode-hook
+  (setq-local tab-width 2)
+  (fm/after company-mode
+   (defvar company-backends)
+   (set (make-local-variable 'company-backends)
+    '(company-css company-web-html company-yasnippet company-capf company-files)))))
+
+(fm/pkg emmet-mode
+ (fm/var emmet-indentation 2)
+ (fm/after web-mode
+  (fm/hook web-mode-hook emmet-mode)))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)

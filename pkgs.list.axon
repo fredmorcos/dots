@@ -247,6 +247,7 @@ perl-archive-zip
 perl-net-libidn2
 picard
 pigz
+pipewire-v4l2
 pipewire-zeroconf
 pkgconf
 polari
@@ -377,7 +378,6 @@ webp-pixbuf-loader
 wget
 whois
 wireguard-tools
-wireplumber
 wmctrl
 xclip
 xdg-user-dirs-gtk
