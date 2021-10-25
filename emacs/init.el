@@ -499,6 +499,7 @@
   (fm/var company-tooltip-limit 15)
   (fm/var company-tooltip-align-annotations t)
   (fm/var company-idle-delay 0.3)
+  (fm/var company-begin-commands '(self-insert-command))
   (fm/var company-minimum-prefix-length 2)
   (fm/var company-occurence-weight-function 'company-occurrence-prefer-any-closest)
   (fm/var company-frontends '(company-echo-metadata-frontend
@@ -665,7 +666,7 @@
  (fm/hook web-mode-hook lsp)
  (fm/hookn web-mode-hook
   (setq-local tab-width 2)
-  (fm/after company-mode
+  (fm/after company
    (defvar company-backends)
    (set (make-local-variable 'company-backends)
     '(company-css company-web-html company-yasnippet company-capf company-files)))))
