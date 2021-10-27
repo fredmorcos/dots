@@ -663,13 +663,16 @@
  (fm/var web-mode-enable-current-element-highlight t)
  (fm/var web-mode-auto-close-style 3)
  (fm/var web-mode-enable-auto-expanding t)
- (fm/hook web-mode-hook lsp)
- (fm/hookn web-mode-hook
-  (setq-local tab-width 2)
-  (fm/after company
-   (defvar company-backends)
-   (set (make-local-variable 'company-backends)
-    '(company-css company-web-html company-yasnippet company-capf company-files)))))
+ (fm/hook web-mode-hook lsp))
+
+(fm/pkg company-web
+ (fm/after web-mode
+  (fm/hookn web-mode-hook
+   (setq-local tab-width 2)
+   (fm/after company
+    (defvar company-backends)
+    (set (make-local-variable 'company-backends)
+     '(company-css company-web-html company-yasnippet company-capf company-files))))))
 
 (fm/pkg emmet-mode
  (fm/var emmet-indentation 2)
