@@ -93,7 +93,6 @@ file-roller
 firefox
 flatpak
 flex
-fwupd
 fzf
 gamemode
 gdb-dashboard
@@ -108,6 +107,7 @@ gnome-calculator
 gnome-characters
 gnome-control-center
 gnome-dictionary
+gnome-firmware
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-screenshot

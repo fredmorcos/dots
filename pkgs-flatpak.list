@@ -16,6 +16,7 @@ org.gnome.Builder
 org.gnome.Devhelp
 org.gnome.Glade
 org.gnome.Solanum
+org.gnome.Todo
 org.gnome.design.AppIconPreview
 org.gnome.design.Contrast
 org.gnome.design.Emblem
