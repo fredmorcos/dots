@@ -108,6 +108,7 @@ dconf /org/gnome/desktop/privacy/remember-recent-files false
 dconf /org/gnome/desktop/privacy/remove-old-trash-files true
 dconf /org/gnome/desktop/privacy/remove-old-temp-files true
 dconf /org/gnome/desktop/privacy/old-files-age "uint32 1"
+dconf /org/gnome/desktop/privacy/report-technical-problems false
 
 # Power management
 dconf /org/gnome/settings-daemon/plugins/power/idle-dim false
