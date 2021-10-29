@@ -1,0 +1,379 @@
+;;; init --- Emacs configuration -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+
+(eval-when-compile
+ (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
+ (push emacs-dots-dir load-path))
+
+(require 'init-macros)
+
+(defmacro face (face &rest props)
+ "Set FACE properties to PROPS."
+ `(set-face-attribute ,face nil ,@props))
+
+(defmacro gkey (key pkg fn)
+ "Define global KEY to call FN from PKG."
+ `(progn
+   (autoload ',fn ,pkg)
+   (global-set-key (kbd ,key) #',fn)))
+
+(defmacro dim (mode text)
+ "Diminish MODE to TEXT."
+ `(progn
+   (assq-delete-all ',mode minor-mode-alist)
+   (push '(,mode ,(concat " " text)) minor-mode-alist)))
+
+(with-eval-after-load 'faces
+ (face 'default :background "Gray98" :foreground "Gray40")
+ (face 'fringe  :background "Gray98" :foreground "Gray40")
+ (face 'cursor  :background "SlateGray3")
+ (face 'region  :background "Snow2")
+
+ (face 'mode-line
+  :background "Gray95"
+  :foreground "LightSteelBlue4"
+  :box nil
+  :weight 'bold)
+
+ (face 'mode-line-inactive
+  :background "Gray95"
+  :foreground "Gray70"
+  :box nil
+  :weight 'bold)
+
+ (face 'mode-line-highlight :background "Snow2" :box nil)
+
+ (face 'link      :foreground "RoyalBlue3" :underline "LightSteelBlue3")
+ (face 'highlight :background "Wheat")
+ (face 'error     :foreground "Red3")
+
+ (face 'line-number              :foreground "Gray85")
+ (face 'line-number-current-line :foreground "Gray70")
+
+ (face 'show-paren-match            :background "Gray90")
+ (face 'show-paren-mismatch         :background "LightSalmon")
+ (face 'show-paren-match-expression :background "Lavender"))
+
+(with-eval-after-load 'font-lock
+ (face 'font-lock-function-name-face :foreground "DarkSlateBlue")
+ (face 'font-lock-keyword-face       :foreground "MediumSlateBlue")
+ (face 'font-lock-type-face          :foreground "DarkGreen")
+ (face 'font-lock-variable-name-face :foreground "DarkCyan")
+ (face 'font-lock-string-face        :foreground "OliveDrab")
+ (face 'font-lock-comment-face       :foreground "Thistle3")
+ (face 'font-lock-warning-face       :foreground "Orange3")
+ (face 'font-lock-constant-face      :foreground "CornflowerBlue"))
+
+(with-eval-after-load 'hl-line
+ (face 'hl-line :background "Gray95" :extend nil))
+
+(with-eval-after-load 'flyspell
+ (face 'flyspell-duplicate :underline "YellowGreen")
+ (face 'flyspell-incorrect :underline "Orchid"))
+
+(with-eval-after-load 'org
+ (face 'org-document-title   :weight 'semi-bold :foreground "Gray20")
+ (face 'org-document-info    :foreground "Gray20")
+ (face 'org-target           :slant 'italic :foreground "Tan")
+ (face 'org-table            :foreground "RoyalBlue")
+ (face 'org-ellipsis         :underline nil :weight 'semi-bold :foreground "Gray30")
+ (face 'org-level-1          :weight 'semi-bold :foreground "Gray30")
+ (face 'org-level-2          :weight 'semi-bold :foreground "Gray30")
+ (face 'org-level-3          :weight 'semi-bold :foreground "Gray30")
+ (face 'org-level-4          :weight 'semi-bold :foreground "Gray30")
+ (face 'org-link             :weight 'semi-bold :height 0.8)
+ (face 'org-todo             :foreground "Maroon" :weight 'semi-bold)
+ (face 'org-done             :foreground "ForestGreen" :weight 'semi-bold)
+ (face 'org-drawer           :foreground "Snow3")
+ (face 'org-special-keyword  :weight 'semi-bold)
+ (face 'org-block            :family "Monospace")
+ (face 'org-block-begin-line :foreground "thistle")
+ (face 'org-block-end-line   :foreground "thistle"))
+
+(with-eval-after-load 'indent-guide
+ (face 'indent-guide-face :foreground "gray80"))
+
+(with-eval-after-load 'diff-hl
+ (face 'diff-hl-delete :background "RosyBrown1")
+ (face 'diff-hl-insert :background "DarkSeaGreen2")
+ (face 'diff-hl-change :background "PowderBlue"))
+
+(with-eval-after-load 'symbol-overlay
+ (face 'symbol-overlay-default-face :background "HoneyDew2"))
+
+(with-eval-after-load 'multiple-cursors
+ (face 'mc/cursor-bar-face :background "Gray40" :foreground "White")
+ (face 'mc/cursor-face     :background "Gray50" :foreground "White"))
+
+(with-eval-after-load 'flycheck
+ (face 'flycheck-error   :underline "Red1")
+ (face 'flycheck-info    :underline "ForestGreen")
+ (face 'flycheck-warning :underline "DarkOrange"))
+
+(with-eval-after-load 'flycheck-posframe
+ (face 'flycheck-posframe-background-face :background "CornSilk")
+ (face 'flycheck-posframe-warning-face    :foreground "DarkOrange")
+ (face 'flycheck-posframe-border-face     :background "Wheat" :foreground "Wheat")
+ (face 'flycheck-posframe-error-face      :foreground "DarkRed"))
+
+(with-eval-after-load 'company
+ (face 'company-tooltip :background "gray95"))
+
+(with-eval-after-load 'tree-sitter-hl
+ (face 'tree-sitter-hl-face:property :slant 'normal))
+
+(with-eval-after-load 'lsp-mode
+ (face 'lsp-face-highlight-read  :inherit 'highlight))
+
+(with-eval-after-load 'lsp-semantic-tokens
+ (face 'lsp-face-semhl-namespace :foreground "CadetBlue")
+ (face 'lsp-face-semhl-enum      :foreground "MediumPurple")
+ (face 'lsp-face-semhl-struct    :foreground "BlueViolet"))
+
+(with-eval-after-load 'lsp-lens-face
+ (face 'lsp-lens-face       :inherit 'shadow)
+ (face 'lsp-lens-mouse-face :inherit 'link))
+
+(with-eval-after-load 'whitespace
+ (face 'whitespace-line :foreground 'unspecified :background "Gray90" :weight 'semi-bold))
+
+(with-eval-after-load 'lsp-rust
+ (face 'lsp-rust-analyzer-inlay-type-face
+  :inherit font-lock-type-face
+  :height 0.8
+  :background "HoneyDew2")
+
+ (face 'lsp-rust-analyzer-inlay-param-face
+  :height 0.8
+  :weight 'semi-bold
+  :foreground "DimGray"
+  :background "Azure2")
+
+ (face 'lsp-rust-analyzer-inlay-chain-face
+  :height 0.8
+  :weight 'semi-bold
+  :foreground "DimGray"
+  :background "Khaki"))
+
+(with-eval-after-load 'lsp-ui-doc
+ (face 'lsp-ui-doc-background :background "Gray92")
+ (face 'lsp-ui-doc-header     :foreground "Gray98" :background "RoyalBlue"))
+
+(with-eval-after-load 'lsp-ui-peek
+ (face 'lsp-ui-peek-list      :background "Gray96")
+ (face 'lsp-ui-peek-peek      :background "Gray92")
+ (face 'lsp-ui-peek-selection :background "LightSkyBlue1")
+ (face 'lsp-ui-peek-header    :foreground "Gray98" :background "RoyalBlue")
+ (face 'lsp-ui-peek-filename  :foreground "RoyalBlue"))
+
+(with-eval-after-load 'lsp-ui-doc
+ (eval-when-compile (defvar lsp-ui-doc-border))
+ (setq lsp-ui-doc-border "Gray50"))
+
+(with-eval-after-load 'web-mode
+ (face 'web-mode-current-column-highlight-face  :background "LightSteelBlue1")
+ (face 'web-mode-current-element-highlight-face :background "LightSkyBlue1"))
+
+(gkey "C-x e"    "qol" fm/replace-escapes)
+(gkey "<M-up>"   "qol" fm/move-line-up)
+(gkey "<M-down>" "qol" fm/move-line-down)
+
+(gkey "{"  "qol" fm/insert-pair-curly)
+(gkey "("  "qol" fm/insert-pair-parens)
+(gkey "'"  "qol" fm/insert-pair-quote)
+(gkey "\"" "qol" fm/insert-pair-double-quotes)
+(gkey "`"  "qol" fm/insert-pair-backtick)
+
+;; Directories.
+(defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
+(defconst emacs-elpa-dir (concat expanded-user-emacs-dir "elpa"))
+(defconst emacs-recentf-file (concat expanded-user-emacs-dir "recentf"))
+(defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
+(defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
+(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
+(defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
+(defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
+(make-directory emacs-autosaves-dir t)
+(make-directory emacs-backups-dir t)
+
+;; Do not show a message in the echo area after startup.
+(fset 'display-startup-echo-area-message 'ignore)
+
+;; subr - Respond to yes/no questions using Y/N.
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Common User Access.
+(cua-selection-mode 1)
+
+;; Startup.
+(setq inhibit-startup-screen t)
+(setq inhibit-startup-message t)
+(setq inhibit-startup-buffer-menu t)
+(setq initial-scratch-message nil)
+(setq initial-major-mode 'fundamental-mode)
+
+;; Saveplace.
+(save-place-mode t)
+
+;; Savehist.
+(add-hook 'savehist-mode-hook
+ (lambda ()
+  (setq history-delete-duplicates t)
+  (setq history-length 100)))
+(savehist-mode t)
+
+;; Recentf.
+(with-eval-after-load 'recentf
+ (eval-when-compile
+  (defvar recentf-auto-cleanup)
+  (defvar recentf-save-file)
+  (defvar recentf-max-menu-items)
+  (defvar recentf-max-saved-items)
+  (defvar recentf-exclude))
+ (setq recentf-auto-cleanup 'never)
+ (setq recentf-save-file emacs-recentf-file)
+ (setq recentf-max-menu-items 50)
+ (setq recentf-max-saved-items 100)
+ (setq recentf-exclude `(,emacs-elpa-dir)))
+(recentf-mode t)
+(add-hook 'kill-emacs-hook 'recentf-cleanup)
+
+;; Indent.
+(setq-default indent-tabs-mode nil)
+
+;; Xref.
+(with-eval-after-load 'xref
+ (setq xref-backend-functions '()))
+
+;; Bindings.
+(setq column-number-indicator-zero-based nil)
+
+;; Fill.
+(setq fill-column 90)
+(setq colon-double-space t)
+(setq default-justification 'left)
+
+;; Windmove.
+(windmove-default-keybindings)
+(windmove-delete-default-keybindings)
+
+(with-eval-after-load 'emacs
+ ;; Scrolling.
+ (setq scroll-conservatively 4)
+ (setq scroll-margin 3)
+ (setq hscroll-margin 3)
+ (setq hscroll-step 1)
+ (setq auto-hscroll-mode 'current-line)
+ (setq fast-but-imprecise-scrolling t)
+ (global-set-key (kbd "<f10>") (lambda () (interactive) (scroll-other-window 1)))
+ (global-set-key (kbd "<f11>") (lambda () (interactive) (scroll-other-window-down 1)))
+ (global-set-key (kbd "<f12>") #'delete-other-windows)
+
+ ;; External Processes.
+ (setq read-process-output-max (* 1024 1024)))
+
+;; Frame.
+(blink-cursor-mode -1)
+(horizontal-scroll-bar-mode -1)
+
+(with-eval-after-load 'files
+ (setq confirm-kill-processes nil)
+ (setq auto-save-file-name-transforms `((".*" ,emacs-autosaves-pattern t)))
+ (setq backup-directory-alist `((".*" . ,emacs-backups-pattern)))
+ (setq backup-inhibited nil)
+ (setq make-backup-files t)
+ (setq delete-old-versions t)
+ (setq mode-require-final-newline 'visit-save)
+ (setq require-final-newline 'visit-save)
+ (setq load-prefer-newer t)
+ (setq coding-system-for-read 'utf-8-unix)
+ (setq coding-system-for-write 'utf-8-unix))
+
+(with-eval-after-load 'help
+ (setq help-window-select t))
+
+(with-eval-after-load 'window
+ (setq split-height-threshold 160)
+ (setq even-window-sizes 'width-only))
+
+(global-set-key (kbd "<M-S-right>") #'next-buffer)
+(global-set-key (kbd "<M-S-left>") #'previous-buffer)
+
+(with-eval-after-load 'mouse
+ (setq mouse-yank-at-point t))
+
+(auto-save-mode)
+
+(with-eval-after-load 'simple
+ (setq undo-limit (* 1024 1024))
+ (setq suggest-key-bindings 10)
+ (setq column-number-mode t)
+ (setq line-number-mode nil)
+ (setq save-interprogram-paste-before-kill t)
+ (setq backward-delete-char-untabify-method 'hungry)
+ (fm/key "<mouse-4>" previous-line)
+ (fm/key "<mouse-5>" next-line)
+ (with-eval-after-load 'files
+  (fm/hook before-save-hook delete-trailing-whitespace)))
+
+(with-eval-after-load 'uniquify
+ (setq uniquify-buffer-name-style 'forward))
+
+(with-eval-after-load 'vc
+ (setq vc-make-backup-files t))
+
+(with-eval-after-load 'newcomment
+ (setq comment-fill-column 80))
+
+(with-eval-after-load 'ediff-wind
+ (eval-when-compile
+  (defvar ediff-split-window-function)
+  (defvar ediff-window-setup-function)
+ (setq ediff-split-window-function #'split-window-horizontally)
+ (setq ediff-window-setup-function #'ediff-setup-windows-plain)))
+
+(with-eval-after-load 'elec-pair
+ (eval-when-compile
+  (defvar electric-pair-pairs))
+ (setq electric-pair-pairs '((?\[ . ?\]))))
+
+(with-eval-after-load 'display-line-numbers
+ (eval-when-compile
+  (defvar display-line-numbers-grow-only)
+  (defvar display-line-numbers-width-start))
+ (setq display-line-numbers-grow-only t)
+ (setq display-line-numbers-width-start t))
+
+(with-eval-after-load 'abbrev
+ (dim abbrev-mode "Ab"))
+
+(with-eval-after-load 'whitespace
+ (fm/dim whitespace-mode "Ws")
+ (fm/var whitespace-line-column 90)
+ (fm/var show-trailing-whitespace nil)
+ (fm/var whitespace-action '(cleanup))
+ (fm/var whitespace-style
+  '(face
+    tabs
+    lines-tail
+    empty
+    tab-mark
+    indentation
+    indentation::tab
+    indentation::space
+    space-after-tab
+    space-after-tab::tab
+    space-after-tab::space
+    space-before-tab
+    space-before-tab::tab
+    space-before-tab::space)))
+
+;; Avoid doing anything after initialization.
+(setq after-init-hook nil)
+
+;; Print startup stats.
+(message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
+
+(provide 'init)
+;;; init ends here
