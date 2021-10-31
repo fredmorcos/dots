@@ -57,25 +57,6 @@
 (fm/after frame
  (blink-cursor-mode -1))
 
-;; Saveplace.
-(save-place-mode)
-
-;; Savehist.
-(savehist-mode)
-
-;; Autosave.
-(auto-save-mode)
-
-;; Recentf.
-(fm/after recentf
- (setq-default recentf-auto-cleanup 'never)
- (setq-default recentf-save-file emacs-recentf-file)
- (setq-default recentf-max-menu-items 50)
- (setq-default recentf-max-saved-items 100)
- (setq-default recentf-exclude `(,emacs-elpa-dir)))
-(fm/hook kill-emacs-hook recentf-cleanup "recentf")
-(recentf-mode)
-
 ;; Bindings.
 (setq-default column-number-indicator-zero-based nil)
 
@@ -120,6 +101,25 @@
  (setq-default load-prefer-newer t)
  (setq-default coding-system-for-read 'utf-8-unix)
  (setq-default coding-system-for-write 'utf-8-unix))
+
+;; Saveplace.
+(save-place-mode)
+
+;; Savehist.
+(savehist-mode)
+
+;; Autosave.
+(auto-save-mode)
+
+;; Recentf.
+(fm/after recentf
+ (setq-default recentf-auto-cleanup 'never)
+ (setq-default recentf-save-file emacs-recentf-file)
+ (setq-default recentf-max-menu-items 50)
+ (setq-default recentf-max-saved-items 100)
+ (setq-default recentf-exclude `(,emacs-elpa-dir)))
+(fm/hook kill-emacs-hook recentf-cleanup "recentf")
+(recentf-mode)
 
 (fm/after help
  (setq-default help-window-select t))
