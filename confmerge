@@ -299,9 +299,9 @@ if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
     pkgs_tmp_file=$(mktemp)
     pacman -Qtteq | sort > "$pkgs_tmp_file"
-    cmerge "pkgs.list" "$pkgs_tmp_file"
-    pkgs_install=$(comm --check-order -2 -3 "pkgs.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
-    pkgs_remove=$(comm --check-order -1 -3 "pkgs.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
+    cmerge "pkgs/pacman.list" "$pkgs_tmp_file"
+    pkgs_install=$(comm --check-order -2 -3 "pkgs/pacman.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
+    pkgs_remove=$(comm --check-order -1 -3 "pkgs/pacman.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
     rm "$pkgs_tmp_file"
 
     if [ "$pkgs_remove" != "" ]; then
@@ -333,9 +333,9 @@ fi
 
 flatpak_tmp_file=$(mktemp)
 flatpak list --app --columns=application > "$flatpak_tmp_file"
-cmerge "pkgs-flatpak.list" "$flatpak_tmp_file"
-flatpak_install=$(comm -2 -3 "pkgs-flatpak.list" "$flatpak_tmp_file" | tr '\n' ' ')
-flatpak_remove=$(comm -1 -3 "pkgs-flatpak.list" "$flatpak_tmp_file" | tr '\n' ' ')
+cmerge "pkgs/flatpak.list" "$flatpak_tmp_file"
+flatpak_install=$(comm -2 -3 "pkgs/flatpak.list" "$flatpak_tmp_file" | tr '\n' ' ')
+flatpak_remove=$(comm -1 -3 "pkgs/flatpak.list" "$flatpak_tmp_file" | tr '\n' ' ')
 rm "$flatpak_tmp_file"
 
 if [ "$flatpak_remove" != "" ]; then
@@ -352,9 +352,9 @@ flatpak update
 
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
-cmerge "pkgs-cargo.list" "$pkgs_cargo_tmp_file"
-pkgs_cargo_install=$(comm --check-order -2 -3 "pkgs-cargo.list" "$pkgs_cargo_tmp_file" | tr '\n' ' ')
-pkgs_cargo_remove=$(comm --check-order -1 -3 "pkgs-cargo.list" "$pkgs_cargo_tmp_file" | tr '\n' ' ')
+cmerge "pkgs/cargo.list" "$pkgs_cargo_tmp_file"
+pkgs_cargo_install=$(comm --check-order -2 -3 "pkgs/cargo.list" "$pkgs_cargo_tmp_file" | tr '\n' ' ')
+pkgs_cargo_remove=$(comm --check-order -1 -3 "pkgs/cargo.list" "$pkgs_cargo_tmp_file" | tr '\n' ' ')
 rm "$pkgs_cargo_tmp_file"
 
 if [ "$pkgs_cargo_remove" != "" ]; then
