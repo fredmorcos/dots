@@ -333,6 +333,12 @@
    '((t . ivy--regex-ignore-order) (t . ivy--regex-plus))))
  (ivy-mode))
 
+(fm/pkg counsel
+ (fm/after counsel
+  (fm/dim counsel-mode)
+  (put 'counsel-find-symbol 'no-counsel-M-x t))
+ (counsel-mode))
+
 (fm/pkg ivy-rich
  (fm/after ivy-rich
   (setq-default ivy-rich-path-style 'abbrev))
@@ -344,12 +350,6 @@
  (fm/key "C-r"         swiper-isearch-backward)
  (fm/after swiper
   (setq-default swiper-include-line-number-in-search t)))
-
-(fm/pkg counsel
- (fm/after counsel
-  (fm/dim counsel-mode)
-  (put 'counsel-find-symbol 'no-counsel-M-x t))
- (counsel-mode))
 
 (fm/pkg embark
  (fm/after flyspell
@@ -729,8 +729,6 @@
  (setq-default emmet-indentation 2)
  (fm/after web-mode
   (fm/hook web-mode-hook emmet-mode)))
-
-(package-install-selected-packages)
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)

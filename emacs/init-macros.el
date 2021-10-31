@@ -81,15 +81,17 @@
 (defmacro fm/pkg (pkg &rest body)
  "Install PKG if not already installed and execute BODY."
  `(progn
-   (push ',pkg package-selected-packages)
    (defvar packages-refreshed nil)
+   (autoload 'package-installed-p "package")
    (when (not (package-installed-p ',pkg))
     (when (not packages-refreshed)
-     (progn
-      (message "Refreshing package repositories...")
-      (package-refresh-contents)
-      (setq packages-refreshed t))))
-   (progn ,@body)))
+     (message "Refreshing package repositories...")
+     (package-refresh-contents)
+     (setq packages-refreshed t))
+    (message "+++ Installing %s..." ',pkg)
+    (package-install ',pkg)
+    (push ',pkg package-selected-packages))
+   ,@body))
 
 (provide 'init-macros)
 ;;; init-macros.el ends here
