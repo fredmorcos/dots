@@ -111,9 +111,7 @@ gnome-firmware
 gnome-icon-theme
 gnome-icon-theme-extras
 gnome-screenshot
-gnome-shell-extension-appindicator
-gnome-shell-extension-gtile
-gnome-shell-extension-pixel-saver-git
+gnome-shell-extension-unite
 gnome-sound-recorder
 gnome-terminal
 gnome-tweaks
