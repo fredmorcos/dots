@@ -392,12 +392,6 @@
   (fm/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
   (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
 
-(fm/pkg fzf
- (fm/key "M-F" fzf-git-files))
-
-(fm/pkg deadgrep
- (fm/key "M-G" deadgrep))
-
 (fm/pkg mwim
  (fm/key "C-a" mwim-beginning)
  (fm/key "C-e" mwim-end))
@@ -429,6 +423,7 @@
  (projectile-mode))
 
 (fm/pkg counsel-projectile
+ (fm/key "M-G" counsel-projectile-git-grep)
  (fm/after projectile
   (fm/hook projectile-mode-hook counsel-projectile-mode)))
 
@@ -531,8 +526,7 @@
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends
-   '((company-capf company-files company-dabbrev-code company-keywords company-dabbrev)))
+  (setq-default company-backends '((company-capf company-files company-keywords)))
   (setq-default completion-ignore-case t)
   (setq-default company-selection-wrap-around t)
   (setq-default company-tooltip-align-annotations t)))
