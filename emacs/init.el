@@ -198,6 +198,13 @@
 (fm/after make-mode
  (fm/hook makefile-mode-hook whitespace-mode))
 
+(fm/pkg symbol-overlay
+ (fm/after symbol-overlay
+  (fm/dim symbol-overlay-mode "Sy")
+  (fm/key-local "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
+  (fm/key-local "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)
+  (setq-default symbol-overlay-idle-time 0.1)))
+
 (fm/after elisp-mode
  (setq-default lisp-indent-offset 1)
  (setq-default lisp-indent-function #'common-lisp-indent-function)
@@ -276,13 +283,6 @@
  (setq-default jit-lock-chunk-size 5000)
  (setq-default jit-lock-antiblink-grace 1))
 
-(fm/after package
- (setq-default package-quickstart-file emacs-package-qs-file)
- (setq-default package-archives
-  '(("gnu"   . "https://elpa.gnu.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")
-    ("org"   . "https://orgmode.org/elpa/"))))
-
 (fm/after indent
  (setq-default tab-always-indent 'complete))
 
@@ -341,6 +341,7 @@
 
 (fm/pkg counsel
  (fm/after counsel
+  (fm/key-local "M-Y" counsel-yank-pop counsel-mode-map)
   (fm/dim counsel-mode)
   (put 'counsel-find-symbol 'no-counsel-M-x t))
  (counsel-mode))
@@ -408,6 +409,7 @@
 
 (fm/pkg transient
  (fm/after transient
+  (setq-default transient-history-file (concat emacs-var-dir "transient-history"))
   (setq-default transient-default-level 7)))
 
 (fm/pkg magit
@@ -424,16 +426,15 @@
   (fm/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
   (fm/dim projectile-mode "Pr")
   (setq-default projectile-cache-file emacs-projectile-cache-file)
-  (setq-default projectile-project-search-path '(("~/Workspace" . 2)))
+  (setq-default projectile-project-search-path '("~/Workspace"))
   (setq-default projectile-sort-order '(recently-active))
   (setq-default projectile-enable-caching t)
   (setq-default projectile-completion-system 'ivy))
  (projectile-mode))
 
 (fm/pkg counsel-projectile
- (fm/key "M-G" counsel-projectile-git-grep)
  (fm/after projectile
-  (fm/hook projectile-mode-hook counsel-projectile-mode)))
+  (fm/key-local "M-G" counsel-projectile-git-grep projectile-mode-map)))
 
 (fm/pkg yasnippet-snippets
  (fm/after yasnippet
@@ -452,13 +453,6 @@
  (fm/after magit-mode
   (fm/hook magit-pre-refresh-hook diff-hl-magit-pre-refresh "diff-hl")
   (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")))
-
-(fm/pkg symbol-overlay
- (fm/after symbol-overlay
-  (fm/dim symbol-overlay-mode "Sy")
-  (fm/key-local "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
-  (fm/key-local "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)
-  (setq-default symbol-overlay-idle-time 0.1)))
 
 (fm/pkg multiple-cursors
  (fm/key "C-c C-v"       mc/edit-lines)

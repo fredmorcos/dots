@@ -79,6 +79,19 @@
 ;; Run the GC after 5 seconds of idleness.
 (run-with-idle-timer 5 t #'garbage-collect)
 
+(fm/after package
+ (setq-default package-archives
+  '(("gnu"   . "https://elpa.gnu.org/packages/")
+    ("melpa" . "https://melpa.org/packages/")
+    ("org"   . "https://orgmode.org/elpa/")))
+ (setq-default package-quickstart-file
+  (concat (expand-file-name user-emacs-directory) "var/package-qa"))
+ (setq-default package-quickstart t))
+
+(fm/after url-vars
+ (setq-default url-privacy-level 'high)
+ (setq-default url-proxy-services '(("no_proxy" . "127.0.0.1"))))
+
 ;; ---------- THEME ----------
 
 ;; Specify some common faces.
@@ -244,14 +257,5 @@
 (fm/after web-mode
  (fm/face web-mode-current-column-highlight-face  :background "Azure2")
  (fm/face web-mode-current-element-highlight-face :background "Azure2"))
-
-;; -------- END THEME --------
-
-(fm/after package
- (setq-default package-quickstart t))
-
-(fm/after url-vars
- (setq-default url-privacy-level 'high)
- (setq-default url-proxy-services '(("no_proxy" . "127.0.0.1"))))
 
 ;;; early-init.el ends here
