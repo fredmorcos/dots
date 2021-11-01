@@ -530,7 +530,8 @@
   (setq-default company-backends '((company-capf company-files company-keywords)))
   (setq-default completion-ignore-case t)
   (setq-default company-selection-wrap-around t)
-  (setq-default company-tooltip-align-annotations t)))
+  (setq-default company-tooltip-align-annotations t)
+  (setq-default company-minimum-prefix-length 2)))
 
 (defun fm/company-add-backend (backend)
  "Add BACKEND to local version of company-backends."
@@ -545,7 +546,6 @@
 ;;   (setq-default company-tooltip-limit 15)
 ;;   (setq-default company-idle-delay 0.3)
 ;;   (setq-default company-begin-commands '(self-insert-command))
-;;   (setq-default company-minimum-prefix-length 2)
 ;;   (setq-default company-occurence-weight-function
 ;;    'company-occurrence-prefer-any-closest)
 ;;   (setq-default company-frontends
