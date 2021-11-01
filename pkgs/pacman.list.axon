@@ -4,9 +4,11 @@ amd-ucode
 amdvlk
 antiword
 arch-audit
+aria2
 arp-scan
 asp
 aspell-en
+atomicparsley
 atool
 audiofile
 autoconf
@@ -425,6 +427,7 @@ xss-lock
 yamllint
 you-get
 youtube-dl
+yt-dlp
 z
 z3
 zola
