@@ -51,9 +51,6 @@ gnome-characters
 gnome-control-center
 gnome-dictionary
 gnome-screenshot
-gnome-shell-extension-appindicator
-gnome-shell-extension-pixel-saver-git
-gnome-shell-extensions
 gnome-shell-extension-unite
 gnome-sound-recorder
 gnome-terminal
@@ -109,6 +106,7 @@ polari
 poppler-data
 power-profiles-daemon
 powertop
+profile-cleaner
 protonvpn-cli
 pstoedit
 pwgen
