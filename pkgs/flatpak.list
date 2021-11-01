@@ -14,7 +14,6 @@ info.portfolio_performance.PortfolioPerformance
 io.github.seadve.Kooha
 org.flatpak.Builder
 org.gnome.Builder
-org.gnome.Devhelp
 org.gnome.Glade
 org.gnome.Solanum
 org.gnome.Todo
