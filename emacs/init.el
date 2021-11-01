@@ -19,17 +19,22 @@
 (fm/key "`"  fm/insert-pair-backtick      "qol")
 
 ;; Directories.
-(defconst emacs-extra-dir (concat emacs-dots-dir "extra"))
-(push emacs-extra-dir load-path)
-
-(defconst expanded-user-emacs-dir (expand-file-name user-emacs-directory))
-(defconst emacs-elpa-dir (concat expanded-user-emacs-dir "elpa"))
-(defconst emacs-recentf-file (concat expanded-user-emacs-dir "recentf"))
-(defconst emacs-temp-dir (concat temporary-file-directory "emacs/"))
-(defconst emacs-autosaves-dir (concat emacs-temp-dir "autosaves"))
-(defconst emacs-autosaves-pattern (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-backups-dir (concat emacs-temp-dir "backups"))
-(defconst emacs-backups-pattern (concat emacs-backups-dir "/"))
+(defconst emacs-user-dir (expand-file-name user-emacs-directory))
+(defconst emacs-elpa-dir (concat emacs-user-dir "elpa"))
+(defconst emacs-var-dir (concat emacs-user-dir "var/"))
+(defconst emacs-recentf-file (concat emacs-var-dir "recentf"))
+(defconst emacs-saveplace-file (concat emacs-var-dir "saveplace"))
+(defconst emacs-savehist-file (concat emacs-var-dir "savehist"))
+(defconst emacs-package-qs-file (concat emacs-var-dir "package-qs"))
+(defconst emacs-projectile-cache-file (concat emacs-var-dir "projectile-cache"))
+(defconst emacs-prescient-save-file (concat emacs-var-dir "prescient-save"))
+(defconst emacs-tmp-dir (concat temporary-file-directory "emacs/"))
+(defconst emacs-autosaves-dir (concat emacs-tmp-dir "autosaves"))
+(defconst emacs-autosaves-pat (concat emacs-autosaves-dir "/\\1"))
+(defconst emacs-autosave-list-prefix (concat emacs-tmp-dir "auto-save-list/.saves-"))
+(defconst emacs-backups-dir (concat emacs-tmp-dir "backups"))
+(defconst emacs-backups-pat (concat emacs-backups-dir "/"))
+(make-directory emacs-var-dir t)
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
 
@@ -42,6 +47,9 @@
 (setq-default inhibit-startup-buffer-menu t)
 (setq-default initial-scratch-message nil)
 (setq-default initial-major-mode 'fundamental-mode)
+
+;; Auto-save.
+(setq-default auto-save-list-file-prefix emacs-autosave-list-prefix)
 
 ;; subr - Respond to yes/no questions using Y/N.
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -91,8 +99,9 @@
 
 (fm/after files
  (setq-default confirm-kill-processes nil)
- (setq-default auto-save-file-name-transforms `((".*" ,emacs-autosaves-pattern t)))
- (setq-default backup-directory-alist `((".*" . ,emacs-backups-pattern)))
+ (setq-default auto-save-file-name-transforms `((".*" ,emacs-autosaves-pat t)))
+ (setq-default auto-save-default t)
+ (setq-default backup-directory-alist `((".*" . ,emacs-backups-pat)))
  (setq-default backup-inhibited nil)
  (setq-default make-backup-files t)
  (setq-default delete-old-versions t)
@@ -102,14 +111,13 @@
  (setq-default coding-system-for-read 'utf-8-unix)
  (setq-default coding-system-for-write 'utf-8-unix))
 
-;; Saveplace.
+(fm/after saveplace
+ (setq-default save-place-file emacs-saveplace-file))
 (save-place-mode)
 
-;; Savehist.
+(fm/after savehist
+ (setq-default savehist-file emacs-savehist-file))
 (savehist-mode)
-
-;; Autosave.
-(auto-save-mode)
 
 ;; Recentf.
 (fm/after recentf
@@ -117,7 +125,7 @@
  (setq-default recentf-save-file emacs-recentf-file)
  (setq-default recentf-max-menu-items 50)
  (setq-default recentf-max-saved-items 100)
- (setq-default recentf-exclude `(,emacs-elpa-dir)))
+ (setq-default recentf-exclude `(,emacs-elpa-dir ,emacs-var-dir)))
 (fm/hook kill-emacs-hook recentf-cleanup "recentf")
 (recentf-mode)
 
@@ -193,6 +201,7 @@
 (fm/after elisp-mode
  (setq-default lisp-indent-offset 1)
  (setq-default lisp-indent-function #'common-lisp-indent-function)
+ (fm/hook emacs-lisp-mode-hook symbol-overlay-mode)
  (fm/hook emacs-lisp-mode-hook whitespace-mode))
 
 (fm/mode "emacs" emacs-lisp-mode)
@@ -249,21 +258,18 @@
    (setq-local comment-style 'extra-line)))
 
 (fm/after css-mode
- (fm/hookn css-mode-hook
-  (fm/setup-c-style-comments)))
+ (fm/hookn css-mode-hook (fm/setup-c-style-comments)))
 
 (fm/after cc-mode
  (fm/key-disable "(" c-mode-base-map)
- (fm/hook c-mode-hook tree-sitter-mode)
- (fm/hook c-mode-hook symbol-overlay-mode)
- (fm/hook c-mode-hook lsp))
+ (fm/hook c-mode-common-hook tree-sitter-mode)
+ (fm/hook c-mode-common-hook lsp))
 
 (fm/after cc-vars
  (setq-default c-mark-wrong-style-of-comment t)
- (setq-default c-default-style
-  '((other . "user")))
- (fm/hookn c-mode-common-hook
-  (fm/setup-c-style-comments)))
+ (setq-default c-default-style '((other . "user")))
+ (setq-default c-basic-offset 2)
+ (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
 
 (fm/after jit-lock
  (setq-default jit-lock-stealth-time 1)
@@ -271,6 +277,7 @@
  (setq-default jit-lock-antiblink-grace 1))
 
 (fm/after package
+ (setq-default package-quickstart-file emacs-package-qs-file)
  (setq-default package-archives
   '(("gnu"   . "https://elpa.gnu.org/packages/")
     ("melpa" . "https://melpa.org/packages/")
@@ -282,7 +289,6 @@
 (fm/pkg toml-mode)
 (fm/pkg markdown-mode)
 (fm/pkg crux)
-(fm/pkg smex)
 (fm/pkg indent-guide)
 
 (fm/pkg json-mode
@@ -363,6 +369,7 @@
 
 (fm/pkg prescient
  (fm/after prescient
+  (setq-default prescient-save-file emacs-prescient-save-file)
   (setq-default prescient-sort-full-matches-first t)
   (eval-when-compile (defvar prescient-filter-method))
   (push 'literal-prefix prescient-filter-method)
@@ -416,7 +423,8 @@
  (fm/after projectile
   (fm/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
   (fm/dim projectile-mode "Pr")
-  (setq-default projectile-project-search-path '("~/Workspace"))
+  (setq-default projectile-cache-file emacs-projectile-cache-file)
+  (setq-default projectile-project-search-path '(("~/Workspace" . 2)))
   (setq-default projectile-sort-order '(recently-active))
   (setq-default projectile-enable-caching t)
   (setq-default projectile-completion-system 'ivy))
@@ -486,7 +494,6 @@
    (setq-local tab-width 1)
    (fm/after flycheck
     (require 'flycheck-hledger)))
-  (fm/hook hledger-mode-hook whitespace-mode)
   (fm/hook hledger-mode-hook whitespace-mode)
   (fm/hook hledger-mode-hook symbol-overlay-mode)
   (fm/hook hledger-mode-hook flycheck-mode))
@@ -587,7 +594,8 @@
 
 (fm/pkg meson-mode
  (fm/after meson-mode
-  (add-hook 'meson-mode-hook 'company-mode)))
+  (fm/hook meson-mode-hook symbol-overlay-mode)
+  (fm/hook meson-mode-hook company-mode)))
 
 (fm/pkg rustic
  (fm/after rustic
