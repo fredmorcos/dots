@@ -663,7 +663,10 @@
   (setq-default lsp-rust-analyzer-inlay-type-format "%s")
   (setq-default lsp-rust-analyzer-inlay-type-space-format ": %s")
   (setq-default lsp-rust-analyzer-inlay-chain-format "➔ %s")
-  (setq-default lsp-rust-analyzer-inlay-chain-space-format " %s")))
+  (setq-default lsp-rust-analyzer-inlay-chain-space-format " %s"))
+ (fm/after lsp-clangd
+  (fm/after cc-mode
+   (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
 
 (fm/pkg lsp-ivy
  (fm/after lsp-mode
