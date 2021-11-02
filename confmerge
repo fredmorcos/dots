@@ -228,7 +228,7 @@ dconf /org/gnome/shell/extensions/unite/hide-window-titlebars "'both'"
 dconf /org/gnome/shell/extensions/unite/show-window-title "'never'"
 dconf /org/gnome/shell/extensions/unite/show-window-buttons "'both'"
 dconf /org/gnome/shell/extensions/unite/notifications-position "'center'"
-dconf /org/gnome/shell/extensions/unite/greyscale-tray-icons true
+dconf /org/gnome/shell/extensions/unite/greyscale-tray-icons false
 dconf /org/gnome/shell/extensions/unite/hide-dropdown-arrows false
 dconf /org/gnome/shell/extensions/unite/hide-app-menu-icon false
 dconf /org/gnome/shell/extensions/unite/reduce-panel-spacing false
