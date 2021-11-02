@@ -633,6 +633,8 @@
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hookn lsp-mode-hook
    (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
+ (fm/after lsp-lens
+  (fm/dim lsp-lens-mode))
  (fm/after lsp-headerline
   (setq-default lsp-headerline-breadcrumb-icons-enable nil))
  (fm/after lsp-semantic-tokens
