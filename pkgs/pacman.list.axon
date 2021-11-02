@@ -104,7 +104,6 @@ gdm
 git-lfs
 gitui
 glfw-x11
-glib2-docs
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
@@ -119,13 +118,11 @@ gnome-shell-extension-unite
 gnome-sound-recorder
 gnome-terminal
 gnome-tweaks
-gnuplot
 gpart
 gparted
 gperftools
 gst-libav
 gstreamer-vaapi
-gtk4-docs
 gtk-engine-murrine
 gtk-engines
 gucharmap
@@ -201,6 +198,7 @@ luajit
 luit
 lzop
 make
+man-db
 man-pages
 mediainfo
 mesa-demos
@@ -391,7 +389,6 @@ xf86-input-vmmouse
 xf86-input-void
 xf86-video-amdgpu
 xorg-bdftopcf
-xorg-docs
 xorg-font-util
 xorg-iceauth
 xorg-server-devel
