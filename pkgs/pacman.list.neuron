@@ -1,4 +1,5 @@
 argyllcms
+aria2
 aspell-en
 atomicparsley
 autoconf
@@ -151,3 +152,4 @@ vulkan-intel
 webp-pixbuf-loader
 xdg-user-dirs-gtk
 youtube-dl
+yt-dlp
