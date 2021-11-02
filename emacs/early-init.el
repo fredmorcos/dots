@@ -119,7 +119,8 @@
  (fm/face font-lock-type-face          :foreground "DarkGreen")
  (fm/face font-lock-variable-name-face :foreground "DarkCyan")
  (fm/face font-lock-string-face        :foreground "OliveDrab")
- (fm/face font-lock-comment-face       :foreground "Thistle3")
+ ;; (fm/face font-lock-comment-face       :foreground "Thistle3")
+ ;; (fm/face font-lock-doc-face           :foreground "YellowGreen")
  (fm/face font-lock-warning-face       :foreground "Orange3")
  (fm/face font-lock-constant-face      :foreground "CornflowerBlue"))
 
