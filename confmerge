@@ -257,7 +257,7 @@ cmerge dict/aspell.en.pws            ~/.aspell.en.pws
 
 cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
 cmerge htoprc                        ~/.config/htop/htoprc
-cmerge youtube-dl.conf               ~/.config/youtube-dl/config
+cmerge yt-dlp.conf                   ~/.config/yt-dlp/config
 cmerge gitconfig                     ~/.config/git/config
 cmerge mpv-input.conf                ~/.config/mpv/input.conf
 

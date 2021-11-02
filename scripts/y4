@@ -3,4 +3,4 @@
 set -o errexit
 set -o nounset
 
-youtube-dl -f "[height<=480]" "$@"
+yt-dlp -f "[height<=480]" "$@"
