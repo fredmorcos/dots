@@ -72,5 +72,10 @@
  (interactive)
  (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer)))
 
+(defun fm/insert-buffer-name ()
+ "Insert the buffer's filename."
+ (interactive)
+ (insert (buffer-name)))
+
 (provide 'qol)
 ;;; qol.el ends here

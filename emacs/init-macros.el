@@ -6,7 +6,7 @@
 (defmacro fm/autoload (func pkg)
  "Create an autoload for FUNC from PKG."
  (when pkg
-  `(progn
+  `(eval-when-compile
     (autoload ',func ,pkg)
     (declare-function ,func ,pkg))))
 

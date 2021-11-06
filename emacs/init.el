@@ -8,6 +8,8 @@
 
 (require 'init-macros)
 
+(fm/key "C-x j"    fm/insert-buffer-name "qol")
+
 (fm/key "C-x e"    fm/replace-escapes "qol")
 (fm/key "<M-up>"   fm/move-line-up    "qol")
 (fm/key "<M-down>" fm/move-line-down  "qol")
@@ -467,6 +469,8 @@
   (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
   (fm/hook yaml-mode-hook flycheck-mode)))
 
+(fm/mode "clang-format" yaml-mode)
+
 (fm/after llvm-mode
  (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
@@ -487,7 +491,7 @@
    (toggle-truncate-lines t)
    (setq-local tab-width 1)
    (fm/after flycheck
-    (require 'flycheck-hledger)))
+    (eval-when-compile (require 'flycheck-hledger))))
   (fm/hook hledger-mode-hook whitespace-mode)
   (fm/hook hledger-mode-hook symbol-overlay-mode)
   (fm/hook hledger-mode-hook flycheck-mode))
@@ -666,6 +670,7 @@
   (setq-default lsp-rust-analyzer-inlay-chain-space-format " %s"))
  (fm/after lsp-clangd
   (fm/after cc-mode
+   (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
 
 (fm/pkg lsp-ivy

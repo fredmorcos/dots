@@ -259,4 +259,34 @@
  (fm/face web-mode-current-column-highlight-face  :background "Azure2")
  (fm/face web-mode-current-element-highlight-face :background "Azure2"))
 
+(fm/after magit-diff
+ ;; (fm/face magit-diff-hunk-heading-highlight
+ ;;  :background "Grey75"
+ ;;  :foreground "Grey30"
+ ;;  :extend nil)
+ ;; (fm/face magit-diff-hunk-heading
+ ;;  :background "Grey80"
+ ;;  :foreground "Grey30"
+ ;;  :extend nil)
+ (fm/face magit-diff-added-highlight
+  :background "#cceecc"
+  :foreground "#22aa22"
+  :extend nil)
+ (fm/face magit-diff-added
+  :background "#ddffdd"
+  :foreground "#22aa22"
+  :extend nil)
+ (fm/face magit-diff-removed-highlight
+  :background "#eecccc"
+  :foreground "#aa2222"
+  :extend nil)
+ (fm/face magit-diff-removed
+  :background "#ffdddd"
+  :foreground "#aa2222"
+  :extend nil)
+ (fm/face magit-diff-context-highlight
+  :background "Grey95"
+  :foreground "Grey50"
+  :extend nil))
+
 ;;; early-init.el ends here
