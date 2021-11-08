@@ -292,6 +292,8 @@
 (fm/pkg markdown-mode)
 (fm/pkg crux)
 (fm/pkg indent-guide)
+(fm/pkg sed-mode)
+(fm/pkg po-mode)
 
 (fm/pkg json-mode
  (fm/hook json-mode-hook indent-guide-mode))
@@ -502,6 +504,8 @@
 
 (fm/pkg flycheck
  (fm/after flycheck
+  (fm/autoload flycheck-next-error "flycheck")
+  (fm/autoload flycheck-previous-error "flycheck")
   (fm/key-local "M-n" flycheck-next-error     flycheck-mode-map "flycheck")
   (fm/key-local "M-p" flycheck-previous-error flycheck-mode-map "flycheck")
   (setq-default flycheck-checker-error-threshold nil)
@@ -589,6 +593,15 @@
  (fm/hook prog-mode-hook electric-layout-mode)
  (fm/hook prog-mode-hook display-line-numbers-mode)
  (fm/hook prog-mode-hook hl-line-mode))
+
+(fm/after conf-mode
+ (fm/hook conf-desktop-mode-hook diff-hl-mode)
+ (fm/hook conf-desktop-mode-hook show-paren-mode)
+ (fm/hook conf-desktop-mode-hook flyspell-prog-mode)
+ (fm/hook conf-desktop-mode-hook electric-pair-mode)
+ (fm/hook conf-desktop-mode-hook electric-layout-mode)
+ (fm/hook conf-desktop-mode-hook display-line-numbers-mode)
+ (fm/hook conf-desktop-mode-hook hl-line-mode))
 
 (fm/pkg meson-mode
  (fm/after meson-mode
