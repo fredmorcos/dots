@@ -83,7 +83,7 @@
 
  ;; History/savehist.
  (setq-default history-delete-duplicates t)
- (setq-default history-length 100)
+ (setq-default history-length 150)
 
  ;; Scrolling.
  (setq-default scroll-conservatively 4)
@@ -216,9 +216,9 @@
 (fm/mode "emacs" emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
 
-(fm/after text-mode
- (fm/hookn text-mode-hook
-  (toggle-truncate-lines t)))
+;; (fm/after text-mode
+;;  (fm/hookn text-mode-hook
+;;   (toggle-truncate-lines t)))
 
 (fm/mode "Passwords.txt" text-mode)
 (fm/mode "Passwords_old.txt" text-mode)
@@ -473,8 +473,8 @@
 
 (fm/mode "clang-format" yaml-mode)
 
-(fm/after llvm-mode
- (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
+;; (fm/after llvm-mode
+;;  (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
 (fm/pkg autodisass-llvm-bitcode)
@@ -490,7 +490,7 @@
   (setq-default hledger-current-overlay t)
   (setq-default hledger-comments-column 1)
   (fm/hookn hledger-mode-hook
-   (toggle-truncate-lines t)
+   ;; (toggle-truncate-lines t)
    (setq-local tab-width 1)
    (fm/after flycheck
     (eval-when-compile (require 'flycheck-hledger))))
