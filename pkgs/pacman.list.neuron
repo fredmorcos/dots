@@ -31,6 +31,7 @@ cargo-udeps
 cargo-watch
 cbindgen
 ccache
+cheese
 dbus-broker
 dconf-editor
 efibootmgr
@@ -91,6 +92,7 @@ lsof
 man-db
 man-pages
 mesa-vdpau
+meson
 mpv
 mythes-en
 ncdu
@@ -119,6 +121,7 @@ rsync
 rust-analyzer
 rust-bindgen
 rustc-demangle
+scour
 seahorse
 seahorse-nautilus
 shellcheck
