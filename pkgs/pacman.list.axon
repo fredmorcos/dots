@@ -26,6 +26,8 @@ bonnie++
 bridge-utils
 btrfs-heatmap
 cabextract
+cairomm-1.16-docs
+cairomm-docs
 capitaine-cursors
 cargo-asm
 cargo-audit
@@ -55,10 +57,12 @@ cdrtools
 cgdb
 chmlib
 clinfo
+cmake
 codespell
 compsize
 conntrack-tools
 cpio
+cppcheck
 curlftpfs
 dateutils
 dbus-broker
@@ -103,6 +107,9 @@ gdm
 git-lfs
 gitui
 glfw-x11
+glib2-docs
+glibmm-2.68-docs
+glibmm-docs
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
@@ -122,8 +129,15 @@ gparted
 gperftools
 gst-libav
 gstreamer-vaapi
+gtk4-demos
+gtk4-docs
 gtk-engine-murrine
 gtk-engines
+gtkmm
+gtkmm-4.0
+gtkmm-4.0-docs
+gtkmm-docs
+gtksourceview2
 gucharmap
 gvfs-google
 gvfs-mtp
@@ -177,6 +191,7 @@ libopenraw
 libpipewire02
 libraw
 libsidplayfp
+libsigc++-3.0-docs
 libupnp
 liburing
 libva-mesa-driver
@@ -204,6 +219,7 @@ mediainfo
 mesa-demos
 mesa-vdpau
 meson
+microsoft-gsl
 mkinitcpio-systemd-tool
 mlocate
 mpv
@@ -231,6 +247,8 @@ openmp
 opusfile
 p7zip
 pacman-contrib
+pangomm-2.48-docs
+pangomm-docs
 papirus-icon-theme
 par2cmdline
 paru-bin
@@ -338,6 +356,7 @@ syncthing
 sysprof
 sysstat
 tealdeer
+tepl
 texlive-bin
 time
 tmux
