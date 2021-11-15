@@ -544,8 +544,8 @@
 (defun fm/company-add-backend (backend)
  "Add BACKEND to local version of company-backends."
  (eval-when-compile (defvar company-backends))
- (let ((new-company-backends `((,backend . ,(car company-backends)))))
-  (setq-local company-backends new-company-backends)))
+ (let ((backends `((,backend . ,(car company-backends)))))
+  (setq-local company-backends backends)))
 
 ;; (fm/pkg company
 ;;  (fm/after company
