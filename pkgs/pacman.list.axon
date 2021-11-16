@@ -159,6 +159,7 @@ hyphen-de
 hyphen-en
 hyphen-fr
 i2c-tools
+ibus-typing-booster
 idle3-tools
 inetutils
 innoextract
@@ -234,6 +235,7 @@ network-manager-applet
 nftables
 nilfs-utils
 nmap
+noto-fonts-extra
 npm
 ntfs-3g
 nuspell
@@ -300,7 +302,6 @@ python-pyaml
 python-pyasn1
 python-pycryptodome
 python-pycurl
-python-pyenchant
 python-pygal
 python-pyinotify
 python-pylast
