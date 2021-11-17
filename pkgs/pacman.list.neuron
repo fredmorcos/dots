@@ -9,6 +9,7 @@ bash-completion
 bat
 bbswitch
 bison
+cairomm-1.16-docs
 capitaine-cursors
 cargo-asm
 cargo-audit
@@ -32,8 +33,10 @@ cargo-watch
 cbindgen
 ccache
 cheese
+cppcheck
 dbus-broker
 dconf-editor
+devhelp
 efibootmgr
 emacs
 eog-plugins
@@ -47,6 +50,9 @@ flex
 fwupd
 gdb
 gdm
+glib2-docs
+glibmm-2.68-docs
+glibmm-docs
 gnome-backgrounds
 gnome-calculator
 gnome-characters
@@ -60,6 +66,14 @@ gnome-tweaks
 gperftools
 gst-libav
 gstreamer-vaapi
+gtk4-demos
+gtk4-docs
+gtkmm
+gtkmm-4.0
+gtkmm-4.0-docs
+gtkmm-docs
+gtksourceview2
+highlight
 hledger-ui
 hledger-web
 hotspot-appimage
@@ -70,6 +84,7 @@ hyphen-en
 intel-compute-runtime
 intel-media-sdk
 intel-ucode
+intltool
 iotop
 ispell
 libdvdcss
@@ -78,6 +93,7 @@ libmythes
 libopenraw
 libproxy-webkit
 libraw
+libsigc++-3.0-docs
 libva-intel-driver
 libva-mesa-driver
 libva-vdpau-driver
@@ -93,6 +109,7 @@ man-db
 man-pages
 mesa-vdpau
 meson
+microsoft-gsl
 mpv
 mythes-en
 ncdu
@@ -101,6 +118,8 @@ nuspell
 ocl-icd
 p7zip
 pacman-contrib
+pangomm-2.48-docs
+pangomm-docs
 papirus-icon-theme
 paru-bin
 pipewire-v4l2
@@ -135,6 +154,7 @@ sushi
 syncthing
 sysprof
 tealdeer
+tepl
 tokei
 torbrowser-launcher
 transmission-gtk
