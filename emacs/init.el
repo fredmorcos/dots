@@ -632,6 +632,7 @@
   (fm/key-local "C-c h" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
   (fm/key-local "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
   (fm/key-local "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
+  (setq-default lsp-progress-prefix "  Progress: ")
   (setq-default lsp-completion-provider :none) ; Company-capf is already set
   (setq-default lsp-headerline-breadcrumb-enable t)
   (setq-default lsp-restart 'ignore)
