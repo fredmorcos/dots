@@ -33,6 +33,7 @@ cargo-watch
 cbindgen
 ccache
 cheese
+cmake
 cppcheck
 dbus-broker
 dconf-editor
