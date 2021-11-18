@@ -711,7 +711,8 @@
   (setq-default lsp-ui-doc-alignment 'frame)
   (setq-default lsp-ui-doc-header t)
   (setq-default lsp-ui-doc-include-signature t)
-  (setq-default lsp-ui-doc-max-height 30))
+  (setq-default lsp-ui-doc-max-height 30)
+  (setq-default lsp-ui-doc-use-webkit t))
  (fm/after lsp-ui-peek
   (setq-default lsp-ui-peek-list-width 30)
   (setq-default lsp-ui-peek-always-show t))
