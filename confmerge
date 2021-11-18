@@ -101,8 +101,8 @@ dconf /org/freedesktop/tracker/miner/files/index-single-directories "@as []"
 dconf /org/freedesktop/tracker/miner/files/index-recursive-directories "@as []"
 
 # Disable some search providers
-dconf /org/gnome/desktop/search-providers/disabled "['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
-dconf /org/gnome/desktop/search-providers/disable-external true
+dconf /org/gnome/desktop/search-providers/disabled "['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Characters.desktop']"
+dconf /org/gnome/desktop/search-providers/disable-external false
 
 # Privacy
 dconf /org/gnome/desktop/privacy/remember-recent-files false
@@ -191,7 +191,7 @@ dconf /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "['Print']"
 dconf /org/gnome/settings-daemon/plugins/media-keys/window-screenshot "['<Shift><Super>Print']"
 dconf /org/gnome/settings-daemon/plugins/media-keys/window-screenshot-clip "['<Alt>Print']"
 
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']"
+dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']"
 
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Primary><Alt>t'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'gnome-terminal'"
@@ -212,6 +212,10 @@ dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/n
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding "'<Primary><Alt>o'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command "'gnome-control-center sound'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name "'Sound Settings'"
+
+dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/binding "'<Primary><Alt>i'"
+dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/command "'polari'"
+dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/name "'IRC'"
 
 # Nautilus
 dconf /org/gnome/nautilus/preferences/default-folder-viewer "'list-view'"
