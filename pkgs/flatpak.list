@@ -12,9 +12,6 @@ de.haeckerfelix.AudioSharing
 fr.romainvigier.MetadataCleaner
 info.portfolio_performance.PortfolioPerformance
 io.github.seadve.Kooha
-org.flatpak.Builder
-org.gnome.Builder
-org.gnome.Glade
 org.gnome.Solanum
 org.gnome.Todo
 org.gnome.design.AppIconPreview

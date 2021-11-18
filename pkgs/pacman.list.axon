@@ -11,7 +11,6 @@ aspell-en
 atomicparsley
 atool
 audiofile
-autoconf
 automake
 bandwhich
 base
@@ -61,14 +60,12 @@ cmake
 codespell
 compsize
 conntrack-tools
-cpio
 cppcheck
 curlftpfs
 dateutils
 dbus-broker
 dconf-editor
 ddcutil
-devhelp
 d-feet
 dhclient
 dhcpcd
@@ -98,7 +95,7 @@ fdupes
 fig2dev
 file-roller
 firefox
-flatpak
+flatpak-builder
 flex
 fzf
 gamemode
@@ -107,11 +104,11 @@ gdm
 git-lfs
 gitui
 glfw-x11
-glib2-docs
 glibmm-2.68-docs
 glibmm-docs
 gmp-ecm
 gnome-backgrounds
+gnome-builder
 gnome-calculator
 gnome-characters
 gnome-control-center
@@ -218,7 +215,6 @@ man-pages
 mediainfo
 mesa-demos
 mesa-vdpau
-meson
 microsoft-gsl
 mkinitcpio-systemd-tool
 mlocate
@@ -253,7 +249,6 @@ pangomm-docs
 papirus-icon-theme
 par2cmdline
 paru-bin
-patch
 pdfarranger
 pdfcrack
 pdfmixtool
@@ -265,7 +260,6 @@ picard
 pigz
 pipewire-v4l2
 pipewire-zeroconf
-pkgconf
 polari
 poppler-data
 powertop
@@ -279,10 +273,8 @@ pv
 pwgen
 pwndbg
 python-aiohttp
-python-babel
 python-beautifulsoup4
 python-cssselect
-python-docutils
 python-dulwich
 python-ecdsa
 python-fastimport
@@ -321,7 +313,6 @@ rhythmbox
 rink
 ripgrep
 rmlint
-rpmextract
 rsync
 rtaudio
 rust-analyzer
@@ -354,7 +345,6 @@ s-tui
 subdl
 sudo
 syncthing
-sysprof
 sysstat
 tealdeer
 tepl
