@@ -721,7 +721,7 @@
  (fm/after lsp-ui
   (fm/key-local "M-."     lsp-ui-peek-find-definitions lsp-ui-mode-map "lsp-ui-peek")
   (fm/key-local "M-?"     lsp-ui-peek-find-references  lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "C-c d"   lsp-ui-doc-glance            lsp-ui-mode-map "lsp-ui-doc")
+  (fm/key-local "C-c d"   lsp-ui-doc-show              lsp-ui-mode-map "lsp-ui-doc")
   (fm/key-local "C-c ! l" lsp-ui-flycheck-list         lsp-ui-mode-map "lsp-ui-flycheck")))
 
 (fm/pkg web-mode
