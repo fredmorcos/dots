@@ -213,7 +213,7 @@ dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/b
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command "'gnome-control-center sound'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name "'Sound Settings'"
 
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/binding "'<Primary><Alt>i'"
+dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/binding "'<Primary><Alt>r'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/command "'polari'"
 dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/name "'IRC'"
 
