@@ -67,6 +67,9 @@
 (fm/after frame
  (blink-cursor-mode -1))
 
+;; Indent.
+(setq-default tab-always-indent 'complete)
+
 ;; Bindings.
 (setq-default column-number-indicator-zero-based nil)
 
@@ -284,9 +287,6 @@
  (setq-default jit-lock-stealth-time 1)
  (setq-default jit-lock-chunk-size 5000)
  (setq-default jit-lock-antiblink-grace 1))
-
-(fm/after indent
- (setq-default tab-always-indent 'complete))
 
 (fm/pkg toml-mode)
 (fm/pkg markdown-mode)
