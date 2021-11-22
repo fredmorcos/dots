@@ -82,8 +82,7 @@
 (fm/after package
  (setq-default package-archives
   '(("gnu"   . "https://elpa.gnu.org/packages/")
-    ("melpa" . "https://melpa.org/packages/")
-    ("org"   . "https://orgmode.org/elpa/")))
+    ("melpa" . "https://melpa.org/packages/")))
  (setq-default package-quickstart-file
   (concat (expand-file-name user-emacs-directory) "var/package-qa"))
  (setq-default package-quickstart t))
