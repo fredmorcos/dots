@@ -223,6 +223,7 @@ dconf /org/gnome/nautilus/list-view/default-zoom-level "'small'"
 dconf /org/gtk/settings/file-chooser/sort-directories-first true
 dconf /org/gnome/nautilus/preferences/recursive-search "'never'"
 dconf /org/gnome/nautilus/preferences/show-image-thumbnails "'never'"
+dconf /org/gnome/nautilus/list-view/default-visible-columns "['name', 'size', 'mime_type', 'date_modified_with_time']"
 
 # Terminal
 dconf /org/gnome/terminal/legacy/theme-variant "'dark'"
