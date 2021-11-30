@@ -136,6 +136,8 @@ gtkmm-4.0
 gtkmm-4.0-docs
 gtkmm-docs
 gtksourceview2
+gtkspell
+gtkspell3
 gucharmap
 gvfs-google
 gvfs-mtp
@@ -180,6 +182,7 @@ libdmapsharing
 libdwarf
 libebur128
 libfido2
+libgepub
 libjxl
 libmad
 libmp4v2
@@ -438,4 +441,8 @@ youtube-dl
 yt-dlp
 z
 z3
+zathura-cb
+zathura-djvu
+zathura-pdf-mupdf
+zathura-ps
 zola
