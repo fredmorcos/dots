@@ -36,6 +36,7 @@ cargo-crev
 cargo-depgraph
 cargo-edit
 cargo-expand
+cargo-feature
 cargo-flamegraph
 cargo-fuzz
 cargo-generate
