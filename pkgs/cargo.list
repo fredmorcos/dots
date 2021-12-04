@@ -1,4 +1,5 @@
 bottom
+cargo-criterion
 cargo-deadlinks
 cargo-geiger
 inferno
