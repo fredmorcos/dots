@@ -336,6 +336,7 @@ seahorse-nautilus
 shake
 shellcheck
 shfmt
+signal-back-bin
 signalbackup-tools-git
 signal-desktop
 skim
