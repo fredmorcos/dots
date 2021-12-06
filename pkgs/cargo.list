@@ -1,6 +1,7 @@
 bottom
 cargo-criterion
 cargo-deadlinks
+cargo-demangle
 cargo-geiger
 inferno
 kmon
