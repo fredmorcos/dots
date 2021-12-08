@@ -38,6 +38,7 @@ cppcheck
 dbus-broker
 dconf-editor
 devhelp
+easy-rsa
 efibootmgr
 emacs
 eog-plugins
@@ -132,6 +133,8 @@ profile-cleaner
 protonvpn-cli
 pstoedit
 pwgen
+python-fs
+python-keyrings-alt
 python-libevdev
 python-pycryptodome
 python-pyudev
