@@ -224,6 +224,7 @@ mesa-vdpau
 microsoft-gsl
 mkinitcpio-systemd-tool
 mlocate
+mobsh-bin
 mpv
 mtools
 musl
