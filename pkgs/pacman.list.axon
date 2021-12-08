@@ -284,10 +284,12 @@ python-cssselect
 python-dulwich
 python-ecdsa
 python-fastimport
+python-fs
 python-ghp-import
 python-h2
 python-hsluv
 python-husl
+python-keyrings-alt
 python-mdx-video
 python-micawber
 python-paramiko
