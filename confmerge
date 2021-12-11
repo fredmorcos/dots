@@ -142,7 +142,7 @@ dconf /system/locale/region "'en_GB.UTF-8'"
 
 # UI
 dconf /org/gnome/mutter/dynamic-workspaces true
-dconf /org/gnome/desktop/interface/enable-hot-corners false
+dconf /org/gnome/desktop/interface/enable-hot-corners true
 dconf /org/gnome/desktop/interface/cursor-blink false
 dconf /org/gnome/desktop/interface/show-battery-percentage true
 dconf /org/gnome/desktop/interface/cursor-theme "'capitaine-cursors'"
