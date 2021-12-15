@@ -102,6 +102,7 @@ flex
 fzf
 gamemode
 gdb-dashboard
+gdb-frontend-bin
 gdm
 gifski
 git-lfs
