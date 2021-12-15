@@ -7,17 +7,18 @@ set shiftwidth=2
 set tabstop=2
 set encoding=utf-8
 
-set number          " Show line numbers.
-set cursorline      " Highlight the current line.
-set wildmenu        " Show an autocompletion bar at the bottom.
-set showmatch       " Highlight matching parens and braces.
-set hlsearch        " Highlight search matches.
-set incsearch       " Search as characters are entered.
+set number                                     " Show line numbers.
+set cursorline                                 " Highlight the current line.
+set wildmenu                                   " Show an autocompletion bar at the bottom.
+set showmatch                                  " Highlight matching parens and braces.
+set hlsearch                                   " Highlight search matches.
+set incsearch                                  " Search as characters are entered.
 set ignorecase
 set smartcase
 set autoindent
 set ruler
 set colorcolumn=100
+set listchars=tab:▸\ ,eol:¬                    " Use `:set list` to show invisible characters
 
 set mouse=r
 
