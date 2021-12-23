@@ -23,6 +23,7 @@ org.gnome.design.Emblem
 org.gnome.design.IconLibrary
 org.gnome.design.SymbolicPreview
 org.gnome.gitlab.YaLTeR.VideoTrimmer
+org.jitsi.jitsi-meet
 org.kde.kcachegrind
 org.kde.massif-visualizer
 re.sonny.Commit
