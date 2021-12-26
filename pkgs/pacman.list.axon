@@ -127,7 +127,6 @@ gnome-terminal
 gnome-tweaks
 gpart
 gparted
-gperftools
 gst-libav
 gstreamer-vaapi
 gtk4-demos
@@ -244,7 +243,6 @@ ntfs-3g
 nuspell
 nvme-cli
 odt2txt
-openblas
 openbsd-netcat
 opencl-mesa
 opendoas
