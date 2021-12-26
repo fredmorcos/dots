@@ -538,7 +538,8 @@
   (setq-default company-backends '((company-capf company-files company-keywords)))
   (setq-default completion-ignore-case t)
   (setq-default company-selection-wrap-around t)
-  (setq-default company-tooltip-align-annotations t)))
+  (setq-default company-tooltip-align-annotations t)
+  (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
 
 (defun fm/company-add-backend (backend)
  "Add BACKEND to local version of company-backends."
