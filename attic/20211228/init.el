@@ -219,6 +219,10 @@
 (fm/mode "emacs" emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
 
+;; (fm/after text-mode
+;;  (fm/hookn text-mode-hook
+;;   (toggle-truncate-lines t)))
+
 (fm/mode "Passwords.txt" text-mode)
 (fm/mode "Passwords_old.txt" text-mode)
 
@@ -469,6 +473,8 @@
 
 (fm/mode "clang-format" yaml-mode)
 
+;; (fm/after llvm-mode
+;;  (fm/hookn llvm-mode-hook (toggle-truncate-lines t)))
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
 (fm/pkg autodisass-llvm-bitcode)
@@ -484,6 +490,7 @@
   (setq-default hledger-current-overlay t)
   (setq-default hledger-comments-column 1)
   (fm/hookn hledger-mode-hook
+   ;; (toggle-truncate-lines t)
    (setq-local tab-width 1)
    (fm/after flycheck
     (eval-when-compile (require 'flycheck-hledger))))
@@ -530,8 +537,8 @@
   (fm/dim company-mode "Co")
   (setq-default company-backends '((company-capf company-files company-keywords)))
   (setq-default completion-ignore-case t)
-  (setq-default company-minimum-prefix-length 1)
   (setq-default company-selection-wrap-around t)
+  (setq-default company-tooltip-align-annotations t)
   (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
 
 (defun fm/company-add-backend (backend)
@@ -539,6 +546,22 @@
  (eval-when-compile (defvar company-backends))
  (let ((backends `((,backend . ,(car company-backends)))))
   (setq-local company-backends backends)))
+
+;; (fm/pkg company
+;;  (fm/after company
+;;   (setq-default company-echo-truncate-lines nil)
+;;   (setq-default company-tooltip-minimum 10)
+;;   (setq-default company-tooltip-limit 15)
+;;   (setq-default company-idle-delay 0.3)
+;;   (setq-default company-begin-commands '(self-insert-command))
+;;   (setq-default company-minimum-prefix-length 0)
+;;   (setq-default company-occurence-weight-function
+;;    'company-occurrence-prefer-any-closest)
+;;   (setq-default company-frontends
+;;    '(company-echo-metadata-frontend company-pseudo-tooltip-frontend))
+;;   (setq-default company-transformers '(company-sort-by-occurrence
+;;    company-sort-by-backend-importance
+;;    company-sort-prefer-same-case-prefix))))
 
 (fm/pkg company-posframe
  (fm/after company-posframe
@@ -599,7 +622,8 @@
   (setq-default rustic-indent-offset 2)
   (setq-default rustic-always-locate-project-on-open t)
   (fm/hookn rustic-mode-hook (electric-quote-local-mode -1))
-  (fm/hook rustic-mode-hook subword-mode)))
+  (fm/hook rustic-mode-hook subword-mode)
+  (fm/hook rustic-mode-hook tree-sitter-mode)))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
@@ -617,7 +641,7 @@
   (setq-default lsp-keymap-prefix "C-c")
   (setq-default lsp-idle-delay 0.1)
   (setq-default lsp-file-watch-threshold nil)
-  (setq-default lsp-enable-semantic-highlighting t)
+  ;; (setq-default lsp-enable-semantic-highlighting t)
   (setq-default lsp-enable-indentation t)
   (setq-default lsp-enable-on-type-formatting t)
   (setq-default lsp-before-save-edits nil)
