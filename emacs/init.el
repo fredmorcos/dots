@@ -124,7 +124,6 @@
  (setq-default savehist-file emacs-savehist-file))
 (savehist-mode)
 
-;; Recentf.
 (fm/after recentf
  (setq-default recentf-auto-cleanup 'never)
  (setq-default recentf-save-file emacs-recentf-file)
