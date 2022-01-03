@@ -105,6 +105,7 @@ gdb-dashboard
 gdb-frontend-bin
 gdm
 gifski
+gimp
 git-lfs
 gitui
 glfw-x11
@@ -192,7 +193,6 @@ libmythes
 libnfs
 libopenraw
 libpipewire02
-libraw
 libsidplayfp
 libsigc++-3.0-docs
 libupnp
@@ -202,7 +202,6 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvterm
-libwmf
 linux
 linux-firmware
 linux-headers
@@ -212,7 +211,6 @@ lldb
 llvm
 lrzip
 lsof
-luajit
 luit
 lzop
 make
@@ -269,7 +267,6 @@ pipewire-v4l2
 pipewire-zeroconf
 pixz
 polari
-poppler-data
 powertop
 procs
 profile-cleaner
