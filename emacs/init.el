@@ -677,7 +677,9 @@
  (fm/after treemacs-interface
   (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
  (fm/after treemacs-customization
-  (setq-default treemacs-width 70)))
+  (setq-default treemacs-width 70))
+ (fm/after treemacs-mode
+  (fm/hook treemacs-mode-hook toggle-truncate-lines)))
 
 (fm/pkg lsp-ui
  (fm/after lsp-ui-flycheck
