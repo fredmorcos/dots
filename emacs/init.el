@@ -269,7 +269,7 @@
 
 (fm/after cc-mode
  (fm/key-disable "(" c-mode-base-map)
- (fm/hook c-mode-common-hook tree-sitter-mode)
+ ;; (fm/hook c-mode-common-hook tree-sitter-mode)
  (fm/hook c-mode-common-hook lsp))
 
 (fm/after cc-vars
@@ -649,7 +649,7 @@
   (setq-default lsp-rust-analyzer-display-parameter-hints t)
   (setq-default lsp-rust-all-features t)
   (setq-default lsp-rust-all-targets t)
-  (setq-default lsp-rust-build-on-save t)
+  ;; (setq-default lsp-rust-build-on-save t)
   (setq-default lsp-rust-unstable-features t)
   (setq-default lsp-rust-full-docs t)
   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy")
