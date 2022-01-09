@@ -218,6 +218,7 @@ man-db
 man-pages
 mediainfo
 mesa-demos
+mesa-utils
 mesa-vdpau
 microsoft-gsl
 mkinitcpio-systemd-tool
