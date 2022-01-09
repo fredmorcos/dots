@@ -46,9 +46,9 @@ if [ -d $INT ]; then
     cmd "$HOME/.config/beets/"            "$INT/Desktop/Configs/config-beets/"
     cmd "$HOME/.config/MusicBrainz/"      "$INT/Desktop/Configs/config-MusicBrainz/"
     cmd "$HOME/.config/transmission/"     "$INT/Desktop/Configs/config-transmission/"
-    cmd "$HOME/.config/youtube-dl/"       "$INT/Desktop/Configs/config-youtube-dl/"
-    cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
+    cmd "$HOME/.config/yt-dlp/"           "$INT/Desktop/Configs/config-yt-dlp/"
     cmd "$HOME/.config/syncthing/"        "$INT/Desktop/Configs/config-syncthing/"
+    cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
 
     if [ -d $EXT ]; then
         cmd "$INT/Desktop/"   "$EXT/Desktop/"
