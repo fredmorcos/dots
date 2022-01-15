@@ -127,6 +127,7 @@ pipewire-v4l2
 pkgconf
 polari
 poppler-data
+power-profiles-daemon
 powertop
 profile-cleaner
 protonvpn-cli
