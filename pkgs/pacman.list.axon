@@ -187,6 +187,7 @@ libdwarf
 libebur128
 libfido2
 libgepub
+libgphoto2
 libjxl
 libmad
 libmp4v2
@@ -328,7 +329,6 @@ rtaudio
 rust-analyzer
 rust-bindgen
 rustc-demangle
-sane
 sassc
 scour
 screen
