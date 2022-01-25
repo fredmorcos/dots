@@ -99,6 +99,7 @@ libva-intel-driver
 libva-mesa-driver
 libva-vdpau-driver
 libwmf
+libzip
 linux-firmware
 linux-headers
 lld
