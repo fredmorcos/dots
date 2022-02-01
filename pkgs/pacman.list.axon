@@ -15,6 +15,7 @@ automake
 bandwhich
 base
 bash-completion
+bashtop
 bat
 beets
 binaryen
