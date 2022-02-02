@@ -50,7 +50,7 @@ firefox
 flatpak
 flex
 fwupd
-gdb
+gdb-frontend-bin
 gdm
 git-lfs
 glib2-docs
@@ -113,6 +113,7 @@ man-pages
 mesa-vdpau
 meson
 microsoft-gsl
+mobsh-bin
 mpv
 mythes-en
 ncdu
