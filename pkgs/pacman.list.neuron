@@ -75,6 +75,7 @@ gtkmm-4.0
 gtkmm-4.0-docs
 gtkmm-docs
 gtksourceview2
+gvfs-mtp
 highlight
 hledger-ui
 hledger-web
