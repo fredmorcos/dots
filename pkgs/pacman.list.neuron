@@ -6,6 +6,7 @@ autoconf
 automake
 base
 bash-completion
+bashtop
 bat
 bbswitch
 bison
@@ -140,6 +141,7 @@ pwgen
 python-fs
 python-keyrings-alt
 python-libevdev
+python-psutil
 python-pycryptodome
 python-pyudev
 realtime-privileges
@@ -160,6 +162,7 @@ sudo
 sushi
 syncthing
 sysprof
+sysstat
 tealdeer
 tepl
 tokei
