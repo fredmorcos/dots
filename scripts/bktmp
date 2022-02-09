@@ -38,10 +38,10 @@ if [ -d $LAPTOP ]; then
     cmd "$HOME/Workspace/"                "$LAPTOP/Workspace/"
     cmd "$HOME/.gnupg/"                   "$LAPTOP/Configs/gnupg/"
     cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
-    cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
     cmd "$HOME/.config/transmission/"     "$LAPTOP/Configs/config-transmission/"
-    cmd "$HOME/.config/youtube-dl/"       "$LAPTOP/Configs/config-youtube-dl/"
+    cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
     cmd "$HOME/.config/syncthing/"        "$LAPTOP/Configs/config-syncthing/"
+    cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
 else
     printf ">>> %s is not mounted\n" $LAPTOP
     exit 1
