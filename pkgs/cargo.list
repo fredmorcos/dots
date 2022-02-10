@@ -4,6 +4,7 @@ cargo-deadlinks
 cargo-demangle
 cargo-geiger
 inferno
+jless
 kmon
 lfs
 rustfilt
