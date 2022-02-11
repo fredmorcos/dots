@@ -611,7 +611,7 @@
   (setq-default lsp-progress-prefix "  Progress: ")
   (setq-default lsp-completion-provider :none) ; Company-capf is already set
   (setq-default lsp-headerline-breadcrumb-enable t)
-  (setq-default lsp-restart 'ignore)
+  (setq-default lsp-restart 'auto-restart)
   (setq-default lsp-enable-snippet t)
   (setq-default lsp-keymap-prefix "C-c")
   (setq-default lsp-idle-delay 0.1)
@@ -623,6 +623,8 @@
   (setq-default lsp-auto-configure t)
   (setq-default lsp-signature-render-documentation t)
   (setq-default lsp-modeline-code-actions-enable nil)
+  (setq-default lsp-log-io nil)
+  (setq-default lsp-enable-imenu nil)
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
   (fm/hookn lsp-mode-hook
