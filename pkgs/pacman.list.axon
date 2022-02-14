@@ -145,6 +145,7 @@ gtkspell3
 gucharmap
 gvfs-google
 gvfs-mtp
+hamster-time-tracker
 hddtemp
 hdparm
 heaptrack
@@ -214,6 +215,7 @@ lldb
 llvm
 lrzip
 lsof
+ltrace
 luit
 lzop
 make
