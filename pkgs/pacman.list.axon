@@ -16,12 +16,14 @@ base
 bash-completion
 bashtop
 bat
+bear
 beets
 binaryen
 bind
 bison
 blanket
 bonnie++
+boost
 btrfs-heatmap
 cabextract
 cairomm-1.16-docs
@@ -318,6 +320,7 @@ python-ruamel-yaml
 python-typogrify
 python-watchdog
 radeontool
+ragel
 read-edid
 realtime-privileges
 reflector
