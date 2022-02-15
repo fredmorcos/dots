@@ -38,6 +38,7 @@ cmake
 cppcheck
 dbus-broker
 dconf-editor
+debuginfod
 devhelp
 easy-rsa
 efibootmgr
