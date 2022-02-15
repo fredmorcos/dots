@@ -310,6 +310,7 @@
   (setq-default org-fontify-done-headline t)
   (setq-default org-startup-indented t)
   (setq-default org-property-format "%s %s")
+  (fm/key-local "C-c p" fm/generate-password org-mode-map "qol")
   (fm/hook org-mode-hook org-bullets-mode)
   (fm/hookn org-mode-hook
    (setq-local left-margin-width 2)
