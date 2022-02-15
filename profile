@@ -8,6 +8,7 @@ export MPV_HOME="$HOME/.config/mpv"
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
+PATH="/usr/lib/ccache/bin/:$PATH"
 LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 
 # Rust
