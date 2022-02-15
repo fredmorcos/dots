@@ -22,7 +22,6 @@ bind
 bison
 blanket
 bonnie++
-bridge-utils
 btrfs-heatmap
 cabextract
 cairomm-1.16-docs
@@ -75,6 +74,7 @@ dhex
 diffpdf
 dmidecode
 dnsmasq
+docker
 drawing
 duperemove
 easy-rsa
@@ -366,6 +366,7 @@ time
 tokei
 torbrowser-launcher
 torsocks
+traceroute
 transmission-gtk
 trash-cli
 tree
