@@ -269,8 +269,10 @@ cmerge dict/aspell.en.pws            ~/.aspell.en.pws
 cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
 cmerge htoprc                        ~/.config/htop/htoprc
 cmerge yt-dlp.conf                   ~/.config/yt-dlp/config
-cmerge gitconfig                     ~/.config/git/config
 cmerge mpv-input.conf                ~/.config/mpv/input.conf
+
+cmerge git/config                    ~/.config/git/config
+cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
 cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
 
