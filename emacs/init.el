@@ -663,6 +663,17 @@
   (setq-default lsp-rust-analyzer-inlay-chain-format "➔ %s")
   (setq-default lsp-rust-analyzer-inlay-chain-space-format " %s"))
  (fm/after lsp-clangd
+  (setq-default lsp-clients-clangd-args
+   '("--header-insertion-decorators"
+     "--all-scopes-completion"
+     "--clang-tidy"
+     "--completion-style=detailed"
+     "--header-insertion=iwyu"
+     "--inlay-hints"
+     "--limit-results=1000"
+     "-j=4"
+     "--malloc-trim"
+     "--pch-storage=memory"))
   (fm/after cc-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
