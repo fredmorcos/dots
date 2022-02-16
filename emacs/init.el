@@ -605,6 +605,7 @@
  (fm/after lsp-mode
   (fm/dim lsp-mode "Ls")
   (fm/key-local "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
+  (fm/key-local "C-c g" lsp-format-region           lsp-mode-map "lsp-mode")
   (fm/key-local "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
   (fm/key-local "C-c h" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
   (fm/key-local "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
@@ -627,9 +628,9 @@
   (setq-default lsp-log-io nil)
   (setq-default lsp-enable-imenu nil)
   (fm/after which-key
-   (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode"))
-  (fm/hookn lsp-mode-hook
-   (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
+   (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
+  ;; (fm/hookn lsp-mode-hook
+  ;;  (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
  (fm/after lsp-lens
   (fm/dim lsp-lens-mode))
  (fm/after lsp-headerline
