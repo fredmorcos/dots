@@ -52,7 +52,7 @@ firefox
 flatpak
 flex
 fwupd
-gdb-frontend-bin
+gdb
 gdm
 git-lfs
 glib2-docs
@@ -153,6 +153,7 @@ rust-analyzer
 rust-bindgen
 rustc-demangle
 scour
+screen
 seahorse
 seahorse-nautilus
 shellcheck
@@ -167,6 +168,7 @@ sysprof
 sysstat
 tealdeer
 tepl
+tmux
 tokei
 torbrowser-launcher
 transmission-gtk
