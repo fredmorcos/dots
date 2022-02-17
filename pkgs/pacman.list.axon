@@ -105,7 +105,6 @@ flex
 fzf
 gamemode
 gdb-dashboard
-gdb-frontend-bin
 gdm
 ghex
 gifski
@@ -368,6 +367,7 @@ termshark
 texlive-bin
 tidy
 time
+tmux
 tokei
 torbrowser-launcher
 torsocks
