@@ -159,7 +159,8 @@
  (fm/face org-special-keyword  :inherit font-lock-keyword-face :weight bold)
  (fm/face org-block            :family "Monospace")
  (fm/face org-block-begin-line :foreground "thistle")
- (fm/face org-block-end-line   :foreground "thistle"))
+ (fm/face org-block-end-line   :foreground "thistle")
+ (fm/face org-code             :foreground "maroon"))
 
 (fm/after indent-guide
  (fm/face indent-guide-face :foreground "gray80"))
