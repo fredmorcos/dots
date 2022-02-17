@@ -11,6 +11,7 @@ aspell-en
 atomicparsley
 audiofile
 automake
+avisynthplus
 bandwhich
 base
 bash-completion
@@ -179,6 +180,7 @@ john
 kcov
 kexec-tools
 kgraphviewer
+ladspa
 ledger
 lesspipe
 lhasa
