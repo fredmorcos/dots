@@ -436,6 +436,12 @@
  (fm/after projectile
   (fm/key-local "M-G" counsel-projectile-git-grep projectile-mode-map)))
 
+(fm/pkg deadgrep
+ (fm/key "M-F" deadgrep)
+ (fm/after deadgrep
+  (fm/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
+  (fm/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
+
 (fm/pkg yasnippet-snippets
  (fm/after yasnippet
   (yasnippet-snippets-initialize)))
