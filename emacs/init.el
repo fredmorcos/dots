@@ -674,7 +674,7 @@
      "--all-scopes-completion"
      "--clang-tidy"
      "--completion-style=detailed"
-     "--header-insertion=iwyu"
+     "--header-insertion=never"
      "--inlay-hints"
      "--limit-results=1000"
      "-j=4"
