@@ -262,6 +262,7 @@ cmerge bash/profile                  ~/.bash_profile
 cmerge profile                       ~/.profile
 cmerge inputrc                       ~/.inputrc
 cmerge vimrc                         ~/.vimrc
+cmerge gdbinit                       ~/.gdbinit
 
 cmerge dict/hunspell_en_US           ~/.hunspell_en_US
 cmerge dict/aspell.en.pws            ~/.aspell.en.pws
