@@ -1,11 +1,13 @@
 set history save
-set history filename ~/.gdbhist
+set history filename ~/.config/gdb/history
 set print array on
 set print pretty on
 set pagination off
 set confirm off
 set breakpoint pending on
 # set disable-randomization
+set auto-load safe-path /
+set auto-load local-gdbinit
 
 # INTERACTIVE SETTINGS AND COMMANDS
 
