@@ -412,6 +412,15 @@
   (setq-default transient-history-file (concat emacs-var-dir "transient-history"))
   (setq-default transient-default-level 7)))
 
+(fm/pkg blamer
+ (fm/after blamer
+  (setq-default blamer-idle-time 0)
+  (setq-default blamer-commit-formatter ": %s")
+  (setq-default blamer-datetime-formatter "%s")
+  (setq-default blamer-max-commit-message-length 60))
+ (fm/after prog-mode
+  (fm/key-local "C-c b" blamer-mode prog-mode-map)))
+
 (fm/pkg magit
  (fm/key "C-x g" magit-status)
  (fm/after magit-mode
