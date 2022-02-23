@@ -74,6 +74,9 @@
 (setq-default column-number-indicator-zero-based nil)
 
 (fm/after emacs
+ ;; Avoid graphical dialog boxes.
+ (setq-default use-dialog-box nil)
+
  ;; Completion.
  (setq-default completion-ignore-case t)
  (setq-default read-buffer-completion-ignore-case t)
