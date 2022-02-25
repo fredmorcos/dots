@@ -25,6 +25,7 @@ bison
 blanket
 bonnie++
 boost
+bridge-utils
 btrfs-heatmap
 cabextract
 cairomm-1.16-docs
@@ -77,7 +78,6 @@ dhex
 diffpdf
 dmidecode
 dnsmasq
-docker
 drawing
 duperemove
 easy-rsa
@@ -241,7 +241,6 @@ ncdu
 neofetch
 net-tools
 network-manager-applet
-nftables
 nilfs-utils
 nmap
 noto-fonts-extra
@@ -274,6 +273,7 @@ pigz
 pipewire-v4l2
 pipewire-zeroconf
 pixz
+podman-docker
 polari
 powertop
 procs
