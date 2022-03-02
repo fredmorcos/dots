@@ -270,7 +270,6 @@ cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
 cmerge htoprc                        ~/.config/htop/htoprc
 cmerge yt-dlp.conf                   ~/.config/yt-dlp/config
 cmerge mpv-input.conf                ~/.config/mpv/input.conf
-cmerge gdbinit                       ~/.config/gdb/gdbinit
 
 cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
