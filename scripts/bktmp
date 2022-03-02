@@ -42,6 +42,7 @@ if [ -d $LAPTOP ]; then
     cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
     cmd "$HOME/.config/syncthing/"        "$LAPTOP/Configs/config-syncthing/"
     cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
+    cmd "$HOME/.local/share/hamster/"     "$LAPTOP/Configs/local-share-hamster/"
 else
     printf ">>> %s is not mounted\n" $LAPTOP
     exit 1

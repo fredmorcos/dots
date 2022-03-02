@@ -49,6 +49,7 @@ if [ -d $INT ]; then
     cmd "$HOME/.config/yt-dlp/"           "$INT/Desktop/Configs/config-yt-dlp/"
     cmd "$HOME/.config/syncthing/"        "$INT/Desktop/Configs/config-syncthing/"
     cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
+    cmd "$HOME/.local/share/hamster/"     "$INT/Desktop/Configs/local-share-hamster/"
 
     if [ -d $EXT ]; then
         cmd "$INT/Desktop/"   "$EXT/Desktop/"
