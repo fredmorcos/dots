@@ -31,4 +31,5 @@ org.jitsi.jitsi-meet
 org.kde.kcachegrind
 org.kde.massif-visualizer
 re.sonny.Commit
+re.sonny.Workbench
 us.zoom.Zoom
