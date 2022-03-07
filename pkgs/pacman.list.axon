@@ -179,6 +179,7 @@ john
 kcov
 kexec-tools
 kgraphviewer
+knot
 ladspa
 ledger
 lesspipe
@@ -224,6 +225,7 @@ lzop
 make
 man-db
 man-pages
+mariadb
 mediainfo
 mesa-demos
 mesa-utils
@@ -239,6 +241,7 @@ mutt
 mythes-en
 ncdu
 neofetch
+net-snmp
 net-tools
 network-manager-applet
 nilfs-utils
@@ -275,6 +278,7 @@ pipewire-zeroconf
 pixz
 podman-docker
 polari
+postgresql
 powertop
 procs
 profile-cleaner
@@ -367,6 +371,7 @@ termshark
 texlive-bin
 tidy
 time
+tinycdb
 tmux
 tokei
 torbrowser-launcher
@@ -383,6 +388,7 @@ udftools
 udiskie
 unace
 unicode-emoji
+unixodbc
 unoconv
 unrar
 unrtf
@@ -449,6 +455,7 @@ xorg-xwininfo
 xorg-xwud
 xsel
 xss-lock
+yaml-cpp
 yamllint
 you-get
 youtube-dl
