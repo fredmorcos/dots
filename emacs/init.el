@@ -617,7 +617,11 @@
   (setq-default rustic-indent-offset 2)
   (setq-default rustic-always-locate-project-on-open t)
   (fm/hookn rustic-mode-hook (electric-quote-local-mode -1))
-  (fm/hook rustic-mode-hook subword-mode)))
+  (fm/hook rustic-mode-hook subword-mode)
+  (fm/hookn rustic-mode-hook
+   (fm/after lsp-mode
+    (fm/hookn lsp-mode-hook
+     (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t))))))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
