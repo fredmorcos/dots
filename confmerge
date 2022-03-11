@@ -274,8 +274,6 @@ cmerge mpv-input.conf                ~/.config/mpv/input.conf
 cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
-cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
-
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 
@@ -289,8 +287,9 @@ cmerge archlinux/paru.conf           /etc/paru.conf
 cmerge net/hostname                  /etc/hostname
 cmerge net/hosts                     /etc/hosts
 
-cmerge locale.conf                   /etc/locale.conf
+cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
 cmerge vconsole.conf                 /etc/vconsole.conf
+cmerge locale.conf                   /etc/locale.conf
 cmerge sysctl.conf                   /etc/sysctl.d/sysctl.conf
 cmerge limits.conf                   /etc/security/limits.conf
 
