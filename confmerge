@@ -360,7 +360,8 @@ if [ "$flatpak_install" != "" ]; then
   $SHELL -c "flatpak install $flatpak_install"
 fi
 
-flatpak update
+sudo flatpak update
+sudo flatpak uninstall --unused
 
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
