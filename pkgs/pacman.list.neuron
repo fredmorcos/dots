@@ -83,6 +83,8 @@ gucharmap
 gvfs-mtp
 hamster-time-tracker
 heaptrack
+hledger-ui
+hledger-web
 hotspot-appimage
 hspell
 htop
@@ -154,6 +156,7 @@ rustc-demangle
 sdl
 seahorse
 seahorse-nautilus
+shellcheck
 signal-desktop
 strace
 subdl
