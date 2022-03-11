@@ -16,6 +16,7 @@ beets
 bison
 bluez-tools
 bluez-utils
+boost
 capitaine-cursors
 cargo-asm
 cargo-bloat
@@ -164,6 +165,7 @@ sudo
 syncthing
 sysprof
 sysstat
+tinycdb
 torbrowser-launcher
 transmission-gtk
 tree
@@ -180,4 +182,5 @@ vivaldi
 vivaldi-ffmpeg-codecs
 webp-pixbuf-loader
 xdg-user-dirs-gtk
+yaml-cpp
 yt-dlp
