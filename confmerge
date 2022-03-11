@@ -298,6 +298,7 @@ cmerge limits.conf                   /etc/security/limits.conf
 cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
+cmerge modules/wifi.conf             /etc/modprobe.d/wifi.conf
 
 cmerge x11/gdm-custom.conf           /etc/gdm/custom.conf
 cmerge x11/00-system.conf            /etc/X11/xorg.conf.d/00-system.conf

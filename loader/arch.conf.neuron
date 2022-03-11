@@ -2,4 +2,4 @@ title   Archlinux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet nordrand ipv6.disable=1 bgrt_disable
+options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet nordrand ipv6.disable=1 bgrt_disable pci=noaer

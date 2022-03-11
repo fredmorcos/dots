@@ -1,4 +1,8 @@
 acpid
+alsa-firmware
+alsa-plugins
+alsa-tools
+alsa-utils
 aria2
 asp
 aspell-en
@@ -37,6 +41,8 @@ dbus-broker
 dconf-editor
 devtools
 d-feet
+diffpdf
+dmidecode
 doxygen
 easy-rsa
 ed
@@ -62,6 +68,7 @@ gnome-calculator
 gnome-characters
 gnome-control-center
 gnome-dictionary
+gnome-firmware
 gnome-font-viewer
 gnome-icon-theme
 gnome-icon-theme-extras
@@ -96,6 +103,7 @@ intltool
 iotop
 ispell
 jfsutils
+kcachegrind
 libdmapsharing
 libdvdcss
 libjxl
@@ -116,6 +124,7 @@ make
 man-db
 mariadb-libs
 mesa-vdpau
+mkinitcpio-utils
 mobsh-bin
 mpv
 mtools
@@ -150,6 +159,7 @@ python-pyacoustid
 python-pycryptodomex
 python-pylast
 python-websockets
+ragel
 realtime-privileges
 rhythmbox
 rtkit
@@ -159,6 +169,8 @@ seahorse
 seahorse-nautilus
 shellcheck
 signal-desktop
+sof-firmware
+sof-tools
 strace
 subdl
 sudo
