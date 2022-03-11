@@ -230,8 +230,8 @@ dconf /org/gnome/nautilus/list-view/default-visible-columns "['name', 'size', 'm
 # Terminal
 dconf /org/gnome/terminal/legacy/theme-variant "'dark'"
 dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(34,29,53)'"
-dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns 200
-dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows 60
+# dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns 200
+# dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows 60
 
 # Unite
 dconf /org/gnome/shell/extensions/unite/extend-left-box false
