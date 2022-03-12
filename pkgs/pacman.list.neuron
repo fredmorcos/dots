@@ -44,6 +44,7 @@ d-feet
 diffpdf
 dmidecode
 doxygen
+drawing
 easy-rsa
 ed
 ell
@@ -62,6 +63,7 @@ fprintd
 gdb
 gdm
 ghex
+gifski
 gimp
 gnome-backgrounds
 gnome-calculator
@@ -83,8 +85,7 @@ gnome-tweaks
 gpart
 gparted
 gst-libav
-gst-plugins-ugly
-gst-python
+gst-plugin-gtk
 gtk-engine-murrine
 gtksourceview2
 gucharmap
@@ -97,6 +98,7 @@ hotspot-appimage
 hspell
 htop
 hunspell-en_us
+img2pdf
 intel-media-sdk
 intel-ucode
 intltool
@@ -139,6 +141,10 @@ pacman-contrib
 papirus-icon-theme
 paru-bin
 patch
+pdfarranger
+pdfmixtool
+pdfslicer
+peek
 picard
 pipewire-v4l2
 pkgconf
@@ -154,7 +160,7 @@ python-cssselect
 python-genshi
 python-html5lib
 python-keyrings-alt
-python-lxml
+python-olefile
 python-pyacoustid
 python-pycryptodomex
 python-pylast
@@ -171,6 +177,7 @@ shellcheck
 signal-desktop
 sof-firmware
 sof-tools
+soundconverter
 strace
 subdl
 sudo
