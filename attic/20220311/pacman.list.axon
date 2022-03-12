@@ -10,7 +10,6 @@ asp
 aspell-en
 atomicparsley
 audiofile
-autoconf
 automake
 avisynthplus
 bandwhich
@@ -27,17 +26,17 @@ bison
 blanket
 bonnie++
 boost
-bottom
 bridge-utils
 btrfs-heatmap
 cabextract
+cairomm-1.16-docs
+cairomm-docs
 capitaine-cursors
 cargo-asm
 cargo-audit
 cargo-bloat
 cargo-c
 cargo-crev
-cargo-deny
 cargo-depgraph
 cargo-edit
 cargo-expand
@@ -45,8 +44,6 @@ cargo-feature
 cargo-flamegraph
 cargo-fuzz
 cargo-generate
-cargo-msrv
-cargo-nextest
 cargo-outdated
 cargo-release
 cargo-sort
@@ -65,9 +62,11 @@ cgdb
 cheese
 chmlib
 clinfo
+cmake
 codespell
 compsize
 conntrack-tools
+cppcheck
 curlftpfs
 dateutils
 dbus-broker
@@ -115,8 +114,11 @@ gimp
 git-lfs
 gitui
 glfw-x11
+glibmm-2.68-docs
+glibmm-docs
 gmp-ecm
 gnome-backgrounds
+gnome-builder
 gnome-calculator
 gnome-characters
 gnome-control-center
@@ -133,10 +135,14 @@ gpart
 gparted
 gst-libav
 gstreamer-vaapi
+gtk4-demos
+gtk4-docs
 gtk-engine-murrine
 gtk-engines
 gtkmm
 gtkmm-4.0
+gtkmm-4.0-docs
+gtkmm-docs
 gtksourceview2
 gtkspell
 gtkspell3
@@ -154,6 +160,7 @@ hledger-web
 hotspot-appimage
 htmlmin
 htop
+httrack
 hunspell-de
 hunspell-en_us
 hunspell-fr
@@ -197,6 +204,7 @@ libofa
 libopenraw
 libpipewire02
 libsidplayfp
+libsigc++-3.0-docs
 libupnp
 liburing
 libva-mesa-driver
@@ -224,7 +232,6 @@ mediainfo
 mesa-demos
 mesa-utils
 mesa-vdpau
-meson
 microsoft-gsl
 mkinitcpio-systemd-tool
 mlocate
@@ -253,6 +260,8 @@ openmp
 opusfile
 p7zip
 pacman-contrib
+pangomm-2.48-docs
+pangomm-docs
 papirus-icon-theme
 par2cmdline
 paru-bin
@@ -269,7 +278,6 @@ pigz
 pipewire-v4l2
 pipewire-zeroconf
 pixz
-pkgconf
 podman-docker
 polari
 postgresql
@@ -284,10 +292,8 @@ pv
 pwgen
 pwndbg
 python-aiohttp
-python-babel
 python-beautifulsoup4
 python-cssselect
-python-docutils
 python-dulwich
 python-ecdsa
 python-fastimport
@@ -361,10 +367,10 @@ s-tui
 subdl
 sudo
 syncthing
-sysprof
 sysstat
 tealdeer
 tepl
+termshark
 texlive-bin
 tidy
 time
@@ -410,6 +416,7 @@ webp-pixbuf-loader
 wget
 whois
 wireguard-tools
+wireshark-qt
 wmctrl
 xclip
 xdg-user-dirs-gtk
@@ -458,4 +465,8 @@ youtube-dl
 yt-dlp
 z
 z3
+zathura-cb
+zathura-djvu
+zathura-pdf-mupdf
+zathura-ps
 zola
