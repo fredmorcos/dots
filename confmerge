@@ -310,6 +310,8 @@ cmerge systemd/system.conf           $SYSD/system.conf
 cmerge systemd/journald.conf         $SYSD/journald.conf
 cmerge systemd/boot-override.conf    $SYSD/system/boot.mount.d/override.conf
 
+cmerge vpn/ox.service                $SYSD/system/ox.service
+
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
     pkgs_tmp_file=$(mktemp)

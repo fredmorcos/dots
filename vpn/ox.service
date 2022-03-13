@@ -1,0 +1,10 @@
+[Unit]
+Description=Start OX VPN service
+
+[Service]
+ExecStart=openvpn --config /home/fred/Documents/Work/Open-Xchange/VPN/fred_morcos@alcatraz.open-xchange.com.ovpn --auth-user-pass /home/fred/Documents/Important/Passwords/_ox.txt --script-security 2 --up /home/fred/Workspace/dots/vpn/dns-setup
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

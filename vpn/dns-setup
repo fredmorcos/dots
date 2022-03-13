@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+# "$1" should be "tunX"
+# 10.20.30.3 is OX DNS
+resolvectl dns "$1" 10.20.30.3
+resolvectl domain "$1" open-xchange.com
