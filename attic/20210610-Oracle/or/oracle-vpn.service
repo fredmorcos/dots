@@ -1,0 +1,9 @@
+[Unit]
+Description=Start VPN service to access Oracle Intranet[Service]
+ExecStart=/bin/bash -c 'exec /usr/sbin/openconnect --verbose --cafile=/etc/ssl/certs/ca-certificates.crt --user=fmorcos_at --passwd-on-stdin --script-tun --script "tunsocks -D 127.0.0.1:8472 -R ssh" myaccess.oraclevpn.com < ~/.config/oracle-vpn.passwd'
+#ExecStart=/bin/bash -c 'exec /usr/sbin/openconnect --verbose --cafile=/etc/ssl/certs/ca-certificates.crt --user=fmorcos_at --passwd-on-stdin --script-tun --script "tunsocks -D 127.0.0.1:8472 -R ssh" ams-twvpn-1a.oraclevpn.com < ~/.config/oracle-vpn.passwd'
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
