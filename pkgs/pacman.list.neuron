@@ -161,7 +161,6 @@ peek
 picard
 pipewire-v4l2
 pkgconf
-polari
 postgresql-libs
 power-profiles-daemon
 powertop
@@ -213,6 +212,7 @@ vim
 vivaldi
 vivaldi-ffmpeg-codecs
 webp-pixbuf-loader
+weechat
 xdg-user-dirs-gtk
 yaml-cpp
 yt-dlp
