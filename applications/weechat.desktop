@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=WeeChat
+GenericName=Chat client
+Comment=Extensible chat client
+Keywords=WeeChat;extensible;chat;IRC;client;console;terminal;
+Exec=weechat %u
+Terminal=true
+Icon=/usr/share/icons/Papirus/64x64/apps/weechat.svg
+Type=Application
+Categories=Network;Chat;IRCClient;ConsoleOnly;
+MimeType=x-scheme-handler/irc;x-scheme-handler/ircs;
