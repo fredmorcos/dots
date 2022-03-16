@@ -341,6 +341,11 @@ if [ -f /etc/os-release ]; then
     else
       paru -Su
     fi
+
+    if [ "$HNAME" == "floron" ]; then
+      echo "Remove bad Atheros wifi firmware..."
+      rm -f "/usr/lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin"
+    fi
   fi
 fi
 
