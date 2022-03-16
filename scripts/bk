@@ -51,6 +51,7 @@ if [ "$HNAME" == "axon" ]; then
         cmd "$HOME/.config/MusicBrainz/"      "$INT/Desktop/Configs/config-MusicBrainz/"
         cmd "$HOME/.config/transmission/"     "$INT/Desktop/Configs/config-transmission/"
         cmd "$HOME/.config/yt-dlp/"           "$INT/Desktop/Configs/config-yt-dlp/"
+        cmd "$HOME/.config/weechat/"          "$INT/Desktop/Configs/config-weechat/"
         cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
         cmd "$HOME/.local/share/hamster/"     "$INT/Desktop/Configs/local-share-hamster/"
 
@@ -79,6 +80,7 @@ elif [ "$HNAME" == "neuron" ]; then
         cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
         cmd "$HOME/.config/transmission/"     "$LAPTOP/Configs/config-transmission/"
         cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
+        cmd "$HOME/.config/weechat/"          "$LAPTOP/Configs/config-weechat/"
         cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
         cmd "$HOME/.local/share/hamster/"     "$LAPTOP/Configs/local-share-hamster/"
     else
