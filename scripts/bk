@@ -19,8 +19,7 @@ CMD=("rsync"
      '--exclude=node_modules/*'
      "$@")
 
-echo "Rsync command:" "${CMD[@]}"
-printf "\n\n"
+echo ">>> Rsync command:" "${CMD[@]}"
 
 cmd () {
     printf ">>> %s --> %s\n" "$1" "$2"
@@ -29,7 +28,7 @@ cmd () {
 }
 
 HNAME=$(hostnamectl hostname)
-printf ">>> Hostname = %s\n" "$HNAME"
+printf ">>> Hostname = %s\n\n\n" "$HNAME"
 
 if [ "$HNAME" == "axon" ]; then
     HOME=/home/fred
