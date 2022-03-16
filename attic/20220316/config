@@ -1,10 +1,16 @@
 [user]
   name = Fred Morcos
   email = fm@fredmorcos.com
-  signingKey = 83493108
+  signingKey = ~/.ssh/id_rsa
 
 [commit]
 	gpgSign = true
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed-signers
 
 [color]
   ui = true
@@ -41,3 +47,4 @@
 
 [includeIf "gitdir:~/Workspace/powerdns/"]
   path = ~/.config/git/config-powerdns
+
