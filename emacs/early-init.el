@@ -259,6 +259,10 @@
  (fm/face web-mode-current-column-highlight-face  :background "Azure2")
  (fm/face web-mode-current-element-highlight-face :background "Azure2"))
 
+(fm/after magit
+ (fm/face magit-branch-local  :foreground "SkyBlue4" :background "Azure")
+ (fm/face magit-branch-remote :foreground "DarkOliveGreen4" :background "Honeydew"))
+
 (fm/after magit-diff
  ;; (fm/face magit-diff-hunk-heading-highlight
  ;;  :background "Grey75"
