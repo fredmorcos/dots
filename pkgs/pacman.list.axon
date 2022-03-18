@@ -28,7 +28,6 @@ blanket
 bonnie++
 boost
 bottom
-bridge-utils
 btrfs-heatmap
 cabextract
 capitaine-cursors
@@ -80,6 +79,8 @@ dhex
 diffpdf
 dmidecode
 dnsmasq
+docker
+docker-scan
 doxygen
 drawing
 duperemove
@@ -271,7 +272,7 @@ pipewire-v4l2
 pipewire-zeroconf
 pixz
 pkgconf
-podman-docker
+podman
 postgresql
 powertop
 procs
