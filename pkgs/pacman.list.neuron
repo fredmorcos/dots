@@ -1,3 +1,4 @@
+aardvark-dns
 acpid
 alsa-firmware
 alsa-plugins
@@ -45,6 +46,7 @@ cargo-supply-chain
 cargo-tarpaulin
 cargo-udeps
 cargo-watch
+catatonit
 cbindgen
 ccache
 cheese
@@ -56,6 +58,9 @@ devtools
 d-feet
 diffpdf
 dmidecode
+docker
+docker-compose
+docker-scan
 doxygen
 drawing
 easy-rsa
@@ -159,8 +164,10 @@ pdfmixtool
 pdfslicer
 peek
 picard
+pigz
 pipewire-v4l2
 pkgconf
+podman-compose
 postgresql-libs
 power-profiles-daemon
 powertop
