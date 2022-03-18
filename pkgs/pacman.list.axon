@@ -1,3 +1,4 @@
+aardvark-dns
 acpid
 alsa-firmware
 amd-ucode
@@ -54,6 +55,7 @@ cargo-supply-chain
 cargo-tarpaulin
 cargo-udeps
 cargo-watch
+catatonit
 catdoc
 cbindgen
 ccache
@@ -80,6 +82,7 @@ diffpdf
 dmidecode
 dnsmasq
 docker
+docker-compose
 docker-scan
 doxygen
 drawing
@@ -272,7 +275,7 @@ pipewire-v4l2
 pipewire-zeroconf
 pixz
 pkgconf
-podman
+podman-compose
 postgresql
 powertop
 procs
