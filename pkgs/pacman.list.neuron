@@ -16,6 +16,7 @@ bash-completion
 bashtop
 bat
 bbswitch
+bear
 bearssl
 beets
 bison
@@ -68,6 +69,7 @@ ed
 ell
 emacs
 eog-plugins
+ethtool
 exa
 exfatprogs
 f2fs-tools
@@ -117,10 +119,12 @@ hspell
 htop
 hunspell-en_us
 img2pdf
+inetutils
 intel-media-sdk
 intel-ucode
 intltool
 iotop
+iptraf-ng
 ispell
 jfsutils
 kcachegrind
