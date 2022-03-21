@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+echo "Removing wifi modules..."
+rmmod iwlmvm
+rmmod iwlwifi
+
+echo "Wait for 2 seconds..."
+sleep 2
+
+echo "Loading wifi modules..."
+modprobe iwlwifi
+
+echo "Wait another second..."
+sleep 1
