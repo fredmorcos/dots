@@ -215,7 +215,6 @@ linux-headers
 linux-tools-meta
 lld
 lldb
-llvm
 lrzip
 lsof
 ltrace
