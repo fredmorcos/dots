@@ -96,6 +96,7 @@ elementary-wallpapers
 emacs
 entr
 eog-plugins
+epiphany
 ethtool
 evince
 exa
@@ -402,8 +403,6 @@ vde2
 vdpauinfo
 vi
 vim-spell-en
-vivaldi
-vivaldi-ffmpeg-codecs
 vkd3d
 vulkan-extra-layers
 vulkan-radeon
