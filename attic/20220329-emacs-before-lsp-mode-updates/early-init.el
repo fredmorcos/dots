@@ -118,6 +118,8 @@
  (fm/face font-lock-type-face          :foreground "DarkGreen")
  (fm/face font-lock-variable-name-face :foreground "DarkCyan")
  (fm/face font-lock-string-face        :foreground "OliveDrab")
+ ;; (fm/face font-lock-comment-face       :foreground "Thistle3")
+ ;; (fm/face font-lock-doc-face           :foreground "YellowGreen")
  (fm/face font-lock-warning-face       :foreground "Orange3")
  (fm/face font-lock-constant-face      :foreground "CornflowerBlue"))
 
@@ -226,19 +228,19 @@
     (deprecated  :strike-through t))))
 
 (fm/after lsp-rust
- (fm/face lsp-rust-analyzer-inlay-face
-  :foreground "DimGray"
-  :background "Azure2"
-  :weight bold
+ (fm/face lsp-rust-analyzer-inlay-type-face
+  :inherit font-lock-type-face
+  :background "HoneyDew2"
   :height 0.8)
  (fm/face lsp-rust-analyzer-inlay-param-face
   :foreground "DimGray"
   :background "Azure2"
   :weight bold
   :height 0.8)
- (fm/face lsp-rust-analyzer-inlay-type-face
-  :inherit font-lock-type-face
-  :background "HoneyDew2"
+ (fm/face lsp-rust-analyzer-inlay-chain-face
+  :background "Khaki"
+  :foreground "DimGray"
+  :weight bold
   :height 0.8))
 
 (fm/after lsp-ui-doc
@@ -262,6 +264,14 @@
  (fm/face magit-branch-remote :foreground "DarkOliveGreen4" :background "Honeydew"))
 
 (fm/after magit-diff
+ ;; (fm/face magit-diff-hunk-heading-highlight
+ ;;  :background "Grey75"
+ ;;  :foreground "Grey30"
+ ;;  :extend nil)
+ ;; (fm/face magit-diff-hunk-heading
+ ;;  :background "Grey80"
+ ;;  :foreground "Grey30"
+ ;;  :extend nil)
  (fm/face magit-diff-added-highlight
   :background "#cceecc"
   :foreground "#22aa22"

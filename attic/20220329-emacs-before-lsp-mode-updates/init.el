@@ -654,8 +654,7 @@
   ;; (fm/hookn lsp-mode-hook
   ;;  (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
  (fm/after lsp-lens
-  (fm/dim lsp-lens-mode)
-  (setq-default lsp-lens-mode nil))
+  (fm/dim lsp-lens-mode))
  (fm/after lsp-headerline
   (setq-default lsp-headerline-breadcrumb-icons-enable nil))
  (fm/after lsp-semantic-tokens
@@ -674,11 +673,6 @@
   (setq-default lsp-rust-analyzer-server-display-inlay-hints t)
   (setq-default lsp-rust-analyzer-display-chaining-hints t)
   (setq-default lsp-rust-analyzer-display-parameter-hints t)
-  (setq-default lsp-rust-analyzer-display-closure-return-type-hints t)
-  (setq-default lsp-rust-analyzer-display-reborrow-hints t)
-  (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
-  (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
-  (setq-default lsp-rust-analyzer-server-format-inlay-hints nil)
   (setq-default lsp-rust-all-features t)
   (setq-default lsp-rust-all-targets t)
   ;; (setq-default lsp-rust-build-on-save t)
@@ -686,8 +680,10 @@
   (setq-default lsp-rust-full-docs t)
   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy")
   (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
-  (setq-default lsp-rust-analyzer-inlay-param-format "%s")
-  (setq-default lsp-rust-analyzer-inlay-type-format "%s"))
+  (setq-default lsp-rust-analyzer-inlay-type-format "%s")
+  (setq-default lsp-rust-analyzer-inlay-type-space-format ": %s")
+  (setq-default lsp-rust-analyzer-inlay-chain-format "➔ %s")
+  (setq-default lsp-rust-analyzer-inlay-chain-space-format " %s"))
  (fm/after lsp-clangd
   (setq-default lsp-clients-clangd-args
    '("--header-insertion-decorators"
