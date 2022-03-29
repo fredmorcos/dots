@@ -2,6 +2,7 @@ cargo-criterion
 cargo-deadlinks
 cargo-demangle
 cargo-geiger
+difftastic
 inferno
 jless
 rustfilt
