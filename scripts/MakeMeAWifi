@@ -15,5 +15,4 @@ sleep 2
 echo "Loading wifi modules..."
 modprobe iwlwifi
 
-echo "Wait another second..."
-sleep 1
+echo "Done"
