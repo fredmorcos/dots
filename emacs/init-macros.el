@@ -85,7 +85,7 @@
    (autoload 'package-installed-p "package")
    (when (not (package-installed-p ',pkg))
     (when (not packages-refreshed)
-     (message "Refreshing package repositories...")
+     (message "+++ Refreshing package repositories to install %s" ',pkg)
      (package-refresh-contents)
      (setq packages-refreshed t))
     (message "+++ Installing %s..." ',pkg)

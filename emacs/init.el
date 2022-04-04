@@ -302,24 +302,23 @@
 (fm/pkg org-bullets
  (setq-default org-bullets-bullet-list '(" ")))
 
-(fm/pkg org
- (fm/after org
-  (setq-default org-cycle-separator-lines 0)
-  (setq-default org-startup-folded 'content)
-  (setq-default org-ellipsis "…")
-  (setq-default org-hide-leading-stars t)
-  (setq-default org-hide-emphasis-markers t)
-  (setq-default org-fontify-whole-heading-line t)
-  (setq-default org-fontify-done-headline t)
-  (setq-default org-startup-indented t)
-  (setq-default org-property-format "%s %s")
-  (fm/key-local "C-c p" fm/generate-password org-mode-map "qol")
-  (fm/hook org-mode-hook org-bullets-mode)
-  (fm/hookn org-mode-hook
-   (setq-local left-margin-width 2)
-   (setq-local right-margin-width 2)
-   (setq-local scroll-margin 0)
-   (setq-local cursor-type 'bar))))
+(fm/after org
+ (setq-default org-cycle-separator-lines 0)
+ (setq-default org-startup-folded 'content)
+ (setq-default org-ellipsis "…")
+ (setq-default org-hide-leading-stars t)
+ (setq-default org-hide-emphasis-markers t)
+ (setq-default org-fontify-whole-heading-line t)
+ (setq-default org-fontify-done-headline t)
+ (setq-default org-startup-indented t)
+ (setq-default org-property-format "%s %s")
+ (fm/key-local "C-c p" fm/generate-password org-mode-map "qol")
+ (fm/hook org-mode-hook org-bullets-mode)
+ (fm/hookn org-mode-hook
+  (setq-local left-margin-width 2)
+  (setq-local right-margin-width 2)
+  (setq-local scroll-margin 0)
+  (setq-local cursor-type 'bar)))
 
 (fm/pkg which-key
  (fm/after which-key
