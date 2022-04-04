@@ -196,6 +196,7 @@ libdmapsharing
 libdwarf
 libebur128
 libfido2
+libgccjit
 libgepub
 libgphoto2
 libjxl
