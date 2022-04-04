@@ -85,7 +85,8 @@
     ("melpa" . "https://melpa.org/packages/")))
  (setq-default package-quickstart-file
   (concat (expand-file-name user-emacs-directory) "var/package-qa"))
- (setq-default package-quickstart t))
+ (setq-default package-quickstart t)
+ (setq-default package-native-compile t))
 
 (fm/after url-vars
  (setq-default url-privacy-level 'high)
