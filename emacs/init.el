@@ -772,6 +772,7 @@
   (fm/hook web-mode-hook emmet-mode)))
 
 (fm/pkg dockerfile-mode)
+(fm/pkg pkgbuild-mode)
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
