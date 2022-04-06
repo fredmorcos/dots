@@ -54,7 +54,9 @@
 (setq-default auto-save-list-file-prefix emacs-autosave-list-prefix)
 
 ;; subr - Respond to yes/no questions using Y/N.
-(defalias 'yes-or-no-p 'y-or-n-p)
+(if (< emacs-major-version 28)
+ (defalias 'yes-or-no-p 'y-or-n-p)
+ (setq-default use-short-answers t))
 
 ;; Windmove.
 (windmove-default-keybindings)
@@ -72,6 +74,15 @@
 
 ;; Bindings.
 (setq-default column-number-indicator-zero-based nil)
+
+;; Modeline
+(setq-default mode-line-compact 'long)
+
+;; Fill-column indicator
+(global-display-fill-column-indicator-mode)
+
+;; Make URLs clickable
+(global-goto-address-mode)
 
 (fm/after emacs
  ;; Avoid graphical dialog boxes.
@@ -162,6 +173,7 @@
  (setq-default suggest-key-bindings 10)
  (setq-default save-interprogram-paste-before-kill t)
  (setq-default backward-delete-char-untabify-method 'hungry)
+ (setq-default next-error-message-highlight t)
  (fm/after files
   (fm/hook before-save-hook delete-trailing-whitespace)))
 
@@ -200,7 +212,7 @@
   tab-mark indentation indentation::tab indentation::space
   space-after-tab space-after-tab::tab space-after-tab::space
   space-before-tab space-before-tab::tab
-  space-before-tab::space)))
+  space-before-tab::space whitespace-missing-newline-at-eof)))
 
 (fm/after make-mode
  (fm/hook makefile-mode-hook whitespace-mode))
@@ -225,7 +237,8 @@
 (fm/mode "Passwords_old.txt" text-mode)
 
 (fm/after eldoc
- (fm/dim eldoc-mode "Ed"))
+ (fm/dim eldoc-mode "Ed")
+ (setq-default eldoc-documentation-strategy 'eldoc-documentation-compose))
 
 (fm/after paren
  (setq-default show-paren-when-point-inside-paren t)
@@ -272,6 +285,10 @@
 
 (fm/after cc-mode
  (fm/key-disable "(" c-mode-base-map)
+ (setq-default c-doc-comment-style
+  '((java-mode . javadoc)
+    (c-mode    . gtkdoc)
+    (c++-mode  . doxygen)))
  ;; (fm/hook c-mode-common-hook tree-sitter-mode)
  (fm/hook c-mode-common-hook lsp))
 
@@ -395,7 +412,8 @@
 (fm/after minibuffer
  (setq-default read-file-name-completion-ignore-case t)
  (setq-default completion-category-defaults nil)
- (setq-default completion-cycle-threshold 4))
+ (setq-default completion-cycle-threshold 4)
+ (setq-default completions-detailed t))
 
 (fm/pkg flyspell-correct-ivy
  (fm/after flyspell
@@ -552,7 +570,7 @@
   (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
 
 (defun fm/company-add-backend (backend)
- "Add BACKEND to local version of company-backends."
+ "Add BACKEND to local version of `company-backends'."
  (eval-when-compile (defvar company-backends))
  (let ((backends `((,backend . ,(car company-backends)))))
   (setq-local company-backends backends)))
@@ -587,7 +605,8 @@
  (fm/hook prog-mode-hook electric-pair-mode)
  (fm/hook prog-mode-hook electric-layout-mode)
  (fm/hook prog-mode-hook display-line-numbers-mode)
- (fm/hook prog-mode-hook hl-line-mode))
+ (fm/hook prog-mode-hook hl-line-mode)
+ (fm/hook prog-mode-hook bug-reference-prog-mode))
 
 (fm/after conf-mode
  (fm/hook conf-desktop-mode-hook diff-hl-mode)

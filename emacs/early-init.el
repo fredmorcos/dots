@@ -33,6 +33,10 @@
  (column-number-mode))
 
 (fm/after emacs
+ ;; Skip redisplays
+ (setq-default redisplay-skip-fontification-on-input t)
+ (setq-default redisplay-skip-initial-frame t)
+
  ;; A big contributor to startup time is garbage collection.
  (setq-default gc-cons-threshold (* 100 1024 1024))
  (setq-default gc-cons-percentage 0.8)
@@ -103,6 +107,8 @@
  (fm/face link                :foreground "RoyalBlue3" :underline "LightSteelBlue3")
  (fm/face highlight           :background "Wheat")
  (fm/face error               :foreground "Red3")
+
+ (fm/face fill-column-indicator :foreground "SeaShell2")
 
  (fm/face mode-line
   :background "Gray95"
