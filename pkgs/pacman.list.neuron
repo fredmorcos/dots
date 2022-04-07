@@ -54,6 +54,7 @@ cbindgen
 ccache
 chafa
 cheese
+cmake
 cuda
 dbus-broker
 dconf-editor
@@ -135,6 +136,7 @@ kcachegrind
 libdecaf
 libdmapsharing
 libdvdcss
+libgccjit
 libjxl
 libmythes
 libopenraw
