@@ -160,7 +160,7 @@ dconf /org/gnome/shell/enabled-extensions "['unite@hardpixel.eu']"
 dconf /org/gnome/desktop/sound/allow-volume-above-100-percent true
 
 # Apps
-dconf /org/gnome/shell/favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'org.gnome.Terminal.desktop', 'signal-desktop.desktop', 'com.discordapp.Discord.desktop', 'rhythmbox.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Characters.desktop', 'gucharmap.desktop', 'org.gnome.Dictionary.desktop', 'com.github.gi_lom.dialect.desktop']"
+dconf /org/gnome/shell/favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'org.gnome.Terminal.desktop', 'signal-desktop.desktop', 'com.discordapp.Discord.desktop', 'rhythmbox.desktop']"
 
 # Shortcuts
 dconf /org/gnome/desktop/wm/keybindings/show-desktop "['<Super>d']"
