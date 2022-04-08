@@ -1,9 +1,9 @@
-# Disable tracker
+# Tracker
 [org/freedesktop/tracker/miner/files]
 index-single-directories="@as []"
 index-recursive-directories="@as []"
 
-# Disable some search providers
+# Search Providers
 [org/gnome/desktop/search-providers]
 disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Characters.desktop']
 disable-external=false
@@ -16,12 +16,12 @@ remove-old-temp-files=true
 old-files-age=uint32 1
 report-technical-problems=false
 
-# Power management
+# Power Management
 [org/gnome/settings-daemon/plugins/power]
 idle-dim=false
 sleep-inactive-ac-type='nothing'
 
-# Night-light
+# Night-Light
 [org/gnome/settings-daemon/plugins/color]
 night-light-enabled=true
 night-light-schedule-automatic=false
@@ -41,7 +41,7 @@ speed=1.0
 delay=uint32 250
 repeat-interval=uint32 15
 
-# More keyboard options
+# More Keyboard Options
 [org/gnome/desktop/input-sources]
 xkb-options=['lv3:ralt_switch', 'ctrl:nocaps', 'compose:ralt']
 
@@ -55,107 +55,115 @@ autorun-never=true
 [system/locale]
 region='en_GB.UTF-8'
 
-# UI
-dconf /org/gnome/mutter/dynamic-workspaces true
-dconf /org/gnome/desktop/interface/enable-hot-corners true
-dconf /org/gnome/desktop/interface/cursor-blink false
-dconf /org/gnome/desktop/interface/show-battery-percentage true
-dconf /org/gnome/desktop/interface/cursor-theme "'capitaine-cursors'"
-dconf /org/gnome/desktop/interface/font-name "'Sans 11'"
-dconf /org/gnome/desktop/interface/document-font-name "'Sans 11'"
-dconf /org/gnome/desktop/interface/monospace-font-name "'Monospace 11'"
-dconf /org/gnome/desktop/interface/font-antialiasing "'rgba'"
-dconf /org/gnome/desktop/interface/clock-show-weekday true
-dconf /org/gnome/desktop/calendar/show-weekdate true
-dconf /org/gnome/desktop/wm/preferences/titlebar-font "'Sans 11'"
-dconf /org/gnome/desktop/wm/preferences/resize-with-right-button true
-dconf /org/gnome/shell/enabled-extensions "['unite@hardpixel.eu']"
+# Workspaces
+[org/gnome/mutter]
+dynamic-workspaces=true
+
+# Shell
+[org/gnome/desktop/interface]
+enable-hot-corners=true
+cursor-blink=false
+show-battery-percentage=true
+cursor-theme='capitaine-cursors'
+font-name='Sans 11'
+document-font-name='Sans 11'
+monospace-font-name='Monospace 11'
+font-antialiasing='rgba'
+clock-show-weekday=true
+
+# Shell Calendar
+[org/gnome/desktop/calendar]
+show-weekdate=true
+
+# Shell Apps and Extensions
+[org/gnome/shell]
+enabled-extensions=['unite@hardpixel.eu']
+favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'org.gnome.Terminal.desktop', 'signal-desktop.desktop', 'com.discordapp.Discord.desktop', 'rhythmbox.desktop']
+
+# Window-related Functions
+[org/gnome/desktop/wm/preferences]
+titlebar-font='Sans 11'
+resize-with-right-button=true
 
 # Sound
-dconf /org/gnome/desktop/sound/allow-volume-above-100-percent true
+[org/gnome/desktop/sound]
+allow-volume-above-100-percent=true
 
-# Apps
-dconf /org/gnome/shell/favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'org.gnome.Terminal.desktop', 'signal-desktop.desktop', 'com.discordapp.Discord.desktop', 'rhythmbox.desktop']"
+# Shell Shortcuts
+[org/gnome/shell/keybindings]
+toggle-application-view=['<Alt>F2']
+screenshot=['Print']
+show-screenshot-ui=['<Control>Print']
+
+# Desktop Shortcuts
+[org/gnome/desktop/wm/keybindings]
+show-desktop=['<Super>d']
+panel-run-dialog=['<Alt>F3']
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-workspace-left=['<Shift><Super>Left']
+move-to-workspace-right=['<Shift><Super>Right']
+switch-to-workspace-left=['<Primary><Alt>Left']
+switch-to-workspace-right=['<Primary><Alt>Right']
+switch-applications=@as []
+switch-applications-backward=@as []
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
+maximize=@as []
+toggle-maximized=['<Super>Up']
 
 # Shortcuts
-dconf /org/gnome/desktop/wm/keybindings/show-desktop "['<Super>d']"
-dconf /org/gnome/shell/keybindings/toggle-application-view "['<Alt>F2']"
-dconf /org/gnome/desktop/wm/keybindings/panel-run-dialog "['<Alt>F3']"
+[org/gnome/settings-daemon/plugins/media-keys]
+home=['<Primary><Alt>h']
+www=['<Primary><Alt>w']
+logout=@as []
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']
+custom-keybindings/custom0/binding='<Primary><Alt>t'
+custom-keybindings/custom0/command='gnome-terminal'
+custom-keybindings/custom0/name='Terminal'
+custom-keybindings/custom1/binding='<Primary><Alt>e'
+custom-keybindings/custom1/command='emacs'
+custom-keybindings/custom1/name='Emacs'
+custom-keybindings/custom2/binding='<Primary><Alt>d'
+custom-keybindings/custom2/command='flatpak run com.discordapp.Discord'
+custom-keybindings/custom2/name='Discord'
+custom-keybindings/custom3/binding='<Primary><Alt>c'
+custom-keybindings/custom3/command='signal-desktop'
+custom-keybindings/custom3/name='Signal'
+custom-keybindings/custom4/binding='<Primary><Alt>o'
+custom-keybindings/custom4/command='gnome-control-center sound'
+custom-keybindings/custom4/name='Sound Settings'
 
-dconf /org/gnome/desktop/wm/keybindings/move-to-monitor-left "@as []"
-dconf /org/gnome/desktop/wm/keybindings/move-to-monitor-right "@as []"
-dconf /org/gnome/desktop/wm/keybindings/move-to-workspace-left "['<Shift><Super>Left']"
-dconf /org/gnome/desktop/wm/keybindings/move-to-workspace-right "['<Shift><Super>Right']"
-dconf /org/gnome/desktop/wm/keybindings/switch-to-workspace-left "['<Primary><Alt>Left']"
-dconf /org/gnome/desktop/wm/keybindings/switch-to-workspace-right "['<Primary><Alt>Right']"
-dconf /org/gnome/desktop/wm/keybindings/switch-applications "@as []"
-dconf /org/gnome/desktop/wm/keybindings/switch-applications-backward "@as []"
-dconf /org/gnome/desktop/wm/keybindings/switch-windows "['<Alt>Tab']"
-dconf /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift><Alt>Tab']"
-
-dconf /org/gnome/desktop/wm/keybindings/maximize "@as []"
-dconf /org/gnome/desktop/wm/keybindings/toggle-maximized "['<Super>Up']"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/home "['<Primary><Alt>h']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/www "['<Primary><Alt>w']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/logout "@as []"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/area-screenshot "['<Primary><Shift>Print']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/area-screenshot-clip "['<Primary>Print']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/screencast "['<Super>Print']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/screenshot "['<Shift>Print']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "['Print']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/window-screenshot "['<Shift><Super>Print']"
-dconf /org/gnome/settings-daemon/plugins/media-keys/window-screenshot-clip "['<Alt>Print']"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding "'<Primary><Alt>t'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command "'gnome-terminal'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name "'Terminal'"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding "'<Primary><Alt>e'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command "'emacs'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name "'Emacs'"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/binding "'<Primary><Alt>d'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/command "'flatpak run com.discordapp.Discord'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/name "'Discord'"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/binding "'<Primary><Alt>c'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/command "'signal-desktop'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/name "'Signal'"
-
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/binding "'<Primary><Alt>o'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/command "'gnome-control-center sound'"
-dconf /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/name "'Sound Settings'"
+# File Chooser
+[org/gtk/settings/file-chooser]
+sort-directories-first=true
 
 # Nautilus
-dconf /org/gnome/nautilus/preferences/default-folder-viewer "'list-view'"
-dconf /org/gnome/nautilus/list-view/default-zoom-level "'small'"
-dconf /org/gtk/settings/file-chooser/sort-directories-first true
-dconf /org/gnome/nautilus/preferences/recursive-search "'never'"
-dconf /org/gnome/nautilus/preferences/show-image-thumbnails "'never'"
-dconf /org/gnome/nautilus/list-view/default-visible-columns "['name', 'size', 'mime_type', 'date_modified_with_time']"
+[org/gnome/nautilus]
+preferences/default-folder-viewer='list-view'
+preferences/recursive-search='never'
+preferences/show-image-thumbnails='never'
+list-view/default-zoom-level='small'
+list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_with_time']
 
 # Terminal
-dconf /org/gnome/terminal/legacy/theme-variant "'dark'"
-dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color "'rgb(34,29,53)'"
-# dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns 200
-# dconf /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-rows 60
+[org/gnome/terminal/legacy]
+theme-variant='dark'
+profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color='rgb(34,29,53)'
 
-# Unite
-dconf /org/gnome/shell/extensions/unite/extend-left-box false
-dconf /org/gnome/shell/extensions/unite/show-desktop-name false
-dconf /org/gnome/shell/extensions/unite/hide-activities-button "'never'"
-dconf /org/gnome/shell/extensions/unite/hide-window-titlebars "'both'"
-dconf /org/gnome/shell/extensions/unite/show-window-title "'never'"
-dconf /org/gnome/shell/extensions/unite/show-window-buttons "'both'"
-dconf /org/gnome/shell/extensions/unite/notifications-position "'center'"
-dconf /org/gnome/shell/extensions/unite/greyscale-tray-icons false
-dconf /org/gnome/shell/extensions/unite/hide-dropdown-arrows false
-dconf /org/gnome/shell/extensions/unite/hide-app-menu-icon false
-dconf /org/gnome/shell/extensions/unite/reduce-panel-spacing false
-dconf /org/gnome/shell/extensions/unite/app-menu-max-width 100
-dconf /org/gnome/shell/extensions/unite/app-menu-ellipsize-mode "'end'"
-dconf /org/gnome/shell/extensions/unite/window-buttons-theme "'auto'"
+# Unite Extension
+[org/gnome/shell/extensions/unite]
+extend-left-box=false
+show-desktop-name=false
+hide-activities-button='never'
+hide-window-titlebars='both'
+show-window-title='never'
+show-window-buttons='both'
+notifications-position='center'
+greyscale-tray-icons=false
+hide-dropdown-arrows=false
+hide-app-menu-icon=false
+reduce-panel-spacing=false
+app-menu-max-width=100
+app-menu-ellipsize-mode='end'
+window-buttons-theme='auto'
