@@ -420,6 +420,7 @@ weechat
 wget
 whois
 wireguard-tools
+wireshark-qt
 wmctrl
 xclip
 xdg-user-dirs-gtk
