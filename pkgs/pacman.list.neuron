@@ -70,7 +70,7 @@ drawing
 easy-rsa
 ed
 ell
-emacs
+emacs-nativecomp
 eog-plugins
 epiphany
 ethtool
@@ -136,7 +136,6 @@ kcachegrind
 libdecaf
 libdmapsharing
 libdvdcss
-libgccjit
 libjxl
 libmythes
 libopenraw
