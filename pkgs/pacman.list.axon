@@ -75,6 +75,7 @@ dateutils
 dbus-broker
 dconf-editor
 ddcutil
+debuginfod
 d-feet
 dhclient
 dhcpcd
@@ -235,6 +236,7 @@ mesa-utils
 mesa-vdpau
 meson
 microsoft-gsl
+minisign
 mkinitcpio-systemd-tool
 mlocate
 mobsh-bin
