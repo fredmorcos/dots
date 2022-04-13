@@ -22,3 +22,8 @@ EDITOR=emacs
 GIT_EDITOR=$EDITOR
 
 export PATH LD_LIBRARY_PATH EDITOR GIT_EDITOR
+
+# On-demand debugging symbols
+DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elfutils.org/"
+
+export DEBUGINFOD_URLS
