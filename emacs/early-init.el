@@ -100,6 +100,9 @@
 
 ;; Specify some common faces.
 (fm/after faces
+ (when (string-equal (system-name) "neuron")
+  (fm/face default :height 150))
+
  (fm/face default             :background "Gray98" :foreground "Gray40")
  (fm/face fringe              :background "Gray98")
  (fm/face cursor              :background "SlateGray3")
@@ -132,8 +135,10 @@
  (fm/face whitespace-line :background "Gray90" :weight bold))
 
 (fm/after display-line-numbers
- (fm/face line-number              :foreground "Gray85")
- (fm/face line-number-current-line :foreground "Gray70"))
+ ;; (fm/face line-number              :foreground "Gray85")
+ ;; (fm/face line-number-current-line :foreground "Gray70")
+ (fm/face line-number                 :foreground "Gray60")
+ (fm/face line-number-current-line    :foreground "Gray50"))
 
 (fm/after hl-line
  (fm/face hl-line :background "Gray95" :extend nil))
