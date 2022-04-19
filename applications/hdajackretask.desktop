@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=HDAJackRetask
+GenericName=Retask the audio jacks for the HDA sound driver
+Exec=hdajackretask
+Terminal=false
+Type=Application
+Categories=AudioVideo;
+Version=0.9.4
+Hidden=true
