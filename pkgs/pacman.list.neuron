@@ -201,6 +201,7 @@ ragel
 realtime-privileges
 rhythmbox
 ripgrep
+rust-analyzer
 rustc-demangle
 sdl
 seahorse
