@@ -212,6 +212,7 @@ sof-firmware
 sof-tools
 soundconverter
 strace
+s-tui
 subdl
 sudo
 syncthing
