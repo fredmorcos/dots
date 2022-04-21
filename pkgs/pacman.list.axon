@@ -176,6 +176,7 @@ iotop
 ipset
 irqbalance
 ispell
+jami-qt
 jfsutils
 john
 kcov
@@ -206,7 +207,6 @@ libofa
 libopenraw
 libpipewire02
 libsidplayfp
-libupnp
 liburing
 libva-mesa-driver
 libva-utils
@@ -461,7 +461,6 @@ xorg-xwininfo
 xorg-xwud
 xsel
 xss-lock
-yaml-cpp
 yamllint
 you-get
 youtube-dl
