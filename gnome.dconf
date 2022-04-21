@@ -78,7 +78,7 @@ show-weekdate=true
 # Shell Apps and Extensions
 [org/gnome/shell]
 enabled-extensions=['unite@hardpixel.eu']
-favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'emacs.desktop', 'org.gnome.Terminal.desktop', 'signal-desktop.desktop', 'com.discordapp.Discord.desktop', 'rhythmbox.desktop']
+favorite-apps=['rhythmbox.desktop']
 
 # Window-related Functions
 [org/gnome/desktop/wm/preferences]
