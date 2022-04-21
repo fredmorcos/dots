@@ -133,8 +133,9 @@ cmerge net/hosts                     /etc/hosts
 cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
 cmerge vconsole.conf                 /etc/vconsole.conf
 cmerge locale.conf                   /etc/locale.conf
-cmerge sysctl.conf                   /etc/sysctl.d/sysctl.conf
 cmerge limits.conf                   /etc/security/limits.conf
+cmerge sysctl/sysctl.conf            /etc/sysctl.d/sysctl.conf
+cmerge sysctl/i915.conf              /etc/sysctl.d/i915.conf
 
 cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
