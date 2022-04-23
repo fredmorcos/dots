@@ -238,6 +238,7 @@ minisign
 mkinitcpio-systemd-tool
 mlocate
 mobsh-bin
+mold
 mpv
 mtools
 musl
