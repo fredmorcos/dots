@@ -85,6 +85,11 @@ cmerge () {
 
 echo "Applying Gnome Settings..."
 dconf load / < gnome.dconf
+if [ -f gnome.dconf.neuron ]; then
+  dconf load / < gnome.dconf.neuron
+elif [ -f gnome.dconf.axon ]; then
+  dconf load / < gnome.dconf.axon
+fi
 
 for file in applications/*.desktop; do
   cmerge "$file" ~/.local/share/"$file"
