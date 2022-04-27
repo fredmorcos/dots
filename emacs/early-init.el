@@ -197,17 +197,24 @@
  (setq-default hledger-date-face '(:foreground "Gray40" :weight bold)))
 
 (fm/after flycheck
- (fm/face flycheck-error   :underline "Red1")
- (fm/face flycheck-info    :underline "ForestGreen")
- (fm/face flycheck-warning :underline "DarkOrange"))
+ (fm/face flycheck-info :underline "ForestGreen")
+ (if (string-equal (system-name) "neuron")
+  (progn
+   (fm/face flycheck-error   :underline "DarkRed" :background "RosyBrown1")
+   (fm/face flycheck-warning :underline "Peru"    :background "PeachPuff1"))
+  (progn
+   (fm/face flycheck-error   :underline "Red1")
+   (fm/face flycheck-warning :underline "DarkOrange"))))
 
 (fm/after flycheck-posframe
  (fm/face flycheck-posframe-background-face :background "SeaShell")
  (fm/face flycheck-posframe-border-face
   :background "DarkOrange"
   :foreground "DarkOrange")
- (fm/face flycheck-posframe-warning-face    :foreground "DarkOrange")
- (fm/face flycheck-posframe-error-face      :foreground "DarkRed"))
+ (fm/face flycheck-posframe-error-face :foreground "DarkRed")
+ (if (string-equal (system-name) "neuron")
+  (fm/face flycheck-posframe-warning-face :foreground "Peru")
+  (fm/face flycheck-posframe-warning-face :foreground "DarkOrange")))
 
 (fm/after company
  (fm/face company-tooltip :background "gray95"))
