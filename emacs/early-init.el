@@ -79,6 +79,8 @@
 
 ;; Native Compilation.
 (setq-default comp-deferred-compilation t)
+(fm/after comp
+ (setq-default native-comp-async-report-warnings-errors 'silent))
 
 ;; Run the GC after 5 seconds of idleness.
 (run-with-idle-timer 5 t #'garbage-collect)
