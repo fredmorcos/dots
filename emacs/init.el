@@ -152,7 +152,11 @@
 
 (fm/after window
  (setq-default split-height-threshold 160)
- (setq-default even-window-sizes 'width-only))
+ (setq-default even-window-sizes 'width-only)
+ (fm/disable-popup "\\`\\*Compile-Log\\*.*\\'")
+ (fm/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
+ (fm/disable-popup "\\`\\*Async-native-compile-Log\\*.*\\'")
+ (fm/disable-popup "\\`\\*Warnings\\*.*\\'"))
 
 (fm/key "<f12>"       delete-other-windows)
 (fm/key "<M-S-right>" next-buffer)
@@ -457,7 +461,7 @@
   (setq-default projectile-cache-file emacs-projectile-cache-file)
   (setq-default projectile-project-search-path '("~/Workspace"))
   (setq-default projectile-sort-order '(recently-active))
-  (setq-default projectile-enable-caching t)
+  (setq-default projectile-enable-caching nil)
   (setq-default projectile-completion-system 'ivy))
  (projectile-mode))
 

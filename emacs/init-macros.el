@@ -60,6 +60,11 @@
  "Diminish MODE to TEXT or nothing."
  `(fm/dim-helper ',mode ,text))
 
+;; Popup buffers.
+(defmacro fm/disable-popup (regexp)
+ "Stop buffers that match REGEXP from popping up."
+ `(push (cons ,regexp (cons #'display-buffer-no-window nil)) display-buffer-alist))
+
 ;; Faces.
 (defmacro fm/face (face &rest props)
  "Set FACE properties to PROPS."
