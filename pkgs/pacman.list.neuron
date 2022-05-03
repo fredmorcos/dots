@@ -197,6 +197,10 @@ python-pyacoustid
 python-pycryptodomex
 python-pylast
 python-websockets
+qbs
+qt6-examples
+qt6-languageserver
+qtcreator
 ragel
 realtime-privileges
 rhythmbox
@@ -235,5 +239,4 @@ weechat
 xdg-user-dirs-gtk
 xorg-xdpyinfo
 xorg-xwininfo
-yaml-cpp
 yt-dlp
