@@ -8,6 +8,9 @@ im.bernard.Nostalgia
 io.bassi.Amberol
 io.github.seadve.Mousai
 io.posidon.Paper
+org.gnome.design.AppIconPreview
+org.gnome.design.IconLibrary
+org.gnome.design.SymbolicPreview
 org.kde.kcachegrind
 org.kde.massif-visualizer
 us.zoom.Zoom
