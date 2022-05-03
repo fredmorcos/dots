@@ -154,6 +154,7 @@ make
 man-db
 mariadb-libs
 mesa-vdpau
+meson
 minisign
 mkinitcpio-utils
 mobsh-bin
