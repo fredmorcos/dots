@@ -332,6 +332,10 @@ python-rjsmin
 python-ruamel-yaml
 python-typogrify
 python-watchdog
+qbs
+qt6-examples
+qt6-languageserver
+qtcreator
 radeontool
 ragel
 read-edid
