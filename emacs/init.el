@@ -307,6 +307,16 @@
  (setq-default jit-lock-chunk-size 5000)
  (setq-default jit-lock-antiblink-grace 1))
 
+(fm/after gdb-mi
+ (setq-default gdb-many-windows t)
+ (setq-default gdb-use-separate-io-buffer t)
+ (advice-add 'gdb-setup-windows :after
+  (lambda () (set-window-dedicated-p (selected-window) t))))
+
+(fm/after gud
+ (fm/hook gud-mode-hook gud-tooltip-mode)
+ (setq-local gdb-restore-window-configuration-after-quit t))
+
 (fm/pkg toml-mode)
 (fm/pkg markdown-mode)
 (fm/pkg crux)
