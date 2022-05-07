@@ -82,7 +82,6 @@ fd
 fdupes
 file-roller
 firefox
-flatpak
 flex
 fprintd
 gdb
@@ -110,6 +109,7 @@ gpart
 gparted
 gst-libav
 gst-plugin-gtk
+gst-plugin-pipewire
 gtk-engine-murrine
 gtksourceview2
 gucharmap
