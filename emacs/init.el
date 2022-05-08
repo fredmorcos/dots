@@ -324,6 +324,11 @@
 (fm/pkg sed-mode)
 (fm/pkg po-mode)
 
+(fm/pkg cmake-mode)
+(fm/pkg eldoc-cmake
+ (fm/after cmake-mode
+  (fm/hook cmake-mode-hook eldoc-cmake-enable "eldoc-cmake")))
+
 (fm/pkg json-mode
  (fm/hook json-mode-hook indent-guide-mode))
 
