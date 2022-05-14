@@ -25,6 +25,7 @@ bluez-tools
 bluez-utils
 boost
 brightnessctl
+cabal-install
 capitaine-cursors
 cargo-asm
 cargo-audit
