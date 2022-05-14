@@ -97,7 +97,7 @@ done
 cmerge bash/rc                       ~/.bashrc
 cmerge bash/profile                  ~/.bash_profile
 cmerge profile                       ~/.profile
-cmerge inputrc                       ~/.inputrc
+cmerge inputrc                       ~/.config/readline/inputrc
 cmerge vimrc                         ~/.vimrc
 
 cmerge dict/hunspell_en_US           ~/.hunspell_en_US
