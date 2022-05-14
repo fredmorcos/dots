@@ -35,7 +35,7 @@ if [ "$HNAME" == "axon" ]; then
     INT=/run/media/fred/Internal
     EXT=/run/media/fred/External
 
-    if [ -d $INT ]; then
+    if [ -d "$INT" ]; then
         cmd "$HOME/Archive/"                  "$INT/Fred/Archive/"
         cmd "$HOME/Documents/"                "$INT/Fred/Documents/"
         cmd "$HOME/Downloads/"                "$INT/Fred/Downloads/"
@@ -54,7 +54,7 @@ if [ "$HNAME" == "axon" ]; then
         cmd "$HOME/.local/share/hamster/"     "$INT/Desktop/Configs/local-share-hamster/"
         cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
 
-        if [ -d $EXT ]; then
+        if [ -d "$EXT" ]; then
             cmd "$INT/Desktop/"   "$EXT/Desktop/"
             cmd "$INT/Fred/"      "$EXT/Fred/"
             cmd "$INT/FredOther/" "$EXT/FredOther/"
@@ -64,13 +64,12 @@ if [ "$HNAME" == "axon" ]; then
         fi
     else
         printf ">>> %s is not mounted\n" "$INT"
-        exit 1
     fi
 elif [ "$HNAME" == "neuron" ]; then
     HOME=/home/fred
     LAPTOP=/run/media/fred/External/Laptop
 
-    if [ -d $LAPTOP ]; then
+    if [ -d "$LAPTOP" ]; then
         cmd "$HOME/Documents/"                "$LAPTOP/Documents/"
         cmd "$HOME/Downloads/"                "$LAPTOP/Downloads/"
         cmd "$HOME/Phone/"                    "$LAPTOP/Phone/"
@@ -84,9 +83,32 @@ elif [ "$HNAME" == "neuron" ]; then
         cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
     else
         printf ">>> %s is not mounted\n" "$LAPTOP"
-        exit 1
+    fi
+
+    OX_EXT=/run/media/fred/OX-External/Laptop
+
+    if [ -d "$OX_EXT" ]; then
+        cmd "$HOME/Archive/"                  "$OX_EXT/Archive/"
+        cmd "$HOME/Documents/"                "$OX_EXT/Documents/"
+        cmd "$HOME/Downloads/"                "$OX_EXT/Downloads/"
+        cmd "$HOME/Music/"                    "$OX_EXT/Music/"
+        cmd "$HOME/Music.New/"                "$OX_EXT/Music.New/"
+        cmd "$HOME/Phone/"                    "$OX_EXT/Phone/"
+        cmd "$HOME/Workspace/"                "$OX_EXT/Workspace/"
+        cmd "$HOME/.cache/"                   "$OX_EXT/.cache/"
+        cmd "$HOME/.config/"                  "$OX_EXT/.config/"
+        cmd "$HOME/.designer/"                "$OX_EXT/.designer/"
+        cmd "$HOME/.local/"                   "$OX_EXT/.local/"
+        cmd "$HOME/.mozilla/"                 "$OX_EXT/.mozilla/"
+        cmd "$HOME/.pki/"                     "$OX_EXT/.pki/"
+        cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
+        cmd "$HOME/.var/"                     "$OX_EXT/.var/"
+        cmd "$HOME/.zoom/"                    "$OX_EXT/.zoom/"
+        cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
+        cmd "$HOME/.bash_history"             "$OX_EXT/.bash_history"
+    else
+        printf ">>> %s is not mounted\n" "$OX_EXT"
     fi
 else
     printf ">>> Unknown machine with hostname = %s\n" "$HNAME"
-    exit 1
 fi
