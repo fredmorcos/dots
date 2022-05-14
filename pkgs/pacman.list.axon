@@ -30,6 +30,7 @@ bonnie++
 boost
 bottom
 btrfs-heatmap
+cabal-install
 cabextract
 capitaine-cursors
 cargo-asm
@@ -121,6 +122,7 @@ gimp
 git-lfs
 gitui
 glfw-x11
+glow
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
