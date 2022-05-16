@@ -76,7 +76,6 @@ dateutils
 dbus-broker
 dconf-editor
 ddcutil
-debuginfod
 d-feet
 dhclient
 dhcpcd
