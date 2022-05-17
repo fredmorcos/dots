@@ -426,6 +426,7 @@ whois
 wireguard-tools
 wireshark-qt
 wmctrl
+wtf
 xclip
 xdg-user-dirs-gtk
 xdot
@@ -473,3 +474,4 @@ yt-dlp
 z
 z3
 zola
+zoxide
