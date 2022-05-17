@@ -60,7 +60,6 @@ cmake
 cuda
 dbus-broker
 dconf-editor
-debuginfod
 devtools
 d-feet
 diffpdf
