@@ -155,7 +155,7 @@
  (setq-default even-window-sizes 'width-only)
  (fm/disable-popup "\\`\\*Compile-Log\\*.*\\'")
  (fm/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
- (fm/disable-popup "\\`\\*Async-native-compile-Log\\*.*\\'")
+ (fm/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
  (fm/disable-popup "\\`\\*Warnings\\*.*\\'"))
 
 (fm/key "<f12>"       delete-other-windows)
