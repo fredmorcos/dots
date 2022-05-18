@@ -85,6 +85,9 @@
 (global-goto-address-mode)
 
 (fm/after emacs
+ ;; Replace dabbrev-expand with hippie-expand
+ (global-set-key [remap dabbrev-expand] 'hippie-expand)
+
  ;; Avoid graphical dialog boxes.
  (setq-default use-dialog-box nil)
 
