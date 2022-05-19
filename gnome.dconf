@@ -81,6 +81,10 @@ show-weekdate=true
 enabled-extensions=['unite@hardpixel.eu']
 favorite-apps=['rhythmbox.desktop', 'de.haeckerfelix.Shortwave.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Hamster.GUI.desktop']
 
+# Window switcher
+[org/gnome/shell/window-switcher]
+app-icon-mode='app-icon-only'
+
 # Window-related Functions
 [org/gnome/desktop/wm/preferences]
 titlebar-font='Sans 11'
