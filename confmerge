@@ -112,7 +112,9 @@ cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
 cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
 cmerge htoprc                        ~/.config/htop/htoprc
 cmerge yt-dlp.conf                   ~/.config/yt-dlp/config
-cmerge mpv-input.conf                ~/.config/mpv/input.conf
+
+cmerge mpv/input.conf                ~/.config/mpv/input.conf
+cmerge mpv/mpv.conf                  ~/.config/mpv/mpv.conf
 
 cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
