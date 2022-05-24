@@ -228,7 +228,7 @@ lzop
 make
 man-db
 man-pages
-mariadb
+mariadb-libs
 mediainfo
 mesa-demos
 mesa-utils
