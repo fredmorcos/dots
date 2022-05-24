@@ -333,7 +333,8 @@
   (fm/hook cmake-mode-hook eldoc-cmake-enable "eldoc-cmake")))
 
 (fm/pkg json-mode
- (fm/hook json-mode-hook indent-guide-mode))
+ (fm/hook json-mode-hook indent-guide-mode)
+ (fm/hook json-mode-hook tree-sitter-mode))
 
 (fm/pkg systemd
  (fm/hook systemd-mode-hook company-mode))
