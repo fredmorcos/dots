@@ -188,6 +188,7 @@ postgresql-libs
 power-profiles-daemon
 powertop
 protonvpn-cli
+protonvpn-gui
 psutils
 pwgen
 python-beautifulsoup4
