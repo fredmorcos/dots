@@ -139,7 +139,6 @@ gnome-tweaks
 gpart
 gparted
 gst-libav
-gstreamer-vaapi
 gtk-engine-murrine
 gtk-engines
 gtkmm
@@ -184,6 +183,7 @@ kexec-tools
 keychain
 kgraphviewer
 knot
+kooha
 ladspa
 ledger
 lesspipe
