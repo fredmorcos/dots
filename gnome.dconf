@@ -57,7 +57,7 @@ region='en_GB.UTF-8'
 
 # Workspaces
 [org/gnome/mutter]
-dynamic-workspaces=true
+dynamic-workspaces=false
 center-new-windows=true
 
 # Shell
@@ -85,10 +85,11 @@ favorite-apps=['rhythmbox.desktop', 'de.haeckerfelix.Shortwave.desktop', 'org.gn
 [org/gnome/shell/window-switcher]
 app-icon-mode='app-icon-only'
 
-# Window-related Functions
+# Window and workspace related
 [org/gnome/desktop/wm/preferences]
 titlebar-font='Sans 11'
 resize-with-right-button=true
+num-workspaces=8
 
 # Sound
 [org/gnome/desktop/sound]
