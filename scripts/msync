@@ -49,8 +49,8 @@ rdiff $HOME/.ssh/authorized_keys
 rdiff $HOME/.ssh/known_hosts
 rdiff $HOME/.config/yt-dlp/archive
 
-cmd $HOME/.gnupg/
 cmd $HOME/.ssh/
 cmd $HOME/.config/yt-dlp/
+cmd $HOME/.local/share/gnupg/
 cmd $HOME/.local/share/keyrings/
 cmd $HOME/.local/share/hamster/
