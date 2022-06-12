@@ -256,6 +256,7 @@ noto-fonts-extra
 ntfs-3g
 nuspell
 nvme-cli
+obs-studio
 odt2txt
 openbsd-netcat
 opencl-mesa
@@ -378,6 +379,7 @@ shake
 shellcheck
 shfmt
 signal-desktop
+simplescreenrecorder
 skim
 slimit
 sloccount
