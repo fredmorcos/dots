@@ -81,6 +81,7 @@ dhclient
 dhcpcd
 dhex
 diffpdf
+diffstat
 dmidecode
 docker
 docker-compose
@@ -333,6 +334,7 @@ python-pycryptodome
 python-pycurl
 python-pyenchant
 python-pygal
+python-pygithub
 python-pyinotify
 python-pylast
 python-pyphen
@@ -345,15 +347,17 @@ python-rjsmin
 python-ruamel-yaml
 python-tabulate
 python-typogrify
-python-vobject
+python-unidiff
 python-watchdog
 python-wcwidth
 python-xlrd
 python-zopfli
 qbs
+qreator
 qt6-examples
 qt6-languageserver
 qtcreator
+qtqr
 radeontool
 ragel
 read-edid
