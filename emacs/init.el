@@ -343,7 +343,6 @@
  (setq-default org-bullets-bullet-list '(" ")))
 
 (fm/after org
- (setq-default org-cycle-separator-lines 0)
  (setq-default org-startup-folded 'content)
  (setq-default org-ellipsis "…")
  (setq-default org-hide-leading-stars t)
