@@ -50,7 +50,6 @@ cargo-supply-chain
 cargo-tarpaulin
 cargo-udeps
 cargo-watch
-catatonit
 catimg
 cbindgen
 ccache
