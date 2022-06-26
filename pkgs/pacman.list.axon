@@ -3,6 +3,7 @@ acpid
 alsa-firmware
 amd-ucode
 amdvlk
+android-sdk-platform-tools
 antiword
 arch-audit
 aria2
@@ -10,6 +11,7 @@ arp-scan
 asp
 aspell-en
 atomicparsley
+audacious
 audiofile
 autoconf
 automake
@@ -56,7 +58,6 @@ cargo-supply-chain
 cargo-tarpaulin
 cargo-udeps
 cargo-watch
-catatonit
 catdoc
 cbindgen
 ccache
@@ -209,7 +210,6 @@ libofa
 libopenraw
 libpipewire02
 libreoffice-impress-templates
-libsidplayfp
 liburing
 libva-mesa-driver
 libva-utils
