@@ -194,10 +194,12 @@ protonvpn-gui
 psutils
 pwgen
 python-beautifulsoup4
+python-colorama
 python-cssselect
 python-genshi
 python-html5lib
 python-keyrings-alt
+python-lsp-black
 python-olefile
 python-pyacoustid
 python-pycryptodomex
