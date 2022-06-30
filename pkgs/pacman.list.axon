@@ -306,7 +306,6 @@ python-beautifulsoup4
 python-brotli
 python-cssselect
 python-defusedxml
-python-docutils
 python-dulwich
 python-ecdsa
 python-fastimport
@@ -318,6 +317,7 @@ python-hsluv
 python-husl
 python-invoke
 python-keyrings-alt
+python-lsp-black
 python-lz4
 python-mdx-video
 python-micawber
