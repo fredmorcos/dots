@@ -16,6 +16,7 @@ audiofile
 autoconf
 automake
 avisynthplus
+bandit
 bandwhich
 base
 bash-completion
@@ -309,6 +310,10 @@ python-defusedxml
 python-dulwich
 python-ecdsa
 python-fastimport
+python-flake8-black
+python-flake8-docstrings
+python-flake8-isort
+python-flake8-typing-imports
 python-fonttools
 python-fs
 python-ghp-import
@@ -321,6 +326,7 @@ python-lsp-black
 python-lz4
 python-mdx-video
 python-micawber
+python-objgraph
 python-openpyxl
 python-paramiko
 python-pdfminer
@@ -341,6 +347,9 @@ python-pyphen
 python-pypng
 python-pyserial
 python-pystemmer
+python-pytest-flake8
+python-pytest-mypy
+python-pytest-pylint
 python-rcssmin
 python-reportlab
 python-rjsmin
