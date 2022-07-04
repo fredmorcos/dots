@@ -223,6 +223,7 @@ linux-headers
 linux-tools-meta
 lld
 lldb
+loupe-git
 lrzip
 lsof
 ltrace
