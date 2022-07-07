@@ -15,6 +15,7 @@ audacious
 audiofile
 autoconf
 automake
+autopep8
 avisynthplus
 bandit
 bandwhich
@@ -321,6 +322,7 @@ python-h2
 python-hsluv
 python-husl
 python-invoke
+python-ipdb
 python-keyrings-alt
 python-lsp-black
 python-lz4
@@ -340,6 +342,7 @@ python-pycryptodome
 python-pycurl
 python-pyenchant
 python-pygal
+python-pygit2
 python-pygithub
 python-pyinotify
 python-pylast
@@ -347,6 +350,7 @@ python-pyphen
 python-pypng
 python-pyserial
 python-pystemmer
+python-pytest-black
 python-pytest-flake8
 python-pytest-mypy
 python-pytest-pylint
@@ -358,7 +362,6 @@ python-tabulate
 python-typogrify
 python-unidiff
 python-watchdog
-python-wcwidth
 python-xlrd
 python-zopfli
 qbs
@@ -501,6 +504,7 @@ xorg-xwud
 xsel
 xss-lock
 yamllint
+yapf
 you-get
 youtube-dl
 yt-dlp
