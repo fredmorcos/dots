@@ -52,7 +52,6 @@ if [ "$HNAME" == "axon" ]; then
         cmd "$HOME/.config/yt-dlp/"           "$INT/Desktop/Configs/config-yt-dlp/"
         cmd "$HOME/.config/weechat/"          "$INT/Desktop/Configs/config-weechat/"
         cmd "$HOME/.local/share/gnupg/"       "$INT/Desktop/Configs/local-share-gnupg/"
-        cmd "$HOME/.local/share/hamster/"     "$INT/Desktop/Configs/local-share-hamster/"
         cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
 
         if [ -d "$EXT" ]; then
@@ -80,7 +79,6 @@ elif [ "$HNAME" == "neuron" ]; then
         cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
         cmd "$HOME/.config/weechat/"          "$LAPTOP/Configs/config-weechat/"
         cmd "$HOME/.local/share/gnupg/"       "$LAPTOP/Configs/local-share-gnupg/"
-        cmd "$HOME/.local/share/hamster/"     "$LAPTOP/Configs/local-share-hamster/"
         cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
     else
         printf ">>> %s is not mounted\n" "$LAPTOP"
