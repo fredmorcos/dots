@@ -84,7 +84,6 @@ firefox
 flatpak
 flex
 fprintd
-gdb
 gdm
 ghex
 gifski
@@ -217,6 +216,7 @@ rust-analyzer
 rustc-demangle
 seahorse
 seahorse-nautilus
+seer-gdb-git
 shellcheck
 signal-desktop
 simplescreenrecorder
