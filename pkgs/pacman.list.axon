@@ -392,6 +392,7 @@ scrot
 sd
 seahorse
 seahorse-nautilus
+seer-gdb-git
 shake
 shellcheck
 shfmt
