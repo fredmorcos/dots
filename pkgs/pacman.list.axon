@@ -34,7 +34,6 @@ bonnie++
 boost
 bottom
 btrfs-heatmap
-cabal-install
 cabextract
 capitaine-cursors
 cargo-asm
@@ -448,6 +447,7 @@ vde2
 vdpauinfo
 vi
 vim-spell-en
+virt-viewer
 visidata
 vkd3d
 vulkan-extra-layers
