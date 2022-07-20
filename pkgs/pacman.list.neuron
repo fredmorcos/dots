@@ -243,6 +243,8 @@ unrar
 usbguard
 valgrind
 vim
+virtualbox-ext-oracle
+virtualbox-guest-iso
 webp-pixbuf-loader
 weechat
 xdg-user-dirs-gtk
