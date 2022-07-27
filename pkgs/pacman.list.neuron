@@ -203,7 +203,6 @@ python-olefile
 python-pyacoustid
 python-pycryptodomex
 python-pylast
-python-websockets
 qbs
 qt6-examples
 qt6-languageserver
