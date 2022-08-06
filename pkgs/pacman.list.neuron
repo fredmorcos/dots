@@ -62,6 +62,8 @@ dbus-broker
 dconf-editor
 devtools
 d-feet
+dhclient
+dhcpcd
 diffpdf
 dmidecode
 docker
@@ -71,7 +73,6 @@ doxygen
 drawing
 easy-rsa
 ed
-ell
 emacs-nativecomp
 eog-plugins
 ethtool
@@ -131,6 +132,7 @@ intltool
 iotop
 iptraf-ng
 ispell
+iwd
 jfsutils
 jp2a
 kcachegrind
@@ -169,6 +171,7 @@ nuspell
 nvidia-settings
 obs-studio
 ocl-icd
+openresolv
 otf-fira-mono
 otf-fira-sans
 p7zip
