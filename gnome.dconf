@@ -177,3 +177,11 @@ reduce-panel-spacing=false
 app-menu-max-width=100
 app-menu-ellipsize-mode='end'
 window-buttons-theme='auto'
+
+# Just Perfection Extension
+[/org/gnome/shell/extensions/just-perfection]
+activities-button=false
+startup-status=0
+animation=3
+dash-icon-size=0
+alt-tab-icon-size=128
