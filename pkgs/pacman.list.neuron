@@ -83,7 +83,6 @@ fd
 fdupes
 file-roller
 firefox
-flatpak
 flex
 fprintd
 gdm
@@ -154,6 +153,7 @@ lrzip
 lsof
 lzop
 make
+malcontent
 man-db
 mariadb-libs
 mesa-vdpau
@@ -199,6 +199,7 @@ pwgen
 python-beautifulsoup4
 python-colorama
 python-cssselect
+python-email-validator
 python-genshi
 python-html5lib
 python-keyrings-alt
