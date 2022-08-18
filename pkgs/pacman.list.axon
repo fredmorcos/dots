@@ -311,6 +311,7 @@ python-beautifulsoup4
 python-brotli
 python-cssselect
 python-defusedxml
+python-discogs-client
 python-dulwich
 python-ecdsa
 python-fastimport
@@ -359,6 +360,7 @@ python-pytest-mypy
 python-pytest-pylint
 python-rcssmin
 python-reportlab
+python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
 python-tabulate
