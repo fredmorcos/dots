@@ -57,6 +57,7 @@ ccache
 chafa
 cheese
 cmake
+cpupower
 cuda
 dbus-broker
 dconf-editor
@@ -148,6 +149,7 @@ libvoikko
 libzip
 light
 linux-firmware
+linux-headers
 lldb
 lrzip
 lsof
@@ -253,5 +255,6 @@ webp-pixbuf-loader
 weechat
 xdg-user-dirs-gtk
 xorg-xdpyinfo
+xorg-xkill
 xorg-xwininfo
 yt-dlp
