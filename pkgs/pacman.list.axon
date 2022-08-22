@@ -227,6 +227,7 @@ linux-tools-meta
 lld
 lldb
 lrzip
+lshw
 lsof
 ltrace
 luit
