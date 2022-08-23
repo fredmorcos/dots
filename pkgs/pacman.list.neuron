@@ -68,9 +68,6 @@ dhclient
 dhcpcd
 diffpdf
 dmidecode
-docker
-docker-compose
-docker-scan
 doxygen
 drawing
 easy-rsa
@@ -167,6 +164,7 @@ mpv
 mtools
 ncdu
 neofetch
+netavark
 noto-fonts-extra
 ntfs-3g
 nuspell
@@ -191,7 +189,6 @@ picard
 pigz
 pipewire-v4l2
 pkgconf
-podman-compose
 postgresql-libs
 power-profiles-daemon
 powertop
