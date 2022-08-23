@@ -30,10 +30,10 @@ binaryen
 bind
 bison
 blanket
-blender
 bonnie++
 boost
 bottom
+bridge-utils
 btrfs-heatmap
 cabextract
 capitaine-cursors
@@ -74,6 +74,7 @@ cmake
 codespell
 compsize
 conntrack-tools
+cpio
 curlftpfs
 dateutils
 dbus-broker
@@ -86,7 +87,7 @@ dhex
 diffpdf
 diffstat
 dmidecode
-docker
+dnsmasq
 docker-compose
 docker-scan
 doxygen
@@ -113,7 +114,7 @@ fdupes
 fig2dev
 file-roller
 firefox
-flatpak-builder
+flatpak
 flex
 fzf
 gamemode
@@ -254,9 +255,11 @@ mutt
 mythes-en
 ncdu
 neofetch
+netavark
 net-snmp
 net-tools
 network-manager-applet
+nftables
 nilfs-utils
 nmap
 noto-fonts-extra
@@ -279,6 +282,7 @@ pacman-contrib
 papirus-icon-theme
 par2cmdline
 paru-bin
+patch
 patchelf
 pdfarranger
 pdfcrack
@@ -293,7 +297,6 @@ pipewire-v4l2
 pipewire-zeroconf
 pixz
 pkgconf
-podman-compose
 postgresql
 powertop
 procs
@@ -386,6 +389,7 @@ rhythmbox
 rink
 ripgrep
 rmlint
+rpm-tools
 rsync
 rtaudio
 rust-analyzer
@@ -462,7 +466,6 @@ vulkan-extra-layers
 vulkan-radeon
 vulkan-tools
 wabt
-wasmer
 wayland-utils
 webp-pixbuf-loader
 weechat
