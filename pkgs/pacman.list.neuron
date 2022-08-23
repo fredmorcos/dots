@@ -54,6 +54,7 @@ cargo-watch
 catimg
 cbindgen
 ccache
+cdrtools
 chafa
 cheese
 cmake
@@ -139,7 +140,6 @@ kcachegrind
 libdecaf
 libdmapsharing
 libdvdcss
-libjxl
 libmythes
 libopenraw
 libreoffice-fresh
@@ -173,6 +173,7 @@ nuspell
 nvidia-settings
 obs-studio
 ocl-icd
+openbsd-netcat
 openresolv
 otf-fira-mono
 otf-fira-sans
@@ -211,9 +212,12 @@ python-pyacoustid
 python-pycryptodomex
 python-pylast
 qbs
+qemu-desktop
+qemu-user
 qt6-examples
 qt6-languageserver
 qtcreator
+radvd
 ragel
 realtime-privileges
 rhythmbox
@@ -249,6 +253,7 @@ unrar
 usbguard
 valgrind
 vim
+virt-manager
 virtualbox-ext-oracle
 virtualbox-guest-iso
 webp-pixbuf-loader
