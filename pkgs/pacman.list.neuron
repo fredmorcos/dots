@@ -137,6 +137,7 @@ kcachegrind
 libdecaf
 libdmapsharing
 libdvdcss
+libjxl
 libmythes
 libopenraw
 libreoffice-fresh
@@ -209,8 +210,6 @@ python-pyacoustid
 python-pycryptodomex
 python-pylast
 qbs
-qemu-desktop
-qemu-user
 qt6-examples
 qt6-languageserver
 qtcreator
@@ -250,7 +249,6 @@ unrar
 usbguard
 valgrind
 vim
-virt-manager
 virtualbox-ext-oracle
 virtualbox-guest-iso
 webp-pixbuf-loader
