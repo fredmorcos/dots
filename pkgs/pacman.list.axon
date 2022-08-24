@@ -74,6 +74,7 @@ cmake
 codespell
 compsize
 conntrack-tools
+cpio
 curlftpfs
 dateutils
 dbus-broker
@@ -95,6 +96,7 @@ duperemove
 easy-rsa
 ebook-tools
 ecm-tools
+edk2-ovmf
 efibootmgr
 elementary-wallpapers
 emacs-nativecomp
@@ -205,13 +207,16 @@ libebur128
 libfido2
 libgepub
 libgphoto2
+libjxl
 libmad
 libmp4v2
 libmythes
+libnfs
 libofa
 libopenraw
 libpipewire02
 libreoffice-impress-templates
+liburing
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
@@ -369,8 +374,6 @@ python-watchdog
 python-xlrd
 python-zopfli
 qbs
-qemu-desktop
-qemu-user
 qreator
 qt6-examples
 qt6-languageserver
@@ -452,10 +455,10 @@ upx
 usbguard
 uutils-coreutils
 valgrind
+vde2
 vdpauinfo
 vi
 vim-spell-en
-virt-manager
 virtualbox-ext-oracle
 virtualbox-guest-iso
 visidata
