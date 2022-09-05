@@ -27,26 +27,26 @@ printf ">>> Hostname = %s\n\n\n" "$HNAME"
 
 TARGET=""
 if [ "$HNAME" == "axon" ]; then
-    TARGET="neuron"
+  TARGET="neuron"
 elif [ "$HNAME" == "neuron" ]; then
-    TARGET="axon"
+  TARGET="axon"
 else
-    printf ">>> Unknown machine with hostname = %s\n" "$HNAME"
-    exit 1
+  printf ">>> Unknown machine with hostname = %s\n" "$HNAME"
+  exit 1
 fi
 
 cmd () {
-    TARGET_OBJ="$TARGET:/$1"
-    printf ">>> %s --> %s\n" "$1" "$TARGET_OBJ"
-    "${CMD[@]}" "$1" "$TARGET_OBJ"
-    printf "\n\n"
+  TARGET_OBJ="$TARGET:/$1"
+  printf ">>> %s --> %s\n" "$1" "$TARGET_OBJ"
+  "${CMD[@]}" "$1" "$TARGET_OBJ"
+  printf "\n\n"
 }
 
 rdiff () {
-    TARGET_FILE="scp://$TARGET/$1"
-    printf ">>> %s vs. %s" "$1" "$TARGET_FILE"
-    vim -d "$1" "$TARGET_FILE"
-    printf "\n\n"
+  TARGET_FILE="scp://$TARGET/$1"
+  printf ">>> %s vs. %s" "$1" "$TARGET_FILE"
+  vim -d "$1" "$TARGET_FILE"
+  printf "\n\n"
 }
 
 HOME=/home/fred
