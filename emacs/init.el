@@ -279,6 +279,8 @@
  (fm/hook text-mode-hook flyspell-mode))
 
 (fm/after sh-script
+ (setq-default sh-basic-offset 2)
+ (setq-default sh-indentation 2)
  (fm/hookn sh-mode-hook
   (fm/hook after-save-hook executable-make-buffer-file-executable-if-script-p)))
 
