@@ -158,6 +158,7 @@ lzop
 make
 malcontent
 man-db
+man-pages
 mariadb-libs
 mesa-vdpau
 meson
