@@ -266,6 +266,7 @@ nilfs-utils
 nmap
 noto-fonts-extra
 ntfs-3g
+nushell
 nuspell
 nvme-cli
 obs-studio
@@ -420,6 +421,7 @@ soundconverter
 sox
 squashfs-tools
 sshfs
+starship
 strace
 s-tui
 subdl
