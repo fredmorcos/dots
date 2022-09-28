@@ -749,19 +749,24 @@
  (fm/after lsp-mode
   (fm/key-local "C-c x" lsp-ivy-workspace-symbol lsp-mode-map)))
 
+(fm/pkg treemacs
+ (fm/key "<f9>" treemacs-select-window)
+ (fm/after treemacs-customization
+  (setq-default treemacs-width 40)
+  (setq-default treemacs-indentation 1))
+ (fm/after treemacs-interface
+  (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
+ (fm/hook treemacs-mode-hook treemacs-git-commit-diff-mode)
+ (fm/hook treemacs-mode-hook treemacs-follow-mode "treemacs-follow-mode")
+ (fm/hook treemacs-mode-hook treemacs-tag-follow-mode))
+
 (fm/pkg lsp-treemacs
  (fm/after lsp-mode
   (fm/key-local "C-c e" lsp-treemacs-errors-list    lsp-mode-map)
   (fm/key-local "C-c s" lsp-treemacs-symbols        lsp-mode-map)
   (fm/key-local "C-c c" lsp-treemacs-call-hierarchy lsp-mode-map)
   (fm/key-local "C-c t" lsp-treemacs-type-hierarchy lsp-mode-map)
-  (fm/hook lsp-mode-hook lsp-treemacs-sync-mode))
- (fm/after treemacs-interface
-  (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
- (fm/after treemacs-customization
-  (setq-default treemacs-width 70))
- (fm/after treemacs-mode
-  (fm/hook treemacs-mode-hook toggle-truncate-lines)))
+  (fm/hook lsp-mode-hook lsp-treemacs-sync-mode)))
 
 (fm/pkg lsp-ui
  (fm/after lsp-ui-flycheck
