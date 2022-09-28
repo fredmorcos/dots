@@ -13,6 +13,8 @@ CMD=("rsync"
      "--executability"
      "--delete"
      "--delete-excluded"
+     "--exclude=*/cargo-target"
+     "--exclude=*/rustup"
      "--exclude=*/target"
      "--exclude=*/__pycache__"
      '--exclude=emacs/elpa/*'
