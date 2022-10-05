@@ -8,6 +8,18 @@ XDG_STATE_HOME="$HOME/.local/state"
 XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME XDG_CONFIG_HOME XDG_STATE_HOME XDG_CACHE_HOME
 
+# Bash
+HISTFILE="$XDG_STATE_HOME/bash_history"
+export HISTFILE
+
+# GnuPG
+GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export GNUPGHOME
+
+# Less
+LESSHISTFILE="$XDG_STATE_HOME/less_history"
+export LESSHISTFILE
+
 # Applications
 MPV_HOME="$HOME/.config/mpv"
 export MPV_HOME
