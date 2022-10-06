@@ -133,9 +133,10 @@ glow
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
+gnome-calendar
 gnome-characters
 gnome-clocks
-gnome-control-center
+gnome-contacts
 gnome-dictionary
 gnome-firmware
 gnome-icon-theme-extras
@@ -147,6 +148,7 @@ gnome-shell-extension-unite-git
 gnome-sound-recorder
 gnome-terminal
 gnome-tweaks
+gnome-weather
 gpart
 gparted
 gst-libav
