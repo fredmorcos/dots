@@ -104,6 +104,7 @@ elementary-wallpapers
 emacs-nativecomp
 entr
 eog-plugins
+epiphany
 ethtool
 evince
 exa
@@ -218,7 +219,6 @@ libnfs
 libofa
 libopenraw
 libpipewire02
-libreoffice-impress-templates
 liburing
 libva-mesa-driver
 libva-utils
