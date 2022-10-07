@@ -41,6 +41,7 @@ cabextract
 capitaine-cursors
 cargo-asm
 cargo-audit
+cargo-binstall
 cargo-bloat
 cargo-c
 cargo-crev
