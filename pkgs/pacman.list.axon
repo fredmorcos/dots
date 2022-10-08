@@ -3,11 +3,9 @@ acpid
 alsa-firmware
 amd-ucode
 amdvlk
-android-sdk-platform-tools
+android-tools
 antiword
-arch-audit
 aria2
-arp-scan
 asp
 aspell-en
 atomicparsley
@@ -27,16 +25,13 @@ bat
 bear
 bearssl
 beets
-binaryen
 bind
 bison
 blanket
 blender
-bonnie++
 boost
 bottom
 bridge-utils
-btrfs-heatmap
 cabextract
 capitaine-cursors
 cargo-asm
@@ -64,6 +59,7 @@ cargo-tarpaulin
 cargo-udeps
 cargo-watch
 catdoc
+catimg
 cbindgen
 ccache
 cclive
