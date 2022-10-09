@@ -14,7 +14,7 @@ automake
 autopep8
 avisynthplus
 bandit
-bandwich
+bandwhich
 baobab
 base
 bash-completion
@@ -96,6 +96,7 @@ flex
 fprintd
 fstrm
 gdm
+geoipupdate
 ghex
 gifski
 gimp
@@ -151,7 +152,6 @@ kcachegrind
 libdecaf
 libdmapsharing
 libdvdcss
-libjxl
 libmythes
 libopenraw
 libreoffice-fresh
@@ -264,6 +264,7 @@ unixodbc
 unrar
 usbguard
 valgrind
+vice
 vim
 virtualbox-ext-oracle
 virtualbox-guest-iso
