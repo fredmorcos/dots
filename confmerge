@@ -143,7 +143,6 @@ cmerge limits.conf                   /etc/security/limits.conf
 cmerge sysctl/sysctl.conf            /etc/sysctl.d/sysctl.conf
 
 cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
-cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
 cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
 
 cmerge x11/gdm-custom.conf           /etc/gdm/custom.conf
