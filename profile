@@ -14,7 +14,8 @@ export HISTFILE
 
 # GnuPG
 GNUPGHOME="$XDG_DATA_HOME/gnupg"
-export GNUPGHOME
+GPG_TTY="$(tty)"
+export GNUPGHOME GPG_TTY
 
 # Screen
 SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
