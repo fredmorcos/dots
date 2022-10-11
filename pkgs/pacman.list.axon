@@ -326,7 +326,6 @@ python-fastimport
 python-flake8-black
 python-flake8-docstrings
 python-flake8-isort
-python-flake8-typing-imports
 python-fonttools
 python-fs
 python-ghp-import
