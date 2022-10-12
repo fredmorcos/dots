@@ -62,4 +62,4 @@ cmd $HOME/.config/yt-dlp/
 cmd $HOME/.local/share/gnupg/
 cmd $HOME/.local/share/keyrings/
 cmd $HOME/Workspace/
-cmd $HOME/VM/
+# cmd $HOME/VM/
