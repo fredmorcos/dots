@@ -101,12 +101,10 @@ elif [ "$HNAME" == "neuron" ]; then
     cmd "$HOME/.designer/"                "$OX_EXT/.designer/"
     cmd "$HOME/.local/"                   "$OX_EXT/.local/"
     cmd "$HOME/.mozilla/"                 "$OX_EXT/.mozilla/"
-    cmd "$HOME/.pki/"                     "$OX_EXT/.pki/"
     cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
     cmd "$HOME/.var/"                     "$OX_EXT/.var/"
     cmd "$HOME/.zoom/"                    "$OX_EXT/.zoom/"
     cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
-    cmd "$HOME/.bash_history"             "$OX_EXT/.bash_history"
   else
     printf ">>> %s is not mounted\n" "$OX_EXT"
   fi
