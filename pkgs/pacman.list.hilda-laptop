@@ -179,6 +179,7 @@ python-libevdev
 python-pycryptodome
 python-pyudev
 realtime-privileges
+reflector
 rink
 ripgrep
 rsync
