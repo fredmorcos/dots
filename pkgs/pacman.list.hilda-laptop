@@ -71,6 +71,7 @@ gdb
 gdm
 gedit-plugins
 ghex
+gimp
 glow
 gnome-backgrounds
 gnome-calculator
@@ -120,12 +121,10 @@ libjxl
 libmythes
 libopenraw
 libproxy-webkit
-libraw
 libva-intel-driver
 libva-mesa-driver
 libva-vdpau-driver
 libvoikko
-libwmf
 libzip
 linux-firmware
 linux-headers
@@ -165,7 +164,6 @@ pdfarranger
 pigz
 pipewire-v4l2
 pkgconf
-poppler-data
 power-profiles-daemon
 powertop
 profile-cleaner
