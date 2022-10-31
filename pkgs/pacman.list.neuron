@@ -124,6 +124,7 @@ gpart
 gparted
 gst-libav
 gst-plugin-gtk
+gst-plugin-libcamera
 gst-plugin-pipewire
 gtk-engine-murrine
 gtksourceview2
@@ -149,6 +150,7 @@ iwd
 jfsutils
 jp2a
 kcachegrind
+libcamera-tools
 libdecaf
 libdmapsharing
 libdvdcss
