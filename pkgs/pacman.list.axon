@@ -150,6 +150,9 @@ gnome-weather
 gpart
 gparted
 gst-libav
+gst-plugin-gtk
+gst-plugin-libcamera
+gst-plugin-va
 gtk-engine-murrine
 gtk-engines
 gtkmm
