@@ -154,6 +154,7 @@ libcamera-tools
 libdecaf
 libdmapsharing
 libdvdcss
+libgnome-keyring
 libmythes
 libopenraw
 libreoffice-fresh
@@ -180,6 +181,7 @@ mkinitcpio-utils
 mobsh-bin
 mpv
 mtools
+nautilus
 ncdu
 neofetch
 netavark
@@ -270,7 +272,6 @@ vice
 vim
 virtualbox-ext-oracle
 virtualbox-guest-iso
-webp-pixbuf-loader
 weechat
 xdg-user-dirs-gtk
 xorg-xdpyinfo
