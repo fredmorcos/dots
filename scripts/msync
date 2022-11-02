@@ -32,6 +32,8 @@ if [ "$HNAME" == "axon" ]; then
   TARGET="neuron"
 elif [ "$HNAME" == "neuron" ]; then
   TARGET="axon"
+elif [ "$HNAME" == "hilda-laptop" ]; then
+  TARGET="axon"
 else
   printf ">>> Unknown machine with hostname = %s\n" "$HNAME"
   exit 1
