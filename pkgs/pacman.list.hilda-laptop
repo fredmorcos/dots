@@ -75,13 +75,12 @@ glow
 gnome-backgrounds
 gnome-calculator
 gnome-characters
-gnome-clocks
+gnome-console
 gnome-control-center
 gnome-dictionary
 gnome-firmware
 gnome-font-viewer
 gnome-icon-theme-extras
-gnome-info-collect
 gnome-logs
 gnome-screenshot
 gnome-shell-extension-just-perfection-desktop
@@ -93,6 +92,7 @@ gpart
 gparted
 gst-libav
 gst-plugin-gtk
+gst-plugin-libcamera
 gstreamer-vaapi
 gucharmap
 gvfs-mtp
@@ -115,6 +115,7 @@ ispell
 iwd
 jq
 kcachegrind
+libcamera-tools
 libdvdcss
 libjxl
 libmythes
@@ -143,6 +144,7 @@ mobsh-bin
 mpv
 mtools
 mythes-en
+nautilus
 ncdu
 neofetch
 noto-fonts-extra
@@ -207,7 +209,6 @@ usbguard
 valgrind
 vim-spell-en
 vulkan-intel
-webp-pixbuf-loader
 weechat
 xdg-user-dirs-gtk
 xorg-xdpyinfo
