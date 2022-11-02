@@ -270,10 +270,10 @@
 (fm/after subword
  (fm/dim subword-mode "Sw"))
 
-(fm/after flyspell
- (fm/dim flyspell-mode "Fs")
- (setq-default ispell-program-name "aspell")
- (setq-default ispell-extra-args '("--sug-mode=ultra")))
+;; (fm/after flyspell
+;;  (fm/dim flyspell-mode "Fs")
+;;  (setq-default ispell-program-name "aspell")
+;;  (setq-default ispell-extra-args '("--sug-mode=ultra")))
 
 (fm/after text-mode
  (fm/hook text-mode-hook flyspell-mode))
@@ -438,10 +438,10 @@
  (setq-default completion-cycle-threshold 4)
  (setq-default completions-detailed t))
 
-(fm/pkg flyspell-correct-ivy
- (fm/after flyspell
-  (fm/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
-  (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
+;; (fm/pkg flyspell-correct-ivy
+;;  (fm/after flyspell
+;;   (fm/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
+;;   (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
 
 (fm/pkg mwim
  (fm/key "C-a" mwim-beginning)
@@ -621,7 +621,7 @@
  (fm/hook prog-mode-hook diff-hl-mode)
  (fm/hook prog-mode-hook eldoc-mode)
  (fm/hook prog-mode-hook show-paren-mode)
- (fm/hook prog-mode-hook flyspell-prog-mode)
+ ;; (fm/hook prog-mode-hook flyspell-prog-mode)
  (fm/hook prog-mode-hook flycheck-mode)
  (fm/hook prog-mode-hook yas-minor-mode)
  (fm/hook prog-mode-hook company-mode)
@@ -634,11 +634,23 @@
 (fm/after conf-mode
  (fm/hook conf-desktop-mode-hook diff-hl-mode)
  (fm/hook conf-desktop-mode-hook show-paren-mode)
- (fm/hook conf-desktop-mode-hook flyspell-prog-mode)
+ ;; (fm/hook conf-desktop-mode-hook flyspell-prog-mode)
  (fm/hook conf-desktop-mode-hook electric-pair-mode)
  (fm/hook conf-desktop-mode-hook electric-layout-mode)
  (fm/hook conf-desktop-mode-hook display-line-numbers-mode)
  (fm/hook conf-desktop-mode-hook hl-line-mode))
+
+(fm/pkg spell-fu
+ (global-spell-fu-mode)
+ (fm/after spell-fu
+  (fm/hookn spell-fu-mode-hook
+   (fm/autoload spell-fu-dictionary-add "spell-fu")
+   (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
+   (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
+   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
+   (spell-fu-dictionary-add
+    (spell-fu-get-personal-dictionary "en-personal" "/home/user/.aspell.en.pws")))
+  (setq-default spell-fu-faces-exclude '(link))))
 
 (fm/pkg meson-mode
  (fm/after meson-mode
@@ -686,7 +698,8 @@
   (setq-default lsp-enable-on-type-formatting t)
   (setq-default lsp-before-save-edits nil)
   (setq-default lsp-auto-configure t)
-  (setq-default lsp-signature-render-documentation t)
+  (setq-default lsp-signature-render-documentation nil)
+  (setq-default lsp-eldoc-render-all nil)
   (setq-default lsp-modeline-code-actions-enable nil)
   (setq-default lsp-log-io nil)
   (setq-default lsp-enable-imenu nil)
