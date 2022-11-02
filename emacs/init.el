@@ -436,6 +436,13 @@
  (setq-default read-file-name-completion-ignore-case t)
  (setq-default completion-category-defaults nil)
  (setq-default completion-cycle-threshold 4)
+ ;; (fm/key-local "C-n" minibuffer-next-completion minibuffer-mode-map)
+ ;; (fm/key-local "C-p" minibuffer-previous-completion minibuffer-mode-map)
+ ;; (fm/key-local "C-n" minibuffer-next-completion completion-in-region-mode-map)
+ ;; (fm/key-local "C-p" minibuffer-previous-completion completion-in-region-mode-map)
+ ;; (setq-default completions-auto-select nil)
+ (setq-default completions-format 'one-column)
+ (setq-default completions-max-height 20)
  (setq-default completions-detailed t))
 
 ;; (fm/pkg flyspell-correct-ivy
@@ -587,7 +594,7 @@
  (fm/after company
   (fm/dim company-mode "Co")
   (setq-default company-backends '((company-capf company-files company-keywords)))
-  (setq-default completion-ignore-case t)
+  (setq-default company-keywords-ignore-case t)
   (setq-default company-minimum-prefix-length 1)
   (setq-default company-selection-wrap-around t)
   (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
