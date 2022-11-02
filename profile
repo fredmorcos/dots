@@ -16,6 +16,10 @@ export HISTFILE
 GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GNUPGHOME
 
+# Screen
+SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
+export SCREENRC
+
 # Less
 LESSHISTFILE="$XDG_STATE_HOME/less_history"
 export LESSHISTFILE
