@@ -100,7 +100,6 @@ edk2-ovmf
 efibootmgr
 elementary-wallpapers
 emacs-nativecomp
-endeavour
 entr
 eog-plugins
 epiphany
@@ -132,11 +131,10 @@ glow
 gmp-ecm
 gnome-backgrounds
 gnome-calculator
-gnome-calendar
 gnome-characters
 gnome-clocks
 gnome-console
-gnome-contacts
+gnome-control-center
 gnome-dictionary
 gnome-firmware
 gnome-font-viewer
@@ -144,7 +142,6 @@ gnome-icon-theme-extras
 gnome-info-collect
 gnome-logs
 gnome-maps
-gnome-notes
 gnome-podcasts
 gnome-screenshot
 gnome-shell-extension-just-perfection-desktop
