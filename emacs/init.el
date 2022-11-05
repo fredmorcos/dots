@@ -694,6 +694,8 @@
   (fm/key-local "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
   (setq-default lsp-progress-prefix "  Progress: ")
   (setq-default lsp-completion-provider :none) ; Company-capf is already set
+  (setq-default lsp-completion-show-detail t)
+  (setq-default lsp-completion-show-kind t)
   (setq-default lsp-headerline-breadcrumb-enable t)
   (setq-default lsp-restart 'auto-restart)
   (setq-default lsp-enable-snippet t)
@@ -705,9 +707,12 @@
   (setq-default lsp-enable-on-type-formatting t)
   (setq-default lsp-before-save-edits nil)
   (setq-default lsp-auto-configure t)
+  (setq-default lsp-signature-auto-activate t)
   (setq-default lsp-signature-render-documentation nil)
+  (setq-default lsp-eldoc-enable-hover t)
   (setq-default lsp-eldoc-render-all nil)
   (setq-default lsp-modeline-code-actions-enable nil)
+  (setq-default lsp-modeline-diagnostics-enable t)
   (setq-default lsp-log-io nil)
   (setq-default lsp-enable-imenu nil)
   (fm/after which-key
@@ -792,7 +797,9 @@
  (fm/after lsp-ui-flycheck
   (setq-default lsp-ui-flycheck-enable t))
  (fm/after lsp-ui-doc
-  (setq-default lsp-ui-doc-enable nil)
+  (setq-default lsp-ui-doc-enable t)
+  (setq-default lsp-ui-doc-show-with-cursor nil)
+  (setq-default lsp-ui-doc-show-with-mouse t)
   (setq-default lsp-ui-doc-alignment 'frame)
   (setq-default lsp-ui-doc-header t)
   (setq-default lsp-ui-doc-include-signature t)
