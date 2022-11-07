@@ -279,6 +279,7 @@ opencl-mesa
 opendoas
 openmp
 openslide
+openssl-1.1
 opusfile
 osmo
 otf-fira-mono
