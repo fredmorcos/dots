@@ -83,7 +83,8 @@ show-weekdate=true
 
 # Shell Apps and Extensions
 [org/gnome/shell]
-enabled-extensions=['unite@hardpixel.eu']
+# enabled-extensions=['unite@hardpixel.eu']
+disable-user-extensions=true
 favorite-apps=['org.gnome.Nautilus.desktop', 'rhythmbox.desktop', 'de.haeckerfelix.Shortwave.desktop', 'org.gnome.DiskUtility.desktop']
 
 # Window switcher
@@ -164,21 +165,21 @@ theme-variant='dark'
 profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color='rgb(34,29,53)'
 
 # Unite Extension
-[org/gnome/shell/extensions/unite]
-extend-left-box=false
-show-desktop-name=false
-hide-activities-button='never'
-hide-window-titlebars='both'
-show-window-title='never'
-show-window-buttons='both'
-notifications-position='center'
-greyscale-tray-icons=false
-hide-dropdown-arrows=false
-hide-app-menu-icon=false
-reduce-panel-spacing=false
-app-menu-max-width=100
-app-menu-ellipsize-mode='end'
-window-buttons-theme='auto'
+# [org/gnome/shell/extensions/unite]
+# extend-left-box=false
+# show-desktop-name=false
+# hide-activities-button='never'
+# hide-window-titlebars='both'
+# show-window-title='never'
+# show-window-buttons='both'
+# notifications-position='center'
+# greyscale-tray-icons=false
+# hide-dropdown-arrows=false
+# hide-app-menu-icon=false
+# reduce-panel-spacing=false
+# app-menu-max-width=100
+# app-menu-ellipsize-mode='end'
+# window-buttons-theme='auto'
 
 # Just Perfection Extension
 # [/org/gnome/shell/extensions/just-perfection]
