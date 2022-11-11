@@ -140,8 +140,6 @@ gnome-font-viewer
 gnome-icon-theme-extras
 gnome-logs
 gnome-screenshot
-gnome-shell-extension-just-perfection-desktop
-gnome-shell-extension-unite-git
 gnome-sound-recorder
 gnome-tweaks
 gpart
@@ -219,13 +217,12 @@ libmythes
 libnfs
 libofa
 libopenraw
-libpipewire02
-liburing
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvterm
+linux
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -408,7 +405,7 @@ scrot
 sd
 seahorse
 seahorse-nautilus
-seer-gdb-git
+seer-gdb
 shake
 shellcheck
 shfmt
@@ -467,8 +464,6 @@ vde2
 vdpauinfo
 vi
 vim-spell-en
-virtualbox-ext-oracle
-virtualbox-guest-iso
 visidata
 vkd3d
 vulkan-extra-layers
