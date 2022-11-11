@@ -114,9 +114,7 @@ gnome-icon-theme-extras
 gnome-logs
 gnome-menus
 gnome-screenshot
-gnome-shell-extension-unite-git
 gnome-sound-recorder
-gnome-terminal
 gnome-themes-extra
 gnome-tweaks
 gpart
@@ -241,7 +239,7 @@ rust-analyzer
 rustc-demangle
 seahorse
 seahorse-nautilus
-seer-gdb-git
+seer-gdb
 shellcheck
 signal-desktop
 simplescreenrecorder
