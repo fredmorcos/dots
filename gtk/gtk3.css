@@ -1,8 +1,0 @@
-/* UNITE windowDecorations */
-@import url('/usr/share/gnome-shell/extensions/unite@hardpixel.eu/styles/gtk3/buttons-right/both.css');
-/* windowDecorations UNITE */
-/* Inner terminal borders */
-vte-terminal, terminal-window {
-    padding: 3px 3px 3px 3px;
-    -vte-terminal-inner-border: 3px 3px 3px 3px;
-}

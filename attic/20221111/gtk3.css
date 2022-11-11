@@ -1,0 +1,5 @@
+/* Inner terminal borders */
+vte-terminal, terminal-window {
+    padding: 3px 3px 3px 3px;
+    -vte-terminal-inner-border: 3px 3px 3px 3px;
+}
