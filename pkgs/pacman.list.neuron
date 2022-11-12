@@ -269,8 +269,6 @@ usbguard
 valgrind
 vice
 vim
-virtualbox-ext-oracle
-virtualbox-guest-iso
 weechat
 xdg-user-dirs-gtk
 xorg-xdpyinfo
