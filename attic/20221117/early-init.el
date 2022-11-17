@@ -248,24 +248,19 @@
 
 (fm/after lsp-rust
  (fm/face lsp-rust-analyzer-inlay-face
-  :foreground "Gray65"
+  :foreground "DimGray"
+  :background "Azure2"
   :weight bold
   :height 0.8)
  (fm/face lsp-rust-analyzer-inlay-param-face
-  :foreground "Gray65"
+  :foreground "DimGray"
+  :background "Azure2"
   :weight bold
   :height 0.8)
  (fm/face lsp-rust-analyzer-inlay-type-face
   :inherit font-lock-type-face
-  :foreground "Gray65"
-  :weight bold
-  :height 0.8)
- (fm/face lsp-rust-analyzer-declaration-modifier-face
-  :underline nil)
- (fm/face lsp-rust-analyzer-mutable-modifier-face
-  :underline nil)
- (fm/face lsp-rust-analyzer-consuming-modifier-face
-  :underline nil))
+  :background "HoneyDew2"
+  :height 0.8))
 
 (fm/after lsp-ui-doc
  (setq-default lsp-ui-doc-border "Gray50")
