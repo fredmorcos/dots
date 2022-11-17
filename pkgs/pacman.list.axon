@@ -428,6 +428,7 @@ sudo
 syncthing
 sysprof
 sysstat
+systemd-resolvconf
 systeroid
 tealdeer
 tepl
