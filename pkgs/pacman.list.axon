@@ -305,8 +305,7 @@ powertop
 procs
 profile-cleaner
 progress
-protonvpn-cli
-protonvpn-gui
+protonvpn
 pstoedit
 psutils
 pv
@@ -375,6 +374,7 @@ python-unidiff
 python-watchdog
 python-xlrd
 python-zopfli
+qbittorrent
 qbs
 qreator
 qt6-examples
