@@ -30,6 +30,7 @@ sleep-inactive-ac-type='nothing'
 night-light-enabled=true
 night-light-schedule-automatic=false
 night-light-schedule-to=20.0
+night-light-temperature=3300
 
 # Touchpad
 [org/gnome/desktop/peripherals/touchpad]
@@ -83,8 +84,8 @@ show-weekdate=true
 
 # Shell Apps and Extensions
 [org/gnome/shell]
-# enabled-extensions=['unite@hardpixel.eu']
-disable-user-extensions=true
+enabled-extensions=['just-perfection-desktop@just-perfection', 'unite@hardpixel.eu', 'appindicatorsupport@rgcjonas.gmail.com']
+disable-user-extensions=false
 favorite-apps=['org.gnome.Nautilus.desktop', 'rhythmbox.desktop', 'de.haeckerfelix.Shortwave.desktop', 'org.gnome.DiskUtility.desktop']
 
 # Window switcher
@@ -164,27 +165,12 @@ list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_w
 theme-variant='dark'
 profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color='rgb(34,29,53)'
 
-# Unite Extension
-# [org/gnome/shell/extensions/unite]
-# extend-left-box=false
-# show-desktop-name=false
-# hide-activities-button='never'
-# hide-window-titlebars='both'
-# show-window-title='never'
-# show-window-buttons='both'
-# notifications-position='center'
-# greyscale-tray-icons=false
-# hide-dropdown-arrows=false
-# hide-app-menu-icon=false
-# reduce-panel-spacing=false
-# app-menu-max-width=100
-# app-menu-ellipsize-mode='end'
-# window-buttons-theme='auto'
+# Tray Icons Extension
+[/org/gnome/shell/extensions/appindicator]
+icon-saturation=0.69999
 
 # Just Perfection Extension
-# [/org/gnome/shell/extensions/just-perfection]
-# activities-button=true
-# startup-status=0
-# animation=3
-# dash-icon-size=0
-# alt-tab-icon-size=128
+[/org/gnome/shell/extensions/just-perfection]
+startup-status=0
+alt-tab-icon-size=128
+animation=3
