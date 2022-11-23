@@ -65,12 +65,12 @@ cclive
 ccls
 cdrtools
 cgdb
+chafa
 cheese
 chmlib
 clinfo
 cmake
 codespell
-compsize
 conntrack-tools
 cpio
 curlftpfs
@@ -106,7 +106,7 @@ epiphany
 ethtool
 evince
 exa
-exfat-utils
+exfatprogs
 ext4magic
 f2fs-tools
 fastjar
@@ -126,7 +126,6 @@ gifski
 gimp
 git-lfs
 gitui
-glfw-x11
 glow
 gmp-ecm
 gnome-backgrounds
@@ -186,6 +185,7 @@ innoextract
 intltool
 iotop
 ipset
+iptraf-ng
 irqbalance
 ispell
 jami-qt
