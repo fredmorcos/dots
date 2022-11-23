@@ -364,7 +364,6 @@ python-pyserial
 python-pystemmer
 python-pytest-black
 python-pytest-flake8
-python-pytest-mypy
 python-pytest-pylint
 python-rcssmin
 python-reportlab
