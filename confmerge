@@ -104,7 +104,6 @@ cmerge dict/hunspell_en_US           ~/.hunspell_en_US
 cmerge dict/aspell.en.pws            ~/.aspell.en.pws
 
 cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
-cmerge gtk/gtk3.css                  ~/.config/gtk-3.0/gtk.css
 
 cmerge emacs/init.el                 ~/.config/emacs/init
 cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
