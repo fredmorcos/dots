@@ -32,7 +32,6 @@ bluez-tools
 bluez-utils
 boost
 bottom
-bridge-utils
 brightnessctl
 cabextract
 capitaine-cursors
@@ -76,9 +75,10 @@ codespell
 conntrack-tools
 cpio
 cpupower
+criu
+cuda
 curlftpfs
 dateutils
-cuda
 dbus-broker
 dconf-editor
 ddcutil
@@ -101,6 +101,7 @@ duperemove
 easy-rsa
 ebook-tools
 ecm-tools
+ed
 edk2-ovmf
 efibootmgr
 elementary-wallpapers
@@ -109,7 +110,6 @@ entr
 eog-plugins
 epiphany
 ethtool
-evince
 exa
 exfatprogs
 ext4magic
@@ -120,7 +120,6 @@ fdupes
 fig2dev
 file-roller
 firefox
-flatpak
 flex
 fprintd
 fstrm
@@ -184,7 +183,6 @@ htop
 hunspell-de
 hunspell-en_us
 hunspell-fr
-hunspell-fr
 hyperfine
 hyphen-de
 hyphen-en
@@ -198,8 +196,6 @@ intel-ucode
 intltool
 iotop
 iptraf-ng
-ipset
-irqbalance
 ispell
 iwd
 jfsutils
@@ -216,7 +212,6 @@ libreoffice-fresh
 libva-mesa-driver
 libva-vdpau-driver
 libvoikko
-libzip
 light
 linux-firmware
 linux-headers
@@ -283,6 +278,7 @@ python-lsp-black
 python-olefile
 python-pyacoustid
 python-pycryptodomex
+python-pygments
 python-pylast
 qbs
 qt6-examples
@@ -313,6 +309,7 @@ sysprof
 sysstat
 systeroid
 tinycdb
+tmux
 torbrowser-launcher
 transmission-gtk
 tree
