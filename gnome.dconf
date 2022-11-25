@@ -30,7 +30,7 @@ sleep-inactive-ac-type='nothing'
 night-light-enabled=true
 night-light-schedule-automatic=false
 night-light-schedule-to=20.0
-night-light-temperature=3300
+night-light-temperature=3700
 
 # Touchpad
 [org/gnome/desktop/peripherals/touchpad]
@@ -160,17 +160,13 @@ preferences/show-directory-item-counts='never'
 list-view/default-zoom-level='small'
 list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_with_time']
 
-# Terminal
-[org/gnome/terminal/legacy]
-theme-variant='dark'
-profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/background-color='rgb(34,29,53)'
-
 # Tray Icons Extension
-[/org/gnome/shell/extensions/appindicator]
-icon-saturation=0.69999
+[org/gnome/shell/extensions/appindicator]
+icon-saturation=0.7
+icon-opacity=255
 
 # Just Perfection Extension
-[/org/gnome/shell/extensions/just-perfection]
+[org/gnome/shell/extensions/just-perfection]
 startup-status=0
 alt-tab-icon-size=128
 animation=3
