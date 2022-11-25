@@ -79,7 +79,6 @@ elif [ "$HNAME" == "neuron" ]; then
     cmd "$HOME/Workspace/"                "$LAPTOP/Workspace/"
     cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
     cmd "$HOME/.config/transmission/"     "$LAPTOP/Configs/config-transmission/"
-    cmd "$HOME/.config/qBittorrent/"      "$INT/Desktop/Configs/config-qBittorrent/"
     cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
     cmd "$HOME/.config/weechat/"          "$LAPTOP/Configs/config-weechat/"
     cmd "$HOME/.local/share/gnupg/"       "$LAPTOP/Configs/local-share-gnupg/"
