@@ -115,7 +115,6 @@ fdupes
 fig2dev
 file-roller
 firefox
-flatpak
 flex
 fzf
 fzy
@@ -189,9 +188,10 @@ ipset
 iptraf-ng
 irqbalance
 ispell
-jami-qt
 jfsutils
 john
+jp2a
+kcachegrind
 kcov
 kexec-tools
 keychain
@@ -204,10 +204,11 @@ ledger
 lesspipe
 lhasa
 libao
-libappindicator-gtk2
+libcamera-tools
 libdecaf
 libdecor
 libdmapsharing
+libdvdcss
 libdwarf
 libebur128
 libfido2
@@ -221,6 +222,7 @@ libmythes
 libnfs
 libofa
 libopenraw
+libupnp
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
@@ -239,6 +241,7 @@ ltrace
 luit
 lzop
 make
+malcontent
 man-db
 man-pages
 mariadb-libs
@@ -264,7 +267,6 @@ neofetch
 netavark
 net-snmp
 net-tools
-network-manager-applet
 nilfs-utils
 nmap
 noto-fonts-extra
@@ -291,6 +293,7 @@ par2cmdline
 paru-bin
 patch
 patchelf
+pavucontrol
 pdfarranger
 pdfcrack
 pdfmixtool
@@ -419,11 +422,12 @@ slimit
 sloccount
 smartmontools
 sndio
+sof-firmware
+sof-tools
 soundconverter
 sox
 squashfs-tools
 sshfs
-starship
 strace
 s-tui
 subdl
@@ -451,6 +455,7 @@ tree-sitter
 ttf-go-mono-git
 ttf-go-sans-git
 ttf-input
+ttf-nerd-fonts-symbols-2048-em-mono
 tup
 udftools
 udiskie
@@ -468,7 +473,6 @@ vde2
 vdpauinfo
 vi
 vim-spell-en
-visidata
 vkd3d
 vulkan-extra-layers
 vulkan-radeon
@@ -521,7 +525,6 @@ xorg-xwd
 xorg-xwininfo
 xorg-xwud
 xsel
-xss-lock
 yamllint
 yapf
 you-get

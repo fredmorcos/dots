@@ -65,6 +65,7 @@ cbindgen
 ccache
 cclive
 ccls
+cdrtools
 cgdb
 chafa
 cheese
@@ -110,6 +111,7 @@ entr
 eog-plugins
 epiphany
 ethtool
+evince
 exa
 exfatprogs
 ext4magic
@@ -120,10 +122,12 @@ fdupes
 fig2dev
 file-roller
 firefox
+flatpak
 flex
 fprintd
 fstrm
 fzf
+fzy
 gamemode
 gdb-dashboard
 gdm
@@ -195,7 +199,9 @@ intel-media-sdk
 intel-ucode
 intltool
 iotop
+ipset
 iptraf-ng
+irqbalance
 ispell
 iwd
 jfsutils
