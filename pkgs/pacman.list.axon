@@ -303,8 +303,6 @@ pdfcrack
 pdfmixtool
 pdfslicer
 peek
-perl-archive-zip
-perl-net-libidn2
 picard
 pigz
 pipewire-v4l2
@@ -402,6 +400,7 @@ qt6-examples
 qt6-languageserver
 qtcreator
 qtqr
+r2ghidra
 radeontool
 radvd
 ragel
@@ -467,7 +466,6 @@ traceroute
 transmission-gtk
 trash-cli
 tree
-tree-sitter
 ttf-go-mono-git
 ttf-go-sans-git
 ttf-input
