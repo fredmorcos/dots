@@ -8,10 +8,12 @@
 export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
 [[ -r "/etc/profile.d/vte.sh" ]] && source /etc/profile.d/vte.sh
+[[ -r "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
+[[ -r "/usr/share/fzf/completion.bash" ]] && source /usr/share/fzf/completion.bash
 # [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 HISTCONTROL=ignoredups
-HISTSIZE=1000
+HISTSIZE=10000
 
 export HISTCONTROL HISTSIZE
 
