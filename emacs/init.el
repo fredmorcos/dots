@@ -298,7 +298,6 @@
   '((java-mode . javadoc)
     (c-mode    . gtkdoc)
     (c++-mode  . doxygen)))
- ;; (fm/hook c-mode-common-hook tree-sitter-mode)
  (fm/hook c-mode-common-hook lsp))
 
 (fm/after cc-vars
@@ -530,7 +529,8 @@
 (fm/pkg yaml-mode
  (fm/after yaml-mode
   (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
-  (fm/hook yaml-mode-hook flycheck-mode)))
+  (fm/hook yaml-mode-hook flycheck-mode)
+  (fm/hook yaml-mode-hook tree-sitter-mode)))
 
 (fm/mode "clang-format" yaml-mode)
 
