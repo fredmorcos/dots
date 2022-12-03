@@ -148,7 +148,7 @@ custom-keybindings/custom4/command='gnome-control-center sound'
 custom-keybindings/custom4/name='Sound Settings'
 
 # File Chooser
-[org/gtk/settings/file-chooser]
+[org/gtk/gtk4/settings/file-chooser]
 sort-directories-first=true
 
 # Nautilus
