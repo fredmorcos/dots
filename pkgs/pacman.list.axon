@@ -25,6 +25,7 @@ bat
 bear
 bearssl
 beets
+bettercap-caplets
 bind
 bison
 blanket
@@ -107,7 +108,7 @@ emacs-nativecomp
 entr
 eog-plugins
 epiphany
-ethtool
+ettercap-gtk
 evince
 exa
 exfatprogs

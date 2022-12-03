@@ -24,6 +24,7 @@ bbswitch
 bear
 bearssl
 beets
+bettercap-caplets
 bind
 bison
 blanket
@@ -110,7 +111,7 @@ emacs-nativecomp
 entr
 eog-plugins
 epiphany
-ethtool
+ettercap-gtk
 exa
 exfatprogs
 ext4magic
@@ -481,6 +482,7 @@ tree
 ttf-go-mono-git
 ttf-go-sans-git
 ttf-input
+ttf-merriweather-sans
 ttf-nerd-fonts-symbols-2048-em-mono
 tup
 udftools
