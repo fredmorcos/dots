@@ -216,6 +216,8 @@ ledger
 lesspipe
 lhasa
 libao
+libappindicator-gtk3
+libayatana-appindicator
 libcamera-tools
 libdecaf
 libdecor
@@ -476,7 +478,6 @@ tokei
 torbrowser-launcher
 torsocks
 traceroute
-transmission-gtk
 trash-cli
 tree
 ttf-go-mono-git
