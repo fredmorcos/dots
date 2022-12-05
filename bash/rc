@@ -68,3 +68,11 @@ dirdlsub() {
     echo "-----------------------------------------";
   done
 }
+
+fman() {
+  if [ -z "$*" ]; then
+    man -k . | fzf --prompt='manual > ' | awk '{print $1}' | xargs -r man
+  else
+    man -k "$@" | fzf --prompt='manual > ' | awk '{print $1}' | xargs -r man
+  fi
+}
