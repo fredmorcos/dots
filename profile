@@ -16,6 +16,10 @@ export HISTFILE
 GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GNUPGHOME
 
+# Android Tools
+ANDROID_HOME="$XDG_DATA_HOME/android"
+export ANDROID_HOME
+
 # Screen
 SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 export SCREENRC
