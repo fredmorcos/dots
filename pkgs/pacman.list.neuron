@@ -114,6 +114,7 @@ entr
 eog-plugins
 epiphany
 ettercap-gtk
+evince
 exa
 exfatprogs
 ext4magic
@@ -325,7 +326,7 @@ pipewire-v4l2
 pipewire-zeroconf
 pixz
 pkgconf
-postgresql-libs
+postgresql
 power-profiles-daemon
 powertop
 procs
@@ -471,9 +472,11 @@ sysprof
 sysstat
 systemd-resolvconf
 systeroid
+t1utils
 tealdeer
 tepl
-texlive-bin
+texlive-formatsextra
+texlive-humanities
 tidy
 time
 tinycdb
@@ -514,6 +517,7 @@ vulkan-radeon
 vulkan-tools
 wabt
 wayland-utils
+wdiff
 weechat
 wget
 whois
