@@ -1,6 +1,8 @@
 aardvark-dns
 acpid
 alsa-firmware
+amd-ucode
+amdvlk
 android-tools
 antiword
 aria2
@@ -236,6 +238,7 @@ libmythes
 libnfs
 libofa
 libopenraw
+librewolf-bin
 libupnp
 libva-mesa-driver
 libva-utils
@@ -417,6 +420,7 @@ qt6-languageserver
 qtcreator
 qtqr
 r2ghidra
+radeontool
 radvd
 ragel
 read-edid
@@ -506,6 +510,7 @@ vkd3d
 vulkan-extra-layers
 vulkan-intel
 vulkan-mesa-layers
+vulkan-radeon
 vulkan-tools
 wabt
 wayland-utils

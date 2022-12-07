@@ -22,6 +22,7 @@ base
 bash-completion
 bashtop
 bat
+bbswitch
 bear
 bearssl
 beets
@@ -30,8 +31,11 @@ bind
 bison
 blanket
 blender
+bluez-tools
+bluez-utils
 boost
 bottom
+brightnessctl
 cabextract
 capitaine-cursors
 cargo-asm
@@ -121,6 +125,7 @@ fig2dev
 file-roller
 firefox
 flex
+fprintd
 fzf
 fzy
 gamemode
@@ -147,6 +152,7 @@ gnome-shell-extension-appindicator
 gnome-shell-extension-just-perfection-desktop
 gnome-shell-extension-unite
 gnome-sound-recorder
+gnome-themes-extra
 gnome-tweaks
 gpart
 gparted
@@ -173,6 +179,7 @@ highlight
 hledger-ui
 hledger-web
 hotspot-appimage
+hspell
 htmlmin
 htop
 hunspell-de
@@ -186,12 +193,15 @@ idle3-tools
 img2pdf
 inetutils
 innoextract
+intel-media-sdk
+intel-ucode
 intltool
 iotop
 ipset
 iptraf-ng
 irqbalance
 ispell
+iwd
 jfsutils
 john
 jp2a
@@ -228,13 +238,15 @@ libmythes
 libnfs
 libofa
 libopenraw
+librewolf-bin
 libupnp
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
+libvoikko
 libvterm
-linux
+light
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -313,6 +325,7 @@ pipewire-zeroconf
 pixz
 pkgconf
 postgresql
+power-profiles-daemon
 powertop
 procs
 profile-cleaner
@@ -346,6 +359,7 @@ python-ghp-import
 python-h2
 python-hsluv
 python-html2text
+python-html5lib
 python-husl
 python-invoke
 python-ipdb
@@ -367,6 +381,7 @@ python-pyalsa
 python-pyaml
 python-pyasn1
 python-pycryptodome
+python-pycryptodomex
 python-pycurl
 python-pyenchant
 python-pygal
@@ -492,6 +507,7 @@ vi
 vim-spell-en
 vkd3d
 vulkan-extra-layers
+vulkan-intel
 vulkan-mesa-layers
 vulkan-radeon
 vulkan-tools
