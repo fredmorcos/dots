@@ -102,8 +102,6 @@
 
 ;; Specify some common faces.
 (fm/after faces
- (when (string-equal (system-name) "neuron")
-  (fm/face default :height 150))
 
  (fm/face default             :background "Gray98" :foreground "Gray40")
  (fm/face fringe              :background "Gray98")
