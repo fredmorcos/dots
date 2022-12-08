@@ -134,6 +134,7 @@ gdb-dashboard
 gdm
 ghex
 gifski
+gimagereader-gtk
 gimp
 git-lfs
 gitui
@@ -155,6 +156,7 @@ gnome-shell-extension-unite
 gnome-sound-recorder
 gnome-themes-extra
 gnome-tweaks
+gocr
 gpart
 gparted
 gst-libav
@@ -167,7 +169,6 @@ gtkmm
 gtkmm-4.0
 gtksourceview2
 gtkspell
-gtkspell3
 gucharmap
 gvfs-google
 gvfs-mtp
@@ -231,7 +232,6 @@ libebur128
 libfido2
 libgepub
 libgnome-keyring
-libgphoto2
 libjxl
 libmad
 libmp4v2
@@ -285,7 +285,6 @@ nautilus
 ncdu
 neofetch
 netavark
-net-snmp
 net-tools
 nilfs-utils
 nmap
@@ -296,6 +295,9 @@ nuspell
 nvidia-settings
 nvme-cli
 obs-studio
+ocrad
+ocrdesktop
+ocrfeeder
 odt2txt
 openbsd-netcat
 opencl-mesa
@@ -385,7 +387,6 @@ python-pyasn1
 python-pycryptodome
 python-pycryptodomex
 python-pycurl
-python-pyenchant
 python-pygal
 python-pygit2
 python-pygithub
@@ -399,7 +400,6 @@ python-pytest-black
 python-pytest-flake8
 python-pytest-pylint
 python-rcssmin
-python-reportlab
 python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
@@ -411,6 +411,7 @@ python-typogrify
 python-unicodedata2
 python-unidiff
 python-watchdog
+python-webcolors
 python-xlrd
 python-zopfli
 qbittorrent
