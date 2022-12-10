@@ -84,6 +84,23 @@
 ;; Make URLs clickable
 (global-goto-address-mode)
 
+;; Hippie expand
+(fm/after hippie-exp
+ (setq-default hippie-expand-try-functions-list
+  '(try-expand-dabbrev
+    try-expand-dabbrev-visible
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    try-expand-line-all-buffers
+    try-expand-list-all-buffers
+    try-complete-file-name-partially
+    try-complete-file-name
+    try-expand-all-abbrevs
+    try-expand-list
+    try-expand-line
+    try-complete-lisp-symbol-partially
+    try-complete-lisp-symbol)))
+
 (fm/after emacs
  ;; Replace dabbrev-expand with hippie-expand
  (global-set-key [remap dabbrev-expand] 'hippie-expand)
