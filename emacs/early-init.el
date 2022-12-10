@@ -102,7 +102,6 @@
 
 ;; Specify some common faces.
 (fm/after faces
-
  (fm/face default             :background "Gray98" :foreground "Gray40")
  (fm/face fringe              :background "Gray98")
  (fm/face cursor              :background "SlateGray3")
