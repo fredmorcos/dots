@@ -128,16 +128,17 @@
  (fm/face font-lock-variable-name-face :foreground "DarkCyan")
  (fm/face font-lock-string-face        :foreground "OliveDrab")
  (fm/face font-lock-warning-face       :foreground "Orange3")
- (fm/face font-lock-constant-face      :foreground "CornflowerBlue"))
+ (fm/face font-lock-constant-face      :foreground "CornflowerBlue")
+ (fm/face font-lock-doc-face           :foreground "HoneyDew3"))
 
 (fm/after whitespace
  (fm/face whitespace-line :background "Gray90" :weight bold))
 
 (fm/after display-line-numbers
- ;; (fm/face line-number              :foreground "Gray85")
- ;; (fm/face line-number-current-line :foreground "Gray70")
- (fm/face line-number                 :foreground "Gray60")
- (fm/face line-number-current-line    :foreground "Gray50"))
+ ;; (fm/face line-number                 :foreground "Gray60")
+ ;; (fm/face line-number-current-line    :foreground "Gray50")
+ (fm/face line-number              :foreground "Gray85")
+ (fm/face line-number-current-line :foreground "Gray70"))
 
 (fm/after hl-line
  (fm/face hl-line :background "Gray95" :extend nil))
@@ -262,7 +263,9 @@
  (fm/face lsp-rust-analyzer-mutable-modifier-face
   :underline nil)
  (fm/face lsp-rust-analyzer-consuming-modifier-face
-  :underline nil))
+  :underline nil)
+ (fm/face lsp-rust-analyzer-documentation-modifier-face
+  :foreground "HoneyDew3"))
 
 (fm/after lsp-ui-doc
  (setq-default lsp-ui-doc-border "Gray50")
