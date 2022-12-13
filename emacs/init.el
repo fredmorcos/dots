@@ -617,7 +617,7 @@
   (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
 
 (defun fm/company-add-backend (backend)
- "Add BACKEND to local version of `company-backends'."
+ "Add BACKEND to local copy of `company-backends'."
  (eval-when-compile (defvar company-backends))
  (let ((backends `((,backend . ,(car company-backends)))))
   (setq-local company-backends backends)))
