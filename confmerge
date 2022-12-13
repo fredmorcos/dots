@@ -155,6 +155,7 @@ SYSD=/etc/systemd
 cmerge systemd/coredump.conf         $SYSD/coredump.conf
 cmerge systemd/system.conf           $SYSD/system.conf
 cmerge systemd/journald.conf         $SYSD/journald.conf
+cmerge systemd/resolved.conf         $SYSD/resolved.conf
 cmerge systemd/boot-override.conf    $SYSD/system/boot.mount.d/override.conf
 
 cmerge vpn/ox.service                $SYSD/system/ox.service
