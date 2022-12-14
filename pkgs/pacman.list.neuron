@@ -22,7 +22,7 @@ base
 bash-completion
 bashtop
 bat
-bbswitch
+bbswitch-dkms
 bear
 bearssl
 beets
@@ -248,6 +248,7 @@ libvdpau-va-gl
 libvoikko
 libvterm
 light
+linux
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -261,7 +262,6 @@ lsof
 ltrace
 luit
 lzop
-make
 malcontent
 man-db
 man-pages
@@ -318,7 +318,6 @@ pacman-contrib
 papirus-icon-theme
 par2cmdline
 paru-bin
-patch
 patchelf
 pavucontrol
 pdfarranger
