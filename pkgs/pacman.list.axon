@@ -124,7 +124,6 @@ fdupes
 fig2dev
 file-roller
 firefox
-flex
 fprintd
 fzf
 fzy
@@ -228,7 +227,6 @@ libdmapsharing
 libdvdcss
 libdwarf
 libebur128
-libfido2
 libgepub
 libgnome-keyring
 libjxl
@@ -277,6 +275,7 @@ mkinitcpio-utils
 mlocate
 mobsh-bin
 mold
+most
 mpv
 mtools
 musl
@@ -313,6 +312,7 @@ otf-fira-mono
 otf-fira-sans
 p7zip
 pacman-contrib
+pam-u2f
 papirus-icon-theme
 par2cmdline
 paru-bin
@@ -572,6 +572,11 @@ yapf
 you-get
 youtube-dl
 yt-dlp
+yubico-pam
+yubikey-full-disk-encryption
+yubikey-manager-qt
+yubikey-personalization-gui
+yubioath-desktop
 z
 zola
 zoxide
