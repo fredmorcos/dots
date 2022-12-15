@@ -542,9 +542,8 @@
  (fm/after yaml-mode
   (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
   (fm/hook yaml-mode-hook flycheck-mode)
-  (fm/hook yaml-mode-hook tree-sitter-mode)))
-
-(fm/mode "clang-format" yaml-mode)
+  (fm/hook yaml-mode-hook tree-sitter-mode))
+ (fm/mode "clang-format" yaml-mode))
 
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
@@ -660,15 +659,29 @@
  (fm/hook conf-desktop-mode-hook hl-line-mode))
 
 (fm/pkg spell-fu
+ (fm/autoload spell-fu-dictionary-add "spell-fu")
+ (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
+ (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
  (fm/after spell-fu
   (fm/hookn spell-fu-mode-hook
-   (fm/autoload spell-fu-dictionary-add "spell-fu")
-   (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
-   (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
    (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
-  (setq-default spell-fu-faces-exclude '(link))))
+  (setq-default spell-fu-faces-exclude '(link org-link))))
+
+(fm/pkg dogears
+ (fm/autoload dogears-list     "dogears")
+ (fm/autoload dogears-sidebar  "dogears")
+ (fm/autoload dogears-forward  "dogears")
+ (fm/autoload dogears-backward "dogears")
+ (fm/autoload dogears-go       "dogears")
+ (fm/autoload dogears-remember "dogears")
+ (fm/key "C-x r L" dogears-list)
+ (fm/key "C-x r S" dogears-sidebar)
+ (fm/key "C-x r F" dogears-forward)
+ (fm/key "C-x r B" dogears-backward)
+ (fm/key "C-x r G" dogears-go)
+ (fm/key "C-x r R" dogears-remember))
 
 (fm/pkg meson-mode
  (fm/after meson-mode
