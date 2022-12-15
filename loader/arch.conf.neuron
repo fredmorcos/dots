@@ -1,5 +1,5 @@
 title   Archlinux
-linux   /vmlinuz-linux
+linux   /vmlinuz-linux-zen
 initrd  /intel-ucode.img
-initrd  /initramfs-linux.img
+initrd  /initramfs-linux-zen.img
 options rw add_efi_memmap mitigations=off nmi_watchdog=0 quiet nordrand ipv6.disable=1 bgrt_disable pci=noaer
