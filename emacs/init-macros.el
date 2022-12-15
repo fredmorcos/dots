@@ -40,6 +40,11 @@
    (eval-when-compile (defvar ,keymap))
    (define-key ,keymap (kbd ,key) nil)))
 
+(defmacro fm/key-remap (old-func new-func)
+ "Remap a global key from OLD-FUNC to NEW-FUNC."
+ `(progn
+   (global-set-key [remap ,old-func] #',new-func)))
+
 (defmacro fm/key-local (key func keymap &optional pkg)
  "Define KEY in KEYMAP to call FUNC from PKG."
  `(progn
