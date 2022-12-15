@@ -58,10 +58,11 @@ export GNUPGHOME
 INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export INPUTRC
 
-# Editors
+# Editors and pagers
 EDITOR=emacs
 GIT_EDITOR=$EDITOR
-export EDITOR GIT_EDITOR
+PAGER=most
+export EDITOR GIT_EDITOR PAGER
 
 # On-demand debugging symbols
 DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elfutils.org/"
