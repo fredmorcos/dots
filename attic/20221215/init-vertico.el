@@ -371,39 +371,44 @@
   (setq-default which-key-idle-delay 0.5))
  (which-key-mode))
 
-(fm/pkg ivy
- (fm/after ivy
-  (fm/dim ivy-mode)
-  (fm/key-local "<RET>" ivy-alt-done ivy-minibuffer-map "ivy")
-  (setq-default ivy-wrap t)
-  (setq-default ivy-use-selectable-prompt t)
-  (setq-default ivy-use-virtual-buffers t)
-  (setq-default ivy-count-format "(%d/%d) ")
-  (setq-default ivy-virtual-abbreviate 'abbreviate)
-  (setq-default ivy-initial-inputs-alist nil)
-  (setq-default ivy-extra-directories nil)
-  (setq-default ivy-re-builders-alist
-   '((t . ivy--regex-ignore-order) (t . ivy--regex-plus))))
- (ivy-mode))
+;; (fm/pkg ivy
+;;  (fm/after ivy
+;;   (fm/dim ivy-mode)
+;;   (fm/key-local "<RET>" ivy-alt-done ivy-minibuffer-map "ivy")
+;;   (setq-default ivy-wrap t)
+;;   (setq-default ivy-use-selectable-prompt t)
+;;   (setq-default ivy-use-virtual-buffers t)
+;;   (setq-default ivy-count-format "(%d/%d) ")
+;;   (setq-default ivy-virtual-abbreviate 'abbreviate)
+;;   (setq-default ivy-initial-inputs-alist nil)
+;;   (setq-default ivy-extra-directories nil)
+;;   (setq-default ivy-re-builders-alist
+;;    '((t . ivy--regex-ignore-order) (t . ivy--regex-plus))))
+;;  (ivy-mode))
 
-(fm/pkg counsel
- (fm/after counsel
-  (fm/key-local "M-Y" counsel-yank-pop counsel-mode-map)
-  (fm/dim counsel-mode)
-  (put 'counsel-find-symbol 'no-counsel-M-x t))
- (counsel-mode))
+;; (fm/pkg counsel
+;;  (fm/after counsel
+;;   (fm/key-local "M-Y" counsel-yank-pop counsel-mode-map)
+;;   (fm/dim counsel-mode)
+;;   (put 'counsel-find-symbol 'no-counsel-M-x t))
+;;  (counsel-mode))
 
-(fm/pkg ivy-rich
- (fm/after ivy-rich
-  (setq-default ivy-rich-path-style 'abbrev))
- (ivy-rich-mode))
+;; (fm/pkg ivy-rich
+;;  (fm/after ivy-rich
+;;   (setq-default ivy-rich-path-style 'abbrev))
+;;  (ivy-rich-mode))
 
-(fm/pkg swiper
- (fm/key-remap isearch-forward  swiper-isearch)
- (fm/key-remap isearch-backward swiper-isearch-backward)
- (fm/key "C-c C-s" swiper-thing-at-point)
- (fm/after swiper
-  (setq-default swiper-include-line-number-in-search t)))
+;; (fm/pkg swiper
+;;  (fm/key "C-s"         swiper-isearch)
+;;  (fm/key "C-c C-s"     swiper-thing-at-point)
+;;  (fm/key "C-r"         swiper-isearch-backward)
+;;  (fm/after swiper
+;;   (setq-default swiper-include-line-number-in-search t)))
+
+(fm/pkg vertico
+ (fm/after vertico
+  (setq-default vertico-cycle t))
+ (vertico-mode))
 
 (fm/pkg embark
  (fm/after flyspell
@@ -415,6 +420,21 @@
 
 (fm/pkg marginalia
  (marginalia-mode))
+
+(fm/pkg consult
+ (fm/after consult
+  (setq-default consult-line-start-from-top t)
+  (fm/autoload consult-customize "consult")
+  (eval-when-compile (defvar consult-buffer))
+  (consult-customize consult-buffer :preview-key nil))
+ (fm/after window
+  (global-set-key [remap switch-to-buffer] #'consult-buffer))
+ (fm/after register
+  (global-set-key [remap jump-to-register] #'consult-register))
+ (fm/after isearch
+  (global-set-key [remap isearch-forward] #'consult-line)
+  (global-set-key [remap isearch-backward] #'consult-line))
+ (fm/key "M-s g" consult-git-grep))
 
 (fm/pkg prescient
  (fm/after prescient
@@ -428,6 +448,9 @@
    (push 'prescient completion-styles)))
  (fm/autoload prescient-persist-mode "prescient")
  (prescient-persist-mode +1))
+
+(fm/pkg vertico-prescient
+ (vertico-prescient-mode))
 
 (fm/pkg ivy-prescient
  (ivy-prescient-mode))
@@ -598,9 +621,9 @@
    (fm/hook flycheck-posframe-inhibit-functions
     (lambda (&rest _) (bound-and-true-p company-backend))))))
 
-(fm/pkg consult-flycheck
- (fm/after flycheck
-  (fm/key-local "C-c ! a" consult-flycheck flycheck-mode-map)))
+;; (fm/pkg consult-flycheck
+;;  (fm/after flycheck
+;;   (fm/key-local "C-c ! a" consult-flycheck flycheck-mode-map)))
 
 (fm/pkg company
  (fm/after company
@@ -728,6 +751,8 @@
   (setq-default lsp-enable-imenu nil)
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
+  ;; (fm/hookn lsp-mode-hook
+  ;;  (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
  (fm/after lsp-lens
   (fm/dim lsp-lens-mode)
   (setq-default lsp-lens-mode nil))
@@ -757,6 +782,7 @@
   (setq-default lsp-rust-analyzer-server-format-inlay-hints nil)
   (setq-default lsp-rust-all-features t)
   (setq-default lsp-rust-all-targets t)
+  ;; (setq-default lsp-rust-build-on-save t)
   (setq-default lsp-rust-unstable-features t)
   (setq-default lsp-rust-full-docs t)
   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy")
@@ -770,8 +796,7 @@
      "--clang-tidy"
      "--completion-style=detailed"
      "--header-insertion=iwyu"
-     ;; Breaks clangd-14
-     ; "--header-insertion-decorators"
+     ; "--header-insertion-decorators" ; Breaks clangd-14
      "--inlay-hints"
      "-j=4"
      "--malloc-trim"
@@ -781,9 +806,9 @@
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
 
-(fm/pkg lsp-ivy
- (fm/after lsp-mode
-  (fm/key-local "C-c x" lsp-ivy-workspace-symbol lsp-mode-map)))
+;; (fm/pkg lsp-ivy
+;;  (fm/after lsp-mode
+;;   (fm/key-local "C-c x" lsp-ivy-workspace-symbol lsp-mode-map)))
 
 (fm/pkg treemacs
  (fm/key "<f9>" treemacs-select-window)

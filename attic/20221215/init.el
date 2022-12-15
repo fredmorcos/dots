@@ -9,9 +9,10 @@
 (require 'init-macros)
 
 (fm/key "C-x j"    fm/insert-buffer-name "qol")
-(fm/key "C-x e"    fm/replace-escapes    "qol")
-(fm/key "<M-up>"   fm/move-line-up       "qol")
-(fm/key "<M-down>" fm/move-line-down     "qol")
+
+(fm/key "C-x e"    fm/replace-escapes "qol")
+(fm/key "<M-up>"   fm/move-line-up    "qol")
+(fm/key "<M-down>" fm/move-line-down  "qol")
 
 (fm/key "{"  fm/insert-pair-curly         "qol")
 (fm/key "("  fm/insert-pair-parens        "qol")
@@ -20,8 +21,6 @@
 (fm/key "`"  fm/insert-pair-backtick      "qol")
 
 ;; Directories.
-(defconst user-home-dir (expand-file-name "~/"))
-(defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
 (defconst emacs-user-dir (expand-file-name user-emacs-directory))
 (defconst emacs-elpa-dir (concat emacs-user-dir "elpa"))
 (defconst emacs-var-dir (concat emacs-user-dir "var/"))
@@ -54,6 +53,11 @@
 ;; Auto-save.
 (setq-default auto-save-list-file-prefix emacs-autosave-list-prefix)
 
+;; subr - Respond to yes/no questions using Y/N.
+(if (< emacs-major-version 28)
+ (defalias 'yes-or-no-p 'y-or-n-p)
+ (setq-default use-short-answers t))
+
 ;; Windmove.
 (windmove-default-keybindings)
 (windmove-delete-default-keybindings)
@@ -83,15 +87,23 @@
 ;; Hippie expand
 (fm/after hippie-exp
  (setq-default hippie-expand-try-functions-list
-  '(try-expand-dabbrev try-expand-dabbrev-visible try-expand-dabbrev-all-buffers
-    try-expand-dabbrev-from-kill try-expand-line-all-buffers try-expand-list-all-buffers
-    try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs
-    try-expand-list try-expand-line try-complete-lisp-symbol-partially
+  '(try-expand-dabbrev
+    try-expand-dabbrev-visible
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    try-expand-line-all-buffers
+    try-expand-list-all-buffers
+    try-complete-file-name-partially
+    try-complete-file-name
+    try-expand-all-abbrevs
+    try-expand-list
+    try-expand-line
+    try-complete-lisp-symbol-partially
     try-complete-lisp-symbol)))
 
 (fm/after emacs
- ;; Replace dabbrev-expand with hippie-expand.
- (fm/key-remap dabbrev-expand hippie-expand)
+ ;; Replace dabbrev-expand with hippie-expand
+ (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
  ;; Avoid graphical dialog boxes.
  (setq-default use-dialog-box nil)
@@ -105,9 +117,6 @@
 
  ;; Indent.
  (setq-default indent-tabs-mode nil)
-
- ;; Respond to yes/no questions using Y/N.
- (setq-default use-short-answers t)
 
  ;; History/savehist.
  (setq-default history-delete-duplicates t)
@@ -184,8 +193,6 @@
  (setq-default mouse-yank-at-point t))
 
 (fm/after simple
- ;; Hide commands in M-x that do not work in the current mode.
- (setq-default read-extended-command-predicate #'command-completion-default-include-p)
  (setq-default undo-limit (* 1024 1024))
  (setq-default suggest-key-bindings 10)
  (setq-default save-interprogram-paste-before-kill t)
@@ -225,10 +232,11 @@
  (setq-default whitespace-line-column 90)
  (setq-default show-trailing-whitespace nil)
  (setq-default whitespace-action '(cleanup))
- (setq-default whitespace-style
-  '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
-    space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
-    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof)))
+ (setq-default whitespace-style '(face tabs lines-tail empty
+  tab-mark indentation indentation::tab indentation::space
+  space-after-tab space-after-tab::tab space-after-tab::space
+  space-before-tab space-before-tab::tab
+  space-before-tab::space whitespace-missing-newline-at-eof)))
 
 (fm/after make-mode
  (fm/hook makefile-mode-hook whitespace-mode))
@@ -248,6 +256,9 @@
 
 (fm/mode "emacs" emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
+
+(fm/mode "Passwords.txt" text-mode)
+(fm/mode "Passwords_old.txt" text-mode)
 
 (fm/after eldoc
  (fm/dim eldoc-mode "Ed")
@@ -276,13 +287,13 @@
 (fm/after subword
  (fm/dim subword-mode "Sw"))
 
-(fm/after flyspell
- (fm/dim flyspell-mode "Fs")
- (setq-default ispell-program-name "aspell")
- (setq-default ispell-extra-args '("--sug-mode=ultra")))
+;; (fm/after flyspell
+;;  (fm/dim flyspell-mode "Fs")
+;;  (setq-default ispell-program-name "aspell")
+;;  (setq-default ispell-extra-args '("--sug-mode=ultra")))
 
 (fm/after text-mode
- (fm/hook text-mode-hook spell-fu-mode))
+ (fm/hook text-mode-hook flyspell-mode))
 
 (fm/after sh-script
  (setq-default sh-basic-offset 2)
@@ -346,7 +357,8 @@
 (fm/pkg systemd
  (fm/hook systemd-mode-hook company-mode))
 
-(fm/pkg org-bullets)
+(fm/pkg org-bullets
+ (setq-default org-bullets-bullet-list '(" ")))
 
 (fm/after org
  (setq-default org-ellipsis "…")
@@ -358,7 +370,6 @@
  (setq-default org-property-format "%s %s")
  (fm/key-local "C-c p" fm/generate-password org-mode-map "qol")
  (fm/hook org-mode-hook org-bullets-mode)
- (fm/hook org-mode-hook spell-fu-mode)
  (fm/hookn org-mode-hook
   (setq-local left-margin-width 2)
   (setq-local right-margin-width 2)
@@ -399,16 +410,15 @@
  (ivy-rich-mode))
 
 (fm/pkg swiper
- (fm/key-remap isearch-forward  swiper-isearch)
- (fm/key-remap isearch-backward swiper-isearch-backward)
- (fm/key "C-c C-s" swiper-thing-at-point)
+ (fm/key "C-s"         swiper-isearch)
+ (fm/key "C-c C-s"     swiper-thing-at-point)
+ (fm/key "C-r"         swiper-isearch-backward)
  (fm/after swiper
   (setq-default swiper-include-line-number-in-search t)))
 
 (fm/pkg embark
  (fm/after flyspell
-  ;; Embark reserves this keybinding.
-  (fm/key-disable "C-." flyspell-mode-map))
+  (fm/key-disable "C-." flyspell-mode-map)) ; Embark reserves that keybinding.
  (fm/key "C-." embark-act)
  (fm/after embark
   (setq-default prefix-help-command #'embark-prefix-help-command)))
@@ -423,9 +433,7 @@
   (eval-when-compile (defvar prescient-filter-method))
   (push 'literal-prefix prescient-filter-method)
   (push 'prefix prescient-filter-method)
-  (push 'anchored prescient-filter-method)
-  (fm/after minibuffer
-   (push 'prescient completion-styles)))
+  (push 'anchored prescient-filter-method))
  (fm/autoload prescient-persist-mode "prescient")
  (prescient-persist-mode +1))
 
@@ -441,8 +449,6 @@
   (push 'orderless completion-styles)))
 
 (fm/after minibuffer
- (push 'substring completion-styles)
- (push 'flex completion-styles)
  (setq-default read-file-name-completion-ignore-case t)
  (setq-default completion-category-defaults nil)
  (setq-default completion-cycle-threshold 4)
@@ -453,14 +459,12 @@
  ;; (setq-default completions-auto-select nil)
  (setq-default completions-format 'one-column)
  (setq-default completions-max-height 20)
- (setq-default completions-detailed t)
- (fm/after consult
-  (setq-default completion-in-region-function #'consult-completion-in-region)))
+ (setq-default completions-detailed t))
 
-(fm/pkg flyspell-correct-ivy
- (fm/after flyspell
-  (fm/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
-  (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
+;; (fm/pkg flyspell-correct-ivy
+;;  (fm/after flyspell
+;;   (fm/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
+;;   (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
 
 (fm/pkg mwim
  (fm/key "C-a" mwim-beginning)
@@ -499,7 +503,8 @@
   (setq-default projectile-cache-file emacs-projectile-cache-file)
   (setq-default projectile-project-search-path '("~/Workspace"))
   (setq-default projectile-sort-order '(recently-active))
-  (setq-default projectile-enable-caching nil))
+  (setq-default projectile-enable-caching nil)
+  (setq-default projectile-completion-system 'ivy))
  (projectile-mode))
 
 (fm/pkg counsel-projectile
@@ -640,7 +645,7 @@
  (fm/hook prog-mode-hook diff-hl-mode)
  (fm/hook prog-mode-hook eldoc-mode)
  (fm/hook prog-mode-hook show-paren-mode)
- (fm/hook prog-mode-hook flyspell-prog-mode)
+ ;; (fm/hook prog-mode-hook flyspell-prog-mode)
  (fm/hook prog-mode-hook flycheck-mode)
  (fm/hook prog-mode-hook yas-minor-mode)
  (fm/hook prog-mode-hook company-mode)
@@ -653,21 +658,22 @@
 (fm/after conf-mode
  (fm/hook conf-desktop-mode-hook diff-hl-mode)
  (fm/hook conf-desktop-mode-hook show-paren-mode)
- (fm/hook conf-desktop-mode-hook flyspell-prog-mode)
+ ;; (fm/hook conf-desktop-mode-hook flyspell-prog-mode)
  (fm/hook conf-desktop-mode-hook electric-pair-mode)
  (fm/hook conf-desktop-mode-hook electric-layout-mode)
  (fm/hook conf-desktop-mode-hook display-line-numbers-mode)
  (fm/hook conf-desktop-mode-hook hl-line-mode))
 
 (fm/pkg spell-fu
+ (global-spell-fu-mode)
  (fm/after spell-fu
   (fm/hookn spell-fu-mode-hook
    (fm/autoload spell-fu-dictionary-add "spell-fu")
    (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
    (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
-   (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
+   (spell-fu-dictionary-add
+    (spell-fu-get-personal-dictionary "en-personal" "/home/user/.aspell.en.pws")))
   (setq-default spell-fu-faces-exclude '(link))))
 
 (fm/pkg meson-mode
@@ -728,6 +734,8 @@
   (setq-default lsp-enable-imenu nil)
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
+  ;; (fm/hookn lsp-mode-hook
+  ;;  (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t)))
  (fm/after lsp-lens
   (fm/dim lsp-lens-mode)
   (setq-default lsp-lens-mode nil))
@@ -757,6 +765,7 @@
   (setq-default lsp-rust-analyzer-server-format-inlay-hints nil)
   (setq-default lsp-rust-all-features t)
   (setq-default lsp-rust-all-targets t)
+  ;; (setq-default lsp-rust-build-on-save t)
   (setq-default lsp-rust-unstable-features t)
   (setq-default lsp-rust-full-docs t)
   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy")
@@ -769,14 +778,12 @@
      "--all-scopes-completion"
      "--clang-tidy"
      "--completion-style=detailed"
-     "--header-insertion=iwyu"
-     ;; Breaks clangd-14
-     ; "--header-insertion-decorators"
+     "--header-insertion=never"
      "--inlay-hints"
+     "--limit-results=1000"
      "-j=4"
      "--malloc-trim"
-     "--pch-storage=memory"
-     "--background-index"))
+     "--pch-storage=memory"))
   (fm/after cc-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
