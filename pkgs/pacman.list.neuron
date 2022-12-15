@@ -445,6 +445,7 @@ rust-analyzer
 rust-bindgen
 rustc-demangle
 sassc
+sbctl
 scour
 screen
 scrot
