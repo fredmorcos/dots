@@ -80,6 +80,11 @@
 ;; Make URLs clickable
 (global-goto-address-mode)
 
+;; Suppress certain annoying warnings.
+(fm/after warnings
+ (eval-when-compile (defvar warning-suppress-types))
+ (add-to-list 'warning-suppress-types '(defvaralias)))
+
 ;; Hippie expand
 (fm/after hippie-exp
  (setq-default hippie-expand-try-functions-list
@@ -199,6 +204,9 @@
 
 (fm/after uniquify
  (setq-default uniquify-buffer-name-style 'forward))
+
+(fm/after woman
+ (setq-default woman-fill-column 100))
 
 (fm/after vc
  (setq-default vc-make-backup-files t))
