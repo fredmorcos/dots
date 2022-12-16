@@ -9,7 +9,7 @@ XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME XDG_CONFIG_HOME XDG_STATE_HOME XDG_CACHE_HOME
 
 # Bash
-HISTFILE="$XDG_STATE_HOME/bash_history"
+HISTFILE="$XDG_STATE_HOME/bash/bash_history"
 export HISTFILE
 
 # GnuPG
@@ -24,9 +24,10 @@ export ANDROID_HOME
 SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 export SCREENRC
 
-# Less
-LESSHISTFILE="$XDG_STATE_HOME/less_history"
-export LESSHISTFILE
+# Less and most
+LESSHISTFILE="$XDG_STATE_HOME/less/less_history"
+PAGER="less --use-color"
+export LESSHISTFILE PAGER
 
 # Applications
 MPV_HOME="$HOME/.config/mpv"
@@ -50,19 +51,14 @@ RUSTUP_HOME="$XDG_DATA_HOME/rust/rustup"
 CARGO_HOME="$XDG_DATA_HOME/rust/cargo"
 export RUSTUP_HOME CARGO_HOME
 
-# GnuPG
-GNUPGHOME="$XDG_DATA_HOME/gnupg"
-export GNUPGHOME
-
 # Inputrc
 INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export INPUTRC
 
-# Editors and pagers
+# Editors
 EDITOR=emacs
 GIT_EDITOR=$EDITOR
-PAGER=most
-export EDITOR GIT_EDITOR PAGER
+export EDITOR GIT_EDITOR
 
 # On-demand debugging symbols
 DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elfutils.org/"
