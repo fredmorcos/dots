@@ -411,7 +411,8 @@
  (fm/key-remap isearch-backward swiper-isearch-backward)
  (fm/key "C-c C-s" swiper-thing-at-point)
  (fm/after swiper
-  (setq-default swiper-include-line-number-in-search t)))
+  (setq-default swiper-include-line-number-in-search t)
+  (setq-default swiper-action-recenter t)))
 
 (fm/pkg embark
  (fm/after flyspell
