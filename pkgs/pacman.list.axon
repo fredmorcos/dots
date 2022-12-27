@@ -134,6 +134,7 @@ ghex
 gifski
 gimagereader-gtk
 gimp
+git-cliff
 git-lfs
 gitui
 glow
@@ -312,6 +313,7 @@ otf-fira-mono
 otf-fira-sans
 p7zip
 pacman-contrib
+pacrunner
 pam-u2f
 papirus-icon-theme
 par2cmdline
