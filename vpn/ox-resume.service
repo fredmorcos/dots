@@ -1,0 +1,15 @@
+[Unit]
+Description=Resume OX VPN service
+Requires=network-online.target
+After=network-online.target
+Wants=network-online.target NetworkManager-wait-online.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/systemctl restart ox.service
+Restart=on-failure
+
+[Install]
+WantedBy=suspend.target
+WantedBy=hibernate.target
+WantedBy=hybrid-sleep.target

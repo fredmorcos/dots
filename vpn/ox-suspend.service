@@ -1,0 +1,10 @@
+[Unit]
+Description=Suspend OX VPN service
+Before=sleep.target
+
+[Service]
+Type=simple
+ExecStart=-/usr/bin/systemctl stop ox.service
+
+[Install]
+WantedBy=sleep.target

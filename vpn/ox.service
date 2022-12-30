@@ -9,3 +9,4 @@ RestartSec=5
 
 [Install]
 WantedBy=network-online.target
+WantedBy=NetworkManager-wait-online.service

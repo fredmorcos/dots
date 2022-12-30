@@ -159,6 +159,8 @@ cmerge systemd/resolved.conf         $SYSD/resolved.conf
 cmerge systemd/boot-override.conf    $SYSD/system/boot.mount.d/override.conf
 
 cmerge vpn/ox.service                $SYSD/system/ox.service
+cmerge vpn/ox-suspend.service        $SYSD/system/ox-suspend.service
+cmerge vpn/ox-resume.service         $SYSD/system/ox-resume.service
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
