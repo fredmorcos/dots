@@ -40,6 +40,7 @@ cabextract
 capitaine-cursors
 cargo-asm
 cargo-audit
+cargo-auditable
 cargo-binstall
 cargo-bloat
 cargo-c
@@ -51,7 +52,9 @@ cargo-expand
 cargo-feature
 cargo-flamegraph
 cargo-fuzz
+cargo-geiger
 cargo-generate
+cargo-hakari
 cargo-msrv
 cargo-nextest
 cargo-outdated
