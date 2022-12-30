@@ -2,7 +2,6 @@ cargo-careful
 cargo-criterion
 cargo-deadlinks
 cargo-demangle
-cargo-geiger
 clang-tidy-sarif
 cxxbridge-cmd
 difftastic
