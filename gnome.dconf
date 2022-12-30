@@ -8,8 +8,8 @@ index-on-battery-first-time=false
 
 # Search Providers
 [org/gnome/desktop/search-providers]
-disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.clocks.desktop']
-enabled=['org.gnome.design.IconLibrary.desktop']
+disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.clocks.desktop', 'org.gnome.design.IconLibrary.desktop', 'org.gnome.Characters.desktop']
+enabled=@as []
 disable-external=false
 
 # Privacy
