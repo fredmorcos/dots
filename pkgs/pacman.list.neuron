@@ -243,6 +243,7 @@ libofa
 libopenraw
 librewolf-bin
 libupnp
+libva-intel-driver
 libva-mesa-driver
 libva-utils
 libva-vdpau-driver
