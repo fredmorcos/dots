@@ -613,7 +613,9 @@
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends '((company-capf company-files company-keywords)))
+  (setq-default company-backends
+   '((company-capf company-files company-keywords company-files company-dabbrev-code
+      company-dabbrev)))
   (setq-default company-keywords-ignore-case t)
   (setq-default company-minimum-prefix-length 1)
   (setq-default company-selection-wrap-around t)
@@ -634,6 +636,18 @@
 (fm/pkg company-prescient
  (fm/after company
   (fm/hook company-mode-hook company-prescient-mode)))
+
+;; (fm/pkg cape
+;;  (fm/after minibuffer
+;;   (add-to-list 'completion-at-point-functions 'cape-dabbrev)
+;;   (add-to-list 'completion-at-point-functions 'cape-file)
+;;   (add-to-list 'completion-at-point-functions 'cape-tex)
+;;   (add-to-list 'completion-at-point-functions 'cape-sgml)
+;;   (add-to-list 'completion-at-point-functions 'cape-rfc1345)
+;;   (add-to-list 'completion-at-point-functions 'cape-abbrev)
+;;   (add-to-list 'completion-at-point-functions 'cape-ispell)
+;;   (add-to-list 'completion-at-point-functions 'cape-dict)
+;;   (add-to-list 'completion-at-point-functions 'cape-line)))
 
 (fm/pkg tree-sitter-langs
  (fm/after tree-sitter-mode
