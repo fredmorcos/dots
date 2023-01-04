@@ -127,20 +127,20 @@ toggle-maximized=['<Super>Up']
 
 # Shortcuts
 [org/gnome/settings-daemon/plugins/media-keys]
-home=['<Primary><Alt>h']
-www=['<Primary><Alt>w']
+home=www=
+['<Super>F2']['<Super>F3']
 logout=@as []
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']
-custom-keybindings/custom0/binding='<Primary><Alt>t'
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']
+custom-keybindings/custom0/binding='<Super>F1'
 custom-keybindings/custom0/command='kgx'
 custom-keybindings/custom0/name='Terminal'
-custom-keybindings/custom1/binding='<Primary><Alt>e'
+custom-keybindings/custom1/binding='<Control><Alt>e'
 custom-keybindings/custom1/command='emacs'
 custom-keybindings/custom1/name='Emacs'
-custom-keybindings/custom2/binding='<Primary><Alt>d'
+custom-keybindings/custom2/binding='<Control><Alt>d'
 custom-keybindings/custom2/command='flatpak run com.discordapp.Discord'
 custom-keybindings/custom2/name='Discord'
-custom-keybindings/custom3/binding='<Primary><Alt>c'
+custom-keybindings/custom3/binding='<Control><Alt>c'
 custom-keybindings/custom3/command='signal-desktop'
 custom-keybindings/custom3/name='Signal'
 custom-keybindings/custom4/binding='<Primary><Alt>o'
