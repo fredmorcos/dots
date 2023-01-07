@@ -197,6 +197,7 @@ hyphen-fr
 idle3-tools
 img2pdf
 inetutils
+inkscape
 innoextract
 intel-media-sdk
 intel-ucode
@@ -357,7 +358,6 @@ python-beautifulsoup4
 python-brotli
 python-cairosvg
 python-cchardet
-python-cssselect
 python-discogs-client
 python-dulwich
 python-ecdsa
@@ -434,7 +434,6 @@ qtqr
 r2ghidra
 radeontool
 radvd
-ragel
 read-edid
 realtime-privileges
 rednotebook
