@@ -613,9 +613,8 @@
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends
-   '((company-capf company-files company-keywords company-files company-dabbrev-code
-      company-dabbrev)))
+  ;; Also: company-keywords company-files company-dabbrev-code company-dabbrev
+  (setq-default company-backends '((company-capf)))
   (setq-default company-keywords-ignore-case t)
   (setq-default company-minimum-prefix-length 1)
   (setq-default company-selection-wrap-around t)
