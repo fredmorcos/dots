@@ -615,8 +615,9 @@
   (fm/dim company-mode "Co")
   ;; Also: company-keywords company-files company-dabbrev-code company-dabbrev
   (setq-default company-backends '((company-capf)))
+  (setq-default company-idle-delay 0.5)
   (setq-default company-keywords-ignore-case t)
-  (setq-default company-minimum-prefix-length 1)
+  (setq-default company-minimum-prefix-length 2)
   (setq-default company-selection-wrap-around t)
   (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
 
@@ -691,19 +692,19 @@
    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
   (setq-default spell-fu-faces-exclude '(link org-link))))
 
-(fm/pkg dogears
- (fm/autoload dogears-list     "dogears")
- (fm/autoload dogears-sidebar  "dogears")
- (fm/autoload dogears-forward  "dogears")
- (fm/autoload dogears-backward "dogears")
- (fm/autoload dogears-go       "dogears")
- (fm/autoload dogears-remember "dogears")
- (fm/key "C-x r L" dogears-list)
- (fm/key "C-x r S" dogears-sidebar)
- (fm/key "C-x r F" dogears-forward)
- (fm/key "C-x r B" dogears-backward)
- (fm/key "C-x r G" dogears-go)
- (fm/key "C-x r R" dogears-remember))
+;; (fm/pkg dogears
+;;  (fm/autoload dogears-list     "dogears")
+;;  (fm/autoload dogears-sidebar  "dogears")
+;;  (fm/autoload dogears-forward  "dogears")
+;;  (fm/autoload dogears-backward "dogears")
+;;  (fm/autoload dogears-go       "dogears")
+;;  (fm/autoload dogears-remember "dogears")
+;;  (fm/key "C-x r L" dogears-list)
+;;  (fm/key "C-x r S" dogears-sidebar)
+;;  (fm/key "C-x r F" dogears-forward)
+;;  (fm/key "C-x r B" dogears-backward)
+;;  (fm/key "C-x r G" dogears-go)
+;;  (fm/key "C-x r R" dogears-remember))
 
 (fm/pkg meson-mode
  (fm/after meson-mode
