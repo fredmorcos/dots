@@ -287,7 +287,8 @@
 (fm/after flyspell
  (fm/dim flyspell-mode "Fs")
  (setq-default ispell-program-name "aspell")
- (setq-default ispell-extra-args '("--sug-mode=ultra")))
+ (setq-default ispell-extra-args '("--sug-mode=ultra"))
+ (setq-default ispell-local-dictionary "en_US"))
 
 (fm/after text-mode
  (fm/hook text-mode-hook spell-fu-mode))
@@ -761,12 +762,14 @@
   (setq-default lsp-modeline-code-actions-enable nil)
   (setq-default lsp-modeline-diagnostics-enable t)
   (setq-default lsp-log-io nil)
+  (setq-default lsp-keep-workspace-alive nil)
   (setq-default lsp-enable-imenu nil)
   (fm/after which-key
    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
  (fm/after lsp-lens
   (fm/dim lsp-lens-mode)
-  (setq-default lsp-lens-mode nil))
+  (setq-default lsp-lens-mode nil)
+  (setq-default lsp-lens-enable nil))
  (fm/after lsp-headerline
   (setq-default lsp-headerline-breadcrumb-icons-enable nil))
  (fm/after lsp-semantic-tokens
