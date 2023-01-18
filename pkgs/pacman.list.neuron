@@ -1,6 +1,7 @@
 aardvark-dns
 acpid
 alsa-firmware
+alsa-utils
 amd-ucode
 amdvlk
 android-tools
@@ -297,6 +298,7 @@ net-tools
 ngrep
 nilfs-utils
 nmap
+noise-suppression-for-voice
 noto-fonts-extra
 ntfs-3g
 nushell
@@ -379,6 +381,7 @@ python-invoke
 python-ipdb
 python-keyrings-alt
 python-keystone
+python-libnacl
 python-lsp-black
 python-lz4
 python-mdx-video
