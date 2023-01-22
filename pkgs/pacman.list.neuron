@@ -129,6 +129,7 @@ fdupes
 fig2dev
 file-roller
 firefox
+flameshot
 fprintd
 fzf
 fzy
@@ -262,6 +263,7 @@ linux-zen
 linux-zen-headers
 lld
 lldb
+llvm
 lrzip
 lshw
 lsof
