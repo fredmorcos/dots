@@ -252,10 +252,7 @@
  (setq-default lisp-indent-offset 1)
  (setq-default lisp-indent-function #'common-lisp-indent-function)
  (fm/hook emacs-lisp-mode-hook symbol-overlay-mode)
- (fm/hook emacs-lisp-mode-hook whitespace-mode)
- (fm/after company
-  (fm/hookn emacs-lisp-mode-hook
-   (fm/company-add-backend 'company-capf))))
+ (fm/hook emacs-lisp-mode-hook whitespace-mode))
 
 (fm/mode "emacs" emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
@@ -293,8 +290,8 @@
  (setq-default ispell-extra-args '("--sug-mode=ultra"))
  (setq-default ispell-local-dictionary "en_US"))
 
-(fm/after text-mode
- (fm/hook text-mode-hook spell-fu-mode))
+;; (fm/after text-mode
+;;  (fm/hook text-mode-hook spell-fu-mode))
 
 (fm/after sh-script
  (setq-default sh-basic-offset 2)
@@ -357,27 +354,6 @@
 
 (fm/pkg systemd
  (fm/hook systemd-mode-hook company-mode))
-
-(fm/pkg highlight-defined
- (fm/hook emacs-lisp-mode-hook highlight-defined-mode))
-
-(fm/pkg highlight-quoted
- (fm/hook emacs-lisp-mode-hook highlight-quoted-mode))
-
-(fm/pkg eros
- (fm/hook emacs-lisp-mode-hook eros-mode))
-
-(fm/pkg suggest)
-
-(fm/pkg ipretty
- (ipretty-mode))
-
-(fm/pkg elsa)
-
-(fm/pkg flycheck-elsa
- (fm/hook emacs-lisp-mode-hook flycheck-elsa-setup))
-
-(fm/pkg puni)
 
 (fm/pkg org-bullets)
 
@@ -480,6 +456,11 @@
  (setq-default read-file-name-completion-ignore-case t)
  (setq-default completion-category-defaults nil)
  (setq-default completion-cycle-threshold 4)
+ ;; (fm/key-local "C-n" minibuffer-next-completion minibuffer-mode-map)
+ ;; (fm/key-local "C-p" minibuffer-previous-completion minibuffer-mode-map)
+ ;; (fm/key-local "C-n" minibuffer-next-completion completion-in-region-mode-map)
+ ;; (fm/key-local "C-p" minibuffer-previous-completion completion-in-region-mode-map)
+ ;; (setq-default completions-auto-select nil)
  (setq-default completions-format 'one-column)
  (setq-default completions-max-height 20)
  (setq-default completions-detailed t)
@@ -633,18 +614,18 @@
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends '())
+  ;; Also: company-keywords company-files company-dabbrev-code company-dabbrev
+  (setq-default company-backends '((company-capf)))
   (setq-default company-idle-delay 0.5)
   (setq-default company-keywords-ignore-case t)
   (setq-default company-minimum-prefix-length 2)
   (setq-default company-selection-wrap-around t)
-  (setq-default company-tooltip-align-annotations t)
   (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
 
 (defun fm/company-add-backend (backend)
  "Add BACKEND to local copy of `company-backends'."
  (eval-when-compile (defvar company-backends))
- (let ((backends `(,backend ,(car company-backends))))
+ (let ((backends `((,backend . ,(car company-backends)))))
   (setq-local company-backends backends)))
 
 (fm/pkg company-posframe
@@ -656,6 +637,18 @@
 (fm/pkg company-prescient
  (fm/after company
   (fm/hook company-mode-hook company-prescient-mode)))
+
+;; (fm/pkg cape
+;;  (fm/after minibuffer
+;;   (add-to-list 'completion-at-point-functions 'cape-dabbrev)
+;;   (add-to-list 'completion-at-point-functions 'cape-file)
+;;   (add-to-list 'completion-at-point-functions 'cape-tex)
+;;   (add-to-list 'completion-at-point-functions 'cape-sgml)
+;;   (add-to-list 'completion-at-point-functions 'cape-rfc1345)
+;;   (add-to-list 'completion-at-point-functions 'cape-abbrev)
+;;   (add-to-list 'completion-at-point-functions 'cape-ispell)
+;;   (add-to-list 'completion-at-point-functions 'cape-dict)
+;;   (add-to-list 'completion-at-point-functions 'cape-line)))
 
 (fm/pkg tree-sitter-langs
  (fm/after tree-sitter-mode
@@ -678,8 +671,7 @@
  (fm/hook prog-mode-hook electric-layout-mode)
  (fm/hook prog-mode-hook display-line-numbers-mode)
  (fm/hook prog-mode-hook hl-line-mode)
- (fm/hook prog-mode-hook bug-reference-prog-mode)
- (fm/hook prog-mode-hook puni-mode))
+ (fm/hook prog-mode-hook bug-reference-prog-mode))
 
 (fm/after conf-mode
  (fm/hook conf-desktop-mode-hook diff-hl-mode)
@@ -690,16 +682,30 @@
  (fm/hook conf-desktop-mode-hook display-line-numbers-mode)
  (fm/hook conf-desktop-mode-hook hl-line-mode))
 
-(fm/pkg spell-fu
- (fm/autoload spell-fu-dictionary-add "spell-fu")
- (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
- (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
- (fm/after spell-fu
-  (fm/hookn spell-fu-mode-hook
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
-   (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
-  (setq-default spell-fu-faces-exclude '(link org-link))))
+;; (fm/pkg spell-fu
+;;  (fm/autoload spell-fu-dictionary-add "spell-fu")
+;;  (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
+;;  (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
+;;  (fm/after spell-fu
+;;   (fm/hookn spell-fu-mode-hook
+;;    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
+;;    (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
+;;    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
+;;   (setq-default spell-fu-faces-exclude '(link org-link))))
+
+;; (fm/pkg dogears
+;;  (fm/autoload dogears-list     "dogears")
+;;  (fm/autoload dogears-sidebar  "dogears")
+;;  (fm/autoload dogears-forward  "dogears")
+;;  (fm/autoload dogears-backward "dogears")
+;;  (fm/autoload dogears-go       "dogears")
+;;  (fm/autoload dogears-remember "dogears")
+;;  (fm/key "C-x r L" dogears-list)
+;;  (fm/key "C-x r S" dogears-sidebar)
+;;  (fm/key "C-x r F" dogears-forward)
+;;  (fm/key "C-x r B" dogears-backward)
+;;  (fm/key "C-x r G" dogears-go)
+;;  (fm/key "C-x r R" dogears-remember))
 
 (fm/pkg meson-mode
  (fm/after meson-mode
@@ -712,13 +718,18 @@
   (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust")
   (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "lsp-rust")
   (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "lsp-rust")
+  (setq-default rustic-lsp-server 'rust-analyzer)
+  (setq-default rustic-analyzer-command '("/usr/bin/rust-analyzer"))
+  (setq-default rustic-format-on-save nil)
+  (setq-default rustic-lsp-format t)
   (setq-default rustic-indent-offset 2)
+  (setq-default rustic-always-locate-project-on-open t)
   (fm/hookn rustic-mode-hook (electric-quote-local-mode -1))
-  (fm/hook rustic-mode-hook subword-mode))
- (fm/after rustic-rustfmt
-  (setq-default rustic-format-on-save t)
-  (setq-default rustic-format-trigger 'on-save)
-  (setq-default rustic-use-rust-save-some-buffers t)))
+  (fm/hook rustic-mode-hook subword-mode)
+  (fm/hookn rustic-mode-hook
+   (fm/after lsp-mode
+    (fm/hookn lsp-mode-hook
+     (fm/hook before-save-hook lsp-format-buffer "lsp-mode" t))))))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
@@ -730,6 +741,7 @@
   (fm/key-local "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
   (fm/key-local "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
   (setq-default lsp-progress-prefix "  Progress: ")
+  (setq-default lsp-completion-provider :none) ; Company-capf is already set
   (setq-default lsp-completion-show-detail t)
   (setq-default lsp-completion-show-kind t)
   (setq-default lsp-headerline-breadcrumb-enable t)
@@ -762,9 +774,13 @@
   (setq-default lsp-headerline-breadcrumb-icons-enable nil))
  (fm/after lsp-semantic-tokens
   (setq-default lsp-semantic-tokens-apply-modifiers t))
+ (fm/after lsp-vetur
+  (setq-default lsp-vetur-emmet "inMarkupAndStylesheetFilesOnly"))
  (fm/after lsp-rust
   (setq-default lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
   (setq-default lsp-rust-analyzer-proc-macro-enable t)
+  (setq-default lsp-rust-analyzer-use-client-watching nil)
+  (setq-default lsp-rust-analyzer-server-command "/usr/bin/rust-analyzer")
   (setq-default lsp-rust-racer-completion nil)
   (setq-default lsp-rust-build-bin t)
   (setq-default lsp-rust-build-lib t)
@@ -773,15 +789,19 @@
   (setq-default lsp-rust-analyzer-display-chaining-hints t)
   (setq-default lsp-rust-analyzer-display-parameter-hints t)
   (setq-default lsp-rust-analyzer-display-closure-return-type-hints t)
+  (setq-default lsp-rust-analyzer-display-reborrow-hints nil)
   (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
   (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
   (setq-default lsp-rust-analyzer-binding-mode-hints t)
-  (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
+  (setq-default lsp-rust-analyzer-server-format-inlay-hints nil)
   (setq-default lsp-rust-all-features t)
   (setq-default lsp-rust-all-targets t)
   (setq-default lsp-rust-unstable-features t)
   (setq-default lsp-rust-full-docs t)
-  (setq-default lsp-rust-analyzer-cargo-watch-command "clippy"))
+  (setq-default lsp-rust-analyzer-cargo-watch-command "clippy")
+  (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
+  (setq-default lsp-rust-analyzer-inlay-param-format "%s")
+  (setq-default lsp-rust-analyzer-inlay-type-format "%s"))
  (fm/after lsp-clangd
   (setq-default lsp-clients-clangd-args
    '("--header-insertion-decorators"
@@ -824,6 +844,8 @@
   (fm/hook lsp-mode-hook lsp-treemacs-sync-mode)))
 
 (fm/pkg lsp-ui
+ (fm/after lsp-ui-flycheck
+  (setq-default lsp-ui-flycheck-enable t))
  (fm/after lsp-ui-doc
   (setq-default lsp-ui-doc-enable t)
   (setq-default lsp-ui-doc-show-with-cursor nil)
@@ -834,16 +856,16 @@
   (setq-default lsp-ui-doc-max-height 30)
   (setq-default lsp-ui-doc-use-webkit t))
  (fm/after lsp-ui-peek
-  (setq-default lsp-ui-peek-list-width 40)
+  (setq-default lsp-ui-peek-list-width 30)
   (setq-default lsp-ui-peek-always-show t))
  (fm/after lsp-ui-sideline
   (setq-default lsp-ui-sideline-enable nil))
  (fm/after lsp-ui
-  (fm/key-local "M-."   lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "M-?"   lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
-  (fm/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
+  (fm/key-local "M-." lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
+  (fm/key-local "M-?" lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
+  (fm/key-local "M-I" lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
+  (fm/key-local "C-c d"   lsp-ui-doc-show      lsp-ui-mode-map "lsp-ui-doc")
+  (fm/key-local "C-c ! l" lsp-ui-flycheck-list lsp-ui-mode-map "lsp-ui-flycheck")))
 
 (fm/pkg web-mode
  (fm/mode ".html" web-mode)

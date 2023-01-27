@@ -187,6 +187,9 @@
  (fm/face mc/cursor-bar-face :background "Gray40" :foreground "White")
  (fm/face mc/cursor-face     :background "Gray50" :foreground "White"))
 
+(fm/after eros
+ (fm/face eros-result-overlay-face :background "RoyalBlue" :foreground "White"))
+
 (fm/after hledger-mode
  (setq-default hledger-description-face '(:foreground "RoyalBlue"))
  (setq-default hledger-account-face '(:inherit default))
