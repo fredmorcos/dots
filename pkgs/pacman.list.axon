@@ -68,6 +68,7 @@ cargo-tarpaulin
 cargo-udeps
 cargo-update
 cargo-watch
+cask
 catdoc
 catimg
 cbindgen
@@ -114,7 +115,6 @@ ed
 edk2-ovmf
 efibootmgr
 elementary-wallpapers
-emacs-nativecomp
 entr
 eog-plugins
 epiphany
