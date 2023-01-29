@@ -377,8 +377,6 @@
 (fm/pkg flycheck-elsa
  (fm/hook emacs-lisp-mode-hook flycheck-elsa-setup))
 
-(fm/pkg puni)
-
 (fm/pkg org-bullets)
 
 (fm/after org
@@ -678,8 +676,7 @@
  (fm/hook prog-mode-hook electric-layout-mode)
  (fm/hook prog-mode-hook display-line-numbers-mode)
  (fm/hook prog-mode-hook hl-line-mode)
- (fm/hook prog-mode-hook bug-reference-prog-mode)
- (fm/hook prog-mode-hook puni-mode))
+ (fm/hook prog-mode-hook bug-reference-prog-mode))
 
 (fm/after conf-mode
  (fm/hook conf-desktop-mode-hook diff-hl-mode)
