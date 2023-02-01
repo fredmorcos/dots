@@ -281,6 +281,7 @@ mesa-utils
 mesa-vdpau
 meson
 microsoft-gsl
+minder
 minisign
 mkinitcpio-systemd-tool
 mkinitcpio-utils
@@ -533,6 +534,7 @@ vulkan-intel
 vulkan-mesa-layers
 vulkan-radeon
 vulkan-tools
+vym
 wabt
 wayland-utils
 wdiff
