@@ -252,10 +252,7 @@
  (setq-default lisp-indent-offset 1)
  (setq-default lisp-indent-function #'common-lisp-indent-function)
  (fm/hook emacs-lisp-mode-hook symbol-overlay-mode)
- (fm/hook emacs-lisp-mode-hook whitespace-mode)
- (fm/after company
-  (fm/hookn emacs-lisp-mode-hook
-   (fm/company-add-backend 'company-capf))))
+ (fm/hook emacs-lisp-mode-hook whitespace-mode))
 
 (fm/mode "emacs" emacs-lisp-mode)
 (fm/mode ".config/emacs/init" emacs-lisp-mode)
@@ -631,7 +628,7 @@
 (fm/pkg company
  (fm/after company
   (fm/dim company-mode "Co")
-  (setq-default company-backends '())
+  (setq-default company-backends '((company-capf)))
   (setq-default company-idle-delay 0.5)
   (setq-default company-keywords-ignore-case t)
   (setq-default company-minimum-prefix-length 2)
@@ -641,8 +638,9 @@
 
 (defun fm/company-add-backend (backend)
  "Add BACKEND to local copy of `company-backends'."
+ (fm/autoload -insert-at "dash")
  (eval-when-compile (defvar company-backends))
- (let ((backends (cons backend (car company-backends))))
+ (let ((backends `(,(-insert-at (length company-backends) backend (car company-backends)))))
   (setq-local company-backends backends)))
 
 (fm/pkg company-posframe
@@ -729,6 +727,7 @@
   (setq-default lsp-progress-prefix "  Progress: ")
   (setq-default lsp-completion-show-detail t)
   (setq-default lsp-completion-show-kind t)
+  (setq-default lsp-completion-provider :none)
   (setq-default lsp-headerline-breadcrumb-enable t)
   (setq-default lsp-restart 'auto-restart)
   (setq-default lsp-enable-snippet t)
