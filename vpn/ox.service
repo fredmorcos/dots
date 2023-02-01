@@ -2,7 +2,7 @@
 Description=OX VPN service
 
 [Service]
-ExecStart=openvpn --config /home/fred/Documents/OX/VPN/fred_morcos@alcatraz.open-xchange.com.ovpn --auth-user-pass /home/fred/Documents/Important/Passwords/_ox.txt --script-security 2 --up /home/fred/Workspace/dots/vpn/dns-setup
+ExecStart=openvpn --config /home/fred/Documents/OX/VPN/fred_morcos@alcatraz.open-xchange.com.ovpn --auth-user-pass /home/fred/Documents/Important/Passwords/_ox.txt --script-security 2 --up /home/fred/Workspace/dots/vpn/dns-setup --data-ciphers 'AES-256-CBC:AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305'
 Restart=always
 TimeoutSec=5
 RestartSec=5
