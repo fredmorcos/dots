@@ -282,7 +282,6 @@ mesa-utils
 mesa-vdpau
 meson
 microsoft-gsl
-minder
 minisign
 mkinitcpio-systemd-tool
 mkinitcpio-utils
