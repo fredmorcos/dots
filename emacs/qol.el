@@ -26,7 +26,7 @@
  (forward-line -1))
 
 (defun fm/insert-pair (left right &optional region-only)
- "Insert LEFT & RIGHT in or around text if REGION-ONLY is t."
+ "Insert LEFT & RIGHT in text, or around it if REGION-ONLY is t."
  (if (use-region-p)
   (let ((begin (region-beginning))
         (end (region-end)))
