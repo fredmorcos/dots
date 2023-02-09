@@ -614,13 +614,18 @@
 
 (fm/pkg flycheck-posframe
  (fm/after flycheck-posframe
+  ;; (flycheck-posframe-configure-pretty-defaults)
   (setq-default flycheck-posframe-position 'window-bottom-left-corner)
   (setq-default flycheck-posframe-border-width 1)
-  (setq-default flycheck-posframe-prefix " ↪ Info: ")
-  (setq-default flycheck-posframe-warnings-prefix " ⚠ Warning: ")
-  (setq-default flycheck-posframe-error-prefix " ⤬ Error: ")
+  (setq-default flycheck-posframe-prefix
+   (concat " " (char-to-string 8618) " Info: "))
+  (setq-default flycheck-posframe-warnings-prefix
+   (concat " " (char-to-string 9888) " Warning: "))
+  (setq-default flycheck-posframe-error-prefix
+   (concat " " (char-to-string 10540) " Error: "))
   (fm/after company
-   (fm/hook flycheck-posframe-inhibit-functions company--active-p "company")
+   (fm/hook flycheck-posframe-inhibit-functions
+    company--active-p "company")
    (fm/hook flycheck-posframe-inhibit-functions
     (lambda (&rest _) (bound-and-true-p company-backend))))))
 
@@ -641,10 +646,9 @@
 
 (defun fm/company-add-backend (backend)
  "Add BACKEND to local copy of `company-backends'."
- (fm/autoload -insert-at "dash")
  (eval-when-compile (defvar company-backends))
- (let ((backends `(,(-insert-at (length company-backends) backend (car company-backends)))))
-  (setq-local company-backends backends)))
+ (fm/autoload fm/append "qol")
+ (fm/append (car company-backends) backend))
 
 (fm/pkg company-posframe
  (fm/after company-posframe
