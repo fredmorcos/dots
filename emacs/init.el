@@ -648,7 +648,8 @@
 
 (fm/pkg company-posframe
  (fm/after company-posframe
-  (fm/dim company-posframe-mode))
+  (fm/dim company-posframe-mode)
+  (setq-default company-posframe-quickhelp-x-offset 2))
  (fm/after company
   (fm/hook company-mode-hook company-posframe-mode "company-posframe")))
 

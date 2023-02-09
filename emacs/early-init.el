@@ -115,7 +115,7 @@
  (fm/face mode-line
   :background "Gray95"
   :foreground "Gray60"
-  :box (:color "Gray95" :line-width 4))
+  :box (:color "Gray95" :line-width 0))
 
  (fm/face mode-line-inactive  :inherit mode-line :foreground "Gray80")
  (fm/face mode-line-buffer-id :foreground "RoyalBlue")
@@ -220,12 +220,18 @@
   (fm/face flycheck-posframe-warning-face :foreground "DarkOrange")))
 
 (fm/after company
- (fm/face company-tooltip :background "gray95"))
+ (fm/face company-tooltip :background "Gray95"))
 
 (fm/after company-posframe
  (setq-default company-posframe-show-params
   '(:internal-border-width 1
-    :internal-border-color "gray60")))
+    :internal-border-color "Gray60"))
+ (setq-default company-posframe-quickhelp-show-params
+  '(:poshandler company-posframe-quickhelp-right-poshandler
+    :timeout 60
+    :no-properties nil
+    :internal-border-width 1
+    :internal-border-color "Gray60")))
 
 (fm/after tree-sitter-hl
  (fm/face tree-sitter-hl-face:property :slant normal :weight regular))
