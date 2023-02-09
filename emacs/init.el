@@ -525,8 +525,9 @@
   (fm/dim projectile-mode "Pr")
   (setq-default projectile-cache-file emacs-projectile-cache-file)
   (setq-default projectile-project-search-path '("~/Workspace"))
-  (setq-default projectile-sort-order '(recently-active))
-  (setq-default projectile-enable-caching nil))
+  (setq-default projectile-sort-order 'recently-active)
+  (setq-default projectile-enable-caching nil)
+  (setq-default projectile-require-project-root nil))
  (projectile-mode))
 
 (fm/pkg counsel-projectile
