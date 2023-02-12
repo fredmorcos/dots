@@ -12,14 +12,13 @@ aspell-en
 atomicparsley
 audacious
 audiofile
-autoconf
-automake
 autopep8
 avisynthplus
 bandit
 bandwhich
 baobab
 base
+base-devel
 bash-completion
 bashtop
 bat
@@ -29,7 +28,6 @@ bearssl
 beets
 bettercap-caplets
 bind
-bison
 blanket
 blender
 bluez-tools
@@ -343,7 +341,6 @@ pigz
 pipewire-v4l2
 pipewire-zeroconf
 pixz
-pkgconf
 postgresql
 power-profiles-daemon
 powertop
@@ -484,7 +481,6 @@ sshfs
 strace
 s-tui
 subdl
-sudo
 svgcleaner
 switcheroo-control
 syncthing
