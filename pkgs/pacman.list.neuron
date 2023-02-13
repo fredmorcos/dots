@@ -84,6 +84,7 @@ cmake
 codespell
 conntrack-tools
 cpio
+cppcheck
 criu
 cuda
 curlftpfs
@@ -429,6 +430,7 @@ python-zopfli
 qbittorrent
 qbs
 qreator
+qt5-tools
 qt6-examples
 qt6-languageserver
 qtcreator
