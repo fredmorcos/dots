@@ -155,12 +155,12 @@
 (savehist-mode)
 
 (fm/after recentf
- (setq-default recentf-auto-cleanup 'never)
+ ;; (setq-default recentf-auto-cleanup 'never)
  (setq-default recentf-save-file emacs-recentf-file)
  (setq-default recentf-max-menu-items 50)
  (setq-default recentf-max-saved-items 100)
  (setq-default recentf-exclude `(,emacs-elpa-dir ,emacs-var-dir)))
-(fm/hook kill-emacs-hook recentf-cleanup "recentf")
+;; (fm/hook kill-emacs-hook recentf-cleanup "recentf")
 (recentf-mode)
 
 (fm/after help
@@ -374,7 +374,13 @@
 (fm/pkg flycheck-elsa
  (fm/hook emacs-lisp-mode-hook flycheck-elsa-setup))
 
-(fm/pkg org-bullets)
+(fm/pkg org-bullets
+ (fm/after org-bullets
+  (setq-default org-bullets-bullet-list
+   `(,(char-to-string 8857)
+     ,(char-to-string 8627)
+     ,(char-to-string 8627)
+     ,(char-to-string 8627)))))
 
 (fm/after org
  (setq-default org-ellipsis "…")
