@@ -85,8 +85,8 @@ show-weekdate=true
 
 # Shell Apps and Extensions
 [org/gnome/shell]
-enabled-extensions=['just-perfection-desktop@just-perfection', 'unite@hardpixel.eu', 'appindicatorsupport@rgcjonas.gmail.com']
-disable-user-extensions=false
+enabled-extensions=@as []
+disable-user-extensions=true
 favorite-apps=['org.gnome.Nautilus.desktop', 'rhythmbox.desktop', 'de.haeckerfelix.Shortwave.desktop', 'org.gnome.DiskUtility.desktop']
 
 # Window switcher
@@ -161,14 +161,3 @@ preferences/show-image-thumbnails='local-only'
 preferences/show-directory-item-counts='never'
 list-view/default-zoom-level='small'
 list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_with_time']
-
-# Tray Icons Extension
-[org/gnome/shell/extensions/appindicator]
-icon-saturation=0.7
-icon-opacity=255
-
-# Just Perfection Extension
-[org/gnome/shell/extensions/just-perfection]
-startup-status=0
-alt-tab-icon-size=128
-animation=3
