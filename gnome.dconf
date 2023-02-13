@@ -161,3 +161,7 @@ preferences/show-image-thumbnails='local-only'
 preferences/show-directory-item-counts='never'
 list-view/default-zoom-level='small'
 list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_with_time']
+
+# Console
+[org/gnome/Console]
+scrollback-lines=100000
