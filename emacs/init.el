@@ -803,10 +803,13 @@
      ;; Breaks clangd-14
      ; "--header-insertion-decorators"
      "--inlay-hints"
-     "-j=4"
+     "-j=8"
      "--malloc-trim"
      "--pch-storage=memory"
-     "--background-index"))
+     "--background-index"
+     "--function-arg-placeholders"
+     "--limit-references=0"
+     "--limit-results=0"))
   (fm/after cc-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
