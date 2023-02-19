@@ -80,7 +80,6 @@ checksec
 cheese
 chmlib
 clinfo
-cmake
 codespell
 conntrack-tools
 cpio
@@ -445,6 +444,8 @@ rhythmbox
 rink
 ripgrep
 rmlint
+rocm-hip-runtime
+rocm-opencl-runtime
 ropgadget
 ropper
 rpm-tools
