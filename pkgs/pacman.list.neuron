@@ -382,6 +382,7 @@ python-keyrings-alt
 python-keystone
 python-libnacl
 python-lsp-black
+python-lsprotocol
 python-lz4
 python-mdx-video
 python-micawber
