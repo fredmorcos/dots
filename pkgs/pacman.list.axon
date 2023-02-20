@@ -380,7 +380,6 @@ python-keyrings-alt
 python-keystone
 python-libnacl
 python-lsp-black
-python-lsprotocol
 python-lz4
 python-mdx-video
 python-micawber
@@ -409,6 +408,8 @@ python-pyserial
 python-pystemmer
 python-pytest-black
 python-pytest-flake8
+python-pytest-lsp
+python-pytest-mypy
 python-pytest-pylint
 python-rcssmin
 python-requests-oauthlib
@@ -441,6 +442,7 @@ realtime-privileges
 rednotebook
 reflector
 remake
+reuse
 rhythmbox
 rink
 ripgrep
