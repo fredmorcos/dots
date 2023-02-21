@@ -423,6 +423,11 @@
    '((t . ivy--regex-ignore-order) (t . ivy--regex-plus))))
  (ivy-mode))
 
+(fm/pkg ctrlf
+ (fm/after ctrlf
+  (setq-default ctrlf-default-search-style 'fuzzy))
+ (ctrlf-mode 1))
+
 (fm/pkg counsel
  (fm/after counsel
   (fm/key-local "M-Y" counsel-yank-pop counsel-mode-map)
@@ -435,13 +440,13 @@
   (setq-default ivy-rich-path-style 'abbrev))
  (ivy-rich-mode))
 
-(fm/pkg swiper
- (fm/key-remap isearch-forward  swiper-isearch)
- (fm/key-remap isearch-backward swiper-isearch-backward)
- (fm/key "C-c C-s" swiper-thing-at-point)
- (fm/after swiper
-  (setq-default swiper-include-line-number-in-search t)
-  (setq-default swiper-action-recenter t)))
+;; (fm/pkg swiper
+;;  (fm/key-remap isearch-forward  swiper-isearch)
+;;  (fm/key-remap isearch-backward swiper-isearch-backward)
+;;  (fm/key "C-c C-s" swiper-thing-at-point)
+;;  (fm/after swiper
+;;   (setq-default swiper-include-line-number-in-search t)
+;;   (setq-default swiper-action-recenter t)))
 
 (fm/pkg embark
  (fm/after flyspell
