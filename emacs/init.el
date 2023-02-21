@@ -425,7 +425,8 @@
 
 (fm/pkg ctrlf
  (fm/after ctrlf
-  (setq-default ctrlf-default-search-style 'fuzzy))
+  (setq-default ctrlf-default-search-style 'fuzzy)
+  (setq-default ctrlf-auto-recenter t))
  (ctrlf-mode 1))
 
 (fm/pkg counsel
