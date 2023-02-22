@@ -29,6 +29,10 @@ LESSHISTFILE="$XDG_STATE_HOME/less/less_history"
 PAGER="less --use-color"
 export LESSHISTFILE PAGER
 
+# Parallel
+PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export PARALLEL_HOME
+
 # Applications
 MPV_HOME="$HOME/.config/mpv"
 export MPV_HOME
