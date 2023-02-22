@@ -476,6 +476,7 @@ sloccount
 smartmontools
 sndio
 sof-firmware
+softhsm
 sof-tools
 soundconverter
 sox
@@ -515,6 +516,7 @@ tup
 udftools
 udiskie
 unace
+unbound
 unicode-emoji
 unixodbc
 unoconv
