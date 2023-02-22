@@ -383,6 +383,7 @@
      ,(char-to-string 8627)))))
 
 (fm/after org
+ (setq-default org-startup-truncated nil)
  (setq-default org-ellipsis "…")
  (setq-default org-hide-leading-stars t)
  (setq-default org-hide-emphasis-markers t)
