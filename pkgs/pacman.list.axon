@@ -75,7 +75,6 @@ cclive
 ccls
 cdrtools
 cgdb
-chafa
 checksec
 cheese
 chmlib
@@ -176,6 +175,7 @@ gvfs-google
 gvfs-mtp
 h2o
 hamster-time-tracker
+harfbuzz-utils
 hddtemp
 hdparm
 heaptrack
