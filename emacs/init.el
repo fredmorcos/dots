@@ -397,8 +397,7 @@
  (fm/hookn org-mode-hook
   (setq-local left-margin-width 2)
   (setq-local right-margin-width 2)
-  (setq-local scroll-margin 0)
-  (setq-local cursor-type 'bar)))
+  (setq-local scroll-margin 0)))
 
 (fm/pkg which-key
  (fm/after which-key
