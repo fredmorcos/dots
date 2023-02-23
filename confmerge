@@ -227,5 +227,5 @@ fi
 
 if [ "$pkgs_cargo_install" != "" ]; then
   echo "Install Cargo packages:"
-  $SHELL -c "cargo install $pkgs_cargo_install"
+  $SHELL -c "cargo binstall $pkgs_cargo_install"
 fi
