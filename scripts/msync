@@ -13,13 +13,13 @@ CMD=("rsync"
      "--executability"
      "--delete"
      "--delete-excluded"
-     "--exclude=*/cargo-target"
-     "--exclude=*/rustup"
-     "--exclude=*/target"
-     "--exclude=*/__pycache__"
+     # "--exclude=*/cargo-target"
+     # "--exclude=*/rustup"
+     # "--exclude=*/target"
+     # "--exclude=*/__pycache__"
      '--exclude=emacs/elpa/*'
      '--exclude=node_modules/*'
-     '--exclude=clangd/*'
+     # '--exclude=clangd/*'
      "$@")
 
 echo ">>> Rsync command:" "${CMD[@]}"
