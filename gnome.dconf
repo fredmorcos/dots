@@ -164,4 +164,4 @@ list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_w
 
 # Console
 [org/gnome/Console]
-scrollback-lines=100000
+scrollback-lines=int64 100000
