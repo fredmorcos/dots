@@ -336,12 +336,18 @@
  (fm/hook gud-mode-hook gud-tooltip-mode)
  (setq-local gdb-restore-window-configuration-after-quit t))
 
-(fm/pkg toml-mode)
 (fm/pkg markdown-mode)
 (fm/pkg crux)
 (fm/pkg indent-guide)
 (fm/pkg sed-mode)
 (fm/pkg po-mode)
+
+(fm/pkg toml-mode)
+(fm/pkg eldoc-toml
+ (fm/after eldoc-toml
+  (fm/dim eldoc-toml-mode))
+ (fm/after toml-mode
+  (fm/hook toml-mode-hook eldoc-toml-mode)))
 
 (fm/pkg cmake-mode)
 (fm/pkg eldoc-cmake
