@@ -426,6 +426,7 @@ python-pytest-flake8
 python-pytest-lsp
 python-pytest-mypy
 python-pytest-pylint
+python-pyudev
 python-rcssmin
 python-requests-oauthlib
 python-rjsmin
