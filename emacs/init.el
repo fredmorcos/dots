@@ -389,6 +389,8 @@
      ,(char-to-string 8627)))))
 
 (fm/after org
+ (setq-default org-todo-keywords
+  `((sequence ,(char-to-string 9744) ,(char-to-string 9745))))
  (setq-default org-startup-truncated nil)
  (setq-default org-ellipsis "…")
  (setq-default org-hide-leading-stars t)
