@@ -510,8 +510,8 @@
   (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
 
 (fm/pkg mwim
- (fm/key "C-a" mwim-beginning)
- (fm/key "C-e" mwim-end))
+ (fm/key-remap move-beginning-of-line mwim-beginning-of-code-or-line-or-comment)
+ (fm/key-remap move-end-of-line mwim-end-of-code-or-line))
 
 (fm/pkg expand-region
  (fm/key "C-=" er/expand-region))
