@@ -167,11 +167,11 @@ list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_w
 scrollback-lines=int64 100000
 
 # Weather
-[/org/gnome/shell/weather]
+[org/gnome/shell/weather]
 locations=[<(uint32 2, <('Vienna', 'LOWW', true, [(0.83979426423570236, 0.2891428852314914)], [(0.84124869946126679, 0.28565222672750273)])>)>]
 
 # Clocks
-[/org/gnome/clocks]
+[org/gnome/clocks]
 alarms=[{'name': <'Prepare Lunch'>, 'id': <'97464b0cd6d7d2a9bde96a6f63f8c192'>, 'active': <false>, 'hour': <17>, 'minute': <0>, 'days': <@ai []>, 'snooze_minutes': <10>, 'ring_minutes': <5>}]
 timers=[{'duration': <300>, 'name': <''>}, {'duration': <420>, 'name': <''>}, {'duration': <180>, 'name': <''>}, {'duration': <900>, 'name': <''>}, {'duration': <600>, 'name': <''>}]
 world-clocks=[{'location': <(uint32 2, <('Mexico City', 'MMMX', true, [(0.33917564548646723, -1.7296212887263802)], [(0.33919020153242879, -1.7302951778038682)])>)>}, {'location': <(uint32 2, <('New York', 'KNYC', true, [(0.71180344078725644, -1.2909618758762367)], [(0.71059804659265924, -1.2916478949920254)])>)>}, {'location': <(uint32 2, <('Vienna', 'LOWW', true, [(0.83979426423570236, 0.2891428852314914)], [(0.84124869946126679, 0.28565222672750273)])>)>}, {'location': <(uint32 2, <('Paris', 'LFPB', true, [(0.85462956287765413, 0.042760566673861078)], [(0.8528842336256599, 0.040724343395436846)])>)>}, {'location': <(uint32 2, <('Amsterdam', 'EHAM', true, [(0.91280719879303418, 0.083194033496160544)], [(0.91367986341903151, 0.085812027374152042)])>)>}, {'location': <(uint32 2, <('Cluj-Napoca', 'LRCL', true, [(0.81652319590691635, 0.41131593287109447)], [(0.81623231933377882, 0.41189770347066179)])>)>}, {'location': <(uint32 2, <('Cairo', 'HECA', true, [(0.52592587544986047, 0.54803338512621935)], [(0.52447144022429604, 0.54541539124822791)])>)>}]
