@@ -472,6 +472,7 @@ rust-bindgen
 rustc-demangle
 sassc
 sbctl
+sbsigntools
 scour
 screen
 scrot
@@ -505,6 +506,7 @@ syncthing
 sysprof
 sysstat
 systemd-resolvconf
+systemd-ukify
 systeroid
 t1utils
 tealdeer
