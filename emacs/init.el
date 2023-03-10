@@ -321,6 +321,9 @@
  (setq-default c-basic-offset 2)
  (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
 
+(fm/after python
+ (setq-default fill-column 80))
+
 (fm/after jit-lock
  (setq-default jit-lock-stealth-time 1)
  (setq-default jit-lock-chunk-size 5000)
