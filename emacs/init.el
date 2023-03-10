@@ -380,25 +380,23 @@
 (fm/pkg flycheck-elsa
  (fm/hook emacs-lisp-mode-hook flycheck-elsa-setup))
 
-(fm/pkg org-bullets
- (fm/after org-bullets
-  (setq-default org-bullets-bullet-list
-   `(,(char-to-string 8857)
-     ,(char-to-string 8627)
-     ,(char-to-string 8627)
-     ,(char-to-string 8627)))))
-
 (fm/after org
- (setq-default org-todo-keywords
-  `((sequence ,(char-to-string 9744) ,(char-to-string 9745))))
  (setq-default org-startup-truncated nil)
- (setq-default org-ellipsis "…")
+ (setq-default org-startup-indented t)
+ (setq-default org-todo-keywords
+  `((sequence ,(char-to-string 9744) ,(char-to-string 9745))
+    (sequence "TODO" "DONE")))
  (setq-default org-hide-leading-stars t)
+ (setq-default org-ellipsis "…")
  (setq-default org-hide-emphasis-markers t)
+ (setq-default org-pretty-entities t)
  (setq-default org-fontify-whole-heading-line t)
  (setq-default org-fontify-done-headline t)
- (setq-default org-startup-indented t)
  (setq-default org-property-format "%s %s")
+ (setq-default org-insert-heading-respect-content t)
+ (setq-default org-catch-invisible-edits 'show-and-error)
+ (setq-default org-auto-align-tags nil)
+ (setq-default org-tags-column 0)
  (setq-default org-special-ctrl-a/e t)
  (setq-default org-special-ctrl-k t)
  (setq-default org-special-ctrl-o t)
@@ -409,6 +407,14 @@
   (setq-local left-margin-width 2)
   (setq-local right-margin-width 2)
   (setq-local scroll-margin 0)))
+
+(fm/pkg org-bullets
+ (fm/after org-bullets
+  (setq-default org-bullets-bullet-list
+   `(,(char-to-string 8857)
+     ,(char-to-string 8627)
+     ,(char-to-string 8627)
+     ,(char-to-string 8627)))))
 
 (fm/pkg which-key
  (fm/after which-key
