@@ -273,7 +273,6 @@ linux-headers
 linux-tools-meta
 linux-zen
 linux-zen-headers
-lld
 lldb
 llvm
 lrzip
