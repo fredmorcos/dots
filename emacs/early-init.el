@@ -194,7 +194,7 @@
  (setq-default hledger-description-face '(:foreground "RoyalBlue"))
  (setq-default hledger-account-face '(:inherit default))
  (setq-default hledger-amount-face
-  '(:background "Gray80"
+  '(:background "Wheat"
     :foreground "Gray40"
     :weight bold))
  (setq-default hledger-date-face '(:foreground "Gray40" :weight bold)))
