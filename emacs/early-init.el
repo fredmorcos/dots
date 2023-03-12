@@ -236,6 +236,9 @@
 (fm/after tree-sitter-hl
  (fm/face tree-sitter-hl-face:property :slant normal :weight regular))
 
+(fm/after scopeline
+ (fm/face scopeline-face :foreground "HoneyDew3"))
+
 (fm/after lsp-mode
  (fm/face lsp-face-highlight-read :inherit highlight))
 

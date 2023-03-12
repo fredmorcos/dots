@@ -703,6 +703,13 @@
   (fm/dim tree-sitter-mode "Ts")
   (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode)))
 
+(fm/pkg scopeline
+ (fm/after tree-sitter
+  (fm/hook tree-sitter-mode-hook scopeline-mode))
+ (fm/after scopeline
+  (fm/dim scopeline-mode "Sl")
+  (setq-default scopeline-min-lines 0)))
+
 (fm/after prog-mode
  (fm/hook prog-mode-hook diff-hl-mode)
  (fm/hook prog-mode-hook eldoc-mode)
