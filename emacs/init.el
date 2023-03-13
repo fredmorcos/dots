@@ -322,7 +322,7 @@
  (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
 
 (fm/after python
- (setq-default fill-column 80))
+ (setq-default fill-column 79))
 
 (fm/after jit-lock
  (setq-default jit-lock-stealth-time 1)
@@ -708,7 +708,7 @@
   (fm/hook tree-sitter-mode-hook scopeline-mode))
  (fm/after scopeline
   (fm/dim scopeline-mode "Sl")
-  (setq-default scopeline-min-lines 0)))
+  (setq-default scopeline-min-lines 10)))
 
 (fm/after prog-mode
  (fm/hook prog-mode-hook diff-hl-mode)
