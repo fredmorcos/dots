@@ -278,6 +278,10 @@
  (setq-default buffer-auto-revert-by-notification t)
  (setq-default auto-revert-mode-text " Ar"))
 
+(fm/after isearch
+ (setq-default isearch-lazy-count t)
+ (setq-default isearch-lazy-highlight t))
+
 (fm/after dired
  (fm/hook dired-mode-hook auto-revert-mode))
 
@@ -545,6 +549,7 @@
 (fm/pkg magit
  (fm/key "C-x g" magit-status)
  (fm/after magit-mode
+  (setq-default magit-log-section-commit-count 20)
   (setq-default magit-auto-revert-tracked-only nil)
   (setq-default magit-display-buffer-function
    'magit-display-buffer-same-window-except-diff-v1)
