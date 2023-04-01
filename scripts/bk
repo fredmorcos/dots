@@ -97,32 +97,12 @@ elif [ "$HNAME" == "neuron" ]; then
     cmd "$HOME/Music.New/"                "$OX_EXT/Music.New/"
     cmd "$HOME/Phone/"                    "$OX_EXT/Phone/"
     cmd "$HOME/Workspace/"                "$OX_EXT/Workspace/"
-    cmd "$HOME/.cache/"                   "$OX_EXT/.cache/"
     cmd "$HOME/.config/"                  "$OX_EXT/.config/"
-    cmd "$HOME/.designer/"                "$OX_EXT/.designer/"
     cmd "$HOME/.local/"                   "$OX_EXT/.local/"
     cmd "$HOME/.mozilla/"                 "$OX_EXT/.mozilla/"
     cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
     cmd "$HOME/.var/"                     "$OX_EXT/.var/"
     cmd "$HOME/.zoom/"                    "$OX_EXT/.zoom/"
-  else
-    printf ">>> %s is not mounted\n" "$OX_EXT"
-  fi
-elif [ "$HNAME" == "hilda-laptop" ]; then
-  HOME=/home/fred
-  OX_EXT=/run/media/fred/OX-External/Hilda-Laptop
-
-  if [ -d "$OX_EXT" ]; then
-    cmd "$HOME/Documents/"                "$OX_EXT/Documents/"
-    cmd "$HOME/Downloads/"                "$OX_EXT/Downloads/"
-    cmd "$HOME/Phone/"                    "$OX_EXT/Phone/"
-    cmd "$HOME/Workspace/"                "$OX_EXT/Workspace/"
-    cmd "$HOME/.cache/"                   "$OX_EXT/.cache/"
-    cmd "$HOME/.config/"                  "$OX_EXT/.config/"
-    cmd "$HOME/.local/"                   "$OX_EXT/.local/"
-    cmd "$HOME/.mozilla/"                 "$OX_EXT/.mozilla/"
-    cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
-    cmd "$HOME/.var/"                     "$OX_EXT/.var/"
   else
     printf ">>> %s is not mounted\n" "$OX_EXT"
   fi
