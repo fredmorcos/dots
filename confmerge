@@ -202,12 +202,12 @@ rm "$flatpak_tmp_file"
 
 if [ "$flatpak_remove" != "" ]; then
   echo "Remove Flatpaks:"
-  $SHELL -c "sudo flatpak remove --app $flatpak_remove"
+  $SHELL -c "flatpak remove --app $flatpak_remove"
 fi
 
 if [ "$flatpak_install" != "" ]; then
   echo "Install Flatpaks:"
-  $SHELL -c "sudo flatpak install $flatpak_install"
+  $SHELL -c "flatpak install $flatpak_install"
 fi
 
 sudo flatpak update
