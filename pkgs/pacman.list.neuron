@@ -375,7 +375,6 @@ python-brotli
 python-cairosvg
 python-cchardet
 python-discogs-client
-python-dulwich
 python-ecdsa
 python-email-validator
 python-fastimport
@@ -566,7 +565,6 @@ wireguard-tools
 wireless-regdb
 wireshark-qt
 wmctrl
-wtf
 xclip
 xdg-user-dirs-gtk
 xdot
