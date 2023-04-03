@@ -396,7 +396,7 @@
  (setq-default org-hide-leading-stars t)
  (setq-default org-ellipsis "…")
  (setq-default org-hide-emphasis-markers t)
- (setq-default org-pretty-entities t)
+ (setq-default org-pretty-entities nil)
  (setq-default org-fontify-whole-heading-line t)
  (setq-default org-fontify-done-headline t)
  (setq-default org-property-format "%s %s")
