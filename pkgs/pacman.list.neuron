@@ -146,11 +146,8 @@ gitui
 glow
 gnome-backgrounds
 gnome-calculator
-gnome-calendar
 gnome-characters
-gnome-clocks
 gnome-console
-gnome-contacts
 gnome-control-center
 gnome-dictionary
 gnome-disk-utility
@@ -161,7 +158,6 @@ gnome-icon-theme-extras
 gnome-logs
 gnome-maps
 gnome-music
-gnome-notes
 gnome-passwordsafe
 gnome-photos
 gnome-pie
@@ -173,7 +169,6 @@ gnome-system-monitor
 gnome-themes-extra
 gnome-tweaks
 gnome-usage
-gnome-weather
 gocr
 gpart
 gparted
