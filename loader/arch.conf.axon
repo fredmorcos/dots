@@ -2,6 +2,6 @@ title   Archlinux
 linux   /vmlinuz-linux-zen
 initrd  /amd-ucode.img
 initrd  /initramfs-linux-zen.img
-options rw add_efi_memmap mitigations=off quiet
-# nmi_watchdog=0 nordrand ipv6.disable=1 bgrt_disable
+options rw add_efi_memmap mitigations=off quiet bgrt_disable
+# nmi_watchdog=0 nordrand ipv6.disable=1
 # rd.luks.name=61e223bf-576c-4771-85f1-9754cbd26daa=home
