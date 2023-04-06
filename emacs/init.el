@@ -931,6 +931,14 @@
  (fm/after vterm
   (setq-default vterm-max-scrollback 100000)))
 
+(fm/pkg sideline
+ (fm/after sideline
+  (fm/dim sideline-mode "Si")))
+
+(fm/pkg sideline-blame
+ (fm/after sideline
+  (setq-default sideline-backends-right '(sideline-blame))))
+
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
 
