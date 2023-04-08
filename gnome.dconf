@@ -78,6 +78,7 @@ document-font-name='Sans 11'
 monospace-font-name='Monospace 13'
 font-antialiasing='rgba'
 clock-show-weekday=true
+color-scheme='prefer-dark'
 
 # Shell Calendar
 [org/gnome/desktop/calendar]
