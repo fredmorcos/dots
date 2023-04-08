@@ -78,7 +78,7 @@ document-font-name='Sans 11'
 monospace-font-name='Monospace 13'
 font-antialiasing='rgba'
 clock-show-weekday=true
-color-scheme='prefer-dark'
+color-scheme='default'
 
 # Shell Calendar
 [org/gnome/desktop/calendar]
@@ -88,7 +88,7 @@ show-weekdate=true
 [org/gnome/shell]
 enabled-extensions=@as []
 disable-user-extensions=true
-favorite-apps=['org.gnome.Nautilus.desktop', 'rhythmbox.desktop', 'de.haeckerfelix.Shortwave.desktop', 'org.gnome.DiskUtility.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Rhythmbox3.desktop', 'org.gnome.DiskUtility.desktop']
 
 # Window switcher
 [org/gnome/shell/window-switcher]
