@@ -84,6 +84,7 @@ cpio
 cppcheck
 criu
 cuda
+cuneiform
 curlftpfs
 dateutils
 dbus-broker
@@ -124,6 +125,7 @@ f2fs-tools
 fastjar
 fd
 fdupes
+feathernotes
 fig2dev
 file-roller
 firefox
@@ -261,6 +263,7 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libvterm
+lifeograph
 light
 linux
 linux-firmware
