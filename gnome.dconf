@@ -149,6 +149,9 @@ custom-keybindings/custom3/name='Signal'
 custom-keybindings/custom4/binding='<Primary><Alt>o'
 custom-keybindings/custom4/command='gnome-control-center sound'
 custom-keybindings/custom4/name='Sound Settings'
+custom-keybindings/custom5/binding='<Control><Alt>n'
+custom-keybindings/custom5/command='flatpak --user run md.obsidian.Obsidian'
+custom-keybindings/custom5/name='Obsidian'
 
 # File Chooser
 [org/gtk/gtk4/settings/file-chooser]
