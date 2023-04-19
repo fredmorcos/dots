@@ -754,18 +754,19 @@
   (fm/hook meson-mode-hook symbol-overlay-mode)
   (fm/hook meson-mode-hook company-mode)))
 
-(fm/pkg rust-mode
- (fm/after rust-mode
-  (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-mode-map "rust-utils")
-  (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-mode-map "lsp-rust")
-  (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-mode-map "lsp-rust")
-  (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-mode-map "lsp-rust")
-  (setq-default rust-indent-offset 2)
-  (setq-default rust-load-optional-libraries nil)
-  (setq-default rust-format-on-save t)
-  (fm/hookn rust-mode-hook (electric-quote-local-mode -1))
-  (fm/hook rust-mode-hook subword-mode)
-  (fm/hook rust-mode-hook lsp)))
+(fm/pkg rustic
+ (fm/after rustic
+  (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rustic-mode-map "rust-mode")
+  (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rustic-mode-map "lsp-rust")
+  (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rustic-mode-map "lsp-rust")
+  (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rustic-mode-map "lsp-rust")
+  (setq-default rustic-indent-offset 2)
+  (fm/hookn rustic-mode-hook (electric-quote-local-mode -1))
+  (fm/hook rustic-mode-hook subword-mode))
+ (fm/after rustic-rustfmt
+  (setq-default rustic-format-on-save t)
+  (setq-default rustic-format-trigger 'on-save)
+  (setq-default rustic-use-rust-save-some-buffers t)))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
@@ -788,7 +789,7 @@
   (setq-default lsp-file-watch-threshold nil)
   (setq-default lsp-enable-semantic-highlighting t)
   (setq-default lsp-enable-indentation t)
-  (setq-default lsp-enable-on-type-formatting nil)
+  (setq-default lsp-enable-on-type-formatting t)
   (setq-default lsp-before-save-edits nil)
   (setq-default lsp-auto-configure t)
   (setq-default lsp-signature-auto-activate t)
@@ -811,9 +812,6 @@
  (fm/after lsp-semantic-tokens
   (setq-default lsp-semantic-tokens-apply-modifiers t))
  (fm/after lsp-rust
-  ;; (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
-  ;; (setq-default lsp-rust-unstable-features t)
-  (setq-default lsp-rust-analyzer-checkonsave-features "all")
   (setq-default lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
   (setq-default lsp-rust-analyzer-proc-macro-enable t)
   (setq-default lsp-rust-racer-completion nil)
@@ -827,9 +825,10 @@
   (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
   (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
   (setq-default lsp-rust-analyzer-binding-mode-hints t)
-  (setq-default lsp-rust-analyzer-display-reborrow-hints "mutable")
+  (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
   (setq-default lsp-rust-all-features t)
   (setq-default lsp-rust-all-targets t)
+  (setq-default lsp-rust-unstable-features t)
   (setq-default lsp-rust-full-docs t)
   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy"))
  (fm/after lsp-clangd
