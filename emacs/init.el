@@ -326,7 +326,8 @@
  (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
 
 (fm/after python
- (setq-default fill-column 79))
+ (setq-default fill-column 79)
+ (fm/hook python-mode-hook lsp))
 
 (fm/after jit-lock
  (setq-default jit-lock-stealth-time 1)
@@ -564,12 +565,12 @@
   (setq-default projectile-project-search-path '("~/Workspace"))
   (setq-default projectile-sort-order 'recently-active)
   (setq-default projectile-enable-caching nil)
-  (setq-default projectile-require-project-root nil))
- (projectile-mode))
+  (setq-default projectile-require-project-root nil)))
 
 (fm/pkg counsel-projectile
- (fm/after projectile
-  (fm/key-local "M-G" counsel-projectile-git-grep projectile-mode-map)))
+ (fm/after counsel-projectile
+  (fm/key-local "M-G" counsel-projectile-git-grep projectile-mode-map))
+ (counsel-projectile-mode))
 
 (fm/pkg deadgrep
  (fm/key "M-F" deadgrep)
