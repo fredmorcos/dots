@@ -361,6 +361,7 @@ psutils
 pv
 pwgen
 pwndbg
+python-aafigure
 python-aiodns
 python-aiohttp
 python-arrow
@@ -427,6 +428,7 @@ python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
 python-scipy
+python-svglib
 python-symengine
 python-sympy
 python-tabulate
@@ -463,6 +465,7 @@ rocm-opencl-runtime
 ropgadget
 ropper
 rpm-tools
+rst2pdf
 rtaudio
 rust-analyzer
 rust-bindgen
@@ -510,6 +513,7 @@ tealdeer
 tepl
 texlive-formatsextra
 texlive-humanities
+texworks
 tidy
 time
 tinycdb
