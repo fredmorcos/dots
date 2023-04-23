@@ -427,10 +427,11 @@
 (fm/pkg which-key
  (fm/after which-key
   (fm/dim which-key-mode)
-  (setq-default which-key-idle-delay 0.5)
-  (setq-default which-key-show-docstrings t)
+  (setq-default which-key-idle-delay 0.2)
+  (setq-default which-key-show-docstrings nil)
   (setq-default which-key-add-column-padding 3)
-  (setq-default which-key-max-description-length 40))
+  (setq-default which-key-max-description-length nil)
+  (setq-default which-key-max-display-columns nil))
  (which-key-mode))
 
 (fm/pkg ivy
