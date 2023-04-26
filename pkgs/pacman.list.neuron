@@ -470,7 +470,6 @@ ropper
 rpm-tools
 rst2pdf
 rtaudio
-rust-analyzer
 rust-bindgen
 rustc-demangle
 sassc
