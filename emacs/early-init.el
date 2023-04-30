@@ -187,6 +187,9 @@
  (fm/face mc/cursor-bar-face :background "Gray40" :foreground "White")
  (fm/face mc/cursor-face     :background "Gray50" :foreground "White"))
 
+(fm/after volatile-highlights
+ (fm/face vhl/default-face :background "Papaya Whip"))
+
 (fm/after eros
  (fm/face eros-result-overlay-face :background "RoyalBlue" :foreground "White"))
 

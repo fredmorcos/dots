@@ -605,6 +605,9 @@
  (fm/after multiple-cursors-core
   (setq-default mc/always-run-for-all t)))
 
+(fm/pkg volatile-highlights
+ (volatile-highlights-mode))
+
 (fm/pkg yaml-mode
  (fm/after yaml-mode
   (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
@@ -941,6 +944,9 @@
 (fm/pkg sideline-blame
  (fm/after sideline
   (setq-default sideline-backends-right '(sideline-blame))))
+
+(fm/pkg buffer-move
+ (fm/key "C-x m" buf-move))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
