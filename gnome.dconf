@@ -162,7 +162,7 @@ sort-directories-first=true
 preferences/default-folder-viewer='list-view'
 preferences/recursive-search='never'
 preferences/show-image-thumbnails='local-only'
-preferences/show-directory-item-counts='never'
+preferences/show-directory-item-counts='local-only'
 list-view/default-zoom-level='small'
 list-view/default-visible-columns=['name', 'size', 'mime_type', 'date_modified_with_time']
 
