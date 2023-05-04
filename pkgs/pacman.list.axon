@@ -326,6 +326,7 @@ openmp
 openslide
 openssl-1.1
 osmo
+ostra-cg
 otf-fira-mono
 otf-fira-sans
 p7zip
@@ -376,7 +377,6 @@ python-fastimport
 python-flake8-black
 python-flake8-docstrings
 python-flake8-isort
-python-fonttools
 python-fs
 python-genshi
 python-ghp-import
@@ -434,6 +434,7 @@ python-tabulate
 python-typogrify
 python-unicodedata2
 python-unidiff
+python-volume_key
 python-watchdog
 python-webcolors
 python-xlrd
