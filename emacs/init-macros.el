@@ -5,7 +5,7 @@
 ;; Helpers.
 (defmacro fm/autoload (func pkg)
  "Create an autoload for FUNC from PKG."
- (when pkg
+ (when (stringp pkg)
   `(eval-when-compile
     (autoload ',func ,pkg)
     (declare-function ,func ,pkg))))
@@ -14,7 +14,7 @@
 (defmacro fm/hook (hook func &optional pkg local)
  "Autoload FUNC from PKG and add it to LOCAL HOOK."
  `(progn
-   ,(macroexpand `(fm/autoload ,func ,pkg))
+   (fm/autoload ,func ,pkg)
    ,(if local
      `(add-hook ',hook #',func 10 t)
      `(add-hook ',hook #',func))))
@@ -27,7 +27,7 @@
 (defmacro fm/key (key func &optional pkg)
  "Define KEY in PKG-KEYMAP to call FUNC from PKG."
  `(progn
-   ,(macroexpand `(fm/autoload ,func ,pkg))
+   (fm/autoload ,func ,pkg)
    (global-set-key (kbd ,key) #',func)))
 
 (defmacro fm/key-interactive (key &rest body)
@@ -48,7 +48,7 @@
 (defmacro fm/key-local (key func keymap &optional pkg)
  "Define KEY in KEYMAP to call FUNC from PKG."
  `(progn
-   ,(macroexpand `(fm/autoload ,func ,pkg))
+   (fm/autoload ,func ,pkg)
    (eval-when-compile (defvar ,keymap))
    (define-key ,keymap (kbd ,key) #',func)))
 
@@ -84,7 +84,7 @@
 (defmacro fm/mode (ext mode &optional pkg)
  "Autoload and enable MODE from PKG for file extension EXT."
  `(progn
-   ,(macroexpand `(fm/autoload ,mode ,pkg))
+   (fm/autoload ,mode ,pkg)
    (push '(,(concat "\\" ext "\\'") . ,mode) auto-mode-alist)))
 
 ;; Packages.

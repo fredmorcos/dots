@@ -868,9 +868,15 @@
   (setq-default treemacs-indentation 1))
  (fm/after treemacs-interface
   (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
- (fm/hook treemacs-mode-hook treemacs-git-commit-diff-mode)
- (fm/hook treemacs-mode-hook treemacs-follow-mode "treemacs-follow-mode")
- (fm/hook treemacs-mode-hook treemacs-tag-follow-mode))
+ (fm/after treemacs-mode
+  (fm/hook treemacs-mode-hook treemacs-tag-follow-mode "treemacs-tag-follow-mode")
+  (fm/hook treemacs-mode-hook treemacs-fringe-indicator-mode "treemacs-fringe-indicator")
+  (fm/hook treemacs-mode-hook treemacs-filewatch-mode "treemacs-filewatch-mode")
+  (fm/autoload treemacs-git-mode "treemacs-async")
+  (fm/hookn treemacs-mode-hook (treemacs-git-mode 'deferred))
+  (fm/hook treemacs-mode-hook
+   treemacs-git-commit-diff-mode
+   "treemacs-git-commit-diff-mode")))
 
 (fm/pkg lsp-treemacs
  (fm/after lsp-mode
