@@ -18,6 +18,7 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"                  # GNU PG
 export LESSHISTFILE="$XDG_STATE_HOME/less/less_history"  # Less and most
 export PAGER="less --use-color"                          # Less and most
 export ANDROID_HOME="$XDG_DATA_HOME/android"             # Android tools
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"           # Docker
 # shellcheck disable=SC2016
 export GVIMINIT='let $MYGVIMRC="$XDG_CONFIG_HOME/vim/gvimrc" | source $MYGVIMRC'  # GVim
 # shellcheck disable=SC2016
