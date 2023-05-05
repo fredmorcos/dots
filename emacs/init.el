@@ -667,8 +667,7 @@
   (setq-default flycheck-posframe-error-prefix
    (concat " " (char-to-string 10540) " Error: "))
   (fm/after company
-   (fm/hook flycheck-posframe-inhibit-functions
-    company--active-p "company")
+   (fm/hook flycheck-posframe-inhibit-functions company--active-p "company")
    (fm/hook flycheck-posframe-inhibit-functions
     (lambda (&rest _) (bound-and-true-p company-backend))))))
 
@@ -939,11 +938,13 @@
 
 (fm/pkg sideline
  (fm/after sideline
-  (fm/dim sideline-mode "Si")))
+  (fm/dim sideline-mode "Si")
+  (setq-default sideline-delay 0.1)))
 
 (fm/pkg sideline-blame
  (fm/after sideline
-  (setq-default sideline-backends-right '(sideline-blame))))
+  (setq-default sideline-backends-right '(sideline-blame))
+  (setq-default sideline-blame-commit-format "- %s")))
 
 (fm/pkg buffer-move
  (fm/key "C-x m" buf-move))
