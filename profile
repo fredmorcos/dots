@@ -18,6 +18,10 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"                  # GNU PG
 export LESSHISTFILE="$XDG_STATE_HOME/less/less_history"  # Less and most
 export PAGER="less --use-color"                          # Less and most
 export ANDROID_HOME="$XDG_DATA_HOME/android"             # Android tools
+# shellcheck disable=SC2016
+export GVIMINIT='let $MYGVIMRC="$XDG_CONFIG_HOME/vim/gvimrc" | source $MYGVIMRC'  # GVim
+# shellcheck disable=SC2016
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'      # Vim
 
 # Binary and library paths
 PATH="$HOME/Workspace/dots/scripts:$PATH"
