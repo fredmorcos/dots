@@ -155,17 +155,10 @@ gnome-epub-thumbnailer
 gnome-firmware
 gnome-font-viewer
 gnome-icon-theme-extras
-gnome-logs
-gnome-maps
-gnome-music
-gnome-passwordsafe
-gnome-photos
-gnome-pie
 gnome-podcasts
 gnome-recipes
 gnome-screenshot
 gnome-sound-recorder
-gnome-system-monitor
 gnome-themes-extra
 gnome-tweaks
 gnome-usage
@@ -242,6 +235,7 @@ libappindicator-gtk3
 libayatana-appindicator
 libcamera-tools
 libdecaf
+libdmapsharing
 libdvdcss
 libdwarf
 libebur128
@@ -328,7 +322,6 @@ opendoas
 openmp
 openslide
 openssl-1.1
-osmo
 ostra-cg
 otf-fira-mono
 otf-fira-sans
@@ -409,6 +402,7 @@ python-pyalsa
 python-pyaml
 python-pyasn1
 python-pycryptodome
+python-pycryptodomex
 python-pycurl
 python-pygal
 python-pygit2
@@ -455,7 +449,6 @@ radeontool
 radvd
 read-edid
 realtime-privileges
-rednotebook
 reflector
 remake
 reuse
