@@ -30,7 +30,9 @@
 (defconst emacs-savehist-file (concat emacs-var-dir "savehist"))
 (defconst emacs-package-qs-file (concat emacs-var-dir "package-qs"))
 (defconst emacs-projectile-cache-file (concat emacs-var-dir "projectile-cache"))
+(defconst emacs-projectile-projects-file (concat emacs-var-dir "projectile-projects"))
 (defconst emacs-prescient-save-file (concat emacs-var-dir "prescient-save"))
+(defconst emacs-bookmarks-file (concat emacs-var-dir "bookmarks"))
 (defconst emacs-tmp-dir (concat temporary-file-directory "emacs/"))
 (defconst emacs-autosaves-dir (concat emacs-tmp-dir "autosaves"))
 (defconst emacs-autosaves-pat (concat emacs-autosaves-dir "/\\1"))
@@ -145,6 +147,9 @@
  (setq-default load-prefer-newer t)
  (setq-default coding-system-for-read 'utf-8-unix)
  (setq-default coding-system-for-write 'utf-8-unix))
+
+(fm/after bookmarks
+ (setq-default bookmark-file emacs-bookmarks-file))
 
 (fm/after saveplace
  (setq-default save-place-file emacs-saveplace-file))
@@ -486,6 +491,10 @@
 (fm/pkg marginalia
  (marginalia-mode))
 
+(fm/pkg hotfuzz
+ (fm/after minibuffer
+  (setq-default completion-styles '(hotfuzz))))
+
 (fm/pkg prescient
  (fm/after prescient
   (setq-default prescient-save-file emacs-prescient-save-file)
@@ -563,6 +572,7 @@
   (fm/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
   (fm/dim projectile-mode "Pr")
   (setq-default projectile-cache-file emacs-projectile-cache-file)
+  (setq-default projectile-known-projects-file emacs-projectile-projects-file)
   (setq-default projectile-project-search-path '("~/Workspace"))
   (setq-default projectile-sort-order 'recently-active)
   (setq-default projectile-enable-caching nil)
@@ -885,6 +895,8 @@
   (fm/key-local "C-c c" lsp-treemacs-call-hierarchy lsp-mode-map)
   (fm/key-local "C-c t" lsp-treemacs-type-hierarchy lsp-mode-map)
   (fm/hook lsp-mode-hook lsp-treemacs-sync-mode)))
+
+(fm/pkg treemacs-projectile)
 
 (fm/pkg lsp-ui
  (fm/after lsp-ui-doc
