@@ -876,12 +876,20 @@
  (fm/after treemacs-customization
   (setq-default treemacs-width 40)
   (setq-default treemacs-indentation 1))
+ (fm/after treemacs
+  (setq-default treemacs-select-when-already-in-treemacs 'move-back))
+  ;; (setq-default treemacs-indent-guide-mode t))
  (fm/after treemacs-interface
   (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
+ ;; (fm/after treemacs-header-line
+ ;;  (setq-default treemacs-indicate-top-scroll-mode t))
  (fm/after treemacs-mode
   (fm/hook treemacs-mode-hook treemacs-tag-follow-mode "treemacs-tag-follow-mode")
   (fm/hook treemacs-mode-hook treemacs-fringe-indicator-mode "treemacs-fringe-indicator")
   (fm/hook treemacs-mode-hook treemacs-filewatch-mode "treemacs-filewatch-mode")
+  ;; (fm/hook treemacs-mode-hook treemacs-indicate-top-scroll-mode "treemacs-header-line")
+  ;; (fm/autoload treemacs-indent-guide-mode "treemacs-visuals")
+  ;; (fm/hookn treemacs-mode-hook (treemacs-indent-guide-mode))
   (fm/autoload treemacs-git-mode "treemacs-async")
   (fm/hookn treemacs-mode-hook (treemacs-git-mode 'deferred))
   (fm/hook treemacs-mode-hook
