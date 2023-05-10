@@ -210,6 +210,13 @@
 (fm/after uniquify
  (setq-default uniquify-buffer-name-style 'forward))
 
+(fm/after tooltip
+ (setq-default tooltip-use-echo-area t))
+
+(fm/after dictionary
+ (setq-default dictionary-server "dict.org")
+ (setq-default dictionary-use-single-buffer t))
+
 (fm/after woman
  (setq-default woman-fill-column 100))
 
@@ -242,6 +249,11 @@
   '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
     space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
     space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof)))
+
+(fm/after proced
+ (setq-default proced-auto-update-flag t)
+ (setq-default proced-auto-update-interval 1)
+ (setq-default proced-tree-flag t))
 
 (fm/after make-mode
  (fm/hook makefile-mode-hook whitespace-mode))
@@ -974,6 +986,9 @@
 
 (fm/pkg buffer-move
  (fm/key "C-x m" buf-move))
+
+(fm/pkg dirvish
+ (dirvish-override-dired-mode))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
