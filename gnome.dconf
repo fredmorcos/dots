@@ -73,9 +73,9 @@ enable-hot-corners=true
 cursor-blink=false
 show-battery-percentage=true
 cursor-theme='capitaine-cursors'
-font-name='Sans 11'
-document-font-name='Sans 11'
-monospace-font-name='Monospace 13'
+font-name='Sans 10'
+document-font-name='Sans 10'
+monospace-font-name='Monospace 9'
 font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
@@ -97,7 +97,7 @@ app-icon-mode='app-icon-only'
 
 # Window and workspace related
 [org/gnome/desktop/wm/preferences]
-titlebar-font='Sans 11'
+titlebar-font='Sans 10'
 resize-with-right-button=true
 num-workspaces=8
 
