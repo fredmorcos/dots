@@ -52,8 +52,8 @@ alias gitstatus='gitall status -s'
 alias gitpp='gitall pull -q && gitall push -q'
 
 dlsub() {
-  OS_NAME=$(head -1 ~/Documents/Important/Passwords/_os.txt)
-  OS_PASS=$(tail -1 ~/Documents/Important/Passwords/_os.txt)
+  OS_NAME=$(head -1 ~/Documents/Notes/Secrets/Passwords/_os.txt)
+  OS_PASS=$(tail -1 ~/Documents/Notes/Secrets/Passwords/_os.txt)
   subdl -i --output='{m}.{L}.{S}' --username "$OS_NAME" --password "$OS_PASS" "$1"
   OS_NAME=
   OS_PASS=
