@@ -319,6 +319,7 @@ ocrfeeder
 odt2txt
 openbsd-netcat
 opencl-mesa
+opencv
 opendoas
 openmp
 openslide
@@ -547,6 +548,7 @@ vdpauinfo
 vi
 vim-spell-en
 vkd3d
+vtk
 vulkan-extra-layers
 vulkan-intel
 vulkan-mesa-layers
