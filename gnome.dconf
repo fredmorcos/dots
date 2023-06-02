@@ -79,7 +79,7 @@ monospace-font-name='Monospace 9'
 font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
-icon-theme='MoreWaita'
+icon-theme='Adwaita'
 
 # Shell Calendar
 [org/gnome/desktop/calendar]
