@@ -137,7 +137,6 @@ gamemode
 gdb-dashboard
 gdm
 ghex
-gimagereader-gtk
 gimp
 git-absorb
 git-cliff
@@ -173,7 +172,6 @@ gtk-engine-murrine
 gtk-engines
 gtkmm
 gtkmm-4.0
-gtksourceview2
 gtkspell
 gucharmap
 gvfs-google
@@ -248,7 +246,6 @@ libmythes
 libnfs
 libofa
 libopenraw
-librewolf-bin
 libupnp
 libva-intel-driver
 libva-mesa-driver
@@ -287,9 +284,7 @@ minisign
 mkinitcpio-systemd-tool
 mkinitcpio-utils
 mlocate
-mobsh-bin
 mold
-morewaita
 most
 mpv
 mtools
@@ -476,7 +471,6 @@ scrot
 sd
 seahorse
 seahorse-nautilus
-seer-gdb
 shake
 shellcheck
 shfmt
@@ -507,7 +501,6 @@ systemd-ukify
 systeroid
 t1utils
 tealdeer
-tepl
 texlive-formatsextra
 texlive-humanities
 texworks
