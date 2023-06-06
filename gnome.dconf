@@ -63,7 +63,7 @@ region='en_GB.UTF-8'
 # Workspaces
 [org/gnome/mutter]
 dynamic-workspaces=false
-center-new-windows=true
+center-new-windows=false
 draggable-border-width=20
 
 # Shell
