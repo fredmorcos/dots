@@ -119,7 +119,9 @@
 
  (fm/face mode-line-inactive  :inherit mode-line :foreground "Gray80")
  (fm/face mode-line-buffer-id :foreground "RoyalBlue")
- (fm/face mode-line-highlight :inherit mode-line-emphasis :background "PowderBlue"))
+ (fm/face mode-line-highlight :inherit mode-line-emphasis :background "PowderBlue")
+
+ (fm/face vertical-border :inherit mode-line-inactive))
 
 (fm/after font-lock
  (fm/face font-lock-function-name-face :inherit font-lock-builtin-face)
