@@ -434,12 +434,8 @@ python-webcolors
 python-xlrd
 python-zopfli
 qbittorrent
-qbs
 qreator
-qt5-tools
-qt6-examples
-qt6-languageserver
-qtcreator
+qt6-wayland
 qtqr
 r2ghidra
 radeontool
@@ -503,9 +499,6 @@ systemd-ukify
 systeroid
 t1utils
 tealdeer
-texlive-formatsextra
-texlive-humanities
-texworks
 tidy
 time
 tinycdb
@@ -549,7 +542,6 @@ vulkan-intel
 vulkan-mesa-layers
 vulkan-radeon
 vulkan-tools
-vym
 wabt
 wayland-utils
 wdiff
