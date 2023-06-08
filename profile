@@ -45,3 +45,7 @@ export GIT_EDITOR=$EDITOR
 
 # On-demand debugging symbols
 export DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elfutils.org/"
+
+# Wayland
+export MOZ_ENABLE_WAYLAND=1           # Firefox
+export QT_QPA_PLATFORM="wayland;xcb"  # Qt
