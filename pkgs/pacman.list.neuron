@@ -391,9 +391,7 @@ python-micawber
 python-objgraph
 python-olefile
 python-openpyxl
-python-paramiko
 python-pdfminer
-python-pip
 python-priority
 python-pyacoustid
 python-pyalsa
@@ -409,7 +407,6 @@ python-pyinotify
 python-pylast
 python-pyphen
 python-pypng
-python-pyserial
 python-pystemmer
 python-pytest-black
 python-pytest-flake8
@@ -453,7 +450,6 @@ rmlint
 rnote
 rocm-hip-runtime
 rocm-opencl-runtime
-ropgadget
 ropper
 rpm-tools
 rst2pdf
