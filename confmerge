@@ -122,6 +122,8 @@ cmerge weechat/irc.conf              ~/.config/weechat/irc.conf
 cmerge weechat/spell.conf            ~/.config/weechat/spell.conf
 cmerge weechat/weechat.conf          ~/.config/weechat/weechat.conf
 
+cmerge wp-disable-suspend.lua        ~/.config/wireplumber/main.lua.d/51-disable-suspension.lua
+
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 
