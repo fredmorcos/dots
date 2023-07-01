@@ -74,6 +74,7 @@ ccache
 cclive
 ccls
 cdrtools
+celluloid
 cgdb
 checksec
 cheese
@@ -288,7 +289,6 @@ mkinitcpio-utils
 mlocate
 mold
 most
-mpv
 mtools
 musl
 mutt
