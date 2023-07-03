@@ -48,7 +48,7 @@ repeat-interval=uint32 15
 
 # More Keyboard Options
 [org/gnome/desktop/input-sources]
-xkb-options=['lv3:ralt_switch', 'ctrl:nocaps', 'compose:ralt']
+xkb-options=['lv3:switch', 'ctrl:nocaps', 'compose:ralt']
 
 # Security
 [org/gnome/desktop/media-handling]
