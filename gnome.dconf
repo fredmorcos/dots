@@ -48,7 +48,7 @@ repeat-interval=uint32 15
 
 # More Keyboard Options
 [org/gnome/desktop/input-sources]
-xkb-options=['lv3:switch', 'ctrl:nocaps', 'compose:ralt']
+xkb-options=['lv3:rwin_switch', 'ctrl:nocaps', 'compose:ralt']
 
 # Security
 [org/gnome/desktop/media-handling]
@@ -65,7 +65,7 @@ region='en_GB.UTF-8'
 dynamic-workspaces=false
 center-new-windows=false
 draggable-border-width=20
-experimental-features=['scale-monitor-framebuffer']
+# experimental-features=['scale-monitor-framebuffer']
 
 # Shell
 [org/gnome/desktop/interface]
@@ -76,7 +76,7 @@ show-battery-percentage=true
 cursor-theme='capitaine-cursors'
 font-name='Sans 10'
 document-font-name='Sans 10'
-monospace-font-name='Monospace 9'
+monospace-font-name='Monospace 13'
 font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
