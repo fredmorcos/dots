@@ -47,5 +47,5 @@ export GIT_EDITOR=$EDITOR
 export DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elfutils.org/"
 
 # Wayland
-export MOZ_ENABLE_WAYLAND=1           # Firefox
-export QT_QPA_PLATFORM="wayland;xcb"  # Qt
+# export MOZ_ENABLE_WAYLAND=1           # Firefox
+# export QT_QPA_PLATFORM="wayland;xcb"  # Qt
