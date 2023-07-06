@@ -320,8 +320,6 @@ openmp
 openslide
 openssl-1.1
 ostra-cg
-otf-fira-mono
-otf-fira-sans
 p7zip
 pacman-contrib
 pacrunner
@@ -507,12 +505,6 @@ traceroute
 trash-cli
 tree
 tree-sitter
-ttf-go-mono-git
-ttf-go-sans-git
-ttf-input
-ttf-martian-mono
-ttf-merriweather-sans
-ttf-nerd-fonts-symbols-mono
 tup
 udftools
 udiskie
