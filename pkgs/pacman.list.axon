@@ -550,6 +550,7 @@ xf86-input-void
 xorg-bdftopcf
 xorg-font-util
 xorg-iceauth
+xorg-mkfontscale
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
