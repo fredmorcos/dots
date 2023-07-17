@@ -35,6 +35,9 @@ bluez-utils
 boost
 bottom
 brightnessctl
+brother-dcp-l2510d
+brscan4
+brscan5
 cabextract
 capitaine-cursors
 cargo-asm
@@ -86,6 +89,7 @@ cpio
 cppcheck
 criu
 cuneiform
+cups-pdf
 curlftpfs
 dateutils
 dbus-broker
@@ -104,6 +108,7 @@ docker
 docker-buildx
 docker-compose
 docker-scan
+docx2txt
 doxygen
 drawing
 duperemove
@@ -210,6 +215,7 @@ intel-media-sdk
 intel-ucode
 intltool
 iotop
+ipp-usb
 ipset
 iptraf-ng
 irqbalance
@@ -242,6 +248,7 @@ libdwarf
 libebur128
 libgepub
 libgnome-keyring
+liblouis
 libmad
 libmp4v2
 libmythes
@@ -267,6 +274,7 @@ linux-zen
 linux-zen-headers
 lldb
 llvm
+logrotate
 lrzip
 lshw
 lsof
@@ -397,7 +405,6 @@ python-pyaml
 python-pyasn1
 python-pycryptodome
 python-pycryptodomex
-python-pycurl
 python-pygal
 python-pygit2
 python-pygithub
@@ -455,6 +462,7 @@ rtaudio
 rust-analyzer
 rust-bindgen
 rustc-demangle
+sane-airscan
 sassc
 sbctl
 sbsigntools
@@ -469,6 +477,7 @@ shellcheck
 shfmt
 signalbackup-tools-git
 signal-desktop
+simple-scan
 simplescreenrecorder
 skim
 slimit
@@ -490,6 +499,7 @@ switcheroo-control
 syncthing
 sysprof
 sysstat
+system-config-printer
 systemd-resolvconf
 systemd-ukify
 systeroid
