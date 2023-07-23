@@ -322,7 +322,8 @@ ocrdesktop
 ocrfeeder
 odt2txt
 openbsd-netcat
-opencl-mesa
+opencl-clover-mesa
+opencl-rusticl-mesa
 opencv
 opendoas
 openmp
