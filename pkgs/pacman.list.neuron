@@ -604,6 +604,7 @@ yubico-pam
 yubikey-full-disk-encryption
 yubikey-manager-qt
 yubikey-personalization-gui
+yubikey-touch-detector
 yubioath-desktop
 z
 zola
