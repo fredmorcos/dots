@@ -369,7 +369,6 @@ python-aiodns
 python-aiohttp
 python-arrow
 python-babel
-python-beautifulsoup4
 python-brotli
 python-cairosvg
 python-cchardet
@@ -469,7 +468,6 @@ sane-airscan
 sassc
 sbctl
 sbsigntools
-scour
 screen
 scrot
 sd
