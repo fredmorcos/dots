@@ -19,7 +19,9 @@
 (setq default-frame-alist
  '((width . 160)
    (height . 60)
-   (background-color . "Gray98")))
+   (background-color . "Gray98")
+   ;; (alpha-background . 95)
+   (use-frame-synchronization . t)))
 
 ;; Prevent an early unstyled Emacs by handling UI elements.
 (fm/after tool-bar (tool-bar-mode -1))
@@ -92,7 +94,8 @@
  (setq-default package-quickstart-file
   (concat (expand-file-name user-emacs-directory) "var/package-qa"))
  (setq-default package-quickstart t)
- (setq-default package-native-compile t))
+ (setq-default package-native-compile t)
+ (setq-default package-install-upgrade-built-in t))
 
 (fm/after url-vars
  (setq-default url-privacy-level 'high)

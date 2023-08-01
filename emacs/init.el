@@ -19,6 +19,8 @@
 (fm/key "\"" fm/insert-pair-double-quotes "qol")
 (fm/key "`"  fm/insert-pair-backtick      "qol")
 
+(fm/key "C-x c" duplicate-dwim)
+
 ;; Directories.
 (defconst user-home-dir (expand-file-name "~/"))
 (defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
@@ -146,7 +148,19 @@
  (setq-default require-final-newline 'visit-save)
  (setq-default load-prefer-newer t)
  (setq-default coding-system-for-read 'utf-8-unix)
- (setq-default coding-system-for-write 'utf-8-unix))
+ (setq-default coding-system-for-write 'utf-8-unix)
+ (setq-default major-mode-remap-alist
+  '((c-mode . c-ts-mode)
+    (c++-mode . c++-ts-mode)
+    (c-or-c++-mode . c-or-c++-ts-mode)
+    (rust-mode . rust-ts-mode)
+    (yaml-mode . yaml-ts-mode)
+    (sh-mode . bash-ts-mode)
+    (toml-mode . toml-ts-mode)
+    (json-mode . json-ts-mode)
+    (cmake-mode . cmake-ts-mode)
+    (python-mode . python-ts-mode)
+    (dockerfile-mode . dockerfile-ts-mode))))
 
 (fm/after bookmarks
  (setq-default bookmark-file emacs-bookmarks-file))
@@ -177,7 +191,8 @@
  (fm/disable-popup "\\`\\*Compile-Log\\*.*\\'")
  (fm/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
  (fm/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
- (fm/disable-popup "\\`\\*Warnings\\*.*\\'"))
+ (fm/disable-popup "\\`\\*Warnings\\*.*\\'")
+ (setq-default switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'")))
 
 (fm/key "<f12>"       delete-other-windows)
 (fm/key "<M-S-right>" next-buffer)
@@ -281,7 +296,8 @@
 (fm/after paren
  (setq-default show-paren-when-point-inside-paren t)
  (setq-default show-paren-style 'mixed)
- (setq-default show-paren-highlight-openparen t))
+ (setq-default show-paren-highlight-openparen t)
+ (setq-default show-paren-context-when-offscreen 'overlay))
 
 (fm/after dired
  (setq-default dired-listing-switches "-l --group-directories-first")
@@ -540,6 +556,7 @@
  (setq-default completions-format 'one-column)
  (setq-default completions-max-height 20)
  (setq-default completions-detailed t)
+ ;; (setq-default set-message-functions '(set-multi-message))
  (fm/after consult
   (setq-default completion-in-region-function #'consult-completion-in-region)))
 
