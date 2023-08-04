@@ -531,6 +531,7 @@ upx
 usbguard
 uutils-coreutils
 valgrind
+vbindiff
 vde2
 vdpauinfo
 vi
@@ -553,6 +554,7 @@ wireless-regdb
 wireshark-qt
 wmctrl
 xclip
+xdelta3
 xdg-user-dirs-gtk
 xdot
 xf86-input-evdev
