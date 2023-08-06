@@ -154,7 +154,7 @@
     (c++-mode . c++-ts-mode)
     (c-or-c++-mode . c-or-c++-ts-mode)
     (rust-mode . rust-ts-mode)
-    (yaml-mode . yaml-ts-mode)
+    ;; (yaml-mode . yaml-ts-mode)
     (sh-mode . bash-ts-mode)
     (toml-mode . toml-ts-mode)
     (json-mode . json-ts-mode)
