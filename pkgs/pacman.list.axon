@@ -142,6 +142,7 @@ fprintd
 fzf
 fzy
 gamemode
+gcovr
 gdb-dashboard
 gdm
 ghex
