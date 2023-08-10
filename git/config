@@ -41,3 +41,8 @@
 
 [includeIf "gitdir:~/Workspace/powerdns/"]
   path = ~/.config/git/config-powerdns
+
+# To fetch pull requests to be able to check them out.
+# [remote "origin"]
+#   fetch = +refs/heads/*:refs/remotes/origin/*
+#   fetch = +refs/pull/*/head:refs/pull/origin/*
