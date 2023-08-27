@@ -275,6 +275,7 @@ linux-headers
 linux-tools-meta
 linux-zen
 linux-zen-headers
+lld
 lldb
 llvm
 logrotate
@@ -348,6 +349,7 @@ pdfcrack
 pdfmixtool
 pdfslicer
 peek
+phantomjs-bin
 picard
 pigz
 pinta
@@ -372,6 +374,7 @@ python-aiohttp
 python-arrow
 python-babel
 python-brotli
+python-brotlicffi
 python-cairosvg
 python-cchardet
 python-discogs-client
@@ -422,6 +425,7 @@ python-pytest-lsp
 python-pytest-mypy
 python-pytest-pylint
 python-pyudev
+python-pyxattr
 python-rcssmin
 python-requests-oauthlib
 python-rjsmin
@@ -436,6 +440,7 @@ python-unidiff
 python-volume_key
 python-watchdog
 python-webcolors
+python-xattr
 python-xlrd
 python-zopfli
 qbittorrent
