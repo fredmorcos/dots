@@ -1,4 +1,4 @@
-;;; init --- Emacs configuration -*- lexical-binding: t; -*-
+;;; init.el --- Emacs configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -1029,4 +1029,4 @@
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
 
 (provide 'init)
-;;; init ends here
+;;; init.el ends here
