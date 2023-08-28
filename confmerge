@@ -105,7 +105,7 @@ cmerge dict/aspell.en.pws            ~/.aspell.en.pws
 
 cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
 
-cmerge emacs/init.el                 ~/.config/emacs/init
+cmerge emacs/init.el                 ~/.config/emacs/init.el
 cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
 
 cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf

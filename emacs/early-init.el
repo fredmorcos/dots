@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;;; Enable init profiling
+;; Enable init profiling
 ;; (require 'profiler)
 ;; (profiler-start 'cpu)
 ;; (add-hook 'after-init-hook #'profiler-report)
@@ -16,12 +16,18 @@
 ;; Custom file (cus-edit).
 (setq-default custom-file "/dev/null")
 
-(setq default-frame-alist
- '((width . 160)
-   (height . 60)
-   (background-color . "Gray98")
-   ;; (alpha-background . 95)
-   (use-frame-synchronization . t)))
+;; (setq default-frame-alist
+;;  '((width . 160)
+;;    (height . 60)
+;;    (background-color . "Gray98")
+;;    ;; (alpha-background . 95)
+;;    (use-frame-synchronization . t)))
+
+;; UI.
+(fm/after frame
+ (modify-all-frames-parameters
+  '((background-color . "Gray98")
+    (fullscreen . maximized))))
 
 ;; Prevent an early unstyled Emacs by handling UI elements.
 (fm/after tool-bar (tool-bar-mode -1))

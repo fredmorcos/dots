@@ -8,6 +8,7 @@
 
 (require 'init-macros)
 
+;; Quality of life improvements.
 (fm/key "C-x j"    fm/insert-buffer-name "qol")
 (fm/key "C-x e"    fm/replace-escapes    "qol")
 (fm/key "<M-up>"   fm/move-line-up       "qol")
@@ -38,7 +39,7 @@
 (defconst emacs-tmp-dir (concat temporary-file-directory "emacs/"))
 (defconst emacs-autosaves-dir (concat emacs-tmp-dir "autosaves"))
 (defconst emacs-autosaves-pat (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-autosave-list-prefix (concat emacs-tmp-dir "auto-save-list/.saves-"))
+(defconst emacs-autosave-list-prefix (concat emacs-tmp-dir "auto-save-list/saves-"))
 (defconst emacs-backups-dir (concat emacs-tmp-dir "backups"))
 (defconst emacs-backups-pat (concat emacs-backups-dir "/"))
 (make-directory emacs-var-dir t)
@@ -71,6 +72,7 @@
 
 ;; Indent.
 (setq-default tab-always-indent 'complete)
+(setq-default tab-first-completion 'word-or-paren-or-punct)
 
 ;; Bindings.
 (setq-default column-number-indicator-zero-based nil)
@@ -92,10 +94,18 @@
 ;; Hippie expand
 (fm/after hippie-exp
  (setq-default hippie-expand-try-functions-list
-  '(try-expand-dabbrev try-expand-dabbrev-visible try-expand-dabbrev-all-buffers
-    try-expand-dabbrev-from-kill try-expand-line-all-buffers try-expand-list-all-buffers
-    try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs
-    try-expand-list try-expand-line try-complete-lisp-symbol-partially
+  '(try-expand-line
+    try-expand-line-all-buffers
+    try-complete-file-name
+    try-complete-file-name-partially
+    try-expand-dabbrev-visible
+    try-expand-dabbrev
+    try-expand-dabbrev-all-buffers
+    try-expand-dabbrev-from-kill
+    try-expand-all-abbrevs
+    try-expand-list
+    try-expand-list-all-buffers
+    try-complete-lisp-symbol-partially
     try-complete-lisp-symbol)))
 
 (fm/after emacs
@@ -122,16 +132,16 @@
  (setq-default history-delete-duplicates t)
  (setq-default history-length 150)
 
- ;; Scrolling.
- (setq-default scroll-conservatively 4)
+ ;; External Processes.
+ (setq-default read-process-output-max (* 1024 1024))
+
+  ;; Scrolling.
+ (setq-default scroll-conservatively 104)
  (setq-default scroll-margin 3)
  (setq-default hscroll-margin 3)
  (setq-default hscroll-step 1)
  (setq-default auto-hscroll-mode 'current-line)
- (setq-default fast-but-imprecise-scrolling t)
-
- ;; External Processes.
- (setq-default read-process-output-max (* 1024 1024)))
+ (setq-default fast-but-imprecise-scrolling t))
 
 (fm/key-interactive "<f10>" (scroll-other-window 1))
 (fm/key-interactive "<f11>" (scroll-other-window-down 1))
@@ -154,7 +164,7 @@
     (c++-mode . c++-ts-mode)
     (c-or-c++-mode . c-or-c++-ts-mode)
     (rust-mode . rust-ts-mode)
-    ;; (yaml-mode . yaml-ts-mode)
+    (yaml-mode . yaml-ts-mode)
     (sh-mode . bash-ts-mode)
     (toml-mode . toml-ts-mode)
     (json-mode . json-ts-mode)
@@ -194,6 +204,7 @@
  (fm/disable-popup "\\`\\*Warnings\\*.*\\'")
  (setq-default switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'")))
 
+;; Window.
 (fm/key "<f12>"       delete-other-windows)
 (fm/key "<M-S-right>" next-buffer)
 (fm/key "<M-S-left>"  previous-buffer)
@@ -302,7 +313,8 @@
 (fm/after dired
  (setq-default dired-listing-switches "-l --group-directories-first")
  (setq-default dired-hide-details-hide-symlink-targets nil)
- (fm/hook dired-mode-hook dired-hide-details-mode "dired"))
+ (fm/hook dired-mode-hook dired-hide-details-mode "dired")
+ (fm/hook dired-mode-hook auto-revert-mode))
 
 (fm/after autorevert
  (fm/dim autorevert-mode "Ar")
@@ -314,9 +326,6 @@
 (fm/after isearch
  (setq-default isearch-lazy-count t)
  (setq-default isearch-lazy-highlight t))
-
-(fm/after dired
- (fm/hook dired-mode-hook auto-revert-mode))
 
 (fm/after subword
  (fm/dim subword-mode "Sw"))
@@ -358,9 +367,13 @@
  (setq-default c-basic-offset 2)
  (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
 
+(fm/after c-ts-mode
+ (fm/hook c++-ts-mode-hook lsp))
+
 (fm/after python
- (setq-default fill-column 79)
- (fm/hook python-mode-hook lsp))
+ (fm/hook python-ts-mode-hook lsp)
+ (fm/hookn python-ts-mode-hook
+  (setq-default fill-column 79)))
 
 (fm/after jit-lock
  (setq-default jit-lock-stealth-time 1)
@@ -551,10 +564,10 @@
  (push 'substring completion-styles)
  (push 'flex completion-styles)
  (setq-default read-file-name-completion-ignore-case t)
- (setq-default completion-category-defaults nil)
- (setq-default completion-cycle-threshold 4)
+ ;; (setq-default completion-category-defaults nil)
+ ;; (setq-default completion-cycle-threshold 4)
  (setq-default completions-format 'one-column)
- (setq-default completions-max-height 20)
+ ;; (setq-default completions-max-height 20)
  (setq-default completions-detailed t)
  ;; (setq-default set-message-functions '(set-multi-message))
  (fm/after consult
@@ -647,12 +660,17 @@
 (fm/pkg volatile-highlights
  (volatile-highlights-mode))
 
-(fm/pkg yaml-mode
- (fm/after yaml-mode
-  (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
-  (fm/hook yaml-mode-hook flycheck-mode)
-  (fm/hook yaml-mode-hook tree-sitter-mode))
- (fm/mode "clang-format" yaml-mode))
+;; (fm/pkg yaml-mode
+;;  (fm/after yaml-mode
+;;   (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
+;;   (fm/hook yaml-mode-hook flycheck-mode)
+;;   (fm/hook yaml-mode-hook tree-sitter-mode))
+;;  (fm/mode "clang-format" yaml-mode))
+
+(fm/after yaml-ts-mode
+ (fm/key-local "C-c p" fm/generate-password yaml-ts-mode-map "qol")
+ (fm/hook yaml-ts-mode-hook flycheck-mode))
+(fm/mode "clang-format" yaml-mode)
 
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
