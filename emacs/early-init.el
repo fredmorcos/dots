@@ -27,7 +27,8 @@
 (fm/after frame
  (modify-all-frames-parameters
   '((background-color . "Gray98")
-    (fullscreen . maximized))))
+    (fullscreen . maximized)
+    (use-frame-synchronization . t))))
 
 ;; Prevent an early unstyled Emacs by handling UI elements.
 (fm/after tool-bar (tool-bar-mode -1))

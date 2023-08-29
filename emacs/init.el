@@ -94,15 +94,15 @@
 ;; Hippie expand
 (fm/after hippie-exp
  (setq-default hippie-expand-try-functions-list
-  '(try-expand-line
-    try-expand-line-all-buffers
-    try-complete-file-name
-    try-complete-file-name-partially
-    try-expand-dabbrev-visible
+  '(try-expand-dabbrev-visible
+    try-expand-line
     try-expand-dabbrev
     try-expand-dabbrev-all-buffers
+    try-expand-line-all-buffers
     try-expand-dabbrev-from-kill
     try-expand-all-abbrevs
+    try-complete-file-name
+    try-complete-file-name-partially
     try-expand-list
     try-expand-list-all-buffers
     try-complete-lisp-symbol-partially
@@ -361,16 +361,17 @@
     (c++-mode  . doxygen)))
  (fm/hook c-mode-common-hook lsp))
 
+(fm/after c-ts-mode
+ (fm/hook c-ts-base-mode-hook lsp))
+
 (fm/after cc-vars
  (setq-default c-mark-wrong-style-of-comment t)
  (setq-default c-default-style '((other . "user")))
  (setq-default c-basic-offset 2)
  (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
 
-(fm/after c-ts-mode
- (fm/hook c++-ts-mode-hook lsp))
-
 (fm/after python
+ (fm/hook python-mode-hook lsp)
  (fm/hook python-ts-mode-hook lsp)
  (fm/hookn python-ts-mode-hook
   (setq-default fill-column 79)))
@@ -473,7 +474,7 @@
 (fm/pkg which-key
  (fm/after which-key
   (fm/dim which-key-mode)
-  (setq-default which-key-idle-delay 0.2)
+  (setq-default which-key-idle-delay 0.5)
   (setq-default which-key-show-docstrings nil)
   (setq-default which-key-add-column-padding 3)
   (setq-default which-key-max-description-length nil)
@@ -827,6 +828,16 @@
   (fm/hookn rust-mode-hook (electric-quote-local-mode -1))
   (fm/hook rust-mode-hook subword-mode)
   (fm/hook rust-mode-hook lsp)))
+
+(fm/after rust-ts-mode
+ (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-ts-mode-map "rust-utils")
+ (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-ts-mode-map "lsp-rust")
+ (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-ts-mode-map "lsp-rust")
+ (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-ts-mode-map "lsp-rust")
+ (setq-default rust-ts-mode-indent-offset 2)
+ (fm/hookn rust-ts-mode-hook (electric-quote-local-mode -1))
+ (fm/hook rust-ts-mode-hook subword-mode)
+ (fm/hook rust-ts-mode-hook lsp))
 
 (fm/pkg lsp-mode
  (fm/after lsp-mode
