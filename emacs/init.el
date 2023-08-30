@@ -813,6 +813,9 @@
 
 (fm/pkg meson-mode
  (fm/after meson-mode
+  (fm/after company
+   (fm/hookn meson-mode-hook
+    (fm/company-add-backend 'company-dabbrev-code)))
   (fm/hook meson-mode-hook symbol-overlay-mode)
   (fm/hook meson-mode-hook company-mode)))
 
