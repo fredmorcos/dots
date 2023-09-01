@@ -608,7 +608,10 @@
   (setq-default magit-display-buffer-function
    'magit-display-buffer-same-window-except-diff-v1)
   (setq-default magit-repository-directories '(("~/Workspace" . 3)))
-  (fm/hook after-save-hook magit-after-save-refresh-status "magit")))
+  (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
+ (fm/after magit-diff
+  (setq-default magit-revision-show-gravatars t)
+  (setq-default magit-revision-fill-summary-line fill-column)))
 
 (fm/pkg projectile
  (fm/after projectile
@@ -925,6 +928,9 @@
      "--limit-references=0"
      "--limit-results=0"))
   (fm/after cc-mode
+   (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
+   (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
+  (fm/after c-ts-base-mode-hook
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
 
