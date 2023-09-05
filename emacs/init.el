@@ -105,8 +105,8 @@
     try-complete-file-name-partially
     try-expand-list
     try-expand-list-all-buffers
-    try-complete-lisp-symbol-partially
-    try-complete-lisp-symbol)))
+    try-complete-lisp-symbol
+    try-complete-lisp-symbol-partially)))
 
 (fm/after emacs
  ;; Replace dabbrev-expand with hippie-expand.
@@ -664,12 +664,12 @@
 (fm/pkg volatile-highlights
  (volatile-highlights-mode))
 
-;; (fm/pkg yaml-mode
-;;  (fm/after yaml-mode
-;;   (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
-;;   (fm/hook yaml-mode-hook flycheck-mode)
-;;   (fm/hook yaml-mode-hook tree-sitter-mode))
-;;  (fm/mode "clang-format" yaml-mode))
+(fm/pkg yaml-mode
+ (fm/after yaml-mode
+  (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
+  (fm/hook yaml-mode-hook flycheck-mode)
+  (fm/hook yaml-mode-hook tree-sitter-mode))
+ (fm/mode "clang-format" yaml-mode))
 
 (fm/after yaml-ts-mode
  (fm/key-local "C-c p" fm/generate-password yaml-ts-mode-map "qol")

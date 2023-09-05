@@ -99,8 +99,8 @@
      (package-refresh-contents)
      (setq packages-refreshed t))
     (message "+++ Installing %s..." ',pkg)
-    (package-install ',pkg)
-    (push ',pkg package-selected-packages))
+    (package-install ',pkg))
+   (push ',pkg package-selected-packages)
    ,@body))
 
 (provide 'init-macros)
