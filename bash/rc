@@ -19,7 +19,7 @@ export HISTCONTROL HISTSIZE
 
 alias grep='grep --color'
 alias g='grep'
-alias ls='exa'
+alias ls='eza'
 alias ll='ls -lg --group-directories-first'
 alias la='ll -a'
 alias mv='mv -i'
