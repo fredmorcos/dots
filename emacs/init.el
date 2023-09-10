@@ -632,8 +632,11 @@
 (fm/pkg deadgrep
  (fm/key "M-F" deadgrep)
  (fm/after deadgrep
-  (fm/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
-  (fm/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
+  ;; (fm/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
+  ;; (fm/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
+  (require 'wgrep-deadgrep)))
+
+(fm/pkg wgrep-deadgrep)
 
 (fm/pkg yasnippet-snippets
  (fm/after yasnippet
@@ -1044,6 +1047,16 @@
 
 (fm/pkg dirvish
  (dirvish-override-dired-mode))
+
+(fm/pkg popper
+ (fm/after popper
+  (setq-default popper-reference-buffers '("\\*deadgrep.*$" "\\*Occur\\*$"))
+  (fm/autoload popper-group-by-projectile "popper")
+  (setq-default popper-group-function #'popper-group-by-projectile)
+  (fm/key "C-`" popper-cycle "popper")
+  (fm/key-local "C-~" popper-toggle-type popper-mode-map "popper"))
+ (popper-mode)
+ (popper-echo-mode))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
