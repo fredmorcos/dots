@@ -401,6 +401,7 @@ python-objgraph
 python-olefile
 python-openpyxl
 python-pdfminer
+python-pipx
 python-priority
 python-pyacoustid
 python-pyalsa
