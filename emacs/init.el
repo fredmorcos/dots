@@ -933,7 +933,7 @@
   (fm/after cc-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
-  (fm/after c-ts-base-mode-hook
+  (fm/after c-ts-base-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
 
