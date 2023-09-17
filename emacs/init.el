@@ -164,7 +164,6 @@
     (c++-mode . c++-ts-mode)
     (c-or-c++-mode . c-or-c++-ts-mode)
     (rust-mode . rust-ts-mode)
-    (yaml-mode . yaml-ts-mode)
     (sh-mode . bash-ts-mode)
     (toml-mode . toml-ts-mode)
     (json-mode . json-ts-mode)
@@ -673,11 +672,6 @@
   (fm/hook yaml-mode-hook flycheck-mode)
   (fm/hook yaml-mode-hook tree-sitter-mode))
  (fm/mode "clang-format" yaml-mode))
-
-(fm/after yaml-ts-mode
- (fm/key-local "C-c p" fm/generate-password yaml-ts-mode-map "qol")
- (fm/hook yaml-ts-mode-hook flycheck-mode))
-(fm/mode "clang-format" yaml-mode)
 
 (fm/mode ".ll" llvm-mode "llvm-mode")
 
