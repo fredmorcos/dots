@@ -927,9 +927,9 @@
   (fm/after cc-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
-  (fm/after c-ts-base-mode
+  (fm/after c-ts-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
-   (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))))
+   (fm/key-local "<f2>" lsp-clangd-find-other-file c-ts-mode-map))))
 
 (fm/pkg lsp-ivy
  (fm/after lsp-mode
