@@ -140,6 +140,7 @@ file-roller
 firefox
 flameshot
 fprintd
+fx
 fzf
 fzy
 gamemode
@@ -325,6 +326,7 @@ ocrad
 ocrdesktop
 ocrfeeder
 odt2txt
+onevpl-intel-gpu
 openbsd-netcat
 opencl-clover-mesa
 opencl-rusticl-mesa
