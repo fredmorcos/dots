@@ -173,6 +173,7 @@ gnome-usage
 gocr
 gpart
 gparted
+gptfdisk
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
