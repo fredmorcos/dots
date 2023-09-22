@@ -49,3 +49,19 @@ export DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elf
 # Wayland
 # export MOZ_ENABLE_WAYLAND=1           # Firefox
 # export QT_QPA_PLATFORM="wayland;xcb"  # Qt
+
+# Other options:
+# export XDG_CONFIG_HOME="$HOME/.config"
+# export XDG_CACHE_HOME="$HOME/.cache"
+# export XDG_DATA_HOME="$HOME/.local/share"
+
+# export XAUTHORITY="$XDG_CONFIG_HOME/Xauthority"
+# export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+# export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+# export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
+# export WGETRC="$XDG_CONFIG_HOME/wget/rc"
+# export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+# export GOPATH="$XDG_DATA_HOME/go"
+
+# alias ssh="ssh -F $XDG_CONFIG_HOME/ssh/config"
+# alias scp="scp -F $XDG_CONFIG_HOME/ssh/config"
