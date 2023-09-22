@@ -147,7 +147,7 @@ gcovr
 gdb-dashboard
 gdm
 ghex
-gimp
+gimp-nufraw
 git-absorb
 git-cliff
 git-lfs
@@ -599,6 +599,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xsane-gimp
 xsel
 yamllint
 yapf
