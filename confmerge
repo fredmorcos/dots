@@ -206,7 +206,7 @@ rm "$flatpak_tmp_file"
 
 if [ "$flatpak_remove" != "" ]; then
   echo "Remove Flatpaks:"
-  $SHELL -c "flatpak --user remove --app $flatpak_remove"
+  $SHELL -c "flatpak --user remove --delete-data --app $flatpak_remove"
 fi
 
 if [ "$flatpak_install" != "" ]; then
@@ -215,7 +215,7 @@ if [ "$flatpak_install" != "" ]; then
 fi
 
 flatpak --user update
-flatpak --user uninstall --unused
+flatpak --user uninstall --unused --delete-data
 
 pkgs_cargo_tmp_file=$(mktemp)
 cargo install --list | grep -E ':$' | awk '{ print $1 }' > "$pkgs_cargo_tmp_file"
