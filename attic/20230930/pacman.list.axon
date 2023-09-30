@@ -88,7 +88,6 @@ conntrack-tools
 cpio
 cppcheck
 criu
-cuda
 cuneiform
 cups-pdf
 curlftpfs
@@ -138,6 +137,7 @@ ffmpegthumbnailer
 fig2dev
 file-roller
 firefox
+flameshot
 foot
 foot-terminfo
 fprintd
@@ -193,6 +193,7 @@ hamster-time-tracker
 harfbuzz-utils
 hddtemp
 hdparm
+heaptrack
 hexedit
 highlight
 hledger-ui
@@ -228,9 +229,11 @@ iwd
 jfsutils
 john
 jp2a
+kcachegrind
 kcov
 kexec-tools
 keychain
+kgraphviewer
 knot
 kooha
 ksnip
@@ -316,7 +319,6 @@ noise-suppression-for-voice
 ntfs-3g
 nushell
 nuspell
-nvidia-settings
 nvme-cli
 nvtop
 obs-studio
