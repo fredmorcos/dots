@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+protonvpn-cli c --p2p
+sudo resolvectl dnsovertls proton0 no
+echo "Ready"
