@@ -278,6 +278,7 @@ lld
 lldb
 llvm
 logrotate
+loupe
 lrzip
 lshw
 lsof
@@ -490,6 +491,7 @@ skim
 slimit
 sloccount
 smartmontools
+snapshot
 sndio
 sof-firmware
 softhsm
