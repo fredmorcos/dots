@@ -49,6 +49,7 @@ export DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elf
 # Wayland
 # export MOZ_ENABLE_WAYLAND=1           # Firefox
 # export QT_QPA_PLATFORM="wayland;xcb"  # Qt
+# export SDL_VIDEODRIVER="wayland,x11"  # SDL
 
 # Other options:
 # export XDG_CONFIG_HOME="$HOME/.config"
