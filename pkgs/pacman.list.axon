@@ -123,6 +123,7 @@ edk2-ovmf
 efibootmgr
 elementary-wallpapers
 entr
+eolie
 epiphany
 ettercap-gtk
 evince
@@ -141,6 +142,7 @@ firefox
 foot
 foot-terminfo
 fprintd
+fragments
 fx
 fzf
 fzy
@@ -166,6 +168,7 @@ gnome-epub-thumbnailer
 gnome-firmware
 gnome-font-viewer
 gnome-icon-theme-extras
+gnome-passwordsafe
 gnome-podcasts
 gnome-recipes
 gnome-screenshot
@@ -384,6 +387,7 @@ python-flake8-black
 python-flake8-docstrings
 python-flake8-isort
 python-fs
+python-fxa
 python-genshi
 python-ghp-import
 python-h2
@@ -427,6 +431,7 @@ python-pytest-pylint
 python-pyudev
 python-pyxattr
 python-rcssmin
+python-requests-hawk
 python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
