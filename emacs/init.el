@@ -8,7 +8,7 @@
 
 (require 'init-macros)
 
-;; Quality of life improvements.
+;; Quality of life improvements
 (fm/key "C-x j"    fm/insert-buffer-name "qol")
 (fm/key "C-x e"    fm/replace-escapes    "qol")
 (fm/key "<M-up>"   fm/move-line-up       "qol")
@@ -22,7 +22,7 @@
 
 (fm/key "C-x c" duplicate-dwim)
 
-;; Directories.
+;; Directories
 (defconst user-home-dir (expand-file-name "~/"))
 (defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
 (defconst emacs-user-dir (expand-file-name user-emacs-directory))
@@ -46,35 +46,35 @@
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
 
-;; Do not show a message in the echo area after startup.
+;; Do not show a message in the echo area after startup
 (fset 'display-startup-echo-area-message 'ignore)
 
-;; Startup.
+;; Startup
 (setq-default inhibit-startup-screen t)
 (setq-default inhibit-startup-message t)
 (setq-default inhibit-startup-buffer-menu t)
 (setq-default initial-scratch-message nil)
 (setq-default initial-major-mode 'fundamental-mode)
 
-;; Auto-save.
+;; Auto-save
 (setq-default auto-save-list-file-prefix emacs-autosave-list-prefix)
 
-;; Windmove.
+;; Windmove
 (windmove-default-keybindings)
 (windmove-delete-default-keybindings)
 
-;; Common User Access.
+;; Common User Access
 (cua-selection-mode 1)
 
-;; Cursor.
+;; Cursor
 (fm/after frame
  (blink-cursor-mode -1))
 
-;; Indent.
+;; Indent
 (setq-default tab-always-indent 'complete)
 (setq-default tab-first-completion 'word-or-paren-or-punct)
 
-;; Bindings.
+;; Bindings
 (setq-default column-number-indicator-zero-based nil)
 
 ;; Modeline
@@ -109,33 +109,33 @@
     try-complete-lisp-symbol-partially)))
 
 (fm/after emacs
- ;; Replace dabbrev-expand with hippie-expand.
+ ;; Replace dabbrev-expand with hippie-expand
  (fm/key-remap dabbrev-expand hippie-expand)
 
- ;; Avoid graphical dialog boxes.
+ ;; Avoid graphical dialog boxes
  (setq-default use-dialog-box nil)
 
- ;; Completion.
+ ;; Completion
  (setq-default completion-ignore-case t)
  (setq-default read-buffer-completion-ignore-case t)
 
- ;; Fill.
+ ;; Fill
  (setq-default fill-column 90)
 
- ;; Indent.
+ ;; Indent
  (setq-default indent-tabs-mode nil)
 
- ;; Respond to yes/no questions using Y/N.
+ ;; Respond to yes/no questions using Y/N
  (setq-default use-short-answers t)
 
- ;; History/savehist.
+ ;; History/savehist
  (setq-default history-delete-duplicates t)
  (setq-default history-length 150)
 
- ;; External Processes.
+ ;; External Processes
  (setq-default read-process-output-max (* 1024 1024))
 
-  ;; Scrolling.
+  ;; Scrolling
  (setq-default scroll-conservatively 104)
  (setq-default scroll-margin 3)
  (setq-default hscroll-margin 3)
@@ -203,7 +203,7 @@
  (fm/disable-popup "\\`\\*Warnings\\*.*\\'")
  (setq-default switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'")))
 
-;; Window.
+;; Window
 (fm/key "<f12>"       delete-other-windows)
 (fm/key "<M-S-right>" next-buffer)
 (fm/key "<M-S-left>"  previous-buffer)
@@ -219,7 +219,7 @@
  (setq-default mouse-yank-at-point t))
 
 (fm/after simple
- ;; Hide commands in M-x that do not work in the current mode.
+ ;; Hide commands in M-x that do not work in the current mode
  (setq-default read-extended-command-predicate #'command-completion-default-include-p)
  (setq-default undo-limit (* 1024 1024))
  (setq-default suggest-key-bindings 10)
