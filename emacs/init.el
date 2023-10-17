@@ -195,6 +195,8 @@
  (setq-default help-window-select t))
 
 (fm/after window
+ (setq-default switch-to-buffer-in-dedicated-window 'pop)
+ (setq-default switch-to-buffer-obey-display-actions t)
  (setq-default split-height-threshold 160)
  (setq-default even-window-sizes 'width-only)
  (fm/disable-popup "\\`\\*Compile-Log\\*.*\\'")
@@ -929,7 +931,7 @@
    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
   (fm/after c-ts-mode
    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
-   (fm/key-local "<f2>" lsp-clangd-find-other-file c-ts-mode-map))))
+   (fm/key-local "<f2>" lsp-clangd-find-other-file c-ts-base-mode-map))))
 
 (fm/pkg lsp-ivy
  (fm/after lsp-mode
