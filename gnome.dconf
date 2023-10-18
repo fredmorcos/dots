@@ -105,7 +105,8 @@ num-workspaces=8
 
 # Sound
 [org/gnome/desktop/sound]
-allow-volume-above-100-percent=true
+allow-volume-above-100-percent=false
+event-sounds=false
 
 # Shell Shortcuts
 [org/gnome/shell/keybindings]
