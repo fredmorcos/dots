@@ -606,8 +606,11 @@
  (fm/after magit-mode
   (setq-default magit-log-section-commit-count 20)
   (setq-default magit-auto-revert-tracked-only nil)
+  ;; (setq-default magit-display-buffer-function
+  ;;  'magit-display-buffer-same-window-except-diff-v1)
   (setq-default magit-display-buffer-function
-   'magit-display-buffer-same-window-except-diff-v1)
+   'magit-display-buffer-fullframe-status-v1)
+  (setq-default magit-bury-buffer-function 'magit-restore-window-configuration)
   (setq-default magit-repository-directories '(("~/Workspace" . 3)))
   (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
  (fm/after magit-diff
