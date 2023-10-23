@@ -250,6 +250,7 @@ libdmapsharing
 libdvdcss
 libdwarf
 libebur128
+libfaketime
 libgepub
 libgnome-keyring
 liblouis
