@@ -312,6 +312,7 @@
  (setq-default show-paren-context-when-offscreen 'overlay))
 
 (fm/after dired
+ (setq-default dired-mouse-drag-files t)
  (setq-default dired-listing-switches "-l --group-directories-first")
  (setq-default dired-hide-details-hide-symlink-targets nil)
  (fm/hook dired-mode-hook dired-hide-details-mode "dired")
