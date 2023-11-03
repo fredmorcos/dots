@@ -41,6 +41,7 @@ brscan4
 brscan5
 cabextract
 capitaine-cursors
+cargo-about
 cargo-asm
 cargo-audit
 cargo-auditable
@@ -50,6 +51,7 @@ cargo-c
 cargo-crev
 cargo-deny
 cargo-depgraph
+cargo-dist
 cargo-edit
 cargo-expand
 cargo-feature
@@ -57,12 +59,18 @@ cargo-flamegraph
 cargo-fuzz
 cargo-geiger
 cargo-generate
+cargo-hack
 cargo-hakari
+cargo-insta
 cargo-llvm-cov
+cargo-machete
+cargo-make
+cargo-modules
 cargo-msrv
 cargo-nextest
 cargo-outdated
 cargo-release
+cargo-semver-checks
 cargo-sort
 cargo-spellcheck
 cargo-supply-chain
