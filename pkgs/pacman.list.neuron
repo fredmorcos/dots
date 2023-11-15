@@ -176,7 +176,6 @@ gnome-epub-thumbnailer
 gnome-firmware
 gnome-font-viewer
 gnome-icon-theme-extras
-gnome-passwordsafe
 gnome-podcasts
 gnome-recipes
 gnome-screenshot
@@ -496,6 +495,7 @@ scrot
 sd
 seahorse
 seahorse-nautilus
+secrets
 shake
 shellcheck
 shfmt
