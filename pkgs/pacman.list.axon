@@ -8,6 +8,7 @@ antiword
 aria2
 asp
 aspell-en
+assimp
 atomicparsley
 atool
 audacious
@@ -458,6 +459,7 @@ python-xlrd
 python-zopfli
 qbittorrent
 qreator
+qt6-quick3dphysics
 qt6-tools
 qt6-wayland
 qtqr
