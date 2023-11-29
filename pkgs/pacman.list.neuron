@@ -151,6 +151,7 @@ foot
 foot-terminfo
 fprintd
 fragments
+freecad
 fx
 fzf
 fzy
@@ -343,6 +344,7 @@ opencl-rusticl-mesa
 opencv
 opendoas
 openmp
+openscad
 openslide
 openssl-1.1
 ostra-cg
@@ -483,6 +485,7 @@ ropper
 rpm-tools
 rst2pdf
 rtaudio
+ruby-webrick
 rust-analyzer
 rust-bindgen
 rustc-demangle
@@ -508,6 +511,7 @@ sloccount
 smartmontools
 snapshot
 sndio
+socat
 sof-firmware
 softhsm
 sof-tools
@@ -561,7 +565,6 @@ vdpauinfo
 vi
 vim-spell-en
 vkd3d
-vtk
 vulkan-extra-layers
 vulkan-intel
 vulkan-mesa-layers
