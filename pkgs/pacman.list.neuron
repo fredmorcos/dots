@@ -92,6 +92,7 @@ checksec
 cheese
 chmlib
 clinfo
+clipgrab
 codespell
 conntrack-tools
 cpio
@@ -220,6 +221,7 @@ hyphen-de
 hyphen-en
 hyphen-fr
 idle3-tools
+ifuse
 img2pdf
 inetutils
 inkscape
@@ -362,10 +364,9 @@ pdfcrack
 pdfmixtool
 pdfslicer
 peek
-phantomjs-bin
 picard
 pigz
-pinta
+pipewire-alsa
 pipewire-v4l2
 pipewire-zeroconf
 pixz
@@ -384,8 +385,6 @@ pwndbg
 python-aafigure
 python-aiodns
 python-aiohttp
-python-arrow
-python-babel
 python-brotli
 python-brotlicffi
 python-cairosvg
@@ -401,6 +400,7 @@ python-fs
 python-fxa
 python-genshi
 python-ghp-import
+python-graphviz
 python-h2
 python-hsluv
 python-html2text
@@ -424,7 +424,6 @@ python-priority
 python-pyacoustid
 python-pyalsa
 python-pyaml
-python-pyasn1
 python-pycryptodome
 python-pygal
 python-pygit2
@@ -447,6 +446,7 @@ python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
 python-scipy
+python-service-identity
 python-svglib
 python-symengine
 python-sympy
@@ -469,6 +469,7 @@ r2ghidra
 radeontool
 radeontop
 radvd
+rapid-photo-downloader
 read-edid
 realtime-privileges
 reflector
@@ -573,6 +574,7 @@ vulkan-tools
 wabt
 wayland-utils
 wdiff
+webp-pixbuf-loader
 weechat
 wget
 whois
@@ -624,7 +626,6 @@ xsel
 yamllint
 yapf
 you-get
-yt-dlp
 yubico-pam
 yubikey-full-disk-encryption
 yubikey-manager-qt
