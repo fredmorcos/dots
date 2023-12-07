@@ -14,11 +14,11 @@
 (fm/key "<M-up>"   fm/move-line-up       "qol")
 (fm/key "<M-down>" fm/move-line-down     "qol")
 
-(fm/key "{"  fm/insert-pair-curly         "qol")
-(fm/key "("  fm/insert-pair-parens        "qol")
-(fm/key "'"  fm/insert-pair-quote         "qol")
-(fm/key "\"" fm/insert-pair-double-quotes "qol")
-(fm/key "`"  fm/insert-pair-backtick      "qol")
+;; (fm/key "{"  fm/insert-pair-curly         "qol")
+;; (fm/key "("  fm/insert-pair-parens        "qol")
+;; (fm/key "'"  fm/insert-pair-quote         "qol")
+;; (fm/key "\"" fm/insert-pair-double-quotes "qol")
+;; (fm/key "`"  fm/insert-pair-backtick      "qol")
 
 (fm/key "C-x c" duplicate-dwim)
 
@@ -524,13 +524,13 @@
 ;;   (setq-default swiper-include-line-number-in-search t)
 ;;   (setq-default swiper-action-recenter t)))
 
-(fm/pkg embark
- (fm/after flyspell
-  ;; Embark reserves this keybinding.
-  (fm/key-disable "C-." flyspell-mode-map))
- (fm/key "C-." embark-act)
- (fm/after embark
-  (setq-default prefix-help-command #'embark-prefix-help-command)))
+;; (fm/pkg embark
+;;  (fm/after flyspell
+;;   ;; Embark reserves this keybinding.
+;;   (fm/key-disable "C-." flyspell-mode-map))
+;;  (fm/key "C-." embark-act)
+;;  (fm/after embark
+;;   (setq-default prefix-help-command #'embark-prefix-help-command)))
 
 (fm/pkg marginalia
  (marginalia-mode))
@@ -1048,15 +1048,19 @@
 (fm/pkg dirvish
  (dirvish-override-dired-mode))
 
-(fm/pkg popper
- (fm/after popper
-  (setq-default popper-reference-buffers '("\\*deadgrep.*$" "\\*Occur\\*$"))
-  (fm/autoload popper-group-by-projectile "popper")
-  (setq-default popper-group-function #'popper-group-by-projectile)
-  (fm/key "C-`" popper-cycle "popper")
-  (fm/key-local "C-~" popper-toggle-type popper-mode-map "popper"))
- (popper-mode)
- (popper-echo-mode))
+;; (fm/pkg popper
+;;  (fm/after popper
+;;   (setq-default popper-reference-buffers '("\\*deadgrep.*$" "\\*Occur\\*$"))
+;;   (fm/autoload popper-group-by-projectile "popper")
+;;   (setq-default popper-group-function #'popper-group-by-projectile)
+;;   (fm/key "C-`" popper-cycle "popper")
+;;   (fm/key-local "C-~" popper-toggle-type popper-mode-map "popper"))
+;;  (popper-mode)
+;;  (popper-echo-mode))
+
+(fm/pkg surround
+ (require 'surround)
+ (fm/key "M-'" surround-mark-inner))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
