@@ -201,6 +201,7 @@ gtkspell
 gucharmap
 gvfs-google
 gvfs-mtp
+gyroflow-bin
 hamster-time-tracker
 harfbuzz-utils
 hddtemp
@@ -343,7 +344,6 @@ onevpl-intel-gpu
 openbsd-netcat
 opencl-clover-mesa
 opencl-rusticl-mesa
-opencv
 opendoas
 openmp
 openscad
