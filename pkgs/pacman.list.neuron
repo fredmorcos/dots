@@ -42,7 +42,6 @@ brscan5
 cabextract
 capitaine-cursors
 cargo-about
-cargo-asm
 cargo-audit
 cargo-auditable
 cargo-binstall
@@ -71,6 +70,7 @@ cargo-nextest
 cargo-outdated
 cargo-release
 cargo-semver-checks
+cargo-show-asm
 cargo-sort
 cargo-spellcheck
 cargo-supply-chain
