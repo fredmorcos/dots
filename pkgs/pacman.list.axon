@@ -89,7 +89,6 @@ cdrtools
 celluloid
 cgdb
 checksec
-cheese
 chmlib
 clinfo
 clipgrab
@@ -200,7 +199,6 @@ gtkspell
 gucharmap
 gvfs-google
 gvfs-mtp
-gyroflow-bin
 hamster-time-tracker
 harfbuzz-utils
 hddtemp
