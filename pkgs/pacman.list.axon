@@ -100,6 +100,7 @@ criu
 cuneiform
 cups-pdf
 curlftpfs
+cxxbridge
 dateutils
 dbus-broker
 dconf-editor
@@ -111,6 +112,7 @@ dhcpcd
 dhex
 diffpdf
 diffstat
+difftastic
 dmidecode
 dnsmasq
 docker
@@ -237,6 +239,7 @@ irqbalance
 ispell
 iwd
 jfsutils
+jless
 john
 jp2a
 kcov
