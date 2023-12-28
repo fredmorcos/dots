@@ -23,6 +23,10 @@
 ;;    ;; (alpha-background . 95)
 ;;    (use-frame-synchronization . t)))
 
+;; Disable showing the warnings buffer, but still log warnings.
+(fm/after warnings
+ (setq-default warning-minimum-level :emergency))
+
 ;; UI.
 (fm/after frame
  (modify-all-frames-parameters
