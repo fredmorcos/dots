@@ -84,26 +84,24 @@ cmerge () {
 }
 
 echo "Applying generic Gnome settings..."
-dconf load / < gnome.dconf
-if [ -f "gnome.dconf.$HNAME" ]; then
+dconf load / < gnome/gnome.dconf
+if [ -f "gnome/gnome.dconf.$HNAME" ]; then
   echo "Applying Gnome settings for $HNAME..."
-  dconf load / < "gnome.dconf.$HNAME"
+  dconf load / < "gnome/gnome.dconf.$HNAME"
 fi
 
 for file in applications/*.desktop; do
   cmerge "$file" ~/.local/share/"$file"
 done
 
-cmerge bash/rc                       ~/.bashrc
-cmerge bash/profile                  ~/.bash_profile
-cmerge profile                       ~/.profile
-cmerge inputrc                       ~/.config/readline/inputrc
+cmerge shell/bashrc                  ~/.bashrc
+cmerge shell/bash_profile            ~/.bash_profile
+cmerge shell/profile                 ~/.profile
+cmerge shell/inputrc                 ~/.config/readline/inputrc
 cmerge vimrc                         ~/.config/vim/vimrc
 
 cmerge dict/hunspell_en_US           ~/.hunspell_en_US
 cmerge dict/aspell.en.pws            ~/.aspell.en.pws
-
-cmerge gtk/bookmarks                 ~/.config/gtk-3.0/bookmarks
 
 cmerge emacs/init.el                 ~/.config/emacs/init.el
 cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
@@ -121,12 +119,11 @@ cmerge weechat/irc.conf              ~/.config/weechat/irc.conf
 cmerge weechat/spell.conf            ~/.config/weechat/spell.conf
 cmerge weechat/weechat.conf          ~/.config/weechat/weechat.conf
 
-cmerge wp-disable-suspend.lua        ~/.config/wireplumber/main.lua.d/51-disable-suspension.lua
+cmerge gnome/gtk-bookmarks           ~/.config/gtk-3.0/bookmarks
+cmerge gnome/gvfs-network.mount      /usr/share/gvfs/mounts/network.mount
 
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
-
-cmerge gvfs-network.mount            /usr/share/gvfs/mounts/network.mount
 
 cmerge archlinux/makepkg.conf        /etc/makepkg.conf
 cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
@@ -136,12 +133,12 @@ cmerge archlinux/paru.conf           /etc/paru.conf
 cmerge net/hostname                  /etc/hostname
 cmerge net/hosts                     /etc/hosts
 
-cmerge personal.us.map               /usr/local/share/kbd/keymaps/personal.us.map
-cmerge vconsole.conf                 /etc/vconsole.conf
-cmerge locale.conf                   /etc/locale.conf
-cmerge limits.conf                   /etc/security/limits.conf
+cmerge sysctl/personal.us.map        /usr/local/share/kbd/keymaps/personal.us.map
+cmerge sysctl/vconsole.conf          /etc/vconsole.conf
+cmerge sysctl/locale.conf            /etc/locale.conf
 cmerge sysctl/sysctl.conf            /etc/sysctl.d/sysctl.conf
 cmerge sysctl/i915.conf              /etc/sysctl.d/i915.conf
+cmerge sysctl/limits.conf            /etc/security/limits.conf
 
 cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
 cmerge modules/amdgpu.conf           /etc/modprobe.d/amdgpu.conf
