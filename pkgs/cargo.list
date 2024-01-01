@@ -4,6 +4,9 @@ cargo-deadlinks
 cargo-demangle
 clang-tidy-sarif
 inferno
+ren-find
+rep-cli
 rustfilt
 sarif-fmt
+suckit
 tvrank-cli

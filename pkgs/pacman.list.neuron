@@ -97,6 +97,7 @@ conntrack-tools
 cpio
 cppcheck
 criu
+csvkit
 cuda
 cuneiform
 cups-pdf
@@ -164,6 +165,7 @@ gdm
 ghex
 gimp-nufraw
 git-absorb
+git-bug
 git-cliff
 git-lfs
 gitui
@@ -419,6 +421,7 @@ python-objgraph
 python-olefile
 python-openpyxl
 python-pdfminer
+python-pdftotext
 python-pipx
 python-priority
 python-pyacoustid
@@ -455,6 +458,7 @@ python-unicodedata2
 python-unidiff
 python-volume_key
 python-watchdog
+python-weasyprint
 python-webcolors
 python-xattr
 python-xlrd
@@ -534,6 +538,7 @@ systemd-ukify
 systeroid
 t1utils
 tealdeer
+tectonic
 thunderbird
 tidy
 time
@@ -546,8 +551,10 @@ traceroute
 trash-cli
 tree
 tup
+typst
 udftools
 udiskie
+ugrep
 unace
 unbound
 unicode-emoji
