@@ -21,6 +21,10 @@
 [init]
   defaultBranch = main
 
+[diff]
+  colormoved = "default"
+  colormovedws = "allow-indentation-change"
+
 [url "https://github.com/"]
   insteadOf = gh:
 
