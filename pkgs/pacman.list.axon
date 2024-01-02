@@ -10,7 +10,6 @@ aspell-en
 assimp
 atomicparsley
 atool
-audacious
 audiofile
 autopep8
 avisynthplus
@@ -86,7 +85,6 @@ ccache
 cclive
 ccls
 cdrtools
-celluloid
 cgdb
 checksec
 chmlib
@@ -144,16 +142,11 @@ f2fs-tools
 fastjar
 fd
 fdupes
-feathernotes
 ffmpegthumbnailer
 fig2dev
 file-roller
 firefox
-foot
-foot-terminfo
 fprintd
-fragments
-freecad
 fx
 fzf
 fzy
@@ -162,7 +155,6 @@ gcovr
 gdb-dashboard
 gdm
 ghex
-gimp-nufraw
 git-absorb
 git-bug
 git-cliff
@@ -180,6 +172,7 @@ gnome-epub-thumbnailer
 gnome-firmware
 gnome-font-viewer
 gnome-icon-theme-extras
+gnome-music
 gnome-podcasts
 gnome-recipes
 gnome-screenshot
@@ -261,7 +254,6 @@ libappindicator-gtk3
 libayatana-appindicator
 libcamera-tools
 libdecaf
-libdmapsharing
 libdvdcss
 libdwarf
 libebur128
@@ -276,6 +268,7 @@ libnfs
 libofa
 libopenraw
 libotr
+libsidplayfp
 libupnp
 libva-intel-driver
 libva-mesa-driver
@@ -284,7 +277,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libvterm
-lifeograph
 light
 linux
 linux-firmware
@@ -318,6 +310,7 @@ mkinitcpio-utils
 mlocate
 mold
 most
+mpv
 mtools
 musl
 mutt
@@ -347,8 +340,8 @@ opencl-clover-mesa
 opencl-rusticl-mesa
 opendoas
 openmp
-openscad
 openslide
+opusfile
 ostra-cg
 p7zip
 pacman-contrib
@@ -385,7 +378,6 @@ pwndbg
 python-aafigure
 python-aiodns
 python-aiohttp
-python-brotli
 python-brotlicffi
 python-cairosvg
 python-cchardet
@@ -404,7 +396,6 @@ python-graphviz
 python-h2
 python-hsluv
 python-html2text
-python-html5lib
 python-husl
 python-invoke
 python-ipdb
@@ -416,8 +407,6 @@ python-lz4
 python-mdx-video
 python-micawber
 python-objgraph
-python-olefile
-python-openpyxl
 python-pdfminer
 python-pdftotext
 python-pipx
@@ -431,7 +420,6 @@ python-pygit2
 python-pygithub
 python-pyinotify
 python-pylast
-python-pyphen
 python-pypng
 python-pystemmer
 python-pytest-black
@@ -459,8 +447,6 @@ python-watchdog
 python-weasyprint
 python-webcolors
 python-xattr
-python-xlrd
-python-zopfli
 qbittorrent
 qreator
 qt6-quick3dphysics
@@ -477,7 +463,6 @@ realtime-privileges
 reflector
 remake
 reuse
-rhythmbox
 rink
 ripgrep
 rmlint
