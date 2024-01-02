@@ -1,7 +1,7 @@
 # Tracker
 [org/freedesktop/tracker/miner/files]
 index-single-directories=@as []
-index-recursive-directories=@as []
+index-recursive-directories=@as ['&MUSIC']
 index-applications=false
 index-on-battery=false
 index-on-battery-first-time=false
