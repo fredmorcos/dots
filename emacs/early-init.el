@@ -35,8 +35,11 @@
     (use-frame-synchronization . t))))
 
 ;; Prevent an early unstyled Emacs by handling UI elements.
-(fm/after tool-bar (tool-bar-mode -1))
-(fm/after menu-bar (menu-bar-mode -1))
+;; (fm/after tool-bar (tool-bar-mode -1))
+;; (fm/after menu-bar (menu-bar-mode -1))
+(fm/after tool-bar
+ (setopt tool-bar-position 'left)
+ (setq-default tool-bar-style 'image))
 (fm/after fringe (set-fringe-style '(8 . 8)))
 (fm/after scroll-bar
  (set-scroll-bar-mode nil)
