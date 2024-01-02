@@ -670,6 +670,8 @@
   (setq-default mc/always-run-for-all t)))
 
 (fm/pkg volatile-highlights
+ (fm/after volatile-highlights
+  (fm/dim volatile-highlights-mode "Vh"))
  (volatile-highlights-mode))
 
 (fm/pkg yaml-mode
