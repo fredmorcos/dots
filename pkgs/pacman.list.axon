@@ -101,7 +101,6 @@ cups-pdf
 curlftpfs
 cxxbridge
 dateutils
-dbus-broker
 dconf-editor
 ddcutil
 devtools
