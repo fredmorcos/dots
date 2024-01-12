@@ -10,6 +10,7 @@ aspell-en
 assimp
 atomicparsley
 atool
+atuin
 audiofile
 autopep8
 avisynthplus
@@ -19,6 +20,7 @@ baobab
 base
 base-devel
 bash-completion
+bash-preexec
 bashtop
 bat
 bbswitch-dkms
@@ -297,6 +299,7 @@ malcontent
 man-db
 man-pages
 mariadb-libs
+mcfly
 mediainfo
 mesa-demos
 mesa-utils
