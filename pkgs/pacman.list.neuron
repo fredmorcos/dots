@@ -1,8 +1,8 @@
 aardvark-dns
 acpid
+afl
 alsa-firmware
 alsa-utils
-amd-ucode
 android-tools
 antiword
 aria2
@@ -20,7 +20,6 @@ baobab
 base
 base-devel
 bash-completion
-bash-preexec
 bashtop
 bat
 bbswitch-dkms
@@ -151,7 +150,6 @@ firefox
 fprintd
 fx
 fzf
-fzy
 gamemode
 gcovr
 gdb-dashboard
@@ -284,8 +282,6 @@ linux
 linux-firmware
 linux-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 lld
 lldb
 logrotate
@@ -300,7 +296,6 @@ malcontent
 man-db
 man-pages
 mariadb-libs
-mcfly
 mediainfo
 mesa-demos
 mesa-utils
@@ -497,7 +492,6 @@ shfmt
 signalbackup-tools-git
 signal-desktop
 simple-scan
-skim
 slimit
 sloccount
 smartmontools

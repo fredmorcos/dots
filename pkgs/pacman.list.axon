@@ -1,5 +1,6 @@
 aardvark-dns
 acpid
+afl
 alsa-firmware
 alsa-utils
 amd-ucode
@@ -20,7 +21,6 @@ baobab
 base
 base-devel
 bash-completion
-bash-preexec
 bashtop
 bat
 bbswitch-dkms
@@ -150,7 +150,6 @@ firefox
 fprintd
 fx
 fzf
-fzy
 gamemode
 gcovr
 gdb-dashboard
@@ -225,7 +224,6 @@ innoextract
 intel-compute-runtime
 intel-gpu-tools
 intel-media-sdk
-intel-ucode
 intltool
 iotop
 ipp-usb
@@ -283,8 +281,6 @@ linux
 linux-firmware
 linux-headers
 linux-tools-meta
-linux-zen
-linux-zen-headers
 lld
 lldb
 logrotate
@@ -299,7 +295,6 @@ malcontent
 man-db
 man-pages
 mariadb-libs
-mcfly
 mediainfo
 mesa-demos
 mesa-utils
@@ -495,7 +490,6 @@ shfmt
 signalbackup-tools-git
 signal-desktop
 simple-scan
-skim
 slimit
 sloccount
 smartmontools
