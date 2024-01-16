@@ -21,6 +21,7 @@ baobab
 base
 base-devel
 bash-completion
+bash-language-server
 bashtop
 bat
 bbswitch-dkms
