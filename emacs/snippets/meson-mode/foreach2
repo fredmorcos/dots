@@ -1,0 +1,7 @@
+# -*- mode:snippet -*-
+# name: foreach2
+# key: for2
+# --
+foreach ${1:element}, ${2:element}: ${3:container}
+  ${0:block}
+endforeach
