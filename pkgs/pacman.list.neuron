@@ -3,6 +3,7 @@ acpid
 afl
 alsa-firmware
 alsa-utils
+amd-ucode
 android-tools
 antiword
 aria2
@@ -346,7 +347,6 @@ p7zip
 pacman-contrib
 pacrunner
 pam-u2f
-papirus-icon-theme
 par2cmdline
 paru-bin
 patchelf

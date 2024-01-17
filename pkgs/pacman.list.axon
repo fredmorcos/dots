@@ -225,6 +225,7 @@ innoextract
 intel-compute-runtime
 intel-gpu-tools
 intel-media-sdk
+intel-ucode
 intltool
 iotop
 ipp-usb
@@ -344,7 +345,6 @@ p7zip
 pacman-contrib
 pacrunner
 pam-u2f
-papirus-icon-theme
 par2cmdline
 paru-bin
 patchelf
