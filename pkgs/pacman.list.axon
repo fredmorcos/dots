@@ -277,7 +277,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libvterm
-light
 linux
 linux-firmware
 linux-headers
@@ -367,6 +366,7 @@ procs
 profile-cleaner
 progress
 protonvpn-cli
+protonvpn-gui
 pstoedit
 psutils
 pv
