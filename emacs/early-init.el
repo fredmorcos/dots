@@ -10,7 +10,6 @@
 (eval-when-compile
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
-
 (require 'init-macros)
 
 ;; Custom file (cus-edit).
