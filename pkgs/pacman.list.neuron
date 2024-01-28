@@ -487,7 +487,6 @@ secrets
 shake
 shellcheck
 shfmt
-signalbackup-tools-git
 signal-desktop
 simple-scan
 slimit
