@@ -173,7 +173,6 @@ gnome-epub-thumbnailer
 gnome-firmware
 gnome-font-viewer
 gnome-icon-theme-extras
-gnome-music
 gnome-podcasts
 gnome-recipes
 gnome-screenshot
@@ -307,6 +306,7 @@ mkinitcpio-utils
 mlocate
 mold
 most
+mp3val
 mpv
 mtools
 musl
@@ -446,11 +446,10 @@ python-weasyprint
 python-webcolors
 python-xattr
 qbittorrent
-qreator
 qt6-quick3dphysics
 qt6-tools
 qt6-wayland
-qtqr
+quodlibet
 r2ghidra
 radeontool
 radeontop
@@ -500,6 +499,7 @@ softhsm
 sof-tools
 soundconverter
 sox
+sqlitebrowser
 squashfs-tools
 sshfs
 strace
