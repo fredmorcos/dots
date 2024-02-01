@@ -24,18 +24,16 @@ CMD=("rsync"
 
 echo ">>> Rsync command:" "${CMD[@]}"
 
-HNAME=$(hostnamectl hostname)
-printf ">>> Hostname = %s\n\n\n" "$HNAME"
+HOSTNAME=$(hostnamectl hostname)
+printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
 
 TARGET=""
-if [ "$HNAME" == "axon" ]; then
+if [ "$HOSTNAME" == "axon" ]; then
   TARGET="neuron"
-elif [ "$HNAME" == "neuron" ]; then
-  TARGET="axon"
-elif [ "$HNAME" == "hilda-laptop" ]; then
+elif [ "$HOSTNAME" == "neuron" ]; then
   TARGET="axon"
 else
-  printf ">>> Unknown machine with hostname = %s\n" "$HNAME"
+  printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
   exit 1
 fi
 
@@ -61,7 +59,11 @@ rdiff $HOME/.config/yt-dlp/archive
 rdiff $HOME/.local/share/rhythmbox/playlists.xml
 
 cmd $HOME/.ssh/
+cmd $HOME/.config/beets/
 cmd $HOME/.config/yt-dlp/
+cmd $HOME/.config/qBittorrent/
+cmd $HOME/.config/protonvpn/
+cmd $HOME/.config/quodlibet/
 cmd $HOME/.local/share/gnupg/
 cmd $HOME/.local/share/keyrings/
 cmd $HOME/Workspace/

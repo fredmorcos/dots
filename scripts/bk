@@ -30,45 +30,47 @@ cmd () {
   printf "\n\n"
 }
 
-HNAME=$(hostnamectl hostname)
-printf ">>> Hostname = %s\n\n\n" "$HNAME"
+HOSTNAME=$(hostnamectl hostname)
+printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
 
-if [ "$HNAME" == "axon" ]; then
+if [ "$HOSTNAME" == "axon" ]; then
   HOME=/home/fred
-  INT=/run/media/fred/Internal
-  EXT=/run/media/fred/External
+  INTERNAL=/run/media/fred/Internal
+  EXTERNAL=/run/media/fred/External
 
-  if [ -d "$INT" ]; then
-    cmd "$HOME/Archive/"                  "$INT/Fred/Archive/"
-    cmd "$HOME/Documents/"                "$INT/Fred/Documents/"
-    cmd "$HOME/Downloads/"                "$INT/Fred/Downloads/"
-    cmd "$HOME/Music/"                    "$INT/Fred/Music/"
-    cmd "$HOME/Music.New/"                "$INT/Fred/Music.New/"
-    cmd "$HOME/Phone/"                    "$INT/Fred/Phone/"
-    cmd "$HOME/Workspace/"                "$INT/Fred/Workspace/"
+  if [ -d "$INTERNAL" ]; then
+    cmd "$HOME/Archive/"                  "$INTERNAL/Fred/Archive/"
+    cmd "$HOME/Documents/"                "$INTERNAL/Fred/Documents/"
+    cmd "$HOME/Downloads/"                "$INTERNAL/Fred/Downloads/"
+    cmd "$HOME/Music/"                    "$INTERNAL/Fred/Music/"
+    cmd "$HOME/Music.New/"                "$INTERNAL/Fred/Music.New/"
+    cmd "$HOME/Phone/"                    "$INTERNAL/Fred/Phone/"
+    cmd "$HOME/Workspace/"                "$INTERNAL/Fred/Workspace/"
 
-    cmd "$HOME/.ssh/"                     "$INT/Desktop/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$INT/Desktop/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$INT/Desktop/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/transmission/"     "$INT/Desktop/Configs/config-transmission/"
-    cmd "$HOME/.config/qBittorrent/"      "$INT/Desktop/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/yt-dlp/"           "$INT/Desktop/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$INT/Desktop/Configs/config-weechat/"
-    cmd "$HOME/.local/share/gnupg/"       "$INT/Desktop/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$INT/Desktop/Configs/local-share-keyrings/"
+    cmd "$HOME/.ssh/"                     "$INTERNAL/Desktop/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$INTERNAL/Desktop/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL/Desktop/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/transmission/"     "$INTERNAL/Desktop/Configs/config-transmission/"
+    cmd "$HOME/.config/qBittorrent/"      "$INTERNAL/Desktop/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$INTERNAL/Desktop/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$INTERNAL/Desktop/Configs/config-quodlibet/"
+    cmd "$HOME/.config/yt-dlp/"           "$INTERNAL/Desktop/Configs/config-yt-dlp/"
+    cmd "$HOME/.config/weechat/"          "$INTERNAL/Desktop/Configs/config-weechat/"
+    cmd "$HOME/.local/share/gnupg/"       "$INTERNAL/Desktop/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$INTERNAL/Desktop/Configs/local-share-keyrings/"
 
-    if [ -d "$EXT" ]; then
-      cmd "$INT/Desktop/"   "$EXT/Desktop/"
-      cmd "$INT/Fred/"      "$EXT/Fred/"
-      cmd "$INT/FredOther/" "$EXT/FredOther/"
+    if [ -d "$EXTERNAL" ]; then
+      cmd "$INTERNAL/Desktop/"   "$EXTERNAL/Desktop/"
+      cmd "$INTERNAL/Fred/"      "$EXTERNAL/Fred/"
+      cmd "$INTERNAL/FredOther/" "$EXTERNAL/FredOther/"
     else
-      printf ">>> %s is not mounted\n" "$EXT"
+      printf ">>> %s is not mounted\n" "$EXTERNAL"
       exit 0
     fi
   else
-    printf ">>> %s is not mounted\n" "$INT"
+    printf ">>> %s is not mounted\n" "$INTERNAL"
   fi
-elif [ "$HNAME" == "neuron" ]; then
+elif [ "$HOSTNAME" == "neuron" ]; then
   HOME=/home/fred
   LAPTOP=/run/media/fred/External/Laptop
 
@@ -78,7 +80,11 @@ elif [ "$HNAME" == "neuron" ]; then
     cmd "$HOME/Phone/"                    "$LAPTOP/Phone/"
     cmd "$HOME/Workspace/"                "$LAPTOP/Workspace/"
     cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$LAPTOP/Configs/config-beets/"
     cmd "$HOME/.config/transmission/"     "$LAPTOP/Configs/config-transmission/"
+    cmd "$HOME/.config/qBittorrent/"      "$LAPTOP/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$LAPTOP/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$LAPTOP/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
     cmd "$HOME/.config/weechat/"          "$LAPTOP/Configs/config-weechat/"
     cmd "$HOME/.local/share/gnupg/"       "$LAPTOP/Configs/local-share-gnupg/"
@@ -87,25 +93,24 @@ elif [ "$HNAME" == "neuron" ]; then
     printf ">>> %s is not mounted\n" "$LAPTOP"
   fi
 
-  OX_EXT=/run/media/fred/OX-External/Laptop
+  OX_EXTERNAL=/run/media/fred/OX-External/Laptop
 
-  if [ -d "$OX_EXT" ]; then
-    cmd "$HOME/Archive/"                  "$OX_EXT/Archive/"
-    cmd "$HOME/Documents/"                "$OX_EXT/Documents/"
-    cmd "$HOME/Downloads/"                "$OX_EXT/Downloads/"
-    cmd "$HOME/Music/"                    "$OX_EXT/Music/"
-    cmd "$HOME/Music.New/"                "$OX_EXT/Music.New/"
-    cmd "$HOME/Phone/"                    "$OX_EXT/Phone/"
-    cmd "$HOME/Workspace/"                "$OX_EXT/Workspace/"
-    cmd "$HOME/.config/"                  "$OX_EXT/.config/"
-    cmd "$HOME/.local/"                   "$OX_EXT/.local/"
-    cmd "$HOME/.mozilla/"                 "$OX_EXT/.mozilla/"
-    cmd "$HOME/.ssh/"                     "$OX_EXT/.ssh/"
-    cmd "$HOME/.var/"                     "$OX_EXT/.var/"
-    cmd "$HOME/.zoom/"                    "$OX_EXT/.zoom/"
+  if [ -d "$OX_EXTERNAL" ]; then
+    cmd "$HOME/Archive/"                  "$OX_EXTERNAL/Archive/"
+    cmd "$HOME/Documents/"                "$OX_EXTERNAL/Documents/"
+    cmd "$HOME/Downloads/"                "$OX_EXTERNAL/Downloads/"
+    cmd "$HOME/Music/"                    "$OX_EXTERNAL/Music/"
+    cmd "$HOME/Music.New/"                "$OX_EXTERNAL/Music.New/"
+    cmd "$HOME/Phone/"                    "$OX_EXTERNAL/Phone/"
+    cmd "$HOME/Workspace/"                "$OX_EXTERNAL/Workspace/"
+    cmd "$HOME/.config/"                  "$OX_EXTERNAL/.config/"
+    cmd "$HOME/.local/"                   "$OX_EXTERNAL/.local/"
+    cmd "$HOME/.mozilla/"                 "$OX_EXTERNAL/.mozilla/"
+    cmd "$HOME/.ssh/"                     "$OX_EXTERNAL/.ssh/"
+    cmd "$HOME/.var/"                     "$OX_EXTERNAL/.var/"
   else
-    printf ">>> %s is not mounted\n" "$OX_EXT"
+    printf ">>> %s is not mounted\n" "$OX_EXTERNAL"
   fi
 else
-  printf ">>> Unknown machine with hostname = %s\n" "$HNAME"
+  printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
 fi
