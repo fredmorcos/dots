@@ -275,7 +275,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libvterm
-linux
 linux-firmware
 linux-headers
 linux-tools-meta
