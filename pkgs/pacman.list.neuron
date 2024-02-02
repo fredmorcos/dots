@@ -3,6 +3,7 @@ acpid
 afl
 alsa-firmware
 alsa-utils
+amd-ucode
 android-tools
 antiword
 aria2
@@ -92,6 +93,7 @@ chmlib
 clinfo
 clipgrab
 codespell
+compsize
 conntrack-tools
 cpio
 cppcheck

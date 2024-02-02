@@ -24,6 +24,7 @@ bash-completion
 bash-language-server
 bashtop
 bat
+bbswitch
 bear
 bearssl
 beets
@@ -92,6 +93,7 @@ chmlib
 clinfo
 clipgrab
 codespell
+compsize
 conntrack-tools
 cpio
 cppcheck
@@ -222,6 +224,7 @@ innoextract
 intel-compute-runtime
 intel-gpu-tools
 intel-media-sdk
+intel-ucode
 intltool
 iotop
 ipp-usb
@@ -273,7 +276,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libvterm
-linux
 linux-firmware
 linux-headers
 linux-tools-meta
