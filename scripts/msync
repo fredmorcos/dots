@@ -60,6 +60,7 @@ rdiff $HOME/.local/share/rhythmbox/playlists.xml
 
 cmd $HOME/.ssh/
 cmd $HOME/.config/beets/
+cmd $HOME/.config/MusicBrainz/
 cmd $HOME/.config/yt-dlp/
 cmd $HOME/.config/qBittorrent/
 cmd $HOME/.config/protonvpn/

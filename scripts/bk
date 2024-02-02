@@ -33,84 +33,140 @@ cmd () {
 HOSTNAME=$(hostnamectl hostname)
 printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
 
+HOME='/home/fred'
+INTERNAL_DATA='/run/media/fred/Internal'
+PORTABLE_DATA='/run/media/fred/External'
+EXTERNAL_DATA='/run/media/fred/External Data'
+PORTABLE_DATA='/run/media/fred/External'
+EXTERNAL_OX='/run/media/fred/OX-External'
+
 if [ "$HOSTNAME" == "axon" ]; then
-  HOME=/home/fred
-  INTERNAL=/run/media/fred/Internal
-  EXTERNAL=/run/media/fred/External
+  if [ -d "$INTERNAL_DATA" ]; then
+    cmd "$HOME/Archive/"                  "$INTERNAL_DATA/Fred/Archive/"
+    cmd "$HOME/Documents/"                "$INTERNAL_DATA/Fred/Documents/"
+    cmd "$HOME/Downloads/"                "$INTERNAL_DATA/Fred/Downloads/"
+    cmd "$HOME/Music/"                    "$INTERNAL_DATA/Fred/Music/"
+    cmd "$HOME/Music.New/"                "$INTERNAL_DATA/Fred/Music.New/"
+    cmd "$HOME/Phone/"                    "$INTERNAL_DATA/Fred/Phone/"
+    cmd "$HOME/Pictures/"                 "$INTERNAL_DATA/Fred/Pictures/"
+    cmd "$HOME/Videos/"                   "$INTERNAL_DATA/Fred/Videos/"
+    cmd "$HOME/Workspace/"                "$INTERNAL_DATA/Fred/Workspace/"
 
-  if [ -d "$INTERNAL" ]; then
-    cmd "$HOME/Archive/"                  "$INTERNAL/Fred/Archive/"
-    cmd "$HOME/Documents/"                "$INTERNAL/Fred/Documents/"
-    cmd "$HOME/Downloads/"                "$INTERNAL/Fred/Downloads/"
-    cmd "$HOME/Music/"                    "$INTERNAL/Fred/Music/"
-    cmd "$HOME/Music.New/"                "$INTERNAL/Fred/Music.New/"
-    cmd "$HOME/Phone/"                    "$INTERNAL/Fred/Phone/"
-    cmd "$HOME/Workspace/"                "$INTERNAL/Fred/Workspace/"
-
-    cmd "$HOME/.ssh/"                     "$INTERNAL/Desktop/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$INTERNAL/Desktop/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL/Desktop/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/transmission/"     "$INTERNAL/Desktop/Configs/config-transmission/"
-    cmd "$HOME/.config/qBittorrent/"      "$INTERNAL/Desktop/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$INTERNAL/Desktop/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$INTERNAL/Desktop/Configs/config-quodlibet/"
-    cmd "$HOME/.config/yt-dlp/"           "$INTERNAL/Desktop/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$INTERNAL/Desktop/Configs/config-weechat/"
-    cmd "$HOME/.local/share/gnupg/"       "$INTERNAL/Desktop/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$INTERNAL/Desktop/Configs/local-share-keyrings/"
-
-    if [ -d "$EXTERNAL" ]; then
-      cmd "$INTERNAL/Desktop/"   "$EXTERNAL/Desktop/"
-      cmd "$INTERNAL/Fred/"      "$EXTERNAL/Fred/"
-      cmd "$INTERNAL/FredOther/" "$EXTERNAL/FredOther/"
-    else
-      printf ">>> %s is not mounted\n" "$EXTERNAL"
-      exit 0
-    fi
+    cmd "$HOME/.ssh/"                     "$INTERNAL_DATA/Fred/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$INTERNAL_DATA/Fred/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL_DATA/Fred/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/transmission/"     "$INTERNAL_DATA/Fred/Configs/config-transmission/"
+    cmd "$HOME/.config/qBittorrent/"      "$INTERNAL_DATA/Fred/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$INTERNAL_DATA/Fred/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$INTERNAL_DATA/Fred/Configs/config-quodlibet/"
+    cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_DATA/Fred/Configs/config-yt-dlp/"
+    cmd "$HOME/.config/weechat/"          "$INTERNAL_DATA/Fred/Configs/config-weechat/"
+    cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_DATA/Fred/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_DATA/Fred/Configs/local-share-keyrings/"
   else
-    printf ">>> %s is not mounted\n" "$INTERNAL"
+    printf ">>> %s is not mounted\n" "$INTERNAL_DATA"
+  fi
+
+  if [ -d "$PORTABLE_DATA" ]; then
+    cmd "$HOME/Archive/"                  "$PORTABLE_DATA/Fred/Archive/"
+    cmd "$HOME/Documents/"                "$PORTABLE_DATA/Fred/Documents/"
+    cmd "$HOME/Downloads/"                "$PORTABLE_DATA/Fred/Downloads/"
+    cmd "$HOME/Music/"                    "$PORTABLE_DATA/Fred/Music/"
+    cmd "$HOME/Music.New/"                "$PORTABLE_DATA/Fred/Music.New/"
+    cmd "$HOME/Phone/"                    "$PORTABLE_DATA/Fred/Phone/"
+    cmd "$HOME/Pictures/"                 "$PORTABLE_DATA/Fred/Pictures/"
+    cmd "$HOME/Videos/"                   "$PORTABLE_DATA/Fred/Videos/"
+    cmd "$HOME/Workspace/"                "$PORTABLE_DATA/Fred/Workspace/"
+
+    cmd "$HOME/.ssh/"                     "$PORTABLE_DATA/Fred/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$PORTABLE_DATA/Fred/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE_DATA/Fred/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/transmission/"     "$PORTABLE_DATA/Fred/Configs/config-transmission/"
+    cmd "$HOME/.config/qBittorrent/"      "$PORTABLE_DATA/Fred/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$PORTABLE_DATA/Fred/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$PORTABLE_DATA/Fred/Configs/config-quodlibet/"
+    cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Fred/Configs/config-yt-dlp/"
+    cmd "$HOME/.config/weechat/"          "$PORTABLE_DATA/Fred/Configs/config-weechat/"
+    cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Fred/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Fred/Configs/local-share-keyrings/"
+
+    cmd "$INTERNAL_DATA/FredOther/"       "$PORTABLE_DATA/FredOther/"
+  else
+    printf ">>> %s is not mounted\n" "$PORTABLE_DATA"
+  fi
+
+  if [ -d "$EXTERNAL_DATA" ]; then
+    cmd "$HOME/Archive/"                  "$EXTERNAL_DATA/Fred/Archive/"
+    cmd "$HOME/Documents/"                "$EXTERNAL_DATA/Fred/Documents/"
+    cmd "$HOME/Downloads/"                "$EXTERNAL_DATA/Fred/Downloads/"
+    cmd "$HOME/Music/"                    "$EXTERNAL_DATA/Fred/Music/"
+    cmd "$HOME/Music.New/"                "$EXTERNAL_DATA/Fred/Music.New/"
+    cmd "$HOME/Phone/"                    "$EXTERNAL_DATA/Fred/Phone/"
+    cmd "$HOME/Pictures/"                 "$EXTERNAL_DATA/Fred/Pictures/"
+    cmd "$HOME/Videos/"                   "$EXTERNAL_DATA/Fred/Videos/"
+    cmd "$HOME/Workspace/"                "$EXTERNAL_DATA/Fred/Workspace/"
+
+    cmd "$HOME/.ssh/"                     "$EXTERNAL_DATA/Fred/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$EXTERNAL_DATA/Fred/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$EXTERNAL_DATA/Fred/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/transmission/"     "$EXTERNAL_DATA/Fred/Configs/config-transmission/"
+    cmd "$HOME/.config/qBittorrent/"      "$EXTERNAL_DATA/Fred/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$EXTERNAL_DATA/Fred/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$EXTERNAL_DATA/Fred/Configs/config-quodlibet/"
+    cmd "$HOME/.config/yt-dlp/"           "$EXTERNAL_DATA/Fred/Configs/config-yt-dlp/"
+    cmd "$HOME/.config/weechat/"          "$EXTERNAL_DATA/Fred/Configs/config-weechat/"
+    cmd "$HOME/.local/share/gnupg/"       "$EXTERNAL_DATA/Fred/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$EXTERNAL_DATA/Fred/Configs/local-share-keyrings/"
+
+    cmd "$INTERNAL_DATA/FredOther/"       "$EXTERNAL_DATA/FredOther/"
+  else
+    printf ">>> %s is not mounted\n" "$EXTERNAL_DATA"
   fi
 elif [ "$HOSTNAME" == "neuron" ]; then
-  HOME=/home/fred
-  LAPTOP=/run/media/fred/External/Laptop
+  if [ -d "$PORTABLE_DATA" ]; then
+    cmd "$HOME/Documents/"                "$PORTABLE_DATA/Laptop/Documents/"
+    cmd "$HOME/Downloads/"                "$PORTABLE_DATA/Laptop/Downloads/"
+    cmd "$HOME/Phone/"                    "$PORTABLE_DATA/Laptop/Phone/"
+    cmd "$HOME/Pictures/"                 "$PORTABLE_DATA/Laptop/Pictures/"
+    cmd "$HOME/Videos/"                   "$PORTABLE_DATA/Laptop/Videos/"
+    cmd "$HOME/Workspace/"                "$PORTABLE_DATA/Laptop/Workspace/"
 
-  if [ -d "$LAPTOP" ]; then
-    cmd "$HOME/Documents/"                "$LAPTOP/Documents/"
-    cmd "$HOME/Downloads/"                "$LAPTOP/Downloads/"
-    cmd "$HOME/Phone/"                    "$LAPTOP/Phone/"
-    cmd "$HOME/Workspace/"                "$LAPTOP/Workspace/"
-    cmd "$HOME/.ssh/"                     "$LAPTOP/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$LAPTOP/Configs/config-beets/"
-    cmd "$HOME/.config/transmission/"     "$LAPTOP/Configs/config-transmission/"
-    cmd "$HOME/.config/qBittorrent/"      "$LAPTOP/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$LAPTOP/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$LAPTOP/Configs/config-quodlibet/"
-    cmd "$HOME/.config/yt-dlp/"           "$LAPTOP/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$LAPTOP/Configs/config-weechat/"
-    cmd "$HOME/.local/share/gnupg/"       "$LAPTOP/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$LAPTOP/Configs/local-share-keyrings/"
+    cmd "$HOME/.ssh/"                     "$PORTABLE_DATA/Laptop/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$PORTABLE_DATA/Laptop/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE_DATA/Laptop/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/transmission/"     "$PORTABLE_DATA/Laptop/Configs/config-transmission/"
+    cmd "$HOME/.config/qBittorrent/"      "$PORTABLE_DATA/Laptop/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$PORTABLE_DATA/Laptop/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$PORTABLE_DATA/Laptop/Configs/config-quodlibet/"
+    cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Laptop/Configs/config-yt-dlp/"
+    cmd "$HOME/.config/weechat/"          "$PORTABLE_DATA/Laptop/Configs/config-weechat/"
+    cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Laptop/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Laptop/Configs/local-share-keyrings/"
   else
-    printf ">>> %s is not mounted\n" "$LAPTOP"
+    printf ">>> %s is not mounted\n" "$PORTABLE_DATA"
   fi
 
-  OX_EXTERNAL=/run/media/fred/OX-External/Laptop
+  if [ -d "$EXTERNAL_OX" ]; then
+    cmd "$HOME/Archive/"                  "$EXTERNAL_OX/Laptop/Archive/"
+    cmd "$HOME/Documents/"                "$EXTERNAL_OX/Laptop/Documents/"
+    cmd "$HOME/Downloads/"                "$EXTERNAL_OX/Laptop/Downloads/"
+    cmd "$HOME/Music/"                    "$EXTERNAL_OX/Laptop/Music/"
+    cmd "$HOME/Music.New/"                "$EXTERNAL_OX/Laptop/Music.New/"
+    cmd "$HOME/Phone/"                    "$EXTERNAL_OX/Laptop/Phone/"
+    cmd "$HOME/Pictures/"                 "$EXTERNAL_OX/Laptop/Pictures/"
+    cmd "$HOME/Videos/"                   "$EXTERNAL_OX/Laptop/Videos/"
+    cmd "$HOME/Workspace/"                "$EXTERNAL_OX/Laptop/Workspace/"
 
-  if [ -d "$OX_EXTERNAL" ]; then
-    cmd "$HOME/Archive/"                  "$OX_EXTERNAL/Archive/"
-    cmd "$HOME/Documents/"                "$OX_EXTERNAL/Documents/"
-    cmd "$HOME/Downloads/"                "$OX_EXTERNAL/Downloads/"
-    cmd "$HOME/Music/"                    "$OX_EXTERNAL/Music/"
-    cmd "$HOME/Music.New/"                "$OX_EXTERNAL/Music.New/"
-    cmd "$HOME/Phone/"                    "$OX_EXTERNAL/Phone/"
-    cmd "$HOME/Workspace/"                "$OX_EXTERNAL/Workspace/"
-    cmd "$HOME/.config/"                  "$OX_EXTERNAL/.config/"
-    cmd "$HOME/.local/"                   "$OX_EXTERNAL/.local/"
-    cmd "$HOME/.mozilla/"                 "$OX_EXTERNAL/.mozilla/"
-    cmd "$HOME/.ssh/"                     "$OX_EXTERNAL/.ssh/"
-    cmd "$HOME/.var/"                     "$OX_EXTERNAL/.var/"
+    cmd "$HOME/.config/"                  "$EXTERNAL_OX/Laptop/Configs/dot.config/"
+    cmd "$HOME/.cache/"                   "$EXTERNAL_OX/Laptop/Configs/dot.cache/"
+    cmd "$HOME/.local/"                   "$EXTERNAL_OX/Laptop/Configs/dot.local/"
+    cmd "$HOME/.mozilla/"                 "$EXTERNAL_OX/Laptop/Configs/dot.mozilla/"
+    cmd "$HOME/.ssh/"                     "$EXTERNAL_OX/Laptop/Configs/dot.ssh/"
+    cmd "$HOME/.var/"                     "$EXTERNAL_OX/Laptop/Configs/dot.var/"
   else
-    printf ">>> %s is not mounted\n" "$OX_EXTERNAL"
+    printf ">>> %s is not mounted\n" "$EXTERNAL_OX"
   fi
 else
   printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
+  exit 1
 fi
