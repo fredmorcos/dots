@@ -339,7 +339,6 @@ openmp
 openslide
 opusfile
 ostra-cg
-p7zip
 pacman-contrib
 pacrunner
 pam-u2f
@@ -444,6 +443,7 @@ python-weasyprint
 python-webcolors
 python-xattr
 qbittorrent
+qnapi
 qt6-quick3dphysics
 qt6-tools
 qt6-wayland
