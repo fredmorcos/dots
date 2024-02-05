@@ -58,7 +58,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.config/protonvpn/"        "$INTERNAL_DATA/Fred/Configs/config-protonvpn/"
     cmd "$HOME/.config/quodlibet/"        "$INTERNAL_DATA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_DATA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$INTERNAL_DATA/Fred/Configs/config-weechat/"
     cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_DATA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_DATA/Fred/Configs/local-share-keyrings/"
   else
@@ -83,7 +82,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.config/protonvpn/"        "$PORTABLE_DATA/Fred/Configs/config-protonvpn/"
     cmd "$HOME/.config/quodlibet/"        "$PORTABLE_DATA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$PORTABLE_DATA/Fred/Configs/config-weechat/"
     cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Fred/Configs/local-share-keyrings/"
 
@@ -110,7 +108,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.config/protonvpn/"        "$EXTERNAL_DATA/Fred/Configs/config-protonvpn/"
     cmd "$HOME/.config/quodlibet/"        "$EXTERNAL_DATA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$EXTERNAL_DATA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$EXTERNAL_DATA/Fred/Configs/config-weechat/"
     cmd "$HOME/.local/share/gnupg/"       "$EXTERNAL_DATA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$EXTERNAL_DATA/Fred/Configs/local-share-keyrings/"
 
@@ -134,7 +131,6 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     cmd "$HOME/.config/protonvpn/"        "$PORTABLE_DATA/Laptop/Configs/config-protonvpn/"
     cmd "$HOME/.config/quodlibet/"        "$PORTABLE_DATA/Laptop/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Laptop/Configs/config-yt-dlp/"
-    cmd "$HOME/.config/weechat/"          "$PORTABLE_DATA/Laptop/Configs/config-weechat/"
     cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Laptop/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Laptop/Configs/local-share-keyrings/"
   else

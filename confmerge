@@ -115,10 +115,6 @@ cmerge mpv/mpv.conf                  ~/.config/mpv/mpv.conf
 cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
-cmerge weechat/irc.conf              ~/.config/weechat/irc.conf
-cmerge weechat/spell.conf            ~/.config/weechat/spell.conf
-cmerge weechat/weechat.conf          ~/.config/weechat/weechat.conf
-
 cmerge gnome/gtk-bookmarks           ~/.config/gtk-3.0/bookmarks
 cmerge gnome/gvfs-network.mount      /usr/share/gvfs/mounts/network.mount
 
