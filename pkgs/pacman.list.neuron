@@ -135,6 +135,7 @@ edk2-ovmf
 efibootmgr
 elementary-wallpapers
 entr
+eog-plugins
 epiphany
 ettercap-gtk
 evince
@@ -283,7 +284,6 @@ linux-tools-meta
 lld
 lldb
 logrotate
-loupe
 lrzip
 lshw
 lsof
@@ -560,8 +560,6 @@ vulkan-tools
 wabt
 wayland-utils
 wdiff
-webp-pixbuf-loader
-weechat
 wget
 whois
 wireguard-tools
