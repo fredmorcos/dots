@@ -56,7 +56,6 @@ HOME=/home/fred
 rdiff $HOME/.ssh/authorized_keys
 rdiff $HOME/.ssh/known_hosts
 rdiff $HOME/.config/yt-dlp/archive
-rdiff $HOME/.local/share/rhythmbox/playlists.xml
 
 cmd $HOME/.ssh/
 cmd $HOME/.config/beets/
