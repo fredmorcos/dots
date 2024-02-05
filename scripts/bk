@@ -35,10 +35,9 @@ printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
 
 HOME='/home/fred'
 INTERNAL_DATA='/run/media/fred/Internal'
-PORTABLE_DATA='/run/media/fred/External'
 EXTERNAL_DATA='/run/media/fred/External Data'
 PORTABLE_DATA='/run/media/fred/External'
-EXTERNAL_OX='/run/media/fred/OX-External'
+PORTABLE_OX='/run/media/fred/Portable OX'
 
 if [ "$HOSTNAME" == "axon" ]; then
   if [ -d "$INTERNAL_DATA" ]; then
@@ -142,25 +141,25 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     printf ">>> %s is not mounted\n" "$PORTABLE_DATA"
   fi
 
-  if [ -d "$EXTERNAL_OX" ]; then
-    cmd "$HOME/Archive/"                  "$EXTERNAL_OX/Laptop/Archive/"
-    cmd "$HOME/Documents/"                "$EXTERNAL_OX/Laptop/Documents/"
-    cmd "$HOME/Downloads/"                "$EXTERNAL_OX/Laptop/Downloads/"
-    cmd "$HOME/Music/"                    "$EXTERNAL_OX/Laptop/Music/"
-    cmd "$HOME/Music.New/"                "$EXTERNAL_OX/Laptop/Music.New/"
-    cmd "$HOME/Phone/"                    "$EXTERNAL_OX/Laptop/Phone/"
-    cmd "$HOME/Pictures/"                 "$EXTERNAL_OX/Laptop/Pictures/"
-    cmd "$HOME/Videos/"                   "$EXTERNAL_OX/Laptop/Videos/"
-    cmd "$HOME/Workspace/"                "$EXTERNAL_OX/Laptop/Workspace/"
+  if [ -d "$PORTABLE_OX" ]; then
+    cmd "$HOME/Archive/"                  "$PORTABLE_OX/Laptop/Archive/"
+    cmd "$HOME/Documents/"                "$PORTABLE_OX/Laptop/Documents/"
+    cmd "$HOME/Downloads/"                "$PORTABLE_OX/Laptop/Downloads/"
+    cmd "$HOME/Music/"                    "$PORTABLE_OX/Laptop/Music/"
+    cmd "$HOME/Music.New/"                "$PORTABLE_OX/Laptop/Music.New/"
+    cmd "$HOME/Phone/"                    "$PORTABLE_OX/Laptop/Phone/"
+    cmd "$HOME/Pictures/"                 "$PORTABLE_OX/Laptop/Pictures/"
+    cmd "$HOME/Videos/"                   "$PORTABLE_OX/Laptop/Videos/"
+    cmd "$HOME/Workspace/"                "$PORTABLE_OX/Laptop/Workspace/"
 
-    cmd "$HOME/.config/"                  "$EXTERNAL_OX/Laptop/Configs/dot.config/"
-    cmd "$HOME/.cache/"                   "$EXTERNAL_OX/Laptop/Configs/dot.cache/"
-    cmd "$HOME/.local/"                   "$EXTERNAL_OX/Laptop/Configs/dot.local/"
-    cmd "$HOME/.mozilla/"                 "$EXTERNAL_OX/Laptop/Configs/dot.mozilla/"
-    cmd "$HOME/.ssh/"                     "$EXTERNAL_OX/Laptop/Configs/dot.ssh/"
-    cmd "$HOME/.var/"                     "$EXTERNAL_OX/Laptop/Configs/dot.var/"
+    cmd "$HOME/.config/"                  "$PORTABLE_OX/Laptop/Configs/dot.config/"
+    cmd "$HOME/.cache/"                   "$PORTABLE_OX/Laptop/Configs/dot.cache/"
+    cmd "$HOME/.local/"                   "$PORTABLE_OX/Laptop/Configs/dot.local/"
+    cmd "$HOME/.mozilla/"                 "$PORTABLE_OX/Laptop/Configs/dot.mozilla/"
+    cmd "$HOME/.ssh/"                     "$PORTABLE_OX/Laptop/Configs/dot.ssh/"
+    cmd "$HOME/.var/"                     "$PORTABLE_OX/Laptop/Configs/dot.var/"
   else
-    printf ">>> %s is not mounted\n" "$EXTERNAL_OX"
+    printf ">>> %s is not mounted\n" "$PORTABLE_OX"
   fi
 else
   printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
