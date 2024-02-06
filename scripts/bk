@@ -36,7 +36,7 @@ printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
 HOME='/home/fred'
 INTERNAL_DATA='/run/media/fred/Internal'
 EXTERNAL_DATA='/run/media/fred/External Data'
-PORTABLE_DATA='/run/media/fred/External'
+PORTABLE_DATA='/run/media/fred/Portable Data'
 PORTABLE_OX='/run/media/fred/Portable OX'
 
 if [ "$HOSTNAME" == "axon" ]; then
