@@ -322,6 +322,7 @@ noise-suppression-for-voice
 ntfs-3g
 nushell
 nuspell
+nvchecker
 nvme-cli
 nvtop
 obs-studio
@@ -369,9 +370,11 @@ psutils
 pv
 pwgen
 pwndbg
+pyalpm
 python-aafigure
 python-aiodns
 python-aiohttp
+python-awesomeversion
 python-brotlicffi
 python-cairosvg
 python-cchardet
