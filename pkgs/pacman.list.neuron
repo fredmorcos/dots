@@ -135,7 +135,6 @@ edk2-ovmf
 efibootmgr
 elementary-wallpapers
 entr
-eog-plugins
 epiphany
 ettercap-gtk
 evince
@@ -190,9 +189,6 @@ gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
 gst-plugin-va
-gtk-engine-murrine
-gtk-engines
-gtkmm
 gtkmm-4.0
 gtkspell
 gucharmap
@@ -283,6 +279,7 @@ linux-tools-meta
 lld
 lldb
 logrotate
+loupe
 lrzip
 lshw
 lsof
