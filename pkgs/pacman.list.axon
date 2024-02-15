@@ -471,6 +471,7 @@ ruby-webrick
 rust-analyzer
 rust-bindgen
 rustc-demangle
+rz-ghidra
 sane-airscan
 sassc
 sbctl
