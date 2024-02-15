@@ -35,6 +35,7 @@ printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
 
 HOME='/home/fred'
 INTERNAL_DATA='/run/media/fred/Internal'
+INTERNAL_MEDIA='/run/media/fred/Internal Media'
 EXTERNAL_DATA='/run/media/fred/External Data'
 PORTABLE_DATA='/run/media/fred/Portable Data'
 PORTABLE_OX='/run/media/fred/Portable OX'
@@ -62,6 +63,33 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_DATA/Fred/Configs/local-share-keyrings/"
   else
     printf ">>> %s is not mounted\n" "$INTERNAL_DATA"
+  fi
+
+  if [ -d "$INTERNAL_MEDIA" ]; then
+    cmd "$HOME/Archive/"                  "$INTERNAL_MEDIA/Fred/Archive/"
+    cmd "$HOME/Documents/"                "$INTERNAL_MEDIA/Fred/Documents/"
+    cmd "$HOME/Downloads/"                "$INTERNAL_MEDIA/Fred/Downloads/"
+    cmd "$HOME/Music/"                    "$INTERNAL_MEDIA/Fred/Music/"
+    cmd "$HOME/Music.New/"                "$INTERNAL_MEDIA/Fred/Music.New/"
+    cmd "$HOME/Phone/"                    "$INTERNAL_MEDIA/Fred/Phone/"
+    cmd "$HOME/Pictures/"                 "$INTERNAL_MEDIA/Fred/Pictures/"
+    cmd "$HOME/Videos/"                   "$INTERNAL_MEDIA/Fred/Videos/"
+    cmd "$HOME/Workspace/"                "$INTERNAL_MEDIA/Fred/Workspace/"
+
+    cmd "$HOME/.ssh/"                     "$INTERNAL_MEDIA/Fred/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$INTERNAL_MEDIA/Fred/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL_MEDIA/Fred/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/qBittorrent/"      "$INTERNAL_MEDIA/Fred/Configs/config-qBittorrent/"
+    cmd "$HOME/.config/protonvpn/"        "$INTERNAL_MEDIA/Fred/Configs/config-protonvpn/"
+    cmd "$HOME/.config/quodlibet/"        "$INTERNAL_MEDIA/Fred/Configs/config-quodlibet/"
+    cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_MEDIA/Fred/Configs/config-yt-dlp/"
+    cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_MEDIA/Fred/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_MEDIA/Fred/Configs/local-share-keyrings/"
+
+    cmd "$INTERNAL_DATA/FredOther/"       "$INTERNAL_MEDIA/FredOther/"
+    cmd "$INTERNAL_DATA/MediaStorage/"    "$INTERNAL_MEDIA/MediaStorage/"
+  else
+    printf ">>> %s is not mounted\n" "$INTERNAL_MEDIA"
   fi
 
   if [ -d "$PORTABLE_DATA" ]; then
