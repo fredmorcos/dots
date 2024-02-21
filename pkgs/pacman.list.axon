@@ -1,4 +1,5 @@
 aardvark-dns
+acpi_call
 acpid
 afl
 alsa-firmware
@@ -97,6 +98,7 @@ compsize
 conntrack-tools
 cpio
 cppcheck
+cpupower-gui
 criu
 csvkit
 cuneiform
@@ -354,9 +356,11 @@ pipewire-alsa
 pipewire-v4l2
 pipewire-zeroconf
 pixz
+polkit-gnome
 postgresql
 power-profiles-daemon
 powertop
+primus_vk
 procs
 profile-cleaner
 progress

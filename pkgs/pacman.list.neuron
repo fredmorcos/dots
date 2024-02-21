@@ -1,4 +1,5 @@
 aardvark-dns
+acpi_call
 acpid
 afl
 alsa-firmware
@@ -97,6 +98,7 @@ compsize
 conntrack-tools
 cpio
 cppcheck
+cpupower-gui
 criu
 csvkit
 cuda
@@ -215,10 +217,8 @@ hyphen-fr
 idle3-tools
 ifuse
 img2pdf
-inetutils
 inkscape
 innoextract
-intel-compute-runtime
 intel-gpu-tools
 intel-media-sdk
 intel-ucode
@@ -321,6 +321,7 @@ ntfs-3g
 nushell
 nuspell
 nvchecker
+nvidia
 nvidia-settings
 nvme-cli
 nvtop
@@ -331,8 +332,6 @@ ocrfeeder
 odt2txt
 onevpl-intel-gpu
 openbsd-netcat
-opencl-clover-mesa
-opencl-rusticl-mesa
 opendoas
 openmp
 openslide
@@ -356,9 +355,11 @@ pipewire-alsa
 pipewire-v4l2
 pipewire-zeroconf
 pixz
+polkit-gnome
 postgresql
 power-profiles-daemon
 powertop
+primus_vk
 procs
 profile-cleaner
 progress
@@ -464,7 +465,6 @@ ripgrep
 rmlint
 rnote
 rocm-hip-runtime
-rocm-opencl-runtime
 ropper
 rpm-tools
 rst2pdf
