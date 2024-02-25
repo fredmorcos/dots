@@ -181,7 +181,6 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     cmd "$HOME/.local/"                   "$PORTABLE_OX/Laptop/Configs/dot.local/"
     cmd "$HOME/.mozilla/"                 "$PORTABLE_OX/Laptop/Configs/dot.mozilla/"
     cmd "$HOME/.ssh/"                     "$PORTABLE_OX/Laptop/Configs/dot.ssh/"
-    cmd "$HOME/.var/"                     "$PORTABLE_OX/Laptop/Configs/dot.var/"
   else
     printf ">>> %s is not mounted\n" "$PORTABLE_OX"
   fi
