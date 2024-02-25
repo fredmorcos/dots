@@ -98,7 +98,6 @@ compsize
 conntrack-tools
 cpio
 cppcheck
-cpupower-gui
 criu
 csvkit
 cuneiform
@@ -250,6 +249,8 @@ libadwaita-demos
 libao
 libappindicator-gtk3
 libayatana-appindicator
+libblockdev-dm
+libblockdev-tools
 libcamera-tools
 libdecaf
 libdvdcss
@@ -361,7 +362,6 @@ polkit-gnome
 postgresql
 power-profiles-daemon
 powertop
-primus_vk
 procs
 profile-cleaner
 progress
@@ -536,6 +536,7 @@ tup
 typst
 udftools
 udiskie
+udisks2-btrfs
 ugrep
 unace
 unbound

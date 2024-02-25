@@ -218,8 +218,10 @@ hyphen-fr
 idle3-tools
 ifuse
 img2pdf
+inetutils
 inkscape
 innoextract
+intel-compute-runtime
 intel-gpu-tools
 intel-media-sdk
 intel-ucode
@@ -249,6 +251,8 @@ libadwaita-demos
 libao
 libappindicator-gtk3
 libayatana-appindicator
+libblockdev-dm
+libblockdev-tools
 libcamera-tools
 libdecaf
 libdvdcss
@@ -333,6 +337,8 @@ ocrfeeder
 odt2txt
 onevpl-intel-gpu
 openbsd-netcat
+opencl-clover-mesa
+opencl-rusticl-mesa
 opendoas
 openmp
 openslide
@@ -360,7 +366,6 @@ polkit-gnome
 postgresql
 power-profiles-daemon
 powertop
-primus_vk
 procs
 profile-cleaner
 progress
@@ -466,6 +471,7 @@ ripgrep
 rmlint
 rnote
 rocm-hip-runtime
+rocm-opencl-runtime
 ropper
 rpm-tools
 rst2pdf
@@ -534,6 +540,7 @@ tup
 typst
 udftools
 udiskie
+udisks2-btrfs
 ugrep
 unace
 unbound
