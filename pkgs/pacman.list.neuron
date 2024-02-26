@@ -252,6 +252,7 @@ libao
 libappindicator-gtk3
 libayatana-appindicator
 libblockdev-dm
+libblockdev-nvdimm
 libblockdev-tools
 libcamera-tools
 libdecaf
@@ -295,6 +296,7 @@ malcontent
 man-db
 man-pages
 mariadb-libs
+mdadm
 mediainfo
 mesa-demos
 mesa-utils
@@ -310,6 +312,7 @@ most
 mp3val
 mpv
 mtools
+muon-meson
 musl
 mutt
 mythes-en
@@ -485,6 +488,7 @@ sane-airscan
 sassc
 sbctl
 sbsigntools
+scdoc
 screen
 sd
 seahorse
@@ -522,6 +526,7 @@ systemd-resolvconf
 systemd-ukify
 systeroid
 t1utils
+tcpdump
 tealdeer
 tectonic
 thunderbird
@@ -568,6 +573,7 @@ vulkan-tools
 wabt
 wayland-utils
 wdiff
+websocat
 wget
 whois
 wireguard-tools
