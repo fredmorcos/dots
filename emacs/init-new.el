@@ -2,54 +2,112 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package gcmh
- :demand
- :delight
- :commands gcmh-mode
- :init
- (gcmh-mode))
+(eval-when-compile
+ (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
+ (push emacs-dots-dir load-path))
+(require 'init-macros)
 
-(defun fm/generate-password ()
- "Generate a password and insert it."
- (interactive)
- (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer)))
+(im/config init-helpers
+ :functions
+ (defun fm/generate-password ()
+  "Generate a password and insert it."
+  (interactive)
+  (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer))))
 
+;; TODO Delete when moved to im/config
 (use-package delight)
 
-(use-package no-littering
- :demand
- :autoload
+(im/config no-littering
+ :package
+ :require
+ :autoloads
  no-littering-theme-backups
  no-littering-expand-etc-file-name
  no-littering-expand-var-file-name
- :config
+ :after
  (no-littering-theme-backups))
 
-(use-package cus-edit
- :ensure nil
- :custom
- (custom-file (no-littering-expand-etc-file-name "custom.el")))
+(im/config enable-and-disable-functions
+ :init
+ ;; Enable these functions.
+ (put 'list-timers      'disabled nil)
+ (put 'narrow-to-region 'disabled nil)
+ (put 'narrow-to-page   'disabled nil)
+ (put 'upcase-region    'disabled nil)
+ (put 'downcase-region  'disabled nil)
+ ;; Disable these functions.
+ (put 'eshell           'disabled t)
+ (put 'overwrite-mode   'disabled t)
+ (put 'iconify-frame    'disabled t)
+ (put 'suspend-frame    'disabled t)
+ (put 'diary            'disabled t))
 
-(use-package move-text
- :commands move-text-default-bindings
+(im/config move-text
+ :package
+ :commands
+ move-text-default-bindings
  :init
  (move-text-default-bindings))
 
-(use-package user
+(im/config erc-networks
+ :after
+ (add-to-list 'erc-networks-alist '(Gnome "gnome.org"))
+ (add-to-list 'erc-server-alist '("Gnome IRC Server" Gnome "irc.gnome.org" 6697))
+ (add-to-list 'erc-networks-alist '(Snoonet "snoonet.org"))
+ (add-to-list 'erc-server-alist '("Snoonet IRC" Snoonet "irc.snoonet.org" 6697)))
+
+(im/config erc-join
+ :custom
+ (erc-autojoin-timing 'ident)
+ (erc-autojoin-channels-alist
+  '(("Libera.Chat"
+     "#archlinux"
+     "#lineageos"
+     "#emacs"
+     "#emacs-beginners"
+     "#ledger"
+     "#hledger"
+     "#autotools"
+     "#systemcrafters")
+    ("irc.oftc.net"
+     "#mesonbuild"
+     "#powerdns")
+    ("irc.gnome.org"
+     "#gtk"
+     "#gtksourceview"
+     "#rust"
+     "#c++")
+    ("irc.snoonet.org"
+     "#personalfinance"))))
+
+;; (im/config erc-services
+;;  :custom
+;;  (erc-prompt-for-nickserv-password nil))
+
+(im/config erc-track
+ :custom
+ (erc-track-shorten-start 10))
+
+(im/config erc
+ :autoloads
+ erc-update-modules
+ :custom
+ (erc-nick "fredmorcos")
+ (erc-user-full-name "Fred Morcos")
+ (erc-kill-buffer-on-part t)
+ (erc-kill-server-buffer-on-quit t)
+ (erc-join-buffer 'window-no-select)
+ ;; (erc-use-auth-source-for-nickserv-password t)
+ :after
+ (add-to-list 'erc-modules 'services)
+ (erc-update-modules)
+ (erc-track-mode)
+ (erc-services-mode))
+
+(use-package misc
  :ensure nil
  :bind
  ("C-x c" . duplicate-dwim))
-
-(use-package startup
- :ensure nil
- :init
- (fset 'display-startup-echo-area-message 'ignore)
- :custom
- (inhibit-startup-screen t)
- (inhibit-startup-message t)
- (inhibit-startup-buffer-menu t)
- (initial-scratch-message nil)
- (initial-major-mode 'fundamental-mode))
 
 (use-package windmove
  :ensure nil
@@ -91,22 +149,24 @@
  :ensure nil
  :custom
  (resize-mini-windows nil)
- (use-dialog-box nil)
+ (use-dialog-box nil "Avoid graphical dialog boxes")
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t)
  (fill-column 90)
  (history-delete-duplicates t)
  (history-length 150)
- (read-process-output-max (* 1024 1024))
+ (read-process-output-max (* 10 1024 1024))
  (scroll-conservatively 101)
+ (fast-but-imprecise-scrolling t)
  (load-prefer-newer t)
  (coding-system-for-read 'utf-8-unix)
  (coding-system-for-write 'utf-8-unix)
  (use-short-answers t "Respond to yes/no questions using Y/N"))
 
 (use-package xref
- :config
- (add-hook 'xref-after-return #'recenter))
+ :hook
+ (xref-after-return . recenter)
+ (xref-after-jump . recenter))
 
 (use-package hippie-exp
  :ensure nil
@@ -115,8 +175,8 @@
  :custom
  (hippie-expand-try-functions-list
   '(try-expand-dabbrev-visible
-    try-expand-line
     try-expand-dabbrev
+    try-expand-line
     try-expand-dabbrev-all-buffers
     try-expand-line-all-buffers
     try-expand-dabbrev-from-kill
@@ -131,6 +191,7 @@
 (use-package simple
  :ensure nil
  :custom
+ (next-error-recenter t)
  (indent-tabs-mode nil)
  (read-extended-command-predicate #'command-completion-default-include-p
   "Hide commands in M-x that do not work in the current mode")
@@ -140,7 +201,11 @@
  (backward-delete-char-untabify-method 'hungry)
  (next-error-message-highlight 'keep)
  :hook
- (before-save . delete-trailing-whitespace))
+ (before-save . delete-trailing-whitespace)
+ :config
+ (defadvice goto-line
+  (after recenter-after-goto-line activate)
+  (recenter)))
 
 (use-package window
  :ensure nil
@@ -163,85 +228,37 @@
 (use-package orderless
  :demand)
 
+(use-package prescient
+ :demand
+ :autoload prescient-persist-mode
+ :custom
+ (prescient-sort-full-matches-first t)
+ :config
+ (prescient-persist-mode))
+
 (use-package minibuffer
  :ensure nil
  :custom
- (completion-styles '(hotfuzz orderless))
+ (minibuffer-electric-default-mode t)
+ (minibuffer-message-clear-timeout 4)
+ ;; (completion-auto-help 'visible)
+ ;; (completions-format 'one-column)
+ ;; (completion-category-defaults nil)
+ (completions-sort #'prescient-sort)
+ (completion-styles '(prescient orderless hotfuzz))
  (completions-max-height 20)
  (read-file-name-completion-ignore-case t)
- (completions-detailed t))
-
-(use-package vertico
- :commands vertico-mode
- :init
- (vertico-mode)
- :custom
- (vertico-preselect 'first)
- :custom-face
- (vertico-current ((t (:weight normal)))))
-
-(use-package consult
- :custom
- (consult-preview-key nil)
- :bind
- ([remap switch-to-buffer] . consult-buffer))
-
-(use-package marginalia
- :commands marginalia-mode
- :init
- (marginalia-mode)
- :bind (:map minibuffer-local-map ("M-a" . marginalia-cycle))
- :custom
- (marginalia-separator " | "))
-
-(use-package nerd-icons-completion
- :commands nerd-icons-completion-mode
- :after marginalia
- :init
- (nerd-icons-completion-mode)
- :hook
- (marginalia-mode-hook . nerd-icons-completion-marginalia-setup))
-
-(use-package corfu
- :hook
- (prog-mode systemd-mode)
- :custom
- (corfu-cycle t))
-
-(use-package corfu-echo
- :ensure nil
- :hook corfu-mode)
-
-(use-package corfu-history
- :ensure nil
- :hook corfu-mode)
-
-(use-package corfu-indexed
- :ensure nil
- :hook corfu-mode)
-
-(use-package corfu-popupinfo
- :ensure nil
- :hook corfu-mode
- :custom
- (corfu-popupinfo-delay: '(1.0 . 0.5)))
-
-(use-package corfu-candidate-overlay
- :after corfu
- :hook corfu-mode)
-
-(use-package nerd-icons-corfu
- :after corfu
- :config
- (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+ (read-answer-short t)
+ (completions-detailed t)
+ (completions-group t))
 
 (use-package files
  :ensure nil
  :custom
  (confirm-kill-processes nil)
  (auto-save-default nil)
- (backup-inhibited t)
- (make-backup-files nil)
+ (backup-inhibited nil)
+ (make-backup-files t)
  (delete-old-versions t)
  (mode-require-final-newline 'visit-save)
  (require-final-newline 'visit-save)
@@ -255,7 +272,11 @@
     (json-mode . json-ts-mode)
     (cmake-mode . cmake-ts-mode)
     (python-mode . python-ts-mode)
-    (dockerfile-mode . dockerfile-ts-mode))))
+    (dockerfile-mode . dockerfile-ts-mode)))
+ :config
+ (defadvice find-file
+  (after recenter-after-find-file activate)
+  (recenter)))
 
 (use-package saveplace
  :ensure nil
@@ -362,20 +383,15 @@
  (lisp-indent-offset 1)
  (lisp-indent-function 'common-lisp-indent-function))
 
-(use-package highlight-defined
- :hook (emacs-lisp-mode))
-
-(use-package highlight-quoted
- :hook (emacs-lisp-mode))
-
-(use-package eros
- :hook (emacs-lisp-mode))
-
+(use-package highlight-defined :hook emacs-lisp-mode)
+(use-package highlight-quoted  :hook emacs-lisp-mode)
+(use-package eros              :hook emacs-lisp-mode)
+(use-package ipretty           :hook emacs-lisp-mode)
 (use-package suggest)
 
-(use-package ipretty
- :init
- (ipretty-mode))
+(use-package org-indent
+ :ensure nil
+ :hook org-mode)
 
 (use-package eldoc
  :ensure nil
@@ -391,6 +407,8 @@
  (show-paren-style 'mixed)
  (show-paren-highlight-openparen t)
  (show-paren-context-when-offscreen 'overlay)
+ (show-paren-when-point-inside-paren t)
+ (show-paren-when-point-in-periphery t)
  :hook
  ((prog-mode conf-desktop-mode) . show-paren-mode))
 
@@ -416,7 +434,8 @@
 
 (use-package subword
  :ensure nil
- :delight " Sw")
+ :delight " Sw"
+ :hook (rust-mode rust-ts-mode))
 
 (use-package which-key
  :delight
@@ -451,9 +470,9 @@
  (ispell-program-name "aspell")
  (ispell-local-dictionary "en_US")
  :config
- (add-to-list 'ispell-extra-args "--sug-mode=ultra")
- :hook
- ((prog-mode conf-desktop-mode) . flyspell-prog-mode))
+ (add-to-list 'ispell-extra-args "--sug-mode=ultra"))
+ ;; :hook
+ ;; ((prog-mode conf-desktop-mode) . flyspell-prog-mode))
 
 (use-package autorevert
  :custom
@@ -465,13 +484,6 @@
 (use-package dirvish
  :init
  (dirvish-override-dired-mode))
-
-(use-package ctrlf
- :init
- (ctrlf-mode)
- :custom
- (ctrlf-default-search-style 'fuzzy)
- (ctrlf-auto-recenter t))
 
 (use-package sh-script
  :ensure nil
@@ -490,18 +502,23 @@
 (use-package python
  :hook ((python-mode python-ts-mode) . (lambda () (setopt fill-column 80))))
 
+(use-package jit-lock
+ :ensure nil
+ :custom
+ (jit-lock-stealth-time 0.1)
+ (jit-lock-chunk-size 4000 "A little more than what can fit on the screen")
+ (jit-lock-antiblink-grace nil))
+
 (use-package markdown-mode)
 (use-package dockerfile-mode)
 (use-package pkgbuild-mode)
 (use-package meson-mode)
 (use-package toml-mode)
+(use-package systemd)
 
 (use-package eldoc-toml
  :delight
  :hook toml-mode)
-
-(use-package lsp-mode
- :hook ((c-mode-common c-ts-base-mode python-mode python-ts-mode) . lsp))
 
 (use-package indent-guide
  :hook (json-mode json-ts-mode))
@@ -559,7 +576,20 @@
  :ensure nil
  :custom
  (magit-revision-show-gravatars t)
- (magit-revision-fill-summary-line fill-column))
+ (magit-revision-fill-summary-line fill-column)
+ :config
+ (defadvice magit-diff-visit-file
+  (after recenter-after-magit-diff-visit-file activate)
+  (recenter)))
+
+(use-package diff-hl
+ :hook (prog-mode conf-desktop-mode)
+ :custom
+ (diff-hl-draw-borders nil)
+ (diff-hl-flydiff-delay 0.1)
+ :hook
+ (magit-pre-refresh . diff-hl-magit-pre-refresh)
+ (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package multiple-cursors
  :bind
@@ -579,8 +609,7 @@
 
 (use-package yaml-mode
  :mode "\\clang-format\\'"
- :bind
- (:map yaml-mode-map ("C-c p" . fm/generate-password)))
+ :bind (:map yaml-mode-map ("C-c p" . fm/generate-password)))
 
 (use-package hledger-mode
  :mode ("\\.journal\\'" "\\.ledger\\'")
@@ -603,38 +632,294 @@
 
 (use-package wgrep-deadgrep)
 
-;; (use-package project
-;;  :commands project-remember-projects-under
-;;  :init
-;;  (project-remember-projects-under "~/Workspace" t))
+(use-package flycheck
+ :commands flycheck-next-error flycheck-previous-error
+ :hook
+ (prog-mode yaml-mode hledger-mode)
+ :custom
+ (flycheck-checker-error-threshold nil)
+ (flycheck-mode-line-prefix "Fc")
+ (flycheck-idle-change-delay 0.2)
+ (flycheck-idle-buffer-switch-delay 0.2)
+ (flycheck-display-errors-delay 0.2)
+ :config
+ (defadvice flycheck-next-error
+  (after recenter-after-flycheck-next activate)
+  (recenter))
+ (defadvice flycheck-previous-error
+  (after recenter-after-flycheck-previous activate)
+  (recenter))
+ :bind
+ (:map flycheck-mode-map
+  ("M-n" . flycheck-next-error)
+  ("M-p" . flycheck-previous-error)))
 
-(use-package project-rootfile
- :after project
- :hook (project-find-functions . project-rootfile-try-detect))
+(use-package flycheck-posframe
+ :custom
+ (flycheck-posframe-position 'window-bottom-left-corner)
+ (flycheck-posframe-border-width 1)
+ :hook
+ flycheck-mode)
 
-;; (use-package flycheck
-;;  )
+(use-package flycheck-hledger
+ :demand t
+ :after (flycheck hledger-mode)
+ :custom
+ ;; TODO Also add "accounts"
+ (flycheck-hledger-checks '("commodities")))
 
-;; (use-package flymake
-;;  :ensure nil
-;;  :commands flymake-goto-next-error flymake-goto-prev-error
-;;  :hook (prog-mode meson-mode)
-;;  :custom
-;;  (flymake-no-changes-timeout 0.1)
-;;  (flymake-mode-line-lighter "Fm")
-;;  (flymake-show-diagnostics-at-end-of-line 'short)
-;;  :bind
-;;  (:map flymake-mode-map
-;;   ("M-n" . (lambda () (interactive) (flymake-goto-next-error) (recenter)))
-;;   ("M-p" . (lambda () (interactive) (flymake-goto-prev-error) (recenter)))
-;;   ("C-c ! b" . flymake-show-buffer-diagnostics)
-;;   ("C-c ! p" . flymake-show-project-diagnostics)))
+(use-package company
+ :delight " Co"
+ :hook (prog-mode yaml-mode hledger-mode systemd-mode)
+ :custom
+ (company-tooltip-align-annotations t)
+ (company-tooltip-minimum-width 40)
+ (company-tooltip-width-grow-only t)
+ (company-keywords-ignore-case t)
+ (company-idle-delay 0.5)
+ :bind (:map company-mode-map ("<tab>" . company-indent-or-complete-common)))
 
-;; (use-package flymake-hledger
-;;  :custom
-;;  (flymake-hledger-checks '("commodities")) ;; TODO: Also add "accounts"
-;;  :hook
-;;  (hledger-mode . flymake-hledger-enable))
+(use-package company-posframe
+ :delight
+ :custom
+ (company-posframe-quickhelp-x-offset 2)
+ :hook company-mode)
+
+(use-package company-prescient
+ :hook company-mode
+ :custom
+ (company-prescient-sort-length-enable nil))
+
+(use-package c-ts-mode
+ :ensure nil
+ :after lsp-mode
+ :bind (:map c-ts-base-mode-map ("<f2>" . lsp-clangd-find-other-file)))
+
+(use-package ivy
+ :delight
+ :bind (:map ivy-minibuffer-map ("<RET>" . ivy-alt-done))
+ :custom
+ (ivy-use-selectable-prompt t)
+ (ivy-use-virtual-buffers t)
+ (ivy-count-format "(%d/%d) ")
+ (ivy-virtual-abbreviate 'abbreviate)
+ (ivy-extra-directories nil)
+ :init
+ (ivy-mode))
+
+(use-package ivy-rich
+ :custom
+ (ivy-rich-path-style 'abbrev)
+ :init
+ (ivy-rich-mode))
+
+(use-package ivy-xref
+ :demand
+ :custom
+ (xref-show-xrefs-function 'ivy-xref-show-xrefs))
+
+(use-package nerd-icons-ivy-rich
+ :init
+ (nerd-icons-ivy-rich-mode))
+
+(use-package ivy-prescient
+ :init
+ (ivy-prescient-mode))
+
+(use-package counsel
+ :delight
+ :init
+ (counsel-mode)
+ :config
+ (defadvice counsel-register
+  (after recenter-after-counsel-register activate)
+  (recenter)))
+
+(use-package register
+ :ensure nil
+ :bind ([remap jump-to-register] . counsel-register))
+
+(use-package swiper
+ ;; :bind
+ ;; ([remap isearch-forward] . swiper)
+ ;; ([remap isearch-backward] . swiper-isearch-backward)
+ :custom
+ (swiper-include-line-number-in-search t)
+ (swiper-action-recenter t))
+
+(im/config ctrlf
+ :package
+ :custom
+ (ctrlf-default-search-style 'fuzzy)
+ (ctrlf-auto-recenter t)
+ :init
+ (ctrlf-mode))
+
+(use-package projectile
+ :delight " Pr"
+ :bind (:map projectile-mode-map ("C-x p" . projectile-command-map))
+ :custom
+ (projectile-project-search-path '("~/Workspace"))
+ (projectile-sort-order 'recently-active)
+ (projectile-indexing-method 'hybrid))
+
+(use-package counsel-projectile
+ :custom
+ (counsel-projectile-mode t)
+ :config
+ (defadvice counsel-projectile-git-grep
+  (after recenter-after-counsel-projectile-git-grep activate)
+  (recenter)))
+
+(use-package treemacs-projectile)
+
+(use-package flyspell-correct-ivy
+ :bind (:map flyspell-mode-map ("C-M-;" . flyspell-correct-wrapper))
+ :custom
+ (flyspell-correct-interface #'flyspell-correct-ivy))
+
+(use-package nerd-icons-completion
+ :init
+ (nerd-icons-completion-mode))
+
+(use-package yasnippet
+ :delight yas-minor-mode " Ys"
+ :autoload yas-minor-mode-on
+ :init
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
+ (defun init/start-ivy-yasnippet ()
+  (interactive)
+  (yas-minor-mode-on)
+  (ivy-yasnippet))
+ :bind
+ ("C-c Y" . init/start-ivy-yasnippet)
+ ("C-c y s" . yas-expand-from-trigger-key))
+
+(use-package yasnippet-snippets)
+(use-package ivy-yasnippet)
+
+(use-package lsp-mode
+ :delight " Ls"
+ :hook
+ ((python-ts-mode c-ts-mode c++-ts-mode c-or-c++-ts-mode) . lsp)
+ (lsp-mode . lsp-enable-which-key-integration)
+ :init
+ (defun init/lsp-treemacs-call-hierarchy () (lsp-treemacs-call-hierarchy t))
+ (defun init/lsp-treemacs-implementations () (lsp-treemacs-implementations t))
+ (defun init/lsp-treemacs-references () (lsp-treemacs-references t))
+ (defun init/lsp-treemacs-type-hierarchy () (lsp-treemacs-type-hierarchy 2))
+ :bind
+ (:map lsp-mode-map
+  ([remap er/expand-region] . lsp-extend-selection)
+  ("C-c r" . lsp-rename)
+  ("C-c h" . lsp-describe-thing-at-point)
+  ("M-<return>" . lsp-execute-code-action)
+  ("C-c e" . lsp-treemacs-errors-list)
+  ("C-c s" . lsp-treemacs-symbols)
+  ("C-c c" . lsp-treemacs-call-hierarchy)
+  ("C-c C" . init/lsp-treemacs-call-hierarchy)
+  ("C-c i" . lsp-treemacs-implementations)
+  ("C-c I" . lsp-treemacs-references)
+  ("C-c t" . lsp-treemacs-type-hierarchy))
+ :custom
+ (lsp-semantic-tokens-enable t)
+ (lsp-enable-relative-indentation t)
+ (lsp-idle-delay 0.3)
+ (lsp-use-plists))
+
+(use-package lsp-treemacs
+ :hook
+ (lsp-mode . lsp-treemacs-sync-mode))
+
+(use-package lsp-ui
+ :bind
+ (:map lsp-mode-map
+  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+  ([remap xref-find-references] . lsp-ui-peek-find-references)
+  ("M-I" . lsp-ui-peek-find-implementation)))
+
+;; (fm/pkg lsp-ui
+;;  (fm/after lsp-ui-doc
+;;   (setq-default lsp-ui-doc-enable t)
+;;   (setq-default lsp-ui-doc-show-with-cursor nil)
+;;   (setq-default lsp-ui-doc-show-with-mouse t)
+;;   (setq-default lsp-ui-doc-alignment 'frame)
+;;   (setq-default lsp-ui-doc-header t)
+;;   (setq-default lsp-ui-doc-include-signature t)
+;;   (setq-default lsp-ui-doc-max-height 30)
+;;   (setq-default lsp-ui-doc-use-webkit t))
+;;  (fm/after lsp-ui-peek
+;;   (setq-default lsp-ui-peek-list-width 40)
+;;   (setq-default lsp-ui-peek-always-show t))
+;;  (fm/after lsp-ui-sideline
+;;   (setq-default lsp-ui-sideline-enable nil))
+;;  (fm/after lsp-ui
+;;   (fm/key-local "M-."   lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
+;;   (fm/key-local "M-?"   lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
+;;   (fm/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
+;;   (fm/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
+;;   ;; (fm/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
+;;   ))
+
+;; (use-package lsp-clangd
+;;  :ensure lsp-mode
+;;  :config
+;;  (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
+;;  (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
+;;  (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
+;;  (add-to-list 'lsp-clients-clangd-args "--header-insertion=iwyu")
+;;  (add-to-list 'lsp-clients-clangd-args "-j=8")
+;;  (add-to-list 'lsp-clients-clangd-args "--malloc-trim")
+;;  (add-to-list 'lsp-clients-clangd-args "--pch-storage=memory")
+;;  (add-to-list 'lsp-clients-clangd-args "--background-index")
+;;  (add-to-list 'lsp-clients-clangd-args "--function-arg-placeholders")
+;;  (add-to-list 'lsp-clients-clangd-args "--limit-references=0")
+;;  (add-to-list 'lsp-clients-clangd-args "--limit-results=0"))
+
+(use-package treemacs
+ :commands treemacs-load-theme
+ :bind ("<f9>" . treemacs-select-window)
+ :custom
+ (treemacs-indentation 1)
+ (treemacs-select-when-already-in-treemacs 'move-back)
+ (treemacs-tag-follow-delay 0.1))
+
+(use-package treemacs-interface
+ :ensure treemacs
+ :after treemacs
+ :bind ("<f12>" . treemacs-delete-other-windows))
+
+(use-package treemacs-async
+ :ensure treemacs
+ :commands treemacs-git-mode)
+
+(use-package treemacs-mode
+ :ensure treemacs
+ :hook
+ (treemacs-mode . treemacs-tag-follow-mode)
+ (treemacs-mode . treemacs-fringe-indicator-mode)
+ (treemacs-mode . treemacs-filewatch-mode)
+ (treemacs-mode . treemacs-git-commit-diff-mode)
+ (treemacs-mode . (lambda () (treemacs-git-mode 'deferred))))
+
+(use-package treemacs-projectile
+ :demand
+ :after (treemacs projectile))
+
+(use-package treemacs-magit
+ :demand
+ :after (treemacs magit))
+
+(use-package treemacs-nerd-icons
+ :demand
+ :after treemacs
+ :config
+ (treemacs-load-theme "nerd-icons"))
+
+(use-package lsp-ivy
+ :after lsp-mode
+ :bind
+ (:map lsp-mode-map ("C-c x" . lsp-ivy-workspace-symbol)))
 
 ;; (fm/pkg blamer
 ;;  (fm/after blamer
@@ -655,39 +940,12 @@
 ;;   (setq-default sideline-backends-right '(sideline-blame))
 ;;   (setq-default sideline-blame-commit-format "- %s")))
 
-;; (fm/pkg yasnippet-snippets
-;;  (fm/after yasnippet
-;;   (yasnippet-snippets-initialize)))
-
-;; (fm/pkg yasnippet
-;;  (fm/after yasnippet
-;;   (fm/dim yas-minor-mode "Ys")
-;;   ;; (fm/after company
-;;   ;;  (fm/hookn yas-minor-mode-hook (fm/company-add-backend 'company-yasnippet)))))
-;;   ))
-
-;; (fm/pkg diff-hl
-;;  (fm/after diff-hl
-;;   (setq-default diff-hl-draw-borders nil)
-;;   (setq-default diff-hl-flydiff-delay 0.1))
-;;  (fm/after magit-mode
-;;   (fm/hook magit-pre-refresh-hook diff-hl-magit-pre-refresh "diff-hl")
-;;   (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")))
-
 ;; (fm/pkg scopeline
 ;;  (fm/after tree-sitter
 ;;   (fm/hook tree-sitter-mode-hook scopeline-mode))
 ;;  (fm/after scopeline
 ;;   (fm/dim scopeline-mode "Sl")
 ;;   (setq-default scopeline-min-lines 10)))
-
-;; (fm/after prog-mode
-;;  (fm/hook prog-mode-hook diff-hl-mode)
-;;  ;; (fm/hook prog-mode-hook yas-minor-mode)
-;;  )
-
-;; (fm/after conf-mode
-;;  (fm/hook conf-desktop-mode-hook diff-hl-mode))
 
 ;; (fm/pkg rust-mode
 ;;  (fm/after rust-mode
@@ -777,64 +1035,6 @@
 ;;   (setq-default lsp-rust-all-targets t)
 ;;   (setq-default lsp-rust-full-docs t)
 ;;   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy"))
-;;  (fm/after lsp-clangd
-;;   (setq-default lsp-clients-clangd-args
-;;    '("--header-insertion-decorators"
-;;      "--all-scopes-completion"
-;;      "--clang-tidy"
-;;      "--completion-style=detailed"
-;;      "--header-insertion=iwyu"
-;;      ;; Breaks clangd-14
-;;      ; "--header-insertion-decorators"
-;;      "--inlay-hints"
-;;      "-j=8"
-;;      "--malloc-trim"
-;;      "--pch-storage=memory"
-;;      "--background-index"
-;;      "--function-arg-placeholders"
-;;      "--limit-references=0"
-;;      "--limit-results=0"))
-;;   (fm/after cc-mode
-;;    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
-;;    (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
-;;   (fm/after c-ts-mode
-;;    (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
-;;    (fm/key-local "<f2>" lsp-clangd-find-other-file c-ts-base-mode-map))))
-
-;; (fm/pkg treemacs
-;;  (fm/key "<f9>" treemacs-select-window)
-;;  (fm/after treemacs-customization
-;;   (setq-default treemacs-width 40)
-;;   (setq-default treemacs-indentation 1))
-;;  (fm/after treemacs
-;;   (setq-default treemacs-select-when-already-in-treemacs 'move-back))
-;;   ;; (setq-default treemacs-indent-guide-mode t))
-;;  (fm/after treemacs-interface
-;;   (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
-;;  ;; (fm/after treemacs-header-line
-;;  ;;  (setq-default treemacs-indicate-top-scroll-mode t))
-;;  (fm/after treemacs-mode
-;;   (fm/hook treemacs-mode-hook treemacs-tag-follow-mode "treemacs-tag-follow-mode")
-;;   (fm/hook treemacs-mode-hook treemacs-fringe-indicator-mode "treemacs-fringe-indicator")
-;;   (fm/hook treemacs-mode-hook treemacs-filewatch-mode "treemacs-filewatch-mode")
-;;   ;; (fm/hook treemacs-mode-hook treemacs-indicate-top-scroll-mode "treemacs-header-line")
-;;   ;; (fm/autoload treemacs-indent-guide-mode "treemacs-visuals")
-;;   ;; (fm/hookn treemacs-mode-hook (treemacs-indent-guide-mode))
-;;   (fm/autoload treemacs-git-mode "treemacs-async")
-;;   (fm/hookn treemacs-mode-hook (treemacs-git-mode 'deferred))
-;;   (fm/hook treemacs-mode-hook
-;;    treemacs-git-commit-diff-mode
-;;    "treemacs-git-commit-diff-mode")))
-
-;; (fm/pkg lsp-treemacs
-;;  (fm/after lsp-mode
-;;   (fm/key-local "C-c e" lsp-treemacs-errors-list    lsp-mode-map)
-;;   (fm/key-local "C-c s" lsp-treemacs-symbols        lsp-mode-map)
-;;   (fm/key-local "C-c c" lsp-treemacs-call-hierarchy lsp-mode-map)
-;;   (fm/key-local "C-c t" lsp-treemacs-type-hierarchy lsp-mode-map)
-;;   (fm/hook lsp-mode-hook lsp-treemacs-sync-mode)))
-
-;; (fm/pkg treemacs-projectile)
 
 ;; (fm/pkg lsp-ui
 ;;  (fm/after lsp-ui-doc
