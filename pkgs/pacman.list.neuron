@@ -296,6 +296,7 @@ malcontent
 man-db
 man-pages
 mariadb-libs
+mdadm
 mediainfo
 mesa-demos
 mesa-utils
@@ -488,6 +489,7 @@ sane-airscan
 sassc
 sbctl
 sbsigntools
+scdoc
 screen
 sd
 seahorse
