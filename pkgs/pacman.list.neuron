@@ -296,7 +296,6 @@ malcontent
 man-db
 man-pages
 mariadb-libs
-mdadm
 mediainfo
 mesa-demos
 mesa-utils
@@ -330,6 +329,7 @@ nushell
 nuspell
 nvchecker
 nvidia
+nvidia-prime
 nvidia-settings
 nvme-cli
 nvtop
@@ -488,7 +488,6 @@ sane-airscan
 sassc
 sbctl
 sbsigntools
-scdoc
 screen
 sd
 seahorse
@@ -517,6 +516,7 @@ strace
 s-tui
 subdl
 svgcleaner
+swift-mesonlsp-bin
 switcheroo-control
 syncthing
 sysprof
@@ -587,6 +587,7 @@ xdot
 xf86-input-evdev
 xf86-input-vmmouse
 xf86-input-void
+xf86-video-intel
 xorg-bdftopcf
 xorg-font-util
 xorg-iceauth
