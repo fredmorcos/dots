@@ -2,13 +2,130 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Helpers.
-(defmacro fm/autoload (func pkg)
- "Create an autoload for FUNC from PKG."
- (when (stringp pkg)
-  `(eval-when-compile
-    (autoload ',func ,pkg)
-    (declare-function ,func ,pkg))))
+(defmacro im/config (name &rest configuration)
+ "Grouping macro for package NAME with CONFIGURATION."
+ (let ((customizations)
+       (eval-after-loads)
+       (inits)
+       (functions)
+       (do-require)
+       (do-debug)
+       (package-name)
+       (autoloads)
+       (commands))
+  (while configuration
+   (pcase (car configuration)
+    (:custom
+     (pop configuration)
+     (while (not (symbolp (car configuration)))
+      ;; (message "%s is not a keyword" (car configuration))
+      (let* ((customization (pop configuration))
+             (transformed-customization
+              `(,(nth 0 customization)    ; Name
+                ,(nth 1 customization)    ; Value
+                nil
+                nil
+                ,(nth 2 customization)))) ; Note
+       ;; Customizations need to be quoted.
+       (push `',transformed-customization customizations))))
+    (:after
+     (pop configuration)
+     (while (not (symbolp (car configuration)))
+      (setf eval-after-loads (append eval-after-loads `(,(pop configuration))))))
+    (:init
+     (pop configuration)
+     (while (not (symbolp (car configuration)))
+      (push (pop configuration) inits)))
+    (:require
+     (pop configuration)
+     (setq do-require t))
+    (:debug
+     (pop configuration)
+     (setq do-debug t))
+    (:functions
+     (pop configuration)
+     (while (not (symbolp (car configuration)))
+      (push (pop configuration) functions)))
+    (:package
+     (pop configuration)
+     (setq package-name
+      (if (stringp (car configuration))
+       (intern (pop configuration))
+       name)))
+    (:autoloads
+     (pop configuration)
+     (while (not (keywordp (car configuration)))
+      (let* ((func-autoload (pop configuration))
+             (autoload-call
+              `(eval-when-compile
+                (autoload ',func-autoload ,(symbol-name name))
+                (declare-function ',func-autoload ',name))))
+       (push `',autoload-call autoloads))))
+    (:commands
+     (pop configuration)
+     (while (not (keywordp (car configuration)))
+      (let* ((cmd-autoload (pop configuration))
+             (command-call
+              `(eval-when-compile
+                (autoload ',cmd-autoload ,(symbol-name name) nil t)
+                (declare-function ',cmd-autoload ',name))))
+       (push `',command-call commands))))
+    (_
+     (pop configuration)
+     (while (not (symbolp (car configuration)))
+      (pop configuration)))))
+  `(progn
+    ,(when package-name
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :package section for %s" ,(symbol-name name)))
+        (progn
+         (defvar im/packages-refreshed nil
+          "Whether package-refresh-contents has been called")
+         (autoload 'package-installed-p "package")
+         (when (not (package-installed-p ',package-name))
+          (when (not im/packages-refreshed)
+           (message "+++ Refreshing package repositories")
+           (package-refresh-contents)
+           (setq im/packages-refreshed t))
+          (message "+++ Installing package %s" ,(symbol-name package-name))
+          (package-install ',package-name))
+         (push ',package-name package-selected-packages))))
+    ,(when autoloads
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :autoloads section for %s" ,(symbol-name name)))
+        ,@(mapcar (lambda (current-autoload) (eval current-autoload)) autoloads)))
+    ,(when commands
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :commands section for %s" ,(symbol-name name)))
+        ,@(mapcar (lambda (current-command) (eval current-command)) commands)))
+    ,(when functions
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :functions section for %s" ,(symbol-name name)))
+        ,@functions))
+    ,(when inits
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :init section for %s" ,(symbol-name name)))
+        ,@inits))
+    ,(when do-require
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :require section for %s" ,(symbol-name name)))
+        (require ',name)))
+    ,(when customizations
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :custom section for %s" ,(symbol-name name)))
+        (custom-theme-set-variables 'user ,@customizations)))
+    ,(when eval-after-loads
+      `(progn
+        ,(when do-debug
+          `(message "+++ Running the :after section for %s" ,(symbol-name name)))
+        (with-eval-after-load ',name ,@eval-after-loads))))))
 
 ;; Hooks.
 (defmacro fm/hook (hook func &optional pkg local)
@@ -75,33 +192,12 @@
  "Set FACE properties to PROPS."
  `(custom-set-faces '(,face ((t ,@props)))))
 
-;; Lazy loading.
-(defmacro fm/after (pkg &rest body)
- "Execute BODY when PKG is loaded."
- `(with-eval-after-load ',pkg ,@body))
-
 ;; Modes.
 (defmacro fm/mode (ext mode &optional pkg)
  "Autoload and enable MODE from PKG for file extension EXT."
  `(progn
    (fm/autoload ,mode ,pkg)
    (push '(,(concat "\\" ext "\\'") . ,mode) auto-mode-alist)))
-
-;; Packages.
-(defmacro fm/pkg (pkg &rest body)
- "Install PKG if not already installed and execute BODY."
- `(progn
-   (defvar packages-refreshed nil)
-   (autoload 'package-installed-p "package")
-   (when (not (package-installed-p ',pkg))
-    (when (not packages-refreshed)
-     (message "+++ Refreshing package repositories to install %s" ',pkg)
-     (package-refresh-contents)
-     (setq packages-refreshed t))
-    (message "+++ Installing %s..." ',pkg)
-    (package-install ',pkg))
-   (push ',pkg package-selected-packages)
-   ,@body))
 
 (provide 'init-macros)
 ;;; init-macros.el ends here
