@@ -250,8 +250,8 @@ libao
 libappindicator-gtk3
 libayatana-appindicator
 libblockdev-dm
+libblockdev-lvm
 libblockdev-nvdimm
-libblockdev-tools
 libcamera-tools
 libdecaf
 libdvdcss
@@ -294,7 +294,6 @@ malcontent
 man-db
 man-pages
 mariadb-libs
-mdadm
 mediainfo
 mesa-demos
 mesa-utils
