@@ -47,9 +47,12 @@ FILES=(/etc/sysctl.d/sysctl.conf /usr/share/kbd/keymaps/i386/include/compose.inc
 ##   This setup loads an lvm2 volume group.
 #    HOOKS=(base udev modconf block lvm2 filesystems fsck)
 #
+##   This will create a systemd based initramfs which loads an encrypted root filesystem.
+#    HOOKS=(base systemd autodetect modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)
+#
 ##   NOTE: If you have /usr on a separate partition, you MUST include the
 #    usr and fsck hooks.
-HOOKS=(base systemd keyboard autodetect modconf block sd-vconsole sd-encrypt filesystems fsck)
+HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole sd-encrypt block filesystems fsck)
 
 # COMPRESSION
 # Use this to compress the initramfs image. By default, zstd compression
