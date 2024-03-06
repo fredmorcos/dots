@@ -28,11 +28,13 @@
 # DNS=149.112.112.112#tls://dns.quad9.net
 # DNS=2620:fe::fe#tls://dns.quad9.net
 # DNS=2620:fe::9#tls://dns.quad9.net
+DNS=194.242.2.3#adblock.doh.mullvad.net
 DNS=193.110.81.0#dns0.eu
 # DNS=2a0f:fc80::#dns0.eu
 DNS=185.253.5.0#dns0.eu
+DNS=9.9.9.9#dns.quad9.net 
+DNS=2620:fe::9#dns.quad9.net 
 # DNS=2a0f:fc81::#dns0.eu
-DNS=194.242.2.3#adblock.doh.mullvad.net
 # DNS=116.202.176.26:854#dot.libredns.gr
 # DNS=2a01:4f8:1c0c:8274::1#dot.libredns.gr
 # DNS=45.90.28.0#78c1a3.dns1.nextdns.io
