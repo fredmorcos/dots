@@ -90,8 +90,33 @@ if [ -f "gnome/gnome.dconf.$HNAME" ]; then
   dconf load / < "gnome/gnome.dconf.$HNAME"
 fi
 
-for file in applications/*.desktop; do
-  cmerge "$file" ~/.local/share/"$file"
+# Hide some applications from desktop menus.
+hide_applications="avahi-discover bssh bvnc cmake-gui cppcheck-gui echomixer \
+                   emacsclient envy24control ettercap gvim hdajackretask     \
+                   hdspconf hdspmixer htop hwmixvolume ipython lstopo nvtop  \
+                   qv4l2 qvidcap vim weechat xdot xdvi xsane"
+
+for application in $hide_applications; do
+  printf '[Desktop Entry]\nHidden=true\n' > "$HOME/.local/share/applications/$application.desktop"
+done
+
+# Give some apps a papirus icon.
+declare -A papirus_applications
+papirus_applications["ca.desrt.dconf-editor"]="apps/dconf-editor"
+papirus_applications["eu.qtrac.diffpdf"]="mimetypes/application-pdf"
+papirus_applications["org.kde.kcachegrind"]="apps/org.kde.kcachegrind"
+papirus_applications["org.kde.kgraphviewer"]="apps/kgraphviewer"
+papirus_applications["org.kde.massif-visualizer"]="apps/org.kde.massif-visualizer"
+
+for application in "${!papirus_applications[@]}"; do
+  icon=${papirus_applications[$application]}
+
+  source="/usr/share/applications/$application"
+  dest="$HOME/.local/share/applications/$application.desktop"
+  if [ ! -f "$dest" ] && [ -f "$source" ]; then
+    cp "$source" "$dest"
+    printf "Icon=/usr/share/icons/Papirus/64x64/%s" "$icon" >> "$dest"
+  fi
 done
 
 cmerge shell/bashrc                  ~/.bashrc

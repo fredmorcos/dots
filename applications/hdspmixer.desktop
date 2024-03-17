@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=HDSPMixer
-Comment=Hammerfall DSP matrix mixer control GUI
-Exec=hdspmixer
-Icon=hdspmixer
-Terminal=false
-Type=Application
-Categories=AudioVideo;
-Hidden=true
