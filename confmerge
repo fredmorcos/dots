@@ -151,11 +151,8 @@ cmerge archlinux/paru.conf           /etc/paru.conf
 cmerge net/hostname                  /etc/hostname
 cmerge net/hosts                     /etc/hosts
 
-cmerge sysctl/personal.us.map        /usr/local/share/kbd/keymaps/personal.us.map
-cmerge sysctl/vconsole.conf          /etc/vconsole.conf
 cmerge sysctl/locale.conf            /etc/locale.conf
 cmerge sysctl/sysctl.conf            /etc/sysctl.d/sysctl.conf
-cmerge sysctl/i915.conf              /etc/sysctl.d/i915.conf
 cmerge sysctl/limits.conf            /etc/security/limits.conf
 
 cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
