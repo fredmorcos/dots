@@ -128,7 +128,6 @@ elementary-wallpapers
 entr
 epapirus-icon-theme
 epiphany
-eqonomize
 ettercap-gtk
 evince
 exfatprogs
@@ -240,7 +239,6 @@ libmad
 libmp4v2
 libmythes
 libnfs
-libnma
 libofa
 libopenraw
 libotr
@@ -300,6 +298,8 @@ ngrep
 nilfs-utils
 nmap
 noise-suppression-for-voice
+noto-fonts-emoji
+noto-fonts-extra
 ntfs-3g
 nushell
 nuspell
@@ -347,7 +347,6 @@ pstoedit
 psutils
 pv
 pwgen
-pwndbg
 pyalpm
 python-aafigure
 python-aiodns
@@ -407,7 +406,6 @@ python-pystemmer
 python-pytest-black
 python-pytest-flake8
 python-pytest-lsp
-python-pytest-mypy
 python-pytest-pylint
 python-pyudev
 python-pyxattr
@@ -458,7 +456,6 @@ ruby-webrick
 rust-analyzer
 rust-bindgen
 rustc-demangle
-rz-ghidra
 sane-airscan
 sassc
 sbctl
@@ -556,7 +553,6 @@ wl-clipboard
 wmctrl
 xclip
 xdelta3
-xdg-desktop-portal-gnome
 xdg-user-dirs-gtk
 xf86-input-evdev
 xf86-input-vmmouse
