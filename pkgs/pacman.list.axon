@@ -239,6 +239,7 @@ libmad
 libmp4v2
 libmythes
 libnfs
+libnma
 libofa
 libopenraw
 libotr
@@ -387,8 +388,10 @@ python-micawber
 python-objgraph
 python-olefile
 python-openpyxl
+python-paramiko
 python-pdfminer
 python-pdftotext
+python-pip
 python-pipx
 python-priority
 python-pyacoustid
@@ -402,6 +405,7 @@ python-pygithub
 python-pyinotify
 python-pylast
 python-pypng
+python-pyserial
 python-pystemmer
 python-pytest-black
 python-pytest-flake8
@@ -419,6 +423,7 @@ python-service-identity
 python-svglib
 python-symengine
 python-sympy
+python-tabulate
 python-typogrify
 python-unicodedata2
 python-unidiff
@@ -553,6 +558,7 @@ wl-clipboard
 wmctrl
 xclip
 xdelta3
+xdg-desktop-portal-gnome
 xdg-user-dirs-gtk
 xf86-input-evdev
 xf86-input-vmmouse
