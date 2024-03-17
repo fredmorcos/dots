@@ -50,9 +50,10 @@ export DEBUGINFOD_URLS="https://debuginfod.archlinux.org/ https://debuginfod.elf
 export LSP_USE_PLISTS=true
 
 # Wayland
-# export MOZ_ENABLE_WAYLAND=1           # Firefox
-# export QT_QPA_PLATFORM="wayland;xcb"  # Qt
-# export SDL_VIDEODRIVER="wayland,x11"  # SDL
+# export MOZ_ENABLE_WAYLAND=1                # Firefox
+# export QT_QPA_PLATFORM="wayland;xcb"       # Qt
+# export SDL_VIDEODRIVER="wayland,x11"       # SDL
+export ELECTRON_OZONE_PLATFORM_HINT="auto"   # Electron
 
 # Other options:
 # export XDG_CONFIG_HOME="$HOME/.config"
