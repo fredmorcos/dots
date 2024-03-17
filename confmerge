@@ -140,9 +140,6 @@ cmerge mpv/mpv.conf                  ~/.config/mpv/mpv.conf
 cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
-cmerge gnome/gtk-bookmarks           ~/.config/gtk-3.0/bookmarks
-cmerge gnome/gvfs-network.mount      /usr/share/gvfs/mounts/network.mount
-
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 
