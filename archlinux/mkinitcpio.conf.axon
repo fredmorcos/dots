@@ -16,7 +16,7 @@ BINARIES=()
 # FILES
 # This setting is similar to BINARIES above, however, files are added
 # as-is and are not parsed in any way.  This is useful for config files.
-FILES=(/etc/sysctl.d/sysctl.conf /usr/share/kbd/keymaps/i386/include/compose.inc /usr/share/kbd/keymaps/i386/include/linux-keys-bare.inc /usr/share/kbd/keymaps/i386/include/qwerty-layout.inc /usr/share/kbd/keymaps/i386/include/linux-with-alt-and-altgr.inc /usr/share/kbd/keymaps/include/compose.latin1 /usr/share/kbd/keymaps/i386/include/euro1.map.gz /usr/local/share/kbd/keymaps/personal.us.map /usr/share/kbd/consolefonts/latarcyrheb-sun32.psfu.gz)
+FILES=(/etc/sysctl.d/sysctl.conf)
 
 # HOOKS
 # This is the most important setting in this file.  The HOOKS control the
