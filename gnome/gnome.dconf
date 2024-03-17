@@ -29,7 +29,7 @@ sleep-inactive-ac-type='nothing'
 [org/gnome/settings-daemon/plugins/color]
 night-light-enabled=true
 night-light-schedule-automatic=false
-night-light-schedule-to=20.0
+night-light-schedule-to=0.0
 night-light-temperature=3700
 
 # Touchpad
@@ -77,11 +77,12 @@ show-battery-percentage=true
 cursor-theme='capitaine-cursors'
 font-name='Sans 10'
 document-font-name='Sans 10'
-monospace-font-name='Monospace 12'
+monospace-font-name='Monospace 11'
 font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
 icon-theme='Adwaita'
+text-scaling-factor=1.0499999999999998
 
 # Shell Calendar
 [org/gnome/desktop/calendar]
