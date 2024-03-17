@@ -1,10 +1,10 @@
 blacklist nouveau
-# blacklist nvidiafb
+blacklist nvidiafb
 blacklist nv
 blacklist rivafb
 blacklist rivatv
-# blacklist nvidia
-blacklist bbswitch
+blacklist nvidia
+# blacklist bbswitch
 
 options bbswitch load_state=0 unload_state=1
 # options nvidia_drm modeset=1 fbdev=1
