@@ -1,7 +1,15 @@
 app.drey.KeyRack
+ch.protonmail.protonmail-bridge
 ch.protonmail.protonmail-import-export-app
-com.calibre_ebook.calibre
 com.discordapp.Discord
 com.github.tchx84.Flatseal
 com.valvesoftware.Steam
+io.gitlab.adhami3310.Converter
 md.obsidian.Obsidian
+org.gnome.FileRoller
+org.kde.krita
+org.kde.okular
+org.signal.Signal
+org.soundconverter.SoundConverter
+org.sqlitebrowser.sqlitebrowser
+org.wireshark.Wireshark
