@@ -140,6 +140,8 @@ cmerge mpv/mpv.conf                  ~/.config/mpv/mpv.conf
 cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
+cmerge fonts.conf                    ~/.config/fontconfig/fonts.conf
+
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 
