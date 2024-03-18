@@ -33,6 +33,7 @@ bind
 blas64-openblas
 bluez-tools
 bluez-utils
+boost
 bottom
 brightnessctl
 brother-dcp-l2510d
