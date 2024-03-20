@@ -130,7 +130,6 @@ entr
 epapirus-icon-theme
 epiphany
 ettercap-gtk
-evince
 exfatprogs
 ext4magic
 eza
@@ -263,7 +262,6 @@ lld
 lldb
 llvm
 logrotate
-loupe
 lrzip
 lshw
 lsof

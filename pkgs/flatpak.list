@@ -7,6 +7,8 @@ com.valvesoftware.Steam
 io.gitlab.adhami3310.Converter
 md.obsidian.Obsidian
 org.gnome.FileRoller
+org.kde.digikam
+org.kde.gwenview
 org.kde.krita
 org.kde.okular
 org.signal.Signal
