@@ -10,4 +10,4 @@
 # Uncomment and configure below
 #export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 
-export FREETYPE_PROPERTIES="autofitter:no-stem-darkening=0"
+export FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
