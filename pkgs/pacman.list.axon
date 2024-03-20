@@ -253,7 +253,6 @@ libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libvterm
-libwmf
 libwpg
 linux-firmware
 linux-headers
@@ -271,7 +270,6 @@ lzop
 man-db
 man-pages
 mariadb-libs
-mediainfo
 mesa-demos
 mesa-utils
 mesa-vdpau
@@ -298,7 +296,6 @@ ngrep
 nilfs-utils
 nmap
 noise-suppression-for-voice
-noto-fonts-emoji
 noto-fonts-extra
 ntfs-3g
 nushell
@@ -317,6 +314,7 @@ openmp
 openslide
 opusfile
 ostra-cg
+p7zip
 pacman-contrib
 pacrunner
 pam-u2f
@@ -370,7 +368,6 @@ python-fs
 python-fxa
 python-genshi
 python-ghp-import
-python-graphviz
 python-h2
 python-hsluv
 python-html2text
@@ -433,7 +430,6 @@ python-webcolors
 python-xattr
 python-xlrd
 qbittorrent
-qnapi
 qt5-svg
 quodlibet
 quota-tools
