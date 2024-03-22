@@ -246,6 +246,7 @@ libopenraw
 libotr
 libraw
 libsidplayfp
+libspectre
 libupnp
 libva-intel-driver
 libva-mesa-driver
