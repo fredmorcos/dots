@@ -93,7 +93,6 @@ compsize
 conntrack-tools
 cpio
 cppcheck
-cpupower
 criu
 cuneiform
 cups-pdf
@@ -552,7 +551,6 @@ wireguard-tools
 wireless-regdb
 wl-clipboard
 wmctrl
-x86_energy_perf_policy
 xclip
 xdelta3
 xdg-desktop-portal-gnome
