@@ -451,7 +451,6 @@ rocm-hip-runtime
 rocm-opencl-runtime
 ropper
 rpm-tools
-rst2pdf
 rtaudio
 ruby-webrick
 rust-analyzer
