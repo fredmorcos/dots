@@ -57,6 +57,20 @@ autorun-x-content-ignore=@as []
 autorun-x-content-open-folder=@as []
 autorun-never=true
 
+# Backgrounds
+[org/gnome/desktop/background]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///home/fred/.local/share/backgrounds/2024-03-24-21-13-57-amber-d.jxl'
+picture-uri-dark='file:///home/fred/.local/share/backgrounds/2024-03-24-21-13-57-amber-d.jxl'
+primary-color='#000000000000'
+secondary-color='#000000000000'
+
+[org/gnome/desktop/screensaver]
+picture-uri='file:///home/fred/.local/share/backgrounds/2024-03-24-21-13-57-amber-d.jxl'
+primary-color='#000000000000'
+secondary-color='#000000000000'
+
 # Language
 [system/locale]
 region='en_GB.UTF-8'
