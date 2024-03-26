@@ -9,7 +9,10 @@ md.obsidian.Obsidian
 org.gnome.FileRoller
 org.kde.digikam
 org.kde.gwenview
+org.kde.kcachegrind
+org.kde.kgraphviewer
 org.kde.krita
+org.kde.massif-visualizer
 org.kde.okular
 org.signal.Signal
 org.sigxcpu.Livi
