@@ -130,6 +130,7 @@ entr
 epapirus-icon-theme
 epiphany
 ettercap-gtk
+evince
 exfatprogs
 ext4magic
 eza
@@ -246,7 +247,6 @@ libopenraw
 libotr
 libraw
 libsidplayfp
-libspectre
 libupnp
 libva-intel-driver
 libva-mesa-driver
@@ -500,6 +500,7 @@ t1utils
 tcpdump
 tealdeer
 tectonic
+texlive-bin
 thunderbird
 tidy
 time
