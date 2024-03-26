@@ -253,7 +253,6 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
-libvterm
 libwpg
 linux-firmware
 linux-headers
