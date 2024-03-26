@@ -83,7 +83,7 @@ cmerge () {
   fi
 }
 
-echo "Applying generic Gnome settings..."
+echo "Gnome: Applying generic settings..."
 dconf load / < gnome/gnome.dconf
 if [ -f "gnome/gnome.dconf.$HNAME" ]; then
   echo "Applying Gnome settings for $HNAME..."
@@ -94,15 +94,20 @@ fi
 hide_applications="avahi-discover bssh bvnc cmake-gui cppcheck-gui echomixer \
                    emacsclient envy24control ettercap gvim hdajackretask     \
                    hdspconf hdspmixer htop hwmixvolume ipython lstopo nvtop  \
-                   qv4l2 qvidcap vim weechat xdot xdvi xsane"
+                   qv4l2 qvidcap vim weechat xdot xdvi xsane gtk-lshw"
 
 for application in $hide_applications; do
-  printf '[Desktop Entry]\nHidden=true\n' > "$HOME/.local/share/applications/$application.desktop"
+  destination="$HOME/.local/share/applications/$application.desktop"
+  if [ ! -f "$destination" ]; then
+    echo "Hide: Hiding application $application"
+    printf '[Desktop Entry]\nHidden=true\n' > "$destination"
+  else
+    echo "Skip: Application $application already hidden"
+  fi
 done
 
 # Give some apps a papirus icon.
 declare -A papirus_applications
-papirus_applications["ca.desrt.dconf-editor"]="apps/dconf-editor"
 papirus_applications["eu.qtrac.diffpdf"]="mimetypes/application-pdf"
 papirus_applications["org.kde.kcachegrind"]="apps/org.kde.kcachegrind"
 papirus_applications["org.kde.kgraphviewer"]="apps/kgraphviewer"
@@ -111,11 +116,21 @@ papirus_applications["org.kde.massif-visualizer"]="apps/org.kde.massif-visualize
 for application in "${!papirus_applications[@]}"; do
   icon=${papirus_applications[$application]}
 
-  source="/usr/share/applications/$application"
+  source1="/usr/share/applications/$application.desktop"
+  source2="$HOME/.local/share/flatpak/exports/share/applications/$application.desktop"
   dest="$HOME/.local/share/applications/$application.desktop"
-  if [ ! -f "$dest" ] && [ -f "$source" ]; then
-    cp "$source" "$dest"
-    printf "Icon=/usr/share/icons/Papirus/64x64/%s" "$icon" >> "$dest"
+  if [ ! -f "$dest" ]; then
+    if [ -f "$source1" ]; then
+      cp "$source1" "$dest"
+      printf "Icon=/usr/share/icons/Papirus/64x64/%s.svg" "$icon" >> "$dest"
+    elif [ -f "$source2" ]; then
+      cp "$source2" "$dest"
+      printf "Icon=/usr/share/icons/Papirus/64x64/%s.svg" "$icon" >> "$dest"
+    else
+      echo "Skip: No sources were found for application $application"
+    fi
+  else
+    echo "Skip: Destination found for application $application, not going to overwrite"
   fi
 done
 
