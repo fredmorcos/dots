@@ -1,14 +1,14 @@
 # Tracker
 [org/freedesktop/tracker/miner/files]
 index-single-directories=@as []
-index-recursive-directories=@as ['&MUSIC']
+index-recursive-directories=@as []
 index-applications=false
 index-on-battery=false
 index-on-battery-first-time=false
 
 # Search Providers
 [org/gnome/desktop/search-providers]
-disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.clocks.desktop', 'org.gnome.design.IconLibrary.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Recipes.desktop', 'firefox.desktop']
+disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.clocks.desktop', 'org.gnome.design.IconLibrary.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Recipes.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop']
 enabled=@as []
 disable-external=false
 
