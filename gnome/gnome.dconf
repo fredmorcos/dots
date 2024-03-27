@@ -106,7 +106,7 @@ show-weekdate=true
 [org/gnome/shell]
 enabled-extensions=@as []
 disable-user-extensions=true
-favorite-apps=['org.gnome.Calculator.desktop', 'io.github.quodlibet.QuodLibet.desktop', 'org.gnome.Snapshot.desktop', 'org.kde.digikam.desktop', 'org.gnome.Podcasts.desktop', 'org.kde.krita.desktop', 'org.qbittorrent.qBittorrent.desktop', 'simple-scan.desktop', 'ca.desrt.dconf-editor.desktop', 'com.valvesoftware.Steam.desktop', 'com.github.tchx84.Flatseal.desktop', 'gparted.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Settings.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'org.gnome.Calculator.desktop', 'io.github.quodlibet.QuodLibet.desktop', 'org.gnome.Snapshot.desktop', 'org.kde.digikam.desktop', 'org.gnome.Podcasts.desktop', 'org.kde.krita.desktop', 'org.qbittorrent.qBittorrent.desktop', 'simple-scan.desktop', 'ca.desrt.dconf-editor.desktop', 'com.valvesoftware.Steam.desktop', 'com.github.tchx84.Flatseal.desktop', 'gparted.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Settings.desktop']
 
 # Window switcher
 [org/gnome/shell/window-switcher]
