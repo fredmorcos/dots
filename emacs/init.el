@@ -3,100 +3,114 @@
 ;;; Code:
 
 (eval-when-compile
- (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
+ (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
-
 (require 'init-macros)
 
-;; Quality of life improvements
-(fm/key "C-x j"    fm/insert-buffer-name "qol")
-(fm/key "C-x e"    fm/replace-escapes    "qol")
-(fm/key "<M-up>"   fm/move-line-up       "qol")
-(fm/key "<M-down>" fm/move-line-down     "qol")
+(im/pkg no-littering
+ (im/autoload no-littering-theme-backups "no-littering")
+ (im/autoload no-littering-expand-etc-file-name "no-littering")
+ (im/autoload no-littering-expand-var-file-name "no-littering")
+ (no-littering-theme-backups))
 
-;; (fm/key "{"  fm/insert-pair-curly         "qol")
-;; (fm/key "("  fm/insert-pair-parens        "qol")
-;; (fm/key "'"  fm/insert-pair-quote         "qol")
-;; (fm/key "\"" fm/insert-pair-double-quotes "qol")
-;; (fm/key "`"  fm/insert-pair-backtick      "qol")
+(im/after emacs
+ ;; Enable these functions.
+ (put 'list-timers      'disabled nil)
+ (put 'narrow-to-region 'disabled nil)
+ (put 'narrow-to-page   'disabled nil)
+ (put 'upcase-region    'disabled nil)
+ (put 'downcase-region  'disabled nil)
 
-(fm/key "C-x c" duplicate-dwim)
+ ;; Disable these functions.
+ (put 'eshell           'disabled t)
+ (put 'overwrite-mode   'disabled t)
+ (put 'iconify-frame    'disabled t)
+ (put 'suspend-frame    'disabled t)
+ (put 'diary            'disabled t)
 
-;; Directories
-(defconst user-home-dir (expand-file-name "~/"))
-(defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
-(defconst emacs-user-dir (expand-file-name user-emacs-directory))
-(defconst emacs-elpa-dir (concat emacs-user-dir "elpa"))
-(defconst emacs-var-dir (concat emacs-user-dir "var/"))
-(defconst emacs-recentf-file (concat emacs-var-dir "recentf"))
-(defconst emacs-saveplace-file (concat emacs-var-dir "saveplace"))
-(defconst emacs-savehist-file (concat emacs-var-dir "savehist"))
-(defconst emacs-package-qs-file (concat emacs-var-dir "package-qs"))
-(defconst emacs-projectile-cache-file (concat emacs-var-dir "projectile-cache"))
-(defconst emacs-projectile-projects-file (concat emacs-var-dir "projectile-projects"))
-(defconst emacs-prescient-save-file (concat emacs-var-dir "prescient-save"))
-(defconst emacs-bookmarks-file (concat emacs-var-dir "bookmarks"))
-(defconst emacs-tmp-dir (concat temporary-file-directory "emacs/"))
-(defconst emacs-autosaves-dir (concat emacs-tmp-dir "autosaves"))
-(defconst emacs-autosaves-pat (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-autosave-list-prefix (concat emacs-tmp-dir "auto-save-list/saves-"))
-(defconst emacs-backups-dir (concat emacs-tmp-dir "backups"))
-(defconst emacs-backups-pat (concat emacs-backups-dir "/"))
-(make-directory emacs-var-dir t)
-(make-directory emacs-autosaves-dir t)
-(make-directory emacs-backups-dir t)
+ ;; Duplicate.
+ (im/key "C-x c" duplicate-dwim "misc")
 
-;; Do not show a message in the echo area after startup
-(fset 'display-startup-echo-area-message 'ignore)
+ ;; Windmove.
+ (windmove-default-keybindings)
+ (windmove-delete-default-keybindings)
 
-;; Startup
-(setq-default inhibit-startup-screen t)
-(setq-default inhibit-startup-message t)
-(setq-default inhibit-startup-buffer-menu t)
-(setq-default initial-scratch-message nil)
-(setq-default initial-major-mode 'fundamental-mode)
+ ;; CUA.
+ (cua-selection-mode 1)
 
-;; Auto-save
-(setq-default auto-save-list-file-prefix emacs-autosave-list-prefix)
+ ;; Save-place and save-hist.
+ (save-place-mode)
+ (savehist-mode)
 
-;; Windmove
-(windmove-default-keybindings)
-(windmove-delete-default-keybindings)
+ (setopt
+  ;; Indent.
+  tab-always-indent 'complete
+  tab-first-completion 'word-or-paren-or-punct
 
-;; Common User Access
-(cua-selection-mode 1)
+  ;; Graphics.
+  resize-mini-windows nil
+  use-dialog-box nil			; Avoid graphical dialog boxes
 
-;; Cursor
-(fm/after frame
- (blink-cursor-mode -1))
+  ;; Case-insensitive completions.
+  completion-ignore-case t
+  read-buffer-completion-ignore-case t
 
-;; Indent
-(setq-default tab-always-indent 'complete)
-(setq-default tab-first-completion 'word-or-paren-or-punct)
+  ;; Filling.
+  fill-column 90
+  colon-double-space t
 
-;; Bindings
-(setq-default column-number-indicator-zero-based nil)
+  ;; History.
+  history-delete-duplicates t
+  history-length 150
 
-;; Modeline
-(setq-default mode-line-compact 'long)
+  ;; Processes.
+  read-process-output-max (* 10 1024 1024) ; Improves LSP performance.
 
-;; Fill-column indicator
-(global-display-fill-column-indicator-mode)
+  ;; Scrolling.
+  scroll-conservatively 101
+  fast-but-imprecise-scrolling t
 
-;; Make URLs clickable
-(global-goto-address-mode)
+  ;; Prefer the newest version of a file.
+  load-prefer-newer t
 
-;; Suppress certain annoying warnings.
-(fm/after warnings
- (eval-when-compile (defvar warning-suppress-types))
- (add-to-list 'warning-suppress-types '(defvaralias)))
+  ;; Files contents.
+  coding-system-for-read 'utf-8-unix
+  coding-system-for-write 'utf-8-unix
 
-;; Hippie expand
-(fm/after hippie-exp
- (setq-default hippie-expand-try-functions-list
+  ;; Respond to yes/no questions using Y/N.
+  use-short-answers t
+
+  ;; Increase undo limits.
+  undo-limit (* 1024 1024)
+
+  ;; Mouse
+  mouse-yank-at-point t))
+
+(im/pkg move-text
+ (move-text-default-bindings))
+
+(im/after frame
+ (setopt blink-cursor-mode nil))
+
+(im/after bindings
+ (setopt column-number-indicator-zero-based nil))
+
+(im/after modeline
+ (setopt mode-line-compact 'long))
+
+(im/after display-fill-column-indicator
+ (setopt global-display-fill-column-indicator-mode t))
+
+(im/after xref
+ (im/hook xref-after-return recenter)
+ (im/hook xref-after-jump recenter))
+
+(im/after hippie-exp
+ (im/key [remap dabbrev-expand] hippie-expand)
+ (setopt hippie-expand-try-functions-list
   '(try-expand-dabbrev-visible
-    try-expand-line
     try-expand-dabbrev
+    try-expand-line
     try-expand-dabbrev-all-buffers
     try-expand-line-all-buffers
     try-expand-dabbrev-from-kill
@@ -108,58 +122,74 @@
     try-complete-lisp-symbol
     try-complete-lisp-symbol-partially)))
 
-(fm/after emacs
- ;; Replace dabbrev-expand with hippie-expand
- (fm/key-remap dabbrev-expand hippie-expand)
+(im/after simple
+ (setopt
+  ;; Recenter to the center of the window.
+  next-error-recenter '(4)
+  indent-tabs-mode nil
+  ;; Hide commands in M-x that do not work in the current mode.
+  read-extended-command-predicate #'command-completion-default-include-p
+  suggest-key-bindings 10
+  save-interprogram-paste-before-kill t
+  backward-delete-char-untabify-method 'hungry
+  next-error-message-highlight 'keep)
+ (defadvice goto-line
+  (after recenter-after-goto-line activate)
+  (recenter)))
 
- ;; Avoid graphical dialog boxes
- (setq-default use-dialog-box nil)
+(im/after window
+ ;; Windows.
+ (im/key "C-<f11>" scroll-other-window)
+ (im/key "C-<f12>" scroll-other-window-down)
+ (im/key "<f12>"   delete-other-windows)
 
- ;; Completion
- (setq-default completion-ignore-case t)
- (setq-default read-buffer-completion-ignore-case t)
+ ;; Buffers.
+ (im/key "M-S-<right>" next-buffer)
+ (im/key "M-S-<left>"  previous-buffer)
 
- ;; Fill
- (setq-default fill-column 90)
+ (setopt
+  switch-to-buffer-in-dedicated-window 'pop
+  switch-to-buffer-obey-display-actions t
+  split-height-threshold 160
+  even-window-sizes 'width-only
+  ;; Skip *SPECIALS* when switching buffers.
+  switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'")))
 
- ;; Indent
- (setq-default indent-tabs-mode nil)
+(im/pkg hotfuzz)
+(im/pkg orderless)
 
- ;; Respond to yes/no questions using Y/N
- (setq-default use-short-answers t)
+(im/pkg prescient
+ (im/after prescient
+  (setopt prescient-sort-full-matches-first t))
+ (im/autoload prescient-persist-mode "prescient")
+ (prescient-persist-mode))
 
- ;; History/savehist
- (setq-default history-delete-duplicates t)
- (setq-default history-length 150)
+(im/after minibuffer
+ (setopt
+  minibuffer-electric-default-mode t
+  minibuffer-message-clear-timeout 4
+  completions-sort #'prescient-sort
+  completion-styles '(prescient orderless hotfuzz)
+  completions-max-height 20
+  read-file-name-completion-ignore-case t
+  read-answer-short t
+  completions-detailed t
+  completions-group t))
 
- ;; External Processes
- (setq-default read-process-output-max (* 1024 1024))
-
-  ;; Scrolling
- (setq-default scroll-conservatively 104)
- (setq-default scroll-margin 3)
- (setq-default hscroll-margin 3)
- (setq-default hscroll-step 1)
- (setq-default auto-hscroll-mode 'current-line)
- (setq-default fast-but-imprecise-scrolling t))
-
-(fm/key-interactive "<f10>" (scroll-other-window 1))
-(fm/key-interactive "<f11>" (scroll-other-window-down 1))
-
-(fm/after files
- (setq-default confirm-kill-processes nil)
- (setq-default auto-save-file-name-transforms `((".*" ,emacs-autosaves-pat t)))
- (setq-default auto-save-default t)
- (setq-default backup-directory-alist `((".*" . ,emacs-backups-pat)))
- (setq-default backup-inhibited nil)
- (setq-default make-backup-files t)
- (setq-default delete-old-versions t)
- (setq-default mode-require-final-newline 'visit-save)
- (setq-default require-final-newline 'visit-save)
- (setq-default load-prefer-newer t)
- (setq-default coding-system-for-read 'utf-8-unix)
- (setq-default coding-system-for-write 'utf-8-unix)
- (setq-default major-mode-remap-alist
+(im/after files
+ (im/hook before-save-hook delete-trailing-whitespace)
+ (defadvice find-file
+  (after recenter-after-find-file activate)
+  (recenter))
+ (setopt
+  confirm-kill-processes nil
+  auto-save-default nil
+  backup-inhibited nil
+  make-backup-files t
+  delete-old-versions t
+  mode-require-final-newline 'visit-save
+  require-final-newline 'visit-save
+  major-mode-remap-alist
   '((c-mode . c-ts-mode)
     (c++-mode . c++-ts-mode)
     (c-or-c++-mode . c-or-c++-ts-mode)
@@ -171,899 +201,764 @@
     (python-mode . python-ts-mode)
     (dockerfile-mode . dockerfile-ts-mode))))
 
-(fm/after bookmarks
- (setq-default bookmark-file emacs-bookmarks-file))
-
-(fm/after saveplace
- (setq-default save-place-file emacs-saveplace-file))
-(save-place-mode)
-
-(fm/after savehist
- (setq-default savehist-file emacs-savehist-file))
-(savehist-mode)
-
-(fm/after recentf
- ;; (setq-default recentf-auto-cleanup 'never)
- (setq-default recentf-save-file emacs-recentf-file)
- (setq-default recentf-max-menu-items 50)
- (setq-default recentf-max-saved-items 100)
- (setq-default recentf-exclude `(,emacs-elpa-dir ,emacs-var-dir)))
-;; (fm/hook kill-emacs-hook recentf-cleanup "recentf")
+(im/after recentf
+ (defun init/do-recentf-exclude (dir)
+  (add-to-list 'recentf-exclude dir))
+ (declare-function init/do-recentf-exclude 'init)
+ (init/do-recentf-exclude (expand-file-name package-user-dir))
+ (init/do-recentf-exclude (no-littering-expand-etc-file-name ""))
+ (init/do-recentf-exclude (no-littering-expand-var-file-name ""))
+ (init/do-recentf-exclude "/usr/share/emacs")
+ (mapc 'init/do-recentf-exclude native-comp-eln-load-path)
+ (setopt
+  recentf-max-menu-items 50
+  recentf-max-saved-items 100))
 (recentf-mode)
 
-(fm/after help
- (setq-default help-window-select t))
-
-(fm/after window
- (setq-default switch-to-buffer-in-dedicated-window 'pop)
- (setq-default switch-to-buffer-obey-display-actions t)
- (setq-default split-height-threshold 160)
- (setq-default even-window-sizes 'width-only)
- (fm/disable-popup "\\`\\*Compile-Log\\*.*\\'")
- (fm/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
- (fm/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
- (fm/disable-popup "\\`\\*Warnings\\*.*\\'")
- (setq-default switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'")))
-
-;; Window
-(fm/key "<f12>"       delete-other-windows)
-(fm/key "<M-S-right>" next-buffer)
-(fm/key "<M-S-left>"  previous-buffer)
-
-(fm/after xref
- (setq-default xref-backend-functions '()))
-
-(fm/after fill
- (setq-default colon-double-space t)
- (setq-default default-justification 'left))
-
-(fm/after mouse
- (setq-default mouse-yank-at-point t))
-
-(fm/after simple
- ;; Hide commands in M-x that do not work in the current mode
- (setq-default read-extended-command-predicate #'command-completion-default-include-p)
- (setq-default undo-limit (* 1024 1024))
- (setq-default suggest-key-bindings 10)
- (setq-default save-interprogram-paste-before-kill t)
- (setq-default backward-delete-char-untabify-method 'hungry)
- (setq-default next-error-message-highlight t)
- (fm/after files
-  (fm/hook before-save-hook delete-trailing-whitespace)))
-
-(fm/key "<mouse-4>" previous-line)
-(fm/key "<mouse-5>" next-line)
-
-(fm/after uniquify
- (setq-default uniquify-buffer-name-style 'forward))
-
-(fm/after tooltip
- (setq-default tooltip-use-echo-area t))
-
-(fm/after dictionary
- (setq-default dictionary-server "dict.org")
- (setq-default dictionary-use-single-buffer t))
-
-(fm/after woman
- (setq-default woman-fill-column 100))
-
-(fm/after vc
- (setq-default vc-make-backup-files t))
-
-(fm/after newcomment
- (setq-default comment-fill-column 80))
-
-(fm/after ediff-wind
- (setq-default ediff-split-window-function #'split-window-horizontally)
- (setq-default ediff-window-setup-function  'ediff-setup-windows-plain))
-
-(fm/after elec-pair
- (setq-default electric-pair-pairs '((?\[ . ?\]))))
-
-(fm/after display-line-numbers
- (setq-default display-line-numbers-grow-only t)
- (setq-default display-line-numbers-width-start t))
-
-(fm/after abbrev
- (fm/dim abbrev-mode "Ab"))
-
-(fm/after whitespace
- (fm/dim whitespace-mode "Ws")
- (setq-default whitespace-line-column 90)
- (setq-default show-trailing-whitespace nil)
- (setq-default whitespace-action '(cleanup))
- (setq-default whitespace-style
-  '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
-    space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
-    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof)))
-
-(fm/after proced
- (setq-default proced-auto-update-flag t)
- (setq-default proced-auto-update-interval 1)
- (setq-default proced-tree-flag t))
-
-(fm/after make-mode
- (fm/hook makefile-mode-hook whitespace-mode))
-
-(fm/pkg symbol-overlay
- (fm/after symbol-overlay
-  (fm/dim symbol-overlay-mode "Sy")
-  (fm/key-local "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
-  (fm/key-local "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)
-  (setq-default symbol-overlay-idle-time 0.1)))
-
-(fm/after elisp-mode
- (setq-default lisp-indent-offset 1)
- (setq-default lisp-indent-function #'common-lisp-indent-function)
- (fm/hook emacs-lisp-mode-hook symbol-overlay-mode)
- (fm/hook emacs-lisp-mode-hook whitespace-mode))
-
-(fm/mode "emacs" emacs-lisp-mode)
-(fm/mode ".config/emacs/init" emacs-lisp-mode)
-
-(fm/after eldoc
- (fm/dim eldoc-mode "Ed")
- (setq-default eldoc-documentation-strategy 'eldoc-documentation-compose))
-
-(fm/after paren
- (setq-default show-paren-when-point-inside-paren t)
- (setq-default show-paren-style 'mixed)
- (setq-default show-paren-highlight-openparen t)
- (setq-default show-paren-context-when-offscreen 'overlay))
-
-(fm/after dired
- (setq-default dired-mouse-drag-files t)
- (setq-default dired-listing-switches "-l --group-directories-first")
- (setq-default dired-hide-details-hide-symlink-targets nil)
- (fm/hook dired-mode-hook dired-hide-details-mode "dired")
- (fm/hook dired-mode-hook auto-revert-mode))
-
-(fm/after autorevert
- (fm/dim autorevert-mode "Ar")
- (setq-default auto-revert-interval 1)
- (setq-default auto-revert-avoid-polling t)
- (setq-default buffer-auto-revert-by-notification t)
- (setq-default auto-revert-mode-text " Ar"))
-
-(fm/after isearch
- (setq-default isearch-lazy-count t)
- (setq-default isearch-lazy-highlight t))
-
-(fm/after subword
- (fm/dim subword-mode "Sw"))
-
-(fm/after flyspell
- (fm/dim flyspell-mode "Fs")
- (setq-default ispell-program-name "aspell")
- (setq-default ispell-extra-args '("--sug-mode=ultra"))
- (setq-default ispell-local-dictionary "en_US"))
-
-(fm/after text-mode
- (fm/hook text-mode-hook spell-fu-mode))
-
-(fm/after sh-script
- (setq-default sh-basic-offset 2)
- (setq-default sh-indentation 2)
- (fm/hookn sh-mode-hook
-  (fm/hook after-save-hook executable-make-buffer-file-executable-if-script-p)))
-
-(defmacro fm/setup-c-style-comments ()
- "Setup C-style /* ... */ comments."
- `(fm/after newcomment
-   (setq-local comment-style 'extra-line)))
-
-(fm/after css-mode
- (fm/hookn css-mode-hook (fm/setup-c-style-comments)))
-
-(fm/after cc-mode
- (fm/key-disable "(" c-mode-base-map)
- (setq-default c-doc-comment-style
-  '((java-mode . javadoc)
-    (c-mode    . gtkdoc)
-    (c++-mode  . doxygen)))
- (fm/hook c-mode-common-hook lsp))
-
-(fm/after c-ts-mode
- (fm/hook c-ts-base-mode-hook lsp))
-
-(fm/after cc-vars
- (setq-default c-mark-wrong-style-of-comment t)
- (setq-default c-default-style '((other . "user")))
- (setq-default c-basic-offset 2)
- (fm/hookn c-mode-common-hook (fm/setup-c-style-comments)))
-
-(fm/after python
- (fm/hook python-mode-hook lsp)
- (fm/hook python-ts-mode-hook lsp)
- (fm/hookn python-ts-mode-hook
-  (setq-default fill-column 79)))
-
-(fm/after jit-lock
- (setq-default jit-lock-stealth-time 1)
- (setq-default jit-lock-chunk-size 5000)
- (setq-default jit-lock-antiblink-grace 1))
-
-(fm/after gdb-mi
- (setq-default gdb-many-windows t)
- (setq-default gdb-use-separate-io-buffer t)
- (advice-add 'gdb-setup-windows :after
-  (lambda () (set-window-dedicated-p (selected-window) t))))
-
-(fm/after gud
- (fm/hook gud-mode-hook gud-tooltip-mode)
- (setq-local gdb-restore-window-configuration-after-quit t))
-
-(fm/pkg markdown-mode)
-(fm/pkg crux)
-(fm/pkg indent-guide)
-(fm/pkg sed-mode)
-(fm/pkg po-mode)
-
-(fm/pkg toml-mode)
-(fm/pkg eldoc-toml
- (fm/after eldoc-toml
-  (fm/dim eldoc-toml-mode))
- (fm/after toml-mode
-  (fm/hook toml-mode-hook eldoc-toml-mode)))
-
-(fm/pkg cmake-mode)
-(fm/pkg eldoc-cmake
- (fm/after cmake-mode
-  (fm/hook cmake-mode-hook eldoc-cmake-enable "eldoc-cmake")))
-
-(fm/pkg json-mode
- (fm/hook json-mode-hook indent-guide-mode)
- (fm/hook json-mode-hook tree-sitter-mode))
-
-(fm/pkg systemd
- (fm/hook systemd-mode-hook company-mode))
-
-(fm/pkg highlight-defined
- (fm/hook emacs-lisp-mode-hook highlight-defined-mode))
-
-(fm/pkg highlight-quoted
- (fm/hook emacs-lisp-mode-hook highlight-quoted-mode))
-
-(fm/pkg eros
- (fm/hook emacs-lisp-mode-hook eros-mode))
-
-(fm/pkg suggest)
-
-(fm/pkg ipretty
- (ipretty-mode))
-
-(fm/pkg elsa)
-
-(fm/pkg flycheck-elsa
- (fm/hook emacs-lisp-mode-hook flycheck-elsa-setup))
-
-(fm/after org
- (setq-default org-startup-truncated nil)
- (setq-default org-startup-indented t)
- (setq-default org-todo-keywords
-  `((sequence ,(char-to-string 9744) ,(char-to-string 9745))
-    (sequence "TODO" "DONE")))
- (setq-default org-hide-leading-stars t)
- (setq-default org-ellipsis "…")
- (setq-default org-hide-emphasis-markers t)
- (setq-default org-pretty-entities nil)
- (setq-default org-fontify-whole-heading-line t)
- (setq-default org-fontify-done-headline t)
- (setq-default org-property-format "%s %s")
- (setq-default org-insert-heading-respect-content t)
- (setq-default org-catch-invisible-edits 'show-and-error)
- (setq-default org-auto-align-tags nil)
- (setq-default org-tags-column 0)
- (setq-default org-special-ctrl-a/e t)
- (setq-default org-special-ctrl-k t)
- (setq-default org-special-ctrl-o t)
- (fm/key-local "C-c p" fm/generate-password org-mode-map "qol")
- (fm/hook org-mode-hook org-bullets-mode)
- ;; (fm/hook org-mode-hook spell-fu-mode)
- (fm/hookn org-mode-hook
-  (setq-local left-margin-width 2)
-  (setq-local right-margin-width 2)
-  (setq-local scroll-margin 0)))
-
-(fm/pkg org-bullets
- (fm/after org-bullets
-  (setq-default org-bullets-bullet-list
-   `(,(char-to-string 8857)
-     ,(char-to-string 8627)
-     ,(char-to-string 8627)
-     ,(char-to-string 8627)))))
-
-(fm/pkg which-key
- (fm/after which-key
-  (fm/dim which-key-mode)
-  (setq-default which-key-idle-delay 0.5)
-  (setq-default which-key-show-docstrings nil)
-  (setq-default which-key-add-column-padding 3)
-  (setq-default which-key-max-description-length nil)
-  (setq-default which-key-max-display-columns nil))
- (which-key-mode))
-
-(fm/pkg ivy
- (fm/after ivy
-  (fm/dim ivy-mode)
-  (fm/key-local "<RET>" ivy-alt-done ivy-minibuffer-map "ivy")
-  (setq-default ivy-wrap t)
-  (setq-default ivy-use-selectable-prompt t)
-  (setq-default ivy-use-virtual-buffers t)
-  (setq-default ivy-count-format "(%d/%d) ")
-  (setq-default ivy-virtual-abbreviate 'abbreviate)
-  (setq-default ivy-initial-inputs-alist nil)
-  (setq-default ivy-extra-directories nil)
-  (setq-default ivy-re-builders-alist
-   '((t . ivy--regex-ignore-order) (t . ivy--regex-plus))))
- (ivy-mode))
-
-(fm/pkg ctrlf
- (fm/after ctrlf
-  (setq-default ctrlf-default-search-style 'fuzzy)
-  (setq-default ctrlf-auto-recenter t))
- (ctrlf-mode 1))
-
-(fm/pkg counsel
- (fm/after counsel
-  (fm/key-local "M-Y" counsel-yank-pop counsel-mode-map)
-  (fm/dim counsel-mode)
-  (put 'counsel-find-symbol 'no-counsel-M-x t))
- (counsel-mode))
-
-(fm/pkg ivy-rich
- (fm/after ivy-rich
-  (setq-default ivy-rich-path-style 'abbrev))
- (ivy-rich-mode))
-
-;; (fm/pkg swiper
-;;  (fm/key-remap isearch-forward  swiper-isearch)
-;;  (fm/key-remap isearch-backward swiper-isearch-backward)
-;;  (fm/key "C-c C-s" swiper-thing-at-point)
-;;  (fm/after swiper
-;;   (setq-default swiper-include-line-number-in-search t)
-;;   (setq-default swiper-action-recenter t)))
-
-;; (fm/pkg embark
-;;  (fm/after flyspell
-;;   ;; Embark reserves this keybinding.
-;;   (fm/key-disable "C-." flyspell-mode-map))
-;;  (fm/key "C-." embark-act)
-;;  (fm/after embark
-;;   (setq-default prefix-help-command #'embark-prefix-help-command)))
-
-(fm/pkg marginalia
- (marginalia-mode))
-
-(fm/pkg hotfuzz
- (fm/after minibuffer
-  (setq-default completion-styles '(hotfuzz))))
-
-(fm/pkg prescient
- (fm/after prescient
-  (setq-default prescient-save-file emacs-prescient-save-file)
-  (setq-default prescient-sort-full-matches-first t)
-  (eval-when-compile (defvar prescient-filter-method))
-  (push 'literal-prefix prescient-filter-method)
-  (push 'prefix prescient-filter-method)
-  (push 'anchored prescient-filter-method)
-  (fm/after minibuffer
-   (push 'prescient completion-styles)))
- (fm/autoload prescient-persist-mode "prescient")
- (prescient-persist-mode +1))
-
-(fm/pkg ivy-prescient
- (ivy-prescient-mode))
-
-(fm/pkg orderless
- (fm/after orderless
-  (eval-when-compile (defvar orderless-matching-styles))
-  (push 'orderless-initialism orderless-matching-styles)
-  (push 'orderless-prefixes orderless-matching-styles))
- (fm/after minibuffer
-  (push 'orderless completion-styles)))
-
-(fm/after minibuffer
- (push 'substring completion-styles)
- (push 'flex completion-styles)
- (setq-default read-file-name-completion-ignore-case t)
- ;; (setq-default completion-category-defaults nil)
- ;; (setq-default completion-cycle-threshold 4)
- (setq-default completions-format 'one-column)
- ;; (setq-default completions-max-height 20)
- (setq-default completions-detailed t)
- ;; (setq-default set-message-functions '(set-multi-message))
- (fm/after consult
-  (setq-default completion-in-region-function #'consult-completion-in-region)))
-
-(fm/pkg flyspell-correct-ivy
- (fm/after flyspell
-  (fm/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
-  (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
-
-(fm/pkg mwim
- (fm/key-remap move-beginning-of-line mwim-beginning-of-code-or-line-or-comment)
- (fm/key-remap move-end-of-line mwim-end-of-code-or-line))
-
-(fm/pkg expand-region
- (fm/key "C-=" er/expand-region))
-
-(fm/pkg transient
- (fm/after transient
-  (setq-default transient-history-file (concat emacs-var-dir "transient-history"))
-  (setq-default transient-default-level 7)))
-
-(fm/pkg blamer
- (fm/after blamer
-  (setq-default blamer-idle-time 0)
-  (setq-default blamer-commit-formatter ": %s")
-  (setq-default blamer-datetime-formatter "%s")
-  (setq-default blamer-max-commit-message-length 60))
- (fm/after prog-mode
-  (fm/key-local "C-c b" blamer-mode prog-mode-map)))
-
-(fm/pkg magit
- (fm/key "C-x g" magit-status)
- (fm/after magit-mode
-  (setq-default magit-log-section-commit-count 20)
-  (setq-default magit-auto-revert-tracked-only nil)
-  ;; (setq-default magit-display-buffer-function
-  ;;  'magit-display-buffer-same-window-except-diff-v1)
-  (setq-default magit-display-buffer-function
-   'magit-display-buffer-fullframe-status-v1)
-  (setq-default magit-bury-buffer-function 'magit-restore-window-configuration)
-  (setq-default magit-repository-directories '(("~/Workspace" . 3)))
-  (fm/hook after-save-hook magit-after-save-refresh-status "magit"))
- (fm/after magit-diff
-  (setq-default magit-revision-show-gravatars t)
-  (setq-default magit-revision-fill-summary-line fill-column)))
-
-(fm/pkg projectile
- (fm/after projectile
-  (fm/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
-  (fm/dim projectile-mode "Pr")
-  (setq-default projectile-cache-file emacs-projectile-cache-file)
-  (setq-default projectile-known-projects-file emacs-projectile-projects-file)
-  (setq-default projectile-project-search-path '("~/Workspace"))
-  (setq-default projectile-sort-order 'recently-active)
-  (setq-default projectile-enable-caching nil)
-  (setq-default projectile-require-project-root nil)))
-
-(fm/pkg counsel-projectile
- (fm/after counsel-projectile
-  (fm/key-local "M-G" counsel-projectile-git-grep projectile-mode-map))
- (counsel-projectile-mode))
-
-(fm/pkg deadgrep
- (fm/key "M-F" deadgrep)
- (fm/after deadgrep
-  ;; (fm/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
-  ;; (fm/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
-  (require 'wgrep-deadgrep)))
-
-(fm/pkg wgrep-deadgrep)
-
-(fm/pkg yasnippet-snippets
- (fm/after yasnippet
-  (yasnippet-snippets-initialize)))
-
-(fm/pkg yasnippet
- (fm/after yasnippet
-  (fm/dim yas-minor-mode "Ys")
-  (fm/after company
-   (fm/hookn yas-minor-mode-hook (fm/company-add-backend 'company-yasnippet)))))
-
-(fm/pkg diff-hl
- (fm/after diff-hl
-  (setq-default diff-hl-draw-borders nil)
-  (setq-default diff-hl-flydiff-delay 0.1))
- (fm/after magit-mode
-  (fm/hook magit-pre-refresh-hook diff-hl-magit-pre-refresh "diff-hl")
-  (fm/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")))
-
-(fm/pkg multiple-cursors
- (fm/key "C-c C-v"       mc/edit-lines)
- (fm/key "C->"           mc/mark-next-like-this)
- (fm/key "C-<"           mc/mark-previous-like-this)
- (fm/key "C-S-<mouse-1>" mc/add-cursor-on-click)
- (fm/after multiple-cursors-core
-  (setq-default mc/always-run-for-all t)))
-
-(fm/pkg volatile-highlights
- (fm/after volatile-highlights
-  (fm/dim volatile-highlights-mode "Vh"))
- (volatile-highlights-mode))
-
-(fm/pkg yaml-mode
- (fm/after yaml-mode
-  (fm/key-local "C-c p" fm/generate-password yaml-mode-map "qol")
-  (fm/hook yaml-mode-hook flycheck-mode)
-  (fm/hook yaml-mode-hook tree-sitter-mode))
- (fm/mode "clang-format" yaml-mode))
-
-(fm/mode ".ll" llvm-mode "llvm-mode")
-
-(fm/pkg autodisass-llvm-bitcode)
-(fm/mode ".bc" autodisass-llvm-bitcode "autodisass-llvm-bitcode")
-
-(fm/pkg demangle-mode
- (fm/after llvm-mode
-  (fm/hook llvm-mode-hook demangle-mode)))
-
-(fm/pkg hledger-mode
- (fm/after hledger-mode
-  (setq-default hledger-currency-string "EUR")
-  (setq-default hledger-current-overlay t)
-  (setq-default hledger-comments-column 1)
-  (fm/hookn hledger-mode-hook
-   (setq-local tab-width 1)
-   (fm/after flycheck
-    (eval-when-compile (require 'flycheck-hledger))))
-  (fm/hook hledger-mode-hook whitespace-mode)
-  (fm/hook hledger-mode-hook symbol-overlay-mode)
-  (fm/hook hledger-mode-hook flycheck-mode))
- (fm/mode ".journal" hledger-mode)
- (fm/mode ".ledger"  hledger-mode))
-
-(fm/pkg flycheck-hledger)
-
-(fm/pkg flycheck
- (fm/after flycheck
-  (fm/autoload flycheck-next-error "flycheck")
-  (fm/autoload flycheck-previous-error "flycheck")
-  (fm/key-local "M-n" flycheck-next-error     flycheck-mode-map "flycheck")
-  (fm/key-local "M-p" flycheck-previous-error flycheck-mode-map "flycheck")
-  (setq-default flycheck-checker-error-threshold nil)
-  (setq-default flycheck-mode-line-prefix "Fc")
-  (setq-default flycheck-check-syntax-automatically
-   '(idle-change new-line mode-enabled idle-buffer-switch))
-  (setq-default flycheck-idle-change-delay 0.25)
-  (setq-default flycheck-idle-buffer-switch-delay 0.25)
-  (fm/hook flycheck-mode-hook flycheck-posframe-mode)))
-
-(fm/pkg flycheck-posframe
- (fm/after flycheck-posframe
-  ;; (flycheck-posframe-configure-pretty-defaults)
-  (setq-default flycheck-posframe-position 'window-bottom-left-corner)
-  (setq-default flycheck-posframe-border-width 1)
-  (setq-default flycheck-posframe-prefix
-   (concat " " (char-to-string 8618) " Info: "))
-  (setq-default flycheck-posframe-warnings-prefix
-   (concat " " (char-to-string 9888) " Warning: "))
-  (setq-default flycheck-posframe-error-prefix
-   (concat " " (char-to-string 10540) " Error: "))
-  (fm/after company
-   (fm/hook flycheck-posframe-inhibit-functions company--active-p "company")
-   (fm/hook flycheck-posframe-inhibit-functions
-    (lambda (&rest _) (bound-and-true-p company-backend))))))
-
-(fm/pkg consult-flycheck
- (fm/after flycheck
-  (fm/key-local "C-c ! a" consult-flycheck flycheck-mode-map)))
-
-(fm/pkg company
- (fm/after company
-  (fm/dim company-mode "Co")
-  (setq-default company-backends '((company-capf)))
-  (setq-default company-idle-delay 0.5)
-  (setq-default company-keywords-ignore-case t)
-  (setq-default company-minimum-prefix-length 2)
-  (setq-default company-selection-wrap-around t)
-  (setq-default company-tooltip-align-annotations t)
-  (fm/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
-
-(defun fm/company-add-backend (backend)
- "Add BACKEND to local copy of `company-backends'."
- (eval-when-compile (defvar company-backends))
- (fm/autoload fm/append "qol")
- (fm/append (car company-backends) backend))
-
-(fm/pkg company-posframe
- (fm/after company-posframe
-  (fm/dim company-posframe-mode)
-  (setq-default company-posframe-quickhelp-x-offset 2))
- (fm/after company
-  (fm/hook company-mode-hook company-posframe-mode "company-posframe")))
-
-(fm/pkg company-prescient
- (fm/after company
-  (fm/hook company-mode-hook company-prescient-mode)))
-
-(fm/pkg tree-sitter-langs
- (fm/after tree-sitter-mode
-  (fm/hook tree-sitter-mode-hook tree-sitter-langs-install-grammars)))
-
-(fm/pkg tree-sitter
- (fm/after tree-sitter
-  (fm/dim tree-sitter-mode "Ts")
-  (fm/hook tree-sitter-mode-hook tree-sitter-hl-mode)))
-
-;; (fm/pkg scopeline
-;;  (fm/after tree-sitter
-;;   (fm/hook tree-sitter-mode-hook scopeline-mode))
-;;  (fm/after scopeline
-;;   (fm/dim scopeline-mode "Sl")
-;;   (setq-default scopeline-min-lines 10)))
-
-(fm/after prog-mode
- (fm/hook prog-mode-hook diff-hl-mode)
- (fm/hook prog-mode-hook eldoc-mode)
- (fm/hook prog-mode-hook show-paren-mode)
- (fm/hook prog-mode-hook flyspell-prog-mode)
- (fm/hook prog-mode-hook flycheck-mode)
- (fm/hook prog-mode-hook yas-minor-mode)
- (fm/hook prog-mode-hook company-mode)
- (fm/hook prog-mode-hook electric-pair-mode)
- (fm/hook prog-mode-hook electric-layout-mode)
- (fm/hook prog-mode-hook display-line-numbers-mode)
- (fm/hook prog-mode-hook hl-line-mode)
- (fm/hook prog-mode-hook bug-reference-prog-mode))
-
-(fm/after conf-mode
- (fm/hook conf-desktop-mode-hook diff-hl-mode)
- (fm/hook conf-desktop-mode-hook show-paren-mode)
- (fm/hook conf-desktop-mode-hook flyspell-prog-mode)
- (fm/hook conf-desktop-mode-hook electric-pair-mode)
- (fm/hook conf-desktop-mode-hook electric-layout-mode)
- (fm/hook conf-desktop-mode-hook display-line-numbers-mode)
- (fm/hook conf-desktop-mode-hook hl-line-mode))
-
-(fm/pkg spell-fu
- (fm/autoload spell-fu-dictionary-add "spell-fu")
- (fm/autoload spell-fu-get-ispell-dictionary "spell-fu")
- (fm/autoload spell-fu-get-personal-dictionary "spell-fu")
- (fm/after spell-fu
-  (fm/hookn spell-fu-mode-hook
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
-   (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
-  (setq-default spell-fu-faces-exclude '(link org-link))))
-
-(fm/pkg meson-mode
- (fm/after meson-mode
-  (fm/after company
-   (fm/hookn meson-mode-hook
-    (fm/company-add-backend 'company-dabbrev-code)))
-  (fm/hook meson-mode-hook symbol-overlay-mode)
-  (fm/hook meson-mode-hook company-mode)))
-
-(fm/pkg rust-mode
- (fm/after rust-mode
-  (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-mode-map "rust-utils")
-  (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-mode-map "lsp-rust")
-  (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-mode-map "lsp-rust")
-  (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-mode-map "lsp-rust")
-  (setq-default rust-indent-offset 2)
-  (setq-default rust-load-optional-libraries nil)
-  (setq-default rust-format-on-save t)
-  (fm/hookn rust-mode-hook (electric-quote-local-mode -1))
-  (fm/hook rust-mode-hook subword-mode)
-  (fm/hook rust-mode-hook lsp)))
-
-(fm/after rust-ts-mode
- (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-ts-mode-map "rust-utils")
- (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-ts-mode-map "lsp-rust")
- (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-ts-mode-map "lsp-rust")
- (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-ts-mode-map "lsp-rust")
- (setq-default rust-ts-mode-indent-offset 2)
- (fm/hookn rust-ts-mode-hook (electric-quote-local-mode -1))
- (fm/hook rust-ts-mode-hook subword-mode)
- (fm/hook rust-ts-mode-hook lsp))
-
-(fm/pkg lsp-mode
- (fm/after lsp-mode
-  (fm/dim lsp-mode "Ls")
-  (fm/key-local "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
-  (fm/key-local "C-c g" lsp-format-region           lsp-mode-map "lsp-mode")
-  (fm/key-local "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
-  (fm/key-local "C-c h" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
-  (fm/key-local "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
-  (fm/key-local "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
-  (setq-default lsp-progress-prefix "  Progress: ")
-  (setq-default lsp-completion-show-detail t)
-  (setq-default lsp-completion-show-kind t)
-  (setq-default lsp-completion-provider :none)
-  (setq-default lsp-headerline-breadcrumb-enable t)
-  (setq-default lsp-restart 'auto-restart)
-  (setq-default lsp-enable-snippet t)
-  (setq-default lsp-keymap-prefix "C-c")
-  (setq-default lsp-idle-delay 0.1)
-  (setq-default lsp-file-watch-threshold nil)
-  (setq-default lsp-enable-semantic-highlighting t)
-  (setq-default lsp-enable-indentation t)
-  (setq-default lsp-enable-on-type-formatting nil)
-  (setq-default lsp-before-save-edits nil)
-  (setq-default lsp-auto-configure t)
-  (setq-default lsp-signature-auto-activate t)
-  (setq-default lsp-signature-render-documentation nil)
-  (setq-default lsp-eldoc-enable-hover t)
-  (setq-default lsp-eldoc-render-all nil)
-  (setq-default lsp-modeline-code-actions-enable nil)
-  (setq-default lsp-modeline-diagnostics-enable t)
-  (setq-default lsp-log-io nil)
-  (setq-default lsp-keep-workspace-alive nil)
-  (setq-default lsp-enable-imenu nil)
-  (fm/after which-key
-   (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
- (fm/after lsp-lens
-  (fm/dim lsp-lens-mode)
-  (setq-default lsp-lens-mode nil)
-  (setq-default lsp-lens-enable nil))
- (fm/after lsp-headerline
-  (setq-default lsp-headerline-breadcrumb-icons-enable nil))
- (fm/after lsp-semantic-tokens
-  (setq-default lsp-semantic-tokens-apply-modifiers t))
- (fm/after lsp-rust
-  ;; (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
-  ;; (setq-default lsp-rust-unstable-features t)
-  (setq-default lsp-rust-analyzer-checkonsave-features "all")
-  (setq-default lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
-  (setq-default lsp-rust-analyzer-proc-macro-enable t)
-  (setq-default lsp-rust-racer-completion nil)
-  (setq-default lsp-rust-build-bin t)
-  (setq-default lsp-rust-build-lib t)
-  (setq-default lsp-rust-clippy-preference "on")
-  (setq-default lsp-rust-analyzer-server-display-inlay-hints t)
-  (setq-default lsp-rust-analyzer-display-chaining-hints t)
-  (setq-default lsp-rust-analyzer-display-parameter-hints t)
-  (setq-default lsp-rust-analyzer-display-closure-return-type-hints t)
-  (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
-  (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
-  (setq-default lsp-rust-analyzer-binding-mode-hints t)
-  (setq-default lsp-rust-analyzer-display-reborrow-hints "mutable")
-  (setq-default lsp-rust-all-features t)
-  (setq-default lsp-rust-all-targets t)
-  (setq-default lsp-rust-full-docs t)
-  (setq-default lsp-rust-analyzer-cargo-watch-command "clippy"))
- (fm/after lsp-clangd
-  (setq-default lsp-clients-clangd-args
-   '("--header-insertion-decorators"
-     "--all-scopes-completion"
-     "--clang-tidy"
-     "--completion-style=detailed"
-     "--header-insertion=iwyu"
-     ;; Breaks clangd-14
-     ; "--header-insertion-decorators"
-     "--inlay-hints"
-     "-j=8"
-     "--malloc-trim"
-     "--pch-storage=memory"
-     "--background-index"
-     "--function-arg-placeholders"
-     "--limit-references=0"
-     "--limit-results=0"))
-  (fm/after cc-mode
-   (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
-   (fm/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
-  (fm/after c-ts-mode
-   (fm/autoload lsp-clangd-find-other-file "lsp-clangd")
-   (fm/key-local "<f2>" lsp-clangd-find-other-file c-ts-base-mode-map))))
-
-(fm/pkg lsp-ivy
- (fm/after lsp-mode
-  (fm/key-local "C-c x" lsp-ivy-workspace-symbol lsp-mode-map)))
-
-(fm/pkg treemacs
- (fm/key "<f9>" treemacs-select-window)
- (fm/after treemacs-customization
-  (setq-default treemacs-width 40)
-  (setq-default treemacs-indentation 1))
- (fm/after treemacs
-  (setq-default treemacs-select-when-already-in-treemacs 'move-back))
-  ;; (setq-default treemacs-indent-guide-mode t))
- (fm/after treemacs-interface
-  (fm/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
- ;; (fm/after treemacs-header-line
- ;;  (setq-default treemacs-indicate-top-scroll-mode t))
- (fm/after treemacs-mode
-  (fm/hook treemacs-mode-hook treemacs-tag-follow-mode "treemacs-tag-follow-mode")
-  (fm/hook treemacs-mode-hook treemacs-fringe-indicator-mode "treemacs-fringe-indicator")
-  (fm/hook treemacs-mode-hook treemacs-filewatch-mode "treemacs-filewatch-mode")
-  ;; (fm/hook treemacs-mode-hook treemacs-indicate-top-scroll-mode "treemacs-header-line")
-  ;; (fm/autoload treemacs-indent-guide-mode "treemacs-visuals")
-  ;; (fm/hookn treemacs-mode-hook (treemacs-indent-guide-mode))
-  (fm/autoload treemacs-git-mode "treemacs-async")
-  (fm/hookn treemacs-mode-hook (treemacs-git-mode 'deferred))
-  (fm/hook treemacs-mode-hook
-   treemacs-git-commit-diff-mode
-   "treemacs-git-commit-diff-mode")))
-
-(fm/pkg lsp-treemacs
- (fm/after lsp-mode
-  (fm/key-local "C-c e" lsp-treemacs-errors-list    lsp-mode-map)
-  (fm/key-local "C-c s" lsp-treemacs-symbols        lsp-mode-map)
-  (fm/key-local "C-c c" lsp-treemacs-call-hierarchy lsp-mode-map)
-  (fm/key-local "C-c t" lsp-treemacs-type-hierarchy lsp-mode-map)
-  (fm/hook lsp-mode-hook lsp-treemacs-sync-mode)))
-
-(fm/pkg treemacs-projectile)
-
-(fm/pkg lsp-ui
- (fm/after lsp-ui-doc
-  (setq-default lsp-ui-doc-enable t)
-  (setq-default lsp-ui-doc-show-with-cursor nil)
-  (setq-default lsp-ui-doc-show-with-mouse t)
-  (setq-default lsp-ui-doc-alignment 'frame)
-  (setq-default lsp-ui-doc-header t)
-  (setq-default lsp-ui-doc-include-signature t)
-  (setq-default lsp-ui-doc-max-height 30)
-  (setq-default lsp-ui-doc-use-webkit t))
- (fm/after lsp-ui-peek
-  (setq-default lsp-ui-peek-list-width 40)
-  (setq-default lsp-ui-peek-always-show t))
- (fm/after lsp-ui-sideline
-  (setq-default lsp-ui-sideline-enable nil))
- (fm/after lsp-ui
-  (fm/key-local "M-."   lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "M-?"   lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
-  (fm/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
-  (fm/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
-
-(fm/pkg web-mode
- (fm/mode ".html" web-mode)
- (fm/mode ".css" web-mode)
- (fm/mode ".js" web-mode)
- (fm/after web-mode
-  (setq-default web-mode-markup-indent-offset 2)
-  (setq-default web-mode-css-indent-offset 2)
-  (setq-default web-mode-code-indent-offset 2)
-  (setq-default web-mode-enable-current-column-highlight t)
-  (setq-default web-mode-enable-current-element-highlight t)
-  (setq-default web-mode-auto-close-style 3)
-  (setq-default web-mode-enable-auto-expanding t)
-  (fm/hook web-mode-hook lsp)
-  (fm/hookn web-mode-hook (setq-local tab-width 2))))
-
-(fm/pkg company-web
- (fm/after web-mode
-  (fm/after company
-   (fm/hookn web-mode-hook
-    (fm/company-add-backend 'company-css)
-    (fm/company-add-backend 'company-web-html)))))
-
-(fm/pkg emmet-mode
- (setq-default emmet-indentation 2)
- (fm/after web-mode
-  (fm/hook web-mode-hook emmet-mode)))
-
-(fm/pkg dockerfile-mode)
-(fm/pkg pkgbuild-mode)
-
-(fm/pkg vterm
- (fm/after vterm
-  (setq-default vterm-max-scrollback 100000)))
-
-(fm/pkg sideline
- (fm/after sideline
-  (fm/dim sideline-mode "Si")
-  (setq-default sideline-delay 0.1)))
-
-(fm/pkg sideline-blame
- (fm/after sideline
-  (setq-default sideline-backends-right '(sideline-blame))
-  (setq-default sideline-blame-commit-format "- %s")))
-
-(fm/pkg buffer-move
- (fm/key "C-x m" buf-move))
-
-(fm/pkg dirvish
- (dirvish-override-dired-mode))
-
-;; (fm/pkg popper
-;;  (fm/after popper
-;;   (setq-default popper-reference-buffers '("\\*deadgrep.*$" "\\*Occur\\*$"))
-;;   (fm/autoload popper-group-by-projectile "popper")
-;;   (setq-default popper-group-function #'popper-group-by-projectile)
-;;   (fm/key "C-`" popper-cycle "popper")
-;;   (fm/key-local "C-~" popper-toggle-type popper-mode-map "popper"))
-;;  (popper-mode)
-;;  (popper-echo-mode))
-
-(fm/pkg surround
- (require 'surround)
- (fm/key "M-'" surround-mark-inner)
- (fm/key "M-\"" surround-insert))
+(im/after help
+ (setopt help-window-select t))
+
+;; (use-package uniquify
+;;  :ensure nil
+;;  :custom
+;;  (uniquify-buffer-name-style 'forward))
+
+;; (use-package tooltip
+;;  :ensure nil
+;;  :custom
+;;  (tooltip-use-echo-area t))
+
+;; (use-package vc
+;;  :ensure nil
+;;  :custom
+;;  (vc-make-backup-files t))
+
+;; (use-package newcomment
+;;  :ensure nil
+;;  :custom
+;;  (comment-fill-column 80))
+
+;; (use-package ediff-wind
+;;  :ensure nil
+;;  :custom
+;;  (ediff-split-window-function 'split-window-horizontally)
+;;  (ediff-window-setup-function 'ediff-setup-windows-plain))
+
+;; (use-package display-line-numbers
+;;  :ensure nil
+;;  :custom
+;;  (display-line-numbers-grow-only t)
+;;  (display-line-numbers-width-start t)
+;;  :hook
+;;  (prog-mode conf-desktop-mode))
+
+;; (use-package whitespace
+;;  :ensure nil
+;;  :delight " Ws"
+;;  :custom
+;;  (whitespace-line-column fill-column)
+;;  (show-trailing-whitespace nil)
+;;  (whitespace-action '(cleanup auto-cleanup))
+;;  (whitespace-style
+;;   '(face tabs lines-tail empty tab-mark missing-newline-at-eof
+;;     space-after-tab  space-after-tab::tab    space-after-tab::space
+;;     space-before-tab space-before-tab::space space-before-tab::tab
+;;     indentation      indentation::tab        indentation::space))
+;;  :hook
+;;  (make-mode emacs-lisp-mode hledger-mode))
+
+;; (use-package symbol-overlay
+;;  :delight
+;;  :custom
+;;  (symbol-overlay-idle-time 0.1)
+;;  :hook
+;;  (emacs-lisp-mode hledger-mode meson-mode))
+
+(im/after elisp-mode
+ (setopt
+  lisp-indent-offset 1
+  lisp-indent-function 'common-lisp-indent-function))
+
+;; (use-package highlight-defined :hook emacs-lisp-mode)
+;; (use-package highlight-quoted  :hook emacs-lisp-mode)
+;; (use-package eros              :hook emacs-lisp-mode)
+;; (use-package ipretty           :hook emacs-lisp-mode)
+;; (use-package suggest)
+
+;; (use-package org-indent
+;;  :ensure nil
+;;  :hook org-mode)
+
+;; (use-package eldoc
+;;  :ensure nil
+;;  :delight " Ed"
+;;  :custom
+;;  (eldoc-documentation-strategy 'eldoc-documentation-compose)
+;;  :hook
+;;  prog-mode)
+
+;; (use-package paren
+;;  :ensure nil
+;;  :custom
+;;  (show-paren-style 'mixed)
+;;  (show-paren-highlight-openparen t)
+;;  (show-paren-context-when-offscreen 'overlay)
+;;  (show-paren-when-point-inside-paren t)
+;;  (show-paren-when-point-in-periphery t)
+;;  :hook
+;;  ((prog-mode conf-desktop-mode) . show-paren-mode))
+
+;; (use-package elec-pair
+;;  :ensure nil
+;;  :hook
+;;  ((prog-mode conf-desktop-mode) . electric-pair-local-mode))
+
+;; (use-package electric
+;;  :ensure nil
+;;  :hook
+;;  ((prog-mode conf-desktop-mode) . electric-layout-local-mode))
+
+;; (use-package hl-line
+;;  :ensure nil
+;;  :hook
+;;  (prog-mode conf-desktop-mode))
+
+;; (use-package bug-reference
+;;  :ensure nil
+;;  :hook
+;;  prog-mode)
+
+;; (use-package subword
+;;  :ensure nil
+;;  :delight " Sw"
+;;  :hook (rust-mode rust-ts-mode))
+
+;; (use-package which-key
+;;  :delight
+;;  :init
+;;  (which-key-mode)
+;;  :custom
+;;  (which-key-idle-delay 0.5)
+;;  (which-key-show-docstrings nil)
+;;  (which-key-add-column-padding 3)
+;;  (which-key-max-description-length nil)
+;;  (which-key-max-display-columns nil))
+
+;; (use-package spell-fu
+;;  :autoload
+;;  spell-fu-dictionary-add
+;;  spell-fu-get-ispell-dictionary
+;;  spell-fu-get-personal-dictionary
+;;  :hook
+;;  ((text-mode)
+;;   (spell-fu-mode .
+;;    (lambda ()
+;;     (spell-fu-dictionary-add
+;;      (spell-fu-get-ispell-dictionary "en"))
+;;     (spell-fu-dictionary-add
+;;      (spell-fu-get-personal-dictionary "en-personal" "~/.aspell.en.pws")))))
+;;  :config
+;;  (add-to-list 'spell-fu-faces-exclude 'link))
+
+;; (use-package flyspell
+;;  :delight " Fs"
+;;  :custom
+;;  (ispell-program-name "aspell")
+;;  (ispell-local-dictionary "en_US")
+;;  :config
+;;  (add-to-list 'ispell-extra-args "--sug-mode=ultra"))
+;;  ;; :hook
+;;  ;; ((prog-mode conf-desktop-mode) . flyspell-prog-mode))
+
+;; (use-package autorevert
+;;  :custom
+;;  (auto-revert-interval 1)
+;;  (auto-revert-avoid-polling t)
+;;  (buffer-auto-revert-by-notification t)
+;;  (auto-revert-mode-text " Ar"))
+
+;; (use-package dirvish
+;;  :init
+;;  (dirvish-override-dired-mode))
+
+;; (use-package sh-script
+;;  :ensure nil
+;;  :custom
+;;  (sh-basic-offset 2)
+;;  (sh-indentation 2)
+;;  :hook
+;;  ((sh-mode bash-ts-mode) .
+;;   (lambda ()
+;;    (use-package executable
+;;     :ensure nil
+;;     :after files
+;;     :hook
+;;     (after-save . executable-make-buffer-file-executable-if-script-p)))))
+
+;; (use-package python
+;;  :hook ((python-mode python-ts-mode) . (lambda () (setopt fill-column 80))))
+
+;; (use-package jit-lock
+;;  :ensure nil
+;;  :custom
+;;  (jit-lock-stealth-time 0.1)
+;;  (jit-lock-chunk-size 4000 "A little more than what can fit on the screen")
+;;  (jit-lock-antiblink-grace nil))
+
+;; (use-package markdown-mode)
+;; (use-package dockerfile-mode)
+;; (use-package pkgbuild-mode)
+;; (use-package meson-mode)
+;; (use-package toml-mode)
+;; (use-package systemd)
+
+;; (use-package eldoc-toml
+;;  :delight
+;;  :hook toml-mode)
+
+;; (use-package indent-guide
+;;  :hook (json-mode json-ts-mode))
+
+;; (use-package tree-sitter
+;;  :delight " Ts"
+;;  :hook yaml-mode)
+
+;; (use-package tree-sitter-langs
+;;  :hook (tree-sitter-mode . (lambda () (tree-sitter-langs-install-grammars t))))
+
+;; (use-package tree-sitter-hl
+;;  :ensure nil
+;;  :hook tree-sitter-mode)
+
+;; (use-package treesit
+;;  :ensure nil
+;;  :custom
+;;  (treesit-language-source-alist
+;;   '((bash   . ("https://github.com/tree-sitter/tree-sitter-bash"))
+;;     (c      . ("https://github.com/tree-sitter/tree-sitter-c"))
+;;     (cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+;;     (json   . ("https://github.com/tree-sitter/tree-sitter-json.git"))
+;;     (python . ("https://github.com/tree-sitter/tree-sitter-python.git"))
+;;     (toml   . ("https://github.com/ikatyang/tree-sitter-toml.git"))
+;;     (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git")))))
+
+;; (use-package mwim
+;;  :bind
+;;  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
+;;  ([remap move-end-of-line]       . mwim-end-of-code-or-line))
+
+;; (use-package expand-region
+;;  :bind
+;;  ("C-=" . er/expand-region))
+
+;; (use-package transient
+;;  :custom
+;;  (transient-default-level 7))
+
+;; (use-package magit
+;;  :autoload magit-after-save-refresh-status
+;;  :bind
+;;  ("C-x g" . magit-status)
+;;  :custom
+;;  (magit-log-section-commit-count 20)
+;;  (magit-auto-revert-tracked-only nil)
+;;  (magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1)
+;;  (magit-bury-buffer-function 'magit-restore-window-configuration)
+;;  (magit-repository-directories '(("~/Workspace" . 3)))
+;;  :config
+;;  (add-hook 'after-save-hook #'magit-after-save-refresh-status))
+
+;; (use-package magit-diff
+;;  :ensure nil
+;;  :custom
+;;  (magit-revision-show-gravatars t)
+;;  (magit-revision-fill-summary-line fill-column)
+;;  :config
+;;  (defadvice magit-diff-visit-file
+;;   (after recenter-after-magit-diff-visit-file activate)
+;;   (recenter)))
+
+;; (use-package diff-hl
+;;  :hook (prog-mode conf-desktop-mode)
+;;  :custom
+;;  (diff-hl-draw-borders nil)
+;;  (diff-hl-flydiff-delay 0.1)
+;;  :hook
+;;  (magit-pre-refresh . diff-hl-magit-pre-refresh)
+;;  (magit-post-refresh . diff-hl-magit-post-refresh))
+
+;; (use-package multiple-cursors
+;;  :bind
+;;  ("C->" . mc/mark-next-like-this)
+;;  ("C-<" . mc/mark-previous-like-this))
+
+;; (use-package multiple-cursors-core
+;;  :ensure nil
+;;  :custom
+;;  (mc/always-run-for-all t))
+
+;; (use-package volatile-highlights
+;;  :commands volatile-highlights-mode
+;;  :delight
+;;  :init
+;;  (volatile-highlights-mode))
+
+;; (use-package yaml-mode
+;;  :mode "\\clang-format\\'"
+;;  :bind (:map yaml-mode-map ("C-c p" . fm/generate-password)))
+
+;; (use-package hledger-mode
+;;  :mode ("\\.journal\\'" "\\.ledger\\'")
+;;  :custom
+;;  (hledger-currency-string "EUR")
+;;  (hledger-current-overlay t)
+;;  (hledger-comments-column 1)
+;;  :hook
+;;  (hledger-mode . (lambda () (setq-local tab-width 1))))
+
+;; (use-package buffer-move
+;;  :bind
+;;  ("C-x m" . buf-move))
+
+;; (use-package deadgrep
+;;  :bind
+;;  ("M-F" . deadgrep)
+;;  :config
+;;  (require 'wgrep-deadgrep))
+
+;; (use-package wgrep-deadgrep)
+
+;; (use-package flycheck
+;;  :commands flycheck-next-error flycheck-previous-error
+;;  :hook
+;;  (prog-mode yaml-mode hledger-mode)
+;;  :custom
+;;  (flycheck-checker-error-threshold nil)
+;;  (flycheck-mode-line-prefix "Fc")
+;;  (flycheck-idle-change-delay 0.2)
+;;  (flycheck-idle-buffer-switch-delay 0.2)
+;;  (flycheck-display-errors-delay 0.2)
+;;  :config
+;;  (defadvice flycheck-next-error
+;;   (after recenter-after-flycheck-next activate)
+;;   (recenter))
+;;  (defadvice flycheck-previous-error
+;;   (after recenter-after-flycheck-previous activate)
+;;   (recenter))
+;;  :bind
+;;  (:map flycheck-mode-map
+;;   ("M-n" . flycheck-next-error)
+;;   ("M-p" . flycheck-previous-error)))
+
+;; (use-package flycheck-posframe
+;;  :custom
+;;  (flycheck-posframe-position 'window-bottom-left-corner)
+;;  (flycheck-posframe-border-width 1)
+;;  :hook
+;;  flycheck-mode)
+
+;; (use-package flycheck-hledger
+;;  :demand t
+;;  :after (flycheck hledger-mode)
+;;  :custom
+;;  ;; TODO Also add "accounts"
+;;  (flycheck-hledger-checks '("commodities")))
+
+;; (use-package company
+;;  :delight " Co"
+;;  :hook (prog-mode yaml-mode hledger-mode systemd-mode)
+;;  :custom
+;;  (company-tooltip-align-annotations t)
+;;  (company-tooltip-minimum-width 40)
+;;  (company-tooltip-width-grow-only t)
+;;  (company-keywords-ignore-case t)
+;;  (company-idle-delay 0.5)
+;;  :bind (:map company-mode-map ("<tab>" . company-indent-or-complete-common)))
+
+;; (use-package company-posframe
+;;  :delight
+;;  :custom
+;;  (company-posframe-quickhelp-x-offset 2)
+;;  :hook company-mode)
+
+;; (use-package company-prescient
+;;  :hook company-mode
+;;  :custom
+;;  (company-prescient-sort-length-enable nil))
+
+;; (use-package c-ts-mode
+;;  :ensure nil
+;;  :after lsp-mode
+;;  :bind (:map c-ts-base-mode-map ("<f2>" . lsp-clangd-find-other-file)))
+
+;; (use-package ivy
+;;  :delight
+;;  :bind (:map ivy-minibuffer-map ("<RET>" . ivy-alt-done))
+;;  :custom
+;;  (ivy-use-selectable-prompt t)
+;;  (ivy-use-virtual-buffers t)
+;;  (ivy-count-format "(%d/%d) ")
+;;  (ivy-virtual-abbreviate 'abbreviate)
+;;  (ivy-extra-directories nil)
+;;  :init
+;;  (ivy-mode))
+
+;; (use-package ivy-rich
+;;  :custom
+;;  (ivy-rich-path-style 'abbrev)
+;;  :init
+;;  (ivy-rich-mode))
+
+;; (use-package ivy-xref
+;;  :demand
+;;  :custom
+;;  (xref-show-xrefs-function 'ivy-xref-show-xrefs))
+
+;; (use-package nerd-icons-ivy-rich
+;;  :init
+;;  (nerd-icons-ivy-rich-mode))
+
+;; (use-package ivy-prescient
+;;  :init
+;;  (ivy-prescient-mode))
+
+;; (use-package counsel
+;;  :delight
+;;  :init
+;;  (counsel-mode)
+;;  :config
+;;  (defadvice counsel-register
+;;   (after recenter-after-counsel-register activate)
+;;   (recenter)))
+
+;; (use-package register
+;;  :ensure nil
+;;  :bind ([remap jump-to-register] . counsel-register))
+
+;; (use-package swiper
+;;  ;; :bind
+;;  ;; ([remap isearch-forward] . swiper)
+;;  ;; ([remap isearch-backward] . swiper-isearch-backward)
+;;  :custom
+;;  (swiper-include-line-number-in-search t)
+;;  (swiper-action-recenter t))
+
+;; (im/config ctrlf
+;;  :package
+;;  :custom
+;;  (ctrlf-default-search-style 'fuzzy)
+;;  (ctrlf-auto-recenter t)
+;;  :init
+;;  (ctrlf-mode))
+
+;; (use-package projectile
+;;  :delight " Pr"
+;;  :bind (:map projectile-mode-map ("C-x p" . projectile-command-map))
+;;  :custom
+;;  (projectile-project-search-path '("~/Workspace"))
+;;  (projectile-sort-order 'recently-active)
+;;  (projectile-indexing-method 'hybrid))
+
+;; (use-package counsel-projectile
+;;  :custom
+;;  (counsel-projectile-mode t)
+;;  :config
+;;  (defadvice counsel-projectile-git-grep
+;;   (after recenter-after-counsel-projectile-git-grep activate)
+;;   (recenter)))
+
+;; (use-package treemacs-projectile)
+
+;; (use-package flyspell-correct-ivy
+;;  :bind (:map flyspell-mode-map ("C-M-;" . flyspell-correct-wrapper))
+;;  :custom
+;;  (flyspell-correct-interface #'flyspell-correct-ivy))
+
+;; (use-package nerd-icons-completion
+;;  :init
+;;  (nerd-icons-completion-mode))
+
+;; (use-package yasnippet
+;;  :delight yas-minor-mode " Ys"
+;;  :autoload yas-minor-mode-on
+;;  :init
+;;  (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
+;;  (defun init/start-ivy-yasnippet ()
+;;   (interactive)
+;;   (yas-minor-mode-on)
+;;   (ivy-yasnippet))
+;;  :bind
+;;  ("C-c Y" . init/start-ivy-yasnippet)
+;;  ("C-c y s" . yas-expand-from-trigger-key))
+
+;; (use-package yasnippet-snippets)
+;; (use-package ivy-yasnippet)
+
+;; (use-package lsp-mode
+;;  :delight " Ls"
+;;  :hook
+;;  ((python-ts-mode c-ts-mode c++-ts-mode c-or-c++-ts-mode) . lsp)
+;;  (lsp-mode . lsp-enable-which-key-integration)
+;;  :init
+;;  (defun init/lsp-treemacs-call-hierarchy () (lsp-treemacs-call-hierarchy t))
+;;  (defun init/lsp-treemacs-implementations () (lsp-treemacs-implementations t))
+;;  (defun init/lsp-treemacs-references () (lsp-treemacs-references t))
+;;  (defun init/lsp-treemacs-type-hierarchy () (lsp-treemacs-type-hierarchy 2))
+;;  :bind
+;;  (:map lsp-mode-map
+;;   ([remap er/expand-region] . lsp-extend-selection)
+;;   ("C-c r" . lsp-rename)
+;;   ("C-c h" . lsp-describe-thing-at-point)
+;;   ("M-<return>" . lsp-execute-code-action)
+;;   ("C-c e" . lsp-treemacs-errors-list)
+;;   ("C-c s" . lsp-treemacs-symbols)
+;;   ("C-c c" . lsp-treemacs-call-hierarchy)
+;;   ("C-c C" . init/lsp-treemacs-call-hierarchy)
+;;   ("C-c i" . lsp-treemacs-implementations)
+;;   ("C-c I" . lsp-treemacs-references)
+;;   ("C-c t" . lsp-treemacs-type-hierarchy))
+;;  :custom
+;;  (lsp-semantic-tokens-enable t)
+;;  (lsp-enable-relative-indentation t)
+;;  (lsp-idle-delay 0.3)
+;;  (lsp-use-plists))
+
+;; (use-package lsp-treemacs
+;;  :hook
+;;  (lsp-mode . lsp-treemacs-sync-mode))
+
+;; (use-package lsp-ui
+;;  :bind
+;;  (:map lsp-mode-map
+;;   ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+;;   ([remap xref-find-references] . lsp-ui-peek-find-references)
+;;   ("M-I" . lsp-ui-peek-find-implementation)))
+
+;; ;; (fm/pkg lsp-ui
+;; ;;  (fm/after lsp-ui-doc
+;; ;;   (setq-default lsp-ui-doc-enable t)
+;; ;;   (setq-default lsp-ui-doc-show-with-cursor nil)
+;; ;;   (setq-default lsp-ui-doc-show-with-mouse t)
+;; ;;   (setq-default lsp-ui-doc-alignment 'frame)
+;; ;;   (setq-default lsp-ui-doc-header t)
+;; ;;   (setq-default lsp-ui-doc-include-signature t)
+;; ;;   (setq-default lsp-ui-doc-max-height 30)
+;; ;;   (setq-default lsp-ui-doc-use-webkit t))
+;; ;;  (fm/after lsp-ui-peek
+;; ;;   (setq-default lsp-ui-peek-list-width 40)
+;; ;;   (setq-default lsp-ui-peek-always-show t))
+;; ;;  (fm/after lsp-ui-sideline
+;; ;;   (setq-default lsp-ui-sideline-enable nil))
+;; ;;  (fm/after lsp-ui
+;; ;;   (fm/key-local "M-."   lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
+;; ;;   (fm/key-local "M-?"   lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
+;; ;;   (fm/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
+;; ;;   (fm/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
+;; ;;   ;; (fm/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
+;; ;;   ))
+
+;; ;; (use-package lsp-clangd
+;; ;;  :ensure lsp-mode
+;; ;;  :config
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--header-insertion=iwyu")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "-j=8")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--malloc-trim")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--pch-storage=memory")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--background-index")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--function-arg-placeholders")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--limit-references=0")
+;; ;;  (add-to-list 'lsp-clients-clangd-args "--limit-results=0"))
+
+;; (use-package treemacs
+;;  :commands treemacs-load-theme
+;;  :bind ("<f9>" . treemacs-select-window)
+;;  :custom
+;;  (treemacs-indentation 1)
+;;  (treemacs-select-when-already-in-treemacs 'move-back)
+;;  (treemacs-tag-follow-delay 0.1))
+
+;; (use-package treemacs-interface
+;;  :ensure treemacs
+;;  :after treemacs
+;;  :bind ("<f12>" . treemacs-delete-other-windows))
+
+;; (use-package treemacs-async
+;;  :ensure treemacs
+;;  :commands treemacs-git-mode)
+
+;; (use-package treemacs-mode
+;;  :ensure treemacs
+;;  :hook
+;;  (treemacs-mode . treemacs-tag-follow-mode)
+;;  (treemacs-mode . treemacs-fringe-indicator-mode)
+;;  (treemacs-mode . treemacs-filewatch-mode)
+;;  (treemacs-mode . treemacs-git-commit-diff-mode)
+;;  (treemacs-mode . (lambda () (treemacs-git-mode 'deferred))))
+
+;; (use-package treemacs-projectile
+;;  :demand
+;;  :after (treemacs projectile))
+
+;; (use-package treemacs-magit
+;;  :demand
+;;  :after (treemacs magit))
+
+;; (use-package treemacs-nerd-icons
+;;  :demand
+;;  :after treemacs
+;;  :config
+;;  (treemacs-load-theme "nerd-icons"))
+
+;; (use-package lsp-ivy
+;;  :after lsp-mode
+;;  :bind
+;;  (:map lsp-mode-map ("C-c x" . lsp-ivy-workspace-symbol)))
+
+;; ;; (fm/pkg blamer
+;; ;;  (fm/after blamer
+;; ;;   (setq-default blamer-idle-time 0)
+;; ;;   (setq-default blamer-commit-formatter ": %s")
+;; ;;   (setq-default blamer-datetime-formatter "%s")
+;; ;;   (setq-default blamer-max-commit-message-length 60))
+;; ;;  (fm/after prog-mode
+;; ;;   (fm/key-local "C-c b" blamer-mode prog-mode-map)))
+
+;; ;; (fm/pkg sideline
+;; ;;  (fm/after sideline
+;; ;;   (fm/dim sideline-mode "Si")
+;; ;;   (setq-default sideline-delay 0.1)))
+
+;; ;; (fm/pkg sideline-blame
+;; ;;  (fm/after sideline
+;; ;;   (setq-default sideline-backends-right '(sideline-blame))
+;; ;;   (setq-default sideline-blame-commit-format "- %s")))
+
+;; ;; (fm/pkg scopeline
+;; ;;  (fm/after tree-sitter
+;; ;;   (fm/hook tree-sitter-mode-hook scopeline-mode))
+;; ;;  (fm/after scopeline
+;; ;;   (fm/dim scopeline-mode "Sl")
+;; ;;   (setq-default scopeline-min-lines 10)))
+
+;; ;; (fm/pkg rust-mode
+;; ;;  (fm/after rust-mode
+;; ;;   (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-mode-map "rust-utils")
+;; ;;   (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-mode-map "lsp-rust")
+;; ;;   (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-mode-map "lsp-rust")
+;; ;;   (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-mode-map "lsp-rust")
+;; ;;   (setq-default rust-indent-offset 2)
+;; ;;   (setq-default rust-load-optional-libraries nil)
+;; ;;   (setq-default rust-format-on-save t)
+;; ;;   (fm/hookn rust-mode-hook (electric-quote-local-mode -1))
+;; ;;   (fm/hook rust-mode-hook subword-mode)
+;; ;;   (fm/hook rust-mode-hook lsp)))
+
+;; ;; (fm/after rust-ts-mode
+;; ;;  (fm/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-ts-mode-map "rust-utils")
+;; ;;  (fm/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-ts-mode-map "lsp-rust")
+;; ;;  (fm/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-ts-mode-map "lsp-rust")
+;; ;;  (fm/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-ts-mode-map "lsp-rust")
+;; ;;  (setq-default rust-ts-mode-indent-offset 2)
+;; ;;  (fm/hookn rust-ts-mode-hook (electric-quote-local-mode -1))
+;; ;;  (fm/hook rust-ts-mode-hook subword-mode)
+;; ;;  (fm/hook rust-ts-mode-hook lsp))
+
+;; ;; (fm/pkg lsp-mode
+;; ;;  (fm/after lsp-mode
+;; ;;   (fm/dim lsp-mode "Ls")
+;; ;;   (fm/key-local "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
+;; ;;   (fm/key-local "C-c g" lsp-format-region           lsp-mode-map "lsp-mode")
+;; ;;   (fm/key-local "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
+;; ;;   (fm/key-local "C-c h" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
+;; ;;   (fm/key-local "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
+;; ;;   (fm/key-local "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
+;; ;;   (setq-default lsp-progress-prefix "  Progress: ")
+;; ;;   (setq-default lsp-completion-show-detail t)
+;; ;;   (setq-default lsp-completion-show-kind t)
+;; ;;   (setq-default lsp-completion-provider :none)
+;; ;;   (setq-default lsp-headerline-breadcrumb-enable t)
+;; ;;   (setq-default lsp-restart 'auto-restart)
+;; ;;   (setq-default lsp-enable-snippet t)
+;; ;;   (setq-default lsp-keymap-prefix "C-c")
+;; ;;   (setq-default lsp-idle-delay 0.1)
+;; ;;   (setq-default lsp-file-watch-threshold nil)
+;; ;;   (setq-default lsp-enable-semantic-highlighting t)
+;; ;;   (setq-default lsp-enable-indentation t)
+;; ;;   (setq-default lsp-enable-on-type-formatting nil)
+;; ;;   (setq-default lsp-before-save-edits nil)
+;; ;;   (setq-default lsp-auto-configure t)
+;; ;;   (setq-default lsp-signature-auto-activate t)
+;; ;;   (setq-default lsp-signature-render-documentation nil)
+;; ;;   (setq-default lsp-eldoc-enable-hover t)
+;; ;;   (setq-default lsp-eldoc-render-all nil)
+;; ;;   (setq-default lsp-modeline-code-actions-enable nil)
+;; ;;   (setq-default lsp-modeline-diagnostics-enable t)
+;; ;;   (setq-default lsp-log-io nil)
+;; ;;   (setq-default lsp-keep-workspace-alive nil)
+;; ;;   (setq-default lsp-enable-imenu nil)
+;; ;;   (fm/after which-key
+;; ;;    (fm/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
+;; ;;  (fm/after lsp-lens
+;; ;;   (fm/dim lsp-lens-mode)
+;; ;;   (setq-default lsp-lens-mode nil)
+;; ;;   (setq-default lsp-lens-enable nil))
+;; ;;  (fm/after lsp-headerline
+;; ;;   (setq-default lsp-headerline-breadcrumb-icons-enable nil))
+;; ;;  (fm/after lsp-semantic-tokens
+;; ;;   (setq-default lsp-semantic-tokens-apply-modifiers t))
+;; ;;  (fm/after lsp-rust
+;; ;;   ;; (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
+;; ;;   ;; (setq-default lsp-rust-unstable-features t)
+;; ;;   (setq-default lsp-rust-analyzer-checkonsave-features "all")
+;; ;;   (setq-default lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
+;; ;;   (setq-default lsp-rust-analyzer-proc-macro-enable t)
+;; ;;   (setq-default lsp-rust-racer-completion nil)
+;; ;;   (setq-default lsp-rust-build-bin t)
+;; ;;   (setq-default lsp-rust-build-lib t)
+;; ;;   (setq-default lsp-rust-clippy-preference "on")
+;; ;;   (setq-default lsp-rust-analyzer-server-display-inlay-hints t)
+;; ;;   (setq-default lsp-rust-analyzer-display-chaining-hints t)
+;; ;;   (setq-default lsp-rust-analyzer-display-parameter-hints t)
+;; ;;   (setq-default lsp-rust-analyzer-display-closure-return-type-hints t)
+;; ;;   (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
+;; ;;   (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
+;; ;;   (setq-default lsp-rust-analyzer-binding-mode-hints t)
+;; ;;   (setq-default lsp-rust-analyzer-display-reborrow-hints "mutable")
+;; ;;   (setq-default lsp-rust-all-features t)
+;; ;;   (setq-default lsp-rust-all-targets t)
+;; ;;   (setq-default lsp-rust-full-docs t)
+;; ;;   (setq-default lsp-rust-analyzer-cargo-watch-command "clippy"))
+
+;; ;; (fm/pkg lsp-ui
+;; ;;  (fm/after lsp-ui-doc
+;; ;;   (setq-default lsp-ui-doc-enable t)
+;; ;;   (setq-default lsp-ui-doc-show-with-cursor nil)
+;; ;;   (setq-default lsp-ui-doc-show-with-mouse t)
+;; ;;   (setq-default lsp-ui-doc-alignment 'frame)
+;; ;;   (setq-default lsp-ui-doc-header t)
+;; ;;   (setq-default lsp-ui-doc-include-signature t)
+;; ;;   (setq-default lsp-ui-doc-max-height 30)
+;; ;;   (setq-default lsp-ui-doc-use-webkit t))
+;; ;;  (fm/after lsp-ui-peek
+;; ;;   (setq-default lsp-ui-peek-list-width 40)
+;; ;;   (setq-default lsp-ui-peek-always-show t))
+;; ;;  (fm/after lsp-ui-sideline
+;; ;;   (setq-default lsp-ui-sideline-enable nil))
+;; ;;  (fm/after lsp-ui
+;; ;;   (fm/key-local "M-."   lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
+;; ;;   (fm/key-local "M-?"   lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
+;; ;;   (fm/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
+;; ;;   (fm/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
+;; ;;   ;; (fm/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
+;; ;;   ))
+
+;; ;; (fm/pkg surround
+;; ;;  (require 'surround)
+;; ;;  (fm/key "M-'" surround-mark-inner)
+;; ;;  (fm/key "M-\"" surround-insert))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(defun fm/replace-escapes ()
+(defun im/replace-escapes ()
  "Replace strange newline escapes with proper UNIX newlines."
  (interactive)
  (goto-char (point-min))
@@ -12,20 +12,20 @@
  (goto-char (point-min))
  (while (search-forward "" nil t) (replace-match "" nil t)))
 
-(defun fm/move-line-up ()
+(defun im/move-line-up ()
  "Move a line up."
  (interactive)
  (transpose-lines 1)
  (forward-line -2))
 
-(defun fm/move-line-down ()
+(defun im/move-line-down ()
  "Move a line down."
  (interactive)
  (forward-line 1)
  (transpose-lines 1)
  (forward-line -1))
 
-(defun fm/insert-pair (left right &optional region-only)
+(defun im/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in text, or around it if REGION-ONLY is t."
  (if (use-region-p)
   (let ((begin (region-beginning))
@@ -42,42 +42,42 @@
      (insert-char right)
      (backward-char))))))
 
-(defun fm/insert-pair-curly ()
+(defun im/insert-pair-curly ()
  "Insert curly braces in or around text."
  (interactive)
- (fm/insert-pair ?\{ ?\} nil))
+ (im/insert-pair ?\{ ?\} nil))
 
-(defun fm/insert-pair-parens ()
+(defun im/insert-pair-parens ()
  "Insert parenthesis in or around text."
  (interactive)
- (fm/insert-pair ?\( ?\) t))
+ (im/insert-pair ?\( ?\) t))
 
-(defun fm/insert-pair-quote ()
+(defun im/insert-pair-quote ()
  "Insert single quotes in or around text."
  (interactive)
- (fm/insert-pair ?\' ?\' t))
+ (im/insert-pair ?\' ?\' t))
 
-(defun fm/insert-pair-double-quotes ()
+(defun im/insert-pair-double-quotes ()
  "Insert double quotes in or around text."
  (interactive)
- (fm/insert-pair ?\" ?\" t))
+ (im/insert-pair ?\" ?\" t))
 
-(defun fm/insert-pair-backtick ()
+(defun im/insert-pair-backtick ()
  "Insert back-ticks in or around text."
  (interactive)
- (fm/insert-pair ?\` ?\` t))
+ (im/insert-pair ?\` ?\` t))
 
-(defun fm/generate-password ()
+(defun im/generate-password ()
  "Generate a password and insert it."
  (interactive)
  (shell-command "pwgen -c -n -y -s -B -1 34 1" (current-buffer)))
 
-(defun fm/insert-buffer-name ()
+(defun im/insert-buffer-name ()
  "Insert the buffer's filename."
  (interactive)
  (insert (buffer-name)))
 
-(defmacro fm/append (list element)
+(defmacro im/append (list element)
  "Append ELEMENT to LIST."
  `(progn
    (eval-when-compile
