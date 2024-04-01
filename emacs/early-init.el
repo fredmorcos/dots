@@ -12,45 +12,47 @@
  (push emacs-dots-dir load-path))
 (require 'init-macros)
 
-(im/after cus-edit
- (setopt custom-file (make-temp-file "emacs-custom-")))
+(im/config cus-edit
+ (im/after
+  (setopt custom-file (make-temp-file "emacs-custom-"))))
 
-(im/after emacs
- (setopt
-  ;; A big contributor to startup time is garbage collection.
-  gc-cons-threshold (* 100 1024 1024)
-  gc-cons-percentage 0.8
+(im/config emacs
+ (im/after
+  (setopt
+   ;; A big contributor to startup time is garbage collection.
+   gc-cons-threshold (* 100 1024 1024)
+   gc-cons-percentage 0.8
 
-  ;; Skip redisplays.
-  redisplay-skip-fontification-on-input t
-  redisplay-skip-initial-frame t
+   ;; Skip redisplays.
+   redisplay-skip-fontification-on-input t
+   redisplay-skip-initial-frame t
 
-  ;; This slows down normal operation.
-  auto-window-vscroll nil
+   ;; This slows down normal operation.
+   auto-window-vscroll nil
 
-  ;; Frame-related improvements.
-  frame-resize-pixelwise t
-  frame-title-format "%b - emacs"
+   ;; Frame-related improvements.
+   frame-resize-pixelwise t
+   frame-title-format "%b - emacs"
 
-  ;; Resizing the Emacs frame can be a terribly expensive part of
-  ;; changing the font. By inhibiting this, we easily halve startup
-  ;; times with fonts that are larger than the system default.
-  frame-inhibit-implied-resize t
+   ;; Resizing the Emacs frame can be a terribly expensive part of
+   ;; changing the font. By inhibiting this, we easily halve startup
+   ;; times with fonts that are larger than the system default.
+   frame-inhibit-implied-resize t
 
-  ;; Improves text rendering performance.
-  bidi-paragraph-direction 'left-to-right
-  bidi-inhibit-bpa t
+   ;; Improves text rendering performance.
+   bidi-paragraph-direction 'left-to-right
+   bidi-inhibit-bpa t
 
-  ;; Ignore X resources.
-  inhibit-x-resources t
+   ;; Ignore X resources.
+   inhibit-x-resources t
 
-  ;; Startup.
-  inhibit-startup-screen t
-  inhibit-startup-message t
-  inhibit-startup-buffer-menu t
-  inhibit-startup-echo-area-message user-real-login-name
-  initial-scratch-message nil
-  initial-major-mode 'fundamental-mode))
+   ;; Startup.
+   inhibit-startup-screen t
+   inhibit-startup-message t
+   inhibit-startup-buffer-menu t
+   inhibit-startup-echo-area-message user-real-login-name
+   initial-scratch-message nil
+   initial-major-mode 'fundamental-mode)))
 
 (im/after warnings
  ;; Stop the warnings buffer from popping up.

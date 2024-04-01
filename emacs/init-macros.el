@@ -2,9 +2,32 @@
 ;;; Commentary:
 ;;; Code:
 
-;; ;; Top-Level Configuration.
-;; (defmacro im/config (name &rest body)
-;;  "Define a toplevel configuration called NAME and execute BODY.")
+;; Top-Level Configuration.
+(defmacro im/config (name &rest body)
+ "Define a toplevel configuration called NAME and execute BODY."
+ `(let ((im/package-name ',name) ,@body)))
+
+;; Lazy Loading.
+(defmacro im/after (name &rest body)
+ "Execute BODY when PKG is loaded."
+ (if (boundp name)
+  `(with-eval-after-load ',name ,@body)
+  `(with-eval-after-load im/package-name ,@body)))
+
+;; External Packages.
+(defmacro im/pkg ()
+ "Install package if not already installed."
+ `(progn
+   (defvar im/packages-refreshed nil)
+   (autoload 'package-installed-p "package")
+   (when (not (package-installed-p im/current-package-name))
+    (when (not im/packages-refreshed)
+     (message "+++ Refreshing package repositories")
+     (package-refresh-contents)
+     (setq im/packages-refreshed t))
+    (message "+++ Installing %s..." im/current-package-name)
+    (package-install im/current-package-name))
+   (push im/current-package-name package-selected-packages)))
 
 ;; Helpers.
 (defmacro im/autoload (func pkg)
@@ -79,10 +102,10 @@
  "Set FACE properties to PROPS."
  `(custom-set-faces '(,face ((t ,@props)))))
 
-;; Lazy loading.
-(defmacro im/after (pkg &rest body)
- "Execute BODY when PKG is loaded."
- `(with-eval-after-load ',pkg ,@body))
+;; ;; Lazy loading.
+;; (defmacro im/after (pkg &rest body)
+;;  "Execute BODY when PKG is loaded."
+;;  `(with-eval-after-load ',pkg ,@body))
 
 ;; Modes.
 (defmacro im/mode (ext mode &optional pkg)
@@ -91,21 +114,21 @@
    (im/autoload ,mode ,pkg)
    (push '(,(concat "\\" ext "\\'") . ,mode) auto-mode-alist)))
 
-;; Packages.
-(defmacro im/pkg (pkg &rest body)
- "Install PKG if not already installed and execute BODY."
- `(progn
-   (defvar im/packages-refreshed nil)
-   (autoload 'package-installed-p "package")
-   (when (not (package-installed-p ',pkg))
-    (when (not im/packages-refreshed)
-     (message "+++ Refreshing package repositories to install %s" ',pkg)
-     (package-refresh-contents)
-     (setq im/packages-refreshed t))
-    (message "+++ Installing %s..." ',pkg)
-    (package-install ',pkg))
-   (push ',pkg package-selected-packages)
-   ,@body))
+;; ;; Packages.
+;; (defmacro im/pkg (pkg &rest body)
+;;  "Install PKG if not already installed and execute BODY."
+;;  `(progn
+;;    (defvar im/packages-refreshed nil)
+;;    (autoload 'package-installed-p "package")
+;;    (when (not (package-installed-p ',pkg))
+;;     (when (not im/packages-refreshed)
+;;      (message "+++ Refreshing package repositories to install %s" ',pkg)
+;;      (package-refresh-contents)
+;;      (setq im/packages-refreshed t))
+;;     (message "+++ Installing %s..." ',pkg)
+;;     (package-install ',pkg))
+;;    (push ',pkg package-selected-packages)
+;;    ,@body))
 
 (provide 'init-macros)
 ;;; init-macros.el ends here
