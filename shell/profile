@@ -55,6 +55,9 @@ export LSP_USE_PLISTS=true
 # export SDL_VIDEODRIVER="wayland,x11"       # SDL
 export ELECTRON_OZONE_PLATFORM_HINT="auto"   # Electron
 
+# Qt
+export QT_QPA_PLATFORMTHEME="qt6ct"
+
 # Other options:
 # export XDG_CONFIG_HOME="$HOME/.config"
 # export XDG_CACHE_HOME="$HOME/.cache"
