@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+hledger-ui -tf Documents/Expenses/Expenses.ledger
