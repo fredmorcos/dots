@@ -369,6 +369,7 @@ python-fs
 python-fxa
 python-genshi
 python-ghp-import
+python-gssapi
 python-h2
 python-hsluv
 python-html2text
