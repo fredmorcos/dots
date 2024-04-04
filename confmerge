@@ -143,8 +143,8 @@ cmerge vimrc                         ~/.config/vim/vimrc
 cmerge dict/hunspell_en_US           ~/.hunspell_en_US
 cmerge dict/aspell.en.pws            ~/.aspell.en.pws
 
-cmerge emacs/init.el                 ~/.config/emacs/init.el
 cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
+cmerge emacs/init.el                 ~/.config/emacs/init.el
 
 cmerge htoprc                        ~/.config/htop/htoprc
 cmerge yt-dlp.conf                   ~/.config/yt-dlp/config
