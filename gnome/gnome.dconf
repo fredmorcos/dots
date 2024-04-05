@@ -154,7 +154,7 @@ calculator=['<Super>F1']
 logout=@as []
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']
 custom-keybindings/custom0/binding='<Control><Alt>t'
-custom-keybindings/custom0/command='kgx'
+custom-keybindings/custom0/command='flatpak --user run org.gnome.Ptyxis.Devel'
 custom-keybindings/custom0/name='Terminal'
 custom-keybindings/custom1/binding='<Control><Alt>e'
 custom-keybindings/custom1/command='emacs'
@@ -185,11 +185,3 @@ preferences/show-directory-item-counts='local-only'
 list-view/default-zoom-level='small'
 list-view/default-column-order=['name', 'size', 'type', 'owner', 'group', 'permissions', 'date_accessed', 'date_created', 'recency', 'detailed_type', 'date_modified']
 list-view/default-visible-columns=['name', 'size', 'detailed_type', 'date_modified']
-
-# Console
-[org/gnome/Console]
-scrollback-lines=int64 100000000
-
-# Weather
-[org/gnome/shell/weather]
-locations=[<(uint32 2, <('Vienna', 'LOWW', true, [(0.83979426423570236, 0.2891428852314914)], [(0.84124869946126679, 0.28565222672750273)])>)>]
