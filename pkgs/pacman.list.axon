@@ -255,7 +255,6 @@ libvdpau-va-gl
 libvoikko
 libwpg
 linux-firmware
-linux-headers
 linux-tools-meta
 lld
 lldb
@@ -498,7 +497,6 @@ sysstat
 system-config-printer
 systemd-resolvconf
 systemd-ukify
-systeroid
 t1utils
 tcpdump
 tealdeer
