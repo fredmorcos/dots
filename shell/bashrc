@@ -7,7 +7,7 @@
 
 export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
-# [[ -r "/etc/profile.d/vte.sh" ]] && source /etc/profile.d/vte.sh
+[[ -r "/etc/profile.d/vte.sh" ]] && source /etc/profile.d/vte.sh
 [[ -r "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
 
 HISTCONTROL=ignoredups
