@@ -16,6 +16,7 @@ org.kde.kgraphviewer
 org.kde.krita
 org.kde.massif-visualizer
 org.kde.okular
+org.kde.skanpage
 org.signal.Signal
 org.soundconverter.SoundConverter
 org.sqlitebrowser.sqlitebrowser
