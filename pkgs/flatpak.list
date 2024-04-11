@@ -17,7 +17,6 @@ org.kde.krita
 org.kde.massif-visualizer
 org.kde.okular
 org.signal.Signal
-org.sigxcpu.Livi
 org.soundconverter.SoundConverter
 org.sqlitebrowser.sqlitebrowser
 org.wireshark.Wireshark
