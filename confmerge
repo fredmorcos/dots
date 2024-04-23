@@ -258,3 +258,19 @@ if [ "$pkgs_cargo_install" != "" ]; then
   echo "Install Cargo packages:"
   $SHELL -c "cargo binstall $pkgs_cargo_install"
 fi
+
+have_unneeded_packages=$(pacman -Qdt | wc -l)
+if [ "$have_unneeded_packages" != 0 ]; then
+  echo ""
+  echo "Unneeded Packages:"
+  echo "------------------"
+  pacman -Qdt
+fi
+
+have_foreign_packages=$(pacman -Qm | wc -l)
+if [ "$have_foreign_packages" != 0 ]; then
+  echo ""
+  echo "Foreign Packages:"
+  echo "-----------------"
+  pacman -Qm
+fi
