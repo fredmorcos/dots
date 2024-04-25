@@ -13,11 +13,13 @@ org.gnome.Papers.Devel
 org.gnome.Ptyxis.Devel
 org.kde.elisa
 org.kde.kcachegrind
+org.kde.kdenlive
 org.kde.kgraphviewer
 org.kde.krita
 org.kde.massif-visualizer
 org.kde.okular
 org.kde.skanpage
+org.shotcut.Shotcut
 org.signal.Signal
 org.soundconverter.SoundConverter
 org.sqlitebrowser.sqlitebrowser
