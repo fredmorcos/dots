@@ -400,13 +400,11 @@ python-pygit2
 python-pygithub
 python-pyinotify
 python-pylast
+python-pylint
 python-pypng
 python-pyserial
 python-pystemmer
-python-pytest-black
-python-pytest-flake8
 python-pytest-lsp
-python-pytest-pylint
 python-pyudev
 python-pyxattr
 python-rcssmin
