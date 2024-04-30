@@ -6,5 +6,6 @@ set -o nounset
 set -o noglob
 
 # protonvpn-cli c --p2p
-sudo resolvectl dnsovertls proton0 no
+# sudo resolvectl dnsovertls proton0 no
+sudo resolvectl dnsovertls tun1 no
 echo "Ready"

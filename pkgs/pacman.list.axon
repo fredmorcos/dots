@@ -105,6 +105,7 @@ devtools
 dhclient
 dhcpcd
 dhex
+dialog
 diffpdf
 diffstat
 difftastic
@@ -224,6 +225,7 @@ ledger
 lesspipe
 lhasa
 libao
+libappindicator-gtk3
 libblockdev-dm
 libblockdev-lvm
 libblockdev-nvdimm
@@ -291,6 +293,7 @@ nautilus
 ncdu
 netavark
 net-tools
+networkmanager
 ngrep
 nilfs-utils
 nmap
@@ -339,7 +342,7 @@ powertop
 procs
 profile-cleaner
 progress
-protonvpn
+proton-vpn-gtk-app
 pstoedit
 psutils
 pv
@@ -347,7 +350,6 @@ pwgen
 pyalpm
 python-aafigure
 python-aiodns
-python-aiohttp
 python-arrow
 python-awesomeversion
 python-babel
@@ -407,6 +409,7 @@ python-pystemmer
 python-pytest-lsp
 python-pyudev
 python-pyxattr
+python-pyxdg
 python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
