@@ -307,7 +307,6 @@ nvme-cli
 nvtop
 ocrad
 odt2txt
-onevpl-intel-gpu
 openbsd-netcat
 opencl-clover-mesa
 opencl-rusticl-mesa
@@ -539,6 +538,7 @@ vdpauinfo
 vi
 vim-spell-en
 vkd3d
+vpl-gpu-rt
 vulkan-extra-layers
 vulkan-intel
 vulkan-mesa-layers
