@@ -409,7 +409,6 @@ python-pystemmer
 python-pytest-lsp
 python-pyudev
 python-pyxattr
-python-pyxdg
 python-rcssmin
 python-requests-hawk
 python-requests-oauthlib
