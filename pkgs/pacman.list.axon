@@ -1,7 +1,7 @@
 aardvark-dns
 acpi_call
 acpid
-afl
+afl++
 alsa-firmware
 alsa-utils
 amd-ucode
@@ -257,9 +257,7 @@ libvoikko
 libwpg
 linux-firmware
 linux-tools-meta
-lld
 lldb
-llvm
 logrotate
 loupe
 lrzip
