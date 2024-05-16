@@ -148,6 +148,7 @@ frei0r-plugins
 fx
 fzf
 gamemode
+gamescope
 gcovr
 gdb-dashboard
 gdm
@@ -554,7 +555,6 @@ wl-clipboard
 wmctrl
 xclip
 xdelta3
-xdg-desktop-portal-gnome
 xdg-user-dirs-gtk
 xf86-input-evdev
 xf86-input-vmmouse
