@@ -377,7 +377,6 @@ python-invoke
 python-ipdb
 python-keyrings-alt
 python-keystone
-python-libnacl
 python-lsp-black
 python-lz4
 python-mdx-video
