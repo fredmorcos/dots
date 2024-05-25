@@ -175,7 +175,6 @@ gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
 gst-plugin-va
-gstreamer-vaapi
 gucharmap
 gvfs-mtp
 handbrake
@@ -221,6 +220,7 @@ kexec-tools
 keychain
 kmon
 knot
+kooha
 ladspa
 ledger
 lesspipe
@@ -247,6 +247,7 @@ libofa
 libopenraw
 libotr
 libraw
+libreoffice-fresh-fr
 libsidplayfp
 libupnp
 libva-intel-driver
@@ -352,12 +353,14 @@ python-aiodns
 python-arrow
 python-awesomeversion
 python-babel
+python-beaker
 python-beautifulsoup4
 python-brotlicffi
 python-cairosvg
 python-cchardet
 python-cssselect
 python-discogs-client
+python-dogpile.cache
 python-ecdsa
 python-email-validator
 python-fastimport
