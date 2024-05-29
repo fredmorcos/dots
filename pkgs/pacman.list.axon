@@ -313,6 +313,7 @@ opencl-rusticl-mesa
 opendoas
 openmp
 openslide
+opensp
 opusfile
 ostra-cg
 otf-commit-mono-nerd
@@ -320,6 +321,7 @@ p7zip
 pacman-contrib
 pacrunner
 pam-u2f
+pandoc-cli
 par2cmdline
 paru-bin
 patchelf
@@ -432,7 +434,6 @@ python-xattr
 python-xlrd
 qbittorrent
 qt5ct
-qt5-wayland
 qt6ct
 qt6-wayland
 quodlibet
@@ -561,6 +562,7 @@ xdg-user-dirs-gtk
 xf86-input-evdev
 xf86-input-vmmouse
 xf86-input-void
+xmlstarlet
 xorg-bdftopcf
 xorg-font-util
 xorg-iceauth
