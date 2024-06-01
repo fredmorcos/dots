@@ -119,6 +119,7 @@ docx2txt
 dog
 doxygen
 d-spy
+duf
 duperemove
 easy-rsa
 ebook-tools
@@ -567,6 +568,7 @@ xorg-bdftopcf
 xorg-font-util
 xorg-iceauth
 xorg-mkfontscale
+xorg-server
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
@@ -581,6 +583,7 @@ xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
 xorg-xgamma
+xorg-xhost
 xorg-xinput
 xorg-xkbevd
 xorg-xkbutils
@@ -589,6 +592,7 @@ xorg-xlsatoms
 xorg-xlsclients
 xorg-xmodmap
 xorg-xpr
+xorg-xrdb
 xorg-xrefresh
 xorg-xsetroot
 xorg-xvinfo
