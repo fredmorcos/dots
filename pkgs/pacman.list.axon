@@ -107,8 +107,10 @@ dhcpcd
 dhex
 dialog
 diffpdf
+diff-so-fancy
 diffstat
 difftastic
+diffuse
 dmidecode
 dnsmasq
 docker
@@ -157,6 +159,7 @@ ghex
 git-absorb
 git-bug
 git-cliff
+git-delta
 git-lfs
 gitui
 glow
@@ -182,6 +185,7 @@ handbrake
 hddtemp
 hdparm
 hexedit
+hexer
 highlight
 hledger-ui
 hledger-web
@@ -272,6 +276,7 @@ lzop
 man-db
 man-pages
 mariadb-libs
+meld
 mesa-demos
 mesa-utils
 mesa-vdpau
@@ -314,7 +319,6 @@ opencl-rusticl-mesa
 opendoas
 openmp
 openslide
-opensp
 opusfile
 ostra-cg
 otf-commit-mono-nerd
@@ -434,12 +438,14 @@ python-webcolors
 python-xattr
 python-xlrd
 qbittorrent
+qhexedit2
 qt5ct
 qt6ct
 qt6-wayland
 quodlibet
 quota-tools
 r2ghidra
+radamsa
 radeontool
 radeontop
 radvd
@@ -563,6 +569,7 @@ xdg-user-dirs-gtk
 xf86-input-evdev
 xf86-input-vmmouse
 xf86-input-void
+xmldiff
 xmlstarlet
 xorg-bdftopcf
 xorg-font-util
@@ -609,3 +616,4 @@ zip
 zola
 zoxide
 zram-generator
+zzuf

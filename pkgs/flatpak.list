@@ -14,8 +14,10 @@ org.kde.elisa
 org.kde.kcachegrind
 org.kde.kdenlive
 org.kde.kgraphviewer
+org.kde.kompare
 org.kde.krita
 org.kde.massif-visualizer
+org.kde.okteta
 org.kde.okular
 org.shotcut.Shotcut
 org.signal.Signal
