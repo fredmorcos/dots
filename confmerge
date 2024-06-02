@@ -156,7 +156,6 @@ cmerge git/config                    ~/.config/git/config
 cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
 cmerge fonts/fonts.conf              ~/.config/fontconfig/fonts.conf
-cmerge fonts/freetype2.sh            /etc/profile.d/freetype2.sh
 
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
