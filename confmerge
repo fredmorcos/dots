@@ -142,6 +142,8 @@ cmerge vimrc                         ~/.config/vim/vimrc
 
 cmerge dict/hunspell_en_US           ~/.hunspell_en_US
 cmerge dict/aspell.en.pws            ~/.aspell.en.pws
+cmerge dict/en_US.dic                ~/.config/enchant/en_US.dic
+cmerge dict/en.dic                ~/.config/enchant/en.dic
 
 cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
 cmerge emacs/init.el                 ~/.config/emacs/init.el
