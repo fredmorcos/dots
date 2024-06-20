@@ -8,8 +8,8 @@ com.valvesoftware.Steam
 md.obsidian.Obsidian
 org.blender.Blender
 org.gimp.GIMP
-org.gnome.Evince
 org.gnome.FileRoller
+org.gnome.Papers
 org.kde.elisa
 org.kde.kcachegrind
 org.kde.kdenlive
