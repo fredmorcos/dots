@@ -92,7 +92,7 @@
    (im/autoload ,mode ,pkg)
    (push '(,(concat "\\" ext "\\'") . ,mode) auto-mode-alist)))
 
-;; ;; Packages.
+;; Packages.
 (defmacro im/pkg (pkg &rest body)
  "Install PKG if not already installed and execute BODY."
  `(progn
