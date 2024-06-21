@@ -57,7 +57,7 @@
  (setq-default gc-cons-percentage 0.8)
 
  ;; Disable tramp when loading .el and .elc files.
- (setq-default file-name-handler-alist nil)
+ ;; (setq-default file-name-handler-alist nil)
 
  ;; This slows down normal operation.
  (setq-default auto-window-vscroll nil)
