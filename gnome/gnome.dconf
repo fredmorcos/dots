@@ -8,7 +8,7 @@ index-on-battery-first-time=false
 
 # Search Providers
 [org/gnome/desktop/search-providers]
-disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.clocks.desktop', 'org.gnome.design.IconLibrary.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Recipes.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop']
+disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.clocks.desktop', 'org.gnome.design.IconLibrary.desktop', 'org.gnome.Characters.desktop', 'org.gnome.Recipes.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop', 'io.github.quodlibet.QuodLibet.desktop']
 enabled=@as []
 disable-external=false
 
@@ -154,7 +154,7 @@ calculator=['<Super>F1']
 logout=@as []
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']
 custom-keybindings/custom0/binding='<Control><Alt>t'
-custom-keybindings/custom0/command='flatpak --user run app.devsuite.Ptyxis -s'
+custom-keybindings/custom0/command='foot'
 custom-keybindings/custom0/name='Terminal'
 custom-keybindings/custom1/binding='<Control><Alt>e'
 custom-keybindings/custom1/command='emacs'
