@@ -159,6 +159,8 @@ cmerge git/config-powerdns           ~/.config/git/config-powerdns
 
 cmerge fonts/fonts.conf              ~/.config/fontconfig/fonts.conf
 
+cmerge foot.ini                      ~/.config/foot/foot.ini
+
 cmerge loader/loader.conf            /boot/loader/loader.conf
 cmerge loader/arch.conf              /boot/loader/entries/arch.conf
 
