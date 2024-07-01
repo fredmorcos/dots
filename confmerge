@@ -134,66 +134,67 @@ for application in "${!papirus_applications[@]}"; do
   fi
 done
 
-cmerge shell/bashrc                  ~/.bashrc
-cmerge shell/bash_profile            ~/.bash_profile
-cmerge shell/profile                 ~/.profile
-cmerge shell/inputrc                 ~/.config/readline/inputrc
-cmerge vimrc                         ~/.config/vim/vimrc
+cmerge shell/bashrc                    ~/.bashrc
+cmerge shell/bash_profile              ~/.bash_profile
+cmerge shell/profile                   ~/.profile
+cmerge shell/inputrc                   ~/.config/readline/inputrc
+cmerge vimrc                           ~/.config/vim/vimrc
 
-cmerge dict/hunspell_en_US           ~/.hunspell_en_US
-cmerge dict/aspell.en.pws            ~/.aspell.en.pws
-cmerge dict/en_US.dic                ~/.config/enchant/en_US.dic
-cmerge dict/en.dic                ~/.config/enchant/en.dic
+cmerge dict/hunspell_en_US             ~/.hunspell_en_US
+cmerge dict/aspell.en.pws              ~/.aspell.en.pws
+cmerge dict/en_US.dic                  ~/.config/enchant/en_US.dic
+cmerge dict/en.dic                     ~/.config/enchant/en.dic
 
-cmerge emacs/early-init.el           ~/.config/emacs/early-init.el
-cmerge emacs/init.el                 ~/.config/emacs/init.el
+cmerge emacs/early-init.el             ~/.config/emacs/early-init.el
+cmerge emacs/init.el                   ~/.config/emacs/init.el
 
-cmerge htoprc                        ~/.config/htop/htoprc
-cmerge yt-dlp.conf                   ~/.config/yt-dlp/config
+cmerge htoprc                          ~/.config/htop/htoprc
+cmerge yt-dlp.conf                     ~/.config/yt-dlp/config
 
-cmerge mpv/input.conf                ~/.config/mpv/input.conf
-cmerge mpv/mpv.conf                  ~/.config/mpv/mpv.conf
+cmerge mpv/input.conf                  ~/.config/mpv/input.conf
+cmerge mpv/mpv.conf                    ~/.config/mpv/mpv.conf
 
-cmerge git/config                    ~/.config/git/config
-cmerge git/config-powerdns           ~/.config/git/config-powerdns
+cmerge git/config                      ~/.config/git/config
+cmerge git/config-powerdns             ~/.config/git/config-powerdns
 
-cmerge fonts/fonts.conf              ~/.config/fontconfig/fonts.conf
+cmerge fonts/fonts.conf                ~/.config/fontconfig/fonts.conf
 
-cmerge foot.ini                      ~/.config/foot/foot.ini
+cmerge foot.ini                        ~/.config/foot/foot.ini
 
-cmerge loader/loader.conf            /boot/loader/loader.conf
-cmerge loader/arch.conf              /boot/loader/entries/arch.conf
+cmerge loader/loader.conf              /boot/loader/loader.conf
+cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
-cmerge archlinux/makepkg.conf        /etc/makepkg.conf
-cmerge archlinux/mkinitcpio.conf     /etc/mkinitcpio.conf
-cmerge archlinux/pacman.conf         /etc/pacman.conf
-cmerge archlinux/paru.conf           /etc/paru.conf
+cmerge archlinux/makepkg.conf          /etc/makepkg.conf
+cmerge archlinux/mkinitcpio.conf       /etc/mkinitcpio.conf
+cmerge archlinux/pacman.conf           /etc/pacman.conf
+cmerge archlinux/paru.conf             /etc/paru.conf
 
-cmerge net/hostname                  /etc/hostname
-cmerge net/hosts                     /etc/hosts
+cmerge net/hostname                    /etc/hostname
+cmerge net/hosts                       /etc/hosts
 
-cmerge sysctl/locale.conf            /etc/locale.conf
-cmerge sysctl/sysctl.conf            /etc/sysctl.d/sysctl.conf
-cmerge sysctl/limits.conf            /etc/security/limits.conf
+cmerge sysctl/locale.conf              /etc/locale.conf
+cmerge sysctl/sysctl.conf              /etc/sysctl.d/sysctl.conf
+cmerge sysctl/limits.conf              /etc/security/limits.conf
 
-cmerge modules/modprobe.conf         /etc/modprobe.d/modprobe.conf
-cmerge modules/nvidia.conf           /etc/modprobe.d/nvidia.conf
+cmerge modules/modprobe.conf           /etc/modprobe.d/modprobe.conf
+cmerge modules/nvidia.conf             /etc/modprobe.d/nvidia.conf
 
-cmerge docker.json                   /etc/docker/daemon.json
-cmerge pythonrc                      /etc/python/pythonrc
+cmerge docker.json                     /etc/docker/daemon.json
+cmerge pythonrc                        /etc/python/pythonrc
 
 SYSD=/etc/systemd
 
-cmerge systemd/coredump.conf         $SYSD/coredump.conf
-cmerge systemd/system.conf           $SYSD/system.conf
-cmerge systemd/journald.conf         $SYSD/journald.conf
-cmerge systemd/resolved.conf         $SYSD/resolved.conf
-cmerge systemd/logind.conf           $SYSD/logind.conf
-cmerge systemd/boot-override.conf    $SYSD/system/boot.mount.d/override.conf
+cmerge systemd/coredump.conf           $SYSD/coredump.conf
+cmerge systemd/system.conf             $SYSD/system.conf
+cmerge systemd/journald.conf           $SYSD/journald.conf
+cmerge systemd/resolved.conf           $SYSD/resolved.conf
+cmerge systemd/logind.conf             $SYSD/logind.conf
+cmerge systemd/boot-override.conf      $SYSD/system/boot.mount.d/override.conf
+cmerge systemd/paccache-override.conf  $SYSD/system/paccache.service.d/override.conf
 
-cmerge vpn/ox.service                $SYSD/system/ox.service
-cmerge vpn/ox-suspend.service        $SYSD/system/ox-suspend.service
-cmerge vpn/ox-resume.service         $SYSD/system/ox-resume.service
+cmerge vpn/ox.service                  $SYSD/system/ox.service
+cmerge vpn/ox-suspend.service          $SYSD/system/ox-suspend.service
+cmerge vpn/ox-resume.service           $SYSD/system/ox-resume.service
 
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
