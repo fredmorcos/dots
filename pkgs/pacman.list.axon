@@ -158,6 +158,7 @@ gamemode
 gcovr
 gdb-dashboard
 gdm
+geoip-database-extra
 geoipupdate
 ghex
 git-absorb
