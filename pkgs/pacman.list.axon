@@ -147,6 +147,7 @@ fig2dev
 firefox
 flatpak
 flatpak-xdg-utils
+foliate
 foot
 foot-terminfo
 foremost
@@ -180,6 +181,7 @@ gocr
 gpart
 gparted
 gptfdisk
+gspell
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
