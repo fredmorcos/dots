@@ -329,7 +329,6 @@ openmp
 openslide
 opusfile
 ostra-cg
-otf-commit-mono-nerd
 p7zip
 pacman-contrib
 pacrunner
@@ -532,6 +531,7 @@ traceroute
 trash-cli
 tree
 ttf-dejavu-nerd
+ttf-monaco
 tup
 typst
 udftools
