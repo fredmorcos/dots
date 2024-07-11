@@ -17,12 +17,12 @@ CMD=("rsync"
      "--exclude=*/rustup"
      "--exclude=*/target"
      "--exclude=*/__pycache__"
-     '--exclude=emacs/elpa/*'
-     '--exclude=node_modules/*'
+     '--exclude=emacs/elpa/***'
+     '--exclude=node_modules/***'
      '--exclude=clangd/*'
-     "--exclude=.local/share/flatpak/*"
-     "--exclude=.local/share/rust"
-     "--exclude=.var/app"
+     '--exclude=.local/share/flatpak/***'
+     '--exclude=.local/share/rust/***'
+     '--exclude=.var/app/***'
      "$@")
 
 echo ">>> Rsync command:" "${CMD[@]}"
