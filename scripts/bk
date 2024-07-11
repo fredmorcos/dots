@@ -20,9 +20,8 @@ CMD=("rsync"
      '--exclude=emacs/elpa/***'
      '--exclude=node_modules/***'
      '--exclude=clangd/*'
-     '--exclude=.local/share/flatpak/***'
-     '--exclude=.local/share/rust/***'
-     '--exclude=.var/app/***'
+     '--exclude=share/flatpak/***'
+     '--exclude=share/rust/***'
      "$@")
 
 echo ">>> Rsync command:" "${CMD[@]}"
