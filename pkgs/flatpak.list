@@ -9,6 +9,7 @@ org.blender.Blender
 org.gimp.GIMP
 org.gnome.FileRoller
 org.gnome.Papers
+org.gnome.Showtime
 org.kde.elisa
 org.kde.kcachegrind
 org.kde.kdenlive
