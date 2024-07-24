@@ -291,6 +291,7 @@ mesa-demos
 mesa-utils
 mesa-vdpau
 meson
+mesonlsp
 microsoft-gsl
 minisign
 mkinitcpio-systemd-tool
@@ -512,7 +513,6 @@ strace
 s-tui
 subdl
 svgcleaner
-swift-mesonlsp-bin
 switcheroo-control
 syncthing
 sysprof
