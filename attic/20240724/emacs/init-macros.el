@@ -80,6 +80,9 @@
  "Set FACE properties to PROPS."
  `(custom-set-faces '(,face ((t ,@props)))))
 
+;; (defalias 'im/custom #'setop)
+;; (defalias 'im/after #'with-eval-after-load)
+
 ;; Lazy loading.
 (defmacro im/after (pkg &rest body)
  "Execute BODY when PKG is loaded."
@@ -108,6 +111,94 @@
    (defvar package-selected-packages)
    (push ',pkg package-selected-packages)
    ,@body))
+
+;; Init Macro.
+;; (defmacro im/init (_name &rest entries)
+;;  (let ((packages)
+;;        (customs))
+;;   (while ))
+
+;; ;; Init Macro.
+;; (defmacro im/init (_name &rest entries)
+;;  "Define a config called NAME with settings provided in ENTRIES.
+
+;;   Entries may be one of the following:
+;;     - :packages PACKAGE
+;;     - :packages (PACKAGES...)
+;;     - :definitions (DEFUN-FORMS...)
+;;     - :before (STATEMENTS...)
+;;     - :after (MODULE . STATEMENTS...)
+;;     - :custom (SETOPT-PAIRS...)
+;;     - :hooks (ADD-HOOK-PAIRS...)"
+;;  `(progn
+;;    ,@(let ((packages (or (plist-get entries :packages) '()))
+;;            (definitions (or (plist-get entries :definitions) '()))
+;;            (before (or (plist-get entries :before) '()))
+;;            (after (or (plist-get entries :after) '()))
+;;            (custom (or (plist-get entries :custom) '()))
+;;            (hooks (or (plist-get entries :hooks) '()))
+;;            (statements))
+;;       ;; Hooks.
+;;       (cond
+;;        ((listp hooks)
+;;         (when (not (equal hooks '()))
+;;          (dolist (element (reverse hooks))
+;;           (push `(im/hook ,(car element) ,(cdr element)) statements))))
+;;        (t (error "Error: im/init: HOOKS must be a list of pairs")))
+;;       ;; Custom.
+;;       (cond
+;;        ((listp custom)
+;;         (when (not (equal custom '()))
+;;          (push `(setopt ,@custom) statements)))
+;;        (t (error "Error: im/init: CUSTOM must be a pair")))
+;;       ;; After.
+;;       (cond
+;;        ((listp after)
+;;         (when (not (equal after '()))
+;;          (push `(with-eval-after-load ',(car after) ,@(cdr after)) statements)))
+;;        (t (error "Error: im/init: AFTER must be a pair")))
+;;       ;; Before.
+;;       (cond
+;;        ((listp before)
+;;         (when (not (equal before '()))
+;;          (dolist (element (reverse before))
+;;           (push element statements))))
+;;        (t (error "Error: im/init: BEFORE must be a list")))
+;;       ;; Definitions.
+;;       (cond
+;;        ((listp definitions)
+;;         (when (not (equal definitions '()))
+;;          (dolist (element (reverse definitions))
+;;           (push element statements))))
+;;        (t (error "Error: im/init: DEFINITIONS must be a list")))
+;;       ;; Packages.
+;;       (cond
+;;        ((symbolp packages)
+;;         (push `(im/pkg ,packages) statements))
+;;        ((listp packages)
+;;         (when (not (equal packages '()))
+;;          (dolist (element (reverse packages))
+;;           (push `(im/pkg ,element) statements))))
+;;        (t (error "Error: im/init: PACKAGES must either be a list or a symbol")))
+;;       statements)))
+
+;; (im/init "python programming"
+;;  :packages (python indent-guide)
+;;  :definitions
+;;  ((defun foo () (message "foo"))
+;;   (defun bar () (message "bar")))
+;;  :before
+;;  ((message "before!"))
+;;  :after
+;;  (python . ((message "after python!")))
+;;  :custom
+;;  (fill-column 80
+;;   fill-column 90)
+;;  :hooks
+;;  ((python-mode-hook . indent-guide-mode)
+;;   (python-mode-hook . eldoc-mode)))
+;;
+;; (im/init "foo")
 
 (provide 'init-macros)
 ;;; init-macros.el ends here
