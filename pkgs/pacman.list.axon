@@ -124,6 +124,7 @@ doxygen
 d-spy
 duf
 duperemove
+dvisvgm
 easy-rsa
 ebook-tools
 ecm-tools
@@ -148,6 +149,7 @@ firefox
 flatpak
 flatpak-xdg-utils
 foliate
+fontforge
 foot
 foot-terminfo
 foremost
@@ -278,6 +280,7 @@ lrzip
 lshw
 lsof
 ltrace
+luametatex
 luit
 lzop
 man-db
@@ -300,6 +303,7 @@ mp3val
 mpv
 mtools
 muon-meson
+mupdf-tools
 musl
 mutt
 mythes-en
@@ -338,6 +342,7 @@ pandoc-cli
 par2cmdline
 paru-bin
 patchelf
+pdf2svg
 pdfarranger
 pdfcrack
 pdfmixtool
@@ -519,7 +524,6 @@ t1utils
 tcpdump
 tealdeer
 tectonic
-texlive-bin
 thunderbird
 tidy
 time
