@@ -8,7 +8,7 @@ set -o noglob
 CMD=("rsync"
      "-hhh"
      "--verbose"
-     "--info=progress2"
+     "--info=progress1,flist0,del1,copy1,backup1,misc0,name1,nonreg1,remove1,skip1,stats0,symsafe1"
      "--archive"
      "--executability"
      "--delete"
@@ -29,11 +29,11 @@ echo ">>> Rsync command:" "${CMD[@]}"
 cmd () {
   printf ">>> %s --> %s\n" "$1" "$2"
   "${CMD[@]}" "$1" "$2"
-  printf "\n\n"
+  # printf "\n"
 }
 
 HOSTNAME=$(hostnamectl hostname)
-printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
+printf ">>> Hostname = %s\n\n" "$HOSTNAME"
 
 HOME='/home/fred'
 INTERNAL_DATA='/run/media/fred/Internal'
