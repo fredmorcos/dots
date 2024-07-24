@@ -233,7 +233,7 @@ kcov
 kexec-tools
 keychain
 kmon
-knot
+knot-resolver
 kooha
 ladspa
 ledger
