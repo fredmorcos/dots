@@ -29,7 +29,6 @@ echo ">>> Rsync command:" "${CMD[@]}"
 cmd () {
   printf ">>> %s --> %s\n" "$1" "$2"
   "${CMD[@]}" "$1" "$2"
-  # printf "\n"
 }
 
 HOSTNAME=$(hostnamectl hostname)
