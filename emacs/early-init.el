@@ -12,8 +12,8 @@
 
  :custom
  ;; A big contributor to startup time is garbage collection.
- gc-cons-threshold (* 100 1024 1024)
- gc-cons-percentage 0.8
+ (gc-cons-threshold (* 100 1024 1024))
+ (gc-cons-percentage 0.8)
 
  :config
  ;; Run the GC after 5 seconds of idleness.
@@ -23,24 +23,24 @@
  :ensure nil
 
  :custom
- custom-file (make-temp-file "emacs-custom-"))
+ (custom-file (make-temp-file "emacs-custom-")))
 
 (use-package emacs
  :ensure nil
 
  :custom
  ;; Skip redisplays.
- redisplay-skip-fontification-on-input t
- redisplay-skip-initial-frame t
+ (redisplay-skip-fontification-on-input t)
+ (redisplay-skip-initial-frame t)
 
  ;; Frame-related improvements.
- frame-resize-pixelwise t
- frame-title-format "%b - emacs"
+ (frame-resize-pixelwise t)
+ (frame-title-format "%b - emacs")
 
  ;; Resizing the Emacs frame can be a terribly expensive part of changing the font. By
  ;; inhibiting this, we easily halve startup times with fonts that are larger than the
  ;; system default.
- frame-inhibit-implied-resize t)
+ (frame-inhibit-implied-resize t))
 
 (use-package frame
  :ensure nil
@@ -59,22 +59,22 @@
 
  :custom
  ;; This slows down normal operation.
- auto-window-vscroll nil)
+ (auto-window-vscroll nil))
 
 (use-package emacs
  :ensure nil
 
  :custom
  ;; Improve text rendering performance.
- bidi-paragraph-direction 'left-to-right
- bidi-inhibit-bpa t)
+ (bidi-paragraph-direction 'left-to-right)
+ (bidi-inhibit-bpa t))
 
 (use-package emacs
  :ensure nil
 
  :custom
  ;; Ignore X resources.
- inhibit-x-resources t
+ (inhibit-x-resources t)
 
  :config
  ;; Ignore X resources by disabling its function; its settings would be redundant with the
@@ -82,16 +82,16 @@
  ;; where the cursor color is concerned).
  (advice-add #'x-apply-session-resources :override #'ignore))
 
-(use-package emacs
+(use-package startup
  :ensure nil
 
  :custom
- inhibit-startup-screen t
- inhibit-startup-message t
- inhibit-startup-buffer-menu t
- inhibit-startup-echo-area-message user-real-login-name
- initial-scratch-message nil
- initial-major-mode 'fundamental-mode
+ (inhibit-startup-screen t)
+ (inhibit-startup-message t)
+ (inhibit-startup-buffer-menu t)
+ (inhibit-startup-echo-area-message user-real-login-name)
+ (initial-scratch-message nil)
+ (initial-major-mode 'fundamental-mode)
 
  :config
  ;; Don't show message in the echo area at startup.
@@ -114,47 +114,47 @@
  :ensure nil
 
  :custom
- menu-bar-mode nil)
+ (menu-bar-mode nil))
 
 (use-package tool-bar
  :ensure nil
 
  :custom
- tool-bar-mode nil)
+ (tool-bar-mode nil))
 
 (use-package scroll-bar
  :ensure nil
 
  :custom
- scroll-bar-mode nil)
+ (scroll-bar-mode nil))
 
 (use-package simple
  :ensure nil
 
  :custom
- line-number-mode t
- column-number-mode t
- size-indication-mode t)
+ (line-number-mode t)
+ (column-number-mode t)
+ (size-indication-mode t))
 
-(use-package emacs
+(use-package bindings
  :ensure nil
 
  :custom
- column-number-indicator-zero-based nil
- mode-line-position-column-format '(" C%C"))
+ (column-number-indicator-zero-based nil)
+ (mode-line-position-column-format '(" C%C")))
 
 (use-package frame
  :ensure nil
 
  :custom
- blink-cursor-mode nil)
+ (blink-cursor-mode nil))
 
 (use-package vc-hooks
  :ensure nil
 
  :custom
  ;; Only use Git as version control.
- vc-handled-backends '(Git))
+ (vc-handled-backends '(Git)))
 
 (use-package files
  :ensure nil
@@ -168,7 +168,7 @@
 
  :custom
  ;; Silence native compilation warnings.
- native-comp-async-report-warnings-errors 'silent)
+ (native-comp-async-report-warnings-errors 'silent))
 
 (use-package package
  :ensure nil
@@ -180,7 +180,7 @@
  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
  :custom
- package-native-compile t)
+ (package-native-compile t))
 
 (use-package url-vars
  :ensure nil
@@ -188,7 +188,7 @@
  :custom
  ;; Use this when unsetting any proxies for localhost.
  ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
- url-privacy-level 'paranoid)
+ (url-privacy-level 'paranoid))
 
 (use-package emacs
  :ensure nil
@@ -204,7 +204,7 @@
  ;; Disable tramp when loading .el and .elc files. That doesn't work correctly. It instead
  ;; completely disables support for documentation linking to show source code available in
  ;; .el and .elc files.
- ;; file-name-handler-alist nil
+ ;; (file-name-handler-alist nil)
 
  :config
  ;; Disable tramp.
