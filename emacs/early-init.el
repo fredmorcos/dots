@@ -82,7 +82,7 @@
  ;; where the cursor color is concerned).
  (advice-add #'x-apply-session-resources :override #'ignore))
 
-(use-package startup
+(use-package emacs
  :ensure nil
 
  :custom
@@ -136,7 +136,7 @@
  (column-number-mode t)
  (size-indication-mode t))
 
-(use-package bindings
+(use-package emacs
  :ensure nil
 
  :custom
@@ -200,7 +200,7 @@
 (use-package emacs
  :ensure nil
 
- :custom
+ ;; :custom
  ;; Disable tramp when loading .el and .elc files. That doesn't work correctly. It instead
  ;; completely disables support for documentation linking to show source code available in
  ;; .el and .elc files.
