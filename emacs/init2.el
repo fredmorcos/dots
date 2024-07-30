@@ -7,39 +7,7 @@
  (push emacs-dots-dir load-path))
 (require 'init-macros)
 
-(im/config "Tidy Emacs Configuration Directory"
- (im/pkg no-littering)
- (im/autoload no-littering-theme-backups "no-littering")
- (im/autoload no-littering-expand-etc-file-name "no-littering")
- (im/autoload no-littering-expand-var-file-name "no-littering")
- (no-littering-theme-backups))
-
-(im/config "Various Functions"
- (im/after emacs
-  ;; Enable these functions.
-  (put 'list-timers      'disabled nil)
-  (put 'narrow-to-region 'disabled nil)
-  (put 'narrow-to-page   'disabled nil)
-  (put 'upcase-region    'disabled nil)
-  (put 'downcase-region  'disabled nil)
-
-  ;; Disable these functions.
-  (put 'eshell           'disabled t)
-  (put 'overwrite-mode   'disabled t)
-  (put 'iconify-frame    'disabled t)
-  (put 'suspend-frame    'disabled t)
-  (put 'diary            'disabled t)))
-
 (im/config "Text Editing"
- ;; Duplicate.
- (im/key "C-x c" duplicate-dwim "misc")
-
- ;; CUA.
- (cua-selection-mode 1)
-
- (im/pkg move-text)
- (move-text-default-bindings)
-
  (im/after simple
   (setopt
    save-interprogram-paste-before-kill t

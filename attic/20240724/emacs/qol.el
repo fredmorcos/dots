@@ -12,6 +12,19 @@
  (goto-char (point-min))
  (while (search-forward "" nil t) (replace-match "" nil t)))
 
+(defun qol/move-line-up ()
+ "Move a line up."
+ (interactive)
+ (transpose-lines 1)
+ (forward-line -2))
+
+(defun qol/move-line-down ()
+ "Move a line down."
+ (interactive)
+ (forward-line 1)
+ (transpose-lines 1)
+ (forward-line -1))
+
 (defun qol/insert-pair (left right &optional region-only)
  "Insert LEFT & RIGHT in text, or around it if REGION-ONLY is t."
  (if (use-region-p)

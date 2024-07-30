@@ -2,27 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile
- (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
- (push emacs-dots-dir load-path))
+;; No Littering --------------------------------------------------------------------------
 
-(require 'init-macros)
-
-;; Quality of life improvements
-(im/key "C-x j"    im/insert-buffer-name "qol")
-(im/key "C-x e"    im/replace-escapes    "qol")
-(im/key "<M-up>"   im/move-line-up       "qol")
-(im/key "<M-down>" im/move-line-down     "qol")
-
-;; (im/key "{"  im/insert-pair-curly         "qol")
-;; (im/key "("  im/insert-pair-parens        "qol")
-;; (im/key "'"  im/insert-pair-quote         "qol")
-;; (im/key "\"" im/insert-pair-double-quotes "qol")
-;; (im/key "`"  im/insert-pair-backtick      "qol")
-
-(im/key "C-x c" duplicate-dwim)
-
-;; Directories
+;; Directories -- TODO REMOVE THESE
 (defconst user-home-dir (expand-file-name "~/"))
 (defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
 (defconst emacs-user-dir (expand-file-name user-emacs-directory))
@@ -46,25 +28,93 @@
 (make-directory emacs-autosaves-dir t)
 (make-directory emacs-backups-dir t)
 
-;; Do not show a message in the echo area after startup
-(fset 'display-startup-echo-area-message 'ignore)
+(use-package no-littering
+ :commands
+ no-littering-theme-backups
+ no-littering-expand-etc-file-name
+ no-littering-expand-var-file-name
 
-;; Startup
-(setq-default inhibit-startup-screen t)
-(setq-default inhibit-startup-message t)
-(setq-default inhibit-startup-buffer-menu t)
-(setq-default initial-scratch-message nil)
-(setq-default initial-major-mode 'fundamental-mode)
+ :config
+ (no-littering-theme-backups))
 
-;; Auto-save
-(setq-default auto-save-list-file-prefix emacs-autosave-list-prefix)
+;; Functions -----------------------------------------------------------------------------
 
-;; Windmove
-(windmove-default-keybindings)
-(windmove-delete-default-keybindings)
+(use-package emacs
+ :ensure nil
 
-;; Common User Access
-(cua-selection-mode 1)
+ :config
+ ;; Enable these functions.
+ (put 'list-timers      'disabled nil)
+ (put 'narrow-to-region 'disabled nil)
+ (put 'narrow-to-page   'disabled nil)
+ (put 'upcase-region    'disabled nil)
+ (put 'downcase-region  'disabled nil)
+
+ ;; Disable these functions.
+ (put 'eshell           'disabled t)
+ (put 'overwrite-mode   'disabled t)
+ (put 'iconify-frame    'disabled t)
+ (put 'suspend-frame    'disabled t)
+ (put 'diary            'disabled t))
+
+;; Text Editing --------------------------------------------------------------------------
+
+(use-package qol
+ :ensure nil
+ :defer t
+
+ :load-path "/home/fred/Workspace/dots/emacs/"
+
+ :bind
+ (("C-x j"    . qol/insert-buffer-name)
+  ("C-x e"    . qol/replace-escapes)
+  ("{"        . qol/insert-pair-curly)
+  ("{"        . qol/insert-pair-curly)
+  ("("        . qol/insert-pair-parens)
+  ("'"        . qol/insert-pair-quote)
+  ("\""       . qol/insert-pair-double-quotes)
+  ("`"        . qol/insert-pair-backtick)))
+
+(use-package misc
+ :ensure nil
+ :defer t
+
+ :bind
+ (("C-x c" . duplicate-dwim)))
+
+(use-package cua-base
+ :ensure nil
+
+ :custom
+ (cua-selection-mode))
+
+(use-package move-text
+ :init
+ (move-text-default-bindings))
+
+;; Auto-save -----------------------------------------------------------------------------
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ (auto-save-list-file-prefix emacs-autosave-list-prefix))
+
+;; Windmove ------------------------------------------------------------------------------
+
+(use-package windmove
+ :ensure nil
+
+ :init
+ (windmove-default-keybindings)
+ (windmove-delete-default-keybindings))
+
+;; Other ---------------------------------------------------------------------------------
+
+(eval-when-compile
+ (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
+ (push emacs-dots-dir load-path))
+(require 'init-macros)
 
 ;; Cursor
 (im/after frame
@@ -470,7 +520,7 @@
  (setq-default org-special-ctrl-a/e t)
  (setq-default org-special-ctrl-k t)
  (setq-default org-special-ctrl-o t)
- (im/key-local "C-c p" im/generate-password org-mode-map "qol")
+ (im/key-local "C-c p" qol/generate-password org-mode-map "qol")
  (im/hook org-mode-hook org-bullets-mode)
  ;; (im/hook org-mode-hook spell-fu-mode)
  (im/hookn org-mode-hook
@@ -768,8 +818,8 @@
 (defun im/company-add-backend (backend)
  "Add BACKEND to local copy of `company-backends'."
  (eval-when-compile (defvar company-backends))
- (im/autoload im/append "qol")
- (im/append (car company-backends) backend))
+ (im/autoload qol/append "qol")
+ (qol/append (car company-backends) backend))
 
 (im/pkg company-posframe
  (im/after company-posframe
