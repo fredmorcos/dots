@@ -7,6 +7,8 @@
 ;; (profiler-start 'cpu)
 ;; (add-hook 'after-init-hook #'profiler-report)
 
+;; Garbage Collector ---------------------------------------------------------------------
+
 (use-package emacs
  :ensure nil
 
@@ -19,11 +21,15 @@
  ;; Run the GC after 5 seconds of idleness.
  (run-with-idle-timer 5 t #'garbage-collect))
 
+;; Configuration System ------------------------------------------------------------------
+
 (use-package cus-edit
  :ensure nil
 
  :custom
  (custom-file (make-temp-file "emacs-custom-")))
+
+;; UI ------------------------------------------------------------------------------------
 
 (use-package emacs
  :ensure nil
@@ -58,21 +64,6 @@
  :ensure nil
 
  :custom
- ;; This slows down normal operation.
- (auto-window-vscroll nil))
-
-(use-package emacs
- :ensure nil
-
- :custom
- ;; Improve text rendering performance.
- (bidi-paragraph-direction 'left-to-right)
- (bidi-inhibit-bpa t))
-
-(use-package emacs
- :ensure nil
-
- :custom
  ;; Ignore X resources.
  (inhibit-x-resources t)
 
@@ -96,13 +87,6 @@
  :config
  ;; Don't show message in the echo area at startup.
  (fset 'display-startup-echo-area-message 'ignore))
-
-(use-package warnings
- :ensure nil
-
- :custom
- ;; Stop the warnings buffer from popping up, but still log warnings.
- (warning-minimum-level :emergency))
 
 (use-package emacs
  :ensure nil
@@ -141,13 +125,64 @@
 
  :custom
  (column-number-indicator-zero-based nil)
- (mode-line-position-column-format '(" C%C")))
+ (mode-line-position-column-format '(" C%C"))
+ (mode-line-compact 'long))
 
 (use-package frame
  :ensure nil
 
  :custom
  (blink-cursor-mode nil))
+
+(use-package display-fill-column-indicator
+ :defer t
+ :ensure nil
+
+ :init
+ (global-display-fill-column-indicator-mode))
+
+;; UX ------------------------------------------------------------------------------------
+
+(use-package warnings
+ :ensure nil
+
+ :custom
+ ;; Stop the warnings buffer from popping up, but still log warnings.
+ (warning-minimum-level :emergency))
+
+(use-package comp
+ :ensure nil
+
+ :custom
+ ;; Silence native compilation warnings.
+ (native-comp-async-report-warnings-errors 'silent))
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ ;; Avoid graphical dialog boxes
+ (use-dialog-box nil)
+
+ ;; Respond to yes/no questions using Y/N
+ (use-short-answers t))
+
+;; Performance ---------------------------------------------------------------------------
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ ;; This slows down normal operation.
+ (auto-window-vscroll nil))
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ ;; Improve text rendering performance.
+ (bidi-paragraph-direction 'left-to-right)
+ (bidi-inhibit-bpa t))
 
 (use-package vc-hooks
  :ensure nil
@@ -162,33 +197,6 @@
  :config
  ;; Disable version control when opening files.
  (remove-hook 'find-file-hook #'vc-refresh-state))
-
-(use-package comp
- :ensure nil
-
- :custom
- ;; Silence native compilation warnings.
- (native-comp-async-report-warnings-errors 'silent))
-
-(use-package package
- :ensure nil
-
- :defines
- package-archives
-
- :config
- (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
- :custom
- (package-native-compile t))
-
-(use-package url-vars
- :ensure nil
-
- :custom
- ;; Use this when unsetting any proxies for localhost.
- ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
- (url-privacy-level 'paranoid))
 
 (use-package emacs
  :ensure nil
@@ -209,6 +217,28 @@
  :config
  ;; Disable tramp.
  (remove-hook 'after-init-hook #'tramp-register-archive-autoload-file-name-handler))
+
+;; Packages ------------------------------------------------------------------------------
+
+(use-package package
+ :ensure nil
+
+ :defines
+ package-archives
+
+ :config
+ (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+ :custom
+ (package-native-compile t))
+
+(use-package url-vars
+ :ensure nil
+
+ :custom
+ ;; Use this when unsetting any proxies for localhost.
+ ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
+ (url-privacy-level 'paranoid))
 
 (provide 'early-init)
 ;;; early-init.el ends here

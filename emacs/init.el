@@ -83,14 +83,34 @@
  (("C-x c" . duplicate-dwim)))
 
 (use-package cua-base
+ :defer t
+ :ensure nil
+
+ :init
+ (cua-selection-mode t))
+
+(use-package move-text
+ :defer t
+
+ :init
+ (move-text-default-bindings))
+
+(use-package emacs
  :ensure nil
 
  :custom
- (cua-selection-mode))
+ (tab-always-indent 'complete)
+ (tab-first-completion 'word-or-paren-or-punct))
 
-(use-package move-text
- :init
- (move-text-default-bindings))
+(use-package simple
+ :ensure nil
+
+ :custom
+ (indent-tabs-mode nil))
+
+(use-package unfill
+ :bind
+ ([remap fill-paragraph] . unfill-toggle))
 
 ;; Auto-save -----------------------------------------------------------------------------
 
@@ -100,7 +120,7 @@
  :custom
  (auto-save-list-file-prefix emacs-autosave-list-prefix))
 
-;; Windmove ------------------------------------------------------------------------------
+;; UX ------------------------------------------------------------------------------------
 
 (use-package windmove
  :ensure nil
@@ -109,41 +129,35 @@
  (windmove-default-keybindings)
  (windmove-delete-default-keybindings))
 
-;; Other ---------------------------------------------------------------------------------
+(use-package goto-addr
+ :defer t
+ :ensure nil
 
-(eval-when-compile
- (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
- (push emacs-dots-dir load-path))
-(require 'init-macros)
+ :init
+ ;; Make URLs clickable
+ (global-goto-address-mode))
 
-;; Cursor
-(im/after frame
- (blink-cursor-mode -1))
+(use-package emacs
+ :ensure nil
 
-;; Indent
-(setq-default tab-always-indent 'complete)
-(setq-default tab-first-completion 'word-or-paren-or-punct)
+ :defines
+ warning-suppress-types
 
-;; Bindings
-(setq-default column-number-indicator-zero-based nil)
-
-;; Modeline
-(setq-default mode-line-compact 'long)
-
-;; Fill-column indicator
-(global-display-fill-column-indicator-mode)
-
-;; Make URLs clickable
-(global-goto-address-mode)
-
-;; Suppress certain annoying warnings.
-(im/after warnings
- (eval-when-compile (defvar warning-suppress-types))
+ :init
+ ;; Suppress certain annoying warnings.
  (add-to-list 'warning-suppress-types '(defvaralias)))
 
-;; Hippie expand
-(im/after hippie-exp
- (setq-default hippie-expand-try-functions-list
+;; Dynamic Expansion ---------------------------------------------------------------------
+
+(use-package hippie-exp
+ :ensure nil
+
+ :bind
+ ;; Replace dabbrev-expand with hippie-expand
+ ([remap dabbrev-expand] . hippie-expand)
+
+ :custom
+ (hippie-expand-try-functions-list
   '(try-expand-dabbrev-visible
     try-expand-line
     try-expand-dabbrev
@@ -158,12 +172,15 @@
     try-complete-lisp-symbol
     try-complete-lisp-symbol-partially)))
 
-(im/after emacs
- ;; Replace dabbrev-expand with hippie-expand
- (im/key-remap dabbrev-expand hippie-expand)
+;; Other ---------------------------------------------------------------------------------
 
- ;; Avoid graphical dialog boxes
- (setq-default use-dialog-box nil)
+(eval-when-compile
+ (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
+ (push emacs-dots-dir load-path))
+(require 'init-macros)
+
+(im/after emacs
+ (im/key-remap dabbrev-expand hippie-expand)
 
  ;; Completion
  (setq-default completion-ignore-case t)
@@ -171,12 +188,6 @@
 
  ;; Fill
  (setq-default fill-column 90)
-
- ;; Indent
- (setq-default indent-tabs-mode nil)
-
- ;; Respond to yes/no questions using Y/N
- (setq-default use-short-answers t)
 
  ;; History/savehist
  (setq-default history-delete-duplicates t)
