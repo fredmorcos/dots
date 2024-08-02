@@ -218,6 +218,13 @@
  ;; Disable tramp.
  (remove-hook 'after-init-hook #'tramp-register-archive-autoload-file-name-handler))
 
+(use-package emacs
+ :ensure nil
+
+ :custom
+ ;; External Processes
+ (setq-default read-process-output-max (* 1024 1024)))
+
 ;; Packages ------------------------------------------------------------------------------
 
 (use-package package

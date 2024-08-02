@@ -29,6 +29,8 @@
 (make-directory emacs-backups-dir t)
 
 (use-package no-littering
+ :demand t
+
  :commands
  no-littering-theme-backups
  no-littering-expand-etc-file-name
@@ -109,8 +111,16 @@
  (indent-tabs-mode nil))
 
 (use-package unfill
+ :ensure t
+
  :bind
  ([remap fill-paragraph] . unfill-toggle))
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ (fill-column 90))
 
 ;; Auto-save -----------------------------------------------------------------------------
 
@@ -147,6 +157,33 @@
  ;; Suppress certain annoying warnings.
  (add-to-list 'warning-suppress-types '(defvaralias)))
 
+(use-package emacs
+ :ensure nil
+
+ :custom
+ ;; Scrolling
+ (scroll-conservatively 104)
+ (scroll-margin 3)
+ (hscroll-margin 3)
+ (hscroll-step 1)
+ (auto-hscroll-mode 'current-line)
+ (fast-but-imprecise-scrolling t)
+
+ :preface
+ (defun init/scroll-other-window ()
+  "Scroll up the other window in a split frame."
+  (interactive)
+  (scroll-other-window 1))
+
+ (defun init/scroll-other-window-down ()
+  "Scroll down the other window in a split frame."
+  (interactive)
+  (scroll-other-window-down 1))
+
+ :bind
+ (("<f10>" . init/scroll-other-window)
+  ("<f11>" . init/scroll-other-window-down)))
+
 ;; Dynamic Expansion ---------------------------------------------------------------------
 
 (use-package hippie-exp
@@ -172,40 +209,30 @@
     try-complete-lisp-symbol
     try-complete-lisp-symbol-partially)))
 
+;; Completion ----------------------------------------------------------------------------
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ (completion-ignore-case t)
+ (read-buffer-completion-ignore-case t))
+
+;; History and save-hist -----------------------------------------------------------------
+
+(use-package emacs
+ :ensure nil
+
+ :custom
+ (setq-default history-delete-duplicates t)
+ (setq-default history-length 150))
+
 ;; Other ---------------------------------------------------------------------------------
 
 (eval-when-compile
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
 (require 'init-macros)
-
-(im/after emacs
- (im/key-remap dabbrev-expand hippie-expand)
-
- ;; Completion
- (setq-default completion-ignore-case t)
- (setq-default read-buffer-completion-ignore-case t)
-
- ;; Fill
- (setq-default fill-column 90)
-
- ;; History/savehist
- (setq-default history-delete-duplicates t)
- (setq-default history-length 150)
-
- ;; External Processes
- (setq-default read-process-output-max (* 1024 1024))
-
-  ;; Scrolling
- (setq-default scroll-conservatively 104)
- (setq-default scroll-margin 3)
- (setq-default hscroll-margin 3)
- (setq-default hscroll-step 1)
- (setq-default auto-hscroll-mode 'current-line)
- (setq-default fast-but-imprecise-scrolling t))
-
-(im/key-interactive "<f10>" (scroll-other-window 1))
-(im/key-interactive "<f11>" (scroll-other-window-down 1))
 
 (im/after files
  (setq-default confirm-kill-processes nil)
@@ -233,7 +260,7 @@
 ;;    (dockerfile-mode . dockerfile-ts-mode))))
 )
 
-(im/after bookmarks
+(im/after bookmark
  (setq-default bookmark-file emacs-bookmarks-file))
 
 (im/after saveplace
