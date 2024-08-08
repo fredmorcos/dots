@@ -2,33 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-;; No Littering --------------------------------------------------------------------------
+;;; No Littering
 
 ;; Directories -- TODO REMOVE THESE
 (defconst user-home-dir (expand-file-name "~/"))
 (defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
 (defconst emacs-user-dir (expand-file-name user-emacs-directory))
-(defconst emacs-elpa-dir (concat emacs-user-dir "elpa"))
 (defconst emacs-var-dir (concat emacs-user-dir "var/"))
-(defconst emacs-recentf-file (concat emacs-var-dir "recentf"))
-(defconst emacs-saveplace-file (concat emacs-var-dir "saveplace"))
-(defconst emacs-savehist-file (concat emacs-var-dir "savehist"))
-(defconst emacs-package-qs-file (concat emacs-var-dir "package-qs"))
 (defconst emacs-projectile-cache-file (concat emacs-var-dir "projectile-cache"))
 (defconst emacs-projectile-projects-file (concat emacs-var-dir "projectile-projects"))
 (defconst emacs-prescient-save-file (concat emacs-var-dir "prescient-save"))
-(defconst emacs-bookmarks-file (concat emacs-var-dir "bookmarks"))
 (defconst emacs-tmp-dir (concat temporary-file-directory "emacs/"))
-(defconst emacs-autosaves-dir (concat emacs-tmp-dir "autosaves"))
-(defconst emacs-autosaves-pat (concat emacs-autosaves-dir "/\\1"))
-(defconst emacs-autosave-list-prefix (concat emacs-tmp-dir "auto-save-list/saves-"))
-(defconst emacs-backups-dir (concat emacs-tmp-dir "backups"))
-(defconst emacs-backups-pat (concat emacs-backups-dir "/"))
 (make-directory emacs-var-dir t)
-(make-directory emacs-autosaves-dir t)
-(make-directory emacs-backups-dir t)
 
 (use-package no-littering
+ :ensure t
  :demand t
 
  :commands
@@ -39,10 +27,17 @@
  :config
  (no-littering-theme-backups))
 
-;; Functions -----------------------------------------------------------------------------
+;;; Diminish
+
+(use-package diminish
+ :ensure t
+ :defer t)
+
+;;; Functions
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :config
  ;; Enable these functions.
@@ -51,7 +46,6 @@
  (put 'narrow-to-page   'disabled nil)
  (put 'upcase-region    'disabled nil)
  (put 'downcase-region  'disabled nil)
-
  ;; Disable these functions.
  (put 'eshell           'disabled t)
  (put 'overwrite-mode   'disabled t)
@@ -59,12 +53,18 @@
  (put 'suspend-frame    'disabled t)
  (put 'diary            'disabled t))
 
-;; Text Editing --------------------------------------------------------------------------
+;;; Text Editing
+
+;; TODO: Do I still need this?
+;; (use-package elec-pair
+;;  :ensure nil
+
+;;  :custom
+;;  (electric-pair-pairs '((?\[ . ?\]))))
 
 (use-package qol
  :ensure nil
  :defer t
-
  :load-path "/home/fred/Workspace/dots/emacs/"
 
  :bind
@@ -85,13 +85,14 @@
  (("C-x c" . duplicate-dwim)))
 
 (use-package cua-base
- :defer t
  :ensure nil
+ :defer t
 
  :init
  (cua-selection-mode t))
 
 (use-package move-text
+ :ensure t
  :defer t
 
  :init
@@ -99,6 +100,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  (tab-always-indent 'complete)
@@ -106,62 +108,162 @@
 
 (use-package simple
  :ensure nil
+ :defer t
 
  :custom
  (indent-tabs-mode nil))
 
 (use-package unfill
  :ensure t
+ :defer t
 
  :bind
  ([remap fill-paragraph] . unfill-toggle))
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  (fill-column 90))
 
-;; Auto-save -----------------------------------------------------------------------------
+(use-package newcomment
+ :ensure nil
+ :defer t
+
+ :custom
+ (comment-fill-column 80))
+
+(use-package files
+ :ensure nil
+ :defer t
+
+ :custom
+ (mode-require-final-newline 'visit-save)
+ (require-final-newline 'visit-save)
+ (coding-system-for-read 'utf-8-unix)
+ (coding-system-for-write 'utf-8-unix))
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
- (auto-save-list-file-prefix emacs-autosave-list-prefix))
+ ;; Fill
+ (colon-double-space t)
+ (default-justification 'left))
 
-;; UX ------------------------------------------------------------------------------------
+;;; Auto-save & backups
+
+(use-package files
+ :ensure nil
+ :defer t
+
+ :custom
+ (auto-save-default t))
+
+(use-package files
+ :ensure nil
+ :defer t
+
+ :custom
+ (backup-inhibited nil)
+ (make-backup-files t)
+ (load-prefer-newer t)
+ (delete-old-versions t))
+
+;;; UI
+
+(use-package uniquify
+ :ensure nil
+ :defer t
+
+ :custom
+ (uniquify-buffer-name-style 'forward))
+
+(use-package tooltip
+ :ensure nil
+ :defer t
+
+ :custom
+ (tooltip-use-echo-area t))
+
+(use-package display-line-numbers
+ :ensure nil
+ :defer t
+
+ :custom
+ (display-line-numbers-grow-only t)
+ (display-line-numbers-width-start t))
+
+;;; UX
 
 (use-package windmove
  :ensure nil
+ :defer t
 
  :init
  (windmove-default-keybindings)
  (windmove-delete-default-keybindings))
 
-(use-package goto-addr
+(use-package warnings
+ :ensure nil
  :defer t
- :ensure nil
 
- :init
- ;; Make URLs clickable
- (global-goto-address-mode))
-
-(use-package emacs
- :ensure nil
-
- :defines
- warning-suppress-types
-
- :init
+ :config
  ;; Suppress certain annoying warnings.
- (add-to-list 'warning-suppress-types '(defvaralias)))
+ (add-to-list 'warning-suppress-types 'defvaralias))
 
-(use-package emacs
+(use-package files
  :ensure nil
+ :defer t
 
  :custom
- ;; Scrolling
+ (confirm-kill-processes nil))
+
+(use-package help
+ :ensure nil
+ :defer t
+
+ :custom
+ (help-window-select t))
+
+(use-package mouse
+ :ensure nil
+ :defer t
+
+ :custom
+ (mouse-yank-at-point t)
+ (mouse-1-click-follows-link 'double))
+
+(use-package simple
+ :ensure nil
+ :defer t
+
+ :custom
+ ;; Hide commands in M-x that do not work in the current mode
+ (read-extended-command-predicate #'command-completion-default-include-p)
+ (undo-limit (* 1024 1024))
+ (suggest-key-bindings 10)
+ (save-interprogram-paste-before-kill t)
+ (backward-delete-char-untabify-method 'hungry)
+ (next-error-message-highlight t))
+
+(use-package simple
+ :ensure nil
+ :defer t
+ :after files
+
+ :hook
+ (before-save . delete-trailing-whitespace))
+
+;;; Scrolling
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :custom
  (scroll-conservatively 104)
  (scroll-margin 3)
  (hscroll-margin 3)
@@ -184,10 +286,19 @@
  (("<f10>" . init/scroll-other-window)
   ("<f11>" . init/scroll-other-window-down)))
 
-;; Dynamic Expansion ---------------------------------------------------------------------
+(use-package simple
+ :ensure nil
+ :defer t
+
+ :bind
+ ("<mouse-4>" . previous-line)
+ ("<mouse-5>" . next-line))
+
+;;; Dynamic Expansion
 
 (use-package hippie-exp
  :ensure nil
+ :defer t
 
  :bind
  ;; Replace dabbrev-expand with hippie-expand
@@ -209,229 +320,427 @@
     try-complete-lisp-symbol
     try-complete-lisp-symbol-partially)))
 
-;; Completion ----------------------------------------------------------------------------
+(use-package abbrev
+ :ensure nil
+ :defer t
+ :diminish "Ab")
+
+;;; Completion
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))
 
-;; History and save-hist -----------------------------------------------------------------
+;;; History and save-hist
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
- (setq-default history-delete-duplicates t)
- (setq-default history-length 150))
+ (history-delete-duplicates t)
+ (history-length 150))
 
-;; Other ---------------------------------------------------------------------------------
+(use-package saveplace
+ :ensure nil
+ :defer t
+
+ :init
+ (save-place-mode))
+
+(use-package savehist
+ :ensure nil
+ :defer t
+
+ :init
+ (savehist-mode))
+
+(use-package recentf
+ :ensure nil
+ :defer t
+
+ :custom
+ (recentf-max-menu-items 50)
+ (recentf-max-saved-items 100)
+ (recentf-exclude `(,(concat (expand-file-name user-emacs-directory) "elpa")
+                    ,(no-littering-expand-var-file-name "")
+                    ,(no-littering-expand-etc-file-name "")))
+
+ :init
+ (recentf-mode))
+
+;;; Windows
+
+(use-package window
+ :ensure nil
+ :defer t
+
+ :custom
+ (switch-to-buffer-in-dedicated-window 'pop)
+ (switch-to-buffer-obey-display-actions t)
+ (split-height-threshold 160)
+ (even-window-sizes 'width-only)
+ (switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'"))
+
+ :preface
+ (defmacro init/disable-popup (regexp)
+  "Stop buffers that match REGEXP from popping up."
+  `(push (cons ,regexp (cons #'display-buffer-no-window nil)) display-buffer-alist))
+
+ :config
+ (init/disable-popup "\\`\\*Compile-Log\\*.*\\'")
+ (init/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
+ (init/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
+ (init/disable-popup "\\`\\*Warnings\\*.*\\'")
+
+ :bind
+ (("<f12>"       . delete-other-windows)
+  ("<M-S-right>" . next-buffer)
+  ("<M-S-left>"  . previous-buffer)))
+
+;;; General Programming
+
+(use-package vc
+ :ensure nil
+ :defer t
+
+ :custom
+ (vc-make-backup-files t))
+
+(use-package ediff-wind
+ :ensure nil
+ :defer t
+
+ :custom
+ (ediff-split-window-function #'split-window-right)
+ (ediff-window-setup-function #'ediff-setup-windows-plain))
+
+(use-package eldoc
+ :ensure nil
+ :defer t
+ :diminish "Ed"
+
+ :custom
+ (eldoc-documentation-strategy 'eldoc-documentation-compose))
+
+(use-package subword
+ :ensure nil
+ :defer t
+ :diminish "Sw")
+
+(use-package prog-mode
+ :ensure nil
+ :defer t
+
+ :hook
+ (prog-mode . display-fill-column-indicator-mode)
+ (prog-mode . goto-address-prog-mode))
+
+(use-package magit-process
+ :ensure nil
+ :defer t
+
+ :hook
+ (magit-process-mode . goto-address-mode))
+
+;;; General Features
+
+(use-package symbol-overlay
+ :ensure t
+ :defer t
+ :diminish "Sy"
+
+ :bind
+ (:map symbol-overlay-mode-map
+  ("M->" . symbol-overlay-jump-next)
+  ("M-<" . symbol-overlay-jump-prev))
+
+ :custom
+ (symbol-overlay-idle-time 0.1))
+
+(use-package paren
+ :ensure nil
+ :defer t
+
+ :custom
+ (show-paren-when-point-inside-paren t)
+ (show-paren-style 'mixed)
+ (show-paren-highlight-openparen t)
+ (show-paren-context-when-offscreen 'overlay))
+
+(use-package autorevert
+ :ensure nil
+ :defer t
+ :diminish "Ar"
+
+ :custom
+ (auto-revert-interval 1)
+ (auto-revert-avoid-polling t)
+ (buffer-auto-revert-by-notification t)
+ (auto-revert-mode-text " Ar"))
+
+(use-package indent-guide
+ :ensure t
+ :defer t)
+
+(use-package crux
+ :ensure t
+ :defer t)
+
+;;; Various
+
+(use-package dictionary
+ :ensure nil
+ :defer t
+
+ :custom
+ (dictionary-server "dict.org")
+ (dictionary-use-single-buffer t))
+
+(use-package woman
+ :ensure nil
+ :defer t
+
+ :custom
+ (woman-fill-column 100))
+
+;;; Whitespace
+
+(use-package whitespace
+ :ensure nil
+ :defer t
+ :diminish "Ws"
+
+ :custom
+ (whitespace-line-column 90)
+ (show-trailing-whitespace nil)
+ (whitespace-action '(cleanup))
+ (whitespace-style
+  '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
+    space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
+    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof)))
+
+;;; Makefiles
+
+(use-package make-mode
+ :ensure nil
+ :defer t
+
+ :hook
+ (makefile-mode . whitespace-mode))
+
+;;; Emacs Lisp
+
+(use-package elisp-mode
+ :ensure nil
+ :defer t
+
+ :custom
+ (lisp-indent-offset 1)
+ (lisp-indent-function #'common-lisp-indent-function)
+
+ :hook
+ (emacs-lisp-mode . symbol-overlay-mode)
+ (emacs-lisp-mode . whitespace-mode))
+
+(use-package highlight-defined
+ :ensure t
+ :defer t
+
+ :hook
+ (emacs-lisp-mode . highlight-defined-mode))
+
+(use-package highlight-quoted
+ :ensure t
+ :defer t
+
+ :hook
+ (emacs-lisp-mode . highlight-quoted-mode))
+
+(use-package eros
+ :ensure t
+ :defer t
+
+ :hook
+ (emacs-lisp-mode . eros-mode))
+
+(use-package suggest
+ :ensure t
+ :defer t)
+
+(use-package ipretty
+ :ensure t
+ :defer t
+
+ :hook
+ (emacs-lisp-mode . (lambda () (ipretty-mode t))))
+
+(use-package elsa
+ :ensure t
+ :defer t)
+
+(use-package flycheck-elsa
+ :ensure t
+ :defer t
+
+ :hook
+ (emacs-lisp-mode . flycheck-elsa-setup))
+
+;;; Shell Scripting
+
+(use-package sh-script
+ :ensure nil
+ :defer t
+
+ :custom
+ (sh-basic-offset 2)
+ (sh-indentation 2)
+
+ :preface
+ (defun init/make-file-executable ()
+  "Makes the file executable on save."
+  (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p 0 t))
+
+ :hook
+ (sh-mode . init/make-file-executable))
+
+;;; Dired
+
+(use-package casual-dired
+ :ensure t
+ :defer t)
+
+(use-package dired-async
+ :ensure nil
+ :defer t
+ :diminish "As")
+
+(use-package dired
+ :ensure nil
+ :defer t
+
+ :custom
+ (dired-mouse-drag-files t)
+ (dired-listing-switches "-l --group-directories-first")
+ (dired-hide-details-hide-symlink-targets nil)
+
+ :bind
+ (:map dired-mode-map
+  ("C-o" . casual-dired-tmenu))
+
+ :preface
+ (defun init/dired-setup ()
+  "Setup dired requires."
+  (require 'dired-x)
+  (require 'wdired)
+  (require 'image-dired)
+  (require 'casual-dired))
+
+ :hook
+ (dired-mode . init/dired-setup)
+ (dired-mode . dired-hide-details-mode)
+ (dired-mode . auto-revert-mode)
+ (dired-mode . hl-line-mode)
+ (dired-mode . context-menu-mode)
+ (dired-mode . dired-async-mode))
+
+;;; Search
+
+(use-package isearch
+ :ensure nil
+ :defer t
+
+ :custom
+ (isearch-lazy-count t)
+ (isearch-lazy-highlight t))
+
+;;; CMake
+
+(use-package cmake-mode
+ :ensure t
+ :defer t
+
+ :hook
+ (cmake-mode . eldoc-cmake-enable))
+
+(use-package eldoc-cmake
+ :ensure t
+ :defer t)
+
+;;; Markdown
+
+(use-package markdown-mode
+ :ensure t
+ :defer t)
+
+;;; Sed
+
+(use-package sed-mode
+ :ensure t
+ :defer t)
+
+;;; Po Translations
+
+(use-package po-mode
+ :ensure t
+ :defer t)
+
+;;; TOML
+
+(use-package toml-mode
+ :ensure t
+ :defer t
+
+ :hook
+ (toml-mode . eldoc-toml-mode))
+
+(use-package eldoc-toml
+ :ensure t
+ :defer t
+ :diminish)
+
+;;; JSON
+
+(use-package json-mode
+ :ensure t
+ :defer t
+
+ :hook
+ (json-mode . indent-guide-mode)
+ (json-mode . tree-sitter-mode))
+
+;;; Systemd
+
+(use-package systemd
+ :ensure t
+ :defer t
+
+ :hook
+ (systemd-mode . company-mode))
+
+;;; Other
+
+;; (im/after files
+;;  (setq-default major-mode-remap-alist
+;;   '((c-mode . c-ts-mode)
+;;     (c++-mode . c++-ts-mode)
+;;     (c-or-c++-mode . c-or-c++-ts-mode)
+;;     (rust-mode . rust-ts-mode)
+;;     (sh-mode . bash-ts-mode)
+;;     (toml-mode . toml-ts-mode)
+;;     (json-mode . json-ts-mode)
+;;     (cmake-mode . cmake-ts-mode)
+;;     (python-mode . python-ts-mode)
+;;     (dockerfile-mode . dockerfile-ts-mode))))
 
 (eval-when-compile
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
 (require 'init-macros)
-
-(im/after files
- (setq-default confirm-kill-processes nil)
- (setq-default auto-save-file-name-transforms `((".*" ,emacs-autosaves-pat t)))
- (setq-default auto-save-default t)
- (setq-default backup-directory-alist `((".*" . ,emacs-backups-pat)))
- (setq-default backup-inhibited nil)
- (setq-default make-backup-files t)
- (setq-default delete-old-versions t)
- (setq-default mode-require-final-newline 'visit-save)
- (setq-default require-final-newline 'visit-save)
- (setq-default load-prefer-newer t)
- (setq-default coding-system-for-read 'utf-8-unix)
- (setq-default coding-system-for-write 'utf-8-unix)
-;; (setq-default major-mode-remap-alist
-;;  '((c-mode . c-ts-mode)
-;;    (c++-mode . c++-ts-mode)
-;;    (c-or-c++-mode . c-or-c++-ts-mode)
-;;    (rust-mode . rust-ts-mode)
-;;    (sh-mode . bash-ts-mode)
-;;    (toml-mode . toml-ts-mode)
-;;    (json-mode . json-ts-mode)
-;;    (cmake-mode . cmake-ts-mode)
-;;    (python-mode . python-ts-mode)
-;;    (dockerfile-mode . dockerfile-ts-mode))))
-)
-
-(im/after bookmark
- (setq-default bookmark-file emacs-bookmarks-file))
-
-(im/after saveplace
- (setq-default save-place-file emacs-saveplace-file))
-(save-place-mode)
-
-(im/after savehist
- (setq-default savehist-file emacs-savehist-file))
-(savehist-mode)
-
-(im/after recentf
- ;; (setq-default recentf-auto-cleanup 'never)
- (setq-default recentf-save-file emacs-recentf-file)
- (setq-default recentf-max-menu-items 50)
- (setq-default recentf-max-saved-items 100)
- (setq-default recentf-exclude `(,emacs-elpa-dir ,emacs-var-dir)))
-;; (im/hook kill-emacs-hook recentf-cleanup "recentf")
-(recentf-mode)
-
-(im/after help
- (setq-default help-window-select t))
-
-(im/after window
- (setq-default switch-to-buffer-in-dedicated-window 'pop)
- (setq-default switch-to-buffer-obey-display-actions t)
- (setq-default split-height-threshold 160)
- (setq-default even-window-sizes 'width-only)
- (im/disable-popup "\\`\\*Compile-Log\\*.*\\'")
- (im/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
- (im/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
- (im/disable-popup "\\`\\*Warnings\\*.*\\'")
- (setq-default switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'")))
-
-;; Window
-(im/key "<f12>"       delete-other-windows)
-(im/key "<M-S-right>" next-buffer)
-(im/key "<M-S-left>"  previous-buffer)
-
-(im/after xref
- (setq-default xref-backend-functions '()))
-
-(im/after fill
- (setq-default colon-double-space t)
- (setq-default default-justification 'left))
-
-(im/after mouse
- (setq-default mouse-yank-at-point t))
-
-(im/after simple
- ;; Hide commands in M-x that do not work in the current mode
- (setq-default read-extended-command-predicate #'command-completion-default-include-p)
- (setq-default undo-limit (* 1024 1024))
- (setq-default suggest-key-bindings 10)
- (setq-default save-interprogram-paste-before-kill t)
- (setq-default backward-delete-char-untabify-method 'hungry)
- (setq-default next-error-message-highlight t)
- (im/after files
-  (im/hook before-save-hook delete-trailing-whitespace)))
-
-(im/key "<mouse-4>" previous-line)
-(im/key "<mouse-5>" next-line)
-
-(im/after uniquify
- (setq-default uniquify-buffer-name-style 'forward))
-
-(im/after tooltip
- (setq-default tooltip-use-echo-area t))
-
-(im/after dictionary
- (setq-default dictionary-server "dict.org")
- (setq-default dictionary-use-single-buffer t))
-
-(im/after woman
- (setq-default woman-fill-column 100))
-
-(im/after vc
- (setq-default vc-make-backup-files t))
-
-(im/after newcomment
- (setq-default comment-fill-column 80))
-
-(im/after ediff-wind
- (setq-default ediff-split-window-function #'split-window-horizontally)
- (setq-default ediff-window-setup-function  'ediff-setup-windows-plain))
-
-(im/after elec-pair
- (setq-default electric-pair-pairs '((?\[ . ?\]))))
-
-(im/after display-line-numbers
- (setq-default display-line-numbers-grow-only t)
- (setq-default display-line-numbers-width-start t))
-
-(im/after abbrev
- (im/dim abbrev-mode "Ab"))
-
-(im/after whitespace
- (im/dim whitespace-mode "Ws")
- (setq-default whitespace-line-column 90)
- (setq-default show-trailing-whitespace nil)
- (setq-default whitespace-action '(cleanup))
- (setq-default whitespace-style
-  '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
-    space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
-    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof)))
-
-(im/after proced
- (setq-default proced-auto-update-flag t)
- (setq-default proced-auto-update-interval 1)
- (setq-default proced-tree-flag t))
-
-(im/after make-mode
- (im/hook makefile-mode-hook whitespace-mode))
-
-(im/pkg symbol-overlay
- (im/after symbol-overlay
-  (im/dim symbol-overlay-mode "Sy")
-  (im/key-local "M->" symbol-overlay-jump-next symbol-overlay-mode-map)
-  (im/key-local "M-<" symbol-overlay-jump-prev symbol-overlay-mode-map)
-  (setq-default symbol-overlay-idle-time 0.1)))
-
-(im/after elisp-mode
- (setq-default lisp-indent-offset 1)
- (setq-default lisp-indent-function #'common-lisp-indent-function)
- (im/hook emacs-lisp-mode-hook symbol-overlay-mode)
- (im/hook emacs-lisp-mode-hook whitespace-mode))
-
-(im/mode "emacs" emacs-lisp-mode)
-(im/mode ".config/emacs/init" emacs-lisp-mode)
-
-(im/after eldoc
- (im/dim eldoc-mode "Ed")
- (setq-default eldoc-documentation-strategy 'eldoc-documentation-compose))
-
-(im/after paren
- (setq-default show-paren-when-point-inside-paren t)
- (setq-default show-paren-style 'mixed)
- (setq-default show-paren-highlight-openparen t)
- (setq-default show-paren-context-when-offscreen 'overlay))
-
-(im/pkg casual-dired)
-
-(im/after dired
- (require 'dired-x)
- (require 'wdired)
- (require 'image-dired)
- (require 'casual-dired)
- (setq-default dired-mouse-drag-files t)
- (setq-default dired-listing-switches "-l --group-directories-first")
- (setq-default dired-hide-details-hide-symlink-targets nil)
- (im/hook dired-mode-hook dired-hide-details-mode "dired")
- (im/hook dired-mode-hook auto-revert-mode)
- (im/hook dired-mode-hook hl-line-mode)
- (im/hook dired-mode-hook context-menu-mode)
- (im/hook dired-mode-hook dired-async-mode)
- (im/hookn dired-mode-hook
-  (setq-local mouse-1-click-follows-link 'double))
- (im/key-local "C-o" casual-dired-tmenu dired-mode-map))
-
-(im/after autorevert
- (im/dim autorevert-mode "Ar")
- (setq-default auto-revert-interval 1)
- (setq-default auto-revert-avoid-polling t)
- (setq-default buffer-auto-revert-by-notification t)
- (setq-default auto-revert-mode-text " Ar"))
-
-(im/after isearch
- (setq-default isearch-lazy-count t)
- (setq-default isearch-lazy-highlight t))
-
-(im/after subword
- (im/dim subword-mode "Sw"))
 
 (im/after flyspell
  (im/dim flyspell-mode "Fs")
@@ -441,12 +750,6 @@
 
 (im/after text-mode
  (im/hook text-mode-hook spell-fu-mode))
-
-(im/after sh-script
- (setq-default sh-basic-offset 2)
- (setq-default sh-indentation 2)
- (im/hookn sh-mode-hook
-  (im/hook after-save-hook executable-make-buffer-file-executable-if-script-p)))
 
 (defmacro im/setup-c-style-comments ()
  "Setup C-style /* ... */ comments."
@@ -493,86 +796,6 @@
 (im/after gud
  (im/hook gud-mode-hook gud-tooltip-mode)
  (setq-local gdb-restore-window-configuration-after-quit t))
-
-(im/pkg markdown-mode)
-(im/pkg crux)
-(im/pkg indent-guide)
-(im/pkg sed-mode)
-(im/pkg po-mode)
-
-(im/pkg toml-mode)
-(im/pkg eldoc-toml
- (im/after eldoc-toml
-  (im/dim eldoc-toml-mode))
- (im/after toml-mode
-  (im/hook toml-mode-hook eldoc-toml-mode)))
-
-(im/pkg cmake-mode)
-(im/pkg eldoc-cmake
- (im/after cmake-mode
-  (im/hook cmake-mode-hook eldoc-cmake-enable "eldoc-cmake")))
-
-(im/pkg json-mode
- (im/hook json-mode-hook indent-guide-mode)
- (im/hook json-mode-hook tree-sitter-mode))
-
-(im/pkg systemd
- (im/hook systemd-mode-hook company-mode))
-
-(im/pkg highlight-defined
- (im/hook emacs-lisp-mode-hook highlight-defined-mode))
-
-(im/pkg highlight-quoted
- (im/hook emacs-lisp-mode-hook highlight-quoted-mode))
-
-(im/pkg eros
- (im/hook emacs-lisp-mode-hook eros-mode))
-
-(im/pkg suggest)
-
-(im/pkg ipretty
- (ipretty-mode))
-
-(im/pkg elsa)
-
-(im/pkg flycheck-elsa
- (im/hook emacs-lisp-mode-hook flycheck-elsa-setup))
-
-(im/after org
- (setq-default org-startup-truncated nil)
- (setq-default org-startup-indented t)
- (setq-default org-todo-keywords
-  `((sequence ,(char-to-string 9744) ,(char-to-string 9745))
-    (sequence "TODO" "DONE")))
- (setq-default org-hide-leading-stars t)
- (setq-default org-ellipsis "…")
- (setq-default org-hide-emphasis-markers t)
- (setq-default org-pretty-entities nil)
- (setq-default org-fontify-whole-heading-line t)
- (setq-default org-fontify-done-headline t)
- (setq-default org-property-format "%s %s")
- (setq-default org-insert-heading-respect-content t)
- (setq-default org-catch-invisible-edits 'show-and-error)
- (setq-default org-auto-align-tags nil)
- (setq-default org-tags-column 0)
- (setq-default org-special-ctrl-a/e t)
- (setq-default org-special-ctrl-k t)
- (setq-default org-special-ctrl-o t)
- (im/key-local "C-c p" qol/generate-password org-mode-map "qol")
- (im/hook org-mode-hook org-bullets-mode)
- ;; (im/hook org-mode-hook spell-fu-mode)
- (im/hookn org-mode-hook
-  (setq-local left-margin-width 2)
-  (setq-local right-margin-width 2)
-  (setq-local scroll-margin 0)))
-
-(im/pkg org-bullets
- (im/after org-bullets
-  (setq-default org-bullets-bullet-list
-   `(,(char-to-string 8857)
-     ,(char-to-string 8627)
-     ,(char-to-string 8627)
-     ,(char-to-string 8627)))))
 
 (im/pkg which-key
  (im/after which-key
@@ -1147,9 +1370,6 @@
 
 (im/pkg buffer-move
  (im/key "C-x m" buf-move))
-
-;; (im/pkg dirvish
-;;  (dirvish-override-dired-mode))
 
 ;; (im/pkg popper
 ;;  (im/after popper

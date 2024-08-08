@@ -7,10 +7,29 @@
 ;; (profiler-start 'cpu)
 ;; (add-hook 'after-init-hook #'profiler-report)
 
-;; Garbage Collector ---------------------------------------------------------------------
+;;; Use Packages
+
+(use-package use-package
+ :ensure nil
+ :defer t
+
+ :custom
+ (use-package-compute-statistics t)
+ (use-package-verbose t)
+ (use-package-expand-minimally t))
 
 (use-package emacs
  :ensure nil
+ :defer t
+
+ :custom
+ (debug-on-error t))
+
+;;; Garbage Collector
+
+(use-package emacs
+ :ensure nil
+ :defer t
 
  :custom
  ;; A big contributor to startup time is garbage collection.
@@ -21,18 +40,20 @@
  ;; Run the GC after 5 seconds of idleness.
  (run-with-idle-timer 5 t #'garbage-collect))
 
-;; Configuration System ------------------------------------------------------------------
+;;; Configuration System
 
 (use-package cus-edit
  :ensure nil
+ :defer t
 
  :custom
  (custom-file (make-temp-file "emacs-custom-")))
 
-;; UI ------------------------------------------------------------------------------------
+;;; UI
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  ;; Skip redisplays.
@@ -50,6 +71,7 @@
 
 (use-package frame
  :ensure nil
+ :defer t
 
  :config
  (modify-all-frames-parameters
@@ -62,6 +84,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  ;; Ignore X resources.
@@ -75,6 +98,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  (inhibit-startup-screen t)
@@ -90,30 +114,35 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :config
  (load-theme 'modus-operandi))
 
 (use-package menu-bar
  :ensure nil
+ :defer t
 
  :custom
  (menu-bar-mode nil))
 
 (use-package tool-bar
  :ensure nil
+ :defer t
 
  :custom
  (tool-bar-mode nil))
 
 (use-package scroll-bar
  :ensure nil
+ :defer t
 
  :custom
  (scroll-bar-mode nil))
 
 (use-package simple
  :ensure nil
+ :defer t
 
  :custom
  (line-number-mode t)
@@ -122,6 +151,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  (column-number-indicator-zero-based nil)
@@ -130,21 +160,16 @@
 
 (use-package frame
  :ensure nil
+ :defer t
 
  :custom
  (blink-cursor-mode nil))
 
-(use-package display-fill-column-indicator
- :defer t
- :ensure nil
-
- :init
- (global-display-fill-column-indicator-mode))
-
-;; UX ------------------------------------------------------------------------------------
+;;; UX
 
 (use-package warnings
  :ensure nil
+ :defer t
 
  :custom
  ;; Stop the warnings buffer from popping up, but still log warnings.
@@ -152,6 +177,7 @@
 
 (use-package comp
  :ensure nil
+ :defer t
 
  :custom
  ;; Silence native compilation warnings.
@@ -159,6 +185,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  ;; Avoid graphical dialog boxes
@@ -167,10 +194,11 @@
  ;; Respond to yes/no questions using Y/N
  (use-short-answers t))
 
-;; Performance ---------------------------------------------------------------------------
+;;; Performance
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  ;; This slows down normal operation.
@@ -178,6 +206,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  ;; Improve text rendering performance.
@@ -186,6 +215,7 @@
 
 (use-package vc-hooks
  :ensure nil
+ :defer t
 
  :custom
  ;; Only use Git as version control.
@@ -193,6 +223,7 @@
 
 (use-package files
  :ensure nil
+ :defer t
 
  :config
  ;; Disable version control when opening files.
@@ -200,6 +231,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :config
  ;; LSP speed improvement.
@@ -207,6 +239,7 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  ;; :custom
  ;; Disable tramp when loading .el and .elc files. That doesn't work correctly. It instead
@@ -220,15 +253,17 @@
 
 (use-package emacs
  :ensure nil
+ :defer t
 
  :custom
  ;; External Processes
  (setq-default read-process-output-max (* 1024 1024)))
 
-;; Packages ------------------------------------------------------------------------------
+;;; Packages
 
 (use-package package
  :ensure nil
+ :defer t
 
  :defines
  package-archives
@@ -241,6 +276,7 @@
 
 (use-package url-vars
  :ensure nil
+ :defer t
 
  :custom
  ;; Use this when unsetting any proxies for localhost.
