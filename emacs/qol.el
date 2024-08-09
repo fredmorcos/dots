@@ -52,7 +52,7 @@
 (defun qol/insert-pair-backtick ()
  "Insert back-ticks in or around text."
  (interactive)
- (im/insert-pair ?\` ?\` t))
+ (qol/insert-pair ?\` ?\` t))
 
 (defun qol/generate-password ()
  "Generate a password and insert it."

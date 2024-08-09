@@ -992,6 +992,30 @@
  :custom
  (transient-default-level 7))
 
+;;; Debuggers
+
+(use-package gdb-mi
+ :ensure nil
+ :defer t
+
+ :custom
+ (gdb-many-windows t)
+ (gdb-use-separate-io-buffer t)
+
+ :config
+ (advice-add 'gdb-setup-windows :after
+  (lambda () (set-window-dedicated-p (selected-window) t))))
+
+(use-package gud
+ :ensure nil
+ :defer t
+
+ :hook
+ (gud-mode-hook . gud-tooltip-mode)
+
+ :custom
+ (gdb-restore-window-configuration-after-quit t))
+
 ;;; Other
 
 ;; (im/after files
@@ -1051,16 +1075,6 @@
  (setq-default jit-lock-chunk-size 5000)
  (setq-default jit-lock-antiblink-grace 1))
 
-(im/after gdb-mi
- (setq-default gdb-many-windows t)
- (setq-default gdb-use-separate-io-buffer t)
- (advice-add 'gdb-setup-windows :after
-  (lambda () (set-window-dedicated-p (selected-window) t))))
-
-(im/after gud
- (im/hook gud-mode-hook gud-tooltip-mode)
- (setq-local gdb-restore-window-configuration-after-quit t))
-
 (im/pkg projectile
  (im/after projectile
   (im/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
@@ -1111,7 +1125,7 @@
 
 (im/pkg yaml-mode
  (im/after yaml-mode
-  (im/key-local "C-c p" im/generate-password yaml-mode-map "qol")
+  (im/key-local "C-c p" qol/generate-password yaml-mode-map "qol")
   (im/hook yaml-mode-hook flycheck-mode)
   (im/hook yaml-mode-hook tree-sitter-mode))
  (im/mode "clang-format" yaml-mode))
