@@ -5,14 +5,10 @@
 ;;; No Littering
 
 ;; Directories -- TODO REMOVE THESE
-(defconst user-home-dir (expand-file-name "~/"))
-(defconst user-dict-en (concat user-home-dir ".aspell.en.pws"))
 (defconst emacs-user-dir (expand-file-name user-emacs-directory))
 (defconst emacs-var-dir (concat emacs-user-dir "var/"))
 (defconst emacs-projectile-cache-file (concat emacs-var-dir "projectile-cache"))
 (defconst emacs-projectile-projects-file (concat emacs-var-dir "projectile-projects"))
-(defconst emacs-prescient-save-file (concat emacs-var-dir "prescient-save"))
-(defconst emacs-tmp-dir (concat temporary-file-directory "emacs/"))
 (make-directory emacs-var-dir t)
 
 (use-package no-littering
@@ -98,6 +94,14 @@
  :init
  (move-text-default-bindings))
 
+(use-package mwim
+ :ensure t
+ :defer t
+
+ :bind
+ ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
+ ([remap move-end-of-line] . mwim-end-of-code-or-line))
+
 (use-package emacs
  :ensure nil
  :defer t
@@ -152,6 +156,13 @@
  ;; Fill
  (colon-double-space t)
  (default-justification 'left))
+
+(use-package expand-region
+ :ensure t
+ :defer t
+
+ :bind
+ ("C-=" . er/expand-region))
 
 ;;; Auto-save & backups
 
@@ -404,21 +415,6 @@
 
 ;;; General Programming
 
-(use-package vc
- :ensure nil
- :defer t
-
- :custom
- (vc-make-backup-files t))
-
-(use-package ediff-wind
- :ensure nil
- :defer t
-
- :custom
- (ediff-split-window-function #'split-window-right)
- (ediff-window-setup-function #'ediff-setup-windows-plain))
-
 (use-package eldoc
  :ensure nil
  :defer t
@@ -440,12 +436,86 @@
  (prog-mode . display-fill-column-indicator-mode)
  (prog-mode . goto-address-prog-mode))
 
-(use-package magit-process
+;;; Version Control
+
+(use-package vc
  :ensure nil
+ :defer t
+
+ :custom
+ (vc-make-backup-files t))
+
+(use-package ediff-wind
+ :ensure nil
+ :defer t
+
+ :custom
+ (ediff-split-window-function #'split-window-right)
+ (ediff-window-setup-function #'ediff-setup-windows-plain))
+
+(use-package blamer
+ :ensure t
+ :defer t
+
+ :custom
+  (blamer-idle-time 0)
+  (blamer-commit-formatter ": %s")
+  (blamer-datetime-formatter "%s")
+ (blamer-max-commit-message-length 60)
+
+ :bind
+ (:map prog-mode-map
+  ("C-c b" . blamer-mode)))
+
+(use-package magit-process
+ :ensure magit
  :defer t
 
  :hook
  (magit-process-mode . goto-address-mode))
+
+(use-package magit
+ :ensure t
+ :defer t
+
+ :bind
+ ("C-x g" . magit-status)
+
+ :custom
+ (magit-log-section-commit-count 20)
+ (magit-auto-revert-tracked-only nil)
+ ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+ (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+ (magit-bury-buffer-function #'magit-restore-window-configuration)
+ (magit-repository-directories '(("~/Workspace" . 3)))
+
+ :hook
+ (after-save . magit-after-save-refresh-status))
+
+(use-package magit-diff
+ :ensure magit
+ :defer t
+
+ :custom
+ (magit-revision-show-gravatars t)
+ (magit-revision-fill-summary-line fill-column))
+
+(use-package diff-hl
+ :ensure t
+ :defer t
+
+ :custom
+ (diff-hl-draw-borders nil)
+ (diff-hl-flydiff-delay 0.1))
+
+(use-package diff-hl
+ :ensure t
+ :defer t
+ :after magit-mode
+
+ :hook
+ (magit-pre-refresh . diff-hl-magit-pre-refresh)
+ (magit-post-refresh . diff-hl-magit-post-refresh))
 
 ;;; General Features
 
@@ -722,6 +792,206 @@
  :hook
  (systemd-mode . company-mode))
 
+;;; Spell Checking
+
+(use-package flyspell
+ :ensure nil
+ :defer t
+ :diminish "Fs"
+
+ :custom
+ (ispell-program-name "aspell")
+ (ispell-extra-args '("--sug-mode=ultra"))
+ (ispell-local-dictionary "en_US"))
+
+(use-package flyspell-correct
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map flyspell-mode-map
+  ("C-;" . flyspell-correct-wrapper))
+
+ :custom
+ (flyspell-correct-interface #'flyspell-correct-ivy))
+
+(use-package flyspell-correct-ivy
+ :ensure t
+ :defer t)
+
+(use-package spell-fu
+ :ensure t
+ :defer t
+
+ :preface
+ (defun init/spell-fu-setup ()
+  "Setup spell-fu."
+  (defconst user-dict-en (expand-file-name "~/.aspell.en.pws"))
+  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
+  (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
+  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
+
+ :hook
+ (spell-fu-mode . init/spell-fu-setup)
+
+ :custom
+ spell-fu-faces-exclude '(link org-link))
+
+;;; Emacs Tools
+
+(use-package which-key
+ :ensure t
+ :defer t
+ :diminish
+
+ :custom
+ (which-key-idle-delay 0.5)
+ (which-key-show-docstrings nil)
+ (which-key-add-column-padding 3)
+ (which-key-max-description-length nil)
+ (which-key-max-display-columns nil)
+
+ :init
+ (which-key-mode))
+
+(use-package ivy
+ :ensure t
+ :defer t
+ :diminish
+
+ :bind
+ (:map ivy-minibuffer-map
+  ("<RET>" . ivy-alt-done))
+
+ :custom
+ (ivy-wrap t)
+ (ivy-use-selectable-prompt t)
+ (ivy-use-virtual-buffers t)
+ (ivy-count-format "(%d/%d) ")
+ (ivy-virtual-abbreviate 'abbreviate)
+ (ivy-initial-inputs-alist nil)
+ (ivy-extra-directories nil)
+ (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
+
+ :init
+ (ivy-mode))
+
+(use-package ivy-rich
+ :ensure t
+ :defer t
+
+ :custom
+ (ivy-rich-path-style 'abbrev)
+
+ :init
+ (ivy-rich-mode))
+
+(use-package counsel
+ :ensure t
+ :defer t
+ :diminish
+
+ :bind
+ (:map counsel-mode-map
+  ("M-Y" . counsel-yank-pop))
+
+ :config
+ (put 'counsel-find-symbol 'no-counsel-M-x t)
+
+ :init
+ (counsel-mode))
+
+(use-package marginalia
+ :ensure t
+ :defer t
+
+ :init
+ (marginalia-mode))
+
+(use-package hotfuzz
+ :ensure t
+ :defer t
+
+ :init
+ (push 'hotfuzz completion-styles))
+
+(use-package prescient
+ :ensure t
+ :defer t
+
+ :custom
+ (prescient-sort-full-matches-first t)
+
+ :config
+ (push 'literal-prefix prescient-filter-method)
+ (push 'prefix prescient-filter-method)
+ (push 'anchored prescient-filter-method)
+
+ :init
+ (push 'prescient completion-styles)
+
+ :commands
+ prescient-persist-mode
+
+ :init
+ (prescient-persist-mode))
+
+(use-package ivy-prescient
+ :ensure t
+ :defer t
+
+ :init
+ (ivy-prescient-mode))
+
+(use-package orderless
+ :ensure t
+ :defer t
+
+ :config
+ (push 'orderless-initialism orderless-matching-styles)
+ (push 'orderless-prefixes orderless-matching-styles)
+
+ :init
+ (push 'orderless completion-styles))
+
+(use-package minibuffer
+ :ensure nil
+ :defer t
+
+ :config
+ (push 'substring completion-styles)
+ (push 'flex completion-styles)
+
+ :custom
+ (read-file-name-completion-ignore-case t)
+ (completions-format 'one-column)
+ (completions-detailed t))
+
+(use-package ctrlf
+ :ensure t
+ :defer t
+
+ :custom
+ (ctrlf-default-search-style 'fuzzy)
+ (ctrlf-auto-recenter t)
+
+ :init
+ (ctrlf-mode))
+
+(use-package consult
+ :ensure t
+ :defer t
+
+ :custom
+ (completion-in-region-function #'consult-completion-in-region))
+
+(use-package transient
+ :ensure t
+ :defer t
+
+ :custom
+ (transient-default-level 7))
+
 ;;; Other
 
 ;; (im/after files
@@ -741,12 +1011,6 @@
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
 (require 'init-macros)
-
-(im/after flyspell
- (im/dim flyspell-mode "Fs")
- (setq-default ispell-program-name "aspell")
- (setq-default ispell-extra-args '("--sug-mode=ultra"))
- (setq-default ispell-local-dictionary "en_US"))
 
 (im/after text-mode
  (im/hook text-mode-hook spell-fu-mode))
@@ -797,151 +1061,6 @@
  (im/hook gud-mode-hook gud-tooltip-mode)
  (setq-local gdb-restore-window-configuration-after-quit t))
 
-(im/pkg which-key
- (im/after which-key
-  (im/dim which-key-mode)
-  (setq-default which-key-idle-delay 0.5)
-  (setq-default which-key-show-docstrings nil)
-  (setq-default which-key-add-column-padding 3)
-  (setq-default which-key-max-description-length nil)
-  (setq-default which-key-max-display-columns nil))
- (which-key-mode))
-
-(im/pkg ivy
- (im/after ivy
-  (im/dim ivy-mode)
-  (im/key-local "<RET>" ivy-alt-done ivy-minibuffer-map "ivy")
-  (setq-default ivy-wrap t)
-  (setq-default ivy-use-selectable-prompt t)
-  (setq-default ivy-use-virtual-buffers t)
-  (setq-default ivy-count-format "(%d/%d) ")
-  (setq-default ivy-virtual-abbreviate 'abbreviate)
-  (setq-default ivy-initial-inputs-alist nil)
-  (setq-default ivy-extra-directories nil)
-  (setq-default ivy-re-builders-alist
-   '((t . ivy--regex-ignore-order) (t . ivy--regex-plus))))
- (ivy-mode))
-
-(im/pkg ctrlf
- (im/after ctrlf
-  (setq-default ctrlf-default-search-style 'fuzzy)
-  (setq-default ctrlf-auto-recenter t))
- (ctrlf-mode 1))
-
-(im/pkg counsel
- (im/after counsel
-  (im/key-local "M-Y" counsel-yank-pop counsel-mode-map)
-  (im/dim counsel-mode)
-  (put 'counsel-find-symbol 'no-counsel-M-x t))
- (counsel-mode))
-
-(im/pkg ivy-rich
- (im/after ivy-rich
-  (setq-default ivy-rich-path-style 'abbrev))
- (ivy-rich-mode))
-
-;; (im/pkg swiper
-;;  (im/key-remap isearch-forward  swiper-isearch)
-;;  (im/key-remap isearch-backward swiper-isearch-backward)
-;;  (im/key "C-c C-s" swiper-thing-at-point)
-;;  (im/after swiper
-;;   (setq-default swiper-include-line-number-in-search t)
-;;   (setq-default swiper-action-recenter t)))
-
-;; (im/pkg embark
-;;  (im/after flyspell
-;;   ;; Embark reserves this keybinding.
-;;   (im/key-disable "C-." flyspell-mode-map))
-;;  (im/key "C-." embark-act)
-;;  (im/after embark
-;;   (setq-default prefix-help-command #'embark-prefix-help-command)))
-
-(im/pkg marginalia
- (marginalia-mode))
-
-(im/pkg hotfuzz
- (im/after minibuffer
-  (setq-default completion-styles '(hotfuzz))))
-
-(im/pkg prescient
- (im/after prescient
-  (setq-default prescient-save-file emacs-prescient-save-file)
-  (setq-default prescient-sort-full-matches-first t)
-  (eval-when-compile (defvar prescient-filter-method))
-  (push 'literal-prefix prescient-filter-method)
-  (push 'prefix prescient-filter-method)
-  (push 'anchored prescient-filter-method)
-  (im/after minibuffer
-   (push 'prescient completion-styles)))
- (im/autoload prescient-persist-mode "prescient")
- (prescient-persist-mode +1))
-
-(im/pkg ivy-prescient
- (ivy-prescient-mode))
-
-(im/pkg orderless
- (im/after orderless
-  (eval-when-compile (defvar orderless-matching-styles))
-  (push 'orderless-initialism orderless-matching-styles)
-  (push 'orderless-prefixes orderless-matching-styles))
- (im/after minibuffer
-  (push 'orderless completion-styles)))
-
-(im/after minibuffer
- (push 'substring completion-styles)
- (push 'flex completion-styles)
- (setq-default read-file-name-completion-ignore-case t)
- ;; (setq-default completion-category-defaults nil)
- ;; (setq-default completion-cycle-threshold 4)
- (setq-default completions-format 'one-column)
- ;; (setq-default completions-max-height 20)
- (setq-default completions-detailed t)
- ;; (setq-default set-message-functions '(set-multi-message))
- (im/after consult
-  (setq-default completion-in-region-function #'consult-completion-in-region)))
-
-(im/pkg flyspell-correct-ivy
- (im/after flyspell
-  (im/key-local "C-;" flyspell-correct-wrapper flyspell-mode-map)
-  (setq-default flyspell-correct-interface #'flyspell-correct-ivy)))
-
-(im/pkg mwim
- (im/key-remap move-beginning-of-line mwim-beginning-of-code-or-line-or-comment)
- (im/key-remap move-end-of-line mwim-end-of-code-or-line))
-
-(im/pkg expand-region
- (im/key "C-=" er/expand-region))
-
-(im/pkg transient
- (im/after transient
-  (setq-default transient-history-file (concat emacs-var-dir "transient-history"))
-  (setq-default transient-default-level 7)))
-
-(im/pkg blamer
- (im/after blamer
-  (setq-default blamer-idle-time 0)
-  (setq-default blamer-commit-formatter ": %s")
-  (setq-default blamer-datetime-formatter "%s")
-  (setq-default blamer-max-commit-message-length 60))
- (im/after prog-mode
-  (im/key-local "C-c b" blamer-mode prog-mode-map)))
-
-(im/pkg magit
- (im/key "C-x g" magit-status)
- (im/after magit-mode
-  (setq-default magit-log-section-commit-count 20)
-  (setq-default magit-auto-revert-tracked-only nil)
-  ;; (setq-default magit-display-buffer-function
-  ;;  'magit-display-buffer-same-window-except-diff-v1)
-  (setq-default magit-display-buffer-function
-   'magit-display-buffer-fullframe-status-v1)
-  (setq-default magit-bury-buffer-function 'magit-restore-window-configuration)
-  (setq-default magit-repository-directories '(("~/Workspace" . 3)))
-  (im/hook after-save-hook magit-after-save-refresh-status "magit"))
- (im/after magit-diff
-  (setq-default magit-revision-show-gravatars t)
-  (setq-default magit-revision-fill-summary-line fill-column)))
-
 (im/pkg projectile
  (im/after projectile
   (im/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
@@ -976,14 +1095,6 @@
   (im/dim yas-minor-mode "Ys")
   (im/after company
    (im/hookn yas-minor-mode-hook (im/company-add-backend 'company-yasnippet)))))
-
-(im/pkg diff-hl
- (im/after diff-hl
-  (setq-default diff-hl-draw-borders nil)
-  (setq-default diff-hl-flydiff-delay 0.1))
- (im/after magit-mode
-  (im/hook magit-pre-refresh-hook diff-hl-magit-pre-refresh "diff-hl")
-  (im/hook magit-post-refresh-hook diff-hl-magit-post-refresh "diff-hl")))
 
 (im/pkg multiple-cursors
  (im/key "C-c C-v"       mc/edit-lines)
@@ -1131,17 +1242,6 @@
  (im/hook conf-desktop-mode-hook electric-layout-mode)
  (im/hook conf-desktop-mode-hook display-line-numbers-mode)
  (im/hook conf-desktop-mode-hook hl-line-mode))
-
-(im/pkg spell-fu
- (im/autoload spell-fu-dictionary-add "spell-fu")
- (im/autoload spell-fu-get-ispell-dictionary "spell-fu")
- (im/autoload spell-fu-get-personal-dictionary "spell-fu")
- (im/after spell-fu
-  (im/hookn spell-fu-mode-hook
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
-   (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
-   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
-  (setq-default spell-fu-faces-exclude '(link org-link))))
 
 (im/pkg meson-mode
  (im/after meson-mode
