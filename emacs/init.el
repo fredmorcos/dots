@@ -436,6 +436,24 @@
  (prog-mode . display-fill-column-indicator-mode)
  (prog-mode . goto-address-prog-mode))
 
+(use-package deadgrep
+ :ensure t
+ :defer t
+
+ :bind
+ (:map prog-mode-map
+  ("M-F" . deadgrep)))
+
+ ;; (im/after deadgrep
+ ;;  ;; (im/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
+ ;;  ;; (im/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
+ ;;  (require 'wgrep-deadgrep)))
+
+(use-package wgrep-deadgrep
+ :ensure t
+ :defer t
+ :after deadgrep)
+
 ;;; Version Control
 
 (use-package vc
@@ -992,6 +1010,31 @@
  :custom
  (transient-default-level 7))
 
+(use-package multiple-cursors
+ :ensure t
+ :defer t
+
+ :bind
+ ("C-c C-v"       . mc/edit-lines)
+ ("C->"           . mc/mark-next-like-this)
+ ("C-<"           . mc/mark-previous-like-this)
+ ("C-S-<mouse-1>" . mc/add-cursor-on-click))
+
+(use-package multiple-cursors-core
+ :ensure nil
+ :defer t
+
+ :custom
+ (mc/always-run-for-all t))
+
+(use-package volatile-highlights
+ :ensure t
+ :defer t
+ :diminish "Vh"
+
+ :init
+ (volatile-highlights-mode))
+
 ;;; Debuggers
 
 (use-package gdb-mi
@@ -1015,6 +1058,45 @@
 
  :custom
  (gdb-restore-window-configuration-after-quit t))
+
+;;; YAML
+
+(use-package yaml-mode
+ :ensure t
+ :defer t
+
+ :bind
+ (:map yaml-mode-map
+  ("C-c p" . qol/generate-password))
+
+ :hook
+ (yaml-mode . flycheck-mode))
+
+;;; LLVM
+
+(use-package llvm-ts-mode
+ :ensure t
+ :defer t
+ :mode "\\.ll\\'"
+
+ :hook
+ (llvm-mode . demangle-mode))
+
+(use-package autodisass-llvm-bitcode
+ :ensure t
+ :defer
+ :mode "\\.bc\\'")
+
+(use-package demangle-mode
+ :ensure t
+ :defer t)
+
+(use-package yaml-mode
+ :ensure t
+ :defer t
+
+ :mode "\\.clang-format"
+ :mode "\\.clang-tidy")
 
 ;;; Other
 
@@ -1091,15 +1173,6 @@
   (im/key-local "M-G" counsel-projectile-git-grep projectile-mode-map))
  (counsel-projectile-mode))
 
-(im/pkg deadgrep
- (im/key "M-F" deadgrep)
- (im/after deadgrep
-  ;; (im/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
-  ;; (im/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
-  (require 'wgrep-deadgrep)))
-
-(im/pkg wgrep-deadgrep)
-
 (im/pkg yasnippet-snippets
  (im/after yasnippet
   (yasnippet-snippets-initialize)))
@@ -1109,35 +1182,6 @@
   (im/dim yas-minor-mode "Ys")
   (im/after company
    (im/hookn yas-minor-mode-hook (im/company-add-backend 'company-yasnippet)))))
-
-(im/pkg multiple-cursors
- (im/key "C-c C-v"       mc/edit-lines)
- (im/key "C->"           mc/mark-next-like-this)
- (im/key "C-<"           mc/mark-previous-like-this)
- (im/key "C-S-<mouse-1>" mc/add-cursor-on-click)
- (im/after multiple-cursors-core
-  (setq-default mc/always-run-for-all t)))
-
-(im/pkg volatile-highlights
- (im/after volatile-highlights
-  (im/dim volatile-highlights-mode "Vh"))
- (volatile-highlights-mode))
-
-(im/pkg yaml-mode
- (im/after yaml-mode
-  (im/key-local "C-c p" qol/generate-password yaml-mode-map "qol")
-  (im/hook yaml-mode-hook flycheck-mode)
-  (im/hook yaml-mode-hook tree-sitter-mode))
- (im/mode "clang-format" yaml-mode))
-
-(im/mode ".ll" llvm-mode "llvm-mode")
-
-(im/pkg autodisass-llvm-bitcode)
-(im/mode ".bc" autodisass-llvm-bitcode "autodisass-llvm-bitcode")
-
-(im/pkg demangle-mode
- (im/after llvm-mode
-  (im/hook llvm-mode-hook demangle-mode)))
 
 (im/pkg hledger-mode
  (im/after hledger-mode
