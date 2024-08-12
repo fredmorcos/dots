@@ -276,8 +276,8 @@
 
  :custom
  (scroll-conservatively 104)
- (scroll-margin 3)
- (hscroll-margin 3)
+ (scroll-margin 1)
+ (hscroll-margin 1)
  (hscroll-step 1)
  (auto-hscroll-mode 'current-line)
  (fast-but-imprecise-scrolling t)
@@ -444,13 +444,12 @@
  (:map prog-mode-map
   ("M-F" . deadgrep)))
 
- ;; (im/after deadgrep
- ;;  ;; (im/key-local "<f5>" deadgrep-edit-mode deadgrep-mode-map "deadgrep")
- ;;  ;; (im/key-local "<f5>" deadgrep-mode deadgrep-edit-mode-map "deadgrep")))
- ;;  (require 'wgrep-deadgrep)))
+(use-package wgrep
+ :ensure t
+ :defer t)
 
 (use-package wgrep-deadgrep
- :ensure t
+ :ensure nil
  :defer t
  :after deadgrep)
 
