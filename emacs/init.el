@@ -4,13 +4,6 @@
 
 ;;; No Littering
 
-;; Directories -- TODO REMOVE THESE
-(defconst emacs-user-dir (expand-file-name user-emacs-directory))
-(defconst emacs-var-dir (concat emacs-user-dir "var/"))
-(defconst emacs-projectile-cache-file (concat emacs-var-dir "projectile-cache"))
-(defconst emacs-projectile-projects-file (concat emacs-var-dir "projectile-projects"))
-(make-directory emacs-var-dir t)
-
 (use-package no-littering
  :ensure t
  :demand t
@@ -163,6 +156,13 @@
 
  :bind
  ("C-=" . er/expand-region))
+
+(use-package text-mode
+ :ensure nil
+ :defer t
+
+ :hook
+ (text-mode . spell-fu-mode))
 
 ;;; Auto-save & backups
 
@@ -345,6 +345,107 @@
  :custom
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))
+
+(use-package company
+ :ensure t
+ :defer t
+ :diminish "Co"
+
+ :commands
+ (company--active-p)
+
+ :custom
+ (company-backends '((company-capf)))
+ (company-idle-delay 0.5)
+ (company-keywords-ignore-case t)
+ (company-minimum-prefix-length 2)
+ (company-selection-wrap-around t)
+ (company-tooltip-align-annotations t)
+
+ :preface
+ (defun init/company-add-backend (backend)
+  "Add BACKEND to local copy of `company-backends'."
+  (qol/append (car company-backends) backend))
+
+ :bind
+ (:map company-mode-map
+  ("<tab>" . company-indent-or-complete-common)))
+
+(use-package company-posframe
+ :ensure t
+ :defer t
+ :diminish
+ :after company
+
+ :custom
+ (company-posframe-quickhelp-x-offset 2)
+
+ :hook
+ (company-mode . company-posframe-mode))
+
+(use-package company-prescient
+ :ensure t
+ :defer t
+ :after company
+
+ :hook
+ (company-mode . company-prescient-mode))
+
+;;; Syntax Checking
+
+(use-package flycheck
+ :ensure t
+ :defer t
+
+ :commands
+ (flycheck-next-error
+  flycheck-previous-error)
+
+ :bind
+ (:map flycheck-mode-map
+  ("M-n" . flycheck-next-error)
+  ("M-p" . flycheck-previous-error))
+
+ :custom
+ (flycheck-checker-error-threshold nil)
+ (flycheck-mode-line-prefix "Fc")
+ (flycheck-check-syntax-automatically
+  '(idle-change new-line mode-enabled idle-buffer-switch))
+ (flycheck-idle-change-delay 0.25)
+ (flycheck-idle-buffer-switch-delay 0.25)
+
+ :hook
+ (flycheck-mode . flycheck-posframe-mode))
+
+(use-package flycheck-posframe
+ :ensure t
+ :defer t
+
+ :custom
+ (flycheck-posframe-position 'window-bottom-left-corner)
+ (flycheck-posframe-border-width 1)
+ (flycheck-posframe-prefix           (concat " " (char-to-string 8618)  " Info: "))
+ (flycheck-posframe-warnings-prefix  (concat " " (char-to-string 9888)  " Warning: "))
+ (flycheck-posframe-error-prefix     (concat " " (char-to-string 10540) " Error: ")))
+
+(use-package flycheck-posframe
+ :ensure t
+ :defer t
+ :after company
+
+ :config
+ (add-hook 'flycheck-posframe-inhibit-functions #'company--active-p)
+ (add-hook 'flycheck-posframe-inhibit-functions
+  (lambda (&rest _) (bound-and-true-p company-backend))))
+
+(use-package consult-flycheck
+ :ensure t
+ :defer t
+ :after flycheck
+
+ :bind
+ (:map flycheck-mode-map
+  ("C-c ! a" . consult-flycheck)))
 
 ;;; History and save-hist
 
@@ -1034,6 +1135,32 @@
  :init
  (volatile-highlights-mode))
 
+;;; Emacs Syntax Highlighting
+
+(use-package jit-lock
+ :ensure nil
+ :defer t
+
+ :custom
+ (jit-lock-stealth-time 1)
+ (jit-lock-chunk-size 5000)
+ (jit-lock-antiblink-grace 1))
+
+(use-package tree-sitter
+ :ensure t
+ :defer t
+ :diminish "Ts"
+
+ :hook
+ (tree-sitter-mode . tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+ :ensure t
+ :defer t
+
+ :hook
+ (tree-sitter-mode . tree-sitter-langs-install-grammars))
+
 ;;; Debuggers
 
 (use-package gdb-mi
@@ -1053,7 +1180,7 @@
  :defer t
 
  :hook
- (gud-mode-hook . gud-tooltip-mode)
+ (gud-mode . gud-tooltip-mode)
 
  :custom
  (gdb-restore-window-configuration-after-quit t))
@@ -1097,6 +1224,136 @@
  :mode "\\.clang-format"
  :mode "\\.clang-tidy")
 
+;;; CSS
+
+(use-package css-mode
+ :ensure nil
+ :defer t
+
+ :preface
+ (defun init/css-setup-comments ()
+  "Setup C-style /* ... */ comments."
+  (with-eval-after-load 'newcomment
+   (setq-local comment-style 'extra-line)))
+
+ :hook
+ (css-mode . init/css-setup-comments))
+
+;;; C Programming
+
+(use-package cc-mode
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map c-mode-base-map
+  ("(" . nil))
+
+ :custom
+ (c-doc-comment-style
+  '((java-mode . javadoc)
+    (c-mode    . gtkdoc)
+    (c++-mode  . doxygen)))
+
+ :hook
+ (c-mode-common . lsp))
+
+(use-package c-ts-mode
+ :ensure nil
+ :defer t
+
+ :hook
+ (c-ts-base-mode . lsp))
+
+(use-package cc-vars
+ :ensure nil
+ :defer t
+
+ :custom
+ (c-mark-wrong-style-of-comment t)
+ (c-default-style '((other . "user")))
+ (c-basic-offset 2)
+
+ :preface
+ (defun init/cc-setup-comments ()
+  "Setup C-style /* ... */ comments."
+  (with-eval-after-load 'newcomment
+   (setq-local comment-style 'extra-line)))
+
+ :hook
+ (c-mode-common . init/cc-setup-comments))
+
+;;; Python
+
+(use-package python
+ :ensure nil
+ :defer t
+
+ :preface
+ (defun init/python-setup-fill-column ()
+  "Set fill column in python-mode."
+  (setq-local fill-column 79))
+
+ :hook
+ (python-mode . lsp)
+ (python-ts-mode . lsp)
+ (python-ts-mode . init/python-setup-fill-column))
+
+;;; Project Management
+
+(use-package projectile
+ :ensure t
+ :defer t
+ :diminish "Pr"
+
+ :bind
+ (:map projectile-mode-map
+  ("C-x p" . projectile-command-map))
+
+ :custom
+ (projectile-project-search-path '("~/Workspace"))
+ (projectile-sort-order 'recently-active)
+ (projectile-enable-caching nil)
+ (projectile-require-project-root nil))
+
+(use-package counsel-projectile
+ :ensure t
+ :defer t
+
+ :bind
+ (:map projectile-mode-map
+  ("M-G" . counsel-projectile-git-grep))
+
+ :init
+ (counsel-projectile-mode))
+
+(use-package treemacs-projectile
+ :ensure t
+ :defer t)
+
+;;; Snippets
+
+(use-package yasnippet
+ :ensure t
+ :defer t
+ :diminish "Ys")
+
+(use-package yasnippet
+ :ensure t
+ :defer t
+ :after company
+
+ :hook
+ (yas-minor-mode . (lambda () (init/company-add-backend 'company-yasnippet))))
+
+(use-package yasnippet-snippets
+ :ensure t
+ :defer t
+ :after yasnippet
+
+ :init
+ (yasnippet-snippets-initialize))
+
 ;;; Other
 
 ;; (im/after files
@@ -1117,71 +1374,6 @@
  (push emacs-dots-dir load-path))
 (require 'init-macros)
 
-(im/after text-mode
- (im/hook text-mode-hook spell-fu-mode))
-
-(defmacro im/setup-c-style-comments ()
- "Setup C-style /* ... */ comments."
- `(im/after newcomment
-   (setq-local comment-style 'extra-line)))
-
-(im/after css-mode
- (im/hookn css-mode-hook (im/setup-c-style-comments)))
-
-(im/after cc-mode
- (im/key-disable "(" c-mode-base-map)
- (setq-default c-doc-comment-style
-  '((java-mode . javadoc)
-    (c-mode    . gtkdoc)
-    (c++-mode  . doxygen)))
- (im/hook c-mode-common-hook lsp))
-
-(im/after c-ts-mode
- (im/hook c-ts-base-mode-hook lsp))
-
-(im/after cc-vars
- (setq-default c-mark-wrong-style-of-comment t)
- (setq-default c-default-style '((other . "user")))
- (setq-default c-basic-offset 2)
- (im/hookn c-mode-common-hook (im/setup-c-style-comments)))
-
-(im/after python
- (im/hook python-mode-hook lsp)
- (im/hook python-ts-mode-hook lsp)
- (im/hookn python-ts-mode-hook
-  (setq-local fill-column 79)))
-
-(im/after jit-lock
- (setq-default jit-lock-stealth-time 1)
- (setq-default jit-lock-chunk-size 5000)
- (setq-default jit-lock-antiblink-grace 1))
-
-(im/pkg projectile
- (im/after projectile
-  (im/key-local "C-x p" projectile-command-map projectile-mode-map "projectile")
-  (im/dim projectile-mode "Pr")
-  (setq-default projectile-cache-file emacs-projectile-cache-file)
-  (setq-default projectile-known-projects-file emacs-projectile-projects-file)
-  (setq-default projectile-project-search-path '("~/Workspace"))
-  (setq-default projectile-sort-order 'recently-active)
-  (setq-default projectile-enable-caching nil)
-  (setq-default projectile-require-project-root nil)))
-
-(im/pkg counsel-projectile
- (im/after counsel-projectile
-  (im/key-local "M-G" counsel-projectile-git-grep projectile-mode-map))
- (counsel-projectile-mode))
-
-(im/pkg yasnippet-snippets
- (im/after yasnippet
-  (yasnippet-snippets-initialize)))
-
-(im/pkg yasnippet
- (im/after yasnippet
-  (im/dim yas-minor-mode "Ys")
-  (im/after company
-   (im/hookn yas-minor-mode-hook (im/company-add-backend 'company-yasnippet)))))
-
 (im/pkg hledger-mode
  (im/after hledger-mode
   (setq-default hledger-currency-string "EUR")
@@ -1193,89 +1385,12 @@
     (eval-when-compile (require 'flycheck-hledger))))
   (im/hook hledger-mode-hook whitespace-mode)
   (im/hook hledger-mode-hook symbol-overlay-mode)
-  (im/hook hledger-mode-hook flycheck-mode))
+  (im/hook hledger-mode-hook flycheck-mode)
+  (im/hook hledger-mode-hook display-fill-column-indicator-mode))
  (im/mode ".journal" hledger-mode)
  (im/mode ".ledger"  hledger-mode))
 
 (im/pkg flycheck-hledger)
-
-(im/pkg flycheck
- (im/after flycheck
-  (im/autoload flycheck-next-error "flycheck")
-  (im/autoload flycheck-previous-error "flycheck")
-  (im/key-local "M-n" flycheck-next-error     flycheck-mode-map "flycheck")
-  (im/key-local "M-p" flycheck-previous-error flycheck-mode-map "flycheck")
-  (setq-default flycheck-checker-error-threshold nil)
-  (setq-default flycheck-mode-line-prefix "Fc")
-  (setq-default flycheck-check-syntax-automatically
-   '(idle-change new-line mode-enabled idle-buffer-switch))
-  (setq-default flycheck-idle-change-delay 0.25)
-  (setq-default flycheck-idle-buffer-switch-delay 0.25)
-  (im/hook flycheck-mode-hook flycheck-posframe-mode)))
-
-(im/pkg flycheck-posframe
- (im/after flycheck-posframe
-  ;; (flycheck-posframe-configure-pretty-defaults)
-  (setq-default flycheck-posframe-position 'window-bottom-left-corner)
-  (setq-default flycheck-posframe-border-width 1)
-  (setq-default flycheck-posframe-prefix
-   (concat " " (char-to-string 8618) " Info: "))
-  (setq-default flycheck-posframe-warnings-prefix
-   (concat " " (char-to-string 9888) " Warning: "))
-  (setq-default flycheck-posframe-error-prefix
-   (concat " " (char-to-string 10540) " Error: "))
-  (im/after company
-   (im/hook flycheck-posframe-inhibit-functions company--active-p "company")
-   (im/hook flycheck-posframe-inhibit-functions
-    (lambda (&rest _) (bound-and-true-p company-backend))))))
-
-(im/pkg consult-flycheck
- (im/after flycheck
-  (im/key-local "C-c ! a" consult-flycheck flycheck-mode-map)))
-
-(im/pkg company
- (im/after company
-  (im/dim company-mode "Co")
-  (setq-default company-backends '((company-capf)))
-  (setq-default company-idle-delay 0.5)
-  (setq-default company-keywords-ignore-case t)
-  (setq-default company-minimum-prefix-length 2)
-  (setq-default company-selection-wrap-around t)
-  (setq-default company-tooltip-align-annotations t)
-  (im/key-local "<tab>" company-indent-or-complete-common company-mode-map "company")))
-
-(defun im/company-add-backend (backend)
- "Add BACKEND to local copy of `company-backends'."
- (eval-when-compile (defvar company-backends))
- (im/autoload qol/append "qol")
- (qol/append (car company-backends) backend))
-
-(im/pkg company-posframe
- (im/after company-posframe
-  (im/dim company-posframe-mode)
-  (setq-default company-posframe-quickhelp-x-offset 2))
- (im/after company
-  (im/hook company-mode-hook company-posframe-mode "company-posframe")))
-
-(im/pkg company-prescient
- (im/after company
-  (im/hook company-mode-hook company-prescient-mode)))
-
-(im/pkg tree-sitter-langs
- (im/after tree-sitter-mode
-  (im/hook tree-sitter-mode-hook tree-sitter-langs-install-grammars)))
-
-(im/pkg tree-sitter
- (im/after tree-sitter
-  (im/dim tree-sitter-mode "Ts")
-  (im/hook tree-sitter-mode-hook tree-sitter-hl-mode)))
-
-;; (im/pkg scopeline
-;;  (im/after tree-sitter
-;;   (im/hook tree-sitter-mode-hook scopeline-mode))
-;;  (im/after scopeline
-;;   (im/dim scopeline-mode "Sl")
-;;   (setq-default scopeline-min-lines 10)))
 
 (im/after prog-mode
  (im/hook prog-mode-hook diff-hl-mode)
@@ -1304,7 +1419,7 @@
  (im/after meson-mode
   (im/after company
    (im/hookn meson-mode-hook
-    (im/company-add-backend 'company-dabbrev-code)))
+    (init/company-add-backend 'company-dabbrev-code)))
   (im/hook meson-mode-hook symbol-overlay-mode)
   (im/hook meson-mode-hook company-mode)))
 
@@ -1457,8 +1572,6 @@
   (im/key-local "C-c t" lsp-treemacs-type-hierarchy lsp-mode-map)
   (im/hook lsp-mode-hook lsp-treemacs-sync-mode)))
 
-(im/pkg treemacs-projectile)
-
 (im/pkg lsp-ui
  (im/after lsp-ui-doc
   (setq-default lsp-ui-doc-enable t)
@@ -1500,8 +1613,8 @@
  (im/after web-mode
   (im/after company
    (im/hookn web-mode-hook
-    (im/company-add-backend 'company-css)
-    (im/company-add-backend 'company-web-html)))))
+    (init/company-add-backend 'company-css)
+    (init/company-add-backend 'company-web-html)))))
 
 (im/pkg emmet-mode
  (setq-default emmet-indentation 2)
