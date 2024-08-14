@@ -56,6 +56,9 @@
  :defer t
  :load-path "/home/fred/Workspace/dots/emacs/"
 
+ :commands
+ qol/append
+
  :bind
  (("C-x j"    . qol/insert-buffer-name)
   ("C-x e"    . qol/replace-escapes)
