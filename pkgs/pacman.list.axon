@@ -360,6 +360,7 @@ peek
 picard
 pigz
 pipewire-alsa
+pipewire-libcamera
 pipewire-v4l2
 pipewire-zeroconf
 pixz
@@ -383,7 +384,6 @@ python-arrow
 python-awesomeversion
 python-babel
 python-beaker
-python-beautifulsoup4
 python-brotlicffi
 python-cairosvg
 python-cchardet
