@@ -195,6 +195,7 @@ gspell
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
+gst-plugins-bad
 gst-plugin-va
 gucharmap
 gvfs-mtp
