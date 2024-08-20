@@ -58,6 +58,7 @@
 
  :commands
  qol/append
+ qol/generate-password
 
  :bind
  (("C-x j"    . qol/insert-buffer-name)
