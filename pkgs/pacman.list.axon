@@ -545,6 +545,7 @@ traceroute
 trash-cli
 tree
 ttf-dejavu-nerd
+ttf-go-sans-git
 ttf-monaco
 tup
 typst
@@ -597,7 +598,6 @@ xmlstarlet
 xorg-bdftopcf
 xorg-font-util
 xorg-iceauth
-xorg-mkfontscale
 xorg-server
 xorg-server-devel
 xorg-server-xephyr
