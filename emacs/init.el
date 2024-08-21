@@ -168,6 +168,21 @@
  :hook
  (text-mode . spell-fu-mode))
 
+(use-package buffer-move
+ :ensure t
+ :defer t
+
+ :bind
+ ("C-x m" . buf-move))
+
+(use-package surround
+ :ensure t
+ :defer t
+
+ :bind
+ ("M-'" . surround-mark-inner)
+ ("M-\"" . surround-insert))
+
 ;;; Auto-save & backups
 
 (use-package files
@@ -557,6 +572,74 @@
  :ensure nil
  :defer t
  :after deadgrep)
+
+(use-package prog-mode
+ :ensure nil
+ :defer t
+
+ :hook
+ (prog-mode . diff-hl-mode)
+ (prog-mode . eldoc-mode)
+ (prog-mode . show-paren-mode)
+ (prog-mode . flyspell-prog-mode)
+ (prog-mode . flycheck-mode)
+ (prog-mode . yas-minor-mode)
+ (prog-mode . company-mode)
+ (prog-mode . electric-pair-mode)
+ (prog-mode . electric-layout-mode)
+ (prog-mode . display-line-numbers-mode)
+ (prog-mode . hl-line-mode)
+ (prog-mode . bug-reference-prog-mode))
+
+(use-package sideline
+ :ensure t
+ :defer t
+ :diminish "Si"
+
+ :custom
+ (sideline-delay 0.1))
+
+(use-package sideline-blame
+ :ensure t
+ :defer t
+ :after sideline
+
+ :custom
+ (sideline-backends-right '(sideline-blame))
+ (sideline-blame-commit-format "- %s"))
+
+;;; Configuration Files
+
+(use-package conf-mode
+ :ensure nil
+ :defer t
+
+ :hook
+ (conf-desktop-mode . diff-hl-mode)
+ (conf-desktop-mode . show-paren-mode)
+ (conf-desktop-mode . flyspell-prog-mode)
+ (conf-desktop-mode . electric-pair-mode)
+ (conf-desktop-mode . electric-layout-mode)
+ (conf-desktop-mode . display-line-numbers-mode)
+ (conf-desktop-mode . hl-line-mode))
+
+;;; Meson
+
+(use-package meson-mode
+ :ensure t
+ :defer t
+
+ :hook
+ (meson-mode . symbol-overlay-mode)
+ (meson-mode . company-mode))
+
+(use-package meson-mode
+ :ensure t
+ :defer t
+ :after company
+
+ :hook
+ (meson-mode . (init/company-add-backend 'company-dabbrev-code)))
 
 ;;; Version Control
 
@@ -1358,6 +1441,89 @@
  :init
  (yasnippet-snippets-initialize))
 
+;;; Ledger
+
+(use-package hledger-mode
+ :ensure t
+ :defer t
+ :mode "\\.journal\\'"
+ :mode "\\.ledger\\'"
+
+ :custom
+ (hledger-currency-string "EUR")
+ (hledger-current-overlay t)
+ (hledger-comments-column 1)
+
+ :hook
+ (hledger-mode . (lambda () (setq-local tab-width 1)))
+ (hledger-mode . whitespace-mode)
+ (hledger-mode . symbol-overlay-mode)
+ (hledger-mode . flycheck-mode)
+ (hledger-mode . display-fill-column-indicator-mode))
+
+(use-package hledger-mode
+ :ensure t
+ :defer t
+ :after flycheck
+
+ :hook
+ (hledger-mode . (lambda () (eval-when-compile (require 'flycheck-hledger)))))
+
+(use-package flycheck-hledger
+ :ensure t
+ :defer t)
+
+;;; Web Development
+
+(use-package web-mode
+ :ensure t
+ :defer t
+ :mode "\\.html\\'"
+ :mode "\\.css\\'"
+ :mode "\\.js\\'"
+
+ :custom
+ (web-mode-markup-indent-offset 2)
+ (web-mode-css-indent-offset 2)
+ (web-mode-code-indent-offset 2)
+ (web-mode-enable-current-column-highlight t)
+ (web-mode-enable-current-element-highlight t)
+ (web-mode-auto-close-style 3)
+ (web-mode-enable-auto-expanding t)
+
+ :hook
+ (web-mode . lsp)
+ (web-mode . (lambda () (setq-local tab-width 2))))
+
+(use-package company-web
+ :ensure t
+ :defer t
+ :after (company web-mode)
+
+ :hook
+ (web-mode . (init/company-add-backend 'company-css))
+ (web-mode . (init/company-add-backend 'company-web-html))
+ (web-mode . emmet-mode))
+
+(use-package emmet-mode
+ :ensure t
+ :defer t
+
+ :custom
+ (emmet-indentation 2))
+
+;;; Docker
+
+(use-package dockerfile-mode
+ :ensure t
+ :defer t)
+
+;;; Archlinux PKGBUILDs
+
+(use-package pkgbuild-mode
+ :ensure t
+ :defer t)
+
 ;;; Other
 
 ;; (im/after files
@@ -1377,55 +1543,6 @@
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
 (require 'init-macros)
-
-(im/pkg hledger-mode
- (im/after hledger-mode
-  (setq-default hledger-currency-string "EUR")
-  (setq-default hledger-current-overlay t)
-  (setq-default hledger-comments-column 1)
-  (im/hookn hledger-mode-hook
-   (setq-local tab-width 1)
-   (im/after flycheck
-    (eval-when-compile (require 'flycheck-hledger))))
-  (im/hook hledger-mode-hook whitespace-mode)
-  (im/hook hledger-mode-hook symbol-overlay-mode)
-  (im/hook hledger-mode-hook flycheck-mode)
-  (im/hook hledger-mode-hook display-fill-column-indicator-mode))
- (im/mode ".journal" hledger-mode)
- (im/mode ".ledger"  hledger-mode))
-
-(im/pkg flycheck-hledger)
-
-(im/after prog-mode
- (im/hook prog-mode-hook diff-hl-mode)
- (im/hook prog-mode-hook eldoc-mode)
- (im/hook prog-mode-hook show-paren-mode)
- (im/hook prog-mode-hook flyspell-prog-mode)
- (im/hook prog-mode-hook flycheck-mode)
- (im/hook prog-mode-hook yas-minor-mode)
- (im/hook prog-mode-hook company-mode)
- (im/hook prog-mode-hook electric-pair-mode)
- (im/hook prog-mode-hook electric-layout-mode)
- (im/hook prog-mode-hook display-line-numbers-mode)
- (im/hook prog-mode-hook hl-line-mode)
- (im/hook prog-mode-hook bug-reference-prog-mode))
-
-(im/after conf-mode
- (im/hook conf-desktop-mode-hook diff-hl-mode)
- (im/hook conf-desktop-mode-hook show-paren-mode)
- (im/hook conf-desktop-mode-hook flyspell-prog-mode)
- (im/hook conf-desktop-mode-hook electric-pair-mode)
- (im/hook conf-desktop-mode-hook electric-layout-mode)
- (im/hook conf-desktop-mode-hook display-line-numbers-mode)
- (im/hook conf-desktop-mode-hook hl-line-mode))
-
-(im/pkg meson-mode
- (im/after meson-mode
-  (im/after company
-   (im/hookn meson-mode-hook
-    (init/company-add-backend 'company-dabbrev-code)))
-  (im/hook meson-mode-hook symbol-overlay-mode)
-  (im/hook meson-mode-hook company-mode)))
 
 (im/pkg rust-mode
  (im/after rust-mode
@@ -1597,68 +1714,6 @@
   (im/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
   (im/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
   (im/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
-
-(im/pkg web-mode
- (im/mode ".html" web-mode)
- (im/mode ".css" web-mode)
- (im/mode ".js" web-mode)
- (im/after web-mode
-  (setq-default web-mode-markup-indent-offset 2)
-  (setq-default web-mode-css-indent-offset 2)
-  (setq-default web-mode-code-indent-offset 2)
-  (setq-default web-mode-enable-current-column-highlight t)
-  (setq-default web-mode-enable-current-element-highlight t)
-  (setq-default web-mode-auto-close-style 3)
-  (setq-default web-mode-enable-auto-expanding t)
-  (im/hook web-mode-hook lsp)
-  (im/hookn web-mode-hook (setq-local tab-width 2))))
-
-(im/pkg company-web
- (im/after web-mode
-  (im/after company
-   (im/hookn web-mode-hook
-    (init/company-add-backend 'company-css)
-    (init/company-add-backend 'company-web-html)))))
-
-(im/pkg emmet-mode
- (setq-default emmet-indentation 2)
- (im/after web-mode
-  (im/hook web-mode-hook emmet-mode)))
-
-(im/pkg dockerfile-mode)
-(im/pkg pkgbuild-mode)
-
-(im/pkg vterm
- (im/after vterm
-  (setq-default vterm-max-scrollback 100000)))
-
-(im/pkg sideline
- (im/after sideline
-  (im/dim sideline-mode "Si")
-  (setq-default sideline-delay 0.1)))
-
-(im/pkg sideline-blame
- (im/after sideline
-  (setq-default sideline-backends-right '(sideline-blame))
-  (setq-default sideline-blame-commit-format "- %s")))
-
-(im/pkg buffer-move
- (im/key "C-x m" buf-move))
-
-;; (im/pkg popper
-;;  (im/after popper
-;;   (setq-default popper-reference-buffers '("\\*deadgrep.*$" "\\*Occur\\*$"))
-;;   (im/autoload popper-group-by-projectile "popper")
-;;   (setq-default popper-group-function #'popper-group-by-projectile)
-;;   (im/key "C-`" popper-cycle "popper")
-;;   (im/key-local "C-~" popper-toggle-type popper-mode-map "popper"))
-;;  (popper-mode)
-;;  (popper-echo-mode))
-
-(im/pkg surround
- (require 'surround)
- (im/key "M-'" surround-mark-inner)
- (im/key "M-\"" surround-insert))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
