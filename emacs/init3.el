@@ -2,17 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; (use-package eldoc-toml
-;;  :delight
-;;  :hook toml-mode)
-
-;; (use-package indent-guide
-;;  :hook (json-mode json-ts-mode))
-
-;; (use-package tree-sitter
-;;  :delight " Ts"
-;;  :hook yaml-mode)
-
 ;; (use-package tree-sitter-langs
 ;;  :hook (tree-sitter-mode . (lambda () (tree-sitter-langs-install-grammars t))))
 

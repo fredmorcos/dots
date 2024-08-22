@@ -818,6 +818,17 @@
  (lisp-indent-offset 1)
  (lisp-indent-function #'common-lisp-indent-function)
 
+ :preface
+ (defun init/expand-current-macro ()
+  "Expand the current macro expression."
+  (interactive)
+  (beginning-of-defun)
+  (emacs-lisp-macroexpand))
+
+ :bind
+ (:map emacs-lisp-mode-map
+  ("<f6>" . init/expand-current-macro))
+
  :hook
  (emacs-lisp-mode . symbol-overlay-mode)
  (emacs-lisp-mode . whitespace-mode))
@@ -937,14 +948,12 @@
 
 (use-package cmake-mode
  :ensure t
- :defer t
-
- :hook
- (cmake-mode . eldoc-cmake-enable))
+ :defer t)
 
 (use-package eldoc-cmake
  :ensure t
- :defer t)
+ :defer t
+ :hook (cmake-mode . eldoc-cmake-enable))
 
 ;;; Markdown
 
@@ -968,34 +977,41 @@
 
 (use-package toml-mode
  :ensure t
- :defer t
-
- :hook
- (toml-mode . eldoc-toml-mode))
+ :defer t)
 
 (use-package eldoc-toml
  :ensure t
  :defer t
- :diminish)
+ :diminish
+ :hook toml-mode)
 
 ;;; JSON
 
 (use-package json-mode
  :ensure t
- :defer t
+ :defer t)
 
- :hook
- (json-mode . indent-guide-mode)
- (json-mode . tree-sitter-mode))
+(use-package indent-guide
+ :ensure t
+ :defer t
+ :hook (json-mode json-ts-mode))
+
+(use-package tree-sitter
+ :ensure t
+ :defer t
+ :diminish "Ts"
+ :hook json-mode)
 
 ;;; Systemd
 
 (use-package systemd
  :ensure t
- :defer t
+ :defer t)
 
- :hook
- (systemd-mode . company-mode))
+(use-package company
+ :ensure t
+ :defer t
+ :hook systemd-mode)
 
 ;;; Spell Checking
 
@@ -1236,17 +1252,21 @@
 (use-package tree-sitter
  :ensure t
  :defer t
- :diminish "Ts"
+ :diminish "Ts")
 
- :hook
- (tree-sitter-mode . tree-sitter-hl-mode))
+(use-package tree-sitter-hl
+ :ensure tree-sitter
+ :defer t
+ :hook tree-sitter-mode
+ :custom-face (tree-sitter-hl-face:property ((t (:inherit font-lock-keyword-face)))))
 
 (use-package tree-sitter-langs
  :ensure t
  :defer t
+ :hook (tree-sitter-mode . (lambda () (tree-sitter-langs-install-grammars t)))
 
- :hook
- (tree-sitter-mode . tree-sitter-langs-install-grammars))
+ :custom
+ (tree-sitter-langs-git-dir (file-name-concat tree-sitter-langs-grammar-dir "git")))
 
 ;;; Debuggers
 
@@ -1280,10 +1300,17 @@
 
  :bind
  (:map yaml-mode-map
-  ("C-c p" . qol/generate-password))
+  ("C-c p" . qol/generate-password)))
 
- :hook
- (yaml-mode . flycheck-mode))
+(use-package flycheck
+ :ensure t
+ :defer t
+ :hook yaml-mode)
+
+(use-package tree-sitter
+ :ensure t
+ :defer t
+ :hook yaml-mode)
 
 ;;; LLVM
 
@@ -1498,16 +1525,16 @@
 (use-package company-web
  :ensure t
  :defer t
- :after (company web-mode)
+ :after (:all company web-mode)
 
  :hook
- (web-mode . (init/company-add-backend 'company-css))
- (web-mode . (init/company-add-backend 'company-web-html))
- (web-mode . emmet-mode))
+ (web-mode . (lambda () (init/company-add-backend 'company-css)))
+ (web-mode . (lambda () (init/company-add-backend 'company-web-html))))
 
 (use-package emmet-mode
  :ensure t
  :defer t
+ :hook web-mode
 
  :custom
  (emmet-indentation 2))
@@ -1523,6 +1550,48 @@
 (use-package pkgbuild-mode
  :ensure t
  :defer t)
+
+;;; Rust
+
+(use-package rust-mode
+ :ensure t
+ :defer t
+
+ :bind
+ (:map rust-mode-map
+  ("<f5>" . rust-dbg-wrap-or-unwrap)
+  ("<f6>" . lsp-rust-analyzer-expand-macro)
+  ("<f7>" . lsp-rust-analyzer-join-lines)
+  ("<f8>" . lsp-rust-analyzer-inlay-hints-mode))
+
+ :custom
+ (rust-indent-offset 2)
+ (rust-load-optional-libraries nil)
+ (rust-format-on-save t)
+
+ :hook
+ (rust-mode . (lambda () (electric-quote-local-mode -1)))
+ (rust-mode . subword-mode)
+ (rust-mode . lsp))
+
+(use-package rust-ts-mode
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map rust-ts-mode-map
+  ("<f5>" . rust-dbg-wrap-or-unwrap)
+  ("<f6>" . lsp-rust-analyzer-expand-macro)
+  ("<f7>" . lsp-rust-analyzer-join-lines)
+  ("<f8>" . lsp-rust-analyzer-inlay-hints-mode))
+
+ :custom
+ (rust-ts-mode-indent-offset 2)
+
+ :hook
+ (rust-ts-mode . (lambda () (electric-quote-local-mode -1)))
+ (rust-ts-mode . subword-mode)
+ (rust-ts-mode . lsp))
 
 ;;; Other
 
@@ -1543,29 +1612,6 @@
  (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path))
 (require 'init-macros)
-
-(im/pkg rust-mode
- (im/after rust-mode
-  (im/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-mode-map "rust-utils")
-  (im/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-mode-map "lsp-rust")
-  (im/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-mode-map "lsp-rust")
-  (im/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-mode-map "lsp-rust")
-  (setq-default rust-indent-offset 2)
-  (setq-default rust-load-optional-libraries nil)
-  (setq-default rust-format-on-save t)
-  (im/hookn rust-mode-hook (electric-quote-local-mode -1))
-  (im/hook rust-mode-hook subword-mode)
-  (im/hook rust-mode-hook lsp)))
-
-(im/after rust-ts-mode
- (im/key-local "<f5>" rust-dbg-wrap-or-unwrap            rust-ts-mode-map "rust-utils")
- (im/key-local "<f6>" lsp-rust-analyzer-expand-macro     rust-ts-mode-map "lsp-rust")
- (im/key-local "<f7>" lsp-rust-analyzer-join-lines       rust-ts-mode-map "lsp-rust")
- (im/key-local "<f8>" lsp-rust-analyzer-inlay-hints-mode rust-ts-mode-map "lsp-rust")
- (setq-default rust-ts-mode-indent-offset 2)
- (im/hookn rust-ts-mode-hook (electric-quote-local-mode -1))
- (im/hook rust-ts-mode-hook subword-mode)
- (im/hook rust-ts-mode-hook lsp))
 
 (im/pkg lsp-mode
  (im/after lsp-mode
