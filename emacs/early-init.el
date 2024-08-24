@@ -233,14 +233,6 @@
  :ensure nil
  :defer t
 
- :config
- ;; LSP speed improvement.
- (setenv "LSP_USE_PLISTS" "true"))
-
-(use-package emacs
- :ensure nil
- :defer t
-
  ;; :custom
  ;; Disable tramp when loading .el and .elc files. That doesn't work correctly. It instead
  ;; completely disables support for documentation linking to show source code available in
@@ -255,8 +247,16 @@
  :ensure nil
  :defer t
 
+ :config
+ ;; LSP speed improvement.
+ (setenv "LSP_USE_PLISTS" "true"))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
  :custom
- ;; External Processes
+ ;; Improves LSP performance.
  (setq-default read-process-output-max (* 1024 1024)))
 
 ;;; Packages

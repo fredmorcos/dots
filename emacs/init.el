@@ -142,6 +142,7 @@
  :custom
  (mode-require-final-newline 'visit-save)
  (require-final-newline 'visit-save)
+ ;; File contents.
  (coding-system-for-read 'utf-8-unix)
  (coding-system-for-write 'utf-8-unix))
 
@@ -190,15 +191,10 @@
  :defer t
 
  :custom
- (auto-save-default t))
-
-(use-package files
- :ensure nil
- :defer t
-
- :custom
+ (auto-save-default t)
  (backup-inhibited nil)
  (make-backup-files t)
+ ;; Prefer the newest version of a file.
  (load-prefer-newer t)
  (delete-old-versions t))
 
@@ -248,6 +244,11 @@
  :ensure nil
  :defer t
 
+ :config
+ (defadvice find-file
+  (after recenter-after-find-file activate)
+  (recenter))
+
  :custom
  (confirm-kill-processes nil))
 
@@ -270,6 +271,12 @@
  :ensure nil
  :defer t
 
+ :config
+ ;; Recenter after using goto-line.
+ (defadvice goto-line
+  (after recenter-after-goto-line activate)
+  (recenter))
+
  :custom
  ;; Hide commands in M-x that do not work in the current mode
  (read-extended-command-predicate #'command-completion-default-include-p)
@@ -277,6 +284,8 @@
  (suggest-key-bindings 10)
  (save-interprogram-paste-before-kill t)
  (backward-delete-char-untabify-method 'hungry)
+ ;; Recenter after jump to next error.
+ (next-error-recenter '(4))
  (next-error-message-highlight t))
 
 (use-package simple
@@ -313,8 +322,8 @@
   (scroll-other-window-down 1))
 
  :bind
- (("<f10>" . init/scroll-other-window)
-  ("<f11>" . init/scroll-other-window-down)))
+ (("C-<f11>" . init/scroll-other-window)
+  ("C-<f12>" . init/scroll-other-window-down)))
 
 (use-package simple
  :ensure nil
@@ -337,8 +346,8 @@
  :custom
  (hippie-expand-try-functions-list
   '(try-expand-dabbrev-visible
-    try-expand-line
     try-expand-dabbrev
+    try-expand-line
     try-expand-dabbrev-all-buffers
     try-expand-line-all-buffers
     try-expand-dabbrev-from-kill
@@ -515,6 +524,7 @@
  (switch-to-buffer-obey-display-actions t)
  (split-height-threshold 160)
  (even-window-sizes 'width-only)
+ ;; Skip *SPECIALS* when switching buffers.
  (switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'"))
 
  :preface
@@ -530,8 +540,15 @@
 
  :bind
  (("<f12>"       . delete-other-windows)
-  ("<M-S-right>" . next-buffer)
-  ("<M-S-left>"  . previous-buffer)))
+  ("M-S-<right>" . next-buffer)
+  ("M-S-<left>"  . previous-buffer)))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :custom
+ (resize-mini-windows t))
 
 ;;; General Programming
 
@@ -554,7 +571,19 @@
 
  :hook
  (prog-mode . display-fill-column-indicator-mode)
- (prog-mode . goto-address-prog-mode))
+ (prog-mode . goto-address-prog-mode)
+ (prog-mode . diff-hl-mode)
+ (prog-mode . eldoc-mode)
+ (prog-mode . show-paren-mode)
+ (prog-mode . flyspell-prog-mode)
+ (prog-mode . flycheck-mode)
+ (prog-mode . yas-minor-mode)
+ (prog-mode . company-mode)
+ (prog-mode . electric-pair-local-mode)
+ (prog-mode . electric-layout-local-mode)
+ (prog-mode . display-line-numbers-mode)
+ (prog-mode . hl-line-mode)
+ (prog-mode . bug-reference-prog-mode))
 
 (use-package deadgrep
  :ensure t
@@ -573,24 +602,6 @@
  :defer t
  :after deadgrep)
 
-(use-package prog-mode
- :ensure nil
- :defer t
-
- :hook
- (prog-mode . diff-hl-mode)
- (prog-mode . eldoc-mode)
- (prog-mode . show-paren-mode)
- (prog-mode . flyspell-prog-mode)
- (prog-mode . flycheck-mode)
- (prog-mode . yas-minor-mode)
- (prog-mode . company-mode)
- (prog-mode . electric-pair-mode)
- (prog-mode . electric-layout-mode)
- (prog-mode . display-line-numbers-mode)
- (prog-mode . hl-line-mode)
- (prog-mode . bug-reference-prog-mode))
-
 (use-package sideline
  :ensure t
  :defer t
@@ -608,6 +619,14 @@
  (sideline-backends-right '(sideline-blame))
  (sideline-blame-commit-format "- %s"))
 
+(use-package xref
+ :ensure nil
+ :defer t
+
+ :init
+ (add-hook 'xref-after-return #'recenter)
+ (add-hook 'xref-after-jump #'recenter))
+
 ;;; Configuration Files
 
 (use-package conf-mode
@@ -618,8 +637,8 @@
  (conf-desktop-mode . diff-hl-mode)
  (conf-desktop-mode . show-paren-mode)
  (conf-desktop-mode . flyspell-prog-mode)
- (conf-desktop-mode . electric-pair-mode)
- (conf-desktop-mode . electric-layout-mode)
+ (conf-desktop-mode . electric-pair-local-mode)
+ (conf-desktop-mode . electric-layout-local-mode)
  (conf-desktop-mode . display-line-numbers-mode)
  (conf-desktop-mode . hl-line-mode))
 
@@ -655,7 +674,8 @@
  :defer t
 
  :custom
- (ediff-split-window-function #'split-window-right)
+ ;; (ediff-split-window-function #'split-window-right)
+ (ediff-split-window-function #'split-window-horizontally)
  (ediff-window-setup-function #'ediff-setup-windows-plain))
 
 (use-package blamer
@@ -727,7 +747,7 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
- :diminish "Sy"
+ :diminish "So"
 
  :bind
  (:map symbol-overlay-mode-map
@@ -753,10 +773,10 @@
  :diminish "Ar"
 
  :custom
+ ;; (auto-revert-mode-text " Ar")
  (auto-revert-interval 1)
  (auto-revert-avoid-polling t)
- (buffer-auto-revert-by-notification t)
- (auto-revert-mode-text " Ar"))
+ (buffer-auto-revert-by-notification t))
 
 (use-package indent-guide
  :ensure t
@@ -892,7 +912,8 @@
   (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p 0 t))
 
  :hook
- (sh-mode . init/make-file-executable))
+ (sh-mode . init/make-file-executable)
+ (bash-ts-mode . init/make-file-executable))
 
 ;;; Dired
 
@@ -1184,9 +1205,21 @@
  (push 'flex completion-styles)
 
  :custom
+ (minibuffer-electric-default-mode t)
+ (minibuffer-message-clear-timeout 4)
+ (completions-sort #'prescient-sort)
+ (completions-max-height 20)
  (read-file-name-completion-ignore-case t)
  (completions-format 'one-column)
- (completions-detailed t))
+ (completions-detailed t)
+ (completions-group t))
+
+(use-package map-ynp
+ :ensure nil
+ :defer t
+
+ :custom
+ (read-answer-short t))
 
 (use-package ctrlf
  :ensure t
@@ -1245,9 +1278,10 @@
  :defer t
 
  :custom
- (jit-lock-stealth-time 1)
- (jit-lock-chunk-size 5000)
- (jit-lock-antiblink-grace 1))
+ (jit-lock-stealth-time 0.1)
+ ;; A little more than what can fit on the screen.
+ (jit-lock-chunk-size 4000)
+ (jit-lock-antiblink-grace nil))
 
 (use-package tree-sitter
  :ensure t
@@ -1454,6 +1488,7 @@
 
  :hook
  (python-mode . lsp)
+ (python-mode . init/python-setup-fill-column)
  (python-ts-mode . lsp)
  (python-ts-mode . init/python-setup-fill-column))
 
