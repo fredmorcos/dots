@@ -269,7 +269,6 @@ libofa
 libopenraw
 libotr
 libraw
-libreoffice-fresh-fr
 libsidplayfp
 libupnp
 libva-intel-driver
@@ -556,7 +555,6 @@ unace
 unbound
 unicode-emoji
 unixodbc
-unoconv
 unrar
 unrtf
 upterm

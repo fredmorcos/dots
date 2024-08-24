@@ -19,6 +19,7 @@ org.kde.krita
 org.kde.massif-visualizer
 org.kde.okteta
 org.kde.okular
+org.libreoffice.LibreOffice
 org.shotcut.Shotcut
 org.signal.Signal
 org.sqlitebrowser.sqlitebrowser
