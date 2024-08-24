@@ -1353,7 +1353,7 @@
  :hook
  (css-mode . init/css-setup-comments))
 
-;;; C Programming
+;;; C and C++ Programming
 
 (use-package cc-mode
  :ensure nil
@@ -1396,6 +1396,50 @@
 
  :hook
  (c-mode-common . init/cc-setup-comments))
+
+(use-package lsp-clangd
+ :ensure lsp-mode
+ :defer t
+
+ :custom
+ (lsp-clients-clangd-args
+  '("--header-insertion-decorators"
+    "--all-scopes-completion"
+    "--clang-tidy"
+    "--completion-style=detailed"
+    "--header-insertion=iwyu"
+    ;; Breaks clangd-14
+                                        ; "--header-insertion-decorators"
+    "--inlay-hints"
+    "-j=8"
+    "--malloc-trim"
+    "--pch-storage=memory"
+    "--background-index"
+    "--function-arg-placeholders"
+    "--limit-references=0"
+    "--limit-results=0")))
+
+(use-package lsp-clangd
+ :ensure lsp-mode
+ :defer t
+ :after cc-mode
+
+ :commands
+ lsp-clangd-find-other-file
+
+ :bind
+ (:map c-mode-base-map ("<f2>" . lsp-clangd-find-other-file)))
+
+(use-package lsp-clangd
+ :ensure lsp-mode
+ :defer t
+ :after c-ts-mode
+
+ :commands
+ lsp-clangd-find-other-file
+
+ :bind
+ (:map c-ts-base-mode-map ("<f2>" . lsp-clangd-find-other-file)))
 
 ;;; Python
 
@@ -1593,173 +1637,230 @@
  (rust-ts-mode . subword-mode)
  (rust-ts-mode . lsp))
 
-;;; Other
+(use-package lsp-rust
+ :ensure lsp-mode
+ :defer t
 
-;; (im/after files
-;;  (setq-default major-mode-remap-alist
-;;   '((c-mode . c-ts-mode)
-;;     (c++-mode . c++-ts-mode)
-;;     (c-or-c++-mode . c-or-c++-ts-mode)
-;;     (rust-mode . rust-ts-mode)
-;;     (sh-mode . bash-ts-mode)
-;;     (toml-mode . toml-ts-mode)
-;;     (json-mode . json-ts-mode)
-;;     (cmake-mode . cmake-ts-mode)
-;;     (python-mode . python-ts-mode)
-;;     (dockerfile-mode . dockerfile-ts-mode))))
+ :custom
+  ;; (lsp-rust-analyzer-max-inlay-hint-length 50)
+  ;; (lsp-rust-unstable-features t)
+ (lsp-rust-analyzer-checkonsave-features "all")
+ (lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
+ (lsp-rust-analyzer-proc-macro-enable t)
+ (lsp-rust-racer-completion nil)
+ (lsp-rust-build-bin t)
+ (lsp-rust-build-lib t)
+ (lsp-rust-clippy-preference "on")
+ (lsp-rust-analyzer-server-display-inlay-hints t)
+ (lsp-rust-analyzer-display-chaining-hints t)
+ (lsp-rust-analyzer-display-parameter-hints t)
+ (lsp-rust-analyzer-display-closure-return-type-hints t)
+ (lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
+ (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
+ (lsp-rust-analyzer-binding-mode-hints t)
+ (lsp-rust-analyzer-display-reborrow-hints "mutable")
+ (lsp-rust-all-features t)
+ (lsp-rust-all-targets t)
+ (lsp-rust-full-docs t)
+ (lsp-rust-analyzer-cargo-watch-command "clippy"))
 
-(eval-when-compile
- (defconst emacs-dots-dir "/home/fred/Workspace/dots/emacs/")
- (push emacs-dots-dir load-path))
-(require 'init-macros)
+;;; LSP
 
-(im/pkg lsp-mode
- (im/after lsp-mode
-  (im/dim lsp-mode "Ls")
-  (im/key-local "C-c f" lsp-format-buffer           lsp-mode-map "lsp-mode")
-  (im/key-local "C-c g" lsp-format-region           lsp-mode-map "lsp-mode")
-  (im/key-local "C-c r" lsp-rename                  lsp-mode-map "lsp-mode")
-  (im/key-local "C-c h" lsp-describe-thing-at-point lsp-mode-map "lsp-mode")
-  (im/key-local "C-="   lsp-extend-selection        lsp-mode-map "lsp-mode")
-  (im/key-local "M-RET" lsp-execute-code-action     lsp-mode-map "lsp-mode")
-  (setq-default lsp-progress-prefix "  Progress: ")
-  (setq-default lsp-completion-show-detail t)
-  (setq-default lsp-completion-show-kind t)
-  (setq-default lsp-completion-provider :none)
-  (setq-default lsp-headerline-breadcrumb-enable t)
-  (setq-default lsp-restart 'auto-restart)
-  (setq-default lsp-enable-snippet t)
-  (setq-default lsp-keymap-prefix "C-c")
-  (setq-default lsp-idle-delay 0.1)
-  (setq-default lsp-file-watch-threshold nil)
-  (setq-default lsp-enable-semantic-highlighting t)
-  (setq-default lsp-enable-indentation t)
-  (setq-default lsp-enable-on-type-formatting nil)
-  (setq-default lsp-before-save-edits nil)
-  (setq-default lsp-auto-configure t)
-  (setq-default lsp-signature-auto-activate t)
-  (setq-default lsp-signature-render-documentation nil)
-  (setq-default lsp-eldoc-enable-hover t)
-  (setq-default lsp-eldoc-render-all nil)
-  (setq-default lsp-modeline-code-actions-enable nil)
-  (setq-default lsp-modeline-diagnostics-enable t)
-  (setq-default lsp-log-io nil)
-  (setq-default lsp-keep-workspace-alive nil)
-  (setq-default lsp-enable-imenu nil)
-  (im/after which-key
-   (im/hook lsp-mode-hook lsp-enable-which-key-integration "lsp-mode")))
- (im/after lsp-lens
-  (im/dim lsp-lens-mode)
-  (setq-default lsp-lens-mode nil)
-  (setq-default lsp-lens-enable nil))
- (im/after lsp-headerline
-  (setq-default lsp-headerline-breadcrumb-icons-enable nil))
- (im/after lsp-semantic-tokens
-  (setq-default lsp-semantic-tokens-apply-modifiers t))
- (im/after lsp-rust
-  ;; (setq-default lsp-rust-analyzer-max-inlay-hint-length 50)
-  ;; (setq-default lsp-rust-unstable-features t)
-  (setq-default lsp-rust-analyzer-checkonsave-features "all")
-  (setq-default lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
-  (setq-default lsp-rust-analyzer-proc-macro-enable t)
-  (setq-default lsp-rust-racer-completion nil)
-  (setq-default lsp-rust-build-bin t)
-  (setq-default lsp-rust-build-lib t)
-  (setq-default lsp-rust-clippy-preference "on")
-  (setq-default lsp-rust-analyzer-server-display-inlay-hints t)
-  (setq-default lsp-rust-analyzer-display-chaining-hints t)
-  (setq-default lsp-rust-analyzer-display-parameter-hints t)
-  (setq-default lsp-rust-analyzer-display-closure-return-type-hints t)
-  (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
-  (setq-default lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
-  (setq-default lsp-rust-analyzer-binding-mode-hints t)
-  (setq-default lsp-rust-analyzer-display-reborrow-hints "mutable")
-  (setq-default lsp-rust-all-features t)
-  (setq-default lsp-rust-all-targets t)
-  (setq-default lsp-rust-full-docs t)
-  (setq-default lsp-rust-analyzer-cargo-watch-command "clippy"))
- (im/after lsp-clangd
-  (setq-default lsp-clients-clangd-args
-   '("--header-insertion-decorators"
-     "--all-scopes-completion"
-     "--clang-tidy"
-     "--completion-style=detailed"
-     "--header-insertion=iwyu"
-     ;; Breaks clangd-14
-     ; "--header-insertion-decorators"
-     "--inlay-hints"
-     "-j=8"
-     "--malloc-trim"
-     "--pch-storage=memory"
-     "--background-index"
-     "--function-arg-placeholders"
-     "--limit-references=0"
-     "--limit-results=0"))
-  (im/after cc-mode
-   (im/autoload lsp-clangd-find-other-file "lsp-clangd")
-   (im/key-local "<f2>" lsp-clangd-find-other-file c-mode-base-map))
-  (im/after c-ts-mode
-   (im/autoload lsp-clangd-find-other-file "lsp-clangd")
-   (im/key-local "<f2>" lsp-clangd-find-other-file c-ts-base-mode-map))))
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :diminish "Ls"
 
-(im/pkg lsp-ivy
- (im/after lsp-mode
-  (im/key-local "C-c x" lsp-ivy-workspace-symbol lsp-mode-map)))
+ :bind
+ ("C-c f" . lsp-format-buffer)
+ ("C-c g" . lsp-format-region)
+ ("C-c r" . lsp-rename)
+ ("C-c h" . lsp-describe-thing-at-point)
+ ("C-="   . lsp-extend-selection)
+ ("M-RET" . lsp-execute-code-action)
 
-(im/pkg treemacs
- (im/key "<f9>" treemacs-select-window)
- (im/after treemacs-customization
-  (setq-default treemacs-width 40)
-  (setq-default treemacs-indentation 1))
- (im/after treemacs
-  (setq-default treemacs-select-when-already-in-treemacs 'move-back))
-  ;; (setq-default treemacs-indent-guide-mode t))
- (im/after treemacs-interface
-  (im/key "<f12>" treemacs-delete-other-windows "treemacs-interface"))
- ;; (im/after treemacs-header-line
- ;;  (setq-default treemacs-indicate-top-scroll-mode t))
- (im/after treemacs-mode
-  (im/hook treemacs-mode-hook treemacs-tag-follow-mode "treemacs-tag-follow-mode")
-  (im/hook treemacs-mode-hook treemacs-fringe-indicator-mode "treemacs-fringe-indicator")
-  (im/hook treemacs-mode-hook treemacs-filewatch-mode "treemacs-filewatch-mode")
-  ;; (im/hook treemacs-mode-hook treemacs-indicate-top-scroll-mode "treemacs-header-line")
-  ;; (im/autoload treemacs-indent-guide-mode "treemacs-visuals")
-  ;; (im/hookn treemacs-mode-hook (treemacs-indent-guide-mode))
-  (im/autoload treemacs-git-mode "treemacs-async")
-  (im/hookn treemacs-mode-hook (treemacs-git-mode 'deferred))
-  (im/hook treemacs-mode-hook
-   treemacs-git-commit-diff-mode
-   "treemacs-git-commit-diff-mode")))
+ :custom
+ (lsp-progress-prefix "  Progress: ")
+ (lsp-completion-show-detail t)
+ (lsp-completion-show-kind t)
+ (lsp-completion-provider :none)
+ (lsp-headerline-breadcrumb-enable t)
+ (lsp-restart 'auto-restart)
+ (lsp-enable-snippet t)
+ (lsp-keymap-prefix "C-c")
+ (lsp-idle-delay 0.1)
+ (lsp-file-watch-threshold nil)
+ (lsp-enable-semantic-highlighting t)
+ (lsp-enable-indentation t)
+ (lsp-enable-on-type-formatting nil)
+ (lsp-before-save-edits nil)
+ (lsp-auto-configure t)
+ (lsp-signature-auto-activate t)
+ (lsp-signature-render-documentation nil)
+ (lsp-eldoc-enable-hover t)
+ (lsp-eldoc-render-all nil)
+ (lsp-modeline-code-actions-enable nil)
+ (lsp-modeline-diagnostics-enable t)
+ (lsp-log-io nil)
+ (lsp-keep-workspace-alive nil)
+ (lsp-enable-imenu nil))
 
-(im/pkg lsp-treemacs
- (im/after lsp-mode
-  (im/key-local "C-c e" lsp-treemacs-errors-list    lsp-mode-map)
-  (im/key-local "C-c s" lsp-treemacs-symbols        lsp-mode-map)
-  (im/key-local "C-c c" lsp-treemacs-call-hierarchy lsp-mode-map)
-  (im/key-local "C-c t" lsp-treemacs-type-hierarchy lsp-mode-map)
-  (im/hook lsp-mode-hook lsp-treemacs-sync-mode)))
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after which-key
 
-(im/pkg lsp-ui
- (im/after lsp-ui-doc
-  (setq-default lsp-ui-doc-enable t)
-  (setq-default lsp-ui-doc-show-with-cursor nil)
-  (setq-default lsp-ui-doc-show-with-mouse t)
-  (setq-default lsp-ui-doc-alignment 'frame)
-  (setq-default lsp-ui-doc-header t)
-  (setq-default lsp-ui-doc-include-signature t)
-  (setq-default lsp-ui-doc-max-height 30)
-  (setq-default lsp-ui-doc-use-webkit t))
- (im/after lsp-ui-peek
-  (setq-default lsp-ui-peek-list-width 40)
-  (setq-default lsp-ui-peek-always-show t))
- (im/after lsp-ui-sideline
-  (setq-default lsp-ui-sideline-enable nil))
- (im/after lsp-ui
-  (im/key-local "M-."   lsp-ui-peek-find-definitions    lsp-ui-mode-map "lsp-ui-peek")
-  (im/key-local "M-?"   lsp-ui-peek-find-references     lsp-ui-mode-map "lsp-ui-peek")
-  (im/key-local "M-I"   lsp-ui-peek-find-implementation lsp-ui-mode-map "lsp-ui-peek")
-  (im/key-local "C-c d" lsp-ui-doc-show                 lsp-ui-mode-map "lsp-ui-doc")
-  (im/key-local "C-c l" lsp-ui-flycheck-list            lsp-ui-mode-map "lsp-ui-flycheck")))
+ :hook
+ (lsp-mode . lsp-enable-which-key-integration))
+
+(use-package lsp-lens
+ :ensure lsp-mode
+ :defer t
+ :diminish
+
+ :custom
+ (lsp-lens-mode nil)
+ (lsp-lens-enable nil))
+
+(use-package lsp-headerline
+ :ensure lsp-mode
+ :defer t
+
+ :custom
+ (lsp-headerline-breadcrumb-icons-enable nil))
+
+(use-package lsp-semantic-tokens
+ :ensure lsp-mode
+ :defer t
+
+ :custom
+ (lsp-semantic-tokens-apply-modifiers t))
+
+(use-package lsp-ivy
+ :ensure t
+ :defer t
+ :after lsp-mode
+
+ :bind
+ (:map lsp-mode-map ("C-c x" . lsp-ivy-workspace-symbol)))
+
+(use-package lsp-ui-peek
+ :ensure lsp-ui
+ :defer t
+
+ :defines
+ lsp-ui-mode-map
+
+ :bind
+ (:map lsp-ui-mode-map
+  ("M-."   . lsp-ui-peek-find-definitions)
+  ("M-?"   . lsp-ui-peek-find-references)
+  ("M-I"   . lsp-ui-peek-find-implementation)
+  ("C-c d" . lsp-ui-doc-show)))
+
+(use-package lsp-ui-flycheck
+ :ensure lsp-ui
+ :defer t
+
+ :bind
+ (:map lsp-ui-mode-map
+  ("C-c l" . lsp-ui-flycheck-list)))
+
+(use-package lsp-ui
+ :ensure t
+ :defer t
+ :after lsp-ui-doc
+
+ :custom
+ (lsp-ui-doc-enable t)
+ (lsp-ui-doc-show-with-cursor nil)
+ (lsp-ui-doc-show-with-mouse t)
+ (lsp-ui-doc-alignment 'frame)
+ (lsp-ui-doc-header t)
+ (lsp-ui-doc-include-signature t)
+ (lsp-ui-doc-max-height 30)
+ (lsp-ui-doc-use-webkit t))
+
+(use-package lsp-ui
+ :ensure t
+ :defer t
+ :after lsp-ui-peek
+
+ :custom
+ (lsp-ui-peek-list-width 40)
+ (lsp-ui-peek-always-show t))
+
+(use-package lsp-ui
+ :ensure t
+ :defer t
+ :after lsp-ui-sideline
+
+ :custom
+ (lsp-ui-sideline-enable nil))
+
+;;; Treemacs
+
+(use-package treemacs
+ :ensure t
+ :defer t
+
+ :bind
+ ("<f9>" . treemacs-select-window))
+
+(use-package treemacs-customization
+ :ensure treemacs
+ :defer t
+
+ :custom
+ ;; (treemacs-indent-guide-mode t)
+ (treemacs-select-when-already-in-treemacs 'move-back)
+ (treemacs-width 40)
+ (treemacs-indentation 1))
+
+(use-package treemacs-interface
+ :ensure treemacs
+ :defer t
+
+ :bind
+ ("<f12>" . treemacs-delete-other-windows))
+
+(use-package treemacs-mode
+ :ensure treemacs
+ :defer t
+
+ :hook
+ (treemacs-mode . treemacs-tag-follow-mode)
+ (treemacs-mode . treemacs-fringe-indicator-mode)
+ (treemacs-mode . treemacs-filewatch-mode)
+ (treemacs-mode . treemacs-git-commit-diff-mode)
+ (treemacs-mode . (lambda () (treemacs-git-mode 'deferred))))
+
+(use-package treemacs-async
+ :ensure treemacs
+ :defer t
+ :commands treemacs-git-mode)
+
+(use-package treemacs-git-commit-diff-mode
+ :ensure treemacs
+ :defer t
+ :commands treemacs-git-commit-diff-mode)
+
+(use-package lsp-treemacs
+ :ensure t
+ :defer t
+ :after lsp-mode
+
+ :bind
+ (:map lsp-mode-map
+  ("C-c e" . lsp-treemacs-errors-list)
+  ("C-c s" . lsp-treemacs-symbols)
+  ("C-c c" . lsp-treemacs-call-hierarchy)
+  ("C-c t" . lsp-treemacs-type-hierarchy))
+
+ :hook
+ (lsp-mode . lsp-treemacs-sync-mode))
+
+;;; Final
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
