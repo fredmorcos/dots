@@ -1574,6 +1574,7 @@
  :custom
  (projectile-project-search-path '("~/Workspace"))
  (projectile-sort-order 'recently-active)
+ (projectile-indexing-method 'hybrid)
  (projectile-enable-caching nil)
  (projectile-require-project-root nil))
 
@@ -1602,7 +1603,21 @@
 (use-package yasnippet
  :ensure t
  :defer t
- :diminish "Ys")
+ :diminish (yas-minor-mode . "Ys")
+
+ :init
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
+
+ :preface
+ (defun init/start-ivy-yasnippet ()
+  "Start Ivy Yasnippet."
+  (interactive)
+  (yas-minor-mode-on)
+  (ivy-yasnippet))
+
+ :bind
+ ("C-c Y" . init/start-ivy-yasnippet)
+ ("C-c y s" . yas-expand-from-trigger-key))
 
 (use-package yasnippet
  :ensure t
@@ -1619,6 +1634,10 @@
 
  :init
  (yasnippet-snippets-initialize))
+
+(use-package ivy-yasnippet
+ :ensure t
+ :defer t)
 
 ;;; Ledger
 
@@ -1786,10 +1805,9 @@
  :bind
  ("C-c f" . lsp-format-buffer)
  ("C-c g" . lsp-format-region)
- ("C-c r" . lsp-rename)
  ("C-c h" . lsp-describe-thing-at-point)
- ("C-="   . lsp-extend-selection)
  ("M-RET" . lsp-execute-code-action)
+ ([remap er/expand-region] . lsp-extend-selection)
 
  :custom
  (lsp-progress-prefix "  Progress: ")
@@ -1800,9 +1818,10 @@
  (lsp-restart 'auto-restart)
  (lsp-enable-snippet t)
  (lsp-keymap-prefix "C-c")
- (lsp-idle-delay 0.1)
+ (lsp-idle-delay 0.3)
  (lsp-file-watch-threshold nil)
  (lsp-enable-semantic-highlighting t)
+ (lsp-enable-relative-indentation t)
  (lsp-enable-indentation t)
  (lsp-enable-on-type-formatting nil)
  (lsp-before-save-edits nil)
@@ -1815,7 +1834,8 @@
  (lsp-modeline-diagnostics-enable t)
  (lsp-log-io nil)
  (lsp-keep-workspace-alive nil)
- (lsp-enable-imenu nil))
+ (lsp-enable-imenu nil)
+ (lsp-use-plists t))
 
 (use-package lsp-mode
  :ensure t
@@ -1846,7 +1866,8 @@
  :defer t
 
  :custom
- (lsp-semantic-tokens-apply-modifiers t))
+ (lsp-semantic-tokens-apply-modifiers t)
+ (lsp-semantic-tokens-enable-multiline-token-support t))
 
 (use-package lsp-ivy
  :ensure t
@@ -1859,15 +1880,13 @@
 (use-package lsp-ui-peek
  :ensure lsp-ui
  :defer t
-
- :defines
- lsp-ui-mode-map
+ :after lsp-mode
 
  :bind
- (:map lsp-ui-mode-map
-  ("M-."   . lsp-ui-peek-find-definitions)
-  ("M-?"   . lsp-ui-peek-find-references)
-  ("M-I"   . lsp-ui-peek-find-implementation)
+ (:map lsp-mode-map
+  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+  ([remap xref-find-references] . lsp-ui-peek-find-references)
+  ("M-I" . lsp-ui-peek-find-implementation)
   ("C-c d" . lsp-ui-doc-show)))
 
 (use-package lsp-ui-flycheck
@@ -1875,7 +1894,7 @@
  :defer t
 
  :bind
- (:map lsp-ui-mode-map
+ (:map lsp-mode-map
   ("C-c l" . lsp-ui-flycheck-list)))
 
 (use-package lsp-ui
@@ -1919,6 +1938,13 @@
  :bind
  ("<f9>" . treemacs-select-window))
 
+(use-package treemacs-themes
+ :ensure treemacs
+ :defer t
+
+ :commands
+ treemacs-load-theme)
+
 (use-package treemacs-customization
  :ensure treemacs
  :defer t
@@ -1927,11 +1953,13 @@
  ;; (treemacs-indent-guide-mode t)
  (treemacs-select-when-already-in-treemacs 'move-back)
  (treemacs-width 40)
- (treemacs-indentation 1))
+ (treemacs-indentation 1)
+ (treemacs-tag-follow-delay 0.1))
 
 (use-package treemacs-interface
  :ensure treemacs
  :defer t
+ :after treemacs
 
  :bind
  ("<f12>" . treemacs-delete-other-windows))
@@ -1962,15 +1990,53 @@
  :defer t
  :after lsp-mode
 
+ :preface
+ (defun init/lsp-treemacs-call-hierarchy ()
+  (interactive)
+  (lsp-treemacs-call-hierarchy t))
+ (defun init/lsp-treemacs-implementations ()
+  (interactive)
+  (lsp-treemacs-implementations t))
+ (defun init/lsp-treemacs-references ()
+  (interactive)
+  (lsp-treemacs-references t))
+ (defun init/lsp-treemacs-type-hierarchy ()
+  (interactive)
+  (lsp-treemacs-type-hierarchy 2))
+
  :bind
  (:map lsp-mode-map
   ("C-c e" . lsp-treemacs-errors-list)
   ("C-c s" . lsp-treemacs-symbols)
   ("C-c c" . lsp-treemacs-call-hierarchy)
-  ("C-c t" . lsp-treemacs-type-hierarchy))
+  ("C-c i" . lsp-treemacs-implementations)
+  ("C-c f" . lsp-treemacs-references)
+  ("C-c t" . init/lsp-treemacs-type-hierarchy)
+  ("C-c C" . init/lsp-treemacs-call-hierarchy)
+  ("C-c T" . init/lsp-treemacs-type-hierarchy)
+  ("C-c I" . init/lsp-treemacs-implementations)
+  ("C-c F" . init/lsp-treemacs-references))
 
  :hook
  (lsp-mode . lsp-treemacs-sync-mode))
+
+(use-package treemacs-projectile
+ :ensure t
+ :defer t
+ :after (treemacs projectile))
+
+(use-package treemacs-magit
+ :ensure t
+ :demand
+ :after (treemacs magit))
+
+(use-package treemacs-nerd-icons
+ :ensure t
+ :demand
+ :after treemacs
+
+ :config
+ (treemacs-load-theme "nerd-icons"))
 
 ;;; Final
 
