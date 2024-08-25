@@ -1656,7 +1656,8 @@
  (hledger-mode . whitespace-mode)
  (hledger-mode . symbol-overlay-mode)
  (hledger-mode . flycheck-mode)
- (hledger-mode . display-fill-column-indicator-mode))
+ (hledger-mode . display-fill-column-indicator-mode)
+ (hledger-mode . hl-line-mode))
 
 (use-package hledger-mode
  :ensure t
