@@ -1088,7 +1088,14 @@
 
 (use-package flyspell-correct-ivy
  :ensure t
- :defer t)
+ :defer t
+
+ :bind
+ (:map flyspell-mode-map
+  ("C-M-;" . flyspell-correct-wrapper))
+
+ :custom
+ (flyspell-correct-interface #'flyspell-correct-ivy))
 
 (use-package spell-fu
  :ensure t
@@ -1145,14 +1152,14 @@
   ("<RET>" . ivy-alt-done))
 
  :custom
+ ;; (ivy-initial-inputs-alist nil)
+ ;; (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
  (ivy-wrap t)
  (ivy-use-selectable-prompt t)
  (ivy-use-virtual-buffers t)
  (ivy-count-format "(%d/%d) ")
  (ivy-virtual-abbreviate 'abbreviate)
- (ivy-initial-inputs-alist nil)
  (ivy-extra-directories nil)
- (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
 
  :init
  (ivy-mode))
@@ -1167,6 +1174,14 @@
  :init
  (ivy-rich-mode))
 
+(use-package nerd-icons-ivy-rich
+ :init
+ (nerd-icons-ivy-rich-mode))
+
+(use-package nerd-icons-completion
+ :init
+ (nerd-icons-completion-mode))
+
 (use-package counsel
  :ensure t
  :defer t
@@ -1177,7 +1192,10 @@
   ("M-Y" . counsel-yank-pop))
 
  :config
- (put 'counsel-find-symbol 'no-counsel-M-x t)
+ ;; (put 'counsel-find-symbol 'no-counsel-M-x t)
+ (defadvice counsel-register
+  (after recenter-after-counsel-register activate)
+  (recenter))
 
  :init
  (counsel-mode))
@@ -1488,23 +1506,20 @@
  :ensure lsp-mode
  :defer t
 
- :custom
- (lsp-clients-clangd-args
-  '("--header-insertion-decorators"
-    "--all-scopes-completion"
-    "--clang-tidy"
-    "--completion-style=detailed"
-    "--header-insertion=iwyu"
-    ;; Breaks clangd-14
-                                        ; "--header-insertion-decorators"
-    "--inlay-hints"
-    "-j=8"
-    "--malloc-trim"
-    "--pch-storage=memory"
-    "--background-index"
-    "--function-arg-placeholders"
-    "--limit-references=0"
-    "--limit-results=0")))
+ :config
+ (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators")
+ (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
+ (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
+ (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
+ (add-to-list 'lsp-clients-clangd-args "--header-insertion=iwyu")
+ (add-to-list 'lsp-clients-clangd-args "-j=8")
+ (add-to-list 'lsp-clients-clangd-args "--malloc-trim")
+ (add-to-list 'lsp-clients-clangd-args "--pch-storage=memory")
+ (add-to-list 'lsp-clients-clangd-args "--background-index")
+ (add-to-list 'lsp-clients-clangd-args "--function-arg-placeholders")
+ (add-to-list 'lsp-clients-clangd-args "--inlay-hints")
+ (add-to-list 'lsp-clients-clangd-args "--limit-references=0")
+ (add-to-list 'lsp-clients-clangd-args "--limit-results=0"))
 
 (use-package lsp-clangd
  :ensure lsp-mode
@@ -1569,6 +1584,11 @@
  :bind
  (:map projectile-mode-map
   ("M-G" . counsel-projectile-git-grep))
+
+ :config
+ (defadvice counsel-projectile-git-grep
+  (after recenter-after-counsel-projectile-git-grep activate)
+  (recenter))
 
  :init
  (counsel-projectile-mode))
