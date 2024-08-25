@@ -44,13 +44,6 @@
 
 ;;; Text Editing
 
-;; TODO: Do I still need this?
-;; (use-package elec-pair
-;;  :ensure nil
-
-;;  :custom
-;;  (electric-pair-pairs '((?\[ . ?\]))))
-
 (use-package qol
  :ensure nil
  :defer t
@@ -98,6 +91,13 @@
  :bind
  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
  ([remap move-end-of-line] . mwim-end-of-code-or-line))
+
+(use-package register
+ :ensure nil
+ :defer t
+
+ :bind
+ ([remap jump-to-register] . counsel-register))
 
 (use-package emacs
  :ensure nil
@@ -167,7 +167,8 @@
  :defer t
 
  :hook
- (text-mode . spell-fu-mode))
+ ;; (text-mode . spell-fu-mode)
+ (text-mode . jinx-mode))
 
 (use-package buffer-move
  :ensure t
@@ -389,6 +390,8 @@
  (company-minimum-prefix-length 2)
  (company-selection-wrap-around t)
  (company-tooltip-align-annotations t)
+ (company-tooltip-minimum-width 40)
+ (company-tooltip-width-grow-only t)
 
  :preface
  (defun init/company-add-backend (backend)
@@ -408,16 +411,14 @@
  :custom
  (company-posframe-quickhelp-x-offset 2)
 
- :hook
- (company-mode . company-posframe-mode))
+ :hook company-mode)
 
 (use-package company-prescient
  :ensure t
  :defer t
  :after company
 
- :hook
- (company-mode . company-prescient-mode))
+ :hook company-mode)
 
 ;;; Syntax Checking
 
@@ -439,22 +440,31 @@
  (flycheck-mode-line-prefix "Fc")
  (flycheck-check-syntax-automatically
   '(idle-change new-line mode-enabled idle-buffer-switch))
- (flycheck-idle-change-delay 0.25)
- (flycheck-idle-buffer-switch-delay 0.25)
+ (flycheck-idle-change-delay 0.2)
+ (flycheck-idle-buffer-switch-delay 0.2)
+ (flycheck-display-errors-delay 0.2)
 
  :hook
- (flycheck-mode . flycheck-posframe-mode))
+ (flycheck-mode . flycheck-posframe-mode)
+
+ :config
+ (defadvice flycheck-next-error
+  (after recenter-after-flycheck-next activate)
+  (recenter))
+ (defadvice flycheck-previous-error
+  (after recenter-after-flycheck-previous activate)
+  (recenter)))
 
 (use-package flycheck-posframe
  :ensure t
  :defer t
 
  :custom
+ ;; (flycheck-posframe-prefix           (concat " " (char-to-string 8618)  " Info: "))
+ ;; (flycheck-posframe-warnings-prefix  (concat " " (char-to-string 9888)  " Warning: "))
+ ;; (flycheck-posframe-error-prefix     (concat " " (char-to-string 10540) " Error: ")))
  (flycheck-posframe-position 'window-bottom-left-corner)
- (flycheck-posframe-border-width 1)
- (flycheck-posframe-prefix           (concat " " (char-to-string 8618)  " Info: "))
- (flycheck-posframe-warnings-prefix  (concat " " (char-to-string 9888)  " Warning: "))
- (flycheck-posframe-error-prefix     (concat " " (char-to-string 10540) " Error: ")))
+ (flycheck-posframe-border-width 1))
 
 (use-package flycheck-posframe
  :ensure t
@@ -508,7 +518,9 @@
  (recentf-max-saved-items 100)
  (recentf-exclude `(,(concat (expand-file-name user-emacs-directory) "elpa")
                     ,(no-littering-expand-var-file-name "")
-                    ,(no-littering-expand-etc-file-name "")))
+                    ,(no-littering-expand-etc-file-name "")
+                    ,@native-comp-eln-load-path
+                    "/usr/share/emacs"))
 
  :init
  (recentf-mode))
@@ -583,7 +595,9 @@
  (prog-mode . electric-layout-local-mode)
  (prog-mode . display-line-numbers-mode)
  (prog-mode . hl-line-mode)
- (prog-mode . bug-reference-prog-mode))
+ (prog-mode . bug-reference-prog-mode)
+ (prog-mode . jinx-mode)
+ (prog-mode . whitespace-mode))
 
 (use-package deadgrep
  :ensure t
@@ -627,6 +641,13 @@
  (add-hook 'xref-after-return #'recenter)
  (add-hook 'xref-after-jump #'recenter))
 
+(use-package ivy-xref
+ :ensure t
+ :demand t
+
+ :custom
+ (xref-show-xrefs-function 'ivy-xref-show-xrefs))
+
 ;;; Configuration Files
 
 (use-package conf-mode
@@ -634,13 +655,15 @@
  :defer t
 
  :hook
- (conf-desktop-mode . diff-hl-mode)
- (conf-desktop-mode . show-paren-mode)
- (conf-desktop-mode . flyspell-prog-mode)
- (conf-desktop-mode . electric-pair-local-mode)
- (conf-desktop-mode . electric-layout-local-mode)
- (conf-desktop-mode . display-line-numbers-mode)
- (conf-desktop-mode . hl-line-mode))
+ ((conf-mode conf-desktop-mode) . diff-hl-mode)
+ ((conf-mode conf-desktop-mode) . show-paren-mode)
+ ((conf-mode conf-desktop-mode) . flyspell-prog-mode)
+ ((conf-mode conf-desktop-mode) . electric-pair-local-mode)
+ ((conf-mode conf-desktop-mode) . electric-layout-local-mode)
+ ((conf-mode conf-desktop-mode) . display-line-numbers-mode)
+ ((conf-mode conf-desktop-mode) . hl-line-mode)
+ ((conf-mode conf-desktop-mode) . jinx-mode)
+ ((conf-mode conf-desktop-mode) . whitespace-mode))
 
 ;;; Meson
 
@@ -723,7 +746,12 @@
 
  :custom
  (magit-revision-show-gravatars t)
- (magit-revision-fill-summary-line fill-column))
+ (magit-revision-fill-summary-line fill-column)
+
+ :config
+ (defadvice magit-diff-visit-file
+  (after recenter-after-magit-diff-visit-file activate)
+  (recenter)))
 
 (use-package diff-hl
  :ensure t
@@ -762,6 +790,7 @@
  :defer t
 
  :custom
+ (show-paren-when-point-in-periphery t)
  (show-paren-when-point-inside-paren t)
  (show-paren-style 'mixed)
  (show-paren-highlight-openparen t)
@@ -811,9 +840,9 @@
  :diminish "Ws"
 
  :custom
- (whitespace-line-column 90)
+ (whitespace-line-column fill-column)
  (show-trailing-whitespace nil)
- (whitespace-action '(cleanup))
+ (whitespace-action '(cleanup auto-cleanup))
  (whitespace-style
   '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
     space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
@@ -1079,6 +1108,16 @@
  :custom
  spell-fu-faces-exclude '(link org-link))
 
+(use-package jinx
+ :ensure t
+ :defer t
+ :diminish "Jx"
+
+ :bind
+ (:map jinx-mode-map
+  ("M-$"   . jinx-correct)
+  ("C-M-$" . jinx-languages)))
+
 ;;; Emacs Tools
 
 (use-package which-key
@@ -1266,12 +1305,12 @@
 (use-package volatile-highlights
  :ensure t
  :defer t
- :diminish "Vh"
+ :diminish
 
  :init
  (volatile-highlights-mode))
 
-;;; Emacs Syntax Highlighting
+;;; Syntax Highlighting
 
 (use-package jit-lock
  :ensure nil
@@ -1282,6 +1321,20 @@
  ;; A little more than what can fit on the screen.
  (jit-lock-chunk-size 4000)
  (jit-lock-antiblink-grace nil))
+
+(use-package treesit
+ :ensure nil
+ :defer t
+
+ :custom
+ (treesit-language-source-alist
+  '((bash   . ("https://github.com/tree-sitter/tree-sitter-bash"))
+    (c      . ("https://github.com/tree-sitter/tree-sitter-c"))
+    (cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+    (json   . ("https://github.com/tree-sitter/tree-sitter-json.git"))
+    (python . ("https://github.com/tree-sitter/tree-sitter-python.git"))
+    (toml   . ("https://github.com/ikatyang/tree-sitter-toml.git"))
+    (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git")))))
 
 (use-package tree-sitter
  :ensure t
@@ -1552,8 +1605,7 @@
 (use-package hledger-mode
  :ensure t
  :defer t
- :mode "\\.journal\\'"
- :mode "\\.ledger\\'"
+ :mode ("\\.journal\\'" "\\.ledger\\'")
 
  :custom
  (hledger-currency-string "EUR")
@@ -1577,7 +1629,12 @@
 
 (use-package flycheck-hledger
  :ensure t
- :defer t)
+ :defer t
+ :after (flycheck hledger-mode)
+
+ :custom
+ ;; TODO Also add "accounts".
+ (flycheck-hledger-checks '("commodities")))
 
 ;;; Web Development
 
