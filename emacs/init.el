@@ -939,7 +939,7 @@
  :diminish "Ar"
 
  :custom
- ;; (auto-revert-mode-text " Ar")
+ (auto-revert-mode-text " Ar")
  (auto-revert-interval 1)
  (auto-revert-avoid-polling t)
  (buffer-auto-revert-by-notification t))
