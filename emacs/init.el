@@ -164,11 +164,19 @@
 
 (use-package text-mode
  :ensure nil
- :defer t
+ :defer t)
 
- :hook
- ;; (text-mode . spell-fu-mode)
- (text-mode . jinx-mode))
+(use-package jinx
+ :ensure t
+ :defer t
+ :after text-mode
+ :hook text-mode)
+
+;; (use-package spell-fu
+;;  :ensure t
+;;  :defer t
+;;  :after text-mode
+;;  :hook text-mode)
 
 (use-package buffer-move
  :ensure t
@@ -444,9 +452,6 @@
  (flycheck-idle-buffer-switch-delay 0.2)
  (flycheck-display-errors-delay 0.2)
 
- :hook
- (flycheck-mode . flycheck-posframe-mode)
-
  :config
  (defadvice flycheck-next-error
   (after recenter-after-flycheck-next activate)
@@ -465,6 +470,12 @@
  ;; (flycheck-posframe-error-prefix     (concat " " (char-to-string 10540) " Error: ")))
  (flycheck-posframe-position 'window-bottom-left-corner)
  (flycheck-posframe-border-width 1))
+
+(use-package flycheck-posframe
+ :ensure t
+ :defer t
+ :after flycheck
+ :hook flycheck-mode)
 
 (use-package flycheck-posframe
  :ensure t
@@ -577,35 +588,109 @@
  :defer t
  :diminish "Sw")
 
-(use-package prog-mode
+(use-package display-fill-column-indicator
  :ensure nil
  :defer t
+ :after prog-mode
+ :hook prog-mode)
 
- :hook
- (prog-mode . display-fill-column-indicator-mode)
- (prog-mode . goto-address-prog-mode)
- (prog-mode . diff-hl-mode)
- (prog-mode . eldoc-mode)
- (prog-mode . show-paren-mode)
- (prog-mode . flyspell-prog-mode)
- (prog-mode . flycheck-mode)
- (prog-mode . yas-minor-mode)
- (prog-mode . company-mode)
- (prog-mode . electric-pair-local-mode)
- (prog-mode . electric-layout-local-mode)
- (prog-mode . display-line-numbers-mode)
- (prog-mode . hl-line-mode)
- (prog-mode . bug-reference-prog-mode)
- (prog-mode . jinx-mode)
- (prog-mode . whitespace-mode))
+(use-package goto-addr
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook (prog-mode . goto-address-prog-mode))
+
+(use-package diff-hl
+ :ensure t
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package eldoc
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package paren
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook (prog-mode . show-paren-mode))
+
+;; (use-package flyspell
+;;  :ensure nil
+;;  :defer t
+;;  :after prog-mode
+;;  :hook (prog-mode . flyspell-prog-mode))
+
+(use-package flycheck
+ :ensure t
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package yasnippet
+ :ensure t
+ :defer t
+ :after prog-mode
+ :hook (prog-mode . yas-minor-mode-on))
+
+(use-package company
+ :ensure t
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package elec-pair
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook (prog-mode . electric-pair-local-mode))
+
+(use-package electric
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook (prog-mode . electric-layout-local-mode))
+
+(use-package display-line-numbers
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package hl-line
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package bug-reference
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook (prog-mode . bug-reference-prog-mode))
+
+(use-package jinx
+ :ensure t
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
+
+(use-package whitespace
+ :ensure nil
+ :defer t
+ :after prog-mode
+ :hook prog-mode)
 
 (use-package deadgrep
  :ensure t
  :defer t
+ :after prog-mode
 
  :bind
- (:map prog-mode-map
-  ("M-F" . deadgrep)))
+ (:map prog-mode-map ("M-F" . deadgrep)))
 
 (use-package wgrep
  :ensure t
@@ -650,38 +735,79 @@
 
 ;;; Configuration Files
 
-(use-package conf-mode
+(use-package diff-hl
+ :ensure t
+ :defer t
+ :after conf-mode
+ :hook (conf-mode conf-desktop-mode))
+
+(use-package paren
  :ensure nil
  :defer t
+ :after conf-mode
+ :hook ((conf-mode conf-desktop-mode) . show-paren-mode))
 
- :hook
- ((conf-mode conf-desktop-mode) . diff-hl-mode)
- ((conf-mode conf-desktop-mode) . show-paren-mode)
- ((conf-mode conf-desktop-mode) . flyspell-prog-mode)
- ((conf-mode conf-desktop-mode) . electric-pair-local-mode)
- ((conf-mode conf-desktop-mode) . electric-layout-local-mode)
- ((conf-mode conf-desktop-mode) . display-line-numbers-mode)
- ((conf-mode conf-desktop-mode) . hl-line-mode)
- ((conf-mode conf-desktop-mode) . jinx-mode)
- ((conf-mode conf-desktop-mode) . whitespace-mode))
+(use-package flyspell
+ :ensure nil
+ :defer t
+ :after conf-mode
+ :hook ((conf-mode conf-desktop-mode) . flyspell-prog-mode))
+
+(use-package elec-pair
+ :ensure nil
+ :defer t
+ :after conf-mode
+ :hook ((conf-mode conf-desktop-mode) . electric-pair-local-mode))
+
+(use-package electric
+ :ensure nil
+ :defer t
+ :after conf-mode
+ :hook ((conf-mode conf-desktop-mode) . electric-layout-local-mode))
+
+(use-package display-line-numbers
+ :ensure nil
+ :defer t
+ :after conf-mode
+ :hook (conf-mode conf-desktop-mode))
+
+(use-package hl-line
+ :ensure nil
+ :defer t
+ :after conf-mode
+ :hook (conf-mode conf-desktop-mode))
+
+(use-package jinx
+ :ensure t
+ :defer t
+ :after conf-mode
+ :hook (conf-mode conf-desktop-mode))
+
+(use-package whitespace
+ :ensure nil
+ :defer t
+ :after conf-mode
+ :hook (conf-mode conf-desktop-mode))
 
 ;;; Meson
 
 (use-package meson-mode
  :ensure t
- :defer t
+ :defer t)
 
- :hook
- (meson-mode . symbol-overlay-mode)
- (meson-mode . company-mode))
-
-(use-package meson-mode
+(use-package symbol-overlay
  :ensure t
  :defer t
- :after company
+ :after meson-mode
+ :hook meson-mode)
 
+(use-package company
+ :ensure t
+ :defer t
+ :after meson-mode
  :hook
- (meson-mode . (init/company-add-backend 'company-dabbrev-code)))
+ (meson-mode
+  (meson-mode . (lambda () (init/company-add-backend 'company-dabbrev-code)))))
 
 ;;; Version Control
 
@@ -715,12 +841,11 @@
  (:map prog-mode-map
   ("C-c b" . blamer-mode)))
 
-(use-package magit-process
- :ensure magit
+(use-package goto-addr
+ :ensure nil
  :defer t
-
- :hook
- (magit-process-mode . goto-address-mode))
+ :after magit-process
+ :hook (magit-process-mode . goto-address-mode))
 
 (use-package magit
  :ensure t
@@ -735,10 +860,13 @@
  ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
  (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
  (magit-bury-buffer-function #'magit-restore-window-configuration)
- (magit-repository-directories '(("~/Workspace" . 3)))
+ (magit-repository-directories '(("~/Workspace" . 3))))
 
- :hook
- (after-save . magit-after-save-refresh-status))
+(use-package magit
+ :ensure t
+ :defer t
+ :after files
+ :hook (after-save . magit-after-save-refresh-status))
 
 (use-package magit-diff
  :ensure magit
@@ -765,7 +893,6 @@
  :ensure t
  :defer t
  :after magit-mode
-
  :hook
  (magit-pre-refresh . diff-hl-magit-pre-refresh)
  (magit-post-refresh . diff-hl-magit-post-refresh))
@@ -850,12 +977,11 @@
 
 ;;; Makefiles
 
-(use-package make-mode
- :ensure nil
+(use-package whitespace
+ :ensure t
  :defer t
-
- :hook
- (makefile-mode . whitespace-mode))
+ :after make-mode
+ :hook makefile-mode)
 
 ;;; Emacs Lisp
 
@@ -876,32 +1002,37 @@
 
  :bind
  (:map emacs-lisp-mode-map
-  ("<f6>" . init/expand-current-macro))
+  ("<f6>" . init/expand-current-macro)))
 
- :hook
- (emacs-lisp-mode . symbol-overlay-mode)
- (emacs-lisp-mode . whitespace-mode))
+(use-package symbol-overlay
+ :ensure t
+ :defer t
+ :after elisp-mode
+ :hook emacs-lisp-mode)
+
+(use-package whitespace
+ :ensure t
+ :defer t
+ :after elisp-mode
+ :hook emacs-lisp-mode)
 
 (use-package highlight-defined
  :ensure t
  :defer t
-
- :hook
- (emacs-lisp-mode . highlight-defined-mode))
+ :after elisp-mode
+ :hook emacs-lisp-mode)
 
 (use-package highlight-quoted
  :ensure t
  :defer t
-
- :hook
- (emacs-lisp-mode . highlight-quoted-mode))
+ :after elisp-mode
+ :hook emacs-lisp-mode)
 
 (use-package eros
  :ensure t
  :defer t
-
- :hook
- (emacs-lisp-mode . eros-mode))
+ :after elisp-mode
+ :hook emacs-lisp-mode)
 
 (use-package suggest
  :ensure t
@@ -910,9 +1041,8 @@
 (use-package ipretty
  :ensure t
  :defer t
-
- :hook
- (emacs-lisp-mode . (lambda () (ipretty-mode t))))
+ :after elisp-mode
+ :hook (emacs-lisp-mode . (lambda () (ipretty-mode t))))
 
 (use-package elsa
  :ensure t
@@ -921,9 +1051,8 @@
 (use-package flycheck-elsa
  :ensure t
  :defer t
-
- :hook
- (emacs-lisp-mode . flycheck-elsa-setup))
+ :after (flycheck elisp-mode)
+ :hook (emacs-lisp-mode . flycheck-elsa-setup))
 
 ;;; Shell Scripting
 
@@ -978,11 +1107,31 @@
 
  :hook
  (dired-mode . init/dired-setup)
- (dired-mode . dired-hide-details-mode)
- (dired-mode . auto-revert-mode)
- (dired-mode . hl-line-mode)
- (dired-mode . context-menu-mode)
- (dired-mode . dired-async-mode))
+ (dired-mode . dired-hide-details-mode))
+
+(use-package hl-line
+ :ensure t
+ :defer t
+ :after dired
+ :hook dired-mode)
+
+(use-package mouse
+ :ensure nil
+ :defer t
+ :after dired
+ :hook (dired-mode . context-menu-mode))
+
+(use-package dired-async
+ :ensure nil
+ :defer t
+ :after dired
+ :hook dired-mode)
+
+(use-package autorevert
+ :ensure nil
+ :defer t
+ :after dired
+ :hook (dired-mode . auto-revert-mode))
 
 ;;; Search
 
@@ -1003,6 +1152,7 @@
 (use-package eldoc-cmake
  :ensure t
  :defer t
+ :after cmake-mode
  :hook (cmake-mode . eldoc-cmake-enable))
 
 ;;; Markdown
@@ -1033,6 +1183,7 @@
  :ensure t
  :defer t
  :diminish
+ :after (eldoc toml-mode)
  :hook toml-mode)
 
 ;;; JSON
@@ -1044,12 +1195,20 @@
 (use-package indent-guide
  :ensure t
  :defer t
- :hook (json-mode json-ts-mode))
+ :after json-mode
+ :hook json-mode)
+
+(use-package indent-guide
+ :ensure t
+ :defer t
+ :after json-ts-mode
+ :hook json-ts-mode)
 
 (use-package tree-sitter
  :ensure t
  :defer t
  :diminish "Ts"
+ :after json-mode
  :hook json-mode)
 
 ;;; Systemd
@@ -1061,59 +1220,60 @@
 (use-package company
  :ensure t
  :defer t
+ :after systemd
  :hook systemd-mode)
 
 ;;; Spell Checking
 
-(use-package flyspell
- :ensure nil
- :defer t
- :diminish "Fs"
+;; (use-package flyspell
+;;  :ensure nil
+;;  :defer t
+;;  :diminish "Fs"
 
- :custom
- (ispell-program-name "aspell")
- (ispell-extra-args '("--sug-mode=ultra"))
- (ispell-local-dictionary "en_US"))
+;;  :custom
+;;  (ispell-program-name "aspell")
+;;  (ispell-extra-args '("--sug-mode=ultra"))
+;;  (ispell-local-dictionary "en_US"))
 
-(use-package flyspell-correct
- :ensure nil
- :defer t
+;; (use-package flyspell-correct
+;;  :ensure nil
+;;  :defer t
 
- :bind
- (:map flyspell-mode-map
-  ("C-;" . flyspell-correct-wrapper))
+;;  :bind
+;;  (:map flyspell-mode-map
+;;   ("C-;" . flyspell-correct-wrapper))
 
- :custom
- (flyspell-correct-interface #'flyspell-correct-ivy))
+;;  :custom
+;;  (flyspell-correct-interface #'flyspell-correct-ivy))
 
-(use-package flyspell-correct-ivy
- :ensure t
- :defer t
+;; (use-package flyspell-correct-ivy
+;;  :ensure t
+;;  :defer t
 
- :bind
- (:map flyspell-mode-map
-  ("C-M-;" . flyspell-correct-wrapper))
+;;  :bind
+;;  (:map flyspell-mode-map
+;;   ("C-M-;" . flyspell-correct-wrapper))
 
- :custom
- (flyspell-correct-interface #'flyspell-correct-ivy))
+;;  :custom
+;;  (flyspell-correct-interface #'flyspell-correct-ivy))
 
-(use-package spell-fu
- :ensure t
- :defer t
+;; (use-package spell-fu
+;;  :ensure t
+;;  :defer t
 
- :preface
- (defun init/spell-fu-setup ()
-  "Setup spell-fu."
-  (defconst user-dict-en (expand-file-name "~/.aspell.en.pws"))
-  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
-  (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
-  (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
+;;  :preface
+;;  (defun init/spell-fu-setup ()
+;;   "Setup spell-fu."
+;;   (defconst user-dict-en (expand-file-name "~/.aspell.en.pws"))
+;;   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
+;;   (spell-fu-dictionary-add (spell-fu-get-personal-dictionary "en-personal" user-dict-en))
+;;   (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "de")))
 
- :hook
- (spell-fu-mode . init/spell-fu-setup)
+;;  :hook
+;;  (spell-fu-mode . init/spell-fu-setup)
 
- :custom
- spell-fu-faces-exclude '(link org-link))
+;;  :custom
+;;  spell-fu-faces-exclude '(link org-link))
 
 (use-package jinx
  :ensure t
@@ -1410,11 +1570,13 @@
 (use-package flycheck
  :ensure t
  :defer t
+ :after yaml-mode
  :hook yaml-mode)
 
 (use-package tree-sitter
  :ensure t
  :defer t
+ :after yaml-mode
  :hook yaml-mode)
 
 ;;; LLVM
@@ -1422,10 +1584,13 @@
 (use-package llvm-ts-mode
  :ensure t
  :defer t
- :mode "\\.ll\\'"
+ :mode "\\.ll\\'")
 
- :hook
- (llvm-mode . demangle-mode))
+(use-package demangle-mode
+ :ensure t
+ :defer t
+ :after llvm-ts-mode
+ :hook llvm-ts-mode)
 
 (use-package autodisass-llvm-bitcode
  :ensure t
@@ -1472,17 +1637,19 @@
  (c-doc-comment-style
   '((java-mode . javadoc)
     (c-mode    . gtkdoc)
-    (c++-mode  . doxygen)))
+    (c++-mode  . doxygen))))
 
- :hook
- (c-mode-common . lsp))
-
-(use-package c-ts-mode
- :ensure nil
+(use-package lsp-mode
+ :ensure t
  :defer t
+ :after cc-mode
+ :hook (c-mode-common . lsp))
 
- :hook
- (c-ts-base-mode . lsp))
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after c-ts-mode
+ :hook (c-ts-base-mode . lsp))
 
 (use-package cc-vars
  :ensure nil
@@ -1532,6 +1699,11 @@
  :bind
  (:map c-mode-base-map ("<f2>" . lsp-clangd-find-other-file)))
 
+(use-package c-ts-mode
+ :ensure nil
+ :defer t
+ :defines c-ts-base-mode-map)
+
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
@@ -1555,10 +1727,14 @@
   (setq-local fill-column 79))
 
  :hook
- (python-mode . lsp)
  (python-mode . init/python-setup-fill-column)
- (python-ts-mode . lsp)
  (python-ts-mode . init/python-setup-fill-column))
+
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after python
+ :hook ((python-mode python-ts-mode) . lsp))
 
 ;;; Project Management
 
@@ -1652,20 +1828,37 @@
  (hledger-comments-column 1)
 
  :hook
- (hledger-mode . (lambda () (setq-local tab-width 1)))
- (hledger-mode . whitespace-mode)
- (hledger-mode . symbol-overlay-mode)
- (hledger-mode . flycheck-mode)
- (hledger-mode . display-fill-column-indicator-mode)
- (hledger-mode . hl-line-mode))
+ (hledger-mode . (lambda () (setq-local tab-width 1))))
 
-(use-package hledger-mode
+(use-package whitespace
  :ensure t
  :defer t
- :after flycheck
+ :after hledger-mode
+ :hook hledger-mode)
 
- :hook
- (hledger-mode . (lambda () (eval-when-compile (require 'flycheck-hledger)))))
+(use-package symbol-overlay
+ :ensure t
+ :defer t
+ :after hledger-mode
+ :hook hledger-mode)
+
+(use-package flycheck
+ :ensure t
+ :defer t
+ :after hledger-mode
+ :hook hledger-mode)
+
+(use-package display-fill-column-indicator
+ :ensure t
+ :defer t
+ :after hledger-mode
+ :hook hledger-mode)
+
+(use-package hl-line
+ :ensure t
+ :defer t
+ :after hledger-mode
+ :hook hledger-mode)
 
 (use-package flycheck-hledger
  :ensure t
@@ -1674,7 +1867,10 @@
 
  :custom
  ;; TODO Also add "accounts".
- (flycheck-hledger-checks '("commodities")))
+ (flycheck-hledger-checks '("commodities"))
+
+ :hook
+ (hledger-mode . (lambda () (eval-when-compile (require 'flycheck-hledger)))))
 
 ;;; Web Development
 
@@ -1695,13 +1891,18 @@
  (web-mode-enable-auto-expanding t)
 
  :hook
- (web-mode . lsp)
  (web-mode . (lambda () (setq-local tab-width 2))))
+
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after web-mode
+ :hook (web-mode . lsp))
 
 (use-package company-web
  :ensure t
  :defer t
- :after (:all company web-mode)
+ :after (company web-mode)
 
  :hook
  (web-mode . (lambda () (init/company-add-backend 'company-css)))
@@ -1746,9 +1947,19 @@
  (rust-format-on-save t)
 
  :hook
- (rust-mode . (lambda () (electric-quote-local-mode -1)))
- (rust-mode . subword-mode)
- (rust-mode . lsp))
+ (rust-mode . (lambda () (electric-quote-local-mode -1))))
+
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after rust-mode
+ :hook (rust-mode . lsp))
+
+(use-package subword
+ :ensure nil
+ :defer t
+ :after rust-mode
+ :hook rust-mode)
 
 (use-package rust-ts-mode
  :ensure nil
@@ -1765,9 +1976,19 @@
  (rust-ts-mode-indent-offset 2)
 
  :hook
- (rust-ts-mode . (lambda () (electric-quote-local-mode -1)))
- (rust-ts-mode . subword-mode)
- (rust-ts-mode . lsp))
+ (rust-ts-mode . (lambda () (electric-quote-local-mode -1))))
+
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after rust-ts-mode
+ :hook (rust-ts-mode . lsp))
+
+(use-package subword
+ :ensure nil
+ :defer t
+ :after rust-ts-mode
+ :hook rust-ts-mode)
 
 (use-package lsp-rust
  :ensure lsp-mode
@@ -1970,11 +2191,27 @@
  :defer t
 
  :hook
- (treemacs-mode . treemacs-tag-follow-mode)
  (treemacs-mode . treemacs-fringe-indicator-mode)
- (treemacs-mode . treemacs-filewatch-mode)
- (treemacs-mode . treemacs-git-commit-diff-mode)
+ (treemacs-mode . treemacs-filewatch-mode))
+
+(use-package treemacs-async
+ :ensure treemacs
+ :defer t
+ :after treemacs-mode
+ :hook
  (treemacs-mode . (lambda () (treemacs-git-mode 'deferred))))
+
+(use-package treemacs-git-commit-diff-mode
+ :ensure treemacs
+ :defer t
+ :after treemacs-mode
+ :hook treemacs-mode)
+
+(use-package treemacs-tag-follow-mode
+ :ensure treemacs
+ :defer t
+ :after treemacs-mode
+ :hook treemacs-mode)
 
 (use-package treemacs-async
  :ensure treemacs
