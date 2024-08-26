@@ -268,6 +268,16 @@
  :custom
  (help-window-select t))
 
+(use-package help-mode
+ :ensure nil
+ :defer t
+
+ :config
+ ;; Recenter after pressing on link to emacs source code.
+ (defadvice help-button-action
+  (after recenter-after-help-button-action activate)
+  (recenter)))
+
 (use-package mouse
  :ensure nil
  :defer t
@@ -2097,7 +2107,13 @@
  :after lsp-mode
 
  :bind
- (:map lsp-mode-map ("C-c x" . lsp-ivy-workspace-symbol)))
+ (:map lsp-mode-map ("C-c x" . lsp-ivy-workspace-symbol))
+
+ :config
+ ;; Recenter after using lsp-ivy-workspace-symbol.
+ (defadvice lsp-ivy-workspace-symbol
+  (after recenter-after-lsp-ivy-workspace-symbol activate)
+  (recenter)))
 
 (use-package lsp-ui-peek
  :ensure lsp-ui
