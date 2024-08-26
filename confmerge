@@ -277,5 +277,5 @@ if [ "$have_foreign_packages" != 0 ]; then
   echo ""
   echo "Foreign Packages:"
   echo "-----------------"
-  pacman -Qm
+  pacman -Qme
 fi
