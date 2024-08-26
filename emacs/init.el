@@ -1337,6 +1337,7 @@
 (use-package ivy-rich
  :ensure t
  :defer t
+ :requires counsel
 
  :custom
  (ivy-rich-path-style 'abbrev)
@@ -1345,10 +1346,16 @@
  (ivy-rich-mode))
 
 (use-package nerd-icons-ivy-rich
+ :ensure t
+ :defer t
+
  :init
  (nerd-icons-ivy-rich-mode))
 
 (use-package nerd-icons-completion
+ :ensure t
+ :defer t
+
  :init
  (nerd-icons-completion-mode))
 
