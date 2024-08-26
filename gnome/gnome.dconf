@@ -188,4 +188,6 @@ list-view/default-visible-columns=['name', 'size', 'detailed_type', 'date_modifi
 
 # Nautilus Terminal
 [com/github/stunkymonkey]
-nautilus-open-any-terminal/terminal = 'foot'
+nautilus-open-any-terminal/terminal='foot'
+nautilus-open-any-terminal/keybindings='<Ctrl>e'
+nautilus-open-any-terminal/use-generic-terminal-name=true
