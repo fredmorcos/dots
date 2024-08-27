@@ -414,8 +414,8 @@
 
  :custom
  ;; (company-idle-delay 0.5)
+ ;; (company-minimum-prefix-length 2)
  (company-keywords-ignore-case t)
- (company-minimum-prefix-length 2)
  (company-selection-wrap-around t)
  (company-tooltip-align-annotations t)
  (company-tooltip-minimum-width 40)
