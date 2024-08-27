@@ -425,17 +425,15 @@
  :defer t
  :diminish
  :after company
+ :hook company-mode
 
  :custom
- (company-posframe-quickhelp-x-offset 2)
-
- :hook company-mode)
+ (company-posframe-quickhelp-x-offset 2))
 
 (use-package company-prescient
  :ensure t
  :defer t
  :after company
-
  :hook company-mode)
 
 ;;; Syntax Checking
@@ -458,9 +456,9 @@
  (flycheck-mode-line-prefix "Fc")
  (flycheck-check-syntax-automatically
   '(idle-change new-line mode-enabled idle-buffer-switch))
- (flycheck-idle-change-delay 0.2)
- (flycheck-idle-buffer-switch-delay 0.2)
- (flycheck-display-errors-delay 0.2)
+ ;; (flycheck-idle-change-delay 0.2)
+ ;; (flycheck-idle-buffer-switch-delay 0.2)
+ ;; (flycheck-display-errors-delay 0.2)
 
  :config
  (defadvice flycheck-next-error
@@ -487,10 +485,10 @@
  :after flycheck
  :hook flycheck-mode)
 
-(use-package flycheck-posframe
+(use-package company
  :ensure t
  :defer t
- :after company
+ :after flycheck-posframe
 
  :config
  (add-hook 'flycheck-posframe-inhibit-functions #'company--active-p)
@@ -714,10 +712,10 @@
 (use-package sideline
  :ensure t
  :defer t
- :diminish "Si"
+ :diminish "Si")
 
- :custom
- (sideline-delay 0.1))
+ ;; :custom
+ ;; (sideline-delay 0.1))
 
 (use-package sideline-blame
  :ensure t
@@ -896,8 +894,8 @@
  :defer t
 
  :custom
- (diff-hl-draw-borders nil)
- (diff-hl-flydiff-delay 0.1))
+ ;; (diff-hl-flydiff-delay 0.1)
+ (diff-hl-draw-borders nil))
 
 (use-package diff-hl
  :ensure t
@@ -1053,16 +1051,6 @@
  :defer t
  :after elisp-mode
  :hook (emacs-lisp-mode . (lambda () (ipretty-mode t))))
-
-(use-package elsa
- :ensure t
- :defer t)
-
-(use-package flycheck-elsa
- :ensure t
- :defer t
- :after (flycheck elisp-mode)
- :hook (emacs-lisp-mode . flycheck-elsa-setup))
 
 ;;; Shell Scripting
 
@@ -1221,18 +1209,6 @@
  :after json-mode
  :hook json-mode)
 
-;;; Systemd
-
-(use-package systemd
- :ensure t
- :defer t)
-
-(use-package company
- :ensure t
- :defer t
- :after systemd
- :hook systemd-mode)
-
 ;;; Spell Checking
 
 ;; (use-package flyspell
@@ -1303,7 +1279,7 @@
  :diminish
 
  :custom
- (which-key-idle-delay 0.5)
+ ;; (which-key-idle-delay 0.5)
  (which-key-show-docstrings nil)
  (which-key-add-column-padding 3)
  (which-key-max-description-length nil)
@@ -1337,7 +1313,7 @@
 (use-package ivy-rich
  :ensure t
  :defer t
- :requires counsel
+ :after counsel
 
  :custom
  (ivy-rich-path-style 'abbrev)
@@ -1812,14 +1788,6 @@
  ("C-c Y" . init/start-ivy-yasnippet)
  ("C-c y s" . yas-expand-from-trigger-key))
 
-(use-package yasnippet
- :ensure t
- :defer t
- :after company
-
- :hook
- (yas-minor-mode . (lambda () (init/company-add-backend 'company-yasnippet))))
-
 (use-package yasnippet-snippets
  :ensure t
  :defer t
@@ -1859,6 +1827,11 @@
  :after hledger-mode
  :hook hledger-mode)
 
+(use-package yasnippet
+ :ensure t
+ :defer t
+ :after hledger-mode
+ :hook (hledger-mode . yas-minor-mode-on))
 (use-package flycheck
  :ensure t
  :defer t
@@ -2057,7 +2030,7 @@
  (lsp-restart 'auto-restart)
  (lsp-enable-snippet t)
  (lsp-keymap-prefix "C-c")
- (lsp-idle-delay 0.3)
+ ;; (lsp-idle-delay 0.3)
  (lsp-file-watch-threshold nil)
  (lsp-enable-semantic-highlighting t)
  (lsp-enable-relative-indentation t)
@@ -2195,11 +2168,11 @@
  :defer t
 
  :custom
+ ;; (treemacs-tag-follow-delay 0.1)
  ;; (treemacs-indent-guide-mode t)
  (treemacs-select-when-already-in-treemacs 'move-back)
  (treemacs-width 40)
- (treemacs-indentation 1)
- (treemacs-tag-follow-delay 0.1))
+ (treemacs-indentation 1))
 
 (use-package treemacs-interface
  :ensure treemacs
