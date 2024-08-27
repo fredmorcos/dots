@@ -14,16 +14,16 @@
  :defer t
 
  :custom
- (use-package-compute-statistics t)
- (use-package-verbose t)
+ ;; (use-package-compute-statistics t)
+ ;; (use-package-verbose t)
  (use-package-expand-minimally t))
 
-(use-package emacs
- :ensure nil
- :defer t
+;; (use-package emacs
+;;  :ensure nil
+;;  :defer t
 
- :custom
- (debug-on-error t))
+;;  :custom
+;;  (debug-on-error t))
 
 ;;; Garbage Collector
 
