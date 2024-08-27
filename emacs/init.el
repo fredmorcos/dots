@@ -397,24 +397,29 @@
  :ensure t
  :defer t
  :diminish "Co"
+ :commands company--active-p
 
- :commands
- (company--active-p)
+ :preface
+ (defun init/setup-company (&optional main-backends secondary-backends)
+  "Setup company completion system with common backends."
+  (setq-local company-backends
+   `((,@main-backends
+      company-capf
+      company-dabbrev-code
+      company-keywords
+      company-yasnippet
+      company-files
+      ,@secondary-backends
+      :separate))))
 
  :custom
- (company-backends '((company-capf)))
- (company-idle-delay 0.5)
+ ;; (company-idle-delay 0.5)
  (company-keywords-ignore-case t)
  (company-minimum-prefix-length 2)
  (company-selection-wrap-around t)
  (company-tooltip-align-annotations t)
  (company-tooltip-minimum-width 40)
  (company-tooltip-width-grow-only t)
-
- :preface
- (defun init/company-add-backend (backend)
-  "Add BACKEND to local copy of `company-backends'."
-  (qol/append (car company-backends) backend))
 
  :bind
  (:map company-mode-map
@@ -648,7 +653,9 @@
  :ensure t
  :defer t
  :after prog-mode
- :hook prog-mode)
+ :hook
+ (prog-mode
+  (prog-mode . init/setup-company)))
 
 (use-package elec-pair
  :ensure nil
@@ -815,7 +822,7 @@
  :after meson-mode
  :hook
  (meson-mode
-  (meson-mode . (lambda () (init/company-add-backend 'company-dabbrev-code)))))
+  (meson-mode . init/setup-company)))
 
 ;;; Version Control
 
@@ -1832,6 +1839,15 @@
  :defer t
  :after hledger-mode
  :hook (hledger-mode . yas-minor-mode-on))
+
+(use-package company
+ :ensure t
+ :defer t
+ :after hledger-mode
+ :hook
+ (hledger-mode
+  (hledger-mode . (lambda () (init/setup-company nil '(company-dabbrev))))))
+
 (use-package flycheck
  :ensure t
  :defer t
@@ -1895,8 +1911,7 @@
  :after (company web-mode)
 
  :hook
- (web-mode . (lambda () (init/company-add-backend 'company-css)))
- (web-mode . (lambda () (init/company-add-backend 'company-web-html))))
+ (web-mode . (lambda () (init/setup-company '(company-css company-web-html)))))
 
 (use-package emmet-mode
  :ensure t
