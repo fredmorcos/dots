@@ -1816,8 +1816,8 @@
 
  :custom
  (hledger-currency-string "EUR")
- (hledger-current-overlay t)
  (hledger-comments-column 1)
+ (hledger-invalidate-completions '(on-idle))
 
  :hook
  (hledger-mode . (lambda () (setq-local tab-width 1))))
@@ -1846,7 +1846,11 @@
  :after hledger-mode
  :hook
  (hledger-mode
-  (hledger-mode . (lambda () (init/setup-company nil '(company-dabbrev))))))
+  (hledger-mode .
+   (lambda ()
+    (init/setup-company
+     '(hledger-company)
+     '(company-dabbrev))))))
 
 (use-package flycheck
  :ensure t
