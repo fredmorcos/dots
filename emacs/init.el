@@ -737,9 +737,9 @@
  :ensure nil
  :defer t
 
- :init
- (add-hook 'xref-after-return #'recenter)
- (add-hook 'xref-after-jump #'recenter))
+ :hook
+ (xref-after-return . recenter)
+ (xref-after-jump . recenter))
 
 (use-package ivy-xref
  :ensure t
