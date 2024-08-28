@@ -326,7 +326,6 @@ ngrep
 nilfs-utils
 nmap
 noise-suppression-for-voice
-noto-fonts-extra
 ntfs-3g
 nushell
 nuspell
@@ -543,7 +542,6 @@ torsocks
 traceroute
 trash-cli
 tree
-ttf-dejavu-nerd
 ttf-go-sans-git
 ttf-monaco
 tup
