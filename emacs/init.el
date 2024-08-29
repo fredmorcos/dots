@@ -1639,17 +1639,17 @@
     (c-mode    . gtkdoc)
     (c++-mode  . doxygen))))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :after cc-mode
- :hook (c-mode-common . lsp))
+;; (use-package lsp-mode
+;;  :ensure t
+;;  :defer t
+;;  :after cc-mode
+;;  :hook (c-mode-common . lsp))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :after c-ts-mode
- :hook (c-ts-base-mode . lsp))
+;; (use-package lsp-mode
+;;  :ensure t
+;;  :defer t
+;;  :after c-ts-mode
+;;  :hook (c-ts-base-mode . lsp))
 
 (use-package cc-vars
  :ensure nil
@@ -1668,6 +1668,18 @@
 
  :hook
  (c-mode-common . init/cc-setup-comments))
+
+(use-package ccls
+ :ensure t
+ :defer t
+ :after cc-mode
+ :hook (c-mode-common . (lambda () (require 'ccls) (lsp))))
+
+(use-package ccls-semantic-highlight
+ :ensure ccls
+ :defer t
+ :custom
+ (ccls-sem-highlight-method 'overlay))
 
 (use-package lsp-clangd
  :ensure lsp-mode
