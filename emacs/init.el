@@ -1673,7 +1673,11 @@
  :ensure t
  :defer t
  :after cc-mode
- :hook (c-mode-common . (lambda () (require 'ccls) (lsp))))
+ :hook
+ (c-mode-common .
+  (lambda ()
+   (require 'ccls)
+   (lsp))))
 
 (use-package ccls-semantic-highlight
  :ensure ccls
