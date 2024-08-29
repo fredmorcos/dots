@@ -16,7 +16,8 @@
  :custom
  ;; (use-package-compute-statistics t)
  ;; (use-package-verbose t)
- (use-package-expand-minimally t))
+ (use-package-expand-minimally t)
+ (use-package-hook-name-suffix nil))
 
 ;; (use-package emacs
 ;;  :ensure nil
