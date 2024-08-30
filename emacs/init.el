@@ -413,8 +413,7 @@
       :separate))))
 
  ;; :bind
- ;; (:map company-mode-map
- ;;  ("<tab>" . company-indent-or-complete-common)))
+ ;; (:map company-mode-map ("<tab>" . company-indent-or-complete-common))
 
  :custom
  (company-idle-delay 0.7)
@@ -748,13 +747,6 @@
 
  :custom
  (xref-show-xrefs-function 'ivy-xref-show-xrefs))
-
-(use-package aggressive-indent
- :ensure t
- :defer t
- :diminish
- :after prog-mode
- :hook prog-mode-hook)
 
 ;;; Configuration Files
 
@@ -1654,13 +1646,6 @@
     (c-mode    . gtkdoc)
     (c++-mode  . doxygen))))
 
-;; (use-package indent
-;;  :ensure nil
-;;  :defer t
-;;  :after (cc-mode cc-cmds)
-;;  :bind
-;;  (:map c-mode-base-map ("<tab>" . indent-region)))
-
 (use-package cc-vars
  :ensure nil
  :defer t
@@ -1715,7 +1700,8 @@
  :defer t
 
  :config
- (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators")
+ ;; This apparently breaks LSP completion.
+ ;; (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators")
  (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
  (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
  (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
@@ -2095,6 +2081,9 @@
  ("M-RET" . lsp-execute-code-action)
  ([remap er/expand-region] . lsp-extend-selection)
 
+ :hook
+ (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t)))
+
  :custom
  (lsp-progress-prefix "  Progress: ")
  (lsp-completion-show-detail t)
@@ -2107,9 +2096,7 @@
  (lsp-idle-delay 0.9)
  (lsp-file-watch-threshold nil)
  (lsp-enable-semantic-highlighting t)
- (lsp-enable-relative-indentation t)
  (lsp-enable-indentation t)
- (lsp-enable-on-type-formatting nil)
  (lsp-before-save-edits nil)
  (lsp-auto-configure t)
  (lsp-signature-auto-activate t)
