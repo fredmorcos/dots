@@ -459,6 +459,7 @@ python-weasyprint
 python-webcolors
 python-xattr
 python-xlrd
+python-zstandard
 qbittorrent
 qhexedit2
 qt5ct
