@@ -65,5 +65,4 @@ cmd $HOME/.config/qBittorrent/
 cmd $HOME/.config/protonvpn/
 cmd $HOME/.config/quodlibet/
 cmd $HOME/.local/share/gnupg/
-cmd $HOME/.local/share/keyrings/
 cmd $HOME/Workspace/
