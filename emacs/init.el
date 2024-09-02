@@ -1078,6 +1078,12 @@
  (sh-mode-hook . init/make-file-executable)
  (bash-ts-mode-hook . init/make-file-executable))
 
+(use-package lsp-mode
+ :ensure t
+ :defer t
+ :after sh-script
+ :hook (sh-mode-hook . lsp))
+
 ;;; Dired
 
 (use-package casual-dired
@@ -1854,7 +1860,7 @@
  :custom
  (hledger-currency-string "EUR")
  (hledger-comments-column 1)
- (hledger-invalidate-completions '(on-idle))
+ (hledger-invalidate-completions '(on-save))
 
  :hook
  (hledger-mode-hook . (lambda () (setq-local tab-width 1))))
@@ -2075,11 +2081,13 @@
  :diminish "Ls"
 
  :bind
- ("C-c f" . lsp-format-buffer)
- ("C-c g" . lsp-format-region)
- ("C-c h" . lsp-describe-thing-at-point)
- ("M-RET" . lsp-execute-code-action)
- ([remap er/expand-region] . lsp-extend-selection)
+ (:map lsp-mode-map
+  ("C-c f" . lsp-format-buffer)
+  ("C-c g" . lsp-format-region)
+  ("C-c h" . lsp-describe-thing-at-point)
+  ("M-RET" . lsp-execute-code-action)
+  ("TAB"   . lsp-format-region)
+  ([remap er/expand-region] . lsp-extend-selection))
 
  :hook
  (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t)))
