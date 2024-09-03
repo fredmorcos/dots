@@ -273,9 +273,12 @@
  :defer t
 
  :config
- ;; Recenter after pressing on link to emacs source code.
+ ;; Recenter after pressing on links to emacs source code.
  (defadvice help-button-action
   (after recenter-after-help-button-action activate)
+  (recenter))
+ (defadvice help-function-def--button-function
+  (after recenter-after-help-function-def--button-function activate)
   (recenter)))
 
 (use-package mouse
@@ -405,10 +408,10 @@
   (setq-local company-backends
    `((,@main-backends
       company-capf
-      company-dabbrev-code
-      company-keywords
+      ;; company-dabbrev-code
+      ;; company-keywords
       company-yasnippet
-      company-files
+      ;; company-files
       ,@secondary-backends
       :separate))))
 
