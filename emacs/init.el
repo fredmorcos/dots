@@ -1804,10 +1804,6 @@
  :ensure t
  :defer t
 
- :bind
- (:map projectile-mode-map
-  ("M-G" . counsel-projectile-git-grep))
-
  :config
  (defadvice counsel-projectile-git-grep
   (after recenter-after-counsel-projectile-git-grep activate)
