@@ -306,7 +306,6 @@ microsoft-gsl
 minisign
 mkinitcpio-systemd-tool
 mkinitcpio-utils
-mlocate
 mmdblookup
 mold
 most
@@ -366,6 +365,7 @@ pipewire-v4l2
 pipewire-zeroconf
 pixz
 pkgfile
+plocate
 polkit-gnome
 postgresql
 power-profiles-daemon
