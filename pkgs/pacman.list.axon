@@ -30,6 +30,7 @@ bearssl
 beets
 bettercap-caplets
 bind
+binsider
 blas64-openblas
 bluez-tools
 bluez-utils
@@ -94,6 +95,7 @@ ccache
 ccls
 cdrtools
 cgdb
+chafa
 checksec
 chmlib
 clinfo
@@ -119,6 +121,7 @@ diff-so-fancy
 diffstat
 difftastic
 diffuse
+diskonaut
 dmidecode
 dnsmasq
 docker
@@ -191,14 +194,13 @@ gpart
 gparted
 gptfdisk
 gspell
-gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
-gst-plugins-bad
 gst-plugin-va
 gucharmap
 gvfs-mtp
 handbrake
+handlr-regex
 hddtemp
 hdparm
 hexedit
@@ -290,6 +292,7 @@ lsof
 ltrace
 luametatex
 luit
+lychee
 lzop
 man-db
 man-pages
@@ -445,8 +448,10 @@ python-requests-hawk
 python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
+python-ruff
 python-scipy
 python-service-identity
+python-setuptools-rust
 python-svglib
 python-symengine
 python-sympy
@@ -454,6 +459,7 @@ python-tabulate
 python-typogrify
 python-unicodedata2
 python-unidiff
+python-uv
 python-volume_key
 python-watchdog
 python-weasyprint
@@ -480,6 +486,7 @@ reflector
 remake
 reuse
 rink
+ripasso
 ripgrep
 rmlint
 rocm-hip-runtime
@@ -502,6 +509,7 @@ sd
 seahorse
 seahorse-nautilus
 secrets
+selene
 shake
 shellcheck
 shfmt
@@ -530,9 +538,11 @@ system-config-printer
 systemd-resolvconf
 systemd-ukify
 t1utils
+taplo-cli
 tcpdump
 tealdeer
 tectonic
+termusic
 thunderbird
 tidy
 time
@@ -545,6 +555,7 @@ traceroute
 trash-cli
 tree
 ttf-go-sans-git
+ttf-joypixels
 ttf-monaco
 tup
 typst
@@ -630,6 +641,7 @@ xsel
 yaml-cpp
 yamllint
 yapf
+yazi
 yt-dlp
 z
 zip
