@@ -194,6 +194,7 @@ gocr
 gpart
 gparted
 gptfdisk
+graphicsmagick
 gspell
 gst-plugin-gtk
 gst-plugin-libcamera
@@ -281,6 +282,7 @@ libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
+libwmf
 libwpg
 linux-firmware
 linux-tools-meta
@@ -488,7 +490,7 @@ remake
 reuse
 rink
 ripasso
-ripgrep
+ripgrep-all
 rmlint
 rocm-hip-runtime
 rocm-opencl-runtime
