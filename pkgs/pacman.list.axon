@@ -558,6 +558,7 @@ torsocks
 traceroute
 trash-cli
 tree
+ttf-atkinson-hyperlegible
 ttf-go-sans-git
 ttf-joypixels
 ttf-monaco
@@ -647,6 +648,8 @@ yamllint
 yapf
 yazi
 yt-dlp
+yubikey-manager-qt
+yubikey-personalization-gui
 z
 zip
 zola
