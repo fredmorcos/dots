@@ -330,6 +330,7 @@ ncdu
 netavark
 net-tools
 networkmanager
+networkmanager-openvpn
 ngrep
 nilfs-utils
 nmap
@@ -357,6 +358,7 @@ pam-u2f
 pandoc-cli
 par2cmdline
 paru-bin
+pass
 patchelf
 pdf2svg
 pdfarranger
@@ -557,7 +559,6 @@ torbrowser-launcher
 torsocks
 traceroute
 trash-cli
-tree
 ttf-atkinson-hyperlegible
 ttf-go-sans-git
 ttf-joypixels
@@ -601,7 +602,6 @@ wireguard-tools
 wireless-regdb
 wl-clipboard
 wmctrl
-xclip
 xdelta3
 xdg-user-dirs-gtk
 xf86-input-evdev
