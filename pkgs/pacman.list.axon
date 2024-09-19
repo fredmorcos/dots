@@ -141,7 +141,6 @@ ecm-tools
 ed
 edk2-ovmf
 efibootmgr
-elementary-wallpapers
 entr
 epapirus-icon-theme
 epiphany
@@ -181,7 +180,6 @@ git-delta
 git-lfs
 gitui
 glow
-gnome-backgrounds
 gnome-calculator
 gnome-control-center
 gnome-disk-utility
