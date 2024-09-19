@@ -97,6 +97,7 @@ font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
 icon-theme='Adwaita'
+accent-color='blue'
 
 # Shell Calendar
 [org/gnome/desktop/calendar]
