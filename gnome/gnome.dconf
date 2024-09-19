@@ -61,13 +61,13 @@ autorun-never=true
 [org/gnome/desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/fred/.local/share/backgrounds/2024-03-24-21-13-57-amber-d.jxl'
-picture-uri-dark='file:///home/fred/.local/share/backgrounds/2024-03-24-21-13-57-amber-d.jxl'
+picture-uri='file:///home/fred/.local/share/backgrounds/2024-09-19-15-24-30-amber-d.jxl'
+picture-uri-dark='file:///home/fred/.local/share/backgrounds/2024-09-19-15-24-30-amber-d.jxl'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
 [org/gnome/desktop/screensaver]
-picture-uri='file:///home/fred/.local/share/backgrounds/2024-03-24-21-13-57-amber-d.jxl'
+picture-uri='file:///home/fred/.local/share/backgrounds/2024-09-19-15-24-30-amber-d.jxl'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -92,7 +92,7 @@ show-battery-percentage=true
 cursor-theme='capitaine-cursors'
 font-name='Sans 13'
 document-font-name='Sans 13'
-monospace-font-name='Monospace 13'
+monospace-font-name='Monospace 14'
 font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
