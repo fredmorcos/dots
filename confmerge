@@ -134,6 +134,8 @@ for application in "${!papirus_applications[@]}"; do
   fi
 done
 
+cmerge gnome/bookmarks                 ~/.config/gtk-3.0/bookmarks
+
 cmerge shell/bashrc                    ~/.bashrc
 cmerge shell/bash_profile              ~/.bash_profile
 cmerge shell/profile                   ~/.profile
