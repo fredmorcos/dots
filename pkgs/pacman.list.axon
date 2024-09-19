@@ -102,7 +102,6 @@ clinfo
 codespell
 compsize
 conntrack-tools
-coz
 cpio
 cppcheck
 criu
@@ -136,7 +135,6 @@ d-spy
 duf
 dunesh
 duperemove
-dvisvgm
 easy-rsa
 ebook-tools
 ecm-tools
@@ -356,7 +354,7 @@ pacrunner
 pam-u2f
 pandoc-cli
 par2cmdline
-paru-bin
+paru-git
 pass
 patchelf
 pdf2svg
@@ -641,6 +639,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xournalpp
 xsel
 yaml-cpp
 yamllint
