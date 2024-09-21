@@ -187,6 +187,7 @@ gnome-firmware
 gnome-font-viewer
 gnome-podcasts
 gnome-tweaks
+gnu-netcat
 gocr
 gpart
 gparted
@@ -338,7 +339,6 @@ nvme-cli
 nvtop
 ocrad
 odt2txt
-openbsd-netcat
 opencl-clover-mesa
 opencl-rusticl-mesa
 opendoas
