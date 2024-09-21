@@ -219,6 +219,7 @@ hyperfine
 hyphen-de
 hyphen-en
 hyphen-fr
+id3lib
 idle3-tools
 ifuse
 img2pdf
@@ -235,6 +236,7 @@ ipset
 iptraf-ng
 irqbalance
 ispell
+itstool
 iwd
 jfsutils
 jless
@@ -249,7 +251,6 @@ ladspa
 ledger
 lesspipe
 lhasa
-libao
 libappindicator-gtk3
 libblockdev-dm
 libblockdev-lvm
@@ -318,6 +319,7 @@ mpv
 mtools
 muon-meson
 mupdf-tools
+musepack-tools
 musl
 mutt
 mythes-en
@@ -344,7 +346,6 @@ opencl-rusticl-mesa
 opendoas
 openmp
 openslide
-opusfile
 ostra-cg
 p7zip
 pacman-contrib
@@ -580,6 +581,7 @@ vdpauinfo
 vi
 vim-spell-en
 vkd3d
+vorbis-tools
 vpl-gpu-rt
 vulkan-extra-layers
 vulkan-intel
