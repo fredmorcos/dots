@@ -104,7 +104,7 @@
  :defer t
 
  :custom
- ;; (tab-always-indent 'complete)
+ (tab-always-indent 'complete)
  (tab-first-completion 'word-or-paren-or-punct))
 
 (use-package simple
@@ -1104,7 +1104,7 @@
 
  :custom
  (dired-mouse-drag-files t)
- (dired-listing-switches "-l --group-directories-first")
+ (dired-listing-switches "-l -h --group-directories-first")
  (dired-hide-details-hide-symlink-targets nil)
 
  :bind
@@ -2085,7 +2085,7 @@
   ("C-c g" . lsp-format-region)
   ("C-c h" . lsp-describe-thing-at-point)
   ("M-RET" . lsp-execute-code-action)
-  ("TAB"   . lsp-format-region)
+  ;; ("TAB"   . lsp-format-region)
   ([remap er/expand-region] . lsp-extend-selection))
 
  :hook
@@ -2154,8 +2154,18 @@
  :defer t
  :after lsp-mode
 
+ :preface
+ (defun init/lsp-ivy-workspace-symbol ()
+  (interactive)
+  (lsp-ivy-workspace-symbol nil))
+ (defun init/lsp-ivy-workspace-symbol-at-point ()
+  (interactive)
+  (lsp-ivy-workspace-symbol t))
+
  :bind
- (:map lsp-mode-map ("C-c x" . lsp-ivy-workspace-symbol))
+ (:map lsp-mode-map
+  ("C-c x" . init/lsp-ivy-workspace-symbol)
+  ("C-c X" . init/lsp-ivy-workspace-symbol-at-point))
 
  :config
  ;; Recenter after using lsp-ivy-workspace-symbol.
