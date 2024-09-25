@@ -340,6 +340,7 @@ nvchecker
 nvme-cli
 nvtop
 ocrad
+ocrfeeder
 odt2txt
 opencl-clover-mesa
 opencl-rusticl-mesa
@@ -361,6 +362,7 @@ pdfarranger
 pdfcrack
 pdfmixtool
 pdfslicer
+pdftricks
 peek
 picard
 pigz
@@ -371,6 +373,7 @@ pipewire-zeroconf
 pixz
 pkgfile
 plocate
+podofo-tools
 polkit-gnome
 postgresql
 power-profiles-daemon
@@ -432,7 +435,6 @@ python-pyacoustid
 python-pyalsa
 python-pyaml
 python-pycryptodome
-python-pyenchant
 python-pygal
 python-pygit2
 python-pygithub
