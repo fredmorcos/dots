@@ -644,6 +644,7 @@ xorg-xwud
 xournalpp
 xsel
 yaml-cpp
+yaml-language-server
 yamllint
 yapf
 yazi
