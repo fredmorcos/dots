@@ -2354,6 +2354,11 @@
  :config
  (treemacs-load-theme "nerd-icons"))
 
+(use-package casual-info
+ :ensure t
+ :bind
+ (:map Info-mode-map ("C-o" . casual-info-tmenu)))
+
 ;;; Final
 
 ;; Print startup stats.
