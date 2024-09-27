@@ -347,7 +347,9 @@ opencl-rusticl-mesa
 opendoas
 openmp
 openslide
+optipng
 ostra-cg
+oxipng
 p7zip
 pacman-contrib
 pacrunner
@@ -373,6 +375,7 @@ pipewire-zeroconf
 pixz
 pkgfile
 plocate
+pngcrush
 podofo-tools
 polkit-gnome
 postgresql
