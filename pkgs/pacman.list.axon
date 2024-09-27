@@ -520,7 +520,6 @@ selene
 shake
 shellcheck
 shfmt
-signal-desktop
 simple-scan
 sloccount
 smartmontools
