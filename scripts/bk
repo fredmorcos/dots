@@ -50,6 +50,7 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/Music.New/"                "$INTERNAL_DATA/Fred/Music.New/"
     cmd "$HOME/Phone/"                    "$INTERNAL_DATA/Fred/Phone/"
     cmd "$HOME/Pictures/"                 "$INTERNAL_DATA/Fred/Pictures/"
+    cmd "$HOME/Public/"                   "$INTERNAL_DATA/Fred/Public/"
     cmd "$HOME/Videos/"                   "$INTERNAL_DATA/Fred/Videos/"
     cmd "$HOME/Workspace/"                "$INTERNAL_DATA/Fred/Workspace/"
 
@@ -74,6 +75,7 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/Music.New/"                "$INTERNAL_MEDIA/Fred/Music.New/"
     cmd "$HOME/Phone/"                    "$INTERNAL_MEDIA/Fred/Phone/"
     cmd "$HOME/Pictures/"                 "$INTERNAL_MEDIA/Fred/Pictures/"
+    cmd "$HOME/Public/"                   "$INTERNAL_MEDIA/Fred/Public/"
     cmd "$HOME/Videos/"                   "$INTERNAL_MEDIA/Fred/Videos/"
     cmd "$HOME/Workspace/"                "$INTERNAL_MEDIA/Fred/Workspace/"
 
@@ -101,6 +103,7 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/Music.New/"                "$PORTABLE_DATA/Fred/Music.New/"
     cmd "$HOME/Phone/"                    "$PORTABLE_DATA/Fred/Phone/"
     cmd "$HOME/Pictures/"                 "$PORTABLE_DATA/Fred/Pictures/"
+    cmd "$HOME/Public/"                   "$PORTABLE_DATA/Fred/Public/"
     cmd "$HOME/Videos/"                   "$PORTABLE_DATA/Fred/Videos/"
     cmd "$HOME/Workspace/"                "$PORTABLE_DATA/Fred/Workspace/"
 
@@ -127,6 +130,7 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/Music.New/"                "$EXTERNAL_DATA/Fred/Music.New/"
     cmd "$HOME/Phone/"                    "$EXTERNAL_DATA/Fred/Phone/"
     cmd "$HOME/Pictures/"                 "$EXTERNAL_DATA/Fred/Pictures/"
+    cmd "$HOME/Public/"                   "$EXTERNAL_DATA/Fred/Public/"
     cmd "$HOME/Videos/"                   "$EXTERNAL_DATA/Fred/Videos/"
     cmd "$HOME/Workspace/"                "$EXTERNAL_DATA/Fred/Workspace/"
 
@@ -150,6 +154,7 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     cmd "$HOME/Downloads/"                "$PORTABLE_DATA/Laptop/Downloads/"
     cmd "$HOME/Phone/"                    "$PORTABLE_DATA/Laptop/Phone/"
     cmd "$HOME/Pictures/"                 "$PORTABLE_DATA/Laptop/Pictures/"
+    cmd "$HOME/Public/"                   "$PORTABLE_DATA/Laptop/Public/"
     cmd "$HOME/Videos/"                   "$PORTABLE_DATA/Laptop/Videos/"
     cmd "$HOME/Workspace/"                "$PORTABLE_DATA/Laptop/Workspace/"
 
@@ -174,6 +179,7 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     cmd "$HOME/Music.New/"                "$PORTABLE_OX/Laptop/Music.New/"
     cmd "$HOME/Phone/"                    "$PORTABLE_OX/Laptop/Phone/"
     cmd "$HOME/Pictures/"                 "$PORTABLE_OX/Laptop/Pictures/"
+    cmd "$HOME/Public/"                   "$PORTABLE_OX/Laptop/Public/"
     cmd "$HOME/Videos/"                   "$PORTABLE_OX/Laptop/Videos/"
     cmd "$HOME/Workspace/"                "$PORTABLE_OX/Laptop/Workspace/"
 
