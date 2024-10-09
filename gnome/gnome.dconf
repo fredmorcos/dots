@@ -85,7 +85,7 @@ draggable-border-width=20
 
 # Shell
 [org/gnome/desktop/interface]
-font-hinting='slight'
+font-hinting='none'
 enable-hot-corners=true
 cursor-blink=false
 show-battery-percentage=true
