@@ -1685,25 +1685,6 @@
  :after c-ts-mode
  :hook (c-ts-base-mode-hook . lsp))
 
-;; (use-package flycheck-clang-analyzer
-;;  :ensure t
-;;  :defer t
-;;  :after flycheck
-;;  :hook (flycheck-mode-hook . flycheck-clang-analyzer-setup))
-
-;; (use-package flycheck-clang-analyzer
-;;  :ensure t
-;;  :defer t
-;;  :after (flycheck lsp-mode)
-;;  :hook
-;;  (flycheck-mode-hook .
-;;   (lambda ()
-;;    (flycheck-add-next-checker 'lsp 'clang-analyzer))))
-
-;; (use-package flycheck-clangcheck
-;;  :ensure t
-;;  :defer t)
-
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
@@ -2115,7 +2096,8 @@
  (lsp-log-io nil)
  (lsp-keep-workspace-alive nil)
  (lsp-enable-imenu nil)
- (lsp-use-plists t))
+ (lsp-use-plists t)
+ (lsp-auto-execute-action t))
 
 (use-package lsp-mode
  :ensure t
