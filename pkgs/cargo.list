@@ -4,6 +4,7 @@ cargo-deadlinks
 cargo-demangle
 clang-tidy-sarif
 inferno
+rainfrog
 ren-find
 rep-cli
 rustfilt
