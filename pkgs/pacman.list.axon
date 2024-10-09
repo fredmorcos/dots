@@ -256,6 +256,7 @@ libappindicator-gtk3
 libblockdev-dm
 libblockdev-lvm
 libblockdev-nvdimm
+libblockdev-smart
 libcamera-tools
 libdecaf
 libdvdcss
@@ -410,7 +411,6 @@ python-flake8-black
 python-flake8-docstrings
 python-flake8-isort
 python-fs
-python-fxa
 python-genshi
 python-ghp-import
 python-gssapi
@@ -452,7 +452,6 @@ python-pytest-lsp
 python-pyudev
 python-pyxattr
 python-rcssmin
-python-requests-hawk
 python-requests-oauthlib
 python-rjsmin
 python-ruamel-yaml
