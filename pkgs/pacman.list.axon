@@ -108,6 +108,7 @@ cppcheck
 criu
 cups-pdf
 curlftpfs
+cvc4
 cxxbridge
 dateutils
 dconf-editor
@@ -165,6 +166,7 @@ foot-terminfo
 foremost
 fprintd
 frei0r-plugins
+frog-protocols
 fx
 fzf
 gamemode
@@ -533,10 +535,12 @@ soundconverter
 sox
 squashfs-tools
 sshfs
+stp
 strace
 s-tui
 subdl
 svgcleaner
+swi-prolog
 switcheroo-control
 syncthing
 sysprof

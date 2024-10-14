@@ -3,6 +3,8 @@ cargo-criterion
 cargo-deadlinks
 cargo-demangle
 clang-tidy-sarif
+czkawka_cli
+czkawka_gui
 inferno
 rainfrog
 ren-find
