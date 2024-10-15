@@ -13,6 +13,7 @@ aspell-fr
 assimp
 atomicparsley
 atool
+atop
 atuin
 audiofile
 autopep8
@@ -42,6 +43,7 @@ brightnessctl
 brother-dcp-l2510d
 brscan4
 brscan5
+btop
 cabextract
 capitaine-cursors
 cargo-about
@@ -331,6 +333,7 @@ nautilus-image-converter
 nautilus-open-any-terminal
 ncdu
 netavark
+nethogs
 net-tools
 networkmanager
 ngrep
@@ -500,6 +503,7 @@ ripgrep-all
 rmlint
 rocm-hip-runtime
 rocm-opencl-runtime
+rocm-smi-lib
 ropper
 rpm-tools
 rtaudio
