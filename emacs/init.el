@@ -95,6 +95,7 @@
 (use-package register
  :ensure nil
  :defer t
+ :after counsel
 
  :bind
  ([remap jump-to-register] . counsel-register))
