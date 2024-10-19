@@ -96,7 +96,7 @@ monospace-font-name='Monospace 14'
 font-antialiasing='rgba'
 clock-show-weekday=true
 color-scheme='default'
-icon-theme='Adwaita'
+icon-theme='MoreWaita'
 accent-color='blue'
 
 # Shell Calendar
