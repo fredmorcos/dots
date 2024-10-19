@@ -319,6 +319,7 @@ mkinitcpio-systemd-tool
 mkinitcpio-utils
 mmdblookup
 mold
+morewaita-icon-theme
 most
 mp3val
 mpv
@@ -356,6 +357,7 @@ openmp
 openslide
 optipng
 ostra-cg
+otf-libertinus
 oxipng
 p7zip
 pacman-contrib
