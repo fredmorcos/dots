@@ -7,6 +7,7 @@ android-tools
 antiword
 aria2
 asar
+asciinema
 aspell-de
 aspell-en
 aspell-fr
@@ -211,8 +212,9 @@ hdparm
 hexedit
 hexer
 highlight
-hledger-ui
-hledger-web
+hledger-bin
+hledger-ui-bin
+hledger-web-bin
 hotspot-appimage
 hspell
 htmlmin
@@ -363,7 +365,7 @@ p7zip
 pacman-contrib
 pacrunner
 pam-u2f
-pandoc-cli
+pandoc-crossref-bin
 par2cmdline
 paru-git
 pass
@@ -526,7 +528,7 @@ seahorse-nautilus
 secrets
 selene
 shake
-shellcheck
+shellcheck-bin
 shfmt
 simple-scan
 sloccount
