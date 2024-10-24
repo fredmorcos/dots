@@ -10,4 +10,4 @@ set -o noglob
 resolvectl dnsovertls "$1" false
 resolvectl dnssec "$1" false
 resolvectl dns "$1" 10.20.30.3
-resolvectl domain "$1" "~open-xchange.com ~dovecot.net"
+resolvectl domain "$1" "~open-xchange.com" "~dovecot.net"
