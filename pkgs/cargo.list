@@ -5,6 +5,7 @@ cargo-demangle
 clang-tidy-sarif
 czkawka_cli
 czkawka_gui
+gitoxide
 inferno
 rainfrog
 ren-find
