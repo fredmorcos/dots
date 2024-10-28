@@ -132,11 +132,13 @@ dnsmasq
 docker
 docker-buildx
 docker-compose
+docker-credential-secretservice-bin
 docker-scan
 docx2txt
 dog
 doxygen
 d-spy
+ducker
 duf
 dunesh
 duperemove
