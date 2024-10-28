@@ -1963,7 +1963,8 @@
 
 (use-package pkgbuild-mode
  :ensure t
- :defer t)
+ :defer t
+ :mode "\\PKGBUILD\\'")
 
 ;;; Rust
 
