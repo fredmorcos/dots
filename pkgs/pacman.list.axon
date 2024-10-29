@@ -580,6 +580,7 @@ ttf-joypixels
 ttf-monaco
 tup
 typst
+typst-lsp
 udftools
 udisks2-btrfs
 ugrep
