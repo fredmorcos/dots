@@ -249,15 +249,8 @@
  :defer t
 
  :config
- ;; LSP speed improvement.
- (setenv "LSP_USE_PLISTS" "true"))
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- ;; Improves LSP performance.
+ ;; Improvements to LSP performance.
+ (setenv "LSP_USE_PLISTS" "true")
  (setq-default read-process-output-max (* 1024 1024)))
 
 ;;; Packages
