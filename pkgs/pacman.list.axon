@@ -362,6 +362,7 @@ openslide
 optipng
 ostra-cg
 otf-libertinus
+oxc-language-server
 oxipng
 p7zip
 pacman-contrib
@@ -660,6 +661,7 @@ xorg-xwininfo
 xorg-xwud
 xournalpp
 xsel
+xsv
 yaml-cpp
 yaml-language-server
 yamllint
