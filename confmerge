@@ -134,6 +134,16 @@ for application in "${!papirus_applications[@]}"; do
   fi
 done
 
+# Figure out the default Firefox profile
+FIREFOX_PROFILE=$(
+  awk '/\[/{prefix=$0; next} $1{print prefix $0}' ~/.mozilla/firefox/profiles.ini |
+    grep -i "\\[Profile0\\]Path=" | cut -d = -f 2
+               )
+
+printf 'Default Firefox Profile = %s\n' "$FIREFOX_PROFILE"
+
+cmerge firefox-user.js                 ~/.mozilla/firefox/"$FIREFOX_PROFILE"/user.js
+
 cmerge gnome/bookmarks                 ~/.config/gtk-3.0/bookmarks
 
 cmerge shell/bashrc                    ~/.bashrc
