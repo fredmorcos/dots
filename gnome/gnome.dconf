@@ -80,8 +80,8 @@ region='en_GB.UTF-8'
 dynamic-workspaces=true
 center-new-windows=false
 draggable-border-width=20
-# experimental-features=[]
-# experimental-features=['scale-monitor-framebuffer']
+experimental-features=[]
+# experimental-features=['scale-monitor-framebuffer', 'variable-refresh-rate', 'xwayland-native-scaling']
 
 # Shell
 [org/gnome/desktop/interface]
