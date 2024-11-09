@@ -167,7 +167,7 @@ cmerge mpv/input.conf                  ~/.config/mpv/input.conf
 cmerge mpv/mpv.conf                    ~/.config/mpv/mpv.conf
 
 cmerge git/config                      ~/.config/git/config
-cmerge git/config-powerdns             ~/.config/git/config-powerdns
+cmerge git/config-ox                   ~/.config/git/config-ox
 
 cmerge fonts/fonts.conf                ~/.config/fontconfig/fonts.conf
 

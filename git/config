@@ -9,8 +9,20 @@
 [color]
   ui = true
 
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
+
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 
 [pull]
   rebase = true
@@ -43,8 +55,8 @@
 [url "aur@aur.archlinux.org:"]
   pushInsteadOf = "aur:"
 
-[includeIf "gitdir:~/Workspace/powerdns/"]
-  path = ~/.config/git/config-powerdns
+[includeIf "gitdir:~/Workspace/dovecot/"]
+  path = ~/.config/git/config-ox
 
 # To fetch pull requests to be able to check them out.
 # [remote "origin"]
