@@ -133,6 +133,7 @@ docker
 docker-buildx
 docker-compose
 docker-credential-secretservice-bin
+dockerfile-language-server-bin
 docker-scan
 docx2txt
 dog
