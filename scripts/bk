@@ -36,7 +36,7 @@ printf ">>> Hostname = %s\n\n" "$HOSTNAME"
 
 HOME='/home/fred'
 INTERNAL_DATA='/run/media/fred/Internal'
-INTERNAL_MEDIA='/run/media/fred/Internal Media'
+INTERNAL_MEDIA='/run/media/fred/InternalMedia'
 EXTERNAL_DATA='/run/media/fred/External Data'
 PORTABLE_DATA='/run/media/fred/Portable Data'
 PORTABLE_OX='/run/media/fred/Portable OX'
@@ -57,9 +57,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.ssh/"                     "$INTERNAL_DATA/Fred/Configs/ssh/"
     cmd "$HOME/.config/beets/"            "$INTERNAL_DATA/Fred/Configs/config-beets/"
     cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL_DATA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/qBittorrent/"      "$INTERNAL_DATA/Fred/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$INTERNAL_DATA/Fred/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$INTERNAL_DATA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_DATA/Fred/Configs/config-yt-dlp/"
     cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_DATA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_DATA/Fred/Configs/local-share-keyrings/"
@@ -82,9 +79,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.ssh/"                     "$INTERNAL_MEDIA/Fred/Configs/ssh/"
     cmd "$HOME/.config/beets/"            "$INTERNAL_MEDIA/Fred/Configs/config-beets/"
     cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL_MEDIA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/qBittorrent/"      "$INTERNAL_MEDIA/Fred/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$INTERNAL_MEDIA/Fred/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$INTERNAL_MEDIA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_MEDIA/Fred/Configs/config-yt-dlp/"
     cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_MEDIA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_MEDIA/Fred/Configs/local-share-keyrings/"
@@ -110,9 +104,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.ssh/"                     "$PORTABLE_DATA/Fred/Configs/ssh/"
     cmd "$HOME/.config/beets/"            "$PORTABLE_DATA/Fred/Configs/config-beets/"
     cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE_DATA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/qBittorrent/"      "$PORTABLE_DATA/Fred/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$PORTABLE_DATA/Fred/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$PORTABLE_DATA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Fred/Configs/config-yt-dlp/"
     cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Fred/Configs/local-share-keyrings/"
@@ -137,9 +128,6 @@ if [ "$HOSTNAME" == "axon" ]; then
     cmd "$HOME/.ssh/"                     "$EXTERNAL_DATA/Fred/Configs/ssh/"
     cmd "$HOME/.config/beets/"            "$EXTERNAL_DATA/Fred/Configs/config-beets/"
     cmd "$HOME/.config/MusicBrainz/"      "$EXTERNAL_DATA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/qBittorrent/"      "$EXTERNAL_DATA/Fred/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$EXTERNAL_DATA/Fred/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$EXTERNAL_DATA/Fred/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$EXTERNAL_DATA/Fred/Configs/config-yt-dlp/"
     cmd "$HOME/.local/share/gnupg/"       "$EXTERNAL_DATA/Fred/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$EXTERNAL_DATA/Fred/Configs/local-share-keyrings/"
@@ -161,9 +149,6 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     cmd "$HOME/.ssh/"                     "$PORTABLE_DATA/Laptop/Configs/ssh/"
     cmd "$HOME/.config/beets/"            "$PORTABLE_DATA/Laptop/Configs/config-beets/"
     cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE_DATA/Laptop/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/qBittorrent/"      "$PORTABLE_DATA/Laptop/Configs/config-qBittorrent/"
-    cmd "$HOME/.config/protonvpn/"        "$PORTABLE_DATA/Laptop/Configs/config-protonvpn/"
-    cmd "$HOME/.config/quodlibet/"        "$PORTABLE_DATA/Laptop/Configs/config-quodlibet/"
     cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Laptop/Configs/config-yt-dlp/"
     cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Laptop/Configs/local-share-gnupg/"
     cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Laptop/Configs/local-share-keyrings/"
@@ -186,7 +171,6 @@ elif [ "$HOSTNAME" == "neuron" ]; then
     cmd "$HOME/.config/"                  "$PORTABLE_OX/Laptop/Configs/dot.config/"
     cmd "$HOME/.cache/"                   "$PORTABLE_OX/Laptop/Configs/dot.cache/"
     cmd "$HOME/.local/"                   "$PORTABLE_OX/Laptop/Configs/dot.local/"
-    cmd "$HOME/.mozilla/"                 "$PORTABLE_OX/Laptop/Configs/dot.mozilla/"
     cmd "$HOME/.ssh/"                     "$PORTABLE_OX/Laptop/Configs/dot.ssh/"
   else
     printf ">>> %s is not mounted\n" "$PORTABLE_OX"
