@@ -6,7 +6,6 @@ amd-ucode
 android-tools
 antiword
 aria2
-asar
 asciinema
 aspell-de
 aspell-en
@@ -24,7 +23,6 @@ bandwhich
 base
 base-devel
 bash-completion
-bash-language-server
 bashtop
 bat
 bbswitch
@@ -91,7 +89,6 @@ cargo-udeps
 cargo-update
 cargo-watch
 cargo-wizard
-cask
 catdoc
 catimg
 cbindgen
@@ -133,15 +130,12 @@ docker
 docker-buildx
 docker-compose
 docker-credential-secretservice-bin
-dockerfile-language-server-bin
 docker-scan
 docx2txt
 dog
-doxygen
 d-spy
 ducker
 duf
-dunesh
 duperemove
 easy-rsa
 ebook-tools
@@ -149,6 +143,7 @@ ecm-tools
 ed
 edk2-ovmf
 efibootmgr
+emacs-wayland
 entr
 epapirus-icon-theme
 epiphany
@@ -203,8 +198,10 @@ gparted
 gptfdisk
 graphicsmagick
 gspell
+gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
+gst-plugins-bad
 gst-plugin-va
 gucharmap
 gvfs-mtp
@@ -215,12 +212,9 @@ hdparm
 hexedit
 hexer
 highlight
-hledger-bin
-hledger-ui-bin
-hledger-web-bin
-hotspot-appimage
+hledger-ui
+hledger-web
 hspell
-htmlmin
 htop
 hunspell-de
 hunspell-en_us
@@ -254,7 +248,6 @@ kcov
 kexec-tools
 keychain
 kmon
-knot-resolver
 kooha
 ladspa
 ledger
@@ -265,8 +258,6 @@ libblockdev-dm
 libblockdev-lvm
 libblockdev-nvdimm
 libblockdev-smart
-libcamera-tools
-libdecaf
 libdvdcss
 libdwarf
 libebur128
@@ -303,7 +294,6 @@ lshw
 lsof
 ltrace
 luametatex
-luit
 lychee
 lzop
 man-db
@@ -323,12 +313,9 @@ mkinitcpio-systemd-tool
 mkinitcpio-utils
 mmdblookup
 mold
-morewaita-icon-theme
 most
-mp3val
 mpv
 mtools
-muon-meson
 mupdf-tools
 musepack-tools
 musl
@@ -368,7 +355,6 @@ p7zip
 pacman-contrib
 pacrunner
 pam-u2f
-pandoc-crossref-bin
 par2cmdline
 paru-git
 pass
@@ -376,7 +362,6 @@ patchelf
 pdf2svg
 pdfarranger
 pdfcrack
-pdfmixtool
 pdfslicer
 pdftricks
 peek
@@ -486,9 +471,7 @@ python-webcolors
 python-xattr
 python-xlrd
 python-zstandard
-qbittorrent
 qt5-wayland
-qt6-wayland
 quota-tools
 r2ghidra
 radamsa
@@ -496,6 +479,7 @@ radeontool
 radeontop
 radvd
 ragel
+rainfrog
 rclone
 read-edid
 realtime-privileges
@@ -516,7 +500,6 @@ rtaudio
 ruby-webrick
 rust-analyzer
 rust-bindgen
-rustc-demangle
 sane-airscan
 sassc
 sbctl
@@ -530,7 +513,7 @@ seahorse-nautilus
 secrets
 selene
 shake
-shellcheck-bin
+shellcheck
 shfmt
 simple-scan
 sloccount
@@ -563,7 +546,6 @@ taplo-cli
 tcpdump
 tealdeer
 tectonic
-termusic
 thunderbird
 tidy
 time
@@ -574,13 +556,9 @@ torbrowser-launcher
 torsocks
 traceroute
 trash-cli
-ttf-atkinson-hyperlegible
-ttf-go-sans-git
-ttf-joypixels
-ttf-monaco
+ttf-cousine-nerd
 tup
 typst
-typst-lsp
 udftools
 udisks2-btrfs
 ugrep
@@ -630,10 +608,8 @@ xournalpp
 xsel
 xsv
 yaml-cpp
-yaml-language-server
 yamllint
 yapf
-yazi
 yt-dlp
 yubikey-manager-qt
 yubikey-personalization-gui

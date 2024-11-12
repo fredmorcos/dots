@@ -2,15 +2,9 @@ cargo-careful
 cargo-criterion
 cargo-deadlinks
 cargo-demangle
-clang-tidy-sarif
-czkawka_cli
-czkawka_gui
-gitoxide
 inferno
-rainfrog
 ren-find
-rep-cli
 rustfilt
-sarif-fmt
 suckit
+television
 tvrank-cli
