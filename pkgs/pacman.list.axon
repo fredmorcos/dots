@@ -234,6 +234,8 @@ intel-media-sdk
 intel-ucode
 intltool
 iotop
+iperf
+iperf3
 ipp-usb
 ipset
 iptraf-ng
@@ -277,7 +279,6 @@ libsidplayfp
 libultrahdr
 libupnp
 libva-intel-driver
-libva-mesa-driver
 libva-utils
 libva-vdpau-driver
 libvdpau-va-gl
@@ -304,7 +305,6 @@ meld
 memtest86+-efi
 mesa-demos
 mesa-utils
-mesa-vdpau
 meson
 mesonlsp
 microsoft-gsl
