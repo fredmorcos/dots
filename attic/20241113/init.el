@@ -688,11 +688,11 @@
  :after prog-mode
  :hook prog-mode-hook)
 
-(use-package whitespace
- :ensure nil
- :defer t
- :after prog-mode
- :hook prog-mode-hook)
+;; (use-package whitespace
+;;  :ensure nil
+;;  :defer t
+;;  :after prog-mode
+;;  :hook prog-mode-hook)
 
 (use-package deadgrep
  :ensure t
@@ -1587,11 +1587,14 @@
  (:map c-mode-base-map
   ("(" . nil))
 
- :custom
- (c-doc-comment-style
-  '((java-mode . javadoc)
-    (c-mode    . gtkdoc)
-    (c++-mode  . doxygen))))
+ ;; :custom
+ ;; (c-doc-comment-style
+ ;;  '((java-mode . javadoc)
+ ;;    (c-mode    . gtkdoc)
+ ;;    (c++-mode  . doxygen)))
+
+ :hook
+ (c-mode-hook . editorconfig-mode))
 
 (use-package cc-vars
  :ensure nil
@@ -1599,17 +1602,18 @@
 
  :custom
  (c-mark-wrong-style-of-comment t)
- (c-default-style '((other . "user")))
- (c-basic-offset 2)
+ ;; (c-default-style '((other . "user")))
+ ;; (c-basic-offset 2)
 
- :preface
- (defun init/cc-setup-comments ()
-  "Setup C-style /* ... */ comments."
-  (with-eval-after-load 'newcomment
-   (setq-local comment-style 'extra-line)))
+ ;; :preface
+ ;; (defun init/cc-setup-comments ()
+ ;;  "Setup C-style /* ... */ comments."
+ ;;  (with-eval-after-load 'newcomment
+ ;;   (setq-local comment-style 'extra-line)))
 
- :hook
- (c-mode-common-hook . init/cc-setup-comments))
+ ;; :hook
+ ;; (c-mode-common-hook . init/cc-setup-comments))
+ )
 
 (use-package lsp-mode
  :ensure t
