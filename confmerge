@@ -173,6 +173,8 @@ cmerge fonts/fonts.conf                ~/.config/fontconfig/fonts.conf
 
 cmerge foot.ini                        ~/.config/foot/foot.ini
 
+cmerge mimeapps.list                   ~/.config/mimeapps.list
+
 cmerge loader/loader.conf              /boot/loader/loader.conf
 cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
