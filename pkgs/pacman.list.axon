@@ -280,7 +280,6 @@ libultrahdr
 libupnp
 libva-intel-driver
 libva-utils
-libva-vdpau-driver
 libvdpau-va-gl
 libvoikko
 libwmf
@@ -356,7 +355,7 @@ pacman-contrib
 pacrunner
 pam-u2f
 par2cmdline
-paru-git
+paru-bin
 pass
 patchelf
 pdf2svg
