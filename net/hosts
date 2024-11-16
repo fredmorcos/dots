@@ -2,7 +2,8 @@
 # See hosts(5) for details.
 
 192.168.0.1   router
-192.168.0.101 phone
-192.168.0.102 axon
-192.168.0.103 neuron
-192.168.0.104 neuron-wifi
+192.168.0.101 phone Phone
+192.168.0.102 axon Desktop
+192.168.0.103 neuron Laptop
+192.168.0.104 neuron-wifi Laptop-WiFi
+192.168.0.105 PocketBook
