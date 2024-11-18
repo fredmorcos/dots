@@ -80,7 +80,7 @@ region='en_GB.UTF-8'
 dynamic-workspaces=true
 center-new-windows=false
 draggable-border-width=20
-experimental-features=[]
+experimental-features=@as []
 # experimental-features=['scale-monitor-framebuffer', 'variable-refresh-rate', 'xwayland-native-scaling']
 
 # Shell
@@ -107,7 +107,7 @@ show-weekdate=true
 [org/gnome/shell]
 enabled-extensions=@as []
 disable-user-extensions=true
-favorite-apps=['org.gnome.Nautilus.desktop', 'com.valvesoftware.Steam.desktop', 'org.gnome.Settings.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'torbrowser.desktop', 'protonvpn.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Podcasts.desktop', 'simple-scan.desktop', 'ca.desrt.dconf-editor.desktop', 'com.valvesoftware.Steam.desktop', 'com.github.tchx84.Flatseal.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Settings.desktop']
 
 # Window switcher
 [org/gnome/shell/window-switcher]
