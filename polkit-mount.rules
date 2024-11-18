@@ -1,0 +1,15 @@
+/* Allow users in storage group to mount partitions without authentication */
+polkit.addRule(function(action, subject) {
+    polkit.log("action=" + action);
+    polkit.log("subject=" + subject);
+
+    if ((action.id == "org.freedesktop.udisks2.encrypted-unlock" ||
+         action.id == "org.freedesktop.udisks2.encrypted-unlock-system" ||
+         action.id == "org.freedesktop.udisks2.filesystem-mount" ||
+         action.id == "org.freedesktop.udisks2.power-off-drive" ||
+         action.id == "org.freedesktop.udisks2.power-off-drive-system") &&
+        subject.isInGroup("storage"))
+    {
+        return polkit.Result.YES;
+    }
+});

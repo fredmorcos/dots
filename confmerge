@@ -178,6 +178,8 @@ cmerge mimeapps.list                   ~/.config/mimeapps.list
 cmerge loader/loader.conf              /boot/loader/loader.conf
 cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
+cmerge polkit-mount.rules              /etc/polkit-1/rules.d/99-mount.rules
+
 cmerge archlinux/makepkg.conf          /etc/makepkg.conf
 cmerge archlinux/makepkg-rust.conf     /etc/makepkg.conf.d/rust.conf
 cmerge archlinux/mkinitcpio.conf       /etc/mkinitcpio.conf
