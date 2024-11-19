@@ -1591,7 +1591,10 @@
  (c-doc-comment-style
   '((java-mode . javadoc)
     (c-mode    . gtkdoc)
-    (c++-mode  . doxygen))))
+    (c++-mode  . doxygen)))
+
+ :hook
+ (c-mode-hook . editorconfig-mode))
 
 (use-package cc-vars
  :ensure nil
@@ -1600,7 +1603,7 @@
  :custom
  (c-mark-wrong-style-of-comment t)
  (c-default-style '((other . "user")))
- (c-basic-offset 2)
+ ;; (c-basic-offset 2)
 
  :preface
  (defun init/cc-setup-comments ()
@@ -1800,8 +1803,7 @@
   (hledger-mode-hook .
    (lambda ()
     (init/setup-company
-     '(hledger-company)
-     '(company-dabbrev))))))
+     '(hledger-company))))))
 
 (use-package flycheck
  :ensure t
