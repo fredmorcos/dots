@@ -274,6 +274,7 @@ libnma
 libofa
 libopenraw
 libotr
+libportal-gtk3
 libraw
 libsidplayfp
 libultrahdr
@@ -351,6 +352,7 @@ otf-libertinus
 oxc-language-server
 oxipng
 p7zip
+paccat
 pacman-contrib
 pacrunner
 pam-u2f
