@@ -707,7 +707,7 @@
  :defer t)
 
 (use-package wgrep-deadgrep
- :ensure nil
+ :ensure t
  :defer t
  :after deadgrep)
 

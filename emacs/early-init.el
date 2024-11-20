@@ -182,7 +182,8 @@
 
  :custom
  ;; Silence native compilation warnings.
- (native-comp-async-report-warnings-errors 'silent))
+ (native-comp-async-report-warnings-errors 'silent)
+ (native-comp-async-query-on-exit t))
 
 (use-package emacs
  :ensure nil
