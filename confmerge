@@ -175,6 +175,8 @@ cmerge foot.ini                        ~/.config/foot/foot.ini
 
 cmerge mimeapps.list                   ~/.config/mimeapps.list
 
+cmerge pythonrc                        ~/.config/python/pythonrc
+
 cmerge loader/loader.conf              /boot/loader/loader.conf
 cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
@@ -198,7 +200,6 @@ cmerge modules/nvidia.conf             /etc/modprobe.d/nvidia.conf
 
 cmerge docker/daemon.json              /etc/docker/daemon.json
 cmerge docker/config.json              ~/.config/docker/config.json
-cmerge pythonrc                        /etc/python/pythonrc
 
 SYSD=/etc/systemd
 
