@@ -1914,8 +1914,7 @@
  (:map rust-mode-map
   ("<f5>" . rust-dbg-wrap-or-unwrap)
   ("<f6>" . lsp-rust-analyzer-expand-macro)
-  ("<f7>" . lsp-rust-analyzer-join-lines)
-  ("<f8>" . lsp-rust-analyzer-inlay-hints-mode))
+  ("<f7>" . lsp-rust-analyzer-join-lines))
 
  :custom
  (rust-indent-offset 2)
@@ -1924,6 +1923,22 @@
 
  :hook
  (rust-mode-hook . (lambda () (electric-quote-local-mode -1))))
+
+(use-package rust-ts-mode
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map rust-ts-mode-map
+  ("<f5>" . rust-dbg-wrap-or-unwrap)
+  ("<f6>" . lsp-rust-analyzer-expand-macro)
+  ("<f7>" . lsp-rust-analyzer-join-lines))
+
+ :custom
+ (rust-ts-mode-indent-offset 2)
+
+ :hook
+ (rust-ts-mode-hook . (lambda () (electric-quote-local-mode -1))))
 
 (use-package lsp-mode
  :ensure t
@@ -1936,23 +1951,6 @@
  :defer t
  :after rust-mode
  :hook rust-mode-hook)
-
-(use-package rust-ts-mode
- :ensure nil
- :defer t
-
- :bind
- (:map rust-ts-mode-map
-  ("<f5>" . rust-dbg-wrap-or-unwrap)
-  ("<f6>" . lsp-rust-analyzer-expand-macro)
-  ("<f7>" . lsp-rust-analyzer-join-lines)
-  ("<f8>" . lsp-rust-analyzer-inlay-hints-mode))
-
- :custom
- (rust-ts-mode-indent-offset 2)
-
- :hook
- (rust-ts-mode-hook . (lambda () (electric-quote-local-mode -1))))
 
 (use-package lsp-mode
  :ensure t
@@ -2006,7 +2004,8 @@
   ("C-c g" . lsp-format-region)
   ("C-c h" . lsp-describe-thing-at-point)
   ("M-RET" . lsp-execute-code-action)
-  ;; ("TAB"   . lsp-format-region)
+  ("TAB"   . lsp-format-region)
+  ("<f8>"  . lsp-inlay-hints-mode)
   ([remap er/expand-region] . lsp-extend-selection))
 
  :hook
