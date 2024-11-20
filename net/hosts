@@ -1,9 +1,18 @@
 # Static table lookup for hostnames.
 # See hosts(5) for details.
 
-192.168.0.1   router
-192.168.0.101 phone Phone
-192.168.0.102 axon Desktop
-192.168.0.103 neuron Laptop
-192.168.0.104 neuron-wifi Laptop-WiFi
-192.168.0.105 PocketBook
+127.0.0.1	localhost axon
+::1		localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+
+172.17.0.2	axon
+fd11:10a1:ce98:488e:0:242:ac11:2	axon
+
+192.168.0.1	router
+192.168.0.102	axon Desktop
+192.168.0.103	neuron Laptop
+192.168.0.104	neuron-wifi Laptop-WiFi
+192.168.0.105	PocketBook
