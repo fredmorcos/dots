@@ -166,6 +166,7 @@ cmerge yt-dlp.conf                     ~/.config/yt-dlp/config
 cmerge mpv/input.conf                  ~/.config/mpv/input.conf
 cmerge mpv/mpv.conf                    ~/.config/mpv/mpv.conf
 
+cmerge ssh/config                      ~/.ssh/config
 cmerge git/config                      ~/.config/git/config
 cmerge git/config-ox                   ~/.config/git/config-ox
 

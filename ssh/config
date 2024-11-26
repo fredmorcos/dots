@@ -1,0 +1,5 @@
+Host dc-ubuntu24
+  User fred
+  HostName localhost
+  Port 2222
+  IdentityFile ~/.ssh/id_rsa
