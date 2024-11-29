@@ -492,7 +492,6 @@ reuse
 rink
 ripasso
 ripgrep-all
-rmlint
 rocm-hip-runtime
 rocm-opencl-runtime
 rocm-smi-lib
