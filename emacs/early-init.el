@@ -264,7 +264,7 @@
  package-archives
 
  :config
- (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+ (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
  :custom
  (package-native-compile t))

@@ -565,9 +565,10 @@
  (switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'"))
 
  :preface
- (defmacro init/disable-popup (regexp)
+ (defun init/disable-popup (regexp)
   "Stop buffers that match REGEXP from popping up."
-  `(push (cons ,regexp (cons #'display-buffer-no-window nil)) display-buffer-alist))
+  (add-to-list 'display-buffer-alist
+   `(,regexp (display-buffer-no-window) (allow-no-window . t))))
 
  :config
  (init/disable-popup "\\`\\*Compile-Log\\*.*\\'")
