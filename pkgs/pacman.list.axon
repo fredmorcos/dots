@@ -161,7 +161,6 @@ firefox
 flatpak
 flatpak-xdg-utils
 foliate
-fontforge
 foot
 foot-terminfo
 foremost
@@ -192,7 +191,6 @@ gnome-font-viewer
 gnome-podcasts
 gnome-tweaks
 gnu-netcat
-gocr
 gpart
 gparted
 gptfdisk
@@ -316,7 +314,6 @@ mold
 most
 mpv
 mtools
-mupdf-tools
 musepack-tools
 musl
 mutt
@@ -338,8 +335,6 @@ nuspell
 nvchecker
 nvme-cli
 nvtop
-ocrad
-ocrfeeder
 odt2txt
 opencl-clover-mesa
 opencl-rusticl-mesa
@@ -492,8 +487,6 @@ reuse
 rink
 ripasso
 ripgrep-all
-rocm-hip-runtime
-rocm-opencl-runtime
 rocm-smi-lib
 ropper
 rpm-tools
@@ -549,7 +542,6 @@ tcpdump
 tealdeer
 tectonic
 television
-thunderbird
 tidy
 time
 tinycdb
@@ -607,7 +599,6 @@ xf86-input-void
 xmldiff
 xmlstarlet
 xorg-xkill
-xournalpp
 xsel
 xsv
 yaml-cpp
