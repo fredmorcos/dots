@@ -8,7 +8,7 @@
 export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
 # [[ -r "/etc/profile.d/vte.sh" ]] && source /etc/profile.d/vte.sh
-# [[ -r "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
+[[ -r "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
 
 tv-widget() {
   local res
@@ -24,8 +24,8 @@ tv-history() {
   READLINE_POINT=$(( READLINE_POINT + ${#res} ))
 }
 
-bind -m emacs-standard -x '"\C-t": tv-widget'
-bind -m emacs-standard -x '"\C-r": tv-history'
+# bind -m emacs-standard -x '"\C-t": tv-widget'
+# bind -m emacs-standard -x '"\C-r": tv-history'
 
 HISTCONTROL="ignoredups:ignorespace:erasedups"
 HISTSIZE=10000
@@ -71,6 +71,32 @@ alias gitstatus='gitall status -s'
 alias gitpp='gitall pull -q && gitall push -q'
 
 alias mkdatedir='mkdir $(date +%Y%m%d)'
+
+dirconv_jxl() {
+  mkdir small
+  # shellcheck disable=SC2086
+  /usr/bin/ls $1 | parallel cjxl --lossless_jpeg=0 {} small/{}.jxl
+}
+
+dirconv_subtitles() {
+  mkdir small
+  for i in $1; do
+    ffmpeg -i "$i" -map 0:s:"$2" "small/$i.en.srt"
+  done
+}
+
+dirconv_mp4() {
+  mkdir small
+  for i in "$@"; do
+    ffmpeg -i "$i" "small/$i.mp4"
+  done
+}
+
+dirconv_opus() {
+  for i in "$@"; do
+    ffmpeg -i "$i" -vn "$i.opus"
+  done
+}
 
 fman() {
   if [ -z "$*" ]; then
