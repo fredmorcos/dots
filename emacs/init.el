@@ -228,6 +228,13 @@
 
 ;;; UX
 
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :custom
+ (delete-by-moving-to-trash t))
+
 (use-package windmove
  :ensure nil
  :defer t
@@ -303,7 +310,34 @@
  (backward-delete-char-untabify-method 'hungry)
  ;; Recenter after jump to next error.
  (next-error-recenter '(4))
- (next-error-message-highlight t))
+ (next-error-message-highlight t)
+
+ :preface
+ (defun init/keyboard-quit-dwim ()
+  "Reasonable keyboard-quit behavior.
+
+- When a minibuffer is open but not focused, close it.
+- When a completions buffer is selected, close it.
+- Otherwise (e.g. region is active) do `keyboard-quit`."
+  (interactive)
+  (cond
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   ((derived-mode-p 'completion-list-mode)
+    (delete-completion-window))
+   (t
+    (keyboard-quit))))
+
+ :bind
+ (([remap keyboard-quit] . #'init/keyboard-quit-dwim)))
+
+(use-package simple
+ :ensure nil
+ :defer t
+ :after eldoc
+
+ :config
+ (eldoc-add-command #'init/keyboard-quit-dwim))
 
 (use-package simple
  :ensure nil
@@ -312,6 +346,10 @@
 
  :hook
  (before-save-hook . delete-trailing-whitespace))
+
+(use-package nerd-icons
+ :ensure t
+ :defer t)
 
 ;;; Scrolling
 
@@ -730,6 +768,9 @@
  :ensure nil
  :defer t
 
+ :commands
+ xref-push-marker-stack
+
  :hook
  (xref-after-return-hook . recenter)
  (xref-after-jump-hook . recenter))
@@ -1095,6 +1136,9 @@
  (dired-mouse-drag-files t)
  (dired-listing-switches "-l -h --group-directories-first")
  (dired-hide-details-hide-symlink-targets nil)
+ (dired-recursive-copies 'always)
+ (dired-recursive-deletes 'always)
+ (dired-dwim-target t)
 
  :bind
  (:map dired-mode-map
@@ -1135,6 +1179,12 @@
  :defer t
  :after dired
  :hook (dired-mode-hook . auto-revert-mode))
+
+(use-package nerd-icons-dired
+ :ensure t
+ :defer t
+
+ :hook (dired-mode-hook . nerd-icons-dired-mode))
 
 ;;; Search
 
@@ -1361,18 +1411,22 @@
  (push 'orderless-initialism orderless-matching-styles)
  (push 'orderless-prefixes orderless-matching-styles)
 
- :init
- (push 'orderless completion-styles))
+ ;; :init
+ ;; (push 'orderless completion-styles))
+ )
 
 (use-package minibuffer
  :ensure nil
  :defer t
 
- :config
- (push 'substring completion-styles)
- (push 'flex completion-styles)
+ ;; :config
+ ;; (push 'substring completion-styles)
+ ;; (push 'flex completion-styles)
 
  :custom
+ (completion-styles '(orderless basic))
+ (completion-category-defaults nil)
+ (completion-category-overrides nil)
  (minibuffer-electric-default-mode t)
  (minibuffer-message-clear-timeout 4)
  (completions-sort #'prescient-sort)
@@ -2079,15 +2133,17 @@
  :preface
  (defun init/lsp-ivy-workspace-symbol ()
   (interactive)
+  (xref-push-marker-stack)
   (lsp-ivy-workspace-symbol nil))
  (defun init/lsp-ivy-workspace-symbol-at-point ()
   (interactive)
+  (xref-push-marker-stack)
   (lsp-ivy-workspace-symbol t))
 
  :bind
  (:map lsp-mode-map
-  ("C-c x" . init/lsp-ivy-workspace-symbol)
-  ("C-c X" . init/lsp-ivy-workspace-symbol-at-point))
+  ("C-c X" . init/lsp-ivy-workspace-symbol)
+  ("C-c x" . init/lsp-ivy-workspace-symbol-at-point))
 
  :config
  ;; Recenter after using lsp-ivy-workspace-symbol.
