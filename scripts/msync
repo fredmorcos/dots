@@ -27,7 +27,6 @@ echo ">>> Rsync command:" "${CMD[@]}"
 HOSTNAME=$(hostnamectl hostname)
 printf ">>> Hostname = %s\n" "$HOSTNAME"
 
-TARGET=${TARGET:-}
 if [ -z ${TARGET+x} ]; then
   if [ "$HOSTNAME" == "axon" ]; then
     TARGET="neuron"
@@ -50,7 +49,7 @@ cmd () {
 
 rdiff () {
   TARGET_FILE="scp://$TARGET/$1"
-  printf ">>> %s vs. %s" "$1" "$TARGET_FILE"
+  printf ">>> %s vs. %s\n" "$1" "$TARGET_FILE"
   vim -d "$1" "$TARGET_FILE"
   printf "\n\n"
 }
