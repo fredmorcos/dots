@@ -461,6 +461,7 @@ python-typogrify
 python-unicodedata2
 python-unidiff
 python-uv
+python-virtualenv
 python-volume_key
 python-watchdog
 python-weasyprint
