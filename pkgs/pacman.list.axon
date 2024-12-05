@@ -237,6 +237,7 @@ iperf3
 ipp-usb
 ipset
 iptraf-ng
+ipython
 irqbalance
 ispell
 itstool
@@ -412,7 +413,6 @@ python-hsluv
 python-html2text
 python-husl
 python-invoke
-python-ipdb
 python-keyrings-alt
 python-keystone
 python-lsp-black
