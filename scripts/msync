@@ -25,17 +25,21 @@ CMD=("rsync"
 echo ">>> Rsync command:" "${CMD[@]}"
 
 HOSTNAME=$(hostnamectl hostname)
-printf ">>> Hostname = %s\n\n\n" "$HOSTNAME"
+printf ">>> Hostname = %s\n" "$HOSTNAME"
 
-TARGET=""
-if [ "$HOSTNAME" == "axon" ]; then
-  TARGET="neuron"
-elif [ "$HOSTNAME" == "neuron" ]; then
-  TARGET="axon"
-else
-  printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
-  exit 1
+TARGET=${TARGET:-}
+if [ -z ${TARGET+x} ]; then
+  if [ "$HOSTNAME" == "axon" ]; then
+    TARGET="neuron"
+  elif [ "$HOSTNAME" == "neuron" ]; then
+    TARGET="axon"
+  else
+    printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
+    exit 1
+  fi
 fi
+
+printf ">>> Target Machine is %s\n\n\n" "$TARGET"
 
 cmd () {
   TARGET_OBJ="$TARGET:/$1"
