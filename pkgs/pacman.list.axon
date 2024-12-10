@@ -130,7 +130,6 @@ docker
 docker-buildx
 docker-compose
 docker-credential-secretservice-bin
-docker-scan
 docx2txt
 dog
 d-spy
