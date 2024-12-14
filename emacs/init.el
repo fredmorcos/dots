@@ -6,13 +6,11 @@
 
 (use-package no-littering
  :ensure t
- :demand t
-
+ :demand
  :commands
  no-littering-theme-backups
  no-littering-expand-etc-file-name
  no-littering-expand-var-file-name
-
  :config
  (no-littering-theme-backups))
 
@@ -27,7 +25,6 @@
 (use-package emacs
  :ensure nil
  :defer t
-
  :config
  ;; Enable these functions.
  (put 'list-timers      'disabled nil)
@@ -48,11 +45,7 @@
  :ensure nil
  :defer t
  :load-path "/home/fred/Workspace/dots/emacs/"
-
- :commands
- qol/append
- qol/generate-password
-
+ :commands qol/generate-password
  :bind
  (("C-x j"    . qol/insert-buffer-name)
   ("C-x e"    . qol/replace-escapes)
@@ -66,80 +59,69 @@
 (use-package misc
  :ensure nil
  :defer t
-
  :bind
  (("C-x c" . duplicate-dwim)))
 
 (use-package cua-base
  :ensure nil
  :defer t
-
  :init
  (cua-selection-mode t))
 
 (use-package move-text
  :ensure t
  :defer t
-
  :init
  (move-text-default-bindings))
 
 (use-package mwim
  :ensure t
  :defer t
-
  :bind
  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
  ([remap move-end-of-line] . mwim-end-of-code-or-line))
 
-(use-package register
- :ensure nil
- :defer t
- :after counsel
-
- :bind
- ([remap jump-to-register] . counsel-register))
-
 (use-package emacs
  :ensure nil
  :defer t
-
- :custom
- (tab-always-indent 'complete)
- (tab-first-completion 'word-or-paren-or-punct))
-
-(use-package simple
- :ensure nil
- :defer t
-
- :custom
- (indent-tabs-mode nil))
-
-(use-package unfill
- :ensure t
- :defer t
-
- :bind
- ([remap fill-paragraph] . unfill-toggle))
-
-(use-package emacs
- :ensure nil
- :defer t
-
  :custom
  (fill-column 90))
 
 (use-package newcomment
  :ensure nil
  :defer t
-
  :custom
  (comment-fill-column 80))
+
+(use-package unfill
+ :ensure t
+ :defer t
+ :bind
+ ([remap fill-paragraph] . unfill-toggle))
+
+(use-package register
+ :ensure nil
+ :defer t
+ :after counsel
+ :bind
+ ([remap jump-to-register] . counsel-register))
+
+(use-package indent
+ :ensure nil
+ :defer t
+ :custom
+ (tab-always-indent 'complete)
+ (tab-first-completion 'word))
+
+(use-package simple
+ :ensure nil
+ :defer t
+ :custom
+ (indent-tabs-mode nil))
 
 (use-package files
  :ensure nil
  :defer t
-
  :custom
  (mode-require-final-newline 'visit-save)
  (require-final-newline 'visit-save)
@@ -150,7 +132,6 @@
 (use-package emacs
  :ensure nil
  :defer t
-
  :custom
  ;; Fill
  (colon-double-space t)
@@ -159,13 +140,8 @@
 (use-package expand-region
  :ensure t
  :defer t
-
  :bind
  ("C-=" . er/expand-region))
-
-(use-package text-mode
- :ensure nil
- :defer t)
 
 (use-package jinx
  :ensure t
@@ -176,14 +152,12 @@
 (use-package buffer-move
  :ensure t
  :defer t
-
  :bind
  ("C-x m" . buf-move))
 
 (use-package surround
  :ensure t
  :defer t
-
  :bind
  ("M-'" . surround-mark-inner)
  ("M-\"" . surround-insert))
@@ -193,7 +167,6 @@
 (use-package files
  :ensure nil
  :defer t
-
  :custom
  (auto-save-default t)
  (backup-inhibited nil)
@@ -207,21 +180,18 @@
 (use-package uniquify
  :ensure nil
  :defer t
-
  :custom
  (uniquify-buffer-name-style 'forward))
 
 (use-package tooltip
  :ensure nil
  :defer t
-
  :custom
  (tooltip-use-echo-area t))
 
 (use-package display-line-numbers
  :ensure nil
  :defer t
-
  :custom
  (display-line-numbers-grow-only t)
  (display-line-numbers-width-start t))
@@ -350,6 +320,63 @@
 (use-package nerd-icons
  :ensure t
  :defer t)
+
+(use-package casual-suite
+ :ensure t
+ :defer t)
+
+(use-package info
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map Info-mode-map ("C-p" . casual-info-tmenu)))
+
+(use-package isearch
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map isearch-mode-map ("C-p" . casual-isearch-tmenu)))
+
+(use-package ibuffer
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map ibuffer-mode-map
+  (("C-p" . casual-ibuffer-tmenu)
+   ("F"   . casual-ibuffer-filter-tmenu)
+   ("s"   . casual-ibuffer-sortby-tmenu))))
+
+(use-package re-builder
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map reb-mode-map ("C-p" . casual-re-builder-tmenu))
+ (:map reb-lisp-mode-map ("C-p" . casual-re-builder-tmenu)))
+
+(use-package bookmark
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map bookmark-bmenu-mode-map ("C-p" . casual-bookmarks-tmenu)))
+
+(use-package symbol-overlay
+ :ensure t
+ :defer t
+
+ :bind
+ (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :bind
+ ("C-p" . casual-editkit-main-tmenu))
 
 ;;; Scrolling
 
@@ -935,15 +962,36 @@
 
  :custom
  ;; (diff-hl-flydiff-delay 0.1)
- (diff-hl-draw-borders nil))
+ (diff-hl-draw-borders nil)
+ (diff-hl-update-async t))
 
 (use-package diff-hl
  :ensure t
  :defer t
  :after magit-mode
  :hook
- (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
  (magit-post-refresh-hook . diff-hl-magit-post-refresh))
+
+(use-package diff-hl-flydiff
+ :ensure diff-hl
+ :defer t
+ :after diff-hl
+ :hook
+ (diff-hl-mode-hook . diff-hl-flydiff-mode))
+
+(use-package diff-hl-show-hunk
+ :ensure diff-hl
+ :defer t
+ :after diff-hl
+ :hook
+ (diff-hl-mode-hook . diff-hl-show-hunk-mouse-mode))
+
+(use-package diff-hl-dired
+ :ensure diff-hl
+ :defer t
+ :after dired
+ :hook
+ (dired-mode-hook . diff-hl-dired-mode))
 
 ;;; General Features
 
@@ -1021,7 +1069,10 @@
  (whitespace-style
   '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
     space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
-    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof)))
+    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof))
+
+ :custom-face
+ (whitespace-tab ((t (:foreground "lavender" :background "white smoke")))))
 
 ;;; Makefiles
 
@@ -1119,10 +1170,6 @@
 
 ;;; Dired
 
-(use-package casual-dired
- :ensure t
- :defer t)
-
 (use-package dired-async
  :ensure nil
  :defer t
@@ -1142,15 +1189,14 @@
 
  :bind
  (:map dired-mode-map
-  ("C-o" . casual-dired-tmenu))
+  ("C-p" . casual-dired-tmenu))
 
  :preface
  (defun init/dired-setup ()
   "Setup dired requires."
   (require 'dired-x)
   (require 'wdired)
-  (require 'image-dired)
-  (require 'casual-dired))
+  (require 'image-dired))
 
  :hook
  (dired-mode-hook . init/dired-setup)
@@ -1658,7 +1704,7 @@
  :custom
  (c-mark-wrong-style-of-comment t)
  (c-default-style '((other . "user")))
- ;; (c-basic-offset 2)
+ (c-basic-offset 2)
 
  :preface
  (defun init/cc-setup-comments ()
@@ -1675,31 +1721,26 @@
  :after cc-mode
  :hook (c-mode-common-hook . lsp))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :after c-ts-mode
- :hook (c-ts-base-mode-hook . lsp))
-
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
 
  :config
- ;; This apparently breaks LSP completion.
- ;; (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators")
+ (add-to-list 'lsp-clients-clangd-args "--enable-config")
  (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
+ (add-to-list 'lsp-clients-clangd-args "--background-index")
  (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
  (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
- (add-to-list 'lsp-clients-clangd-args "--header-insertion=iwyu")
- (add-to-list 'lsp-clients-clangd-args "-j=8")
- (add-to-list 'lsp-clients-clangd-args "--malloc-trim")
- (add-to-list 'lsp-clients-clangd-args "--pch-storage=disk")
- (add-to-list 'lsp-clients-clangd-args "--background-index")
  (add-to-list 'lsp-clients-clangd-args "--function-arg-placeholders")
- (add-to-list 'lsp-clients-clangd-args "--inlay-hints")
+ (add-to-list 'lsp-clients-clangd-args "--header-insertion=iwyu")
+ ;; This sometimes breaks LSP completion.
+ (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators")
  (add-to-list 'lsp-clients-clangd-args "--limit-references=0")
- (add-to-list 'lsp-clients-clangd-args "--limit-results=0"))
+ (add-to-list 'lsp-clients-clangd-args "--limit-results=0")
+ (add-to-list 'lsp-clients-clangd-args "--rename-file-limit=0")
+ (add-to-list 'lsp-clients-clangd-args "-j=16")
+ (add-to-list 'lsp-clients-clangd-args "--malloc-trim")
+ (add-to-list 'lsp-clients-clangd-args "--pch-storage=memory"))
 
 (use-package lsp-clangd
  :ensure lsp-mode
@@ -1711,22 +1752,6 @@
 
  :bind
  (:map c-mode-base-map ("<f2>" . lsp-clangd-find-other-file)))
-
-(use-package c-ts-mode
- :ensure nil
- :defer t
- :defines c-ts-base-mode-map)
-
-(use-package lsp-clangd
- :ensure lsp-mode
- :defer t
- :after c-ts-mode
-
- :commands
- lsp-clangd-find-other-file
-
- :bind
- (:map c-ts-base-mode-map ("<f2>" . lsp-clangd-find-other-file)))
 
 ;;; Python
 
@@ -2331,13 +2356,6 @@
 
  :config
  (treemacs-load-theme "nerd-icons"))
-
-(use-package casual-info
- :ensure t
- :bind
- (:map Info-mode-map ("C-o" . casual-info-tmenu)))
-
-;;; Final
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
