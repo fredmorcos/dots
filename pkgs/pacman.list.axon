@@ -490,6 +490,7 @@ reuse
 rink
 ripasso
 ripgrep-all
+rocm-opencl-runtime
 rocm-smi-lib
 ropper
 rpm-tools
