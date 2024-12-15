@@ -146,13 +146,6 @@
 
 ;;; UX
 
-(use-package warnings
- :ensure nil
- :defer t
- :custom
- ;; Stop the warnings buffer from popping up, but still log warnings.
- (warning-minimum-level :emergency))
-
 (use-package comp
  :ensure nil
  :defer t

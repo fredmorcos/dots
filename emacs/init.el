@@ -149,18 +149,27 @@
  :after text-mode
  :hook text-mode-hook)
 
-(use-package buffer-move
- :ensure t
- :defer t
- :bind
- ("C-x m" . buf-move))
-
 (use-package surround
  :ensure t
  :defer t
  :bind
  ("M-'" . surround-mark-inner)
  ("M-\"" . surround-insert))
+
+;;; Window Management
+
+(use-package windmove
+ :ensure nil
+ :defer t
+ :init
+ (windmove-default-keybindings)
+ (windmove-delete-default-keybindings))
+
+(use-package buffer-move
+ :ensure t
+ :defer t
+ :bind
+ ("C-x m" . buf-move))
 
 ;;; Auto-save & backups
 
@@ -196,54 +205,29 @@
  (display-line-numbers-grow-only t)
  (display-line-numbers-width-start t))
 
-;;; UX
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- (delete-by-moving-to-trash t))
-
-(use-package windmove
- :ensure nil
- :defer t
-
- :init
- (windmove-default-keybindings)
- (windmove-delete-default-keybindings))
+;;; Warnings
 
 (use-package warnings
  :ensure nil
  :defer t
-
  :config
  ;; Suppress certain annoying warnings.
- (add-to-list 'warning-suppress-types 'defvaralias))
-
-(use-package files
- :ensure nil
- :defer t
-
- :config
- (defadvice find-file
-  (after recenter-after-find-file activate)
-  (recenter))
-
+ (add-to-list 'warning-suppress-types 'defvaralias)
  :custom
- (confirm-kill-processes nil))
+ ;; Stop the warnings buffer from popping up, but still log warnings.
+ (warning-minimum-level :emergency))
+
+;;; Help Windows
 
 (use-package help
  :ensure nil
  :defer t
-
  :custom
  (help-window-select t))
 
 (use-package help-mode
  :ensure nil
  :defer t
-
  :config
  ;; Recenter after pressing on links to emacs source code.
  (defadvice help-button-action
@@ -253,10 +237,33 @@
   (after recenter-after-help-function-def--button-function activate)
   (recenter)))
 
+(use-package info
+ :ensure nil
+ :defer t
+ :bind
+ (:map Info-mode-map ("C-p" . casual-info-tmenu)))
+
+;;; UX
+
+(use-package emacs
+ :ensure nil
+ :defer t
+ :custom
+ (delete-by-moving-to-trash t))
+
+(use-package files
+ :ensure nil
+ :defer t
+ :config
+ (defadvice find-file
+  (after recenter-after-find-file activate)
+  (recenter))
+ :custom
+ (confirm-kill-processes nil))
+
 (use-package mouse
  :ensure nil
  :defer t
-
  :custom
  (mouse-yank-at-point t)
  (mouse-1-click-follows-link 'double))
@@ -264,13 +271,15 @@
 (use-package simple
  :ensure nil
  :defer t
-
  :config
  ;; Recenter after using goto-line.
  (defadvice goto-line
   (after recenter-after-goto-line activate)
-  (recenter))
+  (recenter)))
 
+(use-package simple
+ :ensure nil
+ :defer t
  :custom
  ;; Hide commands in M-x that do not work in the current mode
  (read-extended-command-predicate #'command-completion-default-include-p)
@@ -280,15 +289,17 @@
  (backward-delete-char-untabify-method 'hungry)
  ;; Recenter after jump to next error.
  (next-error-recenter '(4))
- (next-error-message-highlight t)
+ (next-error-message-highlight t))
 
+(use-package simple
+ :ensure nil
+ :defer t
  :preface
  (defun init/keyboard-quit-dwim ()
   "Reasonable keyboard-quit behavior.
-
-- When a minibuffer is open but not focused, close it.
-- When a completions buffer is selected, close it.
-- Otherwise (e.g. region is active) do `keyboard-quit`."
+     - When a minibuffer is open but not focused, close it.
+     - When a completions buffer is selected, close it.
+     - Otherwise (e.g. region is active) do `keyboard-quit`."
   (interactive)
   (cond
    ((> (minibuffer-depth) 0)
@@ -297,15 +308,13 @@
     (delete-completion-window))
    (t
     (keyboard-quit))))
-
  :bind
- (([remap keyboard-quit] . #'init/keyboard-quit-dwim)))
+ (([remap keyboard-quit] . init/keyboard-quit-dwim)))
 
 (use-package simple
  :ensure nil
  :defer t
  :after eldoc
-
  :config
  (eldoc-add-command #'init/keyboard-quit-dwim))
 
@@ -313,7 +322,6 @@
  :ensure nil
  :defer t
  :after files
-
  :hook
  (before-save-hook . delete-trailing-whitespace))
 
@@ -325,24 +333,15 @@
  :ensure t
  :defer t)
 
-(use-package info
- :ensure nil
- :defer t
-
- :bind
- (:map Info-mode-map ("C-p" . casual-info-tmenu)))
-
 (use-package isearch
  :ensure nil
  :defer t
-
  :bind
  (:map isearch-mode-map ("C-p" . casual-isearch-tmenu)))
 
 (use-package ibuffer
  :ensure nil
  :defer t
-
  :bind
  (:map ibuffer-mode-map
   (("C-p" . casual-ibuffer-tmenu)
@@ -352,7 +351,6 @@
 (use-package re-builder
  :ensure nil
  :defer t
-
  :bind
  (:map reb-mode-map ("C-p" . casual-re-builder-tmenu))
  (:map reb-lisp-mode-map ("C-p" . casual-re-builder-tmenu)))
@@ -360,21 +358,18 @@
 (use-package bookmark
  :ensure nil
  :defer t
-
  :bind
  (:map bookmark-bmenu-mode-map ("C-p" . casual-bookmarks-tmenu)))
 
 (use-package symbol-overlay
  :ensure t
  :defer t
-
  :bind
  (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
 
 (use-package emacs
  :ensure nil
  :defer t
-
  :bind
  ("C-p" . casual-editkit-main-tmenu))
 
@@ -383,7 +378,6 @@
 (use-package emacs
  :ensure nil
  :defer t
-
  :custom
  (scroll-conservatively 104)
  (scroll-margin 1)
@@ -391,18 +385,15 @@
  (hscroll-step 1)
  (auto-hscroll-mode 'current-line)
  (fast-but-imprecise-scrolling t)
-
  :preface
  (defun init/scroll-other-window ()
   "Scroll up the other window in a split frame."
   (interactive)
   (scroll-other-window 1))
-
  (defun init/scroll-other-window-down ()
   "Scroll down the other window in a split frame."
   (interactive)
   (scroll-other-window-down 1))
-
  :bind
  (("C-<f11>" . init/scroll-other-window)
   ("C-<f12>" . init/scroll-other-window-down)))
@@ -410,7 +401,6 @@
 (use-package simple
  :ensure nil
  :defer t
-
  :bind
  ("<mouse-4>" . previous-line)
  ("<mouse-5>" . next-line))
@@ -420,11 +410,9 @@
 (use-package hippie-exp
  :ensure nil
  :defer t
-
  :bind
  ;; Replace dabbrev-expand with hippie-expand
  ([remap dabbrev-expand] . hippie-expand)
-
  :custom
  (hippie-expand-try-functions-list
   '(try-expand-dabbrev-visible
@@ -451,7 +439,6 @@
 (use-package emacs
  :ensure nil
  :defer t
-
  :custom
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))

@@ -64,14 +64,5 @@
  (interactive)
  (insert (buffer-name)))
 
-(defmacro qol/append (list element)
- "Append ELEMENT to LIST."
- `(progn
-   (eval-when-compile
-    (autoload '-insert-at "dash")
-    (autoload '-contains-p "dash"))
-   (when (not (-contains-p ,list ,element))
-    (setf ,list (-insert-at (length ,list) ,element ,list)))))
-
 (provide 'qol)
 ;;; qol.el ends here
