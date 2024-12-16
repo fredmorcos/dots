@@ -11,6 +11,7 @@
  no-littering-theme-backups
  no-littering-expand-etc-file-name
  no-littering-expand-var-file-name
+
  :config
  (no-littering-theme-backups))
 
@@ -25,6 +26,7 @@
 (use-package emacs
  :ensure nil
  :defer t
+
  :config
  ;; Enable these functions.
  (put 'list-timers      'disabled nil)
@@ -46,6 +48,7 @@
  :defer t
  :load-path "/home/fred/Workspace/dots/emacs/"
  :commands qol/generate-password
+
  :bind
  (("C-x j"    . qol/insert-buffer-name)
   ("C-x e"    . qol/replace-escapes)
@@ -59,24 +62,28 @@
 (use-package misc
  :ensure nil
  :defer t
+
  :bind
  (("C-x c" . duplicate-dwim)))
 
 (use-package cua-base
  :ensure nil
  :defer t
+
  :init
  (cua-selection-mode t))
 
 (use-package move-text
  :ensure t
  :defer t
+
  :init
  (move-text-default-bindings))
 
 (use-package mwim
  :ensure t
  :defer t
+
  :bind
  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
  ([remap move-end-of-line] . mwim-end-of-code-or-line))
@@ -84,18 +91,21 @@
 (use-package emacs
  :ensure nil
  :defer t
+
  :custom
  (fill-column 90))
 
 (use-package newcomment
  :ensure nil
  :defer t
+
  :custom
  (comment-fill-column 80))
 
 (use-package unfill
  :ensure t
  :defer t
+
  :bind
  ([remap fill-paragraph] . unfill-toggle))
 
@@ -103,12 +113,14 @@
  :ensure nil
  :defer t
  :after counsel
+
  :bind
  ([remap jump-to-register] . counsel-register))
 
 (use-package indent
  :ensure nil
  :defer t
+
  :custom
  (tab-always-indent 'complete)
  (tab-first-completion 'word))
@@ -122,6 +134,7 @@
 (use-package files
  :ensure nil
  :defer t
+
  :custom
  (mode-require-final-newline 'visit-save)
  (require-final-newline 'visit-save)
@@ -132,6 +145,7 @@
 (use-package emacs
  :ensure nil
  :defer t
+
  :custom
  ;; Fill
  (colon-double-space t)
@@ -140,6 +154,7 @@
 (use-package expand-region
  :ensure t
  :defer t
+
  :bind
  ("C-=" . er/expand-region))
 
@@ -147,11 +162,13 @@
  :ensure t
  :defer t
  :after text-mode
+
  :hook text-mode-hook)
 
 (use-package surround
  :ensure t
  :defer t
+
  :bind
  ("M-'" . surround-mark-inner)
  ("M-\"" . surround-insert))
@@ -161,6 +178,7 @@
 (use-package windmove
  :ensure nil
  :defer t
+
  :init
  (windmove-default-keybindings)
  (windmove-delete-default-keybindings))
@@ -168,6 +186,7 @@
 (use-package buffer-move
  :ensure t
  :defer t
+
  :bind
  ("C-x m" . buf-move))
 
@@ -176,6 +195,7 @@
 (use-package files
  :ensure nil
  :defer t
+
  :custom
  (auto-save-default t)
  (backup-inhibited nil)
@@ -189,18 +209,21 @@
 (use-package uniquify
  :ensure nil
  :defer t
+
  :custom
  (uniquify-buffer-name-style 'forward))
 
 (use-package tooltip
  :ensure nil
  :defer t
+
  :custom
  (tooltip-use-echo-area t))
 
 (use-package display-line-numbers
  :ensure nil
  :defer t
+
  :custom
  (display-line-numbers-grow-only t)
  (display-line-numbers-width-start t))
@@ -210,9 +233,11 @@
 (use-package warnings
  :ensure nil
  :defer t
+
  :config
  ;; Suppress certain annoying warnings.
  (add-to-list 'warning-suppress-types 'defvaralias)
+
  :custom
  ;; Stop the warnings buffer from popping up, but still log warnings.
  (warning-minimum-level :emergency))
@@ -222,12 +247,14 @@
 (use-package help
  :ensure nil
  :defer t
+
  :custom
  (help-window-select t))
 
 (use-package help-mode
  :ensure nil
  :defer t
+
  :config
  ;; Recenter after pressing on links to emacs source code.
  (defadvice help-button-action
@@ -240,6 +267,7 @@
 (use-package info
  :ensure nil
  :defer t
+
  :bind
  (:map Info-mode-map ("C-p" . casual-info-tmenu)))
 
@@ -248,22 +276,26 @@
 (use-package emacs
  :ensure nil
  :defer t
+
  :custom
  (delete-by-moving-to-trash t))
 
 (use-package files
  :ensure nil
  :defer t
+
  :config
  (defadvice find-file
   (after recenter-after-find-file activate)
   (recenter))
+
  :custom
  (confirm-kill-processes nil))
 
 (use-package mouse
  :ensure nil
  :defer t
+
  :custom
  (mouse-yank-at-point t)
  (mouse-1-click-follows-link 'double))
@@ -271,15 +303,13 @@
 (use-package simple
  :ensure nil
  :defer t
+
  :config
  ;; Recenter after using goto-line.
  (defadvice goto-line
   (after recenter-after-goto-line activate)
-  (recenter)))
+  (recenter))
 
-(use-package simple
- :ensure nil
- :defer t
  :custom
  ;; Hide commands in M-x that do not work in the current mode
  (read-extended-command-predicate #'command-completion-default-include-p)
@@ -289,11 +319,8 @@
  (backward-delete-char-untabify-method 'hungry)
  ;; Recenter after jump to next error.
  (next-error-recenter '(4))
- (next-error-message-highlight t))
+ (next-error-message-highlight t)
 
-(use-package simple
- :ensure nil
- :defer t
  :preface
  (defun init/keyboard-quit-dwim ()
   "Reasonable keyboard-quit behavior.
@@ -308,6 +335,7 @@
     (delete-completion-window))
    (t
     (keyboard-quit))))
+
  :bind
  (([remap keyboard-quit] . init/keyboard-quit-dwim)))
 
@@ -315,6 +343,7 @@
  :ensure nil
  :defer t
  :after eldoc
+
  :config
  (eldoc-add-command #'init/keyboard-quit-dwim))
 
@@ -322,6 +351,7 @@
  :ensure nil
  :defer t
  :after files
+
  :hook
  (before-save-hook . delete-trailing-whitespace))
 
@@ -336,12 +366,14 @@
 (use-package isearch
  :ensure nil
  :defer t
+
  :bind
  (:map isearch-mode-map ("C-p" . casual-isearch-tmenu)))
 
 (use-package ibuffer
  :ensure nil
  :defer t
+
  :bind
  (:map ibuffer-mode-map
   (("C-p" . casual-ibuffer-tmenu)
@@ -351,6 +383,7 @@
 (use-package re-builder
  :ensure nil
  :defer t
+
  :bind
  (:map reb-mode-map ("C-p" . casual-re-builder-tmenu))
  (:map reb-lisp-mode-map ("C-p" . casual-re-builder-tmenu)))
@@ -358,18 +391,21 @@
 (use-package bookmark
  :ensure nil
  :defer t
+
  :bind
  (:map bookmark-bmenu-mode-map ("C-p" . casual-bookmarks-tmenu)))
 
 (use-package symbol-overlay
  :ensure t
  :defer t
+
  :bind
  (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
 
 (use-package emacs
  :ensure nil
  :defer t
+
  :bind
  ("C-p" . casual-editkit-main-tmenu))
 
@@ -378,6 +414,7 @@
 (use-package emacs
  :ensure nil
  :defer t
+
  :custom
  (scroll-conservatively 104)
  (scroll-margin 1)
@@ -385,6 +422,7 @@
  (hscroll-step 1)
  (auto-hscroll-mode 'current-line)
  (fast-but-imprecise-scrolling t)
+
  :preface
  (defun init/scroll-other-window ()
   "Scroll up the other window in a split frame."
@@ -394,6 +432,7 @@
   "Scroll down the other window in a split frame."
   (interactive)
   (scroll-other-window-down 1))
+
  :bind
  (("C-<f11>" . init/scroll-other-window)
   ("C-<f12>" . init/scroll-other-window-down)))
@@ -401,6 +440,7 @@
 (use-package simple
  :ensure nil
  :defer t
+
  :bind
  ("<mouse-4>" . previous-line)
  ("<mouse-5>" . next-line))
@@ -410,9 +450,11 @@
 (use-package hippie-exp
  :ensure nil
  :defer t
+
  :bind
  ;; Replace dabbrev-expand with hippie-expand
  ([remap dabbrev-expand] . hippie-expand)
+
  :custom
  (hippie-expand-try-functions-list
   '(try-expand-dabbrev-visible
@@ -439,6 +481,7 @@
 (use-package emacs
  :ensure nil
  :defer t
+
  :custom
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))
@@ -466,7 +509,7 @@
  ;; (:map company-mode-map ("<tab>" . company-indent-or-complete-common))
 
  :custom
- (company-idle-delay 0.7)
+ ;; (company-idle-delay 0.7)
  ;; (company-minimum-prefix-length 2)
  (company-keywords-ignore-case t)
  (company-selection-wrap-around t)
@@ -702,8 +745,7 @@
  :defer t
  :after prog-mode
  :hook
- (prog-mode-hook
-  (prog-mode-hook . init/setup-company)))
+ (prog-mode-hook . init/setup-company))
 
 (use-package elec-pair
  :ensure nil
@@ -791,7 +833,7 @@
 
 (use-package ivy-xref
  :ensure t
- :demand t
+ :demand
 
  :custom
  (xref-show-xrefs-function 'ivy-xref-show-xrefs))
@@ -868,8 +910,7 @@
  :defer t
  :after meson-mode
  :hook
- (meson-mode-hook
-  (meson-mode-hook . init/setup-company)))
+ (meson-mode-hook . init/setup-company))
 
 ;;; Version Control
 
@@ -894,9 +935,9 @@
  :defer t
 
  :custom
-  (blamer-idle-time 0)
-  (blamer-commit-formatter ": %s")
-  (blamer-datetime-formatter "%s")
+ ;; (blamer-idle-time 0)
+ (blamer-commit-formatter ": %s")
+ (blamer-datetime-formatter "%s")
  (blamer-max-commit-message-length 60)
 
  :bind
@@ -1442,19 +1483,11 @@
 
  :config
  (push 'orderless-initialism orderless-matching-styles)
- (push 'orderless-prefixes orderless-matching-styles)
-
- ;; :init
- ;; (push 'orderless completion-styles))
- )
+ (push 'orderless-prefixes orderless-matching-styles))
 
 (use-package minibuffer
  :ensure nil
  :defer t
-
- ;; :config
- ;; (push 'substring completion-styles)
- ;; (push 'flex completion-styles)
 
  :custom
  (completion-styles '(orderless basic))
@@ -1692,6 +1725,7 @@
  (c-mark-wrong-style-of-comment t)
  (c-default-style '((other . "user")))
  (c-basic-offset 2)
+ (c-tab-always-indent 'complete)
 
  :preface
  (defun init/cc-setup-comments ()
@@ -1991,22 +2025,6 @@
  :hook
  (rust-mode-hook . (lambda () (electric-quote-local-mode -1))))
 
-(use-package rust-ts-mode
- :ensure nil
- :defer t
-
- :bind
- (:map rust-ts-mode-map
-  ("<f5>" . rust-dbg-wrap-or-unwrap)
-  ("<f6>" . lsp-rust-analyzer-expand-macro)
-  ("<f7>" . lsp-rust-analyzer-join-lines))
-
- :custom
- (rust-ts-mode-indent-offset 2)
-
- :hook
- (rust-ts-mode-hook . (lambda () (electric-quote-local-mode -1))))
-
 (use-package lsp-mode
  :ensure t
  :defer t
@@ -2018,18 +2036,6 @@
  :defer t
  :after rust-mode
  :hook rust-mode-hook)
-
-(use-package lsp-mode
- :ensure t
- :defer t
- :after rust-ts-mode
- :hook (rust-ts-mode-hook . lsp))
-
-(use-package subword
- :ensure nil
- :defer t
- :after rust-ts-mode
- :hook rust-ts-mode-hook)
 
 (use-package lsp-rust
  :ensure lsp-mode
@@ -2045,7 +2051,6 @@
  (lsp-rust-build-bin t)
  (lsp-rust-build-lib t)
  (lsp-rust-clippy-preference "on")
- (lsp-rust-analyzer-server-display-inlay-hints t)
  (lsp-rust-analyzer-display-chaining-hints t)
  (lsp-rust-analyzer-display-parameter-hints t)
  (lsp-rust-analyzer-display-closure-return-type-hints t)
@@ -2065,13 +2070,18 @@
  :defer t
  :diminish "Ls"
 
+ :init
+ ;; Improvements to LSP performance.
+ (setenv "LSP_USE_PLISTS" "true")
+ (setq-default read-process-output-max (* 1024 1024))
+
  :bind
  (:map lsp-mode-map
   ("C-c f" . lsp-format-buffer)
   ("C-c g" . lsp-format-region)
+  ;; ("TAB"   . lsp-format-region)
   ("C-c h" . lsp-describe-thing-at-point)
   ("M-RET" . lsp-execute-code-action)
-  ("TAB"   . lsp-format-region)
   ("<f8>"  . lsp-inlay-hints-mode)
   ([remap er/expand-region] . lsp-extend-selection))
 
@@ -2082,26 +2092,26 @@
  (lsp-progress-prefix "  Progress: ")
  (lsp-completion-show-detail t)
  (lsp-completion-show-kind t)
- (lsp-completion-provider :none)
+ ;; (lsp-completion-provider :none)
  (lsp-headerline-breadcrumb-enable t)
  (lsp-restart 'auto-restart)
  (lsp-enable-snippet t)
  (lsp-keymap-prefix "C-c")
- (lsp-idle-delay 0.9)
+ ;; (lsp-idle-delay 0.9)
  (lsp-file-watch-threshold nil)
  (lsp-enable-semantic-highlighting t)
  (lsp-enable-indentation t)
  (lsp-before-save-edits nil)
  (lsp-auto-configure t)
  (lsp-signature-auto-activate t)
- (lsp-signature-render-documentation nil)
+ ;; (lsp-signature-render-documentation nil)
  (lsp-eldoc-enable-hover t)
- (lsp-eldoc-render-all nil)
+ ;; (lsp-eldoc-render-all nil)
  (lsp-modeline-code-actions-enable nil)
  (lsp-modeline-diagnostics-enable t)
  (lsp-log-io nil)
  (lsp-keep-workspace-alive nil)
- (lsp-enable-imenu nil)
+ ;; (lsp-enable-imenu nil)
  (lsp-use-plists t)
  (lsp-auto-execute-action t))
 
