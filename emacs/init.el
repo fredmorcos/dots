@@ -1700,6 +1700,13 @@
 
 ;;; C and C++ Programming
 
+(use-package files
+ :ensure nil
+ :defer t
+
+ :custom
+ (safe-local-variable-values '((comment-style . multi-line))))
+
 (use-package cc-mode
  :ensure nil
  :defer t
@@ -1712,8 +1719,13 @@
  (c-doc-comment-style
   '((java-mode . javadoc)
     (c-mode    . gtkdoc)
-    (c++-mode  . doxygen)))
+    (c++-mode  . doxygen))))
 
+(use-package editorconfig
+ :ensure t
+ :defer t
+ :diminish "Ec"
+ :after cc-mode
  :hook
  (c-mode-hook . editorconfig-mode))
 
@@ -2042,8 +2054,9 @@
  :defer t
 
  :custom
-  ;; (lsp-rust-analyzer-max-inlay-hint-length 50)
-  ;; (lsp-rust-unstable-features t)
+ ;; (lsp-rust-analyzer-max-inlay-hint-length 50)
+ ;; (lsp-rust-unstable-features t)
+ (lsp-rust-analyzer-cargo-run-build-scripts t)
  (lsp-rust-analyzer-checkonsave-features "all")
  (lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
  (lsp-rust-analyzer-proc-macro-enable t)
@@ -2145,7 +2158,8 @@
 
  :custom
  (lsp-semantic-tokens-apply-modifiers t)
- (lsp-semantic-tokens-enable-multiline-token-support t))
+ (lsp-semantic-tokens-enable-multiline-token-support t)
+ (lsp-semantic-tokens-enable t))
 
 (use-package lsp-ivy
  :ensure t
