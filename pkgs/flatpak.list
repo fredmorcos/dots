@@ -5,7 +5,6 @@ com.github.tchx84.Flatseal
 com.obsproject.Studio
 com.transmissionbt.Transmission
 com.valvesoftware.Steam
-io.qt.QtCreator
 md.obsidian.Obsidian
 org.blender.Blender
 org.gimp.GIMP
@@ -13,5 +12,3 @@ org.gnome.FileRoller
 org.gnome.Papers
 org.libreoffice.LibreOffice
 org.signal.Signal
-org.sqlitebrowser.sqlitebrowser
-org.wireshark.Wireshark
