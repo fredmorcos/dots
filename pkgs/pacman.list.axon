@@ -52,11 +52,13 @@ cargo-binstall
 cargo-bloat
 cargo-bundle-licenses
 cargo-c
+cargo-cache
 cargo-clone
 cargo-crev
 cargo-deny
 cargo-depgraph
 cargo-dist
+cargo-docs-rs
 cargo-edit
 cargo-expand
 cargo-feature
