@@ -105,6 +105,7 @@ compsize
 conntrack-tools
 cpio
 cppcheck
+cppdap
 criu
 cups-pdf
 curlftpfs
@@ -395,6 +396,7 @@ python-brotlicffi
 python-cairosvg
 python-cchardet
 python-cssselect
+python-debugpy
 python-discogs-client
 python-dogpile.cache
 python-ecdsa
