@@ -912,6 +912,35 @@
  :hook
  (meson-mode-hook . init/setup-company))
 
+(use-package dape
+ :ensure t
+ :defer t
+
+ :preface
+ (defun init/save-some-buffers ()
+  "Save some buffers before starting dape."
+  (save-some-buffers t t))
+
+ :hook
+ (kill-emacs-hook . dape-breakpoint-save)
+ (after-init-hook . dape-breakpoint-load)
+ (lsp-mode-hook . dape-breakpoint-global-mode)
+ (dape-start-hook . init/save-some-buffers)
+ (dape-start-hook . dape-info)
+
+ :custom
+ (dape-buffer-window-arrangement 'right)
+ (dape-inlay-hints t)
+ (dape-cwd-fn 'projectile-project-root))
+
+(use-package pulse
+ :ensure nil
+ :defer t
+ :after dape
+
+ :hook
+ (dape-display-source-hook . pulse-momentary-highlight-one-line))
+
 ;;; Version Control
 
 (use-package vc
