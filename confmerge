@@ -152,6 +152,9 @@ cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
 cmerge vimrc                           ~/.config/vim/vimrc
 
+cmerge gdb/gdbinit                     ~/.config/gdb/gdbinit
+cmerge gdb/history                     ~/.config/gdb/history
+
 cmerge dict/hunspell_en_US             ~/.hunspell_en_US
 cmerge dict/aspell.en.pws              ~/.aspell.en.pws
 cmerge dict/en_US.dic                  ~/.config/enchant/en_US.dic

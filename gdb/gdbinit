@@ -1,13 +1,20 @@
 set history save
 set history filename ~/.config/gdb/history
-set print array on
-set print pretty on
-set pagination off
+
+set debuginfod enabled on
 set confirm off
 set breakpoint pending on
+
+set print array on
+set print pretty on
+
+# set pagination off
 # set disable-randomization
-set auto-load safe-path /
-set auto-load local-gdbinit
+
+# This allows our programs to use a current directory initialization file, i.e. you can
+# create a .gdbinit for each project you’re debugging.
+# set auto-load safe-path /
+# set auto-load local-gdbinit
 
 # INTERACTIVE SETTINGS AND COMMANDS
 
@@ -28,10 +35,9 @@ set auto-load local-gdbinit
 # add-inferior <name>
 # clone-inferior
 
-# This can help with debugging  multi-threaded programs. When a thread
-# is  stopped  by a  breakpoint,  this  will  allow other  threads  to
-# continue. Use "break <func-name>" to break a specific thread and use
-# "continue -a" to continue all threads.
+# This can help with debugging multi-threaded programs. When a thread is stopped by a
+# breakpoint, this will allow other threads to continue. Use "break <func-name>" to break
+# a specific thread and use "continue -a" to continue all threads.
 
 # set non-stop on
 # continue -a
