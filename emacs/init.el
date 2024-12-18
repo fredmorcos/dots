@@ -2,6 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
+;;; Quality of Life
+
+(use-package qol
+ :ensure nil
+ :defer t
+ :load-path "/home/fred/Workspace/dots/emacs/"
+ :commands qol/select-package qol/append qol/remove)
+
 ;;; No Littering
 
 (use-package no-littering
@@ -12,6 +20,9 @@
  no-littering-expand-etc-file-name
  no-littering-expand-var-file-name
 
+ :init
+ (qol/select-package 'no-littering)
+
  :config
  (no-littering-theme-backups))
 
@@ -19,7 +30,10 @@
 
 (use-package diminish
  :ensure t
- :defer t)
+ :defer t
+
+ :init
+ (qol/select-package 'diminish))
 
 ;;; Functions
 
@@ -78,11 +92,15 @@
  :defer t
 
  :init
+ (qol/select-package 'move-text)
  (move-text-default-bindings))
 
 (use-package mwim
  :ensure t
  :defer t
+
+ :init
+ (qol/select-package 'mwim)
 
  :bind
  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
@@ -105,6 +123,9 @@
 (use-package unfill
  :ensure t
  :defer t
+
+ :init
+ (qol/select-package 'unfill)
 
  :bind
  ([remap fill-paragraph] . unfill-toggle))
@@ -155,6 +176,9 @@
  :ensure t
  :defer t
 
+ :init
+ (qol/select-package 'expand-region)
+
  :bind
  ("C-=" . er/expand-region))
 
@@ -163,11 +187,17 @@
  :defer t
  :after text-mode
 
+ :init
+ (qol/select-package 'jinx)
+
  :hook text-mode-hook)
 
 (use-package surround
  :ensure t
  :defer t
+
+ :init
+ (qol/select-package 'surround)
 
  :bind
  ("M-'" . surround-mark-inner)
@@ -186,6 +216,9 @@
 (use-package buffer-move
  :ensure t
  :defer t
+
+ :init
+ (qol/select-package 'buffer-move)
 
  :bind
  ("C-x m" . buf-move))
@@ -320,6 +353,7 @@
  ;; Recenter after jump to next error.
  (next-error-recenter '(4))
  (next-error-message-highlight t)
+ (completion-auto-select 'second-tab)
 
  :preface
  (defun init/keyboard-quit-dwim ()
@@ -357,11 +391,17 @@
 
 (use-package nerd-icons
  :ensure t
- :defer t)
+ :defer t
+
+ :init
+ (qol/select-package 'nerd-icons))
 
 (use-package casual-suite
  :ensure t
- :defer t)
+ :defer t
+
+ :init
+ (qol/select-package 'casual-suite))
 
 (use-package isearch
  :ensure nil
@@ -398,6 +438,9 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
+
+ :init
+ (qol/select-package 'symbol-overlay)
 
  :bind
  (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
@@ -492,6 +535,9 @@
  :diminish "Co"
  :commands company--active-p
 
+ :init
+ (qol/select-package 'company)
+
  :preface
  (defun init/setup-company (&optional main-backends secondary-backends)
   "Setup company completion system with common backends."
@@ -524,6 +570,13 @@
  :after company
  :hook company-mode-hook
 
+ :init
+ (qol/select-package 'company-posframe)
+
+ :config
+ (qol/append company-posframe-show-params :border-width 1)
+ (qol/append company-posframe-quickhelp-show-params :border-width 1)
+
  :custom
  (company-posframe-quickhelp-x-offset 2))
 
@@ -531,13 +584,19 @@
  :ensure t
  :defer t
  :after company
- :hook company-mode-hook)
+ :hook company-mode-hook
+
+ :init
+ (qol/select-package 'company-prescient))
 
 ;;; Syntax Checking
 
 (use-package flycheck
  :ensure t
  :defer t
+
+ :init
+ (qol/select-package 'flycheck)
 
  :commands
  (flycheck-next-error
@@ -573,6 +632,9 @@
  :ensure t
  :defer t
 
+ :init
+ (qol/select-package 'flycheck-posframe)
+
  :custom
  (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
  (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
@@ -584,22 +646,33 @@
  :ensure t
  :defer t
  :after flycheck
- :hook flycheck-mode-hook)
+ :hook flycheck-mode-hook
+
+ :init
+ (qol/select-package 'flycheck-posframe))
 
 (use-package company
  :ensure t
  :defer t
  :after flycheck-posframe
 
- :config
- (add-hook 'flycheck-posframe-inhibit-functions #'company--active-p)
- (add-hook 'flycheck-posframe-inhibit-functions
-  (lambda (&rest _) (bound-and-true-p company-backend))))
+ :init
+ (qol/select-package 'company)
+
+ :preface
+ (defun init/company-is-active (&rest _)
+  (or (company--active-p) (bound-and-true-p company-backend)))
+
+ :hook
+ (flycheck-posframe-inhibit-functions . init/company-is-active))
 
 (use-package consult-flycheck
  :ensure t
  :defer t
  :after flycheck
+
+ :init
+ (qol/select-package 'consult-flycheck)
 
  :bind
  (:map flycheck-mode-map
@@ -714,7 +787,10 @@
  :ensure t
  :defer t
  :after prog-mode
- :hook prog-mode-hook)
+ :hook prog-mode-hook
+
+ :init
+ (qol/select-package 'diff-hl))
 
 (use-package eldoc
  :ensure nil
@@ -732,20 +808,29 @@
  :ensure t
  :defer t
  :after prog-mode
- :hook prog-mode-hook)
+ :hook prog-mode-hook
+
+ :init
+ (qol/select-package 'flycheck))
 
 (use-package yasnippet
  :ensure t
  :defer t
  :after prog-mode
- :hook (prog-mode-hook . yas-minor-mode-on))
+ :hook (prog-mode-hook . yas-minor-mode-on)
+
+ :init
+ (qol/select-package 'yasnippet))
 
 (use-package company
  :ensure t
  :defer t
  :after prog-mode
  :hook
- (prog-mode-hook . init/setup-company))
+ (prog-mode-hook . init/setup-company)
+
+ :init
+ (qol/select-package 'company))
 
 (use-package elec-pair
  :ensure nil
@@ -781,7 +866,10 @@
  :ensure t
  :defer t
  :after prog-mode
- :hook prog-mode-hook)
+ :hook prog-mode-hook
+
+ :init
+ (qol/select-package 'jinx))
 
 (use-package whitespace
  :ensure nil
@@ -794,27 +882,42 @@
  :defer t
  :after prog-mode
 
+ :init
+ (qol/select-package 'deadgrep)
+
  :bind
  (:map prog-mode-map ("M-F" . deadgrep)))
 
 (use-package wgrep
  :ensure t
- :defer t)
+ :defer t
+
+ :init
+ (qol/select-package 'wgrep))
 
 (use-package wgrep-deadgrep
  :ensure t
  :defer t
- :after deadgrep)
+ :after deadgrep
+
+ :init
+ (qol/select-package 'wgrep-deadgrep))
 
 (use-package sideline
  :ensure t
  :defer t
- :diminish "Si")
+ :diminish "Si"
+
+ :init
+ (qol/select-package 'sideline))
 
 (use-package sideline-blame
  :ensure t
  :defer t
  :after sideline
+
+ :init
+ (qol/select-package 'sideline-blame)
 
  :custom
  (sideline-backends-right '(sideline-blame))
@@ -835,13 +938,19 @@
  :ensure t
  :demand
 
+ :init
+ (qol/select-package 'ivy-xref)
+
  :custom
  (xref-show-xrefs-function 'ivy-xref-show-xrefs))
 
 (use-package editorconfig
  :ensure t
  :defer t
- :diminish "Ec")
+ :diminish "Ec"
+
+ :init
+ (qol/select-package 'editorconfig))
 
 ;;; Configuration Files
 
@@ -911,35 +1020,6 @@
  :after meson-mode
  :hook
  (meson-mode-hook . init/setup-company))
-
-(use-package dape
- :ensure t
- :defer t
-
- :preface
- (defun init/save-some-buffers ()
-  "Save some buffers before starting dape."
-  (save-some-buffers t t))
-
- :hook
- (kill-emacs-hook . dape-breakpoint-save)
- (after-init-hook . dape-breakpoint-load)
- (lsp-mode-hook . dape-breakpoint-global-mode)
- (dape-start-hook . init/save-some-buffers)
- (dape-start-hook . dape-info)
-
- :custom
- (dape-buffer-window-arrangement 'right)
- (dape-inlay-hints t)
- (dape-cwd-fn 'projectile-project-root))
-
-(use-package pulse
- :ensure nil
- :defer t
- :after dape
-
- :hook
- (dape-display-source-hook . pulse-momentary-highlight-one-line))
 
 ;;; Version Control
 
@@ -1474,6 +1554,7 @@
 (use-package hotfuzz
  :ensure t
  :defer t
+ :after minibuffer
 
  :init
  (push 'hotfuzz completion-styles))
@@ -1490,14 +1571,19 @@
  (push 'prefix prescient-filter-method)
  (push 'anchored prescient-filter-method)
 
- :init
- (push 'prescient completion-styles)
-
  :commands
  prescient-persist-mode
 
  :init
  (prescient-persist-mode))
+
+(use-package prescient
+ :ensure t
+ :defer t
+ :after minibuffer
+
+ :init
+ (push 'prescient completion-styles))
 
 (use-package ivy-prescient
  :ensure t
@@ -1514,12 +1600,23 @@
  (push 'orderless-initialism orderless-matching-styles)
  (push 'orderless-prefixes orderless-matching-styles))
 
+(use-package orderless
+ :ensure t
+ :defer t
+ :after minibuffer
+
+ :init
+ (push 'orderless completion-styles))
+
 (use-package minibuffer
  :ensure nil
  :defer t
 
+ :config
+ (qol/remove completion-styles 'emacs22)
+ (qol/remove completion-styles 'partial-completion)
+
  :custom
- (completion-styles '(orderless basic))
  (completion-category-defaults nil)
  (completion-category-overrides nil)
  (minibuffer-electric-default-mode t)
@@ -1639,6 +1736,13 @@
 
 ;;; Debuggers
 
+(use-package debug
+ :ensure nil
+ :defer t
+
+ :bind
+ (:map debugger-mode-map ("C-g" . debugger-quit)))
+
 (use-package gdb-mi
  :ensure nil
  :defer t
@@ -1660,6 +1764,35 @@
 
  :custom
  (gdb-restore-window-configuration-after-quit t))
+
+(use-package dape
+ :ensure t
+ :defer t
+
+ :preface
+ (defun init/save-some-buffers ()
+  "Save some buffers before starting dape."
+  (save-some-buffers t t))
+
+ :hook
+ (kill-emacs-hook . dape-breakpoint-save)
+ (after-init-hook . dape-breakpoint-load)
+ (lsp-mode-hook . dape-breakpoint-global-mode)
+ (dape-start-hook . init/save-some-buffers)
+ (dape-start-hook . dape-info)
+
+ :custom
+ (dape-buffer-window-arrangement 'right)
+ (dape-inlay-hints t)
+ (dape-cwd-fn 'projectile-project-root))
+
+(use-package pulse
+ :ensure nil
+ :defer t
+ :after dape
+
+ :hook
+ (dape-display-source-hook . pulse-momentary-highlight-one-line))
 
 ;;; YAML
 
