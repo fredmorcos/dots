@@ -403,18 +403,6 @@
  :init
  (qol/select-package 'casual-suite))
 
-(use-package visual-replace
- :ensure t
- :defer t
-
- :init
- (qol/select-package 'visual-replace)
-
- :bind
- ("M-%" . visual-replace-thing-at-point)
- ("M-^" . visual-replace-selected)
- ("M-*" . visual-replace))
-
 (use-package isearch
  :ensure nil
  :defer t
@@ -1556,28 +1544,21 @@
  :init
  (counsel-mode))
 
-(use-package emacs
- :ensure nil
- :defer t
-
- :bind
- (:map minibuffer-local-map
-  ("M-A" . marginalia-cycle)))
-
-(use-package simple
- :ensure nil
- :defer t
-
- :bind
- (:map completion-list-mode-map
-  ("M-A" . marginalia-cycle)))
-
 (use-package marginalia
  :ensure t
  :defer t
 
- :config
- (nerd-icons-completion-marginalia-setup)
+ :bind
+ (:map minibuffer-local-map
+  ("M-A" . marginalia-cycle))
+ (:map completion-list-mode-map
+  ("M-A" . marginalia-cycle))
+
+ :custom
+ (marginalia-field-width 10)
+
+ :hook
+ (marginalia-mode-hook . nerd-icons-completion-marginalia-setup)
 
  :init
  (marginalia-mode))
@@ -1639,19 +1620,13 @@
  :init
  (push 'orderless completion-styles))
 
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- (enable-recursive-minibuffers t))
-
 (use-package minibuffer
  :ensure nil
  :defer t
 
  :config
  (qol/remove completion-styles 'emacs22)
+ (qol/remove completion-styles 'partial-completion)
 
  :custom
  (completion-category-defaults nil)
