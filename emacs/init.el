@@ -1806,22 +1806,19 @@
  :ensure t
  :defer t
 
- :preface
- (defun init/save-some-buffers ()
-  "Save some buffers before starting dape."
-  (save-some-buffers t t))
-
  :hook
  (kill-emacs-hook . dape-breakpoint-save)
- (after-init-hook . dape-breakpoint-load)
+ (dape-breakpoint-global-mode-hook . dape-breakpoint-load)
  (lsp-mode-hook . dape-breakpoint-global-mode)
- (dape-start-hook . init/save-some-buffers)
+ (dape-start-hook . save-some-buffers)
  (dape-start-hook . dape-info)
 
  :custom
  (dape-buffer-window-arrangement 'right)
  (dape-inlay-hints t)
- (dape-cwd-fn 'projectile-project-root))
+ (dape-cwd-fn 'projectile-project-root)
+ (dape-default-breakpoints-file
+  (no-littering-expand-var-file-name "dape-breakpoints")))
 
 (use-package pulse
  :ensure nil
@@ -2023,7 +2020,10 @@
  (projectile-sort-order 'recently-active)
  (projectile-indexing-method 'hybrid)
  (projectile-enable-caching nil)
- (projectile-require-project-root nil))
+ (projectile-require-project-root nil)
+
+ :init
+ (projectile-mode))
 
 (use-package counsel-projectile
  :ensure t
@@ -2039,7 +2039,8 @@
 
 (use-package treemacs-projectile
  :ensure t
- :defer t)
+ :defer t
+ :after (treemacs projectile))
 
 ;;; Snippets
 
@@ -2549,11 +2550,6 @@
 
  :hook
  (lsp-mode-hook . lsp-treemacs-sync-mode))
-
-(use-package treemacs-projectile
- :ensure t
- :defer t
- :after (treemacs projectile))
 
 (use-package treemacs-magit
  :ensure t
