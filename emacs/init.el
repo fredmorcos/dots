@@ -1812,6 +1812,7 @@
  (lsp-mode-hook . dape-breakpoint-global-mode)
  (dape-start-hook . save-some-buffers)
  (dape-start-hook . dape-info)
+ (dape-display-source-hook . pulse-momentary-highlight-one-line)
 
  :custom
  (dape-buffer-window-arrangement 'right)
@@ -1819,14 +1820,6 @@
  (dape-cwd-fn 'projectile-project-root)
  (dape-default-breakpoints-file
   (no-littering-expand-var-file-name "dape-breakpoints")))
-
-(use-package pulse
- :ensure nil
- :defer t
- :after dape
-
- :hook
- (dape-display-source-hook . pulse-momentary-highlight-one-line))
 
 ;;; YAML
 
