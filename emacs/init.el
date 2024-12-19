@@ -2516,15 +2516,19 @@
 
  :preface
  (defun init/lsp-treemacs-call-hierarchy ()
+  "Show the outgoing call hierarchy of symbol at point."
   (interactive)
   (lsp-treemacs-call-hierarchy t))
  (defun init/lsp-treemacs-implementations ()
+  "Show the implementations for the symbol at point and auto-select the window."
   (interactive)
   (lsp-treemacs-implementations t))
  (defun init/lsp-treemacs-references ()
+  "Show the references for the symbol at point and auto-select the window."
   (interactive)
   (lsp-treemacs-references t))
  (defun init/lsp-treemacs-type-hierarchy ()
+  "Show the full type hierarchy for the symbol at point."
   (interactive)
   (lsp-treemacs-type-hierarchy 2))
 
