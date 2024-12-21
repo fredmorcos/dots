@@ -78,5 +78,19 @@
   (eval-when-compile (defvar package-selected-packages))
   (qol/append package-selected-packages package)))
 
+(defun qol/get-trimmed-line-string ()
+ "Get the current line as a string."
+ (save-excursion
+  (string-trim
+   (buffer-substring-no-properties
+    (line-beginning-position)
+    (line-end-position)))))
+
+(defun qol/string-starts-with (text char)
+ "Check if CHAR is at the beginning of TEXT."
+ (when (not (stringp text))
+  (error "TEXT should be a string"))
+ (= (aref text 0) char))
+
 (provide 'qol)
 ;;; qol.el ends here

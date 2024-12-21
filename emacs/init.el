@@ -8,7 +8,13 @@
  :ensure nil
  :defer t
  :load-path "/home/fred/Workspace/dots/emacs/"
- :commands qol/select-package qol/append qol/remove)
+ :commands
+ qol/select-package
+ qol/generate-password
+ qol/append
+ qol/remove
+ qol/get-trimmed-line-string
+ qol/string-starts-with)
 
 ;;; No Littering
 
@@ -61,7 +67,6 @@
  :ensure nil
  :defer t
  :load-path "/home/fred/Workspace/dots/emacs/"
- :commands qol/generate-password
 
  :bind
  (("C-x j"    . qol/insert-buffer-name)
@@ -2074,6 +2079,43 @@
  :ensure t
  :defer t
  :mode ("\\.journal\\'" "\\.ledger\\'")
+
+ :preface
+ (defun init/move-amount-to-column ()
+  "Move the amount or the point to the valid column."
+  (interactive)
+  (let ((amount-marker (concat " " hledger-currency-string " ")))
+   (end-of-line)
+   (when (search-backward amount-marker (pos-bol) t)
+    (right-char))
+   (kill-region (point) (pos-eol))
+   (let ((difference (- (current-column) 64)))
+    (if (> difference 0)
+     (progn
+      (left-char difference)
+      (yank))
+     (progn
+      (insert-char ?\s (abs difference))
+      (yank))))))
+
+ (defun init/find-next-unaligned ()
+  "Find the next unaligned amount in a non-comment line."
+  (interactive)
+  (let ((amount-marker (concat " " hledger-currency-string " ")))
+   (when (search-forward amount-marker)
+    (left-char (- (length amount-marker) 1))
+    (if (or
+         (= (current-column) 64)
+         (qol/string-starts-with (qol/get-trimmed-line-string) ?\;))
+     (init/find-next-unaligned)))))
+
+ (defun init/align-next-unaligned ()
+  "Aligned the next unaligned amount."
+  (init/find-next-unaligned)
+  (init/move-amount-to-column))
+
+ :bind
+ (:map hledger-mode-map ("C-c >" . init/move-amount-to-column))
 
  :custom
  (hledger-currency-string "EUR")

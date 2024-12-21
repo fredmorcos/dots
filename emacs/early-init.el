@@ -191,6 +191,13 @@
  :defer t
 
  :custom
+ (max-lisp-eval-depth 10000))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :custom
  ;; This slows down normal operation.
  (auto-window-vscroll nil))
 
