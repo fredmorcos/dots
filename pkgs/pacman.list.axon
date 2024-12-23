@@ -1,3 +1,4 @@
+7zip
 acpid
 afl++
 alsa-firmware
@@ -266,7 +267,6 @@ libebur128
 libfaketime
 libgnome-keyring
 liblouis
-libmad
 libmp4v2
 libmythes
 libnfs
@@ -349,7 +349,6 @@ optipng
 ostra-cg
 otf-libertinus
 oxipng
-p7zip
 paccat
 pacman-contrib
 pacrunner
@@ -391,6 +390,7 @@ pyalpm
 python-aafigure
 python-aiodns
 python-arrow
+python-audioread
 python-awesomeversion
 python-babel
 python-beaker
@@ -418,6 +418,7 @@ python-husl
 python-invoke
 python-keyrings-alt
 python-keystone
+python-linkify-it-py
 python-lsp-black
 python-lz4
 python-mdx-video
@@ -442,6 +443,7 @@ python-pygithub
 python-pyinotify
 python-pylast
 python-pylint
+python-pymad
 python-pypng
 python-pyserial
 python-pystemmer
