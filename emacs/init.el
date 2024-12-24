@@ -1704,13 +1704,23 @@
 
 (use-package multiple-cursors
  :ensure t
+ :defer t)
+
+(use-package mc-edit-lines
+ :ensure multiple-cursors
  :defer t
 
  :bind
- ("C-c C-v"       . mc/edit-lines)
+ ("C-c C-v"       . mc/edit-lines))
+
+(use-package mc-mark-more
+ :ensure multiple-cursors
+ :defer t
+
+ :bind
  ("C->"           . mc/mark-next-like-this)
  ("C-<"           . mc/mark-previous-like-this)
- ("C-S-<mouse-1>" . mc/add-cursor-on-click))
+ ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
 
 (use-package multiple-cursors-core
  :ensure nil
