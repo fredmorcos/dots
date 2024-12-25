@@ -1,0 +1,256 @@
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+n
+n
+p tag
+p ID_SEQUENCE
+n
+p ret
+n
+p r
+n
+n
+q
+tui enable
+break main
+r
+n
+s
+bt
+n
+n
+s
+c
+c
+quit
+break main
+r
+tui enable
+n
+restart
+stop
+r
+n
+p bind2loader
+q
+break main
+tui enable
+r
+n
+q
+q
+break main
+break Bind2Loader::Bind2Loader()
+break Bind2Loader::Bind2Loader
+tui enable
+r
+n
+p bind2loader
+q
+break main
+tui enable
+r
+n
+p bind2loader 
+q
+run
+tui enable
+bt
+q
+catch throw 
+r
+tui enable
+bt
+q
+tui enable
+break main
+r
+n
+c
+r
+n
+n
+q
+break main
+tui enable
+r
+q
+break RemoteBackend::getUpdatedPrimaries
+r
+tui enable
+n
+s
+s
+c
+r
+tui enable
+n
+n
+c
+r
+b
+info break
+delete 2
+delete 3
+info breakpoints 
+b
+delete 4
+info brek
+info breakpoints 
+n
+q
+break HTTPConnector::send_message
+break RemoteBackend::getUpdatedPrimaries
+r
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+tui enable
+c
+p input
+p *input
+n
+cout << req
+p req
+n
+n
+n
+n
+bt
+n
+c
+info breakpoints 
+delete 1
+delete 2
+break RemoteBackend::getUpdatedPrimaries
+r
+n
+break RemoteBackend::recv
+r
+s
+n
+s
+n
+p retval
+n
+n
+bt
+n
+n
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+c
+delete 1
+info breakpoints 
+delete 4
+break RemoteBackend::getUpdatedPrimaries
+info brek
+info breakpoints 
+delete 3
+c
+break RemoteBackend::recv
+c
+s
+n
+s
+n
+p ex.what()
+p ex.reason 
+q
+q
+break RemoteBackend::getUpdatedPrimaries
+r
+tui enable
+break RemoteBackend::recv
+r
+s
+n
+s
+n
+q
+break RemoteBackend::getUpdatedPrimaries
+tui enable
+r
+n
+q
