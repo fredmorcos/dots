@@ -1587,6 +1587,18 @@
  :init
  (marginalia-mode))
 
+(use-package embark
+ :ensure t
+ :defer t
+
+ :bind
+ ("C-." . embark-act)
+ ("C-;" . embark-dwim)
+ ("C-h B" . embark-bindings)
+
+ :init
+ (setq prefix-help-command #'embark-prefix-help-command))
+
 (use-package hotfuzz
  :ensure t
  :defer t
@@ -1594,6 +1606,22 @@
 
  :init
  (push 'hotfuzz completion-styles))
+
+(use-package orderless
+ :ensure t
+ :defer t
+
+ :config
+ (push 'orderless-initialism orderless-matching-styles)
+ (push 'orderless-prefixes orderless-matching-styles))
+
+(use-package orderless
+ :ensure t
+ :defer t
+ :after minibuffer
+
+ :init
+ (push 'orderless completion-styles))
 
 (use-package prescient
  :ensure t
@@ -1627,22 +1655,6 @@
 
  :init
  (ivy-prescient-mode))
-
-(use-package orderless
- :ensure t
- :defer t
-
- :config
- (push 'orderless-initialism orderless-matching-styles)
- (push 'orderless-prefixes orderless-matching-styles))
-
-(use-package orderless
- :ensure t
- :defer t
- :after minibuffer
-
- :init
- (push 'orderless completion-styles))
 
 (use-package emacs
  :ensure nil
