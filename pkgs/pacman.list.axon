@@ -280,6 +280,7 @@ libsidplayfp
 libultrahdr
 libupnp
 libva-intel-driver
+libvarlink
 libva-utils
 libvdpau-va-gl
 libvirt
