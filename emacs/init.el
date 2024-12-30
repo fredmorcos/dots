@@ -408,6 +408,13 @@
  :init
  (qol/select-package 'casual-suite))
 
+(use-package casual-symbol-overlay
+ :ensure casual-suite
+ :defer t
+
+ :config
+ (symbol-overlay-mc-insert-into-casual-tmenu))
+
 (use-package visual-replace
  :ensure t
  :defer t
@@ -461,6 +468,16 @@
 
  :bind
  (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
+
+(use-package symbol-overlay-mc
+ :ensure t
+ :defer t
+
+ :init
+ (qol/select-package 'symbol-overlay-mc)
+
+ :bind
+ (:map symbol-overlay-map ("M-a" . symbol-overlay-mc-mark-all)))
 
 (use-package emacs
  :ensure nil
@@ -1155,7 +1172,7 @@
  :diminish "So"
 
  :bind
- (:map symbol-overlay-mode-map
+ (:map symbol-overlay-map
   ("M->" . symbol-overlay-jump-next)
   ("M-<" . symbol-overlay-jump-prev))
 
