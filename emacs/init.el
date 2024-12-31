@@ -4,6 +4,11 @@
 
 ;;; Quality of Life
 
+(use-package mode-local
+ :ensure nil
+ :defer t
+ :commands setq-mode-local)
+
 (use-package qol
  :ensure nil
  :defer t
@@ -287,7 +292,8 @@
  :defer t
 
  :custom
- (help-window-select t))
+ (help-window-select t)
+ (help-window-keep-selected t))
 
 (use-package help-mode
  :ensure nil
@@ -792,6 +798,33 @@
 
 ;;; General Programming
 
+(use-package devdocs
+ :ensure t
+ :defer t
+
+ :bind
+ ("C-h D" . devdocs-lookup)
+
+ :preface
+ (defmacro init/devdocs-set (mode doc)
+  `(setq-mode-local ,mode devdocs-current-docs '(,doc)))
+
+ :config
+ (init/devdocs-set python-mode "python~3.13")
+ (init/devdocs-set python-ts-mode "python~3.13")
+ (init/devdocs-set rust-mode "rust")
+ (init/devdocs-set c-mode "c")
+ (init/devdocs-set dockerfile-mode "docker")
+ (init/devdocs-set emacs-lisp-mode "elisp")
+ (init/devdocs-set makefile-mode "gnu_make"))
+
+(use-package elec-pair
+ :ensure nil
+ :defer t
+
+ :custom
+ (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
+
 (use-package eldoc
  :ensure nil
  :defer t
@@ -1165,6 +1198,13 @@
  (dired-mode-hook . diff-hl-dired-mode))
 
 ;;; General Features
+
+(use-package speedrect
+ :ensure t
+ :defer t
+
+ :init
+ (speedrect-mode))
 
 (use-package symbol-overlay
  :ensure t
@@ -1646,6 +1686,7 @@
 
  :custom
  (prescient-sort-full-matches-first t)
+ (completions-sort #'prescient-completion-sort)
 
  :config
  (push 'literal-prefix prescient-filter-method)
@@ -1664,7 +1705,32 @@
  :after minibuffer
 
  :init
- (push 'prescient completion-styles))
+ (push 'prescient completion-styles)
+
+ :custom
+ (completions-sort #'prescient-completion-sort)
+
+ :preface
+ (defun init/prescient-remember-minibuffer-contents ()
+  "Remember minibuffer contents as a completion candidate.
+
+    - If we are not completing a file name (according to
+      `minibuffer-completing-file-name'), we remember the
+      minibuffer contents.
+
+    - When completing file names, we remember the last component,
+      including a trailing directory separator if needed."
+  (let ((txt (minibuffer-contents-no-properties)))
+   (unless (string-empty-p txt)
+    (prescient-remember
+     (if minibuffer-completing-file-name
+      (if (directory-name-p txt)
+       (thread-first txt file-name-split (last 2) car file-name-as-directory)
+       (thread-first txt file-name-split last car))
+      txt)))))
+
+ :hook
+ (minibuffer-exit-hook . init/prescient-remember-minibuffer-contents))
 
 (use-package ivy-prescient
  :ensure t
@@ -1686,13 +1752,14 @@
 
  :config
  (qol/remove completion-styles 'emacs22)
+ ;; (qol/remove completion-styles 'basic)
+ ;; (qol/remove completion-styles 'partial-completion)
 
  :custom
  (completion-category-defaults nil)
  (completion-category-overrides nil)
  (minibuffer-electric-default-mode t)
  (minibuffer-message-clear-timeout 4)
- (completions-sort #'prescient-sort)
  (completions-max-height 20)
  (read-file-name-completion-ignore-case t)
  (completions-format 'one-column)
@@ -2026,14 +2093,9 @@
  :ensure nil
  :defer t
 
- :preface
- (defun init/python-setup-fill-column ()
-  "Set fill column in python-mode."
-  (setq-local fill-column 79))
-
- :hook
- (python-mode-hook . init/python-setup-fill-column)
- (python-ts-mode-hook . init/python-setup-fill-column))
+ :config
+ (setq-mode-local python-mode fill-column 79)
+ (setq-mode-local python-ts-mode fill-column 79))
 
 (use-package lsp-mode
  :ensure t
