@@ -143,7 +143,6 @@ FIREFOX_PROFILE=$(
 printf 'Default Firefox Profile = %s\n' "$FIREFOX_PROFILE"
 
 cmerge firefox/user.js                 ~/.mozilla/firefox/"$FIREFOX_PROFILE"/user.js
-cmerge firefox/chrome.css              ~/.mozilla/firefox/"$FIREFOX_PROFILE"/chrome/userChrome.css
 
 cmerge gnome/bookmarks                 ~/.config/gtk-3.0/bookmarks
 
