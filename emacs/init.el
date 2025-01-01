@@ -1651,10 +1651,14 @@
  :bind
  ("C-." . embark-act)
  ("C-;" . embark-dwim)
+ ("C-x B" . embark-become)
  ("C-h B" . embark-bindings)
 
- :init
- (setq prefix-help-command #'embark-prefix-help-command))
+ :custom
+ (prefix-help-command #'embark-prefix-help-command)
+ (embark-prompter #'embark-completing-read-prompter)
+ (embark-mixed-indicator-both t)
+ (embark-mixed-indicator-delay 0))
 
 (use-package hotfuzz
  :ensure t
