@@ -10,18 +10,32 @@ export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 # [[ -r "/etc/profile.d/vte.sh" ]] && source /etc/profile.d/vte.sh
 # [[ -r "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
 
-tv-widget() {
-  local res
-  res="$(tv)"
-  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$res${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT=$(( READLINE_POINT + ${#res} ))
+function tv-widget() {
+  local current_prompt
+  local output
+  current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
+  output=$(tv --input "$current_prompt")
+
+  if [[ -n $output ]]; then
+    # add a space if the prompt does not end with one
+    [[ "${current_prompt}" != *" " ]] && current_prompt="${current_prompt} "
+
+    READLINE_LINE=$current_prompt$output
+    READLINE_POINT=${#READLINE_LINE}
+  fi
 }
 
-tv-history() {
-  local res
-  res="$(tv < ~/.local/state/bash/bash_history)"
-  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$res${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT=$(( READLINE_POINT + ${#res} ))
+function tv-history() {
+  local current_prompt
+  local output
+  current_prompt="${READLINE_LINE:0:$READLINE_POINT}"
+  # output=$(tv bash-history --input "$current_prompt")
+  output=$(tac "$XDG_STATE_HOME/bash/bash_history" | tv --input "$current_prompt")
+
+  if [[ -n $output ]]; then
+    READLINE_LINE=$output
+    READLINE_POINT=${#READLINE_LINE}
+  fi
 }
 
 bind -m emacs-standard -x '"\C-t": tv-widget'
