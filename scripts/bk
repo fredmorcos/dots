@@ -35,145 +35,95 @@ HOSTNAME=$(hostnamectl hostname)
 printf ">>> Hostname = %s\n\n" "$HOSTNAME"
 
 HOME='/home/fred'
-INTERNAL_DATA='/run/media/fred/Internal'
-INTERNAL_MEDIA='/run/media/fred/InternalMedia'
-EXTERNAL_DATA='/run/media/fred/External Data'
-PORTABLE_DATA='/run/media/fred/Portable Data'
-PORTABLE_OX='/run/media/fred/Portable OX'
+DATA='/run/media/fred/Data'
+MEDIA='/run/media/fred/Media'
+PORTABLE='/run/media/fred/Portable'
+OX='/run/media/fred/OX'
+
+backup_home() {
+  cmd "$HOME/Archive/"                  "$1/Fred/Archive/"
+  cmd "$HOME/Documents/"                "$1/Fred/Documents/"
+  cmd "$HOME/Downloads/"                "$1/Fred/Downloads/"
+  cmd "$HOME/Music/"                    "$1/Fred/Music/"
+  cmd "$HOME/Music.New/"                "$1/Fred/Music.New/"
+  cmd "$HOME/Phone/"                    "$1/Fred/Phone/"
+  cmd "$HOME/Pictures/"                 "$1/Fred/Pictures/"
+  cmd "$HOME/Public/"                   "$1/Fred/Public/"
+  cmd "$HOME/Videos/"                   "$1/Fred/Videos/"
+  cmd "$HOME/Workspace/"                "$1/Fred/Workspace/"
+
+  cmd "$HOME/.ssh/"                     "$1/Fred/Configs/ssh/"
+  cmd "$HOME/.config/beets/"            "$1/Fred/Configs/config-beets/"
+  cmd "$HOME/.config/MusicBrainz/"      "$1/Fred/Configs/config-MusicBrainz/"
+  cmd "$HOME/.config/yt-dlp/"           "$1/Fred/Configs/config-yt-dlp/"
+  cmd "$HOME/.local/share/gnupg/"       "$1/Fred/Configs/local-share-gnupg/"
+  cmd "$HOME/.local/share/keyrings/"    "$1/Fred/Configs/local-share-keyrings/"
+}
 
 if [ "$HOSTNAME" == "axon" ]; then
-  if [ -d "$INTERNAL_DATA" ]; then
-    cmd "$HOME/Archive/"                  "$INTERNAL_DATA/Fred/Archive/"
-    cmd "$HOME/Documents/"                "$INTERNAL_DATA/Fred/Documents/"
-    cmd "$HOME/Downloads/"                "$INTERNAL_DATA/Fred/Downloads/"
-    cmd "$HOME/Music/"                    "$INTERNAL_DATA/Fred/Music/"
-    cmd "$HOME/Music.New/"                "$INTERNAL_DATA/Fred/Music.New/"
-    cmd "$HOME/Phone/"                    "$INTERNAL_DATA/Fred/Phone/"
-    cmd "$HOME/Pictures/"                 "$INTERNAL_DATA/Fred/Pictures/"
-    cmd "$HOME/Public/"                   "$INTERNAL_DATA/Fred/Public/"
-    cmd "$HOME/Videos/"                   "$INTERNAL_DATA/Fred/Videos/"
-    cmd "$HOME/Workspace/"                "$INTERNAL_DATA/Fred/Workspace/"
-
-    cmd "$HOME/.ssh/"                     "$INTERNAL_DATA/Fred/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$INTERNAL_DATA/Fred/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL_DATA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_DATA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_DATA/Fred/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_DATA/Fred/Configs/local-share-keyrings/"
+  if [ -d "$DATA" ]; then
+    backup_home "$DATA"
   else
-    printf ">>> %s is not mounted\n" "$INTERNAL_DATA"
+    printf ">>> %s is not mounted\n" "$DATA"
   fi
 
-  if [ -d "$INTERNAL_MEDIA" ]; then
-    cmd "$HOME/Archive/"                  "$INTERNAL_MEDIA/Fred/Archive/"
-    cmd "$HOME/Documents/"                "$INTERNAL_MEDIA/Fred/Documents/"
-    cmd "$HOME/Downloads/"                "$INTERNAL_MEDIA/Fred/Downloads/"
-    cmd "$HOME/Music/"                    "$INTERNAL_MEDIA/Fred/Music/"
-    cmd "$HOME/Music.New/"                "$INTERNAL_MEDIA/Fred/Music.New/"
-    cmd "$HOME/Phone/"                    "$INTERNAL_MEDIA/Fred/Phone/"
-    cmd "$HOME/Pictures/"                 "$INTERNAL_MEDIA/Fred/Pictures/"
-    cmd "$HOME/Public/"                   "$INTERNAL_MEDIA/Fred/Public/"
-    cmd "$HOME/Videos/"                   "$INTERNAL_MEDIA/Fred/Videos/"
-    cmd "$HOME/Workspace/"                "$INTERNAL_MEDIA/Fred/Workspace/"
+  if [ -d "$MEDIA" ]; then
+    backup_home "$MEDIA"
 
-    cmd "$HOME/.ssh/"                     "$INTERNAL_MEDIA/Fred/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$INTERNAL_MEDIA/Fred/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$INTERNAL_MEDIA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/yt-dlp/"           "$INTERNAL_MEDIA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.local/share/gnupg/"       "$INTERNAL_MEDIA/Fred/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$INTERNAL_MEDIA/Fred/Configs/local-share-keyrings/"
-
-    cmd "$INTERNAL_DATA/FredOther/"       "$INTERNAL_MEDIA/FredOther/"
-    cmd "$INTERNAL_DATA/MediaStorage/"    "$INTERNAL_MEDIA/MediaStorage/"
+    if [ -d "$DATA" ]; then
+      cmd "$DATA/FredOther/" "$MEDIA/FredOther/"
+    fi
   else
-    printf ">>> %s is not mounted\n" "$INTERNAL_MEDIA"
+    printf ">>> %s is not mounted\n" "$MEDIA"
   fi
 
-  if [ -d "$PORTABLE_DATA" ]; then
-    cmd "$HOME/Archive/"                  "$PORTABLE_DATA/Fred/Archive/"
-    cmd "$HOME/Documents/"                "$PORTABLE_DATA/Fred/Documents/"
-    cmd "$HOME/Downloads/"                "$PORTABLE_DATA/Fred/Downloads/"
-    cmd "$HOME/Music/"                    "$PORTABLE_DATA/Fred/Music/"
-    cmd "$HOME/Music.New/"                "$PORTABLE_DATA/Fred/Music.New/"
-    cmd "$HOME/Phone/"                    "$PORTABLE_DATA/Fred/Phone/"
-    cmd "$HOME/Pictures/"                 "$PORTABLE_DATA/Fred/Pictures/"
-    cmd "$HOME/Public/"                   "$PORTABLE_DATA/Fred/Public/"
-    cmd "$HOME/Videos/"                   "$PORTABLE_DATA/Fred/Videos/"
-    cmd "$HOME/Workspace/"                "$PORTABLE_DATA/Fred/Workspace/"
+  if [ -d "$PORTABLE" ]; then
+    backup_home "$PORTABLE"
 
-    cmd "$HOME/.ssh/"                     "$PORTABLE_DATA/Fred/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$PORTABLE_DATA/Fred/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE_DATA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Fred/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Fred/Configs/local-share-keyrings/"
-
-    cmd "$INTERNAL_DATA/FredOther/"       "$PORTABLE_DATA/FredOther/"
+    if [ -d "$DATA" ]; then
+      cmd "$DATA/FredOther/" "$PORTABLE/FredOther/"
+    fi
   else
-    printf ">>> %s is not mounted\n" "$PORTABLE_DATA"
-  fi
-
-  if [ -d "$EXTERNAL_DATA" ]; then
-    cmd "$HOME/Archive/"                  "$EXTERNAL_DATA/Fred/Archive/"
-    cmd "$HOME/Documents/"                "$EXTERNAL_DATA/Fred/Documents/"
-    cmd "$HOME/Downloads/"                "$EXTERNAL_DATA/Fred/Downloads/"
-    cmd "$HOME/Music/"                    "$EXTERNAL_DATA/Fred/Music/"
-    cmd "$HOME/Music.New/"                "$EXTERNAL_DATA/Fred/Music.New/"
-    cmd "$HOME/Phone/"                    "$EXTERNAL_DATA/Fred/Phone/"
-    cmd "$HOME/Pictures/"                 "$EXTERNAL_DATA/Fred/Pictures/"
-    cmd "$HOME/Public/"                   "$EXTERNAL_DATA/Fred/Public/"
-    cmd "$HOME/Videos/"                   "$EXTERNAL_DATA/Fred/Videos/"
-    cmd "$HOME/Workspace/"                "$EXTERNAL_DATA/Fred/Workspace/"
-
-    cmd "$HOME/.ssh/"                     "$EXTERNAL_DATA/Fred/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$EXTERNAL_DATA/Fred/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$EXTERNAL_DATA/Fred/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/yt-dlp/"           "$EXTERNAL_DATA/Fred/Configs/config-yt-dlp/"
-    cmd "$HOME/.local/share/gnupg/"       "$EXTERNAL_DATA/Fred/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$EXTERNAL_DATA/Fred/Configs/local-share-keyrings/"
-
-    cmd "$INTERNAL_DATA/FredOther/"       "$EXTERNAL_DATA/FredOther/"
-  else
-    printf ">>> %s is not mounted\n" "$EXTERNAL_DATA"
+    printf ">>> %s is not mounted\n" "$PORTABLE"
   fi
 elif [ "$HOSTNAME" == "neuron" ]; then
-  if [ -d "$PORTABLE_DATA" ]; then
-    cmd "$HOME/Documents/"                "$PORTABLE_DATA/Laptop/Documents/"
-    cmd "$HOME/Downloads/"                "$PORTABLE_DATA/Laptop/Downloads/"
-    cmd "$HOME/Phone/"                    "$PORTABLE_DATA/Laptop/Phone/"
-    cmd "$HOME/Pictures/"                 "$PORTABLE_DATA/Laptop/Pictures/"
-    cmd "$HOME/Public/"                   "$PORTABLE_DATA/Laptop/Public/"
-    cmd "$HOME/Videos/"                   "$PORTABLE_DATA/Laptop/Videos/"
-    cmd "$HOME/Workspace/"                "$PORTABLE_DATA/Laptop/Workspace/"
+  if [ -d "$PORTABLE" ]; then
+    cmd "$HOME/Documents/"                "$PORTABLE/Laptop/Documents/"
+    cmd "$HOME/Downloads/"                "$PORTABLE/Laptop/Downloads/"
+    cmd "$HOME/Phone/"                    "$PORTABLE/Laptop/Phone/"
+    cmd "$HOME/Pictures/"                 "$PORTABLE/Laptop/Pictures/"
+    cmd "$HOME/Public/"                   "$PORTABLE/Laptop/Public/"
+    cmd "$HOME/Videos/"                   "$PORTABLE/Laptop/Videos/"
+    cmd "$HOME/Workspace/"                "$PORTABLE/Laptop/Workspace/"
 
-    cmd "$HOME/.ssh/"                     "$PORTABLE_DATA/Laptop/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$PORTABLE_DATA/Laptop/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE_DATA/Laptop/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/yt-dlp/"           "$PORTABLE_DATA/Laptop/Configs/config-yt-dlp/"
-    cmd "$HOME/.local/share/gnupg/"       "$PORTABLE_DATA/Laptop/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$PORTABLE_DATA/Laptop/Configs/local-share-keyrings/"
+    cmd "$HOME/.ssh/"                     "$PORTABLE/Laptop/Configs/ssh/"
+    cmd "$HOME/.config/beets/"            "$PORTABLE/Laptop/Configs/config-beets/"
+    cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE/Laptop/Configs/config-MusicBrainz/"
+    cmd "$HOME/.config/yt-dlp/"           "$PORTABLE/Laptop/Configs/config-yt-dlp/"
+    cmd "$HOME/.local/share/gnupg/"       "$PORTABLE/Laptop/Configs/local-share-gnupg/"
+    cmd "$HOME/.local/share/keyrings/"    "$PORTABLE/Laptop/Configs/local-share-keyrings/"
   else
-    printf ">>> %s is not mounted\n" "$PORTABLE_DATA"
+    printf ">>> %s is not mounted\n" "$PORTABLE"
   fi
 
-  if [ -d "$PORTABLE_OX" ]; then
-    cmd "$HOME/Archive/"                  "$PORTABLE_OX/Laptop/Archive/"
-    cmd "$HOME/Documents/"                "$PORTABLE_OX/Laptop/Documents/"
-    cmd "$HOME/Downloads/"                "$PORTABLE_OX/Laptop/Downloads/"
-    cmd "$HOME/Music/"                    "$PORTABLE_OX/Laptop/Music/"
-    cmd "$HOME/Music.New/"                "$PORTABLE_OX/Laptop/Music.New/"
-    cmd "$HOME/Phone/"                    "$PORTABLE_OX/Laptop/Phone/"
-    cmd "$HOME/Pictures/"                 "$PORTABLE_OX/Laptop/Pictures/"
-    cmd "$HOME/Public/"                   "$PORTABLE_OX/Laptop/Public/"
-    cmd "$HOME/Videos/"                   "$PORTABLE_OX/Laptop/Videos/"
-    cmd "$HOME/Workspace/"                "$PORTABLE_OX/Laptop/Workspace/"
+  if [ -d "$OX" ]; then
+    cmd "$HOME/Archive/"                  "$OX/Laptop/Archive/"
+    cmd "$HOME/Documents/"                "$OX/Laptop/Documents/"
+    cmd "$HOME/Downloads/"                "$OX/Laptop/Downloads/"
+    cmd "$HOME/Music/"                    "$OX/Laptop/Music/"
+    cmd "$HOME/Music.New/"                "$OX/Laptop/Music.New/"
+    cmd "$HOME/Phone/"                    "$OX/Laptop/Phone/"
+    cmd "$HOME/Pictures/"                 "$OX/Laptop/Pictures/"
+    cmd "$HOME/Public/"                   "$OX/Laptop/Public/"
+    cmd "$HOME/Videos/"                   "$OX/Laptop/Videos/"
+    cmd "$HOME/Workspace/"                "$OX/Laptop/Workspace/"
 
-    cmd "$HOME/.config/"                  "$PORTABLE_OX/Laptop/Configs/dot.config/"
-    cmd "$HOME/.cache/"                   "$PORTABLE_OX/Laptop/Configs/dot.cache/"
-    cmd "$HOME/.local/"                   "$PORTABLE_OX/Laptop/Configs/dot.local/"
-    cmd "$HOME/.ssh/"                     "$PORTABLE_OX/Laptop/Configs/dot.ssh/"
+    cmd "$HOME/.ssh/"                     "$OX/Laptop/Configs/dot.ssh/"
+    cmd "$HOME/.config/"                  "$OX/Laptop/Configs/dot.config/"
+    cmd "$HOME/.cache/"                   "$OX/Laptop/Configs/dot.cache/"
+    cmd "$HOME/.local/"                   "$OX/Laptop/Configs/dot.local/"
   else
-    printf ">>> %s is not mounted\n" "$PORTABLE_OX"
+    printf ">>> %s is not mounted\n" "$OX"
   fi
 else
   printf ">>> Unknown machine with hostname = %s\n" "$HOSTNAME"
