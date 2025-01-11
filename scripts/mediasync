@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+CMD=("rsync"
+     "-hhh"
+     "--verbose"
+     "--info=progress1,flist0,del1,copy1,backup1,misc0,name1,nonreg1,remove1,skip1,stats0,symsafe1"
+     "--archive"
+     "--executability"
+     "--delete"
+     "$@")
+
+echo ">>> Rsync command:" "${CMD[@]}"
+
+cmd () {
+  printf ">>> %s --> %s\n" "$1" "$2"
+  "${CMD[@]}" "$1" "$2"
+}
+
+MEDIA='/run/media/fred/Media'
+
+if [ -d "$MEDIA" ]; then
+  cmd "$MEDIA/MediaStorage/Movies/" "rpi:/media/A/Movies/"
+  cmd "$MEDIA/MediaStorage/Series/" "rpi:/media/B/Series/"
+  cmd "$MEDIA/MediaStorage/Series (Nature)/" "rpi:/media/B/Series (Nature)/"
+else
+  printf ">>> %s is not mounted\n" "$MEDIA"
+fi
