@@ -528,13 +528,6 @@
  (consult-preview-key "M-.")
  (consult-project-function (lambda (_) (projectile-project-root))))
 
-(use-package minibuffer
- :ensure nil
- :defer t
-
- :custom
- (completion-in-region-function #'consult-completion-in-region))
-
 (use-package consult
  :ensure t
  :defer t
