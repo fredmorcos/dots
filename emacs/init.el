@@ -287,6 +287,20 @@
 
 ;;; Help Windows
 
+(use-package helpful
+ :ensure t
+ :defer t
+
+ :bind
+ (([remap describe-key] . helpful-key)
+  ([remap describe-key-briefly] . helpful-callable)
+  ([remap describe-function] . helpful-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . helpful-variable)
+  ([remap describe-mode] . helpful-mode)
+  ("C-h h" . helpful-at-point)
+  ("C-h H" . helpful-symbol)))
+
 (use-package help
  :ensure nil
  :defer t
@@ -491,6 +505,54 @@
 
  :bind
  ("C-p" . casual-editkit-main-tmenu))
+
+(use-package consult
+ :ensure t
+ :defer t
+
+ :init
+ (qol/select-package 'consult)
+
+ :bind
+ ([remap switch-to-buffer] . consult-buffer)
+ ([remap other-window] . consult-buffer-other-window)
+ ([remap jump-to-register] . consult-register)
+ ("M-Y" . consult-yank-pop)
+ ([remap imenu] . consult-imenu)
+ ("M-g I" . consult-imenu-multi)
+
+ :hook
+ (consult-after-jump-hook . recenter)
+
+ :custom
+ (consult-preview-key "M-.")
+ (consult-project-function (lambda (_) (projectile-project-root))))
+
+(use-package minibuffer
+ :ensure nil
+ :defer t
+
+ :custom
+ (completion-in-region-function #'consult-completion-in-region))
+
+(use-package consult
+ :ensure t
+ :defer t
+ :after xref
+
+ :init
+ (qol/select-package 'consult)
+
+ :custom
+ (xref-show-xrefs-function #'consult-xref)
+ (xref-show-definitions-function #'consult-xref))
+
+(use-package embark-consult
+ :ensure t
+ :defer t
+
+ :init
+ (qol/select-package 'embark-consult))
 
 ;;; Scrolling
 
@@ -749,10 +811,12 @@
  :custom
  (recentf-max-menu-items 50)
  (recentf-max-saved-items 100)
- (recentf-exclude `(,(concat (expand-file-name user-emacs-directory) "elpa")
-                    ,(no-littering-expand-var-file-name "")
+ (recentf-exclude `(,(no-littering-expand-var-file-name "")
                     ,(no-littering-expand-etc-file-name "")
                     ,@native-comp-eln-load-path
+                    "~/.cache"
+                    "~/.config/emacs/var"
+                    "~/.config/emacs/elpa"
                     "/usr/share/emacs"))
 
  :init
@@ -768,6 +832,7 @@
  (switch-to-buffer-in-dedicated-window 'pop)
  (switch-to-buffer-obey-display-actions t)
  (split-height-threshold 160)
+ (split-width-threshold 130)
  (even-window-sizes 'width-only)
  ;; Skip *SPECIALS* when switching buffers.
  (switch-to-prev-buffer-skip-regexp '("\\`\\*.*\\'"))
@@ -823,7 +888,8 @@
  :defer t
 
  :custom
- (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
+ (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
+ (electric-pair-preserve-balance nil))
 
 (use-package eldoc
  :ensure nil
@@ -1137,7 +1203,7 @@
  (magit-log-section-commit-count 20)
  ;; (magit-auto-revert-tracked-only nil)
  ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
- (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+ ;; (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
  (magit-bury-buffer-function #'magit-restore-window-configuration)
  (magit-repository-directories '(("~/Workspace" . 3))))
 
@@ -1648,11 +1714,17 @@
  :ensure t
  :defer t
 
+ :init
+ (qol/select-package 'embark)
+
  :bind
- ("C-." . embark-act)
- ("C-;" . embark-dwim)
- ("C-x B" . embark-become)
- ("C-h B" . embark-bindings)
+ (("C-." . embark-act)
+  ("C-;" . embark-dwim)
+  ("C-h B" . embark-bindings)
+  :map minibuffer-local-map
+  ("C-'" . embark-collect)
+  ("C-x E" . embark-export)
+  ("C-x B" . embark-become))
 
  :custom
  (prefix-help-command #'embark-prefix-help-command)
@@ -1787,13 +1859,6 @@
 
  :init
  (ctrlf-mode))
-
-(use-package consult
- :ensure t
- :defer t
-
- :custom
- (completion-in-region-function #'consult-completion-in-region))
 
 (use-package transient
  :ensure t
@@ -2113,6 +2178,9 @@
  :ensure t
  :defer t
  :diminish "Pr"
+
+ :commands
+ projectile-project-root
 
  :bind
  (:map projectile-mode-map
@@ -2451,7 +2519,7 @@
  (lsp-restart 'auto-restart)
  (lsp-enable-snippet t)
  (lsp-keymap-prefix "C-c")
- ;; (lsp-idle-delay 0.9)
+ (lsp-idle-delay 0.1)
  (lsp-file-watch-threshold nil)
  (lsp-enable-semantic-highlighting t)
  (lsp-enable-indentation t)
@@ -2539,6 +2607,16 @@
   ([remap xref-find-references] . lsp-ui-peek-find-references)
   ("M-I" . lsp-ui-peek-find-implementation)
   ("C-c d" . lsp-ui-doc-show)))
+
+(use-package lsp-ui-imenu
+ :ensure lsp-ui
+ :defer t
+
+ :custom
+ (lsp-ui-imenu-auto-refresh t)
+ (lsp-ui-imenu-auto-refresh-delay 0.1)
+ (lsp-ui-imenu-buffer-position 'left)
+ (lsp-ui-imenu-window-fix-width t))
 
 (use-package lsp-ui-flycheck
  :ensure lsp-ui
