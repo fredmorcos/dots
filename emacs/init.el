@@ -520,6 +520,8 @@
  ("M-Y" . consult-yank-pop)
  ([remap imenu] . consult-imenu)
  ("M-g I" . consult-imenu-multi)
+ ("C-x S" . consult-line)
+ ("M-G" . consult-grep)
 
  :hook
  (consult-after-jump-hook . recenter)
@@ -540,12 +542,59 @@
  (xref-show-xrefs-function #'consult-xref)
  (xref-show-definitions-function #'consult-xref))
 
+(use-package minibuffer
+ :ensure nil
+ :defer t
+
+ :custom
+ (completion-in-region-function #'consult-completion-in-region))
+
 (use-package embark-consult
  :ensure t
  :defer t
 
  :init
  (qol/select-package 'embark-consult))
+
+(use-package consult-flycheck
+ :ensure t
+ :defer t
+ :after flycheck
+
+ :init
+ (qol/select-package 'consult-flycheck)
+
+ :bind
+ (:map flycheck-mode-map
+  ("C-c ! a" . consult-flycheck)))
+
+(use-package vertico
+ :ensure t
+ :defer t
+
+ :bind
+ (:map vertico-map
+  ("?" . minibuffer-completion-help)
+  ("M-RET" . minibuffer-force-complete-and-exit)
+  ("M-TAB" . minibuffer-complete)
+  ("RET" . vertico-directory-enter)
+  ("DEL" . vertico-directory-delete-char)
+  ("M-DEL" . vertico-directory-delete-word))
+
+ :custom
+ (vertico-cycle t)
+ (vertico-resize nil)
+
+ :init
+ (qol/select-package 'vertico)
+ (vertico-mode))
+
+(use-package rfn-eshadow
+ :ensure nil
+ :defer t
+
+ :hook
+ (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
 
 ;;; Scrolling
 
@@ -760,18 +809,6 @@
 
  :hook
  (flycheck-posframe-inhibit-functions . init/company-is-active))
-
-(use-package consult-flycheck
- :ensure t
- :defer t
- :after flycheck
-
- :init
- (qol/select-package 'consult-flycheck)
-
- :bind
- (:map flycheck-mode-map
-  ("C-c ! a" . consult-flycheck)))
 
 ;;; History and save-hist
 
@@ -1813,7 +1850,10 @@
  :defer t
 
  :custom
- (enable-recursive-minibuffers t))
+ (enable-recursive-minibuffers t)
+
+ :hook
+ (minibuffer-setup-hook . cursor-intangible-mode))
 
 (use-package minibuffer
  :ensure nil
