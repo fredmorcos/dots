@@ -301,7 +301,6 @@ lychee
 lzop
 man-db
 man-pages
-mariadb-libs
 mdbook-linkcheck
 meld
 memtest86+-efi
@@ -377,7 +376,6 @@ plocate
 pngcrush
 podofo-tools
 polkit-gnome
-postgresql
 power-profiles-daemon
 powertop
 procs
