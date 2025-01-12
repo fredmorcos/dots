@@ -83,7 +83,10 @@
  ;; Resizing the Emacs frame can be a terribly expensive part of changing the font. By
  ;; inhibiting this, we easily halve startup times with fonts that are larger than the
  ;; system default.
- (frame-inhibit-implied-resize t))
+ (frame-inhibit-implied-resize t)
+
+ :custom-face
+ (mode-line ((t (:box "#bcbcbc")))))
 
 (use-package frame
  :ensure nil

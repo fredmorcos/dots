@@ -140,6 +140,14 @@
  :bind
  ([remap fill-paragraph] . unfill-toggle))
 
+(use-package register
+ :ensure nil
+ :defer t
+ :after counsel
+
+ :bind
+ ([remap jump-to-register] . counsel-register))
+
 (use-package indent
  :ensure nil
  :defer t
@@ -514,14 +522,6 @@
  ("M-g I" . consult-imenu-multi)
  ("C-x S" . consult-line)
  ("M-G" . consult-grep)
- ("M-D" . consult-fd)
- (:map consult-narrow-map
-  ("C-?" . consult-narrow-help))
-
- :config
- (defadvice consult-register
-  (after recenter-after-consult-register activate)
-  (recenter))
 
  :hook
  (consult-after-jump-hook . recenter)
@@ -574,6 +574,7 @@
 
  :bind
  (:map vertico-map
+  ("?" . minibuffer-completion-help)
   ("M-RET" . minibuffer-force-complete-and-exit)
   ("M-TAB" . minibuffer-complete)
   ("RET" . vertico-directory-enter)
@@ -1096,6 +1097,16 @@
  (xref-after-return-hook . recenter)
  (xref-after-jump-hook . recenter))
 
+(use-package ivy-xref
+ :ensure t
+ :demand
+
+ :init
+ (qol/select-package 'ivy-xref)
+
+ :custom
+ (xref-show-xrefs-function 'ivy-xref-show-xrefs))
+
 (use-package editorconfig
  :ensure t
  :defer t
@@ -1222,7 +1233,7 @@
  (magit-log-section-commit-count 20)
  ;; (magit-auto-revert-tracked-only nil)
  ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
- (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+ ;; (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
  (magit-bury-buffer-function #'magit-restore-window-configuration)
  (magit-repository-directories '(("~/Workspace" . 3))))
 
@@ -1635,12 +1646,73 @@
  :init
  (which-key-mode))
 
+(use-package ivy
+ :ensure t
+ :defer t
+ :diminish
+
+ :bind
+ (:map ivy-minibuffer-map
+  ("<RET>" . ivy-alt-done))
+
+ :custom
+ ;; (ivy-initial-inputs-alist nil)
+ ;; (ivy-re-builders-alist '((t . ivy--regex-ignore-order) (t . ivy--regex-plus)))
+ (ivy-wrap t)
+ (ivy-use-selectable-prompt t)
+ (ivy-use-virtual-buffers t)
+ (ivy-count-format "(%d/%d) ")
+ (ivy-virtual-abbreviate 'abbreviate)
+ (ivy-extra-directories nil)
+
+ :init
+ (ivy-mode))
+
+(use-package ivy-rich
+ :ensure t
+ :defer t
+ :after counsel
+
+ :custom
+ (ivy-rich-path-style 'abbrev)
+
+ :init
+ (ivy-rich-mode))
+
+(use-package nerd-icons-ivy-rich
+ :ensure t
+ :defer t
+
+ :init
+ (nerd-icons-ivy-rich-mode))
+
 (use-package nerd-icons-completion
  :ensure t
  :defer t
 
  :init
  (nerd-icons-completion-mode))
+
+(use-package counsel
+ :ensure t
+ :defer t
+ :diminish
+
+ :bind
+ (:map counsel-mode-map
+  ("M-Y" . counsel-yank-pop))
+
+ :config
+ ;; (put 'counsel-find-symbol 'no-counsel-M-x t)
+ (defadvice counsel-register
+  (after recenter-after-counsel-register activate)
+  (recenter))
+ (defadvice counsel-outline
+  (after recenter-after-counsel-outline activate)
+  (recenter))
+
+ :init
+ (counsel-mode))
 
 (use-package emacs
  :ensure nil
@@ -1765,6 +1837,13 @@
 
  :hook
  (minibuffer-exit-hook . init/prescient-remember-minibuffer-contents))
+
+(use-package ivy-prescient
+ :ensure t
+ :defer t
+
+ :init
+ (ivy-prescient-mode))
 
 (use-package emacs
  :ensure nil
@@ -1941,7 +2020,7 @@
  :defer t
 
  :hook
- (dape-stopped-hook . dape-breakpoint-save)
+ (kill-emacs-hook . dape-breakpoint-save)
  (dape-breakpoint-global-mode-hook . dape-breakpoint-load)
  (lsp-mode-hook . dape-breakpoint-global-mode)
  (dape-start-hook . save-some-buffers)
@@ -2149,6 +2228,18 @@
 
  :init
  (projectile-mode))
+
+(use-package counsel-projectile
+ :ensure t
+ :defer t
+
+ :config
+ (defadvice counsel-projectile-git-grep
+  (after recenter-after-counsel-projectile-git-grep activate)
+  (recenter))
+
+ :init
+ (counsel-projectile-mode))
 
 (use-package treemacs-projectile
  :ensure t
