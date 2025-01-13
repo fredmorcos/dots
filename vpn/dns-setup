@@ -7,7 +7,7 @@ set -o noglob
 
 # "$1" should be "tunX"
 # 10.20.30.3 is OX DNS
-resolvectl dnsovertls "$1" false
-resolvectl dnssec "$1" false
-resolvectl dns "$1" 10.20.30.3
-resolvectl domain "$1" "~open-xchange.com" "~dovecot.net"
+resolvectl dnsovertls "$1" true
+resolvectl dnssec "$1" true
+resolvectl dns "$1" 10.20.30.3 10.20.30.6 10.217.9.1#gw-02.dovecot.net
+resolvectl domain "$1" "~open-xchange.com" "~dovecot.net" "~oxdus.io" "~oxoe.int" "~oxhh.int" "~oxdo.int" "~oxhb.int" "~oxnbg.int" "~ox.io" "~os.oxui.de" "~os2.oxui.de" "~cloud.oxoe.io" "~int.oxoe.io"
