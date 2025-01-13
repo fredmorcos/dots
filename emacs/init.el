@@ -21,33 +21,6 @@
  qol/get-trimmed-line-string
  qol/string-starts-with)
 
-;;; No Littering
-
-(use-package no-littering
- :ensure t
- :demand
- :commands
- no-littering-theme-backups
- no-littering-expand-etc-file-name
- no-littering-expand-var-file-name
-
- :init
- (qol/select-package 'no-littering)
-
- :config
- (no-littering-theme-backups))
-
-;;; Diminish
-
-(use-package diminish
- :ensure t
- :defer t
-
- :init
- (qol/select-package 'diminish))
-
-;;; Functions
-
 (use-package emacs
  :ensure nil
  :defer t
@@ -66,36 +39,39 @@
  (put 'suspend-frame    'disabled t)
  (put 'diary            'disabled t))
 
-;;; Text Editing
+;;; Configuration Files
 
-(use-package qol
- :ensure nil
- :defer t
- :load-path "/home/fred/Workspace/dots/emacs/"
+(use-package no-littering
+ :ensure t
+ :demand
+ :commands
+ no-littering-theme-backups
+ no-littering-expand-etc-file-name
+ no-littering-expand-var-file-name
 
- :bind
- (("C-x j"    . qol/insert-buffer-name)
-  ("C-x e"    . qol/replace-escapes)
-  ("{"        . qol/insert-pair-curly)
-  ("{"        . qol/insert-pair-curly)
-  ("("        . qol/insert-pair-parens)
-  ("'"        . qol/insert-pair-quote)
-  ("\""       . qol/insert-pair-double-quotes)
-  ("`"        . qol/insert-pair-backtick)))
+ :init
+ (qol/select-package 'no-littering)
 
-(use-package misc
- :ensure nil
- :defer t
+ :config
+ (no-littering-theme-backups))
 
- :bind
- (("C-x c" . duplicate-dwim)))
+;;; Modeline
 
-(use-package cua-base
- :ensure nil
+(use-package diminish
+ :ensure t
  :defer t
 
  :init
- (cua-selection-mode t))
+ (qol/select-package 'diminish))
+
+(use-package uniquify
+ :ensure nil
+ :defer t
+
+ :custom
+ (uniquify-buffer-name-style 'forward))
+
+;;; Moving in Text
 
 (use-package move-text
  :ensure t
@@ -116,6 +92,79 @@
  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
  ([remap move-end-of-line] . mwim-end-of-code-or-line))
 
+;;; Selecting Text
+
+(use-package cua-base
+ :ensure nil
+ :defer t
+
+ :init
+ (cua-selection-mode t))
+
+(use-package expand-region
+ :ensure t
+ :defer t
+
+ :init
+ (qol/select-package 'expand-region)
+
+ :bind
+ ("C-=" . er/expand-region))
+
+(use-package surround
+ :ensure t
+ :defer t
+
+ :init
+ (qol/select-package 'surround)
+
+ :bind
+ ("M-'" . surround-mark-inner)
+ ("M-\"" . surround-insert))
+
+;;; Editing Text
+
+(use-package misc
+ :ensure nil
+ :defer t
+
+ :bind
+ (("C-c d" . duplicate-dwim)))
+
+(use-package files
+ :ensure nil
+ :defer t
+
+ :custom
+ (mode-require-final-newline 'visit-save)
+ (require-final-newline 'visit-save)
+ ;; File contents.
+ (coding-system-for-read 'utf-8-unix)
+ (coding-system-for-write 'utf-8-unix))
+
+;;; Filling
+
+(use-package unfill
+ :ensure t
+ :defer t
+
+ :init
+ (qol/select-package 'unfill)
+
+ :bind
+ ([remap fill-paragraph] . unfill-toggle))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :custom
+ ;; Fill
+ (colon-double-space t)
+ (default-justification 'left))
+
+;;; Fill Column
+
 (use-package emacs
  :ensure nil
  :defer t
@@ -130,22 +179,14 @@
  :custom
  (comment-fill-column 80))
 
-(use-package unfill
- :ensure t
- :defer t
-
- :init
- (qol/select-package 'unfill)
-
- :bind
- ([remap fill-paragraph] . unfill-toggle))
+;;; Indentation
 
 (use-package indent
  :ensure nil
  :defer t
 
  :custom
- (tab-always-indent 'complete)
+ (tab-always-indent t)
  (tab-first-completion 'word))
 
 (use-package simple
@@ -154,35 +195,7 @@
  :custom
  (indent-tabs-mode nil))
 
-(use-package files
- :ensure nil
- :defer t
-
- :custom
- (mode-require-final-newline 'visit-save)
- (require-final-newline 'visit-save)
- ;; File contents.
- (coding-system-for-read 'utf-8-unix)
- (coding-system-for-write 'utf-8-unix))
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- ;; Fill
- (colon-double-space t)
- (default-justification 'left))
-
-(use-package expand-region
- :ensure t
- :defer t
-
- :init
- (qol/select-package 'expand-region)
-
- :bind
- ("C-=" . er/expand-region))
+;;; Spell Checking
 
 (use-package jinx
  :ensure t
@@ -194,18 +207,7 @@
 
  :hook text-mode-hook)
 
-(use-package surround
- :ensure t
- :defer t
-
- :init
- (qol/select-package 'surround)
-
- :bind
- ("M-'" . surround-mark-inner)
- ("M-\"" . surround-insert))
-
-;;; Window Management
+;;; Window Movement
 
 (use-package windmove
  :ensure nil
@@ -214,6 +216,8 @@
  :init
  (windmove-default-keybindings)
  (windmove-delete-default-keybindings))
+
+;;; Buffer Movement
 
 (use-package buffer-move
  :ensure t
@@ -240,13 +244,6 @@
  (delete-old-versions t))
 
 ;;; UI
-
-(use-package uniquify
- :ensure nil
- :defer t
-
- :custom
- (uniquify-buffer-name-style 'forward))
 
 (use-package tooltip
  :ensure nil
@@ -277,7 +274,7 @@
  ;; Stop the warnings buffer from popping up, but still log warnings.
  (warning-minimum-level :emergency))
 
-;;; Help Windows
+;;; Help
 
 (use-package helpful
  :ensure t
@@ -291,7 +288,12 @@
   ([remap describe-variable] . helpful-variable)
   ([remap describe-mode] . helpful-mode)
   ("C-h h" . helpful-at-point)
-  ("C-h H" . helpful-symbol)))
+  ("C-h H" . helpful-symbol))
+
+ :config
+ (defadvice push-button
+  (after recenter-after-push-button activate)
+  (recenter)))
 
 (use-package help
  :ensure nil
@@ -370,7 +372,14 @@
  ;; Recenter after jump to next error.
  (next-error-recenter '(4))
  (next-error-message-highlight t)
- (completion-auto-select 'second-tab))
+ (completion-auto-select nil))
+
+(use-package minibuffer
+ :ensure nil
+ :defer t
+
+ :custom
+ (completion-auto-help nil))
 
 (use-package simple
  :ensure nil
@@ -919,6 +928,17 @@
 
  :custom
  (eldoc-documentation-strategy 'eldoc-documentation-compose))
+
+(use-package eldoc-box
+ :ensure t
+ :defer t
+ :diminish
+
+ :hook
+ (eldoc-mode-hook . eldoc-box-hover-mode)
+
+ :custom
+ (eldoc-box-lighter nil))
 
 (use-package subword
  :ensure nil
@@ -2461,9 +2481,9 @@
  (lsp-enable-indentation t)
  (lsp-before-save-edits nil)
  (lsp-auto-configure t)
- (lsp-signature-auto-activate t)
+ ;; (lsp-signature-auto-activate t)
  ;; (lsp-signature-render-documentation nil)
- (lsp-eldoc-enable-hover t)
+ ;; (lsp-eldoc-enable-hover nil)
  ;; (lsp-eldoc-render-all nil)
  (lsp-modeline-code-actions-enable nil)
  (lsp-modeline-diagnostics-enable t)
