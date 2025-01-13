@@ -370,7 +370,7 @@
  ;; Recenter after jump to next error.
  (next-error-recenter '(4))
  (next-error-message-highlight t)
- (completion-auto-select 'second-tab)
+ (completion-auto-select 'second-tab))
 
 (use-package simple
  :ensure nil
@@ -748,9 +748,9 @@
  (flycheck-mode-line-prefix "Fc")
  (flycheck-check-syntax-automatically
   '(idle-change new-line mode-enabled idle-buffer-switch))
- ;; (flycheck-idle-change-delay 0.5)
- ;; (flycheck-idle-buffer-switch-delay 0.2)
- ;; (flycheck-display-errors-delay 0.2)
+ (flycheck-idle-change-delay 1)
+ (flycheck-idle-buffer-switch-delay 1)
+ (flycheck-display-errors-delay 1)
 
  :config
  (defadvice flycheck-next-error
