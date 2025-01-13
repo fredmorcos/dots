@@ -372,32 +372,6 @@
  (next-error-message-highlight t)
  (completion-auto-select 'second-tab)
 
- :preface
- (defun init/keyboard-quit-dwim ()
-  "Reasonable keyboard-quit behavior.
-     - When a minibuffer is open but not focused, close it.
-     - When a completions buffer is selected, close it.
-     - Otherwise (e.g. region is active) do `keyboard-quit`."
-  (interactive)
-  (cond
-   ((> (minibuffer-depth) 0)
-    (abort-recursive-edit))
-   ((derived-mode-p 'completion-list-mode)
-    (delete-completion-window))
-   (t
-    (keyboard-quit))))
-
- :bind
- ([remap keyboard-quit] . init/keyboard-quit-dwim))
-
-(use-package simple
- :ensure nil
- :defer t
- :after eldoc
-
- :config
- (eldoc-add-command #'init/keyboard-quit-dwim))
-
 (use-package simple
  :ensure nil
  :defer t
@@ -507,7 +481,6 @@
 
  :bind
  ([remap switch-to-buffer] . consult-buffer)
- ([remap other-window] . consult-buffer-other-window)
  ([remap jump-to-register] . consult-register)
  ("M-Y" . consult-yank-pop)
  ([remap imenu] . consult-imenu)
@@ -529,6 +502,25 @@
  :custom
  (consult-preview-key "M-.")
  (consult-project-function (lambda (_) (projectile-project-root))))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+
+ :preface
+ (defun init/find-file-other-window ()
+  (interactive)
+  (cond
+   ((and (fboundp 'projectile-project-root) (projectile-project-root))
+    (other-window-prefix)
+    (projectile-find-file))
+   ((fboundp 'consult-buffer-other-window)
+    (consult-buffer-other-window))
+   (t
+    (error "Projectile and Consult are not available"))))
+
+ :bind
+ ([remap other-window] . init/find-file-other-window))
 
 (use-package consult
  :ensure t
@@ -1536,7 +1528,9 @@
 
  :custom
  (isearch-lazy-count t)
- (isearch-lazy-highlight t))
+ (isearch-lazy-highlight t)
+ (lazy-count-prefix-format "(%s/%s) ")
+ (search-whitespace-regexp ".*?"))
 
 ;;; CMake
 
