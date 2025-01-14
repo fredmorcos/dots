@@ -276,25 +276,6 @@
 
 ;;; Help
 
-(use-package helpful
- :ensure t
- :defer t
-
- :bind
- (([remap describe-key] . helpful-key)
-  ([remap describe-key-briefly] . helpful-callable)
-  ([remap describe-function] . helpful-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . helpful-variable)
-  ([remap describe-mode] . helpful-mode)
-  ("C-h h" . helpful-at-point)
-  ("C-h H" . helpful-symbol))
-
- :config
- (defadvice push-button
-  (after recenter-after-push-button activate)
-  (recenter)))
-
 (use-package help
  :ensure nil
  :defer t
@@ -349,6 +330,15 @@
 
  :custom
  (confirm-kill-processes nil))
+
+(use-package button
+ :ensure nil
+ :defer t
+
+ :config
+ (defadvice push-button
+  (after recenter-after-push-button activate)
+  (recenter)))
 
 (use-package mouse
  :ensure nil
@@ -1239,6 +1229,14 @@
  :bind
  ("C-x g" . magit-status)
 
+ :preface
+ (defun init/disable-line-numbers ()
+  "Disable display-line-numbers-mode."
+  (display-line-numbers-mode -1))
+
+ :hook
+ (magit-mode-hook . init/disable-line-numbers)
+
  :custom
  (magit-log-section-commit-count 20)
  ;; (magit-auto-revert-tracked-only nil)
@@ -1384,9 +1382,8 @@
  (show-trailing-whitespace nil)
  (whitespace-action '(cleanup auto-cleanup))
  (whitespace-style
-  '(face tabs lines-tail empty tab-mark indentation indentation::tab indentation::space
-    space-after-tab space-after-tab::tab space-after-tab::space space-before-tab
-    space-before-tab::tab space-before-tab::space whitespace-missing-newline-at-eof))
+  '(face trailing tabs lines-tail missing-newline-at-eof empty
+    space-after-tab space-before-tab tab-mark))
 
  :custom-face
  (whitespace-tab ((t (:foreground "lavender" :background "white smoke")))))
@@ -2533,32 +2530,6 @@
  (lsp-semantic-tokens-apply-modifiers t)
  (lsp-semantic-tokens-enable-multiline-token-support t)
  (lsp-semantic-tokens-enable t))
-
-(use-package lsp-ivy
- :ensure t
- :defer t
- :after lsp-mode
-
- :preface
- (defun init/lsp-ivy-workspace-symbol ()
-  (interactive)
-  (xref-push-marker-stack)
-  (lsp-ivy-workspace-symbol nil))
- (defun init/lsp-ivy-workspace-symbol-at-point ()
-  (interactive)
-  (xref-push-marker-stack)
-  (lsp-ivy-workspace-symbol t))
-
- :bind
- (:map lsp-mode-map
-  ("C-c X" . init/lsp-ivy-workspace-symbol)
-  ("C-c x" . init/lsp-ivy-workspace-symbol-at-point))
-
- :config
- ;; Recenter after using lsp-ivy-workspace-symbol.
- (defadvice lsp-ivy-workspace-symbol
-  (after recenter-after-lsp-ivy-workspace-symbol activate)
-  (recenter)))
 
 (use-package lsp-ui-peek
  :ensure lsp-ui
