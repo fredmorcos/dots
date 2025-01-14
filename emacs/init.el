@@ -2564,6 +2564,14 @@
 (use-package lsp-ui
  :ensure t
  :defer t
+
+ :bind
+ (:map lsp-mode-map
+  "C-c G S" . lsp-ui-find-workspace-symbol))
+
+(use-package lsp-ui
+ :ensure t
+ :defer t
  :after lsp-ui-doc
 
  :custom
