@@ -340,6 +340,12 @@
  (defadvice find-file
   (after recenter-after-find-file activate)
   (recenter))
+ (defadvice find-file-literally
+  (after recenter-after-find-file-literally activate)
+  (recenter))
+ (defadvice find-file-other-window
+  (after recenter-after-find-file-other-window activate)
+  (recenter))
 
  :custom
  (confirm-kill-processes nil))
@@ -504,6 +510,9 @@
  (defadvice consult-register
   (after recenter-after-consult-register activate)
   (recenter))
+ (defadvice consult-buffer
+  (after recenter-after-consult-buffer activate)
+  (recenter))
 
  :hook
  (consult-after-jump-hook . recenter)
@@ -526,7 +535,7 @@
    ((fboundp 'consult-buffer-other-window)
     (consult-buffer-other-window))
    (t
-    (call-interactively 'find-file))))
+    (call-interactively 'find-file-other-window))))
 
  :bind
  ([remap other-window] . init/find-file-other-window))
@@ -1700,7 +1709,6 @@
 
  :custom
  (prefix-help-command #'embark-prefix-help-command)
- (embark-prompter #'embark-completing-read-prompter)
  (embark-mixed-indicator-both t)
  (embark-mixed-indicator-delay 0))
 
