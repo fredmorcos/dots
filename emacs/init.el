@@ -526,7 +526,7 @@
    ((fboundp 'consult-buffer-other-window)
     (consult-buffer-other-window))
    (t
-    (error "Projectile and Consult are not available"))))
+    (call-interactively 'find-file))))
 
  :bind
  ([remap other-window] . init/find-file-other-window))
