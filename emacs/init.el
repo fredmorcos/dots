@@ -484,6 +484,14 @@
  :init
  (qol/select-package 'consult)
 
+ :preface
+ (defun init/consult-grep-or-git-grep ()
+  "Run grep in non-project buffers and git-grep in project buffers."
+  (interactive)
+  (if (and (fboundp 'projectile-project-root) (projectile-project-root))
+   (consult-git-grep)
+   (consult-grep)))
+
  :bind
  ([remap switch-to-buffer] . consult-buffer)
  ([remap jump-to-register] . consult-register)
@@ -491,7 +499,7 @@
  ([remap imenu] . consult-imenu)
  ("M-g I" . consult-imenu-multi)
  ("C-x S" . consult-line)
- ("M-G" . consult-grep)
+ ("M-G" . init/consult-grep-or-git-grep)
  ("M-D" . consult-fd)
  (:map consult-narrow-map
   ("C-?" . consult-narrow-help))
@@ -2187,7 +2195,10 @@
 
  :init
  (qol/select-package 'yasnippet)
- (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
+
+ :config
+ (unbind-key "TAB" yas-minor-mode-map))
 
 (use-package consult-yasnippet
  :ensure t
