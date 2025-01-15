@@ -2,6 +2,7 @@
 # name: Cash Expense
 # key: cash
 # --
-* ${1:note}
+
+`(format-time-string "%Y-%m-%d")` * ${1:note}
  Assets:Cash                                                    EUR -${2:amount}
  ${3:category}

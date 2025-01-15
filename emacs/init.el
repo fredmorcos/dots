@@ -689,17 +689,14 @@
       company-capf
       ;; company-dabbrev-code
       ;; company-keywords
-      company-yasnippet
+      ;; company-yasnippet
       ;; company-files
       ,@secondary-backends
-      :separate))))
-
- ;; :bind
- ;; (:map company-mode-map ("<tab>" . company-indent-or-complete-common))
+      :separate)))
+  (company-mode))
 
  :custom
- ;; (company-idle-delay 0.7)
- ;; (company-minimum-prefix-length 2)
+ (company-idle-delay 0.7)
  (company-keywords-ignore-case t)
  (company-selection-wrap-around t)
  (company-tooltip-align-annotations t)
@@ -999,8 +996,7 @@
  :ensure t
  :defer t
  :after prog-mode
- :hook
- (prog-mode-hook . init/setup-company)
+ :hook (prog-mode-hook . init/setup-company)
 
  :init
  (qol/select-package 'company))
@@ -1382,8 +1378,15 @@
  (show-trailing-whitespace nil)
  (whitespace-action '(cleanup auto-cleanup))
  (whitespace-style
-  '(face trailing tabs lines-tail missing-newline-at-eof empty
-    space-after-tab space-before-tab tab-mark))
+  '(face
+    trailing
+    tabs
+    lines-tail
+    missing-newline-at-eof
+    empty
+    space-after-tab
+    space-before-tab
+    tab-mark))
 
  :custom-face
  (whitespace-tab ((t (:foreground "lavender" :background "white smoke")))))
@@ -2047,8 +2050,9 @@
  :defer t
 
  :custom
- (safe-local-variable-values '((comment-style . multi-line)
-                               (backward-delete-char-untabify-method . nil))))
+ (safe-local-variable-values
+  '((comment-style . multi-line)
+    (backward-delete-char-untabify-method . nil))))
 
 (use-package cc-mode
  :ensure nil
@@ -2182,18 +2186,15 @@
  :diminish (yas-minor-mode . "Ys")
 
  :init
- (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
+ (qol/select-package 'yasnippet)
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
 
- :preface
- (defun init/start-ivy-yasnippet ()
-  "Start Ivy Yasnippet."
-  (interactive)
-  (yas-minor-mode-on)
-  (ivy-yasnippet))
+(use-package consult-yasnippet
+ :ensure t
+ :defer t
 
  :bind
- ("C-c Y" . init/start-ivy-yasnippet)
- ("C-c y s" . yas-expand-from-trigger-key))
+ ("M-z" . consult-yasnippet))
 
 (use-package yasnippet-snippets
  :ensure t
@@ -2201,11 +2202,18 @@
  :after yasnippet
 
  :init
- (yasnippet-snippets-initialize))
+ (qol/select-package 'yasnippet-snippets)
 
-(use-package ivy-yasnippet
- :ensure t
- :defer t)
+ :preface
+ (defvar *init/yasnippet-snippets-initialized* nil)
+ (defun init/initialize-yasnippet-snippets ()
+  "Initialize yasnippet snippets if they have not already been."
+  (unless *init/yasnippet-snippets-initialized*
+   (yasnippet-snippets-initialize)
+   (setq *init/yasnippet-snippets-initialized* t)))
+
+ :hook
+ (yas-minor-mode-hook . init/initialize-yasnippet-snippets))
 
 ;;; Ledger
 
@@ -2281,12 +2289,14 @@
  :ensure t
  :defer t
  :after hledger-mode
+
+ :preface
+ (defun init/setup-hledger-company ()
+  "Setup company for hledger completion."
+  (init/setup-company '(hledger-company)))
+
  :hook
- (hledger-mode-hook
-  (hledger-mode-hook .
-   (lambda ()
-    (init/setup-company
-     '(hledger-company))))))
+ (hledger-mode-hook . init/setup-hledger-company))
 
 (use-package flycheck
  :ensure t
@@ -2350,12 +2360,13 @@
  :defer t
  :after (company web-mode)
 
+ :preface
+ (defun init/setup-company-web ()
+  "Setup company for web development."
+  (init/setup-company '(company-css company-web-html)))
+
  :hook
- (web-mode-hook .
-  (lambda ()
-   (init/setup-company
-    '(company-css
-      company-web-html)))))
+ (web-mode-hook . init/setup-company-web))
 
 (use-package emmet-mode
  :ensure t
