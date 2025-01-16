@@ -2076,6 +2076,16 @@
     (c-mode    . gtkdoc)
     (c++-mode  . doxygen))))
 
+(use-package cc-cmds
+ :ensure nil
+ :defer t
+
+ :config
+ ;; Unmark region even when c-indent-line-or-region doesn't indent anything.
+ (defadvice c-indent-line-or-region
+  (after deactivate-mark-after-c-indent-line-or-region activate)
+  (deactivate-mark)))
+
 (use-package editorconfig
  :ensure t
  :defer t
