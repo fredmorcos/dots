@@ -62,6 +62,9 @@ export ELECTRON_OZONE_PLATFORM_HINT="auto"   # Electron
 # Qt
 # export QT_QPA_PLATFORMTHEME="qt6ct"
 
+# Flatpak
+export FLATPAK_TTY_PROGRESS=1
+
 # Other options:
 # export XAUTHORITY="$XDG_CONFIG_HOME/Xauthority"
 # export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
