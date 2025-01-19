@@ -150,6 +150,7 @@ toggle-maximized=['<Super>Up']
 
 # Shortcuts
 [org/gnome/settings-daemon/plugins/media-keys]
+volume-step=4
 home=['<Control><Alt>h']
 www=['<Control><Alt>w']
 calculator=['<Super>F1']
