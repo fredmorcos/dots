@@ -851,7 +851,8 @@
                     "~/.cache"
                     "~/.config/emacs/var"
                     "~/.config/emacs/elpa"
-                    "/usr/share/emacs"))
+                    "/usr/share/emacs"
+                    "/run/media"))
 
  :init
  (recentf-mode))
