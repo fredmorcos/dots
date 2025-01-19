@@ -202,6 +202,7 @@ gst-plugin-gtk
 gst-plugin-libcamera
 gst-plugins-bad
 gst-plugin-va
+gstreamer-vaapi
 gucharmap
 gvfs-mtp
 handbrake
@@ -250,7 +251,6 @@ kcov
 kexec-tools
 keychain
 kmon
-kooha
 kubectl
 ladspa
 ledger
