@@ -934,17 +934,6 @@
  :custom
  (eldoc-documentation-strategy 'eldoc-documentation-compose))
 
-(use-package eldoc-box
- :ensure t
- :defer t
- :diminish
-
- :hook
- (eldoc-mode-hook . eldoc-box-hover-mode)
-
- :custom
- (eldoc-box-lighter nil))
-
 (use-package subword
  :ensure nil
  :defer t
@@ -1009,18 +998,6 @@
 
  :init
  (qol/select-package 'company))
-
-(use-package elec-pair
- :ensure nil
- :defer t
- :after prog-mode
- :hook (prog-mode-hook . electric-pair-local-mode))
-
-(use-package electric
- :ensure nil
- :defer t
- :after prog-mode
- :hook (prog-mode-hook . electric-layout-local-mode))
 
 (use-package display-line-numbers
  :ensure nil
@@ -2600,7 +2577,7 @@
 
  :bind
  (:map lsp-mode-map
-  "C-c G S" . lsp-ui-find-workspace-symbol))
+  ("C-c G S" . lsp-ui-find-workspace-symbol)))
 
 (use-package lsp-ui
  :ensure t
