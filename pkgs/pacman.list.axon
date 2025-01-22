@@ -184,6 +184,7 @@ git-cliff
 git-delta
 git-lfs
 gitui
+glyr
 gnome-calculator
 gnome-control-center
 gnome-disk-utility
@@ -378,6 +379,7 @@ podofo-tools
 polkit-gnome
 power-profiles-daemon
 powertop
+pragha
 procs
 profile-cleaner
 progress
