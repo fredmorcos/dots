@@ -44,13 +44,12 @@
 (use-package no-littering
  :ensure t
  :demand
+ :preface (qol/select-package 'no-littering)
+
  :commands
  no-littering-theme-backups
  no-littering-expand-etc-file-name
  no-littering-expand-var-file-name
-
- :init
- (qol/select-package 'no-littering)
 
  :config
  (no-littering-theme-backups))
@@ -60,9 +59,7 @@
 (use-package diminish
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'diminish))
+ :preface (qol/select-package 'diminish))
 
 (use-package uniquify
  :ensure nil
@@ -76,17 +73,15 @@
 (use-package move-text
  :ensure t
  :defer t
+ :preface (qol/select-package 'move-text)
 
  :init
- (qol/select-package 'move-text)
  (move-text-default-bindings))
 
 (use-package mwim
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'mwim)
+ :preface (qol/select-package 'mwim)
 
  :bind
  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line-or-comment)
@@ -104,9 +99,7 @@
 (use-package expand-region
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'expand-region)
+ :preface (qol/select-package 'expand-region)
 
  :bind
  ("C-=" . er/expand-region))
@@ -114,9 +107,7 @@
 (use-package surround
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'surround)
+ :preface (qol/select-package 'surround)
 
  :bind
  ("M-'" . surround-mark-inner)
@@ -147,9 +138,7 @@
 (use-package unfill
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'unfill)
+ :preface (qol/select-package 'unfill)
 
  :bind
  ([remap fill-paragraph] . unfill-toggle))
@@ -200,10 +189,8 @@
 (use-package jinx
  :ensure t
  :defer t
+ :preface (qol/select-package 'jinx)
  :after text-mode
-
- :init
- (qol/select-package 'jinx)
 
  :hook text-mode-hook)
 
@@ -222,9 +209,7 @@
 (use-package buffer-move
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'buffer-move)
+ :preface (qol/select-package 'buffer-move)
 
  :bind
  ("C-x m" . buf-move))
@@ -388,16 +373,12 @@
 (use-package nerd-icons
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'nerd-icons))
+ :preface (qol/select-package 'nerd-icons))
 
 (use-package casual-suite
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'casual-suite))
+ :preface (qol/select-package 'casual-suite))
 
 (use-package casual-symbol-overlay
  :ensure casual-suite
@@ -409,9 +390,7 @@
 (use-package visual-replace
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'visual-replace)
+ :preface (qol/select-package 'visual-replace)
 
  :bind
  ("M-%" . visual-replace-thing-at-point)
@@ -453,9 +432,7 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'symbol-overlay)
+ :preface (qol/select-package 'symbol-overlay)
 
  :bind
  (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
@@ -463,9 +440,7 @@
 (use-package symbol-overlay-mc
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'symbol-overlay-mc)
+ :preface (qol/select-package 'symbol-overlay-mc)
 
  :bind
  (:map symbol-overlay-map ("M-a" . symbol-overlay-mc-mark-all)))
@@ -480,9 +455,7 @@
 (use-package consult
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'consult)
+ :preface (qol/select-package 'consult)
 
  :preface
  (defun init/consult-grep-or-git-grep ()
@@ -541,36 +514,23 @@
 (use-package consult
  :ensure t
  :defer t
+ :preface (qol/select-package 'consult)
  :after xref
-
- :init
- (qol/select-package 'consult)
 
  :custom
  (xref-show-xrefs-function #'consult-xref)
  (xref-show-definitions-function #'consult-xref))
 
-(use-package minibuffer
- :ensure nil
- :defer t
-
- :custom
- (completion-in-region-function #'consult-completion-in-region))
-
 (use-package embark-consult
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'embark-consult))
+ :preface (qol/select-package 'embark-consult))
 
 (use-package consult-flycheck
  :ensure t
  :defer t
+ :preface (qol/select-package 'consult-flycheck)
  :after flycheck
-
- :init
- (qol/select-package 'consult-flycheck)
 
  :bind
  (:map flycheck-mode-map
@@ -592,8 +552,9 @@
  (vertico-cycle t)
  (vertico-resize nil)
 
+ :preface (qol/select-package 'vertico)
+
  :init
- (qol/select-package 'vertico)
  (vertico-mode))
 
 (use-package rfn-eshadow
@@ -683,11 +644,9 @@
 (use-package company
  :ensure t
  :defer t
+ :preface (qol/select-package 'company)
  :diminish "Co"
  :commands company--active-p
-
- :init
- (qol/select-package 'company)
 
  :preface
  (defun init/setup-company (&optional main-backends secondary-backends)
@@ -714,12 +673,10 @@
 (use-package company-posframe
  :ensure t
  :defer t
+ :preface (qol/select-package 'company-posframe)
  :diminish
  :after company
  :hook company-mode-hook
-
- :init
- (qol/select-package 'company-posframe)
 
  :config
  (qol/append company-posframe-show-params :border-width 1)
@@ -731,20 +688,16 @@
 (use-package company-prescient
  :ensure t
  :defer t
+ :preface (qol/select-package 'company-prescient)
  :after company
- :hook company-mode-hook
-
- :init
- (qol/select-package 'company-prescient))
+ :hook company-mode-hook)
 
 ;;; Syntax Checking
 
 (use-package flycheck
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'flycheck)
+ :preface (qol/select-package 'flycheck)
 
  :commands
  (flycheck-next-error
@@ -779,9 +732,7 @@
 (use-package flycheck-posframe
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'flycheck-posframe)
+ :preface (qol/select-package 'flycheck-posframe)
 
  :custom
  (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
@@ -793,19 +744,15 @@
 (use-package flycheck-posframe
  :ensure t
  :defer t
+ :preface  (qol/select-package 'flycheck-posframe)
  :after flycheck
- :hook flycheck-mode-hook
-
- :init
- (qol/select-package 'flycheck-posframe))
+ :hook flycheck-mode-hook)
 
 (use-package company
  :ensure t
  :defer t
+ :preface (qol/select-package 'company)
  :after flycheck-posframe
-
- :init
- (qol/select-package 'company)
 
  :preface
  (defun init/company-is-active (&rest _)
@@ -813,6 +760,18 @@
 
  :hook
  (flycheck-posframe-inhibit-functions . init/company-is-active))
+
+(use-package cape
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'cape)
+
+ :bind ("C-c p" . cape-prefix-map)
+
+ :init
+ (add-hook 'completion-at-point-functions #'cape-dabbrev)
+ (add-hook 'completion-at-point-functions #'cape-file)
+ (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
 ;;; History and save-hist
 
@@ -901,6 +860,7 @@
 (use-package devdocs
  :ensure t
  :defer t
+ :preface (qol/select-package 'devdocs)
 
  :bind
  ("C-h D" . devdocs-lookup)
@@ -954,11 +914,9 @@
 (use-package diff-hl
  :ensure t
  :defer t
+ :preface (qol/select-package 'diff-hl)
  :after prog-mode
- :hook prog-mode-hook
-
- :init
- (qol/select-package 'diff-hl))
+ :hook prog-mode-hook)
 
 (use-package eldoc
  :ensure nil
@@ -975,20 +933,16 @@
 (use-package flycheck
  :ensure t
  :defer t
+ :preface (qol/select-package 'flycheck)
  :after prog-mode
- :hook prog-mode-hook
-
- :init
- (qol/select-package 'flycheck))
+ :hook prog-mode-hook)
 
 (use-package yasnippet
  :ensure t
  :defer t
+ :preface (qol/select-package 'yasnippet)
  :after prog-mode
- :hook (prog-mode-hook . yas-minor-mode-on)
-
- :init
- (qol/select-package 'yasnippet))
+ :hook (prog-mode-hook . yas-minor-mode-on))
 
 (use-package company
  :ensure t
@@ -996,7 +950,7 @@
  :after prog-mode
  :hook (prog-mode-hook . init/setup-company)
 
- :init
+ :preface
  (qol/select-package 'company))
 
 (use-package display-line-numbers
@@ -1020,11 +974,9 @@
 (use-package jinx
  :ensure t
  :defer t
+ :preface (qol/select-package 'jinx)
  :after prog-mode
- :hook prog-mode-hook
-
- :init
- (qol/select-package 'jinx))
+ :hook prog-mode-hook)
 
 (use-package whitespace
  :ensure nil
@@ -1035,10 +987,8 @@
 (use-package deadgrep
  :ensure t
  :defer t
+ :preface (qol/select-package 'deadgrep)
  :after prog-mode
-
- :init
- (qol/select-package 'deadgrep)
 
  :bind
  (:map prog-mode-map ("M-F" . deadgrep)))
@@ -1046,33 +996,25 @@
 (use-package wgrep
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'wgrep))
+ :preface (qol/select-package 'wgrep))
 
 (use-package wgrep-deadgrep
  :ensure t
  :defer t
- :after deadgrep
-
- :init
- (qol/select-package 'wgrep-deadgrep))
+ :preface (qol/select-package 'wgrep-deadgrep)
+ :after deadgrep)
 
 (use-package sideline
  :ensure t
  :defer t
- :diminish "Si"
-
- :init
- (qol/select-package 'sideline))
+ :preface (qol/select-package 'sideline)
+ :diminish "Si")
 
 (use-package sideline-blame
  :ensure t
  :defer t
+ :preface (qol/select-package 'sideline-blame)
  :after sideline
-
- :init
- (qol/select-package 'sideline-blame)
 
  :custom
  (sideline-backends-right '(sideline-blame))
@@ -1094,7 +1036,7 @@
  :defer t
  :diminish "Ec"
 
- :init
+ :preface
  (qol/select-package 'editorconfig))
 
 ;;; Configuration Files
@@ -1151,7 +1093,10 @@
 
 (use-package meson-mode
  :ensure t
- :defer t)
+ :defer t
+
+ :preface
+ (qol/select-package 'meson-mode))
 
 (use-package symbol-overlay
  :ensure t
@@ -1187,6 +1132,7 @@
 (use-package blamer
  :ensure t
  :defer t
+ :preface (qol/select-package 'blamer)
 
  :custom
  ;; (blamer-idle-time 0)
@@ -1249,6 +1195,7 @@
 (use-package diff-hl
  :ensure t
  :defer t
+ :preface (qol/select-package 'diff-hl)
 
  :custom
  ;; (diff-hl-flydiff-delay 0.1)
@@ -1288,6 +1235,7 @@
 (use-package speedrect
  :ensure t
  :defer t
+ :preface (qol/select-package 'speedrect)
 
  :init
  (speedrect-mode))
@@ -1295,6 +1243,7 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
+ :preface (qol/select-package 'symbol-overlay)
  :diminish "So"
 
  :bind
@@ -1329,11 +1278,13 @@
 
 (use-package indent-guide
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'indent-guide))
 
 (use-package crux
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'crux))
 
 ;;; Various
 
@@ -1380,7 +1331,7 @@
 ;;; Makefiles
 
 (use-package whitespace
- :ensure t
+ :ensure nil
  :defer t
  :after make-mode
  :hook makefile-mode-hook)
@@ -1409,11 +1360,12 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
+ :preface (qol/select-package 'symbol-overlay)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package whitespace
- :ensure t
+ :ensure nil
  :defer t
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
@@ -1421,28 +1373,33 @@
 (use-package highlight-defined
  :ensure t
  :defer t
+ :preface (qol/select-package 'highlight-defined)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package highlight-quoted
  :ensure t
  :defer t
+ :preface (qol/select-package 'highlight-quoted)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package eros
  :ensure t
  :defer t
+ :preface (qol/select-package 'eros)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package suggest
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'suggest))
 
 (use-package ipretty
  :ensure t
  :defer t
+ :preface (qol/select-package 'ipretty)
  :after elisp-mode
  :hook (emacs-lisp-mode-hook . (lambda () (ipretty-mode t))))
 
@@ -1468,6 +1425,7 @@
 (use-package lsp-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-mode)
  :after sh-script
  :hook (sh-mode-hook . lsp))
 
@@ -1508,6 +1466,7 @@
 (use-package hl-line
  :ensure t
  :defer t
+ :preface (qol/select-package 'hl-line)
  :after dired
  :hook dired-mode-hook)
 
@@ -1532,7 +1491,7 @@
 (use-package nerd-icons-dired
  :ensure t
  :defer t
-
+ :preface (qol/select-package 'nerd-icons-dired)
  :hook (dired-mode-hook . nerd-icons-dired-mode))
 
 ;;; Search
@@ -1551,11 +1510,13 @@
 
 (use-package cmake-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'cmake-mode))
 
 (use-package eldoc-cmake
  :ensure t
  :defer t
+ :preface (qol/select-package 'eldoc-cmake)
  :after cmake-mode
  :hook (cmake-mode-hook . eldoc-cmake-enable))
 
@@ -1563,29 +1524,34 @@
 
 (use-package markdown-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'markdown-mode))
 
 ;;; Sed
 
 (use-package sed-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'sed-mode))
 
 ;;; Po Translations
 
 (use-package po-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'po-mode))
 
 ;;; TOML
 
 (use-package toml-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'toml-mode))
 
 (use-package eldoc-toml
  :ensure t
  :defer t
+ :preface (qol/select-package 'eldoc-toml)
  :diminish
  :after (eldoc toml-mode)
  :hook toml-mode-hook)
@@ -1594,23 +1560,27 @@
 
 (use-package json-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'json-mode))
 
 (use-package indent-guide
  :ensure t
  :defer t
+ :preface (qol/select-package 'ident-guide)
  :after json-mode
  :hook json-mode-hook)
 
 (use-package indent-guide
  :ensure t
  :defer t
+ :preface (qol/select-package 'ident-guide)
  :after json-ts-mode
  :hook json-ts-mode-hook)
 
 (use-package tree-sitter
  :ensure t
  :defer t
+ :preface (qol/select-package 'tree-sitter)
  :diminish "Ts"
  :after json-mode
  :hook json-mode-hook)
@@ -1620,6 +1590,7 @@
 (use-package jinx
  :ensure t
  :defer t
+ :preface (qol/select-package 'jinx)
  :diminish "Jx"
 
  :bind
@@ -1632,6 +1603,7 @@
 (use-package which-key
  :ensure t
  :defer t
+ :preface (qol/select-package 'which-key)
  :diminish
 
  :custom
@@ -1647,6 +1619,7 @@
 (use-package nerd-icons-completion
  :ensure t
  :defer t
+ :preface (qol/select-package 'nerd-icons-completion)
 
  :init
  (nerd-icons-completion-mode))
@@ -1670,6 +1643,7 @@
 (use-package marginalia
  :ensure t
  :defer t
+ :preface (qol/select-package 'marginalia)
 
  :config
  (nerd-icons-completion-marginalia-setup)
@@ -1680,9 +1654,7 @@
 (use-package embark
  :ensure t
  :defer t
-
- :init
- (qol/select-package 'embark)
+ :preface (qol/select-package 'embark)
 
  :bind
  (("C-." . embark-act)
@@ -1701,6 +1673,7 @@
 (use-package hotfuzz
  :ensure t
  :defer t
+ :preface (qol/select-package 'hotfuzz)
  :after minibuffer
 
  :init
@@ -1709,6 +1682,7 @@
 (use-package orderless
  :ensure t
  :defer t
+ :preface (qol/select-package 'orderless)
 
  :config
  (push 'orderless-initialism orderless-matching-styles)
@@ -1717,6 +1691,7 @@
 (use-package orderless
  :ensure t
  :defer t
+ :preface (qol/select-package 'orderless)
  :after minibuffer
 
  :init
@@ -1725,6 +1700,7 @@
 (use-package prescient
  :ensure t
  :defer t
+ :preface (qol/select-package 'prescient)
 
  :custom
  (prescient-sort-full-matches-first t)
@@ -1744,6 +1720,7 @@
 (use-package prescient
  :ensure t
  :defer t
+ :preface (qol/select-package 'prescient)
  :after minibuffer
 
  :init
@@ -1814,6 +1791,7 @@
 (use-package ctrlf
  :ensure t
  :defer t
+ :preface (qol/select-package 'ctrlf)
 
  :custom
  (ctrlf-default-search-style 'fuzzy)
@@ -1825,13 +1803,15 @@
 (use-package transient
  :ensure t
  :defer t
+ :preface (qol/select-package 'transient)
 
  :custom
  (transient-default-level 7))
 
 (use-package multiple-cursors
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'multiple-cursors))
 
 (use-package mc-edit-lines
  :ensure multiple-cursors
@@ -1850,7 +1830,7 @@
  ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
 
 (use-package multiple-cursors-core
- :ensure nil
+ :ensure multiple-cursors
  :defer t
 
  :custom
@@ -1859,6 +1839,7 @@
 (use-package volatile-highlights
  :ensure t
  :defer t
+ :preface (qol/select-package 'volatile-highlights)
  :diminish
 
  :init
@@ -1893,6 +1874,7 @@
 (use-package tree-sitter
  :ensure t
  :defer t
+ :preface (qol/select-package 'tree-sitter)
  :diminish "Ts")
 
 (use-package tree-sitter-hl
@@ -1905,6 +1887,8 @@
 (use-package tree-sitter-langs
  :ensure t
  :defer t
+ :preface (qol/select-package 'tree-sitter-langs)
+
  :hook
  (tree-sitter-mode-hook .
   (lambda ()
@@ -1947,6 +1931,7 @@
 (use-package dape
  :ensure t
  :defer t
+ :preface (qol/select-package 'dape)
 
  :hook
  (dape-stopped-hook . dape-breakpoint-save)
@@ -1968,6 +1953,7 @@
 (use-package yaml-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'yaml-mode)
 
  :bind
  (:map yaml-mode-map
@@ -1990,26 +1976,31 @@
 (use-package llvm-ts-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'llvm-ts-mode)
  :mode "\\.ll\\'")
 
 (use-package demangle-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'demangle-mode)
  :after llvm-ts-mode
  :hook llvm-ts-mode-hook)
 
 (use-package autodisass-llvm-bitcode
  :ensure t
- :defer
+ :defer t
+ :preface (qol/select-package 'autodisass-llvm-bitcode)
  :mode "\\.bc\\'")
 
 (use-package demangle-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'demangle-mode))
 
 (use-package yaml-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'yaml-mode)
 
  :mode "\\.clang-format"
  :mode "\\.clang-tidy")
@@ -2067,6 +2058,7 @@
 (use-package editorconfig
  :ensure t
  :defer t
+ :preface (qol/select-package 'editorconfig)
  :diminish "Ec"
  :after cc-mode
  :hook
@@ -2094,12 +2086,14 @@
 (use-package lsp-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-mode)
  :after cc-mode
  :hook (c-mode-common-hook . lsp))
 
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
+ :preface (qol/select-package 'lsp-mode)
 
  :config
  (add-to-list 'lsp-clients-clangd-args "--enable-config")
@@ -2150,6 +2144,7 @@
 (use-package projectile
  :ensure t
  :defer t
+ :preface (qol/select-package 'projectile)
  :diminish "Pr"
 
  :commands
@@ -2169,9 +2164,17 @@
  :init
  (projectile-mode))
 
+(use-package consult-projectile
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'consult-projectile)
+ :after projectile
+ :bind ("C-x P" . consult-projectile))
+
 (use-package treemacs-projectile
  :ensure t
  :defer t
+ :preface (qol/select-package 'treemacs-projectile)
  :after (treemacs projectile))
 
 ;;; Snippets
@@ -2179,10 +2182,10 @@
 (use-package yasnippet
  :ensure t
  :defer t
+ :preface (qol/select-package 'yasnippet)
  :diminish (yas-minor-mode . "Ys")
 
  :init
- (qol/select-package 'yasnippet)
  (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
 
  :config
@@ -2191,6 +2194,7 @@
 (use-package consult-yasnippet
  :ensure t
  :defer t
+ :preface (qol/select-package 'consult-yasnippet)
 
  :bind
  ("M-z" . consult-yasnippet))
@@ -2198,10 +2202,8 @@
 (use-package yasnippet-snippets
  :ensure t
  :defer t
+ :preface (qol/select-package 'yasnippet-snippets)
  :after yasnippet
-
- :init
- (qol/select-package 'yasnippet-snippets)
 
  :preface
  (defvar *init/yasnippet-snippets-initialized* nil)
@@ -2219,6 +2221,7 @@
 (use-package hledger-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'hledger-mode)
  :mode ("\\.journal\\'" "\\.ledger\\'")
 
  :preface
@@ -2267,7 +2270,7 @@
  (hledger-mode-hook . (lambda () (setq-local tab-width 1))))
 
 (use-package whitespace
- :ensure t
+ :ensure nil
  :defer t
  :after hledger-mode
  :hook hledger-mode-hook)
@@ -2275,18 +2278,21 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
+ :preface (qol/select-package 'symbol-overlay)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package yasnippet
  :ensure t
  :defer t
+ :preface (qol/select-package 'yasnippet)
  :after hledger-mode
  :hook (hledger-mode-hook . yas-minor-mode-on))
 
 (use-package company
  :ensure t
  :defer t
+ :preface (qol/select-package 'company)
  :after hledger-mode
 
  :preface
@@ -2300,24 +2306,28 @@
 (use-package flycheck
  :ensure t
  :defer t
+ :preface (qol/select-package 'flycheck)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package display-fill-column-indicator
  :ensure t
  :defer t
+ :preface (qol/select-package 'display-fill-column-indicator)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package hl-line
  :ensure t
  :defer t
+ :preface (qol/select-package 'hl-line)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package flycheck-hledger
  :ensure t
  :defer t
+ :preface (qol/select-package 'flycheck-hledger)
  :after (flycheck hledger-mode)
 
  :custom
@@ -2332,6 +2342,7 @@
 (use-package web-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'web-mode)
  :mode "\\.html\\'"
  :mode "\\.css\\'"
  :mode "\\.js\\'"
@@ -2357,6 +2368,7 @@
 (use-package company-web
  :ensure t
  :defer t
+ :preface (qol/select-package 'company-web)
  :after (company web-mode)
 
  :preface
@@ -2370,6 +2382,7 @@
 (use-package emmet-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'emmet-mode)
  :hook web-mode-hook
 
  :custom
@@ -2379,15 +2392,18 @@
 
 (use-package dockerfile-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'dockerfile-mode))
 
 (use-package docker-compose-mode
  :ensure t
- :defer t)
+ :defer t
+ :preface (qol/select-package 'docker-compose-mode))
 
 (use-package docker
  :ensure t
  :defer t
+ :preface (qol/select-package 'docker)
  :bind ("C-c D" . docker))
 
 ;;; Archlinux PKGBUILDs
@@ -2395,6 +2411,7 @@
 (use-package pkgbuild-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'pkgbuild-mode)
  :mode "\\PKGBUILD\\'")
 
 ;;; Rust
@@ -2402,6 +2419,7 @@
 (use-package rust-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'rust-mode)
 
  :bind
  (:map rust-mode-map
@@ -2461,6 +2479,7 @@
 (use-package lsp-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-mode)
  :diminish "Ls"
 
  :init
@@ -2545,6 +2564,7 @@
  :ensure lsp-ui
  :defer t
  :after lsp-mode
+ :preface (qol/select-package 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -2556,6 +2576,7 @@
 (use-package lsp-ui-imenu
  :ensure lsp-ui
  :defer t
+ :preface (qol/select-package 'lsp-ui)
 
  :custom
  (lsp-ui-imenu-auto-refresh t)
@@ -2563,25 +2584,39 @@
  (lsp-ui-imenu-buffer-position 'left)
  (lsp-ui-imenu-window-fix-width t))
 
+(use-package consult-lsp
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'consult-lsp)
+ :after lsp-mode
+
+ :bind
+ (:map lsp-mode-map
+  ("C-c ! d" . consult-lsp-diagnostics)
+  ("C-c s s" . consult-lsp-symbols)))
+
 (use-package lsp-ui-flycheck
  :ensure lsp-ui
  :defer t
+ :preface (qol/select-package 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
-  ("C-c l" . lsp-ui-flycheck-list)))
+  ("C-c ! L" . lsp-ui-flycheck-list)))
 
 (use-package lsp-ui
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
-  ("C-c G S" . lsp-ui-find-workspace-symbol)))
+  ("C-c s S" . lsp-ui-find-workspace-symbol)))
 
 (use-package lsp-ui
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-ui)
  :after lsp-ui-doc
 
  :custom
@@ -2597,6 +2632,7 @@
 (use-package lsp-ui
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-ui)
  :after lsp-ui-peek
 
  :custom
@@ -2606,20 +2642,18 @@
 (use-package lsp-ui
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-ui)
  :after lsp-ui-sideline
 
  :custom
  (lsp-ui-sideline-enable nil))
-
-(use-package dap-mode
- :ensure t
- :defer t)
 
 ;;; Treemacs
 
 (use-package treemacs
  :ensure t
  :defer t
+ :preface (qol/select-package 'treemacs)
 
  :bind
  ("<f9>" . treemacs-select-window))
@@ -2690,6 +2724,7 @@
 (use-package lsp-treemacs
  :ensure t
  :defer t
+ :preface (qol/select-package 'lsp-treemacs)
  :after lsp-mode
 
  :preface
@@ -2712,16 +2747,16 @@
 
  :bind
  (:map lsp-mode-map
-  ("C-c e" . lsp-treemacs-errors-list)
-  ("C-c s" . lsp-treemacs-symbols)
-  ("C-c c" . lsp-treemacs-call-hierarchy)
-  ("C-c i" . lsp-treemacs-implementations)
-  ("C-c f" . lsp-treemacs-references)
-  ("C-c t" . init/lsp-treemacs-type-hierarchy)
-  ("C-c C" . init/lsp-treemacs-call-hierarchy)
-  ("C-c T" . init/lsp-treemacs-type-hierarchy)
-  ("C-c I" . init/lsp-treemacs-implementations)
-  ("C-c F" . init/lsp-treemacs-references))
+  ("C-c t e" . lsp-treemacs-errors-list)
+  ("C-c t s" . lsp-treemacs-symbols)
+  ("C-c t c" . lsp-treemacs-call-hierarchy)
+  ("C-c t i" . lsp-treemacs-implementations)
+  ("C-c t f" . lsp-treemacs-references)
+  ("C-c t t" . init/lsp-treemacs-type-hierarchy)
+  ("C-c t C" . init/lsp-treemacs-call-hierarchy)
+  ("C-c t T" . init/lsp-treemacs-type-hierarchy)
+  ("C-c t I" . init/lsp-treemacs-implementations)
+  ("C-c t F" . init/lsp-treemacs-references))
 
  :hook
  (lsp-mode-hook . lsp-treemacs-sync-mode))
@@ -2729,11 +2764,13 @@
 (use-package treemacs-magit
  :ensure t
  :demand
+ :preface (qol/select-package 'treemacs-magit)
  :after (treemacs magit))
 
 (use-package treemacs-nerd-icons
  :ensure t
  :demand
+ :preface (qol/select-package 'treemacs-nerd-icons)
  :after treemacs
 
  :config
