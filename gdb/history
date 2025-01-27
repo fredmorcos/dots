@@ -1,104 +1,3 @@
-r
-n
-p bind2loader
-q
-break main
-tui enable
-r
-n
-q
-q
-break main
-break Bind2Loader::Bind2Loader()
-break Bind2Loader::Bind2Loader
-tui enable
-r
-n
-p bind2loader
-q
-break main
-tui enable
-r
-n
-p bind2loader 
-q
-run
-tui enable
-bt
-q
-catch throw 
-r
-tui enable
-bt
-q
-tui enable
-break main
-r
-n
-c
-r
-n
-n
-q
-break main
-tui enable
-r
-q
-break RemoteBackend::getUpdatedPrimaries
-r
-tui enable
-n
-s
-s
-c
-r
-tui enable
-n
-n
-c
-r
-b
-info break
-delete 2
-delete 3
-info breakpoints 
-b
-delete 4
-info brek
-info breakpoints 
-n
-q
-break HTTPConnector::send_message
-break RemoteBackend::getUpdatedPrimaries
-r
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
 c
 c
 c
@@ -253,4 +152,105 @@ show startup-quietly
 q
 q
 q
+q
+break rfc2231_decode_value
+tui enable
+r
+watch value
+watch str_c(result)
+n
+c
+n
+p *value
+p value
+q
+break rfc2231_decode_value
+tui enable
+r
+watch value
+n
+c
+q
+break rfc2231_decode_value
+tui enable
+r
+n
+p value
+n
+p str_c(result)
+n
+pch
+p ch
+p str_c(result)
+n
+p str_c(result)
+n
+p str_c(result)
+n
+p str_c(result)
+n
+p str_c(result)
+n
+p str_c(result)
+n
+p value
+p decoded
+p str_c(decoded)
+n
+p utf8
+r
+n
+p str_c(result)
+n
+p str_c(result)
+n
+r
+n
+p str_c(result)
+p value
+n
+p ch
+n
+p ch
+n
+s
+n
+r
+c
+c
+c
+c
+bt
+break test_rfc2231_parser:86
+r
+c
+c
+c
+n
+p input
+s
+n
+s
+n
+s
+n
+n
+q
+break rfc2231_decode_value 
+tui enable
+r
+c
+c
+c
+c
+bt
+r
+c
+c
+c
+n
+p value
+p last
+p str_c(result)
+p value-last
 q
