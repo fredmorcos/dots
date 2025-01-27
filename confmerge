@@ -152,6 +152,7 @@ cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
 cmerge vimrc                           ~/.config/vim/vimrc
 
+cmerge gdb/gdbearlyinit                ~/.config/gdb/gdbearlyinit
 cmerge gdb/gdbinit                     ~/.config/gdb/gdbinit
 cmerge gdb/history                     ~/.config/gdb/history
 

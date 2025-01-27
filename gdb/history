@@ -1,22 +1,3 @@
-q
-tui enable
-break main
-r
-n
-s
-bt
-n
-n
-s
-c
-c
-quit
-break main
-r
-tui enable
-n
-restart
-stop
 r
 n
 p bind2loader
@@ -253,4 +234,23 @@ p actual_value
 n
 p decoded
 p str_c(decoded)
+q
+break rfc2231_decode_value
+tui enable
+r
+n
+watch p
+n
+n
+watch ch
+n
+p *p
+n
+n
+q
+q
+show startup-quietly 
+q
+q
+q
 q
