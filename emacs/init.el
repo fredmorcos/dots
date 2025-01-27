@@ -1198,7 +1198,7 @@
  :preface (qol/select-package 'diff-hl)
 
  :custom
- ;; (diff-hl-flydiff-delay 0.1)
+ (diff-hl-flydiff-delay 1)
  (diff-hl-draw-borders nil)
  (diff-hl-update-async t))
 
