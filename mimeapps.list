@@ -157,6 +157,8 @@ video/x-ogm=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
 x-scheme-handler/mailto=org.mozilla.Thunderbird.desktop;emacs-mail.desktop;
+message/rfc822=emacs.desktop;
+
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;
 application/json=emacs.desktop;
@@ -322,3 +324,4 @@ video/x-ogm+ogg=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
 x-scheme-handler/mailto=emacs-mail.desktop;
+message/rfc822=emacs.desktop
