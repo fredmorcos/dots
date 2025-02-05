@@ -1,171 +1,3 @@
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-tui enable
-c
-p input
-p *input
-n
-cout << req
-p req
-n
-n
-n
-n
-bt
-n
-c
-info breakpoints 
-delete 1
-delete 2
-break RemoteBackend::getUpdatedPrimaries
-r
-n
-break RemoteBackend::recv
-r
-s
-n
-s
-n
-p retval
-n
-n
-bt
-n
-n
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-c
-delete 1
-info breakpoints 
-delete 4
-break RemoteBackend::getUpdatedPrimaries
-info brek
-info breakpoints 
-delete 3
-c
-break RemoteBackend::recv
-c
-s
-n
-s
-n
-p ex.what()
-p ex.reason 
-q
-q
-break RemoteBackend::getUpdatedPrimaries
-r
-tui enable
-break RemoteBackend::recv
-r
-s
-n
-s
-n
-q
-break RemoteBackend::getUpdatedPrimaries
-tui enable
-r
-n
-q
-break rfc2231-parser.c:301
-r
-tui
-tui enable
-n
-p rfc2231_params[j].value
-n
-p actual_value
-p charset
-n
-p utf8
-p *utf8
-p utf8->data
-p *(utf8->data)
-tui disable
-p *utf8
-p str_c(utf8)
-tui enable
-n
-p actual_value
-n
-p decoded
-p str_c(decoded)
-q
-break rfc2231_decode_value
-tui enable
-r
-n
-watch p
-n
-n
-watch ch
-n
-p *p
-n
-n
-q
-q
-show startup-quietly 
-q
-q
-q
-q
-break rfc2231_decode_value
-tui enable
-r
-watch value
-watch str_c(result)
-n
-c
-n
-p *value
-p value
-q
-break rfc2231_decode_value
-tui enable
 r
 watch value
 n
@@ -253,4 +85,172 @@ p value
 p last
 p str_c(result)
 p value-last
+q
+break rfc2231_decode_charset_value 
+tui enable
+r
+n
+p charset
+s
+n
+p ch
+p str_c(str)
+n
+p ch
+n
+p str_c(str)
+n
+n
+p value
+n
+p result
+p result->v[0]
+p *result->v[0]
+p *(result->v[0])
+p result->v[0]
+p result->v[0][0]
+p result->v[0]
+n
+p result->v[0]
+p result->v[0][0]
+n
+c
+break rfc2231_decode_charset_value 
+r
+tui enable
+p value
+c
+p value
+c
+p value
+r
+s
+r
+c
+c
+c
+c
+r
+tui enable
+p value
+c
+p value
+n
+s
+n
+p ch
+p value
+n
+p ch
+p str
+p str_c(str)
+n
+p ch
+n
+p ch
+p str_c(str)
+n
+p str_c(str)
+n
+n
+p value
+n
+c
+p value
+c
+p value
+n
+s
+n
+p str_c(str)
+n
+break rfc2231_decode_charset_value 
+tui enable
+r
+n
+p value
+q
+break rfc2231_decode_charset_value 
+tui enable
+r
+n
+p value
+n
+p decoded
+n
+p value
+n
+s
+n
+s
+n
+n
+s
+n
+s
+n
+n
+s
+s
+s
+f
+help f
+fi
+fin
+n
+p utf8_r
+p str_c(utf8_r)
+n
+p tmp_val
+c
+n
+p value
+n
+p value
+n
+s
+n
+s
+n
+s
+n
+s
+n
+p charset_is_utf8(charset)
+n
+s
+n
+s
+fin
+p *result_r
+p result_r
+p output
+p str_c(output)
+n
+p tmp_val
+q
+break test_rfc2231_parser_rfc_tests_2
+q
+break test_rfc2231_parser_rfc_tests_2
+tui enable
+r
+n
+s
+break rfc2231_decode_charset_value 
+c
+n
+n charset
+q
+break rfc2231_decode_charset_value 
+break test_rfc2231_parser_rfc_tests_2
+tui enable
+r
+c
+c
+n
+p charset
+p value
+n
+p str_c(tmp)
+n
 q
