@@ -154,7 +154,6 @@ cmerge vimrc                           ~/.config/vim/vimrc
 
 cmerge gdb/gdbearlyinit                ~/.config/gdb/gdbearlyinit
 cmerge gdb/gdbinit                     ~/.config/gdb/gdbinit
-cmerge gdb/history                     ~/.config/gdb/history
 
 cmerge dict/hunspell_en_US             ~/.hunspell_en_US
 cmerge dict/aspell.en.pws              ~/.aspell.en.pws
@@ -179,8 +178,6 @@ cmerge fonts/fonts.conf                ~/.config/fontconfig/fonts.conf
 cmerge foot.ini                        ~/.config/foot/foot.ini
 
 cmerge mimeapps.list                   ~/.config/mimeapps.list
-
-cmerge python/history                  ~/.config/python/history
 
 cmerge loader/loader.conf              /boot/loader/loader.conf
 cmerge loader/arch.conf                /boot/loader/entries/arch.conf
