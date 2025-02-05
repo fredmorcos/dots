@@ -180,7 +180,7 @@ cmerge foot.ini                        ~/.config/foot/foot.ini
 
 cmerge mimeapps.list                   ~/.config/mimeapps.list
 
-cmerge pythonrc                        ~/.config/python/pythonrc
+cmerge python/history                  ~/.config/python/history
 
 cmerge loader/loader.conf              /boot/loader/loader.conf
 cmerge loader/arch.conf                /boot/loader/entries/arch.conf
