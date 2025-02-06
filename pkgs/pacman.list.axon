@@ -326,6 +326,7 @@ mythes-en
 nautilus-image-converter
 nautilus-open-any-terminal
 ncdu
+neovim
 netavark
 nethogs
 net-tools
@@ -445,6 +446,7 @@ python-pyinotify
 python-pylast
 python-pylint
 python-pymad
+python-pynvim
 python-pypng
 python-pyserial
 python-pystemmer
@@ -609,7 +611,6 @@ xf86-input-void
 xmldiff
 xmlstarlet
 xorg-xkill
-xsel
 xsv
 yaml-cpp
 yamllint
