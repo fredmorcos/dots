@@ -150,7 +150,6 @@ cmerge shell/bashrc                    ~/.bashrc
 cmerge shell/bash_profile              ~/.bash_profile
 cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
-cmerge vimrc                           ~/.config/vim/vimrc
 
 cmerge gdb/gdbearlyinit                ~/.config/gdb/gdbearlyinit
 cmerge gdb/gdbinit                     ~/.config/gdb/gdbinit
