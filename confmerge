@@ -68,7 +68,7 @@ cmerge () {
         echo "Skip: {$SRC} === $DST"
       else
         echo "Merge: {$SRC} != $DST"
-        dosudo "vim -f -d $DPATH/$SRC" "$DST"
+        dosudo "nvim -f -d $DPATH/$SRC" "$DST"
       fi
     else
       echo "Error: $DST exists but is not a file"
