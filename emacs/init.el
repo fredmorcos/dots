@@ -2157,8 +2157,8 @@
  :custom
  (projectile-project-search-path '("~/Workspace"))
  (projectile-sort-order 'recently-active)
- (projectile-indexing-method 'hybrid)
  (projectile-enable-caching nil)
+ (projectile-indexing-method 'hybrid)
  (projectile-require-project-root nil)
 
  :init
