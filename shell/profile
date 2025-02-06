@@ -24,10 +24,6 @@ export ANDROID_HOME="$XDG_DATA_HOME/android"             # Android tools
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"           # Docker
 export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube           # Minikube
 export PYTHON_HISTORY="$XDG_CONFIG_HOME/python/history"  # Python
-# shellcheck disable=SC2016
-export GVIMINIT='let $MYGVIMRC="$XDG_CONFIG_HOME/vim/gvimrc" | source $MYGVIMRC'  # GVim
-# shellcheck disable=SC2016
-export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'      # Vim
 
 # Binary and library paths
 PATH="$HOME/Workspace/dots/scripts:$PATH"

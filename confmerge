@@ -151,6 +151,8 @@ cmerge shell/bash_profile              ~/.bash_profile
 cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
 
+cmerge nvim/init.vim                   ~/.config/nvim/init.vim
+
 cmerge gdb/gdbearlyinit                ~/.config/gdb/gdbearlyinit
 cmerge gdb/gdbinit                     ~/.config/gdb/gdbinit
 
