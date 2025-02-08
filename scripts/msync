@@ -50,7 +50,7 @@ cmd () {
 rdiff () {
   TARGET_FILE="scp://$TARGET/$1"
   printf ">>> %s vs. %s\n" "$1" "$TARGET_FILE"
-  vim -d "$1" "$TARGET_FILE"
+  nvim -d "$1" "$TARGET_FILE"
   printf "\n\n"
 }
 
