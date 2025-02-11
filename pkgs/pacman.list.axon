@@ -31,7 +31,6 @@ bear
 bearssl
 beets
 bettercap-caplets
-bind
 binsider
 blas64-openblas
 bluez-tools
@@ -150,7 +149,7 @@ emacs-wayland
 entr
 epapirus-icon-theme
 epiphany
-ettercap-gtk
+ethtool
 exfatprogs
 eza
 f2fs-tools
@@ -175,8 +174,6 @@ gamemode
 gcovr
 gdb-dashboard
 gdm
-geoip-database-extra
-geoipupdate
 ghex
 git-absorb
 git-bug
@@ -314,7 +311,6 @@ minikube
 minisign
 mkinitcpio-systemd-tool
 mkinitcpio-utils
-mmdblookup
 mold
 most
 mpv
@@ -500,7 +496,6 @@ ripasso
 ripgrep-all
 rocm-opencl-runtime
 rocm-smi-lib
-ropper
 rpm-tools
 rtaudio
 ruby-webrick
@@ -535,7 +530,6 @@ soundconverter
 sox
 squashfs-tools
 sshfs
-stp
 strace
 s-tui
 subdl
@@ -570,7 +564,6 @@ udftools
 udisks2-btrfs
 ugrep
 unace
-unbound
 unicode-emoji
 unixodbc
 unrar
