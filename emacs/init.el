@@ -1171,7 +1171,8 @@
  ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
  (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
  (magit-bury-buffer-function #'magit-restore-window-configuration)
- (magit-repository-directories '(("~/Workspace" . 3))))
+ (magit-repository-directories '(("~/Workspace" . 3)))
+ (magit-format-file-function #'magit-format-file-nerd-icons))
 
 (use-package magit
  :ensure t
