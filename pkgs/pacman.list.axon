@@ -252,6 +252,7 @@ jp2a
 kcov
 kexec-tools
 keychain
+key-rack
 kmon
 kubectl
 ladspa
