@@ -7,6 +7,7 @@ amd-ucode
 android-tools
 antiword
 aria2
+arj
 asciinema
 aspell-de
 aspell-en
@@ -38,11 +39,13 @@ bluez-utils
 boost
 bottom
 boxxy
+bridge-utils
 brightnessctl
 brother-dcp-l2510d
 brscan4
 brscan5
 btop
+bzip3
 cabextract
 capitaine-cursors
 cargo-about
@@ -158,6 +161,7 @@ fd
 fdupes
 ffmpegthumbnailer
 fig2dev
+file-roller
 firefox
 flatpak
 flatpak-xdg-utils
@@ -352,6 +356,7 @@ paccat
 pacman-contrib
 pacrunner
 pam-u2f
+papers
 par2cmdline
 paru-bin
 pass
