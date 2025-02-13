@@ -504,7 +504,6 @@ rocm-opencl-runtime
 rocm-smi-lib
 rpm-tools
 rtaudio
-ruby-webrick
 rust-analyzer
 rust-bindgen
 sane-airscan
