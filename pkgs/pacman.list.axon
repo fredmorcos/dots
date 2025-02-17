@@ -547,6 +547,7 @@ system-config-printer
 systemd-resolvconf
 systemd-ukify
 t1utils
+tabiew
 taplo-cli
 tcpdump
 tealdeer
