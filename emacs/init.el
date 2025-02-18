@@ -2261,7 +2261,9 @@
   (init/move-amount-to-column))
 
  :bind
- (:map hledger-mode-map ("C-c >" . init/move-amount-to-column))
+ (:map hledger-mode-map
+  ("C-c >" . init/move-amount-to-column)
+  ("C-c +" . hledger-increment-entry-date))
 
  :custom
  (hledger-currency-string "EUR")
