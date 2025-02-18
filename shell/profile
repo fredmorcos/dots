@@ -25,6 +25,9 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"           # Docker
 export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube           # Minikube
 export PYTHON_HISTORY="$XDG_CONFIG_HOME/python/history"  # Python
 
+# Python
+export USE_SYMENGINE=1
+
 # Binary and library paths
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/.local/share/rust/cargo/bin:$PATH"
