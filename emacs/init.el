@@ -2491,11 +2491,14 @@
  (setenv "LSP_USE_PLISTS" "true")
  (setq-default read-process-output-max (* 1024 1024))
 
+ :config
+ ;; Unmark after formatting.
+ (defadvice lsp-format-region
+  (after unmark-after-lsp-format-region activate)
+  (keyboard-quit))
+
  :bind
  (:map lsp-mode-map
-  ("C-c f" . lsp-format-buffer)
-  ("C-c g" . lsp-format-region)
-  ;; ("TAB"   . lsp-format-region)
   ("C-c h" . lsp-describe-thing-at-point)
   ("M-RET" . lsp-execute-code-action)
   ("<f8>"  . lsp-inlay-hints-mode)
