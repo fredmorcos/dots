@@ -1315,16 +1315,17 @@
  (whitespace-line-column fill-column)
  (show-trailing-whitespace nil)
  (whitespace-action '(cleanup auto-cleanup))
- (whitespace-style
-  '(face
-    trailing
-    tabs
-    lines-tail
-    missing-newline-at-eof
-    empty
-    space-after-tab
-    space-before-tab
-    tab-mark))
+ ;; (whitespace-style
+ ;;  '(face
+ ;;    trailing
+ ;;    tabs
+ ;;    lines-tail
+ ;;    missing-newline-at-eof
+ ;;    empty
+ ;;    space-after-tab
+ ;;    space-before-tab
+ ;;    tab-mark))
+ (whitespace-style nil)
 
  :custom-face
  (whitespace-tab ((t (:foreground "lavender" :background "white smoke")))))
