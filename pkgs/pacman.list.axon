@@ -33,6 +33,7 @@ bearssl
 beets
 binsider
 blas64-openblas
+blender
 bluez-tools
 bluez-utils
 boost
@@ -213,6 +214,7 @@ hdparm
 hexedit
 hexer
 highlight
+hiprt
 hledger-ui
 hledger-web
 hspell
@@ -277,7 +279,6 @@ libofa
 libopenraw
 libotr
 libportal-gtk3
-libraw
 libsidplayfp
 libultrahdr
 libupnp
@@ -608,7 +609,6 @@ xmldiff
 xmlstarlet
 xorg-xkill
 xsv
-yaml-cpp
 yamllint
 yapf
 yt-dlp
