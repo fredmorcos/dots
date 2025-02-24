@@ -275,12 +275,8 @@
 
  :config
  ;; Recenter after pressing on links to emacs source code.
- (defadvice help-button-action
-  (after recenter-after-help-button-action activate)
-  (recenter))
- (defadvice help-function-def--button-function
-  (after recenter-after-help-function-def--button-function activate)
-  (recenter)))
+ (advice-add 'help-button-action :after #'recenter)
+ (advice-add 'help-function-def--button-function :after #'recenter))
 
 (use-package info
  :ensure nil
@@ -303,15 +299,9 @@
  :defer t
 
  :config
- (defadvice find-file
-  (after recenter-after-find-file activate)
-  (recenter))
- (defadvice find-file-literally
-  (after recenter-after-find-file-literally activate)
-  (recenter))
- (defadvice find-file-other-window
-  (after recenter-after-find-file-other-window activate)
-  (recenter))
+ (advice-add 'find-file :after #'recenter)
+ (advice-add 'find-file-literally :after #'recenter)
+ (advice-add 'find-file-other-window :after #'recenter)
 
  :custom
  (confirm-kill-processes nil))
@@ -321,9 +311,7 @@
  :defer t
 
  :config
- (defadvice push-button
-  (after recenter-after-push-button activate)
-  (recenter)))
+ (advice-add 'push-button :after #'recenter))
 
 (use-package mouse
  :ensure nil
@@ -339,9 +327,7 @@
 
  :config
  ;; Recenter after using goto-line.
- (defadvice goto-line
-  (after recenter-after-goto-line activate)
-  (recenter))
+ (advice-add 'goto-line :after #'recenter)
 
  :custom
  ;; Hide commands in M-x that do not work in the current mode
@@ -478,12 +464,8 @@
   ("C-?" . consult-narrow-help))
 
  :config
- (defadvice consult-register
-  (after recenter-after-consult-register activate)
-  (recenter))
- (defadvice consult-buffer
-  (after recenter-after-consult-buffer activate)
-  (recenter))
+ (advice-add 'consult-register :after #'recenter)
+ (advice-add 'consult-buffer :after #'recenter)
 
  :hook
  (consult-after-jump-hook . recenter)
@@ -719,15 +701,9 @@
  (flycheck-display-errors-delay 1)
 
  :config
- (defadvice flycheck-next-error
-  (after recenter-after-flycheck-next-error activate)
-  (recenter))
- (defadvice flycheck-previous-error
-  (after recenter-after-flycheck-previous-error activate)
-  (recenter))
- (defadvice flycheck-error-list-goto-error
-  (after recenter-after-flycheck-error-list-goto-error activate)
-  (recenter)))
+ (advice-add 'flycheck-next-error :after #'recenter)
+ (advice-add 'flycheck-previous-error :after #'recenter)
+ (advice-add 'flycheck-error-list-goto-error :after #'recenter))
 
 (use-package flycheck-posframe
  :ensure t
@@ -1189,9 +1165,7 @@
  (magit-revision-fill-summary-line fill-column)
 
  :config
- (defadvice magit-diff-visit-file
-  (after recenter-after-magit-diff-visit-file activate)
-  (recenter)))
+ (advice-add 'magit-diff-visit-file :after #'recenter))
 
 (use-package diff-hl
  :ensure t
@@ -1724,6 +1698,7 @@
  :defer t
  :preface (qol/select-package 'prescient)
  :after minibuffer
+ :functions prescient-remember
 
  :init
  (push 'prescient completion-styles)
@@ -2053,9 +2028,7 @@
 
  :config
  ;; Unmark region even when c-indent-line-or-region doesn't indent anything.
- (defadvice c-indent-line-or-region
-  (after deactivate-mark-after-c-indent-line-or-region activate)
-  (deactivate-mark)))
+ (advice-add 'c-indent-line-or-region :after #'keyboard-quit))
 
 (use-package editorconfig
  :ensure t
@@ -2494,9 +2467,7 @@
 
  :config
  ;; Unmark after formatting.
- (defadvice lsp-format-region
-  (after unmark-after-lsp-format-region activate)
-  (keyboard-quit))
+ (advice-add 'lsp-format-region :after #'keyboard-quit)
 
  :bind
  (:map lsp-mode-map
