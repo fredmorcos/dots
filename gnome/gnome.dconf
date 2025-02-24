@@ -61,8 +61,8 @@ autorun-never=true
 [org/gnome/desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/fred/.local/share/backgrounds/2024-09-19-15-24-30-amber-d.jxl'
-picture-uri-dark='file:///home/fred/.local/share/backgrounds/2024-09-19-15-24-30-amber-d.jxl'
+picture-uri='file:///home/fred/.local/share/backgrounds/2025-02-24-12-55-48-Monterey-morning.jpg'
+picture-uri-dark='file:///home/fred/.local/share/backgrounds/2025-02-24-12-55-48-Monterey-morning.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
