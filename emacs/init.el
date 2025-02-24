@@ -1568,14 +1568,14 @@
 (use-package indent-guide
  :ensure t
  :defer t
- :preface (qol/select-package 'ident-guide)
+ :preface (qol/select-package 'indent-guide)
  :after json-mode
  :hook json-mode-hook)
 
 (use-package indent-guide
  :ensure t
  :defer t
- :preface (qol/select-package 'ident-guide)
+ :preface (qol/select-package 'indent-guide)
  :after json-ts-mode
  :hook json-ts-mode-hook)
 
