@@ -1,6 +1,6 @@
 {
-        "auths": {
-                "registry.open-xchange.com": {}
-        },
-        "credsStore": "secretservice"
+  "auths": {
+    "registry.open-xchange.com": {}
+  },
+  "credsStore": "secretservice"
 }
