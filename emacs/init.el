@@ -25,6 +25,11 @@
  :ensure nil
  :defer t
 
+ :preface
+ (defun init/recenter (&rest _)
+  "A recentering function we can use as an advice."
+  (recenter))
+
  :config
  ;; Enable these functions.
  (put 'list-timers      'disabled nil)
@@ -176,7 +181,7 @@
 
  :custom
  (tab-always-indent t)
- (tab-first-completion 'word))
+ (tab-first-completion 'word-or-paren-or-punct))
 
 (use-package simple
  :ensure nil
@@ -275,8 +280,8 @@
 
  :config
  ;; Recenter after pressing on links to emacs source code.
- (advice-add 'help-button-action :after #'recenter)
- (advice-add 'help-function-def--button-function :after #'recenter))
+ (advice-add 'help-button-action :after #'init/recenter)
+ (advice-add 'help-function-def--button-function :after #'init/recenter))
 
 (use-package info
  :ensure nil
@@ -299,9 +304,9 @@
  :defer t
 
  :config
- (advice-add 'find-file :after #'recenter)
- (advice-add 'find-file-literally :after #'recenter)
- (advice-add 'find-file-other-window :after #'recenter)
+ (advice-add 'find-file :after #'init/recenter)
+ (advice-add 'find-file-literally :after #'init/recenter)
+ (advice-add 'find-file-other-window :after #'init/recenter)
 
  :custom
  (confirm-kill-processes nil))
@@ -311,7 +316,7 @@
  :defer t
 
  :config
- (advice-add 'push-button :after #'recenter))
+ (advice-add 'push-button :after #'init/recenter))
 
 (use-package mouse
  :ensure nil
@@ -327,7 +332,7 @@
 
  :config
  ;; Recenter after using goto-line.
- (advice-add 'goto-line :after #'recenter)
+ (advice-add 'goto-line :after #'init/recenter)
 
  :custom
  ;; Hide commands in M-x that do not work in the current mode
@@ -464,8 +469,8 @@
   ("C-?" . consult-narrow-help))
 
  :config
- (advice-add 'consult-register :after #'recenter)
- (advice-add 'consult-buffer :after #'recenter)
+ (advice-add 'consult-register :after #'init/recenter)
+ (advice-add 'consult-buffer :after #'init/recenter)
 
  :hook
  (consult-after-jump-hook . recenter)
@@ -701,9 +706,9 @@
  (flycheck-display-errors-delay 1)
 
  :config
- (advice-add 'flycheck-next-error :after #'recenter)
- (advice-add 'flycheck-previous-error :after #'recenter)
- (advice-add 'flycheck-error-list-goto-error :after #'recenter))
+ (advice-add 'flycheck-next-error :after #'init/recenter)
+ (advice-add 'flycheck-previous-error :after #'init/recenter)
+ (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
 
 (use-package flycheck-posframe
  :ensure t
@@ -1165,7 +1170,7 @@
  (magit-revision-fill-summary-line fill-column)
 
  :config
- (advice-add 'magit-diff-visit-file :after #'recenter))
+ (advice-add 'magit-diff-visit-file :after #'init/recenter))
 
 (use-package diff-hl
  :ensure t
@@ -1576,6 +1581,13 @@
 
 ;;; Emacs Tools
 
+(use-package register
+ :ensure nil
+ :defer t
+
+ :custom
+ (register-use-preview t))
+
 (use-package which-key
  :ensure t
  :defer t
@@ -1756,7 +1768,8 @@
  (read-file-name-completion-ignore-case t)
  (completions-format 'one-column)
  (completions-detailed t)
- (completions-group t))
+ (completions-group t)
+ (completion-cycle-threshold nil))
 
 (use-package map-ynp
  :ensure nil
