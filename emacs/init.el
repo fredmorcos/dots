@@ -136,7 +136,10 @@
  (require-final-newline 'visit-save)
  ;; File contents.
  (coding-system-for-read 'utf-8-unix)
- (coding-system-for-write 'utf-8-unix))
+ (coding-system-for-write 'utf-8-unix)
+ (major-mode-remap-alist
+  '((python-mode . python-ts-mode)
+    (json-mode . json-ts-mode))))
 
 ;;; Filling
 
@@ -1256,11 +1259,6 @@
  (auto-revert-avoid-polling t)
  (buffer-auto-revert-by-notification t))
 
-(use-package indent-guide
- :ensure t
- :defer t
- :preface (qol/select-package 'indent-guide))
-
 (use-package crux
  :ensure t
  :defer t
@@ -1544,17 +1542,17 @@
  :defer t
  :preface (qol/select-package 'json-mode))
 
-(use-package indent-guide
+(use-package indent-bars
  :ensure t
  :defer t
- :preface (qol/select-package 'indent-guide)
+ :preface (qol/select-package 'indent-bars)
  :after json-mode
  :hook json-mode-hook)
 
-(use-package indent-guide
+(use-package indent-bars
  :ensure t
  :defer t
- :preface (qol/select-package 'indent-guide)
+ :preface (qol/select-package 'indent-bars)
  :after json-ts-mode
  :hook json-ts-mode-hook)
 
@@ -1961,6 +1959,13 @@
  :after yaml-mode
  :hook yaml-mode-hook)
 
+(use-package indent-bars
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'indent-bars)
+ :after yaml-mode
+ :hook yaml-mode-hook)
+
 ;;; LLVM
 
 (use-package llvm-ts-mode
@@ -2125,7 +2130,14 @@
  :ensure t
  :defer t
  :after python
- :hook ((python-mode-hook python-ts-mode-hook) . lsp))
+ :hook (python-base-mode-hook . lsp))
+
+(use-package indent-bars
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'indent-bars)
+ :after python
+ :hook python-base-mode-hook)
 
 ;;; Project Management
 
