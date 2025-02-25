@@ -1,3 +1,4 @@
+3cpio
 7zip
 acpid
 afl++
@@ -20,6 +21,7 @@ atuin
 audiofile
 autopep8
 avisynthplus
+bacon
 bandit
 bandwhich
 base
@@ -45,6 +47,7 @@ brother-dcp-l2510d
 brscan4
 brscan5
 btop
+bugstalker
 bzip3
 cabextract
 capitaine-cursors
@@ -143,6 +146,7 @@ d-spy
 ducker
 duf
 duperemove
+dust
 easy-rsa
 ebook-tools
 ecm-tools
@@ -198,6 +202,7 @@ gpart
 gparted
 gptfdisk
 graphicsmagick
+grcov
 gspell
 gst-libav
 gst-plugin-gtk
@@ -250,6 +255,7 @@ iwd
 jfsutils
 jless
 jp2a
+kani
 kcov
 kexec-tools
 keychain
@@ -336,6 +342,7 @@ ngrep
 nilfs-utils
 nmap
 noise-suppression-for-voice
+noto-fonts-emoji
 ntfs-3g
 nushell
 nuspell
@@ -506,6 +513,7 @@ rpm-tools
 rtaudio
 rust-analyzer
 rust-bindgen
+rustscan
 sane-airscan
 sassc
 sbctl
@@ -523,6 +531,7 @@ shake
 shellcheck
 shfmt
 simple-scan
+skim
 sloccount
 smartmontools
 snapshot
@@ -597,6 +606,7 @@ webp-pixbuf-loader
 websocat
 wget
 whois
+wild
 wireguard-tools
 wireless-regdb
 wl-clipboard
@@ -611,6 +621,7 @@ xorg-xkill
 xsv
 yamllint
 yapf
+yazi
 yt-dlp
 yubikey-manager-qt
 yubikey-personalization-gui
