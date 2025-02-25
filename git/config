@@ -4,7 +4,13 @@
   signingKey = 83493108
 
 [commit]
-	gpgSign = true
+  gpgSign = true
+
+[branch]
+  sort = committerdate
+
+[tag]
+  sort = version:refname
 
 [color]
   ui = true
@@ -23,8 +29,21 @@
 [merge]
   conflictstyle = zdiff3
 
+[push]
+  default = simple
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+
 [pull]
   rebase = true
+
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
 
 [status]
   showUntrackedFiles = all
@@ -33,26 +52,45 @@
   defaultBranch = main
 
 [diff]
-  colormoved = "default"
-  colormovedws = "allow-indentation-change"
+  algorithm = histogram
+  colorMoved = true
+  colorMovedWS = allow-indentation-change
+  renames = true
+  # Replace the a/ and b/ in diff header output with where the diff is actually coming
+  # from: i/ for the index, w/ for the working directory and c/ for the commit.
+  mnemonicPrefix = true
+
+[help]
+  autocorrect = prompt
+
+[commit]
+  verbose = true
+
+# Reuse Recoded Resolutions: The enabled option will make sure it records the before and
+# after states of rebase conflicts and the autoupdate will automatically re-apply the
+# resolutions if it sees them again. I wrote about this at some length over here, so I
+# won’t bore you with the recap any further.
+# [rerere]
+#   enabled = true
+#   autoupdate = true
 
 [url "https://github.com/"]
   insteadOf = gh:
 
 [url "git@github.com:"]
-  pushInsteadOf = "gh:"
+  pushInsteadOf = gh:
 
 [url "https://gitlab.com/"]
   insteadOf = gl:
 
 [url "git@gitlab.com:"]
-  pushInsteadOf = "gl:"
+  pushInsteadOf = gl:
 
 [url "https://aur.archlinux.org/"]
   insteadOf = aur:
 
 [url "aur@aur.archlinux.org:"]
-  pushInsteadOf = "aur:"
+  pushInsteadOf = aur:
 
 [includeIf "gitdir:~/Workspace/dovecot/"]
   path = ~/.config/git/config-ox
