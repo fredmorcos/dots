@@ -675,13 +675,6 @@
  :custom
  (company-posframe-quickhelp-x-offset 2))
 
-(use-package company-prescient
- :ensure t
- :defer t
- :preface (qol/select-package 'company-prescient)
- :after company
- :hook company-mode-hook)
-
 ;;; Syntax Checking
 
 (use-package flycheck
@@ -886,6 +879,7 @@
 (use-package display-fill-column-indicator
  :ensure nil
  :defer t
+ :preface (qol/select-package 'display-fill-column-indicator)
  :after prog-mode
  :hook prog-mode-hook)
 
@@ -1504,7 +1498,23 @@
 (use-package markdown-mode
  :ensure t
  :defer t
- :preface (qol/select-package 'markdown-mode))
+ :preface (qol/select-package 'markdown-mode)
+ :config
+ (setq-mode-local markdown-mode fill-column 79))
+
+(use-package display-fill-column-indicator
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'display-fill-column-indicator)
+ :after markdown-mode
+ :hook markdown-mode-hook)
+
+(use-package hl-line
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'hl-line)
+ :after markdown-mode
+ :hook markdown-mode-hook)
 
 ;;; Sed
 
@@ -1682,61 +1692,6 @@
 
  :init
  (push 'orderless completion-styles))
-
-(use-package prescient
- :ensure t
- :defer t
- :preface (qol/select-package 'prescient)
-
- :custom
- (prescient-sort-full-matches-first t)
- (completions-sort #'prescient-completion-sort)
-
- :config
- (push 'literal-prefix prescient-filter-method)
- (push 'prefix prescient-filter-method)
- (push 'anchored prescient-filter-method)
-
- :commands
- prescient-persist-mode
-
- :init
- (prescient-persist-mode))
-
-(use-package prescient
- :ensure t
- :defer t
- :preface (qol/select-package 'prescient)
- :after minibuffer
- :functions prescient-remember
-
- :init
- (push 'prescient completion-styles)
-
- :custom
- (completions-sort #'prescient-completion-sort)
-
- :preface
- (defun init/prescient-remember-minibuffer-contents ()
-  "Remember minibuffer contents as a completion candidate.
-
-    - If we are not completing a file name (according to
-      `minibuffer-completing-file-name'), we remember the
-      minibuffer contents.
-
-    - When completing file names, we remember the last component,
-      including a trailing directory separator if needed."
-  (let ((txt (minibuffer-contents-no-properties)))
-   (unless (string-empty-p txt)
-    (prescient-remember
-     (if minibuffer-completing-file-name
-      (if (directory-name-p txt)
-       (thread-first txt file-name-split (last 2) car file-name-as-directory)
-       (thread-first txt file-name-split last car))
-      txt)))))
-
- :hook
- (minibuffer-exit-hook . init/prescient-remember-minibuffer-contents))
 
 (use-package emacs
  :ensure nil
@@ -2331,7 +2286,6 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'flycheck-hledger)
- :after (flycheck hledger-mode)
 
  :custom
  ;; TODO Also add "accounts".
