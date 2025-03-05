@@ -1479,20 +1479,6 @@
  (lazy-count-prefix-format "(%s/%s) ")
  (search-whitespace-regexp ".*?"))
 
-;;; CMake
-
-(use-package cmake-mode
- :ensure t
- :defer t
- :preface (qol/select-package 'cmake-mode))
-
-(use-package eldoc-cmake
- :ensure t
- :defer t
- :preface (qol/select-package 'eldoc-cmake)
- :after cmake-mode
- :hook (cmake-mode-hook . eldoc-cmake-enable))
-
 ;;; Markdown
 
 (use-package markdown-mode
