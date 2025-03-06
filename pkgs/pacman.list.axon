@@ -1,6 +1,7 @@
 3cpio
 7zip
 acpid
+adwaita-fonts
 afl++
 alsa-firmware
 alsa-utils
@@ -262,6 +263,7 @@ keychain
 key-rack
 kmon
 kubectl
+lact-libadwaita
 ladspa
 ledger
 lesspipe
