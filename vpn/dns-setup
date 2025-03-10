@@ -10,4 +10,4 @@ set -o noglob
 resolvectl dnsovertls "$1" true
 resolvectl dnssec "$1" true
 resolvectl dns "$1" 10.20.30.3 10.20.30.6 10.217.9.1#gw-02.dovecot.net
-resolvectl domain "$1" "~open-xchange.com" "~dovecot.net" "~oxdus.io" "~oxoe.int" "~oxhh.int" "~oxdo.int" "~oxhb.int" "~oxnbg.int" "~ox.io" "~oxoe.io" "~os.oxui.de" "~os2.oxui.de" "~cloud.oxoe.io" "~int.oxoe.io"
+resolvectl domain "$1" "~open-xchange.com" "~dovecot.net" "~oxdus.io" "~oxoe.int" "~oxhh.int" "~oxdo.int" "~oxhb.int" "~oxnbg.int" "~ox.io" "~oxoe.io" "~os.oxui.de" "~os2.oxui.de" "~cloud.oxoe.io" "~int.oxoe.io" "~qa.dovecot.net"
