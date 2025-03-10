@@ -2302,12 +2302,6 @@
  :hook
  (web-mode-hook . (lambda () (setq-local tab-width 2))))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :after web-mode
- :hook (web-mode-hook . lsp))
-
 (use-package company-web
  :ensure t
  :defer t
