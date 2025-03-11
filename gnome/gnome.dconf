@@ -86,19 +86,19 @@ experimental-features=@as []
 
 # Shell
 [org/gnome/desktop/interface]
-font-hinting='none'
-enable-hot-corners=true
-cursor-blink=false
-show-battery-percentage=true
-cursor-theme='capitaine-cursors'
-font-name='Sans 13'
-document-font-name='Sans 13'
-monospace-font-name='Monospace 14'
-font-antialiasing='rgba'
+accent-color='blue'
 clock-show-weekday=true
 color-scheme='default'
+cursor-blink=false
+cursor-theme='capitaine-cursors'
+document-font-name='Sans 14'
+enable-hot-corners=true
+font-antialiasing='rgba'
+font-hinting='none'
+font-name='Sans 13'
 icon-theme='Adwaita'
-accent-color='blue'
+monospace-font-name='Monospace 14'
+show-battery-percentage=true
 
 # Shell Calendar
 [org/gnome/desktop/calendar]

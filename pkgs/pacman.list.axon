@@ -358,6 +358,7 @@ openmp
 openslide
 optipng
 ostra-cg
+otf-apple-fonts
 otf-libertinus
 otf-monaspace-nerd
 oxipng
@@ -574,6 +575,7 @@ torsocks
 traceroute
 trash-cli
 ttf-cousine-nerd
+ttf-monaco
 tup
 typst
 udftools
