@@ -275,7 +275,6 @@ libblockdev-nvdimm
 libblockdev-smart
 libdvdcss
 libdwarf
-libebur128
 libfaketime
 libgnome-keyring
 liblouis
