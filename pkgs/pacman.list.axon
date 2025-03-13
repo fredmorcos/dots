@@ -475,6 +475,7 @@ python-svglib
 python-symengine
 python-sympy
 python-tabulate
+python-trio
 python-typogrify
 python-unicodedata2
 python-unidiff
