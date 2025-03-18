@@ -1,7 +1,6 @@
 3cpio
 7zip
 acpid
-adwaita-fonts
 afl++
 alsa-firmware
 alsa-utils
@@ -360,8 +359,6 @@ optipng
 ostra-cg
 otf-apple-fonts
 otf-commit-mono-nerd
-otf-libertinus
-otf-monaspace-nerd
 oxipng
 paccat
 pacman-contrib
@@ -576,8 +573,6 @@ torbrowser-launcher
 torsocks
 traceroute
 trash-cli
-ttf-cousine-nerd
-ttf-monaco
 tup
 typst
 udftools
