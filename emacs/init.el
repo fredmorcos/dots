@@ -396,7 +396,11 @@
  :defer t
 
  :bind
- (:map isearch-mode-map ("C-p" . casual-isearch-tmenu)))
+ (:map isearch-mode-map ("C-p" . casual-isearch-tmenu))
+
+ :custom
+ (isearch-allow-motion t)
+ (isearch-motion-changes-direction t))
 
 (use-package ibuffer
  :ensure nil
