@@ -598,7 +598,6 @@ vulkan-extra-layers
 vulkan-intel
 vulkan-mesa-layers
 vulkan-radeon
-vulkan-tools
 wabt
 wayland-utils
 wdiff
