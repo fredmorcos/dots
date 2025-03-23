@@ -2237,20 +2237,6 @@
  :after hledger-mode
  :hook (hledger-mode-hook . yas-minor-mode-on))
 
-(use-package company
- :ensure t
- :defer t
- :preface (qol/select-package 'company)
- :after hledger-mode
-
- :preface
- (defun init/setup-hledger-company ()
-  "Setup company for hledger completion."
-  (init/setup-company '(hledger-company)))
-
- :hook
- (hledger-mode-hook . init/setup-hledger-company))
-
 (use-package flycheck
  :ensure t
  :defer t
