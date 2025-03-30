@@ -1751,7 +1751,7 @@
  :defer t
 
  :bind
- ("C-c C-v"       . mc/edit-lines))
+ ("C-c C-v" . mc/edit-lines))
 
 (use-package mc-mark-more
  :ensure multiple-cursors
@@ -2082,7 +2082,11 @@
  :defer t
  :preface (qol/select-package 'indent-bars)
  :after python
- :hook python-base-mode-hook)
+ :hook python-base-mode-hook
+
+ :custom
+ (indent-bars-treesit-support t)
+ (indent-bars-width-frac 0.1))
 
 ;;; Project Management
 
