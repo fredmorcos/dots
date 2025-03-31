@@ -3,6 +3,7 @@ cargo-criterion
 cargo-deadlinks
 cargo-demangle
 inferno
+oo7-cli
 ren-find
 rustfilt
 suckit
