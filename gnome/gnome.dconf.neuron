@@ -1,3 +1,6 @@
 # Shell
 [org/gnome/desktop/interface]
 monospace-font-name='Monospace 14'
+
+[/org/gnome/mutter]
+experimental-features=['scale-monitor-framebuffer']
