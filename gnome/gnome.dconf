@@ -24,6 +24,7 @@ report-technical-problems=false
 [org/gnome/settings-daemon/plugins/power]
 idle-dim=false
 sleep-inactive-ac-type='nothing'
+power-button-action='nothing'
 
 # Night-Light
 [org/gnome/settings-daemon/plugins/color]
