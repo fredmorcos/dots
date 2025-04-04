@@ -1399,13 +1399,6 @@
  (sh-mode-hook . init/make-file-executable)
  (bash-ts-mode-hook . init/make-file-executable))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :preface (qol/select-package 'lsp-mode)
- :after sh-script
- :hook (sh-mode-hook . lsp))
-
 ;;; Dired
 
 (use-package dired-async
