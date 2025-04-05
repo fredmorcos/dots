@@ -233,6 +233,7 @@ hyphen-de
 hyphen-en
 hyphen-fr
 id3lib
+identity
 idle3-tools
 ifuse
 img2pdf
@@ -433,7 +434,6 @@ python-keystone
 python-linkify-it-py
 python-lsp-black
 python-lz4
-python-mdx-video
 python-micawber
 python-objgraph
 python-olefile
@@ -505,6 +505,7 @@ realtime-privileges
 reflector
 remake
 renameutils
+resources
 reuse
 rink
 ripasso
@@ -593,6 +594,7 @@ valgrind
 vbindiff
 vdpauinfo
 vi
+video-trimmer
 vkd3d
 vorbis-tools
 vpl-gpu-rt
