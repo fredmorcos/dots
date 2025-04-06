@@ -156,8 +156,12 @@ video/x-msvideo=mpv.desktop;
 video/x-ogm=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
-x-scheme-handler/mailto=org.mozilla.Thunderbird.desktop;emacs-mail.desktop;
+x-scheme-handler/mailto=org.mozilla.Thunderbird.desktop;emacs-mail.desktop;firefox.desktop;
 message/rfc822=emacs.desktop;
+x-scheme-handler/http=firefox.desktop;
+application/xhtml+xml=firefox.desktop;
+text/html=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
 
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;
@@ -323,5 +327,9 @@ video/x-ogm=mpv.desktop;
 video/x-ogm+ogg=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
-x-scheme-handler/mailto=emacs-mail.desktop;
+x-scheme-handler/mailto=firefox.desktop
 message/rfc822=emacs.desktop
+x-scheme-handler/http=firefox.desktop
+application/xhtml+xml=firefox.desktop
+text/html=firefox.desktop
+x-scheme-handler/https=firefox.desktop
