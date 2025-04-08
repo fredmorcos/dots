@@ -648,10 +648,10 @@
   (setq-local company-backends
    `((,@main-backends
       company-capf
-      ;; company-dabbrev-code
-      ;; company-keywords
-      ;; company-yasnippet
-      ;; company-files
+      company-dabbrev-code
+      company-keywords
+      company-yasnippet
+      company-files
       ,@secondary-backends
       :separate)))
   (company-mode))
@@ -662,6 +662,11 @@
  (company-selection-wrap-around t)
  (company-tooltip-align-annotations t)
  (company-tooltip-minimum-width 40)
+ (company-tooltip-maximum-width 80)
+ (company-tooltip-limit 15)
+ (company-tooltip-minimum 10)
+ (company-tooltip-flip-when-above t)
+ (company-tooltip-annotation-padding 3)
  (company-tooltip-width-grow-only t))
 
 (use-package company-posframe
