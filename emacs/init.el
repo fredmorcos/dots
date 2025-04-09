@@ -138,8 +138,7 @@
  (coding-system-for-read 'utf-8-unix)
  (coding-system-for-write 'utf-8-unix)
  (major-mode-remap-alist
-  '((python-mode . python-ts-mode)
-    (json-mode . json-ts-mode))))
+  '((json-mode . json-ts-mode))))
 
 ;;; Filling
 
@@ -857,7 +856,6 @@
 
  :config
  (init/devdocs-set python-mode "python~3.13")
- (init/devdocs-set python-ts-mode "python~3.13")
  (init/devdocs-set rust-mode "rust")
  (init/devdocs-set c-mode "c")
  (init/devdocs-set dockerfile-mode "docker")
@@ -1798,7 +1796,6 @@
     (c      . ("https://github.com/tree-sitter/tree-sitter-c"))
     (cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp"))
     (json   . ("https://github.com/tree-sitter/tree-sitter-json.git"))
-    (python . ("https://github.com/tree-sitter/tree-sitter-python.git"))
     (toml   . ("https://github.com/ikatyang/tree-sitter-toml.git"))
     (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git")))))
 
@@ -2074,6 +2071,29 @@
  :defer t
  :after python
  :hook (python-base-mode-hook . lsp))
+
+(use-package lsp-pylsp
+ :ensure lsp-mode
+ :defer t
+ :after (python lsp-mode)
+ :custom
+ (lsp-pylsp-plugins-autopep8-enabled t)
+ (lsp-pylsp-plugins-black-enabled t)
+ (lsp-pylsp-plugins-isort-enabled t)
+ (lsp-pylsp-plugins-jedi-completion-fuzzy t)
+ (lsp-pylsp-plugins-mypy-dmypy t)
+ (lsp-pylsp-plugins-mypy-enabled t)
+ (lsp-pylsp-plugins-mypy-report-progress t)
+ (lsp-pylsp-plugins-pycodestyle-enabled t)
+ (lsp-pylsp-plugins-pyflakes-enabled t)
+ (lsp-pylsp-plugins-pylint-enabled t)
+ (lsp-pylsp-plugins-rope-autoimport-code-actions-enabled t)
+ (lsp-pylsp-plugins-rope-autoimport-completions-enabled t)
+ (lsp-pylsp-plugins-rope-autoimport-enabled t)
+ (lsp-pylsp-plugins-rope-completion-enabled t)
+ (lsp-pylsp-plugins-ruff-enabled t)
+ (lsp-pylsp-plugins-ruff-preview t)
+ (lsp-pylsp-plugins-yapf-enabled t))
 
 (use-package indent-bars
  :ensure t
