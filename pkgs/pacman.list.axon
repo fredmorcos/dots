@@ -350,10 +350,14 @@ ntfs-3g
 nushell
 nuspell
 nvchecker
+nvidia-open
+nvidia-prime
+nvidia-settings
 nvme-cli
 nvtop
 odt2txt
 opencl-clover-mesa
+opencl-nvidia
 opencl-rusticl-mesa
 opendoas
 openmp
@@ -435,6 +439,7 @@ python-keystone
 python-linkify-it-py
 python-lsp-black
 python-lz4
+python-mdx-video
 python-micawber
 python-objgraph
 python-olefile
@@ -458,6 +463,7 @@ python-pylast
 python-pylint
 python-pymad
 python-pynvim
+python-pynvml
 python-pypng
 python-pyserial
 python-pystemmer
