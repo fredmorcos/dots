@@ -647,10 +647,10 @@
   (setq-local company-backends
    `((,@main-backends
       company-capf
-      company-dabbrev-code
-      company-keywords
-      company-yasnippet
-      company-files
+      ;; company-dabbrev-code
+      ;; company-keywords
+      ;; company-yasnippet
+      ;; company-files
       ,@secondary-backends
       :separate)))
   (company-mode))
