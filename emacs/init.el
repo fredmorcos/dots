@@ -2117,20 +2117,18 @@
  :commands
  projectile-project-root
 
- :bind
- (:map projectile-mode-map
-  ("C-x p" . projectile-command-map))
+ :bind-keymap ("C-x p" . projectile-command-map)
 
  :custom
- (projectile-project-search-path '("~/Workspace"))
+ (projectile-project-search-path '(("~/Workspace" . 3)))
  (projectile-sort-order 'recently-active)
  (projectile-auto-cleanup-known-projects t)
  (projectile-enable-caching nil)
+ (projectile-auto-discover t)
  ; (projectile-indexing-method 'hybrid)
  ; (projectile-require-project-root nil)
 
- :init
- (projectile-mode))
+ :hook (after-init-hook . projectile-mode))
 
 (use-package consult-projectile
  :ensure t
