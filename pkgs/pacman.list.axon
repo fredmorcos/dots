@@ -5,6 +5,7 @@ afl++
 alsa-firmware
 alsa-utils
 amd-ucode
+android-file-transfer
 android-tools
 antiword
 aria2
@@ -328,6 +329,7 @@ mold
 most
 mpv
 mtools
+mtpfs
 musepack-tools
 musl
 mutt
