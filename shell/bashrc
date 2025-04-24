@@ -61,6 +61,12 @@ dirconv_jxl() {
   /usr/bin/ls $1 | parallel cjxl --lossless_jpeg=0 {} small/{}.jxl
 }
 
+dirconv_jpg_resize() {
+  mkdir small
+  # shellcheck disable=SC2086
+  /usr/bin/ls $2 | parallel magick {} -scale $1 -quality 90% small/{}
+}
+
 dirconv_subtitles() {
   mkdir small
   for i in $1; do
