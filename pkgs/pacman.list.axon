@@ -203,9 +203,7 @@ gnu-netcat
 gpart
 gparted
 gptfdisk
-graphicsmagick
 grcov
-gspell
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
@@ -239,6 +237,7 @@ idle3-tools
 ifuse
 img2pdf
 inetutils
+inkscape
 innoextract
 intel-compute-runtime
 intel-media-sdk
@@ -298,7 +297,6 @@ libvdpau-va-gl
 libvirt
 libvoikko
 libwmf
-libwpg
 linux-firmware
 linux-tools-meta
 lldb
@@ -417,7 +415,6 @@ python-beaker
 python-brotlicffi
 python-cairosvg
 python-cchardet
-python-cssselect
 python-debugpy
 python-discogs-client
 python-dogpile.cache
@@ -465,7 +462,6 @@ python-pylint
 python-pymad
 python-pynvim
 python-pypng
-python-pyserial
 python-pystemmer
 python-pytest-isort
 python-pytest-lsp
@@ -496,7 +492,6 @@ python-weasyprint
 python-webcolors
 python-xattr
 python-xlrd
-python-zstandard
 qemu-base
 qemu-tools
 qemu-user
@@ -507,7 +502,6 @@ radamsa
 radeontool
 radeontop
 radvd
-ragel
 rainfrog
 rclone
 read-edid
@@ -532,7 +526,6 @@ sassc
 sbctl
 sbsigntools
 scdoc
-scour
 screen
 scx-scheds
 sd
