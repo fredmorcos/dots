@@ -22,6 +22,11 @@ CMD=("rsync"
      '--exclude=clangd/*'
      '--exclude=share/flatpak/***'
      '--exclude=share/rust/***'
+     '--exclude __pycache__'
+     '--exclude .mypy_cache'
+     '--exclude emacs/elpa/'
+     '--exclude node_modules/'
+     '--exclude .cache/clangd'
      "$@")
 
 echo ">>> Rsync command:" "${CMD[@]}"
