@@ -1,0 +1,20 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+
+127.0.0.1	localhost neuron
+::1		localhost ip6-localhost ip6-loopback
+fe00::0		ip6-localnet
+ff00::0		ip6-mcastprefix
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+
+172.17.0.2				neuron
+fd11:10a1:ce98:488e:0:242:ac11:2	neuron
+
+192.168.0.1	router
+192.168.0.102	axon Desktop
+# 192.168.0.103	neuron Laptop
+# 192.168.0.104	neuron-wifi Laptop-WiFi
+192.168.0.104	neuron Laptop
+192.168.0.105	PocketBook
+192.168.0.106	rpi
