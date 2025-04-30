@@ -27,6 +27,7 @@ CMD=("rsync"
      '--exclude=emacs/elpa/'
      '--exclude=node_modules/'
      '--exclude=.cache/clangd'
+     '--exclude=.libs'
      "$@")
 
 echo ">>> Rsync command:" "${CMD[@]}"
