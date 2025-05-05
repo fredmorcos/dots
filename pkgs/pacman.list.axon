@@ -214,6 +214,7 @@ gucharmap
 gvfs-mtp
 handbrake
 handlr-regex
+haveged
 hddtemp
 hdparm
 hexedit
@@ -514,6 +515,7 @@ reuse
 rink
 ripasso
 ripgrep-all
+rng-tools
 rocm-opencl-runtime
 rocm-smi-lib
 rpm-tools
