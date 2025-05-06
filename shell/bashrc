@@ -56,21 +56,21 @@ alias gitpp='gitall pull -q && gitall push -q'
 alias mkdatedir='mkdir $(date +%Y%m%d)'
 
 dirconv_jxl() {
-  mkdir small
+  mkdir small-jxl
   # shellcheck disable=SC2086
-  /usr/bin/ls $1 | parallel cjxl --lossless_jpeg=0 {} small/{}.jxl
+  /usr/bin/ls $1 | parallel cjxl --lossless_jpeg=0 {} small-jxl/{}.jxl
 }
 
 dirconv_jpg_resize() {
-  mkdir small
+  mkdir small-jpg
   # shellcheck disable=SC2086
-  /usr/bin/ls $2 | parallel magick {} -scale $1 -quality 90% small/{}
+  /usr/bin/ls $2 | parallel magick {} -scale $1 -quality 90% small-jpg/{}
 }
 
 dirconv_subtitles() {
-  mkdir small
+  mkdir subtitles
   for i in $1; do
-    ffmpeg -i "$i" -map 0:s:"$2" "small/$i.en.srt"
+    ffmpeg -i "$i" -map 0:s:"$2" "subtitles/$i.en.srt"
   done
 }
 
