@@ -288,6 +288,7 @@ libofa
 libopenraw
 libotr
 libportal-gtk3
+libressl
 libsidplayfp
 libultrahdr
 libupnp
