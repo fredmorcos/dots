@@ -556,6 +556,7 @@ sshfs
 strace
 s-tui
 subdl
+sudo-rs
 svgcleaner
 swi-prolog
 switcheroo-control
