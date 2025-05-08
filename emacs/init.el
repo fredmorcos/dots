@@ -1096,6 +1096,15 @@
  :hook
  (meson-mode-hook . init/setup-company))
 
+(use-package lsp-meson
+ :ensure lsp-mode
+ :defer t
+ :preface (qol/select-package 'lsp-mode)
+ :after meson-mode
+ :hook (meson-mode-hook . lsp)
+ :custom
+ (lsp-meson-server-executable '("mesonlsp" "--full")))
+
 ;;; Version Control
 
 (use-package vc
