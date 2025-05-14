@@ -753,10 +753,9 @@
 
  :bind ("C-c p" . cape-prefix-map)
 
- :init
- (add-hook 'completion-at-point-functions #'cape-dabbrev)
- (add-hook 'completion-at-point-functions #'cape-file)
- (add-hook 'completion-at-point-functions #'cape-elisp-block))
+ :hook
+ (completion-at-point-functions . cape-dabbrev)
+ (completion-at-point-functions . cape-file))
 
 ;;; History and save-hist
 
@@ -1103,7 +1102,10 @@
  :after meson-mode
  :hook (meson-mode-hook . lsp)
  :custom
- (lsp-meson-server-executable '("mesonlsp" "--full")))
+ (lsp-meson-server-executable '("mesonlsp" "--full"))
+ :init
+ (setq-mode-local meson-mode lsp-completion-mode nil)
+ (setq-mode-local meson-mode lsp-completion-enable nil))
 
 ;;; Version Control
 
