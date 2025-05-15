@@ -2736,7 +2736,7 @@
  (treemacs-load-theme "nerd-icons"))
 
 ;; Print startup stats.
-(message "Startup in %s (%d GC runs)" (emacs-init-time) gcs-done)
+(message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
 
 (provide 'init)
 ;;; init.el ends here

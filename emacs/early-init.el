@@ -32,16 +32,16 @@
  :custom
  (debug-on-error t))
 
-(use-package profiler
- :disabled
- :ensure nil
- :defer t
+;; (use-package profiler
+;;  :disabled
+;;  :ensure nil
+;;  :defer t
 
- :init
- (profiler-start 'cpu)
+;;  :init
+;;  (profiler-start 'cpu)
 
- :hook
- (after-init-hook . profiler-report))
+;;  :hook
+;;  (after-init-hook . profiler-report))
 
 ;;; Garbage Collector
 
@@ -55,8 +55,8 @@
  (gc-cons-percentage 0.8)
 
  :config
- ;; Run the GC after 5 seconds of idleness.
- (run-with-idle-timer 5 t #'garbage-collect))
+ ;; Run the GC after 1 second of idleness.
+ (run-with-idle-timer 1 t #'garbage-collect))
 
 ;;; Configuration System
 
