@@ -42,7 +42,9 @@
  (put 'overwrite-mode   'disabled t)
  (put 'iconify-frame    'disabled t)
  (put 'suspend-frame    'disabled t)
- (put 'diary            'disabled t))
+ (put 'diary            'disabled t)
+ (put 'scroll-left      'disabled t)
+ (put 'scroll-right     'disabled t))
 
 ;;; Configuration Files
 
@@ -2572,11 +2574,10 @@
  (:map lsp-mode-map
   ("C-c s S" . lsp-ui-find-workspace-symbol)))
 
-(use-package lsp-ui
- :ensure t
+(use-package lsp-ui-doc
+ :ensure lsp-ui
  :defer t
  :preface (qol/select-package 'lsp-ui)
- :after lsp-ui-doc
 
  :custom
  (lsp-ui-doc-enable t)
@@ -2588,21 +2589,19 @@
  (lsp-ui-doc-max-height 30)
  (lsp-ui-doc-use-webkit t))
 
-(use-package lsp-ui
- :ensure t
+(use-package lsp-ui-peek
+ :ensure lsp-ui
  :defer t
  :preface (qol/select-package 'lsp-ui)
- :after lsp-ui-peek
 
  :custom
  (lsp-ui-peek-list-width 40)
  (lsp-ui-peek-always-show t))
 
-(use-package lsp-ui
- :ensure t
+(use-package lsp-ui-sideline
+ :ensure lsp-ui
  :defer t
  :preface (qol/select-package 'lsp-ui)
- :after lsp-ui-sideline
 
  :custom
  (lsp-ui-sideline-enable nil))
