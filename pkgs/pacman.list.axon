@@ -242,7 +242,6 @@ innoextract
 intel-compute-runtime
 intel-media-sdk
 intel-ucode
-intltool
 iotop
 iperf
 iperf3
@@ -512,7 +511,6 @@ reflector
 remake
 renameutils
 resources
-reuse
 rink
 ripasso
 ripgrep-all
