@@ -136,6 +136,7 @@ diffstat
 difftastic
 diffuse
 diskonaut
+dmidecode
 dnsmasq
 docker
 docker-buildx
@@ -162,7 +163,6 @@ exfatprogs
 extra-cmake-modules
 eza
 f2fs-tools
-facter
 fastjar
 fd
 fdupes
