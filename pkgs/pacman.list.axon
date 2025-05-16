@@ -37,6 +37,7 @@ beets
 binsider
 blas64-openblas
 blender
+bluez-obex
 bluez-tools
 bluez-utils
 boost
@@ -104,6 +105,7 @@ cbindgen
 ccache
 ccls
 cdrtools
+cfitsio
 cgdb
 chafa
 checksec
@@ -114,7 +116,6 @@ compsize
 conntrack-tools
 cpio
 cppcheck
-cppdap
 criu
 cups-pdf
 curlftpfs
@@ -135,7 +136,6 @@ diffstat
 difftastic
 diffuse
 diskonaut
-dmidecode
 dnsmasq
 docker
 docker-buildx
@@ -159,8 +159,10 @@ entr
 epiphany
 ethtool
 exfatprogs
+extra-cmake-modules
 eza
 f2fs-tools
+facter
 fastjar
 fd
 fdupes
@@ -339,6 +341,7 @@ nautilus-open-any-terminal
 ncdu
 neovim
 netavark
+netcdf
 nethogs
 net-tools
 networkmanager
@@ -401,6 +404,7 @@ pragha
 procs
 profile-cleaner
 progress
+proj
 proton-vpn-gtk-app
 pstoedit
 psutils
