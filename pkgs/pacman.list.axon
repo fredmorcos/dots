@@ -328,6 +328,7 @@ most
 mpv
 mtools
 mtpfs
+mupdf-tools
 musepack-tools
 musl
 mutt
@@ -572,6 +573,7 @@ taplo-cli
 tcpdump
 tealdeer
 tectonic
+texlive-latexextra
 tidy
 tig
 time
@@ -627,6 +629,7 @@ xf86-input-void
 xmldiff
 xmlstarlet
 xorg-xkill
+xournalpp
 xsv
 yamllint
 yapf
