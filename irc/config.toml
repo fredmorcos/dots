@@ -1,0 +1,40 @@
+theme = "Latte"
+
+[servers.liberachat]
+nickname = "fredmorcos"
+alt_nicks = ["fredmorcos_", "fredmorcos__"]
+realname = "Fred Morcos"
+server = "irc.libera.chat"
+channels = ["#lineageos", "#archlinux", "#archlinuxarm", "#emacs", "#emacs-beginners"]
+nick_password_file = "/home/fred/Documents/Notes/Secrets/Passwords/IRC/_libera.txt"
+nick_password_file_first_line_only = true
+password_file = "/home/fred/Documents/Notes/Secrets/Passwords/IRC/_libera.txt"
+password_file_first_line_only = true
+
+# [servers.liberachat.sasl.plain]
+# username = "fredmorcos"
+# password_file = "/home/fred/Documents/Notes/Secrets/Passwords/IRC/_libera.txt"
+
+[servers.oftc]
+nickname = "fredmorcos"
+alt_nicks = ["fredmorcos_", "fredmorcos__"]
+realname = "Fred Morcos"
+server = "irc.oftc.net"
+channels = ["#mesonbuild"]
+nick_password_file = "/home/fred/Documents/Notes/Secrets/Passwords/IRC/_oftc.txt"
+password_file_first_line_only = true
+
+[actions.buffer]
+click_channel_name = "replace-pane"
+
+[actions.sidebar]
+buffer = "replace-pane"
+
+[buffer.channel.topic]
+enabled = true
+
+[buffer.emojis]
+characters_to_trigger_picker = 0
+
+[font]
+size = 20

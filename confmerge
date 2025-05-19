@@ -183,6 +183,10 @@ cmerge foot.ini                        ~/.config/foot/foot.ini
 
 cmerge mimeapps.list                   ~/.config/mimeapps.list
 
+HALLOY=~/.var/app/org.squidowl.halloy/config/halloy
+cmerge irc/config.toml                 $HALLOY/config.toml
+cmerge irc/theme.toml                  $HALLOY/themes/Latte.toml
+
 cmerge loader/loader.conf              /boot/loader/loader.conf
 cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
