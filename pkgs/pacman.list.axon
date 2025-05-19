@@ -542,13 +542,13 @@ selene
 shake
 shellcheck
 shfmt
-showtime
 simple-scan
 skim
 sloccount
 smartmontools
 snapshot
 sndio
+sniffnet
 socat
 sof-firmware
 softhsm
