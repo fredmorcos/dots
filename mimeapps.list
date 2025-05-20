@@ -162,6 +162,7 @@ x-scheme-handler/http=firefox.desktop;
 application/xhtml+xml=firefox.desktop;
 text/html=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
+application/x-partial-download=mpv.desktop;
 
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;
