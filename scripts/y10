@@ -3,4 +3,4 @@
 set -o errexit
 set -o nounset
 
-yt-dlp -f "[height<=1080]" "$@"
+yt-dlp -S +size,+br,+res,+fps -f "[height<=1080]" "$@"
