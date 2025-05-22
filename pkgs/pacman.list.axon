@@ -360,9 +360,8 @@ nvidia-settings
 nvme-cli
 nvtop
 odt2txt
-opencl-clover-mesa
+opencl-mesa
 opencl-nvidia
-opencl-rusticl-mesa
 opendoas
 openmp
 openslide
