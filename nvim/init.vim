@@ -1,3 +1,5 @@
+set mouse=
+
 if &diff
   :map n ]c
   :map pp dp
