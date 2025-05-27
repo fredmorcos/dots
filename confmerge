@@ -150,6 +150,7 @@ cmerge gnome/nautilus-date/NautilusDate.py ~/.local/share/nautilus-python/extens
 cmerge gnome/nautilus-date/pyproject.toml  ~/.local/share/nautilus-python/extensions/pyproject.toml
 
 cmerge shell/bashrc                    ~/.bashrc
+cmerge shell/bashrc.user               ~/.bashrc.user
 cmerge shell/bash_profile              ~/.bash_profile
 cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
