@@ -508,6 +508,7 @@ qemu-base
 qemu-tools
 qemu-user
 qt5-wayland
+qt6-wayland
 quota-tools
 r2ghidra
 radamsa
