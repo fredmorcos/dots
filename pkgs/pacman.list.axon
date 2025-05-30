@@ -149,6 +149,7 @@ ducker
 duf
 duperemove
 dust
+dysk
 easy-rsa
 ebook-tools
 ecm-tools
@@ -192,6 +193,7 @@ git-cliff
 git-delta
 git-lfs
 gitui
+glances
 glyr
 gnome-calculator
 gnome-control-center
@@ -320,6 +322,7 @@ mesa-demos
 mesa-utils
 meson
 mesonlsp
+micro
 microsoft-gsl
 minikube
 minisign
@@ -452,6 +455,7 @@ python-lsp-black
 python-lz4
 python-micawber
 python-mpd2
+python-netifaces2
 python-objgraph
 python-olefile
 python-openpyxl
@@ -461,11 +465,11 @@ python-pdftotext
 python-pip
 python-pipx
 python-priority
+python-prometheus_client
 python-pyacoustid
 python-pyalsa
 python-pyaml
 python-pycryptodome
-python-pydantic
 python-pygal
 python-pygit2
 python-pygithub
@@ -475,6 +479,7 @@ python-pylint
 python-pymad
 python-pynvim
 python-pypng
+python-pystache
 python-pystemmer
 python-pytest-isort
 python-pytest-lsp
@@ -504,6 +509,7 @@ python-weasyprint
 python-webcolors
 python-xattr
 python-xlrd
+python-zeroconf
 qemu-base
 qemu-tools
 qemu-user
