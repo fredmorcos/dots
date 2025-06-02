@@ -643,20 +643,6 @@
  :diminish "Co"
  :commands company--active-p
 
- :preface
- (defun init/setup-company (&optional main-backends secondary-backends)
-  "Setup company completion system with common backends."
-  (setq-local company-backends
-   `((,@main-backends
-      company-capf
-      ;; company-dabbrev-code
-      ;; company-keywords
-      ;; company-yasnippet
-      ;; company-files
-      ,@secondary-backends
-      :separate)))
-  (company-mode))
-
  :custom
  (company-idle-delay 0.7)
  (company-keywords-ignore-case t)
@@ -930,15 +916,6 @@
  :after prog-mode
  :hook (prog-mode-hook . yas-minor-mode-on))
 
-(use-package company
- :ensure t
- :defer t
- :after prog-mode
- :hook (prog-mode-hook . init/setup-company)
-
- :preface
- (qol/select-package 'company))
-
 (use-package display-line-numbers
  :ensure nil
  :defer t
@@ -1090,21 +1067,17 @@
  :after meson-mode
  :hook meson-mode-hook)
 
-(use-package company
- :ensure t
- :defer t
- :after meson-mode
- :hook
- (meson-mode-hook . init/setup-company))
-
 (use-package lsp-meson
  :ensure lsp-mode
  :defer t
  :preface (qol/select-package 'lsp-mode)
  :after meson-mode
+
  :hook (meson-mode-hook . lsp)
+
  :custom
  (lsp-meson-server-executable '("mesonlsp" "--full"))
+
  :init
  (setq-mode-local meson-mode lsp-completion-mode nil)
  (setq-mode-local meson-mode lsp-completion-enable nil))
@@ -1276,7 +1249,10 @@
 (use-package crux
  :ensure t
  :defer t
- :preface (qol/select-package 'crux))
+ :preface (qol/select-package 'crux)
+
+ :bind
+ ([remap keyboard-quit] . crux-keyboard-quit-dwim))
 
 ;;; Various
 
@@ -1587,6 +1563,12 @@
   ("C-M-$" . jinx-languages)))
 
 ;;; Emacs Tools
+
+(use-package vundo
+ :ensure t
+ :defer t
+ :custom
+ (vundo-glyph-alist vundo-unicode-symbols))
 
 (use-package register
  :ensure nil
@@ -2240,15 +2222,39 @@
  :bind
  (:map hledger-mode-map
   ("C-c >" . init/move-amount-to-column)
+  ("C-c x" . init/find-next-unaligned)
   ("C-c +" . hledger-increment-entry-date))
 
  :custom
  (hledger-currency-string "EUR")
  (hledger-comments-column 1)
  (hledger-invalidate-completions '(on-save))
+ (hledger-jfile "~/Documents/Expenses/Expenses.ledger")
+
+ :config
+ (setq-mode-local hledger-mode tab-width 1))
+
+(use-package company
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'company)
+ :hook hledger-mode-hook
+ :config
+ (setq-mode-local hledger-mode
+  company-backends '(hledger-company)
+  completion-at-point-functions nil))
+
+(use-package flycheck-hledger
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'flycheck-hledger)
+
+ :custom
+ ;; TODO Also add "accounts".
+ (flycheck-hledger-checks '("commodities"))
 
  :hook
- (hledger-mode-hook . (lambda () (setq-local tab-width 1))))
+ (hledger-mode-hook . (lambda () (eval-when-compile (require 'flycheck-hledger)))))
 
 (use-package whitespace
  :ensure nil
@@ -2291,18 +2297,6 @@
  :after hledger-mode
  :hook hledger-mode-hook)
 
-(use-package flycheck-hledger
- :ensure t
- :defer t
- :preface (qol/select-package 'flycheck-hledger)
-
- :custom
- ;; TODO Also add "accounts".
- (flycheck-hledger-checks '("commodities"))
-
- :hook
- (hledger-mode-hook . (lambda () (eval-when-compile (require 'flycheck-hledger)))))
-
 ;;; Web Development
 
 (use-package web-mode
@@ -2322,26 +2316,28 @@
  (web-mode-auto-close-style 3)
  (web-mode-enable-auto-expanding t)
 
- :hook
- (web-mode-hook . (lambda () (setq-local tab-width 2))))
+ :config
+ (setq-mode-local web-mode tab-width 2))
+
+(use-package company
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'company)
+ :hook web-mode-hook)
 
 (use-package company-web
  :ensure t
- :defer t
+ :defer nil
  :preface (qol/select-package 'company-web)
  :after (company web-mode)
 
- :preface
- (defun init/setup-company-web ()
-  "Setup company for web development."
-  (init/setup-company '(company-css company-web-html)))
-
- :hook
- (web-mode-hook . init/setup-company-web))
+ :config
+ (setq-mode-local web-mode company-backends '(company-css company-web-html :separate)))
 
 (use-package emmet-mode
  :ensure t
  :defer t
+ :diminish "Em"
  :preface (qol/select-package 'emmet-mode)
  :hook web-mode-hook
 
