@@ -1326,6 +1326,19 @@
  (:map emacs-lisp-mode-map
   ("<f6>" . init/expand-current-macro)))
 
+(use-package elisp-mode
+ :ensure nil
+ :defer t
+ :after company
+
+ :config
+ (setq-mode-local emacs-lisp-mode
+  company-backends '(company-capf
+                     company-keywords
+                     company-dabbrev-code
+                     company-files
+                     :separate)))
+
 (use-package symbol-overlay
  :ensure t
  :defer t
@@ -1564,9 +1577,18 @@
 
 ;;; Emacs Tools
 
+(use-package speedrect
+ :ensure t
+ :demand
+ :preface (qol/select-package 'speedrect)
+ :diminish "Sr"
+ :config (speedrect-mode))
+
 (use-package vundo
  :ensure t
  :defer t
+ :preface (qol/select-package 'vundo)
+ :bind ("C-x u" . vundo)
  :custom
  (vundo-glyph-alist vundo-unicode-symbols))
 
@@ -2332,7 +2354,8 @@
  :after (company web-mode)
 
  :config
- (setq-mode-local web-mode company-backends '(company-css company-web-html :separate)))
+ (setq-mode-local web-mode
+  company-backends '(company-css company-web-html :separate)))
 
 (use-package emmet-mode
  :ensure t
