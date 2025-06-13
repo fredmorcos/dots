@@ -642,6 +642,7 @@
  :preface (qol/select-package 'company)
  :diminish "Co"
  :commands company--active-p
+ :hook prog-mode-hook
 
  :custom
  (company-idle-delay 0.7)
@@ -655,6 +656,12 @@
  (company-tooltip-flip-when-above t)
  (company-tooltip-annotation-padding 3)
  (company-tooltip-width-grow-only t))
+
+(use-package prog-mode
+ :ensure nil
+ :defer t
+ :config
+ (setq-mode-local prog-mode company-backends nil))
 
 (use-package company-posframe
  :ensure t
