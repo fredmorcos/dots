@@ -102,6 +102,7 @@ catdoc
 catimg
 cbindgen
 ccache
+ccid
 ccls
 cdrtools
 cfitsio
@@ -442,7 +443,6 @@ python-gssapi
 python-h2
 python-hsluv
 python-html2text
-python-husl
 python-installer
 python-invoke
 python-keyrings-alt
@@ -512,6 +512,7 @@ python-zeroconf
 qemu-base
 qemu-tools
 qemu-user
+qt5-svg
 qt5-wayland
 qt6-wayland
 quota-tools
@@ -652,7 +653,6 @@ yamllint
 yapf
 yazi
 yt-dlp
-yubikey-manager-qt
 yubikey-personalization-gui
 z
 zip
