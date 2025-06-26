@@ -14,7 +14,7 @@ HISTSIZE=10000
 
 export HISTCONTROL HISTSIZE
 
-source ~/.bashrc.user
+source .bashrc.user
 
 osc7_cwd() {
     local strlen=${#PWD}
