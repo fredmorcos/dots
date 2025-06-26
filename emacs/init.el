@@ -661,7 +661,12 @@
  :ensure nil
  :defer t
  :config
- (setq-mode-local prog-mode company-backends nil))
+ (setq-mode-local emacs-lisp-mode
+  company-backends '(company-capf
+                     company-keywords
+                     company-dabbrev-code
+                     company-files
+                     :separate)))
 
 (use-package company-posframe
  :ensure t
@@ -1332,19 +1337,6 @@
  :bind
  (:map emacs-lisp-mode-map
   ("<f6>" . init/expand-current-macro)))
-
-(use-package elisp-mode
- :ensure nil
- :defer t
- :after company
-
- :config
- (setq-mode-local emacs-lisp-mode
-  company-backends '(company-capf
-                     company-keywords
-                     company-dabbrev-code
-                     company-files
-                     :separate)))
 
 (use-package symbol-overlay
  :ensure t
