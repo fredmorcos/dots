@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
+# export PS1='\[\e[7;34m\]\w\[\e[0m\] >  '
 
 [[ -r "/usr/share/fzf/key-bindings.bash" ]] && source /usr/share/fzf/key-bindings.bash
 
@@ -33,3 +33,5 @@ osc7_cwd() {
 }
 
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
+
+[[ -x $(which starship) ]] && eval "$(starship init bash)"

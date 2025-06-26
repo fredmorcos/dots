@@ -155,6 +155,7 @@ cmerge shell/bash_profile              ~/.bash_profile
 cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
 cmerge shell/foot.ini                  ~/.config/foot/foot.ini
+cmerge shell/starship.rs               ~/.config/starship.toml
 
 cmerge nvim/init.vim                   ~/.config/nvim/init.vim
 

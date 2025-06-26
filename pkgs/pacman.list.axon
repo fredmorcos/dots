@@ -570,6 +570,7 @@ soundconverter
 sox
 squashfs-tools
 sshfs
+starship
 strace
 s-tui
 subdl
