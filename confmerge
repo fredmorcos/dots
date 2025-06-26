@@ -154,6 +154,7 @@ cmerge shell/bashrc.user               ~/.bashrc.user
 cmerge shell/bash_profile              ~/.bash_profile
 cmerge shell/profile                   ~/.profile
 cmerge shell/inputrc                   ~/.config/readline/inputrc
+cmerge shell/foot.ini                  ~/.config/foot/foot.ini
 
 cmerge nvim/init.vim                   ~/.config/nvim/init.vim
 
@@ -179,8 +180,6 @@ cmerge git/config                      ~/.config/git/config
 cmerge git/config-ox                   ~/.config/git/config-ox
 
 cmerge fonts/fonts.conf                ~/.config/fontconfig/fonts.conf
-
-cmerge foot.ini                        ~/.config/foot/foot.ini
 
 cmerge mimeapps.list                   ~/.config/mimeapps.list
 
