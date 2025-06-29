@@ -2253,7 +2253,10 @@
  (hledger-jfile "~/Documents/Expenses/Expenses.ledger")
 
  :config
- (setq-mode-local hledger-mode tab-width 1))
+ (setq-mode-local hledger-mode
+  tab-width 1
+  fill-column 100
+  comment-fill-column 100))
 
 (use-package company
  :ensure t
