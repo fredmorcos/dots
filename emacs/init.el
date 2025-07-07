@@ -714,37 +714,63 @@
  (advice-add 'flycheck-previous-error :after #'init/recenter)
  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
 
-(use-package flycheck-posframe
+;; (use-package flyover
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'flyover)
+;;  :hook flycheck-mode-hook
+
+;;  :custom
+;;  (flyover-base-height 0.9)
+;;  (flyover-background-lightness 100)
+;;  (flyover-max-line-length 100)
+;;  (flyover-percent-darker 20)
+;;  (flyover-text-tint-percent 100)
+;;  (flyover-icon-left-padding 1.1)
+;;  (flyover-hide-checker-name nil))
+
+(use-package flycheck-inline
  :ensure t
  :defer t
- :preface (qol/select-package 'flycheck-posframe)
-
- :custom
- (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
- (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
- (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
- (flycheck-posframe-position 'window-bottom-left-corner)
- (flycheck-posframe-border-width 1))
-
-(use-package flycheck-posframe
- :ensure t
- :defer t
- :preface  (qol/select-package 'flycheck-posframe)
+ :preface (qol/select-package 'flycheck-inline)
  :after flycheck
- :hook flycheck-mode-hook)
+ :hook flycheck-mode-hook
+ :custom-face
+ (flycheck-inline-info ((t (:inverse-video t))))
+ (flycheck-inline-warning ((t (:inverse-video t))))
+ (flycheck-inline-error ((t (:inverse-video t)))))
 
-(use-package company
- :ensure t
- :defer t
- :preface (qol/select-package 'company)
- :after flycheck-posframe
+;; (use-package flycheck-posframe
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'flycheck-posframe)
 
- :preface
- (defun init/company-is-active (&rest _)
-  (or (company--active-p) (bound-and-true-p company-backend)))
+;;  :custom
+;;  (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
+;;  (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
+;;  (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
+;;  (flycheck-posframe-position 'window-bottom-left-corner)
+;;  (flycheck-posframe-border-width 1))
 
- :hook
- (flycheck-posframe-inhibit-functions . init/company-is-active))
+;; (use-package flycheck-posframe
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'flycheck-posframe)
+;;  :after flycheck
+;;  :hook flycheck-mode-hook)
+
+;; (use-package company
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'company)
+;;  :after flycheck-posframe
+
+;;  :preface
+;;  (defun init/company-is-active (&rest _)
+;;   (or (company--active-p) (bound-and-true-p company-backend)))
+
+;;  :hook
+;;  (flycheck-posframe-inhibit-functions . init/company-is-active))
 
 (use-package cape
  :ensure t
