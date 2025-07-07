@@ -163,6 +163,7 @@ application/xhtml+xml=firefox.desktop;
 text/html=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 application/x-partial-download=mpv.desktop;
+text/x-python=emacs.desktop;
 
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;
@@ -334,3 +335,4 @@ x-scheme-handler/http=firefox.desktop
 application/xhtml+xml=firefox.desktop
 text/html=firefox.desktop
 x-scheme-handler/https=firefox.desktop
+text/x-python=emacs.desktop

@@ -2526,12 +2526,12 @@
  (lsp-lens-mode nil)
  (lsp-lens-enable nil))
 
-(use-package lsp-headerline
+(use-package lsp-icons
  :ensure lsp-mode
  :defer t
 
  :custom
- (lsp-headerline-breadcrumb-icons-enable nil))
+ (lsp-headerline-breadcrumb-icons-enable t))
 
 (use-package lsp-semantic-tokens
  :ensure lsp-mode
