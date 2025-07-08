@@ -729,48 +729,48 @@
 ;;  (flyover-icon-left-padding 1.1)
 ;;  (flyover-hide-checker-name nil))
 
-(use-package flycheck-inline
+;; (use-package flycheck-inline
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'flycheck-inline)
+;;  :after flycheck
+;;  :hook flycheck-mode-hook
+;;  :custom-face
+;;  (flycheck-inline-info ((t (:inverse-video t))))
+;;  (flycheck-inline-warning ((t (:inverse-video t))))
+;;  (flycheck-inline-error ((t (:inverse-video t)))))
+
+(use-package flycheck-posframe
  :ensure t
  :defer t
- :preface (qol/select-package 'flycheck-inline)
+ :preface (qol/select-package 'flycheck-posframe)
+
+ :custom
+ (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
+ (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
+ (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
+ (flycheck-posframe-position 'window-bottom-left-corner)
+ (flycheck-posframe-border-width 1))
+
+(use-package flycheck-posframe
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'flycheck-posframe)
  :after flycheck
- :hook flycheck-mode-hook
- :custom-face
- (flycheck-inline-info ((t (:inverse-video t))))
- (flycheck-inline-warning ((t (:inverse-video t))))
- (flycheck-inline-error ((t (:inverse-video t)))))
+ :hook flycheck-mode-hook)
 
-;; (use-package flycheck-posframe
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'flycheck-posframe)
+(use-package company
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'company)
+ :after flycheck-posframe
 
-;;  :custom
-;;  (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
-;;  (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
-;;  (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
-;;  (flycheck-posframe-position 'window-bottom-left-corner)
-;;  (flycheck-posframe-border-width 1))
+ :preface
+ (defun init/company-is-active (&rest _)
+  (or (company--active-p) (bound-and-true-p company-backend)))
 
-;; (use-package flycheck-posframe
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'flycheck-posframe)
-;;  :after flycheck
-;;  :hook flycheck-mode-hook)
-
-;; (use-package company
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'company)
-;;  :after flycheck-posframe
-
-;;  :preface
-;;  (defun init/company-is-active (&rest _)
-;;   (or (company--active-p) (bound-and-true-p company-backend)))
-
-;;  :hook
-;;  (flycheck-posframe-inhibit-functions . init/company-is-active))
+ :hook
+ (flycheck-posframe-inhibit-functions . init/company-is-active))
 
 (use-package cape
  :ensure t
