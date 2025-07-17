@@ -281,10 +281,8 @@ libdvdcss
 libdwarf
 libfaketime
 libgnome-keyring
-liblouis
 libmp4v2
 libmythes
-libnfs
 libnma
 libofa
 libopenraw
@@ -302,6 +300,7 @@ libvirt
 libvoikko
 libwmf
 linux-firmware
+linux-headers
 linux-tools-meta
 lldb
 logrotate
@@ -509,9 +508,6 @@ python-webcolors
 python-xattr
 python-xlrd
 python-zeroconf
-qemu-base
-qemu-tools
-qemu-user
 qt5-svg
 qt5-wayland
 qt6-wayland
