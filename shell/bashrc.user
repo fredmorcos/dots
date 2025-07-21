@@ -43,7 +43,7 @@ dirconv_jxl() {
 dirconv_jpg_resize() {
   mkdir small-jpg
   # shellcheck disable=SC2086
-  /usr/bin/ls $2 | parallel magick {} -scale $1 -quality 90% small-jpg/{}
+  /usr/bin/ls $2 | parallel magick {} -scale $1 -quality 90% small-jpg/{}.jpg
 }
 
 dirconv_subtitles() {
