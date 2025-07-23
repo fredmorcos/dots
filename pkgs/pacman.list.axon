@@ -544,7 +544,6 @@ sd
 seahorse
 seahorse-nautilus
 secrets
-selene
 shake
 shellcheck
 shfmt
@@ -646,7 +645,6 @@ xournalpp
 xsv
 yamllint
 yapf
-yazi
 yt-dlp
 yubikey-personalization-gui
 z
