@@ -595,7 +595,6 @@ traceroute
 transmission-qt
 trash-cli
 ttf-atkinson-hyperlegible
-ttf-font-awesome
 tup
 typst
 udftools
@@ -633,7 +632,7 @@ wild
 wireguard-tools
 wireless-regdb
 wl-clipboard
-wmctrl
+woff2-font-awesome
 xdelta3
 xf86-input-evdev
 xf86-input-vmmouse
