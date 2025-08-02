@@ -295,7 +295,6 @@ libva-intel-driver
 libvarlink
 libva-utils
 libvdpau-va-gl
-libvirt
 libvoikko
 libwmf
 linux-firmware
