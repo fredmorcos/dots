@@ -2273,16 +2273,28 @@
   ("C-c +" . hledger-increment-entry-date))
 
  :custom
- (hledger-currency-string "EUR")
- (hledger-comments-column 1)
- (hledger-invalidate-completions '(on-save))
- (hledger-jfile "~/Documents/Expenses/Expenses.ledger")
+ (hledger-invalidate-completions '(on-save on-idle))
+ (hledger-refresh-completions-idle-delay 5)
 
  :config
  (setq-mode-local hledger-mode
   tab-width 1
   fill-column 100
   comment-fill-column 100))
+
+(use-package hledger-core
+ :ensure hledger-mode
+ :defer t
+ :custom
+ (hledger-currency-string "EUR")
+ (hledger-comments-column 1)
+ (hledger-jfile "~/Documents/Expenses/Expenses.ledger"))
+
+;; (use-package hledger-navigate
+;;  :ensure hledger-mode
+;;  :defer t
+;;  :custom
+;;  (hledger-enable-current-overlay t))
 
 (use-package company
  :ensure t
@@ -2558,6 +2570,13 @@
 
  :custom
  (lsp-headerline-breadcrumb-icons-enable t))
+
+(use-package lsp-headerline
+ :ensure lsp-mode
+ :defer t
+
+ :custom
+ (lsp-headerline-arrow "▶"))
 
 (use-package lsp-semantic-tokens
  :ensure lsp-mode
