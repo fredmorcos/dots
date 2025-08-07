@@ -636,6 +636,46 @@
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))
 
+;; (use-package corfu
+;;  :ensure t
+;;  :defer t
+;;  :hook prog-mode-hook
+
+;;  :custom
+;;  ;; Only complete when hitting TAB.
+;;  (corfu-auto nil)
+
+;;  ;; Delay before popup (enable if corfu-auto is t).
+;;  ;; (corfu-auto-delay 0)
+
+;;  ;; Trigger completion after typing 1 character.
+;;  (corfu-auto-prefix 1)
+;;  ;; Quit popup if no match.
+;;  (corfu-quit-no-match t)
+;;  ;; Margin when scrolling completions.
+;;  (corfu-scroll-margin 5)
+;;  ;; Maximum width of completion popup.
+;;  (corfu-max-width 50)
+;;  ;; Minimum width of completion popup.
+;;  (corfu-min-width 50)
+
+;;  :config
+;;  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+;; (use-package corfu-popupinfo
+;;  :ensure corfu
+;;  :defer t
+;;  :hook corfu-mode-hook
+
+;;  :custom
+;;  ;; Delay before showing documentation popup.
+;;  (corfu-popupinfo-delay 0.5))
+
+;; (use-package nerd-icons-corfu
+;;  :ensure t
+;;  :defer t
+;;  :after corfu)
+
 (use-package company
  :ensure t
  :defer t
@@ -852,6 +892,8 @@
  (init/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
  (init/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
  (init/disable-popup "\\`\\*Warnings\\*.*\\'")
+ (advice-add 'previous-buffer :after #'init/recenter)
+ (advice-add 'next-buffer :after #'init/recenter)
 
  :bind
  (("<f12>"       . delete-other-windows)
@@ -902,6 +944,14 @@
 
  :custom
  (eldoc-documentation-strategy 'eldoc-documentation-compose))
+
+(use-package eldoc-box
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'eldoc-box)
+
+ :custom
+ (eldoc-box-lighter " Eb"))
 
 (use-package subword
  :ensure nil
@@ -2305,6 +2355,12 @@
  (setq-mode-local hledger-mode
   company-backends '(hledger-company)
   completion-at-point-functions nil))
+
+;; (use-package corfu
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'corfu)
+;;  :hook hledger-mode-hook)
 
 (use-package flycheck-hledger
  :ensure t
