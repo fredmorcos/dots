@@ -36,7 +36,6 @@ bearssl
 beets
 binsider
 blas64-openblas
-blender
 bluez-tools
 bluez-utils
 boost
@@ -287,6 +286,7 @@ libofa
 libopenraw
 libotr
 libportal-gtk3
+libraw
 libressl
 libsidplayfp
 libultrahdr
