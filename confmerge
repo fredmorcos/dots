@@ -188,8 +188,8 @@ HALLOY=~/.var/app/org.squidowl.halloy/config/halloy
 cmerge irc/config.toml                 $HALLOY/config.toml
 cmerge irc/theme.toml                  $HALLOY/themes/Latte.toml
 
-cmerge loader/loader.conf              /boot/loader/loader.conf
-cmerge loader/arch.conf                /boot/loader/entries/arch.conf
+# cmerge loader/loader.conf              /boot/loader/loader.conf
+# cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
 cmerge polkit-mount.rules              /etc/polkit-1/rules.d/99-mount.rules
 
@@ -220,7 +220,6 @@ cmerge systemd/system.conf             $SYSD/system.conf
 cmerge systemd/journald.conf           $SYSD/journald.conf
 cmerge systemd/resolved.conf           $SYSD/resolved.conf
 cmerge systemd/logind.conf             $SYSD/logind.conf
-cmerge systemd/boot-override.conf      $SYSD/system/boot.mount.d/override.conf
 cmerge systemd/paccache-override.conf  $SYSD/system/paccache.service.d/override.conf
 
 cmerge vpn/ox.service                  $SYSD/system/ox.service
