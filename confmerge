@@ -198,6 +198,7 @@ cmerge archlinux/makepkg-rust.conf     /etc/makepkg.conf.d/rust.conf
 cmerge archlinux/mkinitcpio.conf       /etc/mkinitcpio.conf
 cmerge archlinux/pacman.conf           /etc/pacman.conf
 cmerge archlinux/paru.conf             /etc/paru.conf
+cmerge archlinux/mirrorlist            /etc/pacman.d/mirrorlist
 
 cmerge net/hostname                    /etc/hostname
 cmerge net/hosts                       /etc/hosts
