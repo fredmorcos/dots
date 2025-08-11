@@ -480,12 +480,15 @@
  (advice-add 'consult-register :after #'init/recenter)
  (advice-add 'consult-buffer :after #'init/recenter)
 
- :hook
- (consult-after-jump-hook . recenter)
-
  :custom
  (consult-preview-key "M-.")
  (consult-project-function (lambda (_) (projectile-project-root))))
+
+(use-package emacs
+ :ensure nil
+ :defer t
+ :after consult
+ :hook (consult-after-jump-hook . recenter))
 
 (use-package emacs
  :ensure nil
