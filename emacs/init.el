@@ -466,7 +466,6 @@
 
  :bind
  ([remap switch-to-buffer] . consult-buffer)
- ([remap jump-to-register] . consult-register)
  ("M-Y" . consult-yank-pop)
  ([remap imenu] . consult-imenu)
  ("M-g I" . consult-imenu-multi)
@@ -477,18 +476,26 @@
   ("C-?" . consult-narrow-help))
 
  :config
- (advice-add 'consult-register :after #'init/recenter)
  (advice-add 'consult-buffer :after #'init/recenter)
 
  :custom
  (consult-preview-key "M-.")
  (consult-project-function (lambda (_) (projectile-project-root))))
 
-(use-package emacs
+(use-package consult-register
+ :ensure consult
+ :defer t
+ :preface (qol/select-package 'consult)
+ :config
+ (advice-add 'consult-register :after #'init/recenter))
+
+(use-package register
  :ensure nil
  :defer t
- :after consult
- :hook (consult-after-jump-hook . recenter))
+ :preface (qol/select-package 'consult)
+ :bind
+ ([remap jump-to-register] . consult-register)
+ ([remap point-to-register] . consult-register-store))
 
 (use-package emacs
  :ensure nil
@@ -503,21 +510,13 @@
     (projectile-find-file))
    ((fboundp 'consult-buffer-other-window)
     (consult-buffer-other-window))
+   ((fboundp 'find-file-other-window)
+    (call-interactively 'find-file-other-window))
    (t
-    (call-interactively 'find-file-other-window))))
+    (error "Cannot find any more other-window functions to run"))))
 
  :bind
  ([remap other-window] . init/find-file-other-window))
-
-(use-package consult
- :ensure t
- :defer t
- :preface (qol/select-package 'consult)
- :after xref
-
- :custom
- (xref-show-xrefs-function #'consult-xref)
- (xref-show-definitions-function #'consult-xref))
 
 (use-package embark-consult
  :ensure t
@@ -529,14 +528,12 @@
  :defer t
  :preface (qol/select-package 'consult-flycheck)
  :after flycheck
-
- :bind
- (:map flycheck-mode-map
-  ("C-c ! a" . consult-flycheck)))
+ :bind (:map flycheck-mode-map ("C-c ! a" . consult-flycheck)))
 
 (use-package vertico
  :ensure t
  :defer t
+ :preface (qol/select-package 'vertico)
 
  :bind
  (:map vertico-map
@@ -549,8 +546,6 @@
  :custom
  (vertico-cycle t)
  (vertico-resize nil)
-
- :preface (qol/select-package 'vertico)
 
  :init
  (vertico-mode))
@@ -1077,21 +1072,24 @@
 (use-package xref
  :ensure nil
  :defer t
-
  :commands
  xref-push-marker-stack
+ :config
+ (add-to-list 'xref-after-return-hook #'recenter))
 
- :hook
- (xref-after-return-hook . recenter)
- (xref-after-jump-hook . recenter))
+(use-package xref
+ :ensure nil
+ :defer t
+ :preface (qol/select-package 'consult)
+ :custom
+ (xref-show-xrefs-function #'consult-xref)
+ (xref-show-definitions-function #'consult-xref))
 
 (use-package editorconfig
  :ensure t
  :defer t
  :diminish "Ec"
-
- :preface
- (qol/select-package 'editorconfig))
+ :preface (qol/select-package 'editorconfig))
 
 ;;; Configuration Files
 
@@ -2286,7 +2284,7 @@
  :mode ("\\.journal\\'" "\\.ledger\\'")
 
  :preface
- (defun init/move-amount-to-column ()
+ (defun init/hledger-move-amount-to-column ()
   "Move the amount or the point to the valid column."
   (interactive)
   (let ((amount-marker (concat " " hledger-currency-string " ")))
@@ -2303,7 +2301,7 @@
       (insert-char ?\s (abs difference))
       (yank))))))
 
- (defun init/find-next-unaligned ()
+ (defun init/hledger-find-next-unaligned ()
   "Find the next unaligned amount in a non-comment line."
   (interactive)
   (let ((amount-marker (concat " " hledger-currency-string " ")))
@@ -2312,17 +2310,17 @@
     (if (or
          (= (current-column) 64)
          (qol/string-starts-with (qol/get-trimmed-line-string) ?\;))
-     (init/find-next-unaligned)))))
+     (init/hledger-find-next-unaligned)))))
 
- (defun init/align-next-unaligned ()
+ (defun init/hledger-align-next-unaligned ()
   "Aligned the next unaligned amount."
-  (init/find-next-unaligned)
-  (init/move-amount-to-column))
+  (init/hledger-find-next-unaligned)
+  (init/hledger-move-amount-to-column))
 
  :bind
  (:map hledger-mode-map
-  ("C-c >" . init/move-amount-to-column)
-  ("C-c x" . init/find-next-unaligned)
+  ("C-c >" . init/hledger-move-amount-to-column)
+  ("C-c x" . init/hledger-find-next-unaligned)
   ("C-c +" . hledger-increment-entry-date))
 
  :custom
