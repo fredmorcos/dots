@@ -28,7 +28,8 @@
  :preface
  (defun init/recenter (&rest _)
   "A recentering function we can use as an advice."
-  (recenter))
+  (interactive)
+  (call-interactively #'recenter))
 
  :config
  ;; Enable these functions.
@@ -489,10 +490,11 @@
  :config
  (advice-add 'consult-register :after #'init/recenter))
 
-(use-package register
- :ensure nil
+(use-package consult-register
+ :ensure consult
  :defer t
  :preface (qol/select-package 'consult)
+ :after register
  :bind
  ([remap jump-to-register] . consult-register)
  ([remap point-to-register] . consult-register-store))
@@ -1072,10 +1074,13 @@
 (use-package xref
  :ensure nil
  :defer t
- :commands
- xref-push-marker-stack
- :config
- (add-to-list 'xref-after-return-hook #'recenter))
+ :commands xref-push-marker-stack)
+
+(use-package emacs
+ :ensure nil
+ :defer t
+ :after xref
+ :hook (xref-after-return-hook . recenter))
 
 (use-package xref
  :ensure nil
