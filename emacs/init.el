@@ -28,8 +28,7 @@
  :preface
  (defun init/recenter (&rest _)
   "A recentering function we can use as an advice."
-  (interactive)
-  (call-interactively #'recenter))
+  (recenter))
 
  :config
  ;; Enable these functions.
