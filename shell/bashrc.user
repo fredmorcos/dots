@@ -1,6 +1,6 @@
 alias grep='grep --color'
 alias g='grep'
-alias ls='eza'
+alias ls='eza --git'
 alias ll='ls -lg --group-directories-first'
 alias la='ll -a'
 alias mv='mv -i'
