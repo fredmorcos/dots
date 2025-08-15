@@ -164,6 +164,7 @@ text/html=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 application/x-partial-download=mpv.desktop;
 text/x-python=emacs.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=org.libreoffice.LibreOffice.writer.desktop;
 
 [Default Applications]
 application/epub+zip=com.github.johnfactotum.Foliate.desktop;
@@ -336,3 +337,4 @@ application/xhtml+xml=firefox.desktop
 text/html=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 text/x-python=emacs.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=org.libreoffice.LibreOffice.writer.desktop
