@@ -3,7 +3,6 @@
 ## Generated on 2025-07-02
 ##
 
-Server = http://mirror.dkm.cz/archlinux/$repo/os/$arch
 Server = http://mirror.digitalnova.at/archlinux/$repo/os/$arch
 Server = http://mirror.alwyzon.net/archlinux/$repo/os/$arch
 Server = https://mirror.alwyzon.net/archlinux/$repo/os/$arch
