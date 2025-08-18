@@ -28,6 +28,7 @@ CMD=("rsync"
      '--exclude=node_modules/'
      '--exclude=.cache/clangd'
      '--exclude=.libs'
+     '--exclude=dovecot/'
      "$@")
 
 echo ">>> Rsync command:" "${CMD[@]}"
