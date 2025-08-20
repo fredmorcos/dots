@@ -86,11 +86,5 @@
     (line-beginning-position)
     (line-end-position)))))
 
-(defun qol/string-starts-with (text char)
- "Check if CHAR is at the beginning of TEXT."
- (when (not (stringp text))
-  (error "TEXT should be a string"))
- (= (aref text 0) char))
-
 (provide 'qol)
 ;;; qol.el ends here

@@ -2,6 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(eval-and-compile
+ (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
+ (push emacs-dots-dir load-path)
+ (require 'init-macros))
+
 ;;; Quality of Life
 
 (use-package mode-local
@@ -18,8 +23,7 @@
  qol/generate-password
  qol/append
  qol/remove
- qol/get-trimmed-line-string
- qol/string-starts-with)
+ qol/get-trimmed-line-string)
 
 (use-package emacs
  :ensure nil
@@ -893,6 +897,7 @@
  (init/disable-popup "\\`\\*Warnings\\*.*\\'")
  (advice-add 'previous-buffer :after #'init/recenter)
  (advice-add 'next-buffer :after #'init/recenter)
+ (advice-add 'split-window-below :after #'init/recenter)
 
  :bind
  (("<f12>"       . delete-other-windows)
@@ -1241,12 +1246,22 @@
 (use-package magit
  :ensure t
  :defer t
+ :preface (qol/select-package 'magit)
  :after files
- :hook (after-save-hook . magit-after-save-refresh-status))
+ :commands magit-after-save-refresh-status
+
+ :preface
+ (defun init/magit-after-save-refresh-status ()
+  "Refresh magit after save."
+  (add-hook 'after-save-hook #'magit-after-save-refresh-status 0 t))
+
+ :hook
+ (magit-mode-hook . init/magit-after-save-refresh-status))
 
 (use-package magit-diff
  :ensure magit
  :defer t
+ :preface (qol/select-package 'magit)
 
  :custom
  (magit-revision-show-gravatars t)
@@ -2313,7 +2328,7 @@
     (left-char (- (length amount-marker) 1))
     (if (or
          (= (current-column) 64)
-         (qol/string-starts-with (qol/get-trimmed-line-string) ?\;))
+         (string-prefix-p "?" (qol/get-trimmed-line-string)))
      (init/hledger-find-next-unaligned)))))
 
  (defun init/hledger-align-next-unaligned ()
