@@ -114,7 +114,6 @@ clinfo
 codespell
 compsize
 conntrack-tools
-cpio
 cppcheck
 criu
 cups-pdf
@@ -136,7 +135,6 @@ diffstat
 difftastic
 diffuse
 diskonaut
-dmidecode
 dnsmasq
 docker
 docker-buildx
@@ -576,6 +574,7 @@ sysstat
 system-config-printer
 systemd-resolvconf
 systemd-ukify
+systemtap
 t1utils
 tabiew
 tailscale
@@ -615,6 +614,7 @@ vbindiff
 vdpauinfo
 vi
 video-trimmer
+virt-what
 vkd3d
 vorbis-tools
 vpl-gpu-rt
@@ -631,6 +631,7 @@ whois
 wild
 wireguard-tools
 wireless-regdb
+wireless_tools
 wl-clipboard
 woff2-font-awesome
 xdelta3
