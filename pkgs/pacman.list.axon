@@ -109,6 +109,7 @@ cgdb
 chafa
 checksec
 chmlib
+clamav
 clinfo
 codespell
 compsize
@@ -305,7 +306,6 @@ logrotate
 loupe
 lrzip
 lshw
-lsof
 ltrace
 luametatex
 lychee
@@ -344,7 +344,6 @@ neovim
 netavark
 netcdf
 nethogs
-net-tools
 networkmanager
 ngrep
 nilfs-utils
@@ -525,6 +524,7 @@ resources
 rink
 ripasso
 ripgrep-all
+rkhunter
 rng-tools
 rnnoise
 rocm-opencl-runtime
@@ -601,6 +601,7 @@ udftools
 udisks2-btrfs
 ugrep
 unace
+unhide
 unicode-emoji
 unixodbc
 unrar
@@ -626,7 +627,6 @@ wayland-utils
 wdiff
 webp-pixbuf-loader
 websocat
-wget
 whois
 wild
 wireguard-tools
