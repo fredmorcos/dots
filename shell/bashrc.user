@@ -17,6 +17,7 @@ alias dupes='fdupes -rdSnA -o name'
 alias genpw='pwgen -c -n -y -s -B -1 34 1'
 alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-history"'
 alias adb='HOME="$XDG_DATA_HOME"/android adb'
+alias expenses='hledger-ui -t -E -f ~/Documents/Expenses/Expenses.ledger'
 
 gitall() {
   for i in *; do
