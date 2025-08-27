@@ -2324,12 +2324,15 @@
   "Find the next unaligned amount in a non-comment line."
   (interactive)
   (let ((amount-marker (concat " " hledger-currency-string " ")))
-   (when (search-forward amount-marker)
-    (left-char (- (length amount-marker) 1))
-    (if (or
-         (= (current-column) 64)
-         (string-prefix-p "?" (qol/get-trimmed-line-string)))
-     (init/hledger-find-next-unaligned)))))
+   (catch 'exit-loop
+    (while t
+     (when (search-forward amount-marker)
+      (left-char (- (length amount-marker) 1))
+      (if (not (or
+                (= (current-column) 64)
+                (string-prefix-p ";" (qol/get-trimmed-line-string))
+                (eq (get-text-property (point) 'face) 'font-lock-comment-face)))
+     (throw 'exit-loop t)))))))
 
  (defun init/hledger-align-next-unaligned ()
   "Aligned the next unaligned amount."
