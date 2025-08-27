@@ -2306,19 +2306,20 @@
  (defun init/hledger-move-amount-to-column ()
   "Move the amount or the point to the valid column."
   (interactive)
-  (let ((amount-marker (concat " " hledger-currency-string " ")))
-   (end-of-line)
-   (when (search-backward amount-marker (pos-bol) t)
-    (right-char))
-   (kill-region (point) (pos-eol))
-   (let ((difference (- (current-column) 64)))
-    (if (> difference 0)
-     (progn
-      (left-char difference)
-      (yank))
-     (progn
-      (insert-char ?\s (abs difference))
-      (yank))))))
+  (save-excursion
+   (let ((amount-marker (concat " " hledger-currency-string " ")))
+    (end-of-line)
+    (when (search-backward amount-marker (pos-bol) t)
+     (right-char))
+    (kill-region (point) (pos-eol))
+    (let ((difference (- (current-column) 64)))
+     (if (> difference 0)
+      (progn
+       (left-char difference)
+       (yank))
+      (progn
+       (insert-char ?\s (abs difference))
+       (yank)))))))
 
  (defun init/hledger-find-next-unaligned ()
   "Find the next unaligned amount in a non-comment line."
@@ -2333,11 +2334,6 @@
                 (string-prefix-p ";" (qol/get-trimmed-line-string))
                 (eq (get-text-property (point) 'face) 'font-lock-comment-face)))
      (throw 'exit-loop t)))))))
-
- (defun init/hledger-align-next-unaligned ()
-  "Aligned the next unaligned amount."
-  (init/hledger-find-next-unaligned)
-  (init/hledger-move-amount-to-column))
 
  :bind
  (:map hledger-mode-map
