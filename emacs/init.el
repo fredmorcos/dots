@@ -947,7 +947,8 @@
  :diminish "Ed"
 
  :custom
- (eldoc-documentation-strategy 'eldoc-documentation-compose))
+ (eldoc-documentation-strategy 'eldoc-documentation-compose)
+ (eldoc-idle-delay 0.1))
 
 (use-package eldoc-box
  :ensure t
@@ -1485,6 +1486,7 @@
 (use-package sh-script
  :ensure nil
  :defer t
+ :mode (rx bos ".bashrc.user" eos)
 
  :custom
  (sh-basic-offset 2)
@@ -2024,7 +2026,7 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'llvm-ts-mode)
- :mode "\\.ll\\'")
+ :mode (rx ".ll" eos))
 
 (use-package demangle-mode
  :ensure t
@@ -2037,7 +2039,7 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'autodisass-llvm-bitcode)
- :mode "\\.bc\\'")
+ :mode (rx ".bc" eos))
 
 (use-package demangle-mode
  :ensure t
@@ -2049,8 +2051,8 @@
  :defer t
  :preface (qol/select-package 'yaml-mode)
 
- :mode "\\.clang-format"
- :mode "\\.clang-tidy")
+ :mode (rx ".clang-format" eos)
+ :mode (rx ".clang-tidy" eos))
 
 ;;; CSS
 
@@ -2300,40 +2302,42 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'hledger-mode)
- :mode ("\\.journal\\'" "\\.ledger\\'")
+ :mode (rx ".journal" eos)
+ :mode (rx ".ledger" eos)
 
  :preface
  (defun init/hledger-move-amount-to-column ()
   "Move the amount or the point to the valid column."
   (interactive)
-  (save-excursion
-   (let ((amount-marker (concat " " hledger-currency-string " ")))
-    (end-of-line)
-    (when (search-backward amount-marker (pos-bol) t)
-     (right-char))
-    (kill-region (point) (pos-eol))
-    (let ((difference (- (current-column) 64)))
-     (if (> difference 0)
-      (progn
-       (left-char difference)
-       (yank))
-      (progn
-       (insert-char ?\s (abs difference))
-       (yank)))))))
+  (let ((amount-marker (concat " " hledger-currency-string " "))
+        (original-pos (point)))
+   (end-of-line)
+   (when (search-backward amount-marker (pos-bol) t)
+    (right-char))
+   (let ((text (buffer-substring (point) (pos-eol)))
+         (difference (- (current-column) 64)))
+    (delete-region (point) (pos-eol))
+    (if (> difference 0)
+     (progn
+      (left-char difference)
+      (insert text))
+     (progn
+      (insert-char ?\s (abs difference))
+      (insert text)))
+    (unless (string-blank-p text)
+     (goto-char original-pos)))))
 
  (defun init/hledger-find-next-unaligned ()
   "Find the next unaligned amount in a non-comment line."
   (interactive)
   (let ((amount-marker (concat " " hledger-currency-string " ")))
-   (catch 'exit-loop
-    (while t
-     (when (search-forward amount-marker)
-      (left-char (- (length amount-marker) 1))
-      (if (not (or
-                (= (current-column) 64)
-                (string-prefix-p ";" (qol/get-trimmed-line-string))
-                (eq (get-text-property (point) 'face) 'font-lock-comment-face)))
-     (throw 'exit-loop t)))))))
+   (catch 'found
+    (while (search-forward amount-marker nil t)
+     (left-char (- (length amount-marker) 1))
+     (when (not (or
+                 (= (current-column) 64)
+                 (looking-back ";.*" (line-beginning-position))))
+      (throw 'found t))))))
 
  :bind
  (:map hledger-mode-map
@@ -2440,9 +2444,9 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'web-mode)
- :mode "\\.html\\'"
- :mode "\\.css\\'"
- :mode "\\.js\\'"
+ :mode (rx ".html" eos)
+ :mode (rx ".css" eos)
+ :mode (rx ".js" eos)
 
  :custom
  (web-mode-markup-indent-offset 2)
@@ -2506,7 +2510,7 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'pkgbuild-mode)
- :mode "\\PKGBUILD\\'")
+ :mode (rx bos "PKGBUILD" eos))
 
 ;;; Rust
 
