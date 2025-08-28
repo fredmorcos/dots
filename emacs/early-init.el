@@ -20,11 +20,12 @@
   (setopt
    use-package-always-ensure t)))
 
-(im/config "Debugging & Profiling" :disabled
+(im/config "Debugging" :disabled
  (im/after emacs
   (setopt
-   debug-on-error t))
+   debug-on-error t)))
 
+(im/config "Profiling" :disabled
  (profiler-start 'cpu)
  (im/after startup
   (im/hook after-init-hook profiler-report "profiler")))
