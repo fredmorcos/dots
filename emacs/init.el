@@ -733,10 +733,40 @@
  :defer t
  :preface (qol/select-package 'flycheck)
 
+ :functions flycheck-overlay-errors-at
+
  :commands
  (flycheck-next-error
   flycheck-previous-error
   flycheck-add-next-checker)
+
+ :preface
+ (defun init/flycheck-eldoc (callback &rest _ignored)
+  "Print flycheck messages at point by calling CALLBACK."
+  (when-let ((flycheck-errors (and flycheck-mode (flycheck-overlay-errors-at (point)))))
+   (mapc
+    (lambda (err)
+     (funcall callback
+      (format "%s: %s"
+       (let ((level (flycheck-error-level err)))
+        (pcase level
+         ('info (propertize "I" 'face 'flycheck-error-list-info))
+         ('error (propertize "E" 'face 'flycheck-error-list-error))
+         ('warning (propertize "W" 'face 'flycheck-error-list-warning))
+         (_ level)))
+       (flycheck-error-message err))
+      :thing (or
+              (flycheck-error-id err)
+              (flycheck-error-group err))
+      :face 'font-lock-doc-face))
+    flycheck-errors)))
+
+ (defun init/setup-flycheck-eldoc ()
+  (with-eval-after-load 'eldoc
+   (add-hook 'eldoc-documentation-functions #'init/flycheck-eldoc nil t)))
+
+ :hook
+ (flycheck-mode-hook . init/setup-flycheck-eldoc)
 
  :bind
  (:map flycheck-mode-map
@@ -748,59 +778,35 @@
  (flycheck-mode-line-prefix "Fc")
  (flycheck-check-syntax-automatically
   '(idle-change new-line mode-enabled idle-buffer-switch))
- (flycheck-idle-change-delay 1)
- (flycheck-idle-buffer-switch-delay 1)
- (flycheck-display-errors-delay 1)
+ (flycheck-idle-change-delay 0.1)
+ (flycheck-idle-buffer-switch-delay 0.1)
+ (flycheck-display-errors-delay 0.1)
+ (flycheck-display-errors-function nil)
+ (flycheck-help-echo-function nil)
 
  :config
  (advice-add 'flycheck-next-error :after #'init/recenter)
  (advice-add 'flycheck-previous-error :after #'init/recenter)
  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
 
-;; (use-package flyover
+;; (use-package flycheck-posframe
 ;;  :ensure t
 ;;  :defer t
-;;  :preface (qol/select-package 'flyover)
-;;  :hook flycheck-mode-hook
+;;  :preface (qol/select-package 'flycheck-posframe)
 
 ;;  :custom
-;;  (flyover-base-height 0.9)
-;;  (flyover-background-lightness 100)
-;;  (flyover-max-line-length 100)
-;;  (flyover-percent-darker 20)
-;;  (flyover-text-tint-percent 100)
-;;  (flyover-icon-left-padding 1.1)
-;;  (flyover-hide-checker-name nil))
+;;  (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
+;;  (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
+;;  (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
+;;  (flycheck-posframe-position 'window-bottom-left-corner)
+;;  (flycheck-posframe-border-width 1))
 
-;; (use-package flycheck-inline
+;; (use-package flycheck-posframe
 ;;  :ensure t
 ;;  :defer t
-;;  :preface (qol/select-package 'flycheck-inline)
+;;  :preface (qol/select-package 'flycheck-posframe)
 ;;  :after flycheck
-;;  :hook flycheck-mode-hook
-;;  :custom-face
-;;  (flycheck-inline-info ((t (:inverse-video t))))
-;;  (flycheck-inline-warning ((t (:inverse-video t))))
-;;  (flycheck-inline-error ((t (:inverse-video t)))))
-
-(use-package flycheck-posframe
- :ensure t
- :defer t
- :preface (qol/select-package 'flycheck-posframe)
-
- :custom
- (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
- (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
- (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
- (flycheck-posframe-position 'window-bottom-left-corner)
- (flycheck-posframe-border-width 1))
-
-(use-package flycheck-posframe
- :ensure t
- :defer t
- :preface (qol/select-package 'flycheck-posframe)
- :after flycheck
- :hook flycheck-mode-hook)
+;;  :hook flycheck-mode-hook)
 
 (use-package company
  :ensure t
@@ -870,6 +876,13 @@
  (recentf-mode))
 
 ;;; Windows
+
+(use-package winner
+ :ensure nil
+ :defer t
+
+ :init
+ (winner-mode))
 
 (use-package window
  :ensure nil
