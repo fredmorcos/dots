@@ -1002,6 +1002,13 @@
  :after prog-mode
  :hook prog-mode-hook)
 
+(use-package eldoc
+ :ensure nil
+ :defer t
+ :after flycheck
+ :config
+ (eldoc-add-command-completions "flycheck-"))
+
 (use-package paren
  :ensure nil
  :defer t
