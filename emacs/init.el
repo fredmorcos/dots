@@ -1007,7 +1007,8 @@
  :defer t
  :after flycheck
  :config
- (eldoc-add-command-completions "flycheck-"))
+ (eldoc-add-command-completions "flycheck-")
+ (eldoc-add-command-completions "mwim-"))
 
 (use-package paren
  :ensure nil
