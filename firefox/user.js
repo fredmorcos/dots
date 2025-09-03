@@ -4,7 +4,7 @@ user_pref("network.trr.excluded-domains", "open-xchange.com,dovecot.net");
 user_pref("dom.ipc.forkserver.enable", 1);
 user_pref("browser.tabs.hoverPreview.enabled", 1);
 user_pref("browser.tabs.hoverPreview.showThumbnails", 0);
-user_pref("privacy.resistFingerprinting", true);
+/* user_pref("privacy.resistFingerprinting", true); */
 
 /* Disable Pocket */
 user_pref("extensions.pocket.api", "http://0.0.0.0/pocket");
