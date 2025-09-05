@@ -280,7 +280,10 @@
 
  :custom
  (help-window-select t)
- (help-window-keep-selected t))
+ (help-window-keep-selected t)
+ (help-enable-completion-autoload nil)
+ (help-enable-autoload nil)
+ (help-enable-symbol-autoload nil))
 
 (use-package help-mode
  :ensure nil
