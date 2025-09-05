@@ -43,6 +43,14 @@
    (global-set-key (kbd ,key) #',func)))
 
 ;;;###autoload
+(defmacro im/key-local (key func keymap &optional pkg)
+ "Define KEY in KEYMAP to call FUNC from PKG."
+ `(progn
+   (im/autoload ,func ,pkg)
+   (eval-when-compile (defvar ,keymap))
+   (define-key ,keymap (kbd ,key) #',func)))
+
+;;;###autoload
 (defmacro im/key-interactive (key &rest body)
  "Define KEY to call an interactive lambda with BODY."
  `(global-set-key (kbd ,key) (lambda () (interactive) ,@body)))
@@ -59,14 +67,6 @@
  "Remap a global key from OLD-FUNC to NEW-FUNC."
  `(progn
    (global-set-key [remap ,old-func] #',new-func)))
-
-;;;###autoload
-(defmacro im/key-local (key func keymap &optional pkg)
- "Define KEY in KEYMAP to call FUNC from PKG."
- `(progn
-   (im/autoload ,func ,pkg)
-   (eval-when-compile (defvar ,keymap))
-   (define-key ,keymap (kbd ,key) #',func)))
 
 ;; Diminish.
 
