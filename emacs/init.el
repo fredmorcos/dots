@@ -2387,6 +2387,12 @@
  (hledger-comments-column 1)
  (hledger-jfile "~/Documents/Expenses/Expenses.ledger"))
 
+(use-package elec-pair
+ :ensure nil
+ :defer t
+ :after hledger-mode
+ :hook (hledger-mode-hook . electric-pair-local-mode))
+
 ;; (use-package hledger-navigate
 ;;  :ensure hledger-mode
 ;;  :defer t
