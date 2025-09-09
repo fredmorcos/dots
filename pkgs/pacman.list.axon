@@ -202,10 +202,11 @@ gnome-podcasts
 gnome-tweaks
 gnu-netcat
 gpart
-gparted
 gpick
 gptfdisk
+graphicsmagick
 grcov
+gspell
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
@@ -240,7 +241,6 @@ idle3-tools
 ifuse
 img2pdf
 inetutils
-inkscape
 innoextract
 intel-compute-runtime
 intel-media-sdk
@@ -298,6 +298,7 @@ libva-utils
 libvdpau-va-gl
 libvoikko
 libwmf
+libwpg
 linux-firmware
 linux-headers
 linux-tools-meta
@@ -313,7 +314,6 @@ lzop
 man-db
 man-pages
 mdbook-linkcheck
-meld
 memtest86+-efi
 mesa-demos
 mesa-utils
@@ -384,7 +384,6 @@ patchelf
 pdf2svg
 pdfarranger
 pdfcrack
-pdfslicer
 pdftricks
 peek
 picard
@@ -423,6 +422,7 @@ python-brotlicffi
 python-build
 python-cairosvg
 python-cchardet
+python-cssselect
 python-deadlib
 python-debugpy
 python-discogs-client
@@ -477,6 +477,7 @@ python-pylint
 python-pymad
 python-pynvim
 python-pypng
+python-pyserial
 python-pystache
 python-pystemmer
 python-pytest-isort
@@ -508,6 +509,7 @@ python-webcolors
 python-xattr
 python-xlrd
 python-zeroconf
+python-zstandard
 qt5-svg
 qt5-wayland
 qt6-wayland
@@ -644,7 +646,6 @@ xf86-input-void
 xmldiff
 xmlstarlet
 xorg-xkill
-xournalpp
 xsv
 yamllint
 yapf
