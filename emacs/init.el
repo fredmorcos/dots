@@ -9,6 +9,10 @@
 
 ;;; Quality of Life
 
+(im/config "Read .dir-locals.el over TRAMP"
+ (im/after files
+  (setopt enable-remote-dir-locals t)))
+
 (use-package mode-local
  :ensure nil
  :defer t
@@ -1839,7 +1843,7 @@
  :custom
  (completion-category-defaults nil)
  (completion-category-overrides nil)
- (minibuffer-electric-default-mode t)
+ ;; (minibuffer-electric-default-mode t)
  (minibuffer-message-clear-timeout 4)
  (completions-max-height 20)
  (read-file-name-completion-ignore-case t)

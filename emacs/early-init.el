@@ -10,8 +10,6 @@
 (im/config "Use Package"
  (im/after use-package-core
   (setopt
-   ;; use-package-compute-statistics t
-   ;; use-package-verbose t
    use-package-expand-minimally t
    use-package-hook-name-suffix nil
    use-package-always-defer t))
@@ -19,6 +17,12 @@
  (im/after use-package-ensure
   (setopt
    use-package-always-ensure t)))
+
+(im/config "Use Package Debugging" :disabled
+ (im/after use-package-core
+  (setopt
+   use-package-compute-statistics t
+   use-package-verbose t)))
 
 (im/config "Debugging" :disabled
  (im/after emacs
@@ -111,46 +115,49 @@
    use-short-answers t)))
 
 (im/config "Performance"
- (im/after emacs (setopt max-lisp-eval-depth 10000))
-
  (im/after emacs
   (setopt
+   ;; When evaluating deep ELisp recursions.
+   ;; max-lisp-eval-depth 10000
+
    ;; This slows down normal operation.
-   auto-window-vscroll nil))
+   auto-window-vscroll nil
 
- (im/after emacs
-  (setopt
-   ;; Improve text rendering performance.
+   ;; Improve rendering performance at the expense of support for left-to-right languages.
    bidi-paragraph-direction 'left-to-right
-   bidi-inhibit-bpa t))
+   bidi-inhibit-bpa t
 
- (im/after vc-hooks
-  ;; Only use Git as version control.
-  (setopt vc-handled-backends '(Git))
-
-  (im/after files
-   ;; Disable version control when opening files.
-   (remove-hook 'find-file-hook #'vc-refresh-state)))
+   ;; Only use Git as version control.
+   vc-handled-backends '(Git)))
 
  ;; Actually should be (im/after startup ...) but the startup.el package file does not
  ;; (provide 'startup) so (with-eval-after-load startup ...) does not work.
  (im/after emacs
-  ;; Disable tramp.
-  (remove-hook 'after-init-hook #'tramp-register-archive-autoload-file-name-handler)
+  ;; ;; Disable tramp.
+  ;; (im/after tramp-archive
+  ;;  (remove-hook 'after-init-hook #'tramp-register-archive-autoload-file-name-handler))
+
+  ;; Disable input contexts (for Windows).
   (im/after term/pgtk-win
    (remove-hook 'after-init-hook #'pgtk-use-im-context-handler)))
 
  (im/after files
-  (im/after subr
-   ;; Disable tramp.
-   (declare-function tramp-set-connection-local-variables-for-buffer "subr")
-   (remove-hook 'find-file-hook #'tramp-set-connection-local-variables-for-buffer))
+  ;; (im/after subr
+  ;;  ;; Disable tramp.
+  ;;  (declare-function tramp-set-connection-local-variables-for-buffer "subr")
+  ;;  (remove-hook 'find-file-hook #'tramp-set-connection-local-variables-for-buffer))
 
+  ;; Disable transparent file encryption support.
   (im/after epa-hook
    (remove-hook 'find-file-hook #'epa-file-find-file-hook))
 
-  (im/after url-handlers
-   (remove-hook 'find-file-hook #'url-handlers-set-buffer-mode))))
+  ;; ;; Disable setting correct URL handlers when visiting remote files.
+  ;; (im/after url-handlers
+  ;;  (remove-hook 'find-file-hook #'url-handlers-set-buffer-mode))
+
+  (im/after vc-hooks
+   ;; Disable version control when opening files.
+   (remove-hook 'find-file-hook #'vc-refresh-state))))
 
 (im/config "Packages"
  (im/after url-vars

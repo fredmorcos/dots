@@ -5,10 +5,12 @@
 ;; Top-Level Configuration.
 
 ;;;###autoload
-(defmacro im/config (_im/pkg &rest body)
- "Define a toplevel configuration called IM/PKG and execute BODY."
+(defmacro im/config (title &rest body)
+ "Define a toplevel configuration called TITLE and execute BODY."
  (when (not (eq (car body) :disabled))
-  `(progn ,@body)))
+  `(progn
+    (defvar _img/pkg ,title)
+    ,@body)))
 
 ;; Autoloads.
 
