@@ -103,7 +103,6 @@ catimg
 cbindgen
 ccache
 ccid
-ccls
 cdrtools
 cfitsio
 cgdb
@@ -115,7 +114,6 @@ clinfo
 codespell
 compsize
 conntrack-tools
-cppcheck
 criu
 cups-pdf
 curlftpfs
