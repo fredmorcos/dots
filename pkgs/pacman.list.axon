@@ -50,6 +50,7 @@ btop
 bugstalker
 bzip3
 cabextract
+caligula
 capitaine-cursors
 cargo-about
 cargo-audit
@@ -202,6 +203,7 @@ gnome-tweaks
 gnu-netcat
 gpart
 gparted
+gpick
 gptfdisk
 grcov
 gst-libav
@@ -377,6 +379,7 @@ papirus-icon-theme
 par2cmdline
 paru-bin
 pass
+pastel
 patchelf
 pdf2svg
 pdfarranger
@@ -398,6 +401,7 @@ polkit-gnome
 power-profiles-daemon
 powertop
 pragha
+pre-commit
 procs
 profile-cleaner
 progress
@@ -493,10 +497,10 @@ python-sympy
 python-tabulate
 python-trio
 python-typogrify
+python-ukkonen
 python-unicodedata2
 python-unidiff
 python-uv
-python-virtualenv
 python-volume_key
 python-watchdog
 python-weasyprint
@@ -551,7 +555,6 @@ sloccount
 smartmontools
 snapshot
 sndio
-sniffnet
 socat
 sof-firmware
 softhsm
