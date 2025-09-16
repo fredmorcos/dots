@@ -296,6 +296,7 @@ libvarlink
 libva-utils
 libvdpau-va-gl
 libvoikko
+libwebp-utils
 libwmf
 libwpg
 linux-firmware
