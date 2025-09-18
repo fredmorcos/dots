@@ -160,6 +160,7 @@ exfatprogs
 extra-cmake-modules
 eza
 f2fs-tools
+fasd
 fastjar
 fd
 fdupes
