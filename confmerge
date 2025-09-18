@@ -218,8 +218,6 @@ SYSD=/etc/systemd
 cmerge systemd/coredump.conf           $SYSD/coredump.conf
 cmerge systemd/system.conf             $SYSD/system.conf
 cmerge systemd/journald.conf           $SYSD/journald.conf
-cmerge systemd/resolved.conf           $SYSD/resolved.conf
-cmerge systemd/logind.conf             $SYSD/logind.conf
 cmerge systemd/paccache-override.conf  $SYSD/system/paccache.service.d/override.conf
 
 cmerge vpn/ox.service                  $SYSD/system/ox.service
