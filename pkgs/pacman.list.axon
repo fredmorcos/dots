@@ -8,6 +8,7 @@ amd-ucode
 android-file-transfer
 android-tools
 antiword
+apparmor
 aria2
 arj
 asciinema
@@ -455,6 +456,7 @@ python-lz4
 python-micawber
 python-mpd2
 python-netifaces2
+python-notify2
 python-objgraph
 python-olefile
 python-openpyxl
