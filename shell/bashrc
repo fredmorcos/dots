@@ -35,3 +35,4 @@ osc7_cwd() {
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }osc7_cwd
 
 [[ -x $(which starship) ]] && eval "$(starship init bash)"
+[[ -x $(which zoxide) ]] && eval "$(zoxide init bash)"
