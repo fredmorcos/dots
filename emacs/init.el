@@ -486,9 +486,6 @@
  (:map consult-narrow-map
   ("C-?" . consult-narrow-help))
 
- :config
- (advice-add 'consult-buffer :after #'init/recenter)
-
  :custom
  (consult-preview-key "M-.")
  (consult-project-function (lambda (_) (projectile-project-root))))
@@ -897,7 +894,7 @@
 
  :custom
  (switch-to-buffer-in-dedicated-window 'pop)
- (switch-to-buffer-obey-display-actions t)
+ ;; (switch-to-buffer-obey-display-actions t)
  (split-height-threshold 160)
  (split-width-threshold 130)
  (even-window-sizes 'width-only)
@@ -918,6 +915,7 @@
  (advice-add 'previous-buffer :after #'init/recenter)
  (advice-add 'next-buffer :after #'init/recenter)
  (advice-add 'split-window-below :after #'init/recenter)
+ (advice-add 'switch-to-buffer :after #'init/recenter)
 
  :bind
  (("<f12>"       . delete-other-windows)
@@ -1423,6 +1421,7 @@
  ;;  '(face
  ;;    trailing
  ;;    tabs
+ ;;    spaces
  ;;    lines-tail
  ;;    missing-newline-at-eof
  ;;    empty
@@ -2106,7 +2105,11 @@
  :custom
  (safe-local-variable-values
   '((comment-style . multi-line)
-    (backward-delete-char-untabify-method . nil))))
+    (backward-delete-char-untabify-method . nil)
+    (electric-indent-inhibit . nil)
+    (lsp-enable-indentation . nil)
+    (lsp-enable-on-type-formatting . nil)
+    (lsp-enable-semantic-highlighting . nil))))
 
 (use-package cc-mode
  :ensure nil
@@ -2619,9 +2622,16 @@
  (setenv "LSP_USE_PLISTS" "true")
  (setq-default read-process-output-max (* 1024 1024))
 
+ ;; :preface
+ ;; (defun init/restore-point (&rest args)
+ ;;  (let ((point (point)))
+ ;;   (apply args)
+ ;;   (goto-char point)))
+
  :config
  ;; Unmark after formatting.
  (advice-add 'lsp-format-region :after #'keyboard-quit)
+ ;; (advice-add 'lsp--apply-text-edits :around #'init/restore-point)
 
  :bind
  (:map lsp-mode-map
