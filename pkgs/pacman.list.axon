@@ -311,6 +311,7 @@ lshw
 ltrace
 luametatex
 lychee
+lzip
 lzop
 man-db
 man-pages
@@ -375,6 +376,7 @@ paccat
 pacman-contrib
 pacrunner
 pam-u2f
+paper-clip
 papers
 papirus-icon-theme
 par2cmdline
@@ -553,6 +555,7 @@ secrets
 shake
 shellcheck
 shfmt
+showtime
 simple-scan
 skim
 sloccount
@@ -606,6 +609,7 @@ udftools
 udisks2-btrfs
 ugrep
 unace
+unarj
 unhide
 unicode-emoji
 unixodbc
@@ -640,6 +644,7 @@ wireless-regdb
 wireless_tools
 wl-clipboard
 woff2-font-awesome
+xarchiver
 xdelta3
 xf86-input-evdev
 xf86-input-vmmouse
