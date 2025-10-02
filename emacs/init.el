@@ -850,6 +850,9 @@
  :ensure nil
  :defer t
 
+ :custom
+ (save-place-abbreviate-file-names t)
+
  :init
  (save-place-mode))
 
