@@ -201,7 +201,6 @@ gnome-firmware
 gnome-font-viewer
 gnome-podcasts
 gnome-tweaks
-gnu-netcat
 gpart
 gpick
 gptfdisk
@@ -363,6 +362,7 @@ nvidia-settings
 nvme-cli
 nvtop
 odt2txt
+openbsd-netcat
 opencl-mesa
 opencl-nvidia
 opendoas
