@@ -2471,13 +2471,14 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'flycheck-hledger)
-
- :custom
- ;; TODO Also add "accounts".
- (flycheck-hledger-checks '("commodities"))
+ :after hledger-mode
 
  :hook
- (hledger-mode-hook . (lambda () (eval-when-compile (require 'flycheck-hledger)))))
+ (hledger-mode-hook .
+  (lambda ()
+   (require 'flycheck-hledger)
+   ;; TODO Also add "accounts".
+   (setopt flycheck-hledger-checks '("commodities")))))
 
 (use-package whitespace
  :ensure nil
