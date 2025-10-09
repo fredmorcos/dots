@@ -927,7 +927,7 @@
  (split-width-threshold 130)
  (even-window-sizes 'width-only)
  ;; Skip *SPECIALS* when switching buffers.
- (switch-to-prev-buffer-skip-regexp ("\\`\\*.+\\*\\'"))
+ (switch-to-prev-buffer-skip-regexp '("\\`\\*.+\\*\\'"))
 
  :preface
  (defun init/disable-popup (regexp)
