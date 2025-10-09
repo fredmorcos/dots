@@ -878,8 +878,19 @@
  :custom
  (save-place-abbreviate-file-names t)
 
+ ;; :preface
+ ;; (defun init/activate-save-place-mode (&rest _)
+ ;;  (unless save-place-mode (save-place-mode))))
+
  :init
  (save-place-mode))
+
+;; (use-package files
+;;  :ensure nil
+;;  :defer t
+
+;;  :config
+;;  (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
 
 (use-package savehist
  :ensure nil
