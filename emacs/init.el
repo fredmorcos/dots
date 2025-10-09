@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Find out what loaded a mode e.g. org
+;; (with-eval-after-load 'org
+;;   (unless after-init-time
+;;     (message "Org loaded during init! Printing backtrace...")
+;;    (backtrace)))
+
 (eval-and-compile
  (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path)
