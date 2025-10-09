@@ -1938,10 +1938,27 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'volatile-highlights)
- :diminish
+ :diminish)
 
- :init
- (volatile-highlights-mode))
+(use-package volatile-highlights
+ :ensure volatile-highlights
+ :defer t
+ :preface (qol/select-package 'volatile-highlights)
+ :diminish
+ :after hledger-mode
+
+ :hook
+ (hledger-mode-hook . volatile-highlights-mode))
+
+(use-package volatile-highlights
+ :ensure volatile-highlights
+ :defer t
+ :preface (qol/select-package 'volatile-highlights)
+ :diminish
+ :after prog-mode
+
+ :hook
+ (prog-mode-hook . volatile-highlights-mode))
 
 ;;; Syntax Highlighting
 
