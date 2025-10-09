@@ -651,6 +651,25 @@
 
 ;; (use-package corfu
 ;;  :ensure t
+;;  :if (display-graphic-p)
+;;  :hook (after-init . global-corfu-mode)
+;;  :init
+;;  (setq tab-always-indent 'complete)
+;;  :bind (:map corfu-map ("<tab>" . corfu-complete))
+;;  :config
+;;  (setq corfu-preview-current nil)
+;;  (setq corfu-min-width 20)
+
+;;  (setq corfu-popupinfo-delay '(1.25 . 0.5))
+;;  (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
+
+;;  ;; Sort by input history (no need to modify `corfu-sort-function').
+;;  (with-eval-after-load 'savehist
+;;   (corfu-history-mode 1)
+;;   (add-to-list 'savehist-additional-variables 'corfu-history)))
+
+;; (use-package corfu
+;;  :ensure t
 ;;  :defer t
 ;;  :hook prog-mode-hook
 
