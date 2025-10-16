@@ -198,7 +198,7 @@
  :defer t
 
  :custom
- (tab-always-indent t)
+ (tab-always-indent 'complete)
  (tab-first-completion 'word-or-paren-or-punct))
 
 (use-package simple
@@ -494,7 +494,10 @@
 
  :custom
  (consult-preview-key "M-.")
- (consult-project-function (lambda (_) (projectile-project-root))))
+ (consult-project-function (lambda (_) (projectile-project-root)))
+
+ :config
+ (advice-add #'consult-buffer :before #'init/recentf-load-list))
 
 (use-package consult-register
  :ensure consult
@@ -620,8 +623,8 @@
 
  :custom
  (hippie-expand-try-functions-list
-  '(try-expand-dabbrev-visible
-    try-expand-dabbrev
+  '(try-expand-dabbrev
+    try-expand-dabbrev-visible
     try-expand-line
     try-expand-dabbrev-all-buffers
     try-expand-line-all-buffers
@@ -878,19 +881,16 @@
  :custom
  (save-place-abbreviate-file-names t)
 
- ;; :preface
- ;; (defun init/activate-save-place-mode (&rest _)
- ;;  (unless save-place-mode (save-place-mode))))
+ :preface
+ (defun init/activate-save-place-mode (&rest _)
+  (unless save-place-mode (save-place-mode))))
 
- :init
- (save-place-mode))
+(use-package files
+ :ensure nil
+ :defer t
 
-;; (use-package files
-;;  :ensure nil
-;;  :defer t
-
-;;  :config
-;;  (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
+ :config
+ (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
 
 (use-package savehist
  :ensure nil
@@ -902,6 +902,15 @@
 (use-package recentf
  :ensure nil
  :defer t
+ :commands (recentf-load-list)
+ :config (recentf-mode)
+
+ :preface
+ (defvar init/recentf-loaded-p nil)
+ (defun init/recentf-load-list (&rest _)
+  (unless init/recentf-loaded-p
+   (recentf-load-list)
+   (setq init/recentf-loaded-p t)))
 
  :custom
  (recentf-max-menu-items 50)
@@ -913,10 +922,7 @@
                     "~/.config/emacs/var"
                     "~/.config/emacs/elpa"
                     "/usr/share/emacs"
-                    "/run/media"))
-
- :init
- (recentf-mode))
+                    "/run/media")))
 
 ;;; Windows
 
@@ -1781,10 +1787,7 @@
 (use-package nerd-icons-completion
  :ensure t
  :defer t
- :preface (qol/select-package 'nerd-icons-completion)
-
- :init
- (nerd-icons-completion-mode))
+ :preface (qol/select-package 'nerd-icons-completion))
 
 (use-package emacs
  :ensure nil
@@ -1807,11 +1810,14 @@
  :defer t
  :preface (qol/select-package 'marginalia)
 
- :config
- (nerd-icons-completion-marginalia-setup)
+ :preface
+ (defun init/marginalia-mode ()
+  (unless (bound-and-true-p marginalia-mode)
+   (marginalia-mode)))
 
- :init
- (marginalia-mode))
+ :hook
+ (marginalia-mode-hook . nerd-icons-completion-marginalia-setup)
+ (minibuffer-setup-hook . init/marginalia-mode))
 
 (use-package embark
  :ensure t
@@ -2391,6 +2397,7 @@
  :preface (qol/select-package 'hledger-mode)
  :mode (rx ".journal" eos)
  :mode (rx ".ledger" eos)
+ :mode (rx ".hledger" eos)
 
  :preface
  (defun init/hledger-move-amount-to-column ()
@@ -2455,12 +2462,6 @@
  :defer t
  :after hledger-mode
  :hook (hledger-mode-hook . electric-pair-local-mode))
-
-;; (use-package hledger-navigate
-;;  :ensure hledger-mode
-;;  :defer t
-;;  :custom
-;;  (hledger-enable-current-overlay t))
 
 (use-package company
  :ensure t
