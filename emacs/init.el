@@ -1636,6 +1636,7 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'nerd-icons-dired)
+ :diminish
  :hook (dired-mode-hook . nerd-icons-dired-mode))
 
 ;;; Search
