@@ -207,9 +207,6 @@ cmerge sysctl/locale.conf              /etc/locale.conf
 cmerge sysctl/sysctl.conf              /etc/sysctl.d/sysctl.conf
 cmerge sysctl/limits.conf              /etc/security/limits.conf
 
-cmerge modules/modprobe.conf           /etc/modprobe.d/modprobe.conf
-cmerge modules/nvidia.conf             /etc/modprobe.d/nvidia.conf
-
 cmerge docker/daemon.json              /etc/docker/daemon.json
 cmerge docker/config.json              ~/.config/docker/config.json
 
@@ -231,8 +228,8 @@ if [ -f /etc/os-release ]; then
     pkgs_tmp_file=$(mktemp)
     pacman -Qtteq | sort > "$pkgs_tmp_file"
     cmerge "pkgs/pacman.list" "$pkgs_tmp_file"
-    pkgs_install=$(comm --check-order -2 -3 "pkgs/pacman.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
-    pkgs_remove=$(comm --check-order -1 -3 "pkgs/pacman.list.$HNAME" "$pkgs_tmp_file" | tr '\n' ' ')
+    pkgs_install=$(comm --check-order -2 -3 "pkgs/pacman.list" "$pkgs_tmp_file" | tr '\n' ' ')
+    pkgs_remove=$(comm --check-order -1 -3 "pkgs/pacman.list" "$pkgs_tmp_file" | tr '\n' ' ')
     rm "$pkgs_tmp_file"
 
     if [ "$pkgs_remove" != "" ]; then
