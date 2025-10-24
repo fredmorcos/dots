@@ -25,6 +25,29 @@ CMD=("rsync"
      '--exclude=__pycache__'
      '--exclude=.mypy_cache'
      '--exclude=emacs/elpa/'
+     '--exclude=emacs/eln-cache/'
+     '--exclude=ccache/'
+     '--exclude=paru/'
+     '--exclude=pip/'
+     '--exclude=thumbnails/'
+     '--exclude=dconf/'
+     '--exclude=epiphany/'
+     '--exclude=llvm-debuginfod/'
+     '--exclude=media-art/'
+     '--exclude=mesa_shader_cache_db/'
+     '--exclude=mesa_shader_cache/'
+     '--exclude=tracker3/'
+     '--exclude=flatpak-cargo/'
+     '--exclude=electron/'
+     '--exclude=share/nautilus/'
+     '--exclude=share/gnome-shell/'
+     '--exclude=index-v2/'
+     '--exclude=gvfs-metadata/'
+     '--exclude=vulkan-pipeline-cache/'
+     '--exclude=mozilla/'
+     '--exclude=pip-tools/'
+     '--exclude=tealdeer/'
+     '--exclude=torbrowser/'
      '--exclude=node_modules/'
      '--exclude=.cache/clangd'
      '--exclude=.libs'
@@ -48,32 +71,37 @@ PORTABLE='/run/media/fred/Portable'
 OX='/run/media/fred/OX'
 
 backup_home() {
-  cmd "$HOME/Archive/"                  "$1/Fred/Archive/"
-  cmd "$HOME/Documents/"                "$1/Fred/Documents/"
-  cmd "$HOME/Downloads/"                "$1/Fred/Downloads/"
-  cmd "$HOME/Phone/"                    "$1/Fred/Phone/"
-  cmd "$HOME/Pictures/"                 "$1/Fred/Pictures/"
-  cmd "$HOME/Public/"                   "$1/Fred/Public/"
-  cmd "$HOME/Videos/"                   "$1/Fred/Videos/"
-  cmd "$HOME/Workspace/"                "$1/Fred/Workspace/"
+  cmd "$HOME/Archive/"                  "$1/Archive/"
+  cmd "$HOME/Documents/"                "$1/Documents/"
+  cmd "$HOME/Downloads/"                "$1/Downloads/"
+  cmd "$HOME/Phone/"                    "$1/Phone/"
+  cmd "$HOME/Pictures/"                 "$1/Pictures/"
+  cmd "$HOME/Public/"                   "$1/Public/"
+  cmd "$HOME/Videos/"                   "$1/Videos/"
+  cmd "$HOME/Workspace/"                "$1/Workspace/"
 
-  cmd "$HOME/.ssh/"                     "$1/Fred/Configs/ssh/"
-  cmd "$HOME/.config/beets/"            "$1/Fred/Configs/config-beets/"
-  cmd "$HOME/.config/MusicBrainz/"      "$1/Fred/Configs/config-MusicBrainz/"
-  cmd "$HOME/.config/yt-dlp/"           "$1/Fred/Configs/config-yt-dlp/"
-  cmd "$HOME/.local/share/gnupg/"       "$1/Fred/Configs/local-share-gnupg/"
-  cmd "$HOME/.local/share/keyrings/"    "$1/Fred/Configs/local-share-keyrings/"
+  cmd "$HOME/.ssh/"                     "$1/Configs/ssh/"
+  cmd "$HOME/.config/beets/"            "$1/Configs/config-beets/"
+  cmd "$HOME/.config/MusicBrainz/"      "$1/Configs/config-MusicBrainz/"
+  cmd "$HOME/.config/yt-dlp/"           "$1/Configs/config-yt-dlp/"
+  cmd "$HOME/.config/syncthing/"        "$1/Configs/config-syncthing/"
+  cmd "$HOME/.local/share/gnupg/"       "$1/Configs/local-share-gnupg/"
+  cmd "$HOME/.local/share/keyrings/"    "$1/Configs/local-share-keyrings/"
+
+  cmd "$HOME/.config/"                  "$1/Configs/dot.config/"
+  cmd "$HOME/.cache/"                   "$1/Configs/dot.cache/"
+  cmd "$HOME/.local/"                   "$1/Configs/dot.local/"
 }
 
 if [ "$HOSTNAME" == "axon" ]; then
   if [ -d "$DATA" ]; then
-    backup_home "$DATA"
+    backup_home "$DATA/Fred"
   else
     printf ">>> %s is not mounted\n" "$DATA"
   fi
 
   if [ -d "$MEDIA" ]; then
-    backup_home "$MEDIA"
+    backup_home "$MEDIA/Fred"
 
     if [ -d "$DATA" ]; then
       cmd "$DATA/FredOther/" "$MEDIA/FredOther/"
@@ -83,7 +111,7 @@ if [ "$HOSTNAME" == "axon" ]; then
   fi
 
   if [ -d "$PORTABLE" ]; then
-    backup_home "$PORTABLE"
+    backup_home "$PORTABLE/Fred"
 
     if [ -d "$DATA" ]; then
       cmd "$DATA/FredOther/" "$PORTABLE/FredOther/"
@@ -93,38 +121,13 @@ if [ "$HOSTNAME" == "axon" ]; then
   fi
 elif [ "$HOSTNAME" == "neuron" ]; then
   if [ -d "$PORTABLE" ]; then
-    cmd "$HOME/Documents/"                "$PORTABLE/Laptop/Documents/"
-    cmd "$HOME/Downloads/"                "$PORTABLE/Laptop/Downloads/"
-    cmd "$HOME/Phone/"                    "$PORTABLE/Laptop/Phone/"
-    cmd "$HOME/Pictures/"                 "$PORTABLE/Laptop/Pictures/"
-    cmd "$HOME/Public/"                   "$PORTABLE/Laptop/Public/"
-    cmd "$HOME/Videos/"                   "$PORTABLE/Laptop/Videos/"
-    cmd "$HOME/Workspace/"                "$PORTABLE/Laptop/Workspace/"
-
-    cmd "$HOME/.ssh/"                     "$PORTABLE/Laptop/Configs/ssh/"
-    cmd "$HOME/.config/beets/"            "$PORTABLE/Laptop/Configs/config-beets/"
-    cmd "$HOME/.config/MusicBrainz/"      "$PORTABLE/Laptop/Configs/config-MusicBrainz/"
-    cmd "$HOME/.config/yt-dlp/"           "$PORTABLE/Laptop/Configs/config-yt-dlp/"
-    cmd "$HOME/.local/share/gnupg/"       "$PORTABLE/Laptop/Configs/local-share-gnupg/"
-    cmd "$HOME/.local/share/keyrings/"    "$PORTABLE/Laptop/Configs/local-share-keyrings/"
+    backup_home "$PORTABLE/Laptop"
   else
     printf ">>> %s is not mounted\n" "$PORTABLE"
   fi
 
   if [ -d "$OX" ]; then
-    cmd "$HOME/Archive/"                  "$OX/Laptop/Archive/"
-    cmd "$HOME/Documents/"                "$OX/Laptop/Documents/"
-    cmd "$HOME/Downloads/"                "$OX/Laptop/Downloads/"
-    cmd "$HOME/Phone/"                    "$OX/Laptop/Phone/"
-    cmd "$HOME/Pictures/"                 "$OX/Laptop/Pictures/"
-    cmd "$HOME/Public/"                   "$OX/Laptop/Public/"
-    cmd "$HOME/Videos/"                   "$OX/Laptop/Videos/"
-    cmd "$HOME/Workspace/"                "$OX/Laptop/Workspace/"
-
-    cmd "$HOME/.ssh/"                     "$OX/Laptop/Configs/dot.ssh/"
-    cmd "$HOME/.config/"                  "$OX/Laptop/Configs/dot.config/"
-    cmd "$HOME/.cache/"                   "$OX/Laptop/Configs/dot.cache/"
-    cmd "$HOME/.local/"                   "$OX/Laptop/Configs/dot.local/"
+    backup_home "$OX/Laptop"
   else
     printf ">>> %s is not mounted\n" "$OX"
   fi
