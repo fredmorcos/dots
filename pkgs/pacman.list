@@ -239,7 +239,6 @@ pyalpm
 python-aafigure
 python-aiodns
 python-arrow
-python-audioop-lts
 python-awesomeversion
 python-babel
 python-beaker
@@ -248,7 +247,6 @@ python-build
 python-cairosvg
 python-cchardet
 python-cssselect
-python-deadlib
 python-debugpy
 python-discogs-client
 python-docker
@@ -319,6 +317,8 @@ python-ruamel-yaml
 python-ruff
 python-service-identity
 python-setuptools-rust
+python-standard-aifc
+python-standard-sunau
 python-svglib
 python-symengine
 python-sympy
