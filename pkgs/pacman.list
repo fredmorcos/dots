@@ -20,8 +20,6 @@ beets
 bluez-tools
 bluez-utils
 boost
-brother-dcp-l2510d
-brscan4
 brscan5
 bzip3
 caligula
@@ -213,11 +211,7 @@ nvchecker
 nvme-cli
 openbsd-netcat
 opencl-mesa
-opencl-nvidia
-optipng
-otf-apple-fonts
 otf-commit-mono-nerd
-oxipng
 paccat
 pacman-contrib
 pacrunner
