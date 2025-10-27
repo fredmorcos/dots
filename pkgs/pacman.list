@@ -20,6 +20,8 @@ beets
 bluez-tools
 bluez-utils
 boost
+brother-dcp-l2510d
+brscan4
 brscan5
 bzip3
 caligula
@@ -117,7 +119,6 @@ gnome-tweaks
 gptfdisk
 graphicsmagick
 grcov
-gspell
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
