@@ -109,6 +109,7 @@ fprintd
 fzf
 gcovr
 gdm
+git-delta
 gnome-calculator
 gnome-control-center
 gnome-disk-utility
@@ -239,6 +240,7 @@ pyalpm
 python-aafigure
 python-aiodns
 python-arrow
+python-audioop-lts
 python-awesomeversion
 python-babel
 python-beaker
@@ -317,8 +319,6 @@ python-ruamel-yaml
 python-ruff
 python-service-identity
 python-setuptools-rust
-python-standard-aifc
-python-standard-sunau
 python-svglib
 python-symengine
 python-sympy
