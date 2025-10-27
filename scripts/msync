@@ -59,10 +59,20 @@ rdiff $HOME/.ssh/known_hosts
 rdiff $HOME/.config/yt-dlp/archive
 
 cmd $HOME/.ssh/
-cmd $HOME/.config/beets/
+
 cmd $HOME/.config/MusicBrainz/
-cmd $HOME/.config/yt-dlp/
+cmd $HOME/.config/beets/
 cmd $HOME/.config/protonvpn/
+cmd $HOME/.config/transmission/
+cmd $HOME/.config/yt-dlp/
+
+cmd $HOME/.local/share/authenticator/
+cmd $HOME/.local/share/gnome-podcasts/
 cmd $HOME/.local/share/gnupg/
 cmd $HOME/.local/share/keyrings/
+
+cmd $HOME/.cache/authenticator/
+cmd $HOME/.cache/gnome-podcasts/
+cmd $HOME/.cache/transmission/
+
 cmd $HOME/Workspace/
