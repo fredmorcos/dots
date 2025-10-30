@@ -205,17 +205,14 @@ cmerge net/hosts                       /etc/hosts
 
 cmerge sysctl/locale.conf              /etc/locale.conf
 cmerge sysctl/sysctl.conf              /etc/sysctl.d/sysctl.conf
-cmerge sysctl/limits.conf              /etc/security/limits.conf
 
 cmerge docker/daemon.json              /etc/docker/daemon.json
 cmerge docker/config.json              ~/.config/docker/config.json
 
 SYSD=/etc/systemd
 
-cmerge systemd/coredump.conf           $SYSD/coredump.conf
 cmerge systemd/system.conf             $SYSD/system.conf
 cmerge systemd/journald.conf           $SYSD/journald.conf
-cmerge systemd/paccache-override.conf  $SYSD/system/paccache.service.d/override.conf
 
 cmerge vpn/ox.service                  $SYSD/system/ox.service
 cmerge vpn/ox-suspend.service          $SYSD/system/ox-suspend.service
