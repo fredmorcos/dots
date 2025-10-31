@@ -3,6 +3,7 @@ Host dc-ubuntu24
   HostName localhost
   Port 2222
   IdentityFile ~/.ssh/id_rsa
+  Compression no
 
 Host rpi
   User root

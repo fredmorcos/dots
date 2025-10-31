@@ -249,7 +249,19 @@
  (make-backup-files t)
  ;; Prefer the newest version of a file.
  (load-prefer-newer t)
- (delete-old-versions t))
+ (delete-old-versions t)
+ (remote-file-name-inhibit-auto-save-visited t)
+ (remote-file-name-inhibit-locks t))
+
+;;; Tramp
+
+(use-package tramp-sh
+ :ensure nil
+ :defer t
+
+ :custom
+ (tramp-use-scp-direct-remote-copying t)
+ (tramp-copy-size-limit (* 1024 1024)))
 
 ;;; UI
 
