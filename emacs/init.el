@@ -13,6 +13,30 @@
  (push emacs-dots-dir load-path)
  (require 'init-macros))
 
+;;; Benchmark Init
+
+;; (use-package benchmark-init
+;;  :ensure t
+;;  :defer nil
+;;  :commands benchmark-init/activate
+;;  :hook
+;;  ;; To disable collection of benchmark data after init is done.
+;;  (after-init-hook . benchmark-init/deactivate))
+
+;; (require 'benchmark-init)
+;; ;; (benchmark-init/activate)
+;; (add-hook 'after-init-hook #'benchmark-init/deactivate)
+
+;; (use-package benchmark-init
+;;  :ensure t
+;;  :demand
+;;  ;; :config
+;;  ;; (add-hook 'after-init-hook  #'benchmark-init/deactivate 100)
+;;  :init
+;;  (benchmark-init/activate))
+
+;;; ----------
+
 ;;; Quality of Life
 
 (im/config "Read .dir-locals.el over TRAMP"
