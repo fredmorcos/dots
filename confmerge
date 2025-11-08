@@ -205,6 +205,7 @@ cmerge net/hosts                       /etc/hosts
 
 cmerge sysctl/locale.conf              /etc/locale.conf
 cmerge sysctl/sysctl.conf              /etc/sysctl.d/sysctl.conf
+cmerge sysctl/modprobe.conf            /etc/modprobe.d/modprobe.conf
 
 cmerge docker/daemon.json              /etc/docker/daemon.json
 cmerge docker/config.json              ~/.config/docker/config.json
