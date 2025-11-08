@@ -2310,6 +2310,12 @@
  (setq-mode-local python-mode fill-column 79)
  (setq-mode-local python-ts-mode fill-column 79))
 
+(use-package uv-mode
+ :ensure t
+ :defer t
+ :after python
+ :hook (python-base-mode-hook . uv-mode-auto-activate-hook))
+
 (use-package lsp-mode
  :ensure t
  :defer t
