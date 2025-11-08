@@ -277,7 +277,6 @@ python-keyrings-alt
 python-keystone
 python-langdetect
 python-linkify-it-py
-python-lsp-black
 python-lz4
 python-micawber
 python-mpd2
@@ -313,7 +312,6 @@ python-pyserial
 python-pystache
 python-pystemmer
 python-pytest-isort
-python-pytest-lsp
 python-pyudev
 python-pyxattr
 python-rcssmin
@@ -340,6 +338,7 @@ python-volume_key
 python-watchdog
 python-wcwidth
 python-webcolors
+python-websockets
 python-xattr
 python-xlrd
 python-zeroconf
