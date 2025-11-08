@@ -94,7 +94,7 @@ fi
 hide_applications="avahi-discover bssh bvnc cmake-gui cppcheck-gui echomixer \
                    emacsclient envy24control ettercap gvim hdajackretask     \
                    hdspconf hdspmixer htop hwmixvolume ipython lstopo nvtop  \
-                   qv4l2 qvidcap vim weechat xdot xdvi xsane gtk-lshw"
+                   qv4l2 qvidcap vim weechat xdot xdvi xsane gtk-lshw nvim"
 
 for application in $hide_applications; do
   destination="$HOME/.local/share/applications/$application.desktop"
