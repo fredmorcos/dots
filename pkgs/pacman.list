@@ -23,6 +23,7 @@ boost
 brother-dcp-l2510d
 brscan4
 brscan5
+btop
 bzip3
 caligula
 capitaine-cursors
@@ -135,6 +136,7 @@ hddtemp
 hdparm
 hip-runtime-amd
 hledger-ui
+hspell
 htop
 hunspell-de
 hunspell-en_us
@@ -171,6 +173,7 @@ libraw
 libultrahdr
 libva-utils
 libvdpau-va-gl
+libvoikko
 libwebp-utils
 libwmf
 libwpg
