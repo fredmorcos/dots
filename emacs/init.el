@@ -2275,13 +2275,16 @@
  :config
  (add-to-list 'lsp-clients-clangd-args "--enable-config")
  (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
+ (add-to-list 'lsp-clients-clangd-args "--query-driver=/**/*")
+ (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
+ (add-to-list 'lsp-clients-clangd-args "--log=error")
  (add-to-list 'lsp-clients-clangd-args "--background-index")
  (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
  (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
  (add-to-list 'lsp-clients-clangd-args "--function-arg-placeholders")
- (add-to-list 'lsp-clients-clangd-args "--header-insertion=iwyu")
+ (add-to-list 'lsp-clients-clangd-args "--header-insertion=never")
  ;; This sometimes breaks LSP completion.
- (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators")
+ (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators=0")
  (add-to-list 'lsp-clients-clangd-args "--limit-references=0")
  (add-to-list 'lsp-clients-clangd-args "--limit-results=0")
  (add-to-list 'lsp-clients-clangd-args "--rename-file-limit=0")
