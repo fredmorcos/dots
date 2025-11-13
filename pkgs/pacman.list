@@ -179,7 +179,6 @@ libwpg
 libzip
 linux
 linux-firmware
-linux-headers
 linux-tools-meta
 lld
 lldb
