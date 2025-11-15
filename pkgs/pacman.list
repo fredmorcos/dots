@@ -261,7 +261,6 @@ python-flake8-black
 python-flake8-docstrings
 python-flake8-isort
 python-flask
-python-fonttools
 python-fs
 python-genshi
 python-ghp-import
@@ -313,7 +312,6 @@ python-pytest-isort
 python-pyudev
 python-pyxattr
 python-rcssmin
-python-reportlab
 python-requests-oauthlib
 python-rjsmin
 python-rope
