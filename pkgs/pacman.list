@@ -211,7 +211,6 @@ networkmanager
 noto-fonts-emoji
 ntfs-3g
 nuspell
-nvchecker
 nvme-cli
 openbsd-netcat
 opencl-mesa
@@ -240,7 +239,6 @@ proton-vpn-gtk-app
 pwgen
 pyalpm
 python-aiodns
-python-arrow
 python-audioread
 python-awesomeversion
 python-babel
@@ -302,7 +300,6 @@ python-pyinotify
 python-pylast
 python-pylint
 python-pymad
-python-pynvim
 python-pyphen
 python-pypng
 python-pyserial
