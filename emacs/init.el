@@ -2316,6 +2316,7 @@
 (use-package uv-mode
  :ensure t
  :defer t
+ :preface (qol/select-package 'uv-mode)
  :after python
  :hook (python-base-mode-hook . uv-mode-auto-activate-hook))
 
