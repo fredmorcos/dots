@@ -159,7 +159,6 @@ lhasa
 libblockdev-dm
 libblockdev-lvm
 libblockdev-nvdimm
-libblockdev-smart
 libdvdcss
 libdwarf
 libgnome-keyring
