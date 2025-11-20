@@ -688,111 +688,61 @@
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))
 
-;; (use-package corfu
-;;  :ensure t
-;;  :if (display-graphic-p)
-;;  :hook (after-init . global-corfu-mode)
-;;  :init
-;;  (setq tab-always-indent 'complete)
-;;  :bind (:map corfu-map ("<tab>" . corfu-complete))
-;;  :config
-;;  (setq corfu-preview-current nil)
-;;  (setq corfu-min-width 20)
-
-;;  (setq corfu-popupinfo-delay '(1.25 . 0.5))
-;;  (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
-
-;;  ;; Sort by input history (no need to modify `corfu-sort-function').
-;;  (with-eval-after-load 'savehist
-;;   (corfu-history-mode 1)
-;;   (add-to-list 'savehist-additional-variables 'corfu-history)))
-
-;; (use-package corfu
-;;  :ensure t
-;;  :defer t
-;;  :hook prog-mode-hook
-
-;;  :custom
-;;  ;; Only complete when hitting TAB.
-;;  (corfu-auto nil)
-
-;;  ;; Delay before popup (enable if corfu-auto is t).
-;;  ;; (corfu-auto-delay 0)
-
-;;  ;; Trigger completion after typing 1 character.
-;;  (corfu-auto-prefix 1)
-;;  ;; Quit popup if no match.
-;;  (corfu-quit-no-match t)
-;;  ;; Margin when scrolling completions.
-;;  (corfu-scroll-margin 5)
-;;  ;; Maximum width of completion popup.
-;;  (corfu-max-width 50)
-;;  ;; Minimum width of completion popup.
-;;  (corfu-min-width 50)
-
-;;  :config
-;;  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
-
-;; (use-package corfu-popupinfo
-;;  :ensure corfu
-;;  :defer t
-;;  :hook corfu-mode-hook
-
-;;  :custom
-;;  ;; Delay before showing documentation popup.
-;;  (corfu-popupinfo-delay 0.5))
-
-;; (use-package nerd-icons-corfu
-;;  :ensure t
-;;  :defer t
-;;  :after corfu)
-
-(use-package company
+(use-package corfu
  :ensure t
  :defer t
- :preface (qol/select-package 'company)
- :diminish "Co"
- :commands company--active-p
- :hook prog-mode-hook
-
- :custom
- (company-idle-delay 0.7)
- (company-keywords-ignore-case t)
- (company-selection-wrap-around t)
- (company-tooltip-align-annotations t)
- (company-tooltip-minimum-width 40)
- (company-tooltip-maximum-width 80)
- (company-tooltip-limit 15)
- (company-tooltip-minimum 10)
- (company-tooltip-flip-when-above t)
- (company-tooltip-annotation-padding 3)
- (company-tooltip-width-grow-only t))
-
-(use-package prog-mode
- :ensure nil
- :defer t
+ :preface (qol/select-package 'corfu)
+ ;; :custom
+ ;; (corfu-preview-current nil)
+ ;; (corfu-auto nil)
+ ;; (corfu-auto-delay 0)
+ ;; (corfu-quit-no-match t)
+ ;; (corfu-scroll-margin 5)
+ ;; (corfu-max-width 50)
+ ;; (corfu-min-width 20)
  :config
- (setq-mode-local emacs-lisp-mode
-  company-backends '(company-capf
-                     company-keywords
-                     company-dabbrev-code
-                     company-files
-                     :separate)))
+ (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-(use-package company-posframe
+(use-package corfu
  :ensure t
  :defer t
- :preface (qol/select-package 'company-posframe)
- :diminish
- :after company
- :hook company-mode-hook
+ :preface (qol/select-package 'corfu)
+ :after prog-mode
+ :hook prog-mode-hook)
 
- :config
- (qol/append company-posframe-show-params :border-width 1)
- (qol/append company-posframe-quickhelp-show-params :border-width 1)
+(use-package corfu-popupinfo
+ :ensure corfu
+ :defer t
+ :preface (qol/select-package 'corfu)
+ :after corfu
+ :hook corfu-mode-hook)
 
+(use-package corfu-popupinfo
+ :ensure corfu
+ :defer t
+ :preface (qol/select-package 'corfu)
  :custom
- (company-posframe-quickhelp-x-offset 2))
+ (corfu-popupinfo-delay '(1.25 . 0.5)))
+
+(use-package corfu-history
+ :ensure corfu
+ :defer t
+ :preface (qol/select-package 'corfu)
+ :after corfu
+ :hook corfu-mode-hook)
+
+(use-package corfu-history
+ :ensure corfu
+ :defer t
+ :preface (qol/select-package 'corfu)
+ :after savehist
+ :config
+ (add-to-list 'savehist-additional-variables 'corfu-history))
+
+(use-package nerd-icons-corfu
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'nerd-icons-corfu))
 
 ;;; Syntax Checking
 
@@ -856,38 +806,6 @@
  (advice-add 'flycheck-next-error :after #'init/recenter)
  (advice-add 'flycheck-previous-error :after #'init/recenter)
  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
-
-;; (use-package flycheck-posframe
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'flycheck-posframe)
-
-;;  :custom
-;;  (flycheck-posframe-prefix (concat " " (char-to-string 8618)  " Info: "))
-;;  (flycheck-posframe-warning-prefix (concat " " (char-to-string 9888)  " Warning: "))
-;;  (flycheck-posframe-error-prefix (concat " " (char-to-string 10540) " Error: "))
-;;  (flycheck-posframe-position 'window-bottom-left-corner)
-;;  (flycheck-posframe-border-width 1))
-
-;; (use-package flycheck-posframe
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'flycheck-posframe)
-;;  :after flycheck
-;;  :hook flycheck-mode-hook)
-
-(use-package company
- :ensure t
- :defer t
- :preface (qol/select-package 'company)
- :after flycheck-posframe
-
- :preface
- (defun init/company-is-active (&rest _)
-  (or (company--active-p) (bound-and-true-p company-backend)))
-
- :hook
- (flycheck-posframe-inhibit-functions . init/company-is-active))
 
 (use-package cape
  :ensure t
@@ -1927,6 +1845,7 @@
  :defer t
 
  :config
+ (qol/remove completion-at-point-functions 'tags-completion-at-point-function)
  (qol/remove completion-styles 'emacs22)
  ;; (qol/remove completion-styles 'basic)
  ;; (qol/remove completion-styles 'partial-completion)
@@ -2520,21 +2439,23 @@
  :after hledger-mode
  :hook (hledger-mode-hook . electric-pair-local-mode))
 
-(use-package company
- :ensure t
- :defer t
- :preface (qol/select-package 'company)
- :hook hledger-mode-hook
- :config
- (setq-mode-local hledger-mode
-  company-backends '(hledger-company)
-  completion-at-point-functions nil))
-
-;; (use-package corfu
+;; (use-package company
 ;;  :ensure t
 ;;  :defer t
-;;  :preface (qol/select-package 'corfu)
-;;  :hook hledger-mode-hook)
+;;  :preface (qol/select-package 'company)
+;;  :after hledger-mode
+;;  :hook hledger-mode-hook
+;;  :config
+;;  (setq-mode-local hledger-mode
+;;   company-backends '(hledger-company)
+;;   completion-at-point-functions nil))
+
+(use-package corfu
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'corfu)
+ :after hledger-mode
+ :hook hledger-mode-hook)
 
 (use-package flycheck-hledger
  :ensure t
@@ -2612,21 +2533,21 @@
  :config
  (setq-mode-local web-mode tab-width 2))
 
-(use-package company
- :ensure t
- :defer t
- :preface (qol/select-package 'company)
- :hook web-mode-hook)
+;; (use-package company
+;;  :ensure t
+;;  :defer t
+;;  :preface (qol/select-package 'company)
+;;  :hook web-mode-hook)
 
-(use-package company-web
- :ensure t
- :defer nil
- :preface (qol/select-package 'company-web)
- :after (company web-mode)
+;; (use-package company-web
+;;  :ensure t
+;;  :defer nil
+;;  :preface (qol/select-package 'company-web)
+;;  :after (company web-mode)
 
- :config
- (setq-mode-local web-mode
-  company-backends '(company-css company-web-html :separate)))
+;;  :config
+;;  (setq-mode-local web-mode
+;;   company-backends '(company-css company-web-html :separate)))
 
 (use-package emmet-mode
  :ensure t
