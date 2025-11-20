@@ -1370,13 +1370,23 @@
  :ensure magit
  :defer t
  :preface (qol/select-package 'magit)
+ :preface
+ (defun init/magit-load-nerd-icons (&rest args)
+  (if (require 'nerd-icons nil t)
+   (apply args)
+   (message "Installing the `nerd-icons' package...")
+   (unless (package-installed-p 'nerd-icons)
+    (unless package-archive-contents
+     (package-refresh-contents))
+    (package-install 'nerd-icons))))
 
  :custom
  (magit-revision-show-gravatars t)
  (magit-revision-fill-summary-line fill-column)
 
  :config
- (advice-add 'magit-diff-visit-file :after #'init/recenter))
+ (advice-add 'magit-diff-visit-file :after #'init/recenter)
+ (advice-add 'magit-format-file-nerd-icons :around #'init/magit-load-nerd-icons))
 
 (use-package diff-hl
  :ensure t
