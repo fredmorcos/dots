@@ -72,6 +72,10 @@
  "Add ELEMENTS to LIST-VAR."
  `(setq ,list-var (append ,list-var (list ,@elements))))
 
+(defmacro qol/append-local (list-var &rest elements)
+ "Add ELEMENTS to buffer-local LIST-VAR."
+ `(setq-local ,list-var (append ,list-var (list ,@elements))))
+
 (defun qol/select-package (package)
  "Add PACKAGE to list of selected packages."
  (with-eval-after-load 'package
