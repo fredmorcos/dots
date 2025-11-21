@@ -670,14 +670,14 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'corfu)
- ;; :custom
- ;; (corfu-preview-current nil)
+ :custom
+ (corfu-preview-current nil)
  ;; (corfu-auto nil)
  ;; (corfu-auto-delay 0)
  ;; (corfu-quit-no-match t)
- ;; (corfu-scroll-margin 5)
+ (corfu-scroll-margin 5)
  ;; (corfu-max-width 50)
- ;; (corfu-min-width 20)
+ (corfu-min-width 50)
  :config
  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
@@ -789,16 +789,10 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'cape)
- :bind ("C-c p" . cape-prefix-map))
-
-(use-package cape
- :ensure t
- :defer t
- :preface (qol/select-package 'cape)
- :after minibuffer
- :hook
- (completion-at-point-functions . cape-dabbrev)
- (completion-at-point-functions . cape-file))
+ :bind ("C-c p" . cape-prefix-map)
+ :config
+ (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
+ (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))
 
 ;;; History and save-hist
 
@@ -911,6 +905,21 @@
  (resize-mini-windows t))
 
 ;;; General Programming
+
+(use-package prog-mode
+ :ensure nil
+ :defer t
+
+ :preface
+ (defun init/prog-capfs ()
+  (cape-wrap-super #'cape-file #'cape-dabbrev))
+
+ (defun init/setup-prog-capfs ()
+  (setq-local completion-at-point-functions
+   (list #'init/prog-capfs)))
+
+ :hook
+ (prog-mode-hook . init/setup-prog-capfs))
 
 (use-package devdocs
  :ensure t
@@ -1454,7 +1463,23 @@
   ("<f6>" . init/expand-current-macro))
 
  :config
- (advice-add #'elisp-completion-at-point :around #'cape-wrap-case-fold))
+ (advice-add 'elisp-completion-at-point :around #'cape-wrap-case-fold)
+ (advice-add 'elisp-completion-at-point :around #'cape-wrap-nonexclusive)
+
+ :preface
+ (defun init/elisp-capfs ()
+  (cape-wrap-super
+   'elisp-completion-at-point
+   #'yasnippet-capf
+   #'cape-file
+   #'cape-dabbrev))
+
+ (defun init/setup-elisp-capfs ()
+  (setq-local completion-at-point-functions
+   (list #'init/elisp-capfs)))
+
+ :hook
+ (emacs-lisp-mode-hook . init/setup-elisp-capfs))
 
 (use-package symbol-overlay
  :ensure t
@@ -2181,6 +2206,14 @@
  :after cc-mode
  :hook (c-mode-common-hook . lsp))
 
+(use-package lsp-completion
+ :ensure lsp-mode
+ :defer t
+ :preface (qol/select-package 'lsp-mode)
+ :config
+ (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
+ (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
+
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
@@ -2346,9 +2379,10 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'yasnippet-capf)
- :after yasnippet
  :custom
- (yasnippet-capf-lookup-by 'name))
+ (yasnippet-capf-lookup-by 'name)
+ :config
+ (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive))
 
 ;;; Ledger
 
@@ -2405,12 +2439,23 @@
  (hledger-refresh-completions-idle-delay 5)
 
  :config
- (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
-
  (setq-mode-local hledger-mode
   tab-width 1
   fill-column 100
-  comment-fill-column 100))
+  comment-fill-column 100)
+
+ (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
+ (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
+
+ :preface
+ (defun init/hledger-capfs ()
+  (cape-wrap-super 'hledger-completion-at-point #'yasnippet-capf))
+
+ (defun init/setup-hledger-capfs ()
+  (setq-local completion-at-point-functions (list #'init/hledger-capfs)))
+
+ :hook
+ (hledger-mode-hook . init/setup-hledger-capfs))
 
 (use-package hledger-core
  :ensure hledger-mode
