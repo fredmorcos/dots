@@ -4,36 +4,14 @@
 
 ;; Find out what loaded a mode e.g. org
 ;; (with-eval-after-load 'org
-;;   (unless after-init-time
-;;     (message "Org loaded during init! Printing backtrace...")
-;;    (backtrace)))
+;;  (unless after-init-time
+;;   (message "Org loaded during init! Printing backtrace...")
+;;   (backtrace)))
 
 (eval-and-compile
  (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
  (push emacs-dots-dir load-path)
  (require 'init-macros))
-
-;;; Benchmark Init
-
-;; (use-package benchmark-init
-;;  :ensure t
-;;  :defer nil
-;;  :commands benchmark-init/activate
-;;  :hook
-;;  ;; To disable collection of benchmark data after init is done.
-;;  (after-init-hook . benchmark-init/deactivate))
-
-;; (require 'benchmark-init)
-;; ;; (benchmark-init/activate)
-;; (add-hook 'after-init-hook #'benchmark-init/deactivate)
-
-;; (use-package benchmark-init
-;;  :ensure t
-;;  :demand
-;;  ;; :config
-;;  ;; (add-hook 'after-init-hook  #'benchmark-init/deactivate 100)
-;;  :init
-;;  (benchmark-init/activate))
 
 ;;; ----------
 
@@ -811,9 +789,13 @@
  :ensure t
  :defer t
  :preface (qol/select-package 'cape)
+ :bind ("C-c p" . cape-prefix-map))
 
- :bind ("C-c p" . cape-prefix-map)
-
+(use-package cape
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'cape)
+ :after minibuffer
  :hook
  (completion-at-point-functions . cape-dabbrev)
  (completion-at-point-functions . cape-file))
@@ -1469,7 +1451,10 @@
 
  :bind
  (:map emacs-lisp-mode-map
-  ("<f6>" . init/expand-current-macro)))
+  ("<f6>" . init/expand-current-macro))
+
+ :config
+ (advice-add #'elisp-completion-at-point :around #'cape-wrap-case-fold))
 
 (use-package symbol-overlay
  :ensure t
@@ -2340,14 +2325,6 @@
  :config
  (unbind-key "TAB" yas-minor-mode-map))
 
-(use-package consult-yasnippet
- :ensure t
- :defer t
- :preface (qol/select-package 'consult-yasnippet)
-
- :bind
- ("M-z" . consult-yasnippet))
-
 (use-package yasnippet-snippets
  :ensure t
  :defer t
@@ -2364,6 +2341,14 @@
 
  :hook
  (yas-minor-mode-hook . init/initialize-yasnippet-snippets))
+
+(use-package yasnippet-capf
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'yasnippet-capf)
+ :after yasnippet
+ :custom
+ (yasnippet-capf-lookup-by 'name))
 
 ;;; Ledger
 
@@ -2420,6 +2405,8 @@
  (hledger-refresh-completions-idle-delay 5)
 
  :config
+ (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
+
  (setq-mode-local hledger-mode
   tab-width 1
   fill-column 100
@@ -2438,17 +2425,6 @@
  :defer t
  :after hledger-mode
  :hook (hledger-mode-hook . electric-pair-local-mode))
-
-;; (use-package company
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'company)
-;;  :after hledger-mode
-;;  :hook hledger-mode-hook
-;;  :config
-;;  (setq-mode-local hledger-mode
-;;   company-backends '(hledger-company)
-;;   completion-at-point-functions nil))
 
 (use-package corfu
  :ensure t
@@ -2658,16 +2634,9 @@
  (setenv "LSP_USE_PLISTS" "true")
  (setq-default read-process-output-max (* 1024 1024))
 
- ;; :preface
- ;; (defun init/restore-point (&rest args)
- ;;  (let ((point (point)))
- ;;   (apply args)
- ;;   (goto-char point)))
-
  :config
  ;; Unmark after formatting.
  (advice-add 'lsp-format-region :after #'keyboard-quit)
- ;; (advice-add 'lsp--apply-text-edits :around #'init/restore-point)
 
  :bind
  (:map lsp-mode-map
