@@ -958,13 +958,14 @@
  (eldoc-documentation-strategy 'eldoc-documentation-compose)
  (eldoc-idle-delay 0.1))
 
-(use-package eldoc-box
+(use-package eldoc-mouse
  :ensure t
  :defer t
- :preface (qol/select-package 'eldoc-box)
-
- :custom
- (eldoc-box-lighter " Eb"))
+ :diminish "Em"
+ :preface (qol/select-package 'eldoc-mouse)
+ :bind (:map eldoc-mouse-mode-map
+        ("<f1> <f1>" . eldoc-mouse-pop-doc-at-cursor))
+ :hook eldoc-mode-hook)
 
 (use-package subword
  :ensure nil
