@@ -185,6 +185,7 @@ llvm
 logrotate
 loupe
 lrzip
+lsb-release
 lsof
 ltrace
 lzip
