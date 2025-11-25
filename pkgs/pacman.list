@@ -133,7 +133,6 @@ handlr-regex
 haveged
 hddtemp
 hdparm
-hip-runtime-amd
 hledger-ui
 hspell
 htop
@@ -340,8 +339,6 @@ quota-tools
 realtime-privileges
 reflector
 ripgrep-all
-rocm-opencl-runtime
-rocm-smi-lib
 rust-analyzer
 rust-bindgen
 sane-airscan
