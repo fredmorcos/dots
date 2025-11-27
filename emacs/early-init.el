@@ -168,7 +168,10 @@
 
  (im/after package
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  (setopt package-native-compile t)))
+  (setopt
+   package-native-compile t
+   ;; Highest number gets priority (what is not mentioned has priority 0)
+   package-archive-priorities '(("gnu" . 3) ("melpa" . 2) ("nongnu" . 1)))))
 
 (provide 'early-init)
 ;;; early-init.el ends here

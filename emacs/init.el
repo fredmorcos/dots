@@ -2450,7 +2450,8 @@
 
  :preface
  (defun init/hledger-capfs ()
-  (cape-wrap-super 'hledger-completion-at-point #'yasnippet-capf))
+  ; 'hledger-completion-at-point
+  (cape-wrap-super #'cape-dabbrev #'yasnippet-capf))
 
  (defun init/setup-hledger-capfs ()
   (setq-local completion-at-point-functions (list #'init/hledger-capfs)))
@@ -2462,7 +2463,7 @@
  :ensure hledger-mode
  :defer t
  :custom
- (hledger-currency-string "EUR")
+ (hledger-currency-string "")
  (hledger-comments-column 1)
  (hledger-jfile "~/Documents/Expenses/Expenses.ledger"))
 
@@ -2678,7 +2679,7 @@
  :init
  ;; Improvements to LSP performance.
  (setenv "LSP_USE_PLISTS" "true")
- (setq-default read-process-output-max (* 1024 1024))
+ (setq-default read-process-output-max (* 10 1024 1024))
 
  :config
  ;; Unmark after formatting.
