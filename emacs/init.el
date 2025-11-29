@@ -2975,6 +2975,18 @@
  :config
  (treemacs-load-theme "nerd-icons"))
 
+;;; Sessions
+
+(use-package easysession
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'easysession)
+ :custom
+ (easysession-save-mode-lighter-show-session-name t)
+ :bind
+ ("C-c u" . easysession-save-as)
+ ("C-c U" . easysession-switch-to))
+
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
 
