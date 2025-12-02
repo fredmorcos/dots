@@ -2396,10 +2396,12 @@
  :mode (rx ".hledger" eos)
 
  :preface
+ (defvar init/hledger-currency-string "EUR")
+
  (defun init/hledger-move-amount-to-column ()
   "Move the amount or the point to the valid column."
   (interactive)
-  (let ((amount-marker (concat " " hledger-currency-string " "))
+  (let ((amount-marker (concat " " init/hledger-currency-string " "))
         (original-pos (point)))
    (end-of-line)
    (when (search-backward amount-marker (pos-bol) t)
@@ -2420,7 +2422,7 @@
  (defun init/hledger-find-next-unaligned ()
   "Find the next unaligned amount in a non-comment line."
   (interactive)
-  (let ((amount-marker (concat " " hledger-currency-string " ")))
+  (let ((amount-marker (concat " " init/hledger-currency-string " ")))
    (catch 'found
     (while (search-forward amount-marker nil t)
      (left-char (- (length amount-marker) 1))
@@ -2438,6 +2440,7 @@
  :custom
  (hledger-invalidate-completions '(on-save on-idle))
  (hledger-refresh-completions-idle-delay 5)
+ (hledger-currency-string "")
 
  :config
  (setq-mode-local hledger-mode
