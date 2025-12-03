@@ -285,7 +285,6 @@ python-pip
 python-pipx
 python-priority
 python-prometheus_client
-python-psutil
 python-pyacoustid
 python-pyalsa
 python-pyaml
@@ -384,7 +383,6 @@ wayland-utils
 webp-pixbuf-loader
 whois
 wild
-wireguard-tools
 wireless-regdb
 wireless_tools
 wl-clipboard
