@@ -2559,22 +2559,6 @@
  :config
  (setq-mode-local web-mode tab-width 2))
 
-;; (use-package company
-;;  :ensure t
-;;  :defer t
-;;  :preface (qol/select-package 'company)
-;;  :hook web-mode-hook)
-
-;; (use-package company-web
-;;  :ensure t
-;;  :defer nil
-;;  :preface (qol/select-package 'company-web)
-;;  :after (company web-mode)
-
-;;  :config
-;;  (setq-mode-local web-mode
-;;   company-backends '(company-css company-web-html :separate)))
-
 (use-package emmet-mode
  :ensure t
  :defer t
@@ -2629,8 +2613,19 @@
  (rust-load-optional-libraries nil)
  (rust-format-on-save t)
 
+ :config
+ (setq-mode-local rust-mode fill-column 110)
+
  :hook
  (rust-mode-hook . (lambda () (electric-quote-local-mode -1))))
+
+(use-package rust-mode
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'rust-mode)
+ :after newcomment
+ :config
+ (setq-mode-local rust-mode comment-fill-column 110))
 
 (use-package lsp-mode
  :ensure t
@@ -2665,6 +2660,11 @@
  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
  (lsp-rust-analyzer-binding-mode-hints t)
+ (lsp-rust-analyzer-closure-capture-hints t)
+ (lsp-rust-analyzer-closure-return-type-hints "always")
+ (lsp-rust-analyzer-discriminants-hints "fieldless")
+ (lsp-rust-analyzer-expression-adjustment-hints "reborrow")
+ (lsp-rust-analyzer-implicit-drops t)
  (lsp-rust-analyzer-display-reborrow-hints "mutable")
  (lsp-rust-all-features t)
  (lsp-rust-all-targets t)
