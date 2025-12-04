@@ -2625,7 +2625,17 @@
  :preface (qol/select-package 'rust-mode)
  :after newcomment
  :config
- (setq-mode-local rust-mode comment-fill-column 110))
+ (setq-mode-local rust-mode comment-fill-column 100))
+
+(use-package rust-mode
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'rust-mode)
+ :after corfu
+ :config
+ (setq-mode-local rust-mode
+  corfu-auto t
+  corfu-auto-prefix 1))
 
 (use-package lsp-mode
  :ensure t
