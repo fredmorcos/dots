@@ -995,9 +995,9 @@
  :preface
  (defun init/prog-capfs ()
   (let ((capfs '(#'cape-file #'cape-dabbrev)))
-   (when (boundp 'yas-minor-mode)
+   (when (bound-and-true-p 'yas-minor-mode)
     (qol/append capfs #'yasnippet-capf))
-   (when (boundp 'lsp-mode)
+   (when (bound-and-true-p 'lsp-mode)
     (qol/append capfs #'lsp-completion-at-point))
    (cape-wrap-super #'cape-file #'cape-dabbrev)))
 
