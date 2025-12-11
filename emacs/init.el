@@ -46,6 +46,23 @@
   "A recentering function we can use as an advice."
   (recenter))
 
+ (defun init/minibuffer-with-region (fn &rest args)
+  "When opening a command using the minibuffer, prepopulate it with the region."
+  (progn
+   (if (use-region-p)
+    ;; Region is active: insert region contents
+    (minibuffer-with-setup-hook
+     (lambda ()
+      (delete-minibuffer-contents)
+      (insert (buffer-substring-no-properties (region-beginning) (region-end)))))
+    (let ((tap (thing-at-point 'symbol t)))
+     (when (not (= (length tap) 0))
+      (minibuffer-with-setup-hook
+       (lambda ()
+        (delete-minibuffer-contents)
+        (insert tap))))))
+   (apply fn args)))
+
  :config
  ;; Enable these functions.
  (put 'list-timers      'disabled nil)
@@ -666,61 +683,121 @@
  (completion-ignore-case t)
  (read-buffer-completion-ignore-case t))
 
-(use-package corfu
+(defvar init/completion-system :corfu "Which completion system to use.")
+
+(when (eq init/completion-system :corfu)
+ (use-package corfu
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :custom
+  (corfu-preview-current nil)
+  ;; (corfu-auto nil)
+  ;; (corfu-auto-delay 0)
+  ;; (corfu-quit-no-match t)
+  (corfu-scroll-margin 5)
+  ;; (corfu-max-width 50)
+  (corfu-min-width 50)
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+ (use-package corfu
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :after prog-mode
+  :hook prog-mode-hook)
+
+ (use-package corfu-popupinfo
+  :ensure corfu
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :after corfu
+  :hook corfu-mode-hook)
+
+ (use-package corfu-popupinfo
+  :ensure corfu
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :custom
+  (corfu-popupinfo-delay '(1.25 . 0.5)))
+
+ (use-package corfu-history
+  :ensure corfu
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :after corfu
+  :hook corfu-mode-hook)
+
+ (use-package corfu-history
+  :ensure corfu
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :after savehist
+  :config
+  (add-to-list 'savehist-additional-variables 'corfu-history))
+
+ (use-package nerd-icons-corfu
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'nerd-icons-corfu)))
+
+(when (eq init/completion-system :company)
+ (use-package company
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'company)
+  :diminish "Co"
+  :commands company--active-p
+  :hook prog-mode-hook
+
+  :custom
+  (company-idle-delay 0.7)
+  (company-keywords-ignore-case t)
+  (company-selection-wrap-around t)
+  (company-tooltip-align-annotations t)
+  (company-tooltip-minimum-width 40)
+  (company-tooltip-maximum-width 80)
+  (company-tooltip-limit 15)
+  (company-tooltip-minimum 10)
+  (company-tooltip-flip-when-above t)
+  (company-tooltip-annotation-padding 3)
+  (company-tooltip-width-grow-only t))
+
+ (use-package prog-mode
+  :ensure nil
+  :defer t
+  :config
+  (setq-mode-local emacs-lisp-mode
+   company-backends '(company-capf
+                      company-keywords
+                      company-dabbrev-code
+                      company-files
+                      :separate)))
+
+ (use-package company-posframe
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'company-posframe)
+  :diminish
+  :after company
+  :hook company-mode-hook
+
+  :config
+  (qol/append company-posframe-show-params :border-width 1)
+  (qol/append company-posframe-quickhelp-show-params :border-width 1)
+
+  :custom
+  (company-posframe-quickhelp-x-offset 2)))
+
+(use-package cape
  :ensure t
  :defer t
- :preface (qol/select-package 'corfu)
- :custom
- (corfu-preview-current nil)
- ;; (corfu-auto nil)
- ;; (corfu-auto-delay 0)
- ;; (corfu-quit-no-match t)
- (corfu-scroll-margin 5)
- ;; (corfu-max-width 50)
- (corfu-min-width 50)
+ :preface (qol/select-package 'cape)
+ :bind ("C-c p" . cape-prefix-map)
  :config
- (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
-
-(use-package corfu
- :ensure t
- :defer t
- :preface (qol/select-package 'corfu)
- :after prog-mode
- :hook prog-mode-hook)
-
-(use-package corfu-popupinfo
- :ensure corfu
- :defer t
- :preface (qol/select-package 'corfu)
- :after corfu
- :hook corfu-mode-hook)
-
-(use-package corfu-popupinfo
- :ensure corfu
- :defer t
- :preface (qol/select-package 'corfu)
- :custom
- (corfu-popupinfo-delay '(1.25 . 0.5)))
-
-(use-package corfu-history
- :ensure corfu
- :defer t
- :preface (qol/select-package 'corfu)
- :after corfu
- :hook corfu-mode-hook)
-
-(use-package corfu-history
- :ensure corfu
- :defer t
- :preface (qol/select-package 'corfu)
- :after savehist
- :config
- (add-to-list 'savehist-additional-variables 'corfu-history))
-
-(use-package nerd-icons-corfu
- :ensure t
- :defer t
- :preface (qol/select-package 'nerd-icons-corfu))
+ (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
+ (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))
 
 ;;; Syntax Checking
 
@@ -785,14 +862,19 @@
  (advice-add 'flycheck-previous-error :after #'init/recenter)
  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
 
-(use-package cape
- :ensure t
- :defer t
- :preface (qol/select-package 'cape)
- :bind ("C-c p" . cape-prefix-map)
- :config
- (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
- (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))
+(when (eq init/completion-system :company)
+ (use-package company
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'company)
+  :after flycheck-posframe
+
+  :preface
+  (defun init/company-is-active (&rest _)
+   (or (company--active-p) (bound-and-true-p company-backend)))
+
+  :hook
+  (flycheck-posframe-inhibit-functions . init/company-is-active)))
 
 ;;; History and save-hist
 
@@ -912,7 +994,12 @@
 
  :preface
  (defun init/prog-capfs ()
-  (cape-wrap-super #'cape-file #'cape-dabbrev))
+  (let ((capfs '(#'cape-file #'cape-dabbrev)))
+   (when (boundp 'yas-minor-mode)
+    (qol/append capfs #'yasnippet-capf))
+   (when (boundp 'lsp-mode)
+    (qol/append capfs #'lsp-completion-at-point))
+   (cape-wrap-super #'cape-file #'cape-dabbrev)))
 
  (defun init/setup-prog-capfs ()
   (setq-local completion-at-point-functions
@@ -2476,12 +2563,24 @@
  :after hledger-mode
  :hook (hledger-mode-hook . electric-pair-local-mode))
 
-(use-package corfu
- :ensure t
- :defer t
- :preface (qol/select-package 'corfu)
- :after hledger-mode
- :hook hledger-mode-hook)
+(when (eq init/completion-system :company)
+ (use-package company
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'company)
+  :hook hledger-mode-hook
+  :config
+  (setq-mode-local hledger-mode
+   company-backends '(hledger-company)
+   completion-at-point-functions nil)))
+
+(when (eq init/completion-system :corfu)
+ (use-package corfu
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'corfu)
+  :after hledger-mode
+  :hook hledger-mode-hook))
 
 (use-package flycheck-hledger
  :ensure t
@@ -2559,6 +2658,23 @@
  :config
  (setq-mode-local web-mode tab-width 2))
 
+(when (eq init/completion-system :company)
+ (use-package company
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'company)
+  :hook web-mode-hook)
+
+ (use-package company-web
+  :ensure t
+  :defer nil
+  :preface (qol/select-package 'company-web)
+  :after (company web-mode)
+
+  :config
+  (setq-mode-local web-mode
+   company-backends '(company-css company-web-html :separate))))
+
 (use-package emmet-mode
  :ensure t
  :defer t
@@ -2627,15 +2743,17 @@
  :config
  (setq-mode-local rust-mode comment-fill-column 100))
 
-(use-package rust-mode
- :ensure t
- :defer t
- :preface (qol/select-package 'rust-mode)
- :after corfu
- :config
- (setq-mode-local rust-mode
-  corfu-auto t
-  corfu-auto-prefix 1))
+(when (eq init/completion-system :corfu)
+ (use-package rust-mode
+  :ensure t
+  :defer t
+  :preface (qol/select-package 'rust-mode)
+  :after corfu
+  :config
+  (setq-mode-local rust-mode
+   corfu-auto t
+   corfu-auto-delay 0.4
+   corfu-auto-prefix 1)))
 
 (use-package lsp-mode
  :ensure t
@@ -2707,12 +2825,10 @@
 
  :hook
  (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t)))
+ (lsp-mode-hook . init/setup-prog-capfs)
 
  :custom
  (lsp-progress-prefix "  Progress: ")
- (lsp-completion-show-detail t)
- (lsp-completion-show-kind t)
- ;; (lsp-completion-provider :none)
  (lsp-headerline-breadcrumb-enable t)
  (lsp-restart 'auto-restart)
  (lsp-enable-snippet t)
@@ -2734,6 +2850,14 @@
  ;; (lsp-enable-imenu nil)
  (lsp-use-plists t)
  (lsp-auto-execute-action t))
+
+(use-package lsp-completion
+ :ensure lsp-mode
+ :defer t
+ :custom
+ ;; (lsp-completion-provider :none)
+ (lsp-completion-show-detail t)
+ (lsp-completion-show-kind t))
 
 (use-package lsp-mode
  :ensure t

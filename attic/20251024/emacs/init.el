@@ -4,9 +4,9 @@
 
 ;; Find out what loaded a mode e.g. org
 ;; (with-eval-after-load 'org
-;;   (unless after-init-time
-;;     (message "Org loaded during init! Printing backtrace...")
-;;    (backtrace)))
+;;  (unless after-init-time
+;;   (message "Org loaded during init! Printing backtrace...")
+;;   (backtrace)))
 
 (eval-and-compile
  (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
@@ -794,6 +794,17 @@
  :custom
  (company-posframe-quickhelp-x-offset 2))
 
+(use-package cape
+ :ensure t
+ :defer t
+ :preface (qol/select-package 'cape)
+
+ :bind ("C-c p" . cape-prefix-map)
+
+ :hook
+ (completion-at-point-functions . cape-dabbrev)
+ (completion-at-point-functions . cape-file))
+
 ;;; Syntax Checking
 
 (use-package flycheck
@@ -888,17 +899,6 @@
 
  :hook
  (flycheck-posframe-inhibit-functions . init/company-is-active))
-
-(use-package cape
- :ensure t
- :defer t
- :preface (qol/select-package 'cape)
-
- :bind ("C-c p" . cape-prefix-map)
-
- :hook
- (completion-at-point-functions . cape-dabbrev)
- (completion-at-point-functions . cape-file))
 
 ;;; History and save-hist
 
