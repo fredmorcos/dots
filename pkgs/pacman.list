@@ -332,7 +332,6 @@ python-xlrd
 python-zeroconf
 python-zopfli
 python-zstandard
-quota-tools
 realtime-privileges
 reflector
 ripgrep-all
