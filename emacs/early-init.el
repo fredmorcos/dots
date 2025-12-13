@@ -2,176 +2,187 @@
 ;;; Commentary:
 ;;; Code:
 
+;;; Quality of Life
+
 (eval-and-compile
- (defconst emacs-dots-dir "~/Workspace/dots/emacs/")
- (push emacs-dots-dir load-path)
+ (push "~/Workspace/dots/emacs/" load-path)
  (require 'init-macros))
 
-(im/config "Use Package"
- (im/after use-package-core
-  (setopt
-   use-package-expand-minimally t
-   use-package-hook-name-suffix nil
-   use-package-always-defer t))
+;;; Use Package
 
- (im/after use-package-ensure
-  (setopt
-   use-package-always-ensure t)))
+(init/after 'use-package-core
+ (setopt
+  use-package-expand-minimally t
+  use-package-hook-name-suffix nil
+  use-package-always-defer t))
 
-(im/config "Use Package Debugging" :disabled
- (im/after use-package-core
+(init/after 'use-package-ensure
+ (setopt use-package-always-ensure t))
+
+(defvar init/use-package-statistics :disabled)
+(when (not (eq init/use-package-statistics :disabled))
+ (init/after 'use-package-core
   (setopt
    use-package-compute-statistics t
    use-package-verbose t)))
 
-(im/config "Debugging" :disabled
- (im/after emacs
-  (setopt
-   debug-on-error t)))
+;;; Debugging
 
-(im/config "Profiling" :disabled
+(defvar init/emacs-debugging :disabled)
+(when (not (eq init/emacs-debugging :disabled))
+ (init/after 'emacs
+  (setopt debug-on-error t)))
+
+;;; Profiling
+
+(defvar init/emacs-profiling :disabled)
+(when (not (eq init/emacs-profiling :disabled))
  (profiler-start 'cpu)
- (im/after startup
-  (im/hook after-init-hook profiler-report "profiler")))
+ (init/after 'startup
+  (init/autoload profiler-report "profiler")
+  (add-hook 'after-init-hook 'profiler-report)))
 
-(im/config "Garbage Collector"
- (im/after emacs
-  ;; Run the GC after 1 second of idleness.
-  (run-with-idle-timer 1 t #'garbage-collect)
-  (setopt
-   ;; A big contributor to startup time is garbage collection.
-   gc-cons-threshold (* 100 1024 1024)
-   gc-cons-percentage 0.8)))
+;;; Garbage Collector
 
-(im/config "Configuration System"
- (im/after cus-edit
-  (setopt custom-file (make-temp-file "emacs-custom-"))))
+(init/after 'emacs
+ ;; Run the GC after 5 seconds of idleness.
+ (init/autoload run-with-idle-timer "timer")
+ (run-with-idle-timer 5 t #'garbage-collect)
+ (setopt
+  ;; A big contributor to startup time is garbage collection.
+  gc-cons-threshold (* 100 1024 1024)
+  gc-cons-percentage 0.8))
 
-(im/config "User Interface"
- (im/after emacs
-  (setopt
-   ;; Skip redisplays.
-   redisplay-skip-fontification-on-input t
-   redisplay-skip-initial-frame t
-   ;; Frame-related improvements.
-   frame-resize-pixelwise t
-   frame-title-format "%b - emacs"
-   ;; Resizing the Emacs frame can be a terribly expensive part of changing the font. By
-   ;; inhibiting this, we easily halve startup times with fonts that are larger than the
-   ;; system default.
-   frame-inhibit-implied-resize t)
+;;; Configuration System
 
-  (load-theme 'modus-operandi)
-  (im/face mode-line :box "#c8c8c8")
-  (im/face mode-line-inactive :box "#e6e6e6"))
+(init/after 'cus-edit
+ (setopt custom-file (make-temp-file "emacs-custom-")))
 
- (im/after frame
-  (modify-all-frames-parameters
-   '((background-color . "Gray97")
-     (fullscreen . maximized))))
+;;; User Interface
 
- (im/after emacs
-  (setopt
-   inhibit-startup-screen t
-   inhibit-startup-message t
-   inhibit-startup-buffer-menu t
-   inhibit-startup-echo-area-message user-real-login-name
-   initial-scratch-message nil
-   initial-major-mode 'fundamental-mode)
+(init/after 'emacs
+ (setopt
+  ;; Skip redisplays.
+  redisplay-skip-fontification-on-input t
+  redisplay-skip-initial-frame t
+  ;; Frame-related improvements.
+  frame-resize-pixelwise t
+  frame-title-format "%b - emacs"
+  ;; Resizing the Emacs frame can be a terribly expensive part of changing the font. By
+  ;; inhibiting this, we easily halve startup times with fonts that are larger than the
+  ;; system default.
+  frame-inhibit-implied-resize t)
 
-  ;; Don't show messages in the echo area at startup.
-  (fset 'display-startup-echo-area-message 'ignore))
+ (load-theme 'modus-operandi)
+ (init/face mode-line :box "#c8c8c8")
+ (init/face mode-line-inactive :box "#e6e6e6"))
 
- (im/after menu-bar (setopt menu-bar-mode nil))
- (im/after tool-bar (setopt tool-bar-mode nil))
- (im/after scroll-bar (setopt scroll-bar-mode nil))
+(init/after 'frame
+ (modify-all-frames-parameters
+  '((background-color . "Gray97")
+    (fullscreen . maximized))))
 
- (im/after simple
-  (setopt
-   line-number-mode t
-   column-number-mode t
-   size-indication-mode t))
+;; Actually should be (init/after 'startup ...) but the startup.el package file does not
+;; (provide 'startup) so (with-eval-after-load 'startup ...) does not work.
+(init/after 'emacs
+ (setopt
+  inhibit-startup-screen t
+  inhibit-startup-message t
+  inhibit-startup-buffer-menu t
+  inhibit-startup-echo-area-message user-real-login-name
+  startup-screen-inhibit-startup-screen t
+  initial-scratch-message nil
+  initial-major-mode 'fundamental-mode))
 
- (im/after emacs
-  (setopt
-   column-number-indicator-zero-based nil
-   mode-line-position-column-format '(" C%C")
-   mode-line-compact 'long))
+;; Actually should be (init/after 'startup ...) but the startup.el package file does not
+;; (provide 'startup) so (with-eval-after-load 'startup ...) does not work.
+(init/after 'emacs
+ ;; Don't show messages in the echo area at startup.
+ (fset 'display-startup-echo-area-message 'ignore))
 
- (im/after frame (setopt blink-cursor-mode nil)))
+(init/after 'menu-bar
+ (setopt menu-bar-mode nil))
 
-(im/config "User Experience"
- (im/after comp
-  (setopt
-   ;; Silence native compilation warnings.
-   native-comp-async-report-warnings-errors 'silent
-   native-comp-async-query-on-exit t))
+(init/after 'tool-bar
+ (setopt tool-bar-mode nil))
 
- (im/after emacs
-  (setopt
-   ;; Avoid graphical dialog boxes
-   use-dialog-box nil
-   ;; Respond to yes/no questions using Y/N
-   use-short-answers t)))
+(init/after 'scroll-bar
+ (setopt scroll-bar-mode nil))
 
-(im/config "Performance"
- (im/after emacs
-  (setopt
-   ;; When evaluating deep ELisp recursions.
-   ;; max-lisp-eval-depth 10000
+(init/after 'simple
+ (setopt
+  line-number-mode t
+  column-number-mode t
+  size-indication-mode t))
 
-   ;; This slows down normal operation.
-   auto-window-vscroll nil
+(init/after 'emacs
+ (setopt
+  column-number-indicator-zero-based nil
+  mode-line-position-column-format '(" C%C")
+  mode-line-compact 'long))
 
-   ;; Improve rendering performance at the expense of support for left-to-right languages.
-   bidi-paragraph-direction 'left-to-right
-   bidi-inhibit-bpa t
+(init/after 'frame
+ (setopt blink-cursor-mode nil))
 
-   ;; Only use Git as version control.
-   vc-handled-backends '(Git)))
+;;; User Experience
 
- ;; Actually should be (im/after startup ...) but the startup.el package file does not
- ;; (provide 'startup) so (with-eval-after-load startup ...) does not work.
- (im/after emacs
-  ;; ;; Disable tramp.
-  ;; (im/after tramp-archive
-  ;;  (remove-hook 'after-init-hook #'tramp-register-archive-autoload-file-name-handler))
+(init/after 'comp
+ (setopt
+  ;; Silence native compilation warnings.
+  native-comp-async-report-warnings-errors 'silent
+  native-comp-async-query-on-exit t))
 
+(init/after 'emacs
+ (setopt
+  ;; Avoid graphical dialog boxes
+  use-dialog-box nil
+  ;; Respond to yes/no questions using Y/N
+  use-short-answers t))
+
+;;; Performance
+
+(init/after 'emacs
+ (setopt
+  ;; This slows down normal operation.
+  auto-window-vscroll nil
+
+  ;; Improve rendering performance at the expense of support for left-to-right languages.
+  bidi-paragraph-direction 'left-to-right
+  bidi-inhibit-bpa t
+
+  ;; Only use Git as version control.
+  vc-handled-backends '(Git)))
+
+;; Actually should be (init/after 'startup ...) but the startup.el package file does not
+;; (provide 'startup) so (with-eval-after-load 'startup ...) does not work.
+(init/after 'emacs
   ;; Disable input contexts (for Windows).
-  (im/after term/pgtk-win
+  (init/after 'term/pgtk-win
    (remove-hook 'after-init-hook #'pgtk-use-im-context-handler)))
 
- (im/after files
-  ;; (im/after subr
-  ;;  ;; Disable tramp.
-  ;;  (declare-function tramp-set-connection-local-variables-for-buffer "subr")
-  ;;  (remove-hook 'find-file-hook #'tramp-set-connection-local-variables-for-buffer))
+(init/after 'files
+ ;; Disable transparent file encryption support.
+ (init/after 'epa-hook
+  (remove-hook 'find-file-hook #'epa-file-find-file-hook))
 
-  ;; Disable transparent file encryption support.
-  (im/after epa-hook
-   (remove-hook 'find-file-hook #'epa-file-find-file-hook))
+ (init/after 'vc-hooks
+  ;; Disable version control when opening files.
+  (remove-hook 'find-file-hook #'vc-refresh-state)))
 
-  ;; ;; Disable setting correct URL handlers when visiting remote files.
-  ;; (im/after url-handlers
-  ;;  (remove-hook 'find-file-hook #'url-handlers-set-buffer-mode))
+;;; Packages
 
-  (im/after vc-hooks
-   ;; Disable version control when opening files.
-   (remove-hook 'find-file-hook #'vc-refresh-state))))
+(init/after 'url-vars
+ (setopt
+  ;; Use this when unsetting any proxies for localhost.
+  ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
+  url-privacy-level 'paranoid))
 
-(im/config "Packages"
- (im/after url-vars
-  (setopt
-   ;; Use this when unsetting any proxies for localhost.
-   ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
-   url-privacy-level 'paranoid))
-
- (im/after package
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  (setopt
-   package-native-compile t
-   ;; Highest number gets priority (what is not mentioned has priority 0)
-   package-archive-priorities '(("gnu" . 3) ("melpa" . 2) ("nongnu" . 1)))))
+(init/after 'package
+ (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+ (setopt
+  package-native-compile t
+  ;; Highest number gets priority (what is not mentioned has priority 0)
+  package-archive-priorities '(("gnu" . 3) ("melpa" . 2) ("nongnu" . 1))))
 
 (provide 'early-init)
 ;;; early-init.el ends here
