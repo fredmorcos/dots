@@ -2,24 +2,37 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Top-Level Configuration.
+;;; Lazy Loading
 
-;;;###autoload
-(defmacro im/config (title &rest body)
- "Define a toplevel configuration called TITLE and execute BODY."
- (when (not (eq (car body) :disabled))
-  `(progn
-    (defvar _img/pkg ,title)
-    ,@body)))
+(defalias 'init/after #'with-eval-after-load)
 
-;; Autoloads.
-
-;;;###autoload
-(defmacro im/autoload (func pkg)
+(defmacro init/autoload (func pkg)
  "Create an autoload for FUNC from PKG."
  `(eval-when-compile
    (autoload ',func ,pkg)
    (declare-function ,func ,pkg)))
+
+;;; Packages
+
+(defun init/package (package)
+ "Add PACKAGE to list of selected packages."
+ (init/after 'package
+  (eval-when-compile (defvar package-selected-packages))
+  (push package package-selected-packages)
+  (defvar init/packages-refreshed nil)
+  (when (not (package-installed-p package))
+   (when (not init/packages-refreshed)
+    (message "+++ Refreshing package repositories")
+    (package-refresh-contents)
+    (setq init/packages-refreshed t))
+   (message "+++ Installing %s..." package)
+   (package-install package))))
+
+;;; Faces.
+
+(defmacro init/face (face &rest props)
+ "Set FACE properties to PROPS."
+ `(custom-set-faces '(,face ((t ,@props)))))
 
 ;; Hooks.
 
@@ -92,20 +105,6 @@
  "Stop buffers that match REGEXP from popping up."
  `(push (cons ,regexp (cons #'display-buffer-no-window nil)) display-buffer-alist))
 
-;; Faces.
-
-;;;###autoload
-(defmacro im/face (face &rest props)
- "Set FACE properties to PROPS."
- `(custom-set-faces '(,face ((t ,@props)))))
-
-;; Lazy loading.
-
-;;;###autoload
-(defmacro im/after (pkg &rest body)
- "Execute BODY when PKG is loaded."
- `(with-eval-after-load ',pkg ,@body))
-
 ;; Modes.
 
 ;;;###autoload
@@ -114,27 +113,6 @@
  `(progn
    (im/autoload ,mode ,pkg)
    (push '(,(concat "\\" ext "\\'") . ,mode) auto-mode-alist)))
-
-;; Packages.
-
-;;;###autoload
-(defmacro im/pkg ()
- "Install PKG if not already installed and execute BODY."
- (defvar _im/pkg)
- (when (not (boundp _im/pkg))
-  (error "Calls to im/pkg must exist inside of im/config blocks"))
- `(progn
-   (defvar im/packages-refreshed nil)
-   (autoload 'package-installed-p "package")
-   (when (not (package-installed-p ',_im/pkg))
-    (when (not im/packages-refreshed)
-     (message "+++ Refreshing package repositories")
-     (package-refresh-contents)
-     (setq im/packages-refreshed t))
-    (message "+++ Installing %s..." ',_im/pkg)
-    (package-install ',_im/pkg))
-   (defvar package-selected-packages)
-   (push ',_im/pkg package-selected-packages)))
 
 (provide 'init-macros)
 ;;; init-macros.el ends here
