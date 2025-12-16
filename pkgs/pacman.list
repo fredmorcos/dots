@@ -244,7 +244,6 @@ python-brotli
 python-brotlicffi
 python-build
 python-cchardet
-python-debugpy
 python-defusedxml
 python-discogs-client
 python-docker
