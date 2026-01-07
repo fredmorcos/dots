@@ -340,7 +340,6 @@ rust-bindgen
 sane-airscan
 sbctl
 seahorse
-seahorse-nautilus
 shellcheck
 shfmt
 simple-scan
