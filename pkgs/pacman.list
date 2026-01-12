@@ -237,7 +237,6 @@ proton-vpn-gtk-app
 pwgen
 pyalpm
 python-aiodns
-python-audioread
 python-awesomeversion
 python-babel
 python-beaker
