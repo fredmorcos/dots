@@ -308,8 +308,6 @@ python-rjsmin
 python-ruamel-yaml
 python-service-identity
 python-setuptools-rust
-python-standard-aifc
-python-standard-sunau
 python-symengine
 python-sympy
 python-tabulate
