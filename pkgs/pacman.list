@@ -236,13 +236,11 @@ progress
 proton-vpn-gtk-app
 pwgen
 pyalpm
-python-aiodns
 python-awesomeversion
 python-babel
 python-beaker
 python-brotli
 python-brotlicffi
-python-build
 python-cchardet
 python-defusedxml
 python-discogs-client
@@ -282,7 +280,6 @@ python-pdftotext
 python-pip
 python-pipx
 python-priority
-python-prometheus_client
 python-pyacoustid
 python-pyalsa
 python-pyaml
