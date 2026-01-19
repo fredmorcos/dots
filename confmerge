@@ -181,6 +181,7 @@ cmerge git/config                      ~/.config/git/config
 cmerge git/config-ox                   ~/.config/git/config-ox
 
 cmerge fonts/fonts.conf                ~/.config/fontconfig/fonts.conf
+cmerge fonts/freetype2.sh              /etc/profile.d/freetype2.sh
 
 cmerge mimeapps.list                   ~/.config/mimeapps.list
 
