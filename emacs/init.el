@@ -50,64 +50,70 @@
     (put 'scroll-right     'disabled t)))
 
 (config "Clean Configuration Files"
-  (package 'no-littering
-    (eval-and-compile
-      (require 'no-littering))
-    (no-littering-theme-backups)))
+  (packages 'no-littering)
+  (eval-and-compile (require 'no-littering))
+  (no-littering-theme-backups))
 
 (config "Modeline"
-  (package 'diminish
-    (eval-and-compile
-      (require 'diminish)))
-
+  (packages 'diminish)
+  (eval-and-compile (require 'diminish))
   (after 'uniquify
     (setopt
       uniquify-buffer-name-style 'forward)))
 
 (config "Moving in Text"
-  (package 'move-text
-    (move-text-default-bindings))
-
-  (package 'mwim
-    (bind-key [remap move-beginning-of-line] #'mwim-beginning-of-code-or-line-or-comment)
-    (bind-key [remap move-end-of-line] #'mwim-end-of-code-or-line)))
+  (packages 'move-text 'mwim)
+  (move-text-default-bindings)
+  (bind-key [remap move-beginning-of-line] #'mwim-beginning-of-code-or-line-or-comment)
+  (bind-key [remap move-end-of-line] #'mwim-end-of-code-or-line))
 
 (config "Selecting Text"
-  (builtin 'files
-    (cua-selection-mode t))
-
-  (package 'expand-region
-    (bind-key "C-=" #'er/expand-region))
-
-  (package 'surround
-    (bind-key "M-'" #'surround-mark-inner)
-    (bind-key "M-\"" #'surround-insert)))
+  (cua-selection-mode t)
+  (packages 'expand-region 'surround)
+  (bind-key "C-=" #'er/expand-region)
+  (bind-key "M-'" #'surround-mark-inner)
+  (bind-key "M-\"" #'surround-insert))
 
 (config "Editing Text"
-  (builtin 'misc
-    (bind-key "C-c d" #'duplicate-dwim))
-
+  (bind-key "C-c d" #'duplicate-dwim)
+  (packages 'casual)
+  (bind-key "C-p" #'casual-editkit-main-tmenu)
   (after 'files
     (setopt
       mode-require-final-newline 'visit-save
       require-final-newline 'visit-save
       ;; File contents.
       coding-system-for-read 'utf-8-unix
-      coding-system-for-write 'utf-8-unix)))
+      coding-system-for-write 'utf-8-unix))
+
+  (after 'simple
+    (add-hook 'before-save-hook #'delete-trailing-whitespace)
+    (setopt
+      undo-limit (* 1024 1024)
+      backward-delete-char-untabify-method 'hungry)))
 
 (config "Filling Text"
-  (package 'unfill
-    (bind-key [remap fill-paragraph] #'unfill-toggle))
+  (packages 'unfill)
+  (bind-key [remap fill-paragraph] #'unfill-toggle)
 
   (after 'emacs
     (setopt
-      colon-double-space t
-      default-justification 'left
       fill-column 90))
+
+  ;; fill.el
+  (after 'emacs
+    (setopt
+      colon-double-space t
+      default-justification 'left))
 
   (after 'newcomment
     (setopt
       comment-fill-column 80)))
+
+(config "Kill Ring"
+  (after 'simple
+    (setopt
+      save-interprogram-paste-before-kill t)))
 
 (config "Indentation"
   (after 'indent
@@ -119,16 +125,15 @@
     (setopt
       indent-tabs-mode nil)))
 
-(config "Window Movement"
-  (builtin 'windmove
-    (windmove-default-keybindings)
-    (windmove-delete-default-keybindings)))
+(config "Window Movement and Management"
+  (windmove-default-keybindings)
+  (windmove-delete-default-keybindings))
 
 (config "Buffer Movement"
-  (package 'buffer-move
-    (bind-key "C-x m" #'buf-move)))
+  (packages 'buffer-move)
+  (bind-key "C-x m" #'buf-move))
 
-(config "Backups and autosaves"
+(config "Backups and Autosaves"
   (after 'files
     (setopt
       auto-save-default t
@@ -157,6 +162,8 @@
     (add-to-list 'warning-suppress-types 'defvaralias)))
 
 (config "Help"
+  (packages 'casual 'casual-suite)
+
   (after 'help
     (setopt
       help-window-select t
@@ -169,11 +176,17 @@
     (advice-add 'help-button-action :after #'init/recenter)
     (advice-add 'help-function-def--button-function :after #'init/recenter))
 
-  (package 'casual
-    (after 'info
-      (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))))
+  (after 'info
+    (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))
+
+  (packages 'transient)
+  (after 'transient
+    (setopt
+      transient-default-level 7)))
 
 (config "User Interface"
+  (packages 'casual 'casual-suite 'nerd-icons)
+
   (after 'tooltip
     (setopt
       tooltip-use-echo-area t))
@@ -204,124 +217,147 @@
       mouse-1-click-follows-link 'double))
 
   (after 'simple
-    (advice-add 'goto-line :after #'init/recenter)
+    (advice-add 'goto-line :after #'init/recenter))
+
+  (after 'map-ynp
     (setopt
-      ;; Hide commands in M-x that do not work in the current mode
-      read-extended-command-predicate #'command-completion-default-include-p
-      undo-limit (* 1024 1024)
-      suggest-key-bindings 10
-      save-interprogram-paste-before-kill t
-      backward-delete-char-untabify-method 'hungry
+      read-answer-short t)))
+
+(config "Search & Replace"
+  (packages 'visual-replace)
+  (bind-key "M-%" #'visual-replace-thing-at-point)
+  (bind-key "M-^" #'visual-replace-selected)
+  (bind-key "M-*" #'visual-replace)
+
+  (after 'isearch
+    (setopt
+      isearch-allow-motion t
+      isearch-motion-changes-direction t))
+
+  (packages 'casual)
+  (bind-key "C-p" #'casual-isearch-tmenu)
+
+  (packages 'ctrlf)
+  (after 'ctrlf
+    (setopt
+      ctrlf-default-search-style 'fuzzy
+      ctrlf-auto-recenter t))
+  (ctrlf-mode))
+
+(config "Buffer Management"
+  (after 'ibuffer
+    (bind-keys :map 'ibuffer-mode-map
+      ("C-p" . casual-ibuffer-tmenu)
+      ("F"   . casual-ibuffer-filter-tmenu)
+      ("s"   . casual-ibuffer-sortby-tmenu))))
+
+(config "Error Lists"
+  (after 'simple
+    (setopt
       ;; Recenter after jump to next error.
       next-error-recenter '(4)
-      next-error-message-highlight t
-      completion-auto-select nil)))
+      next-error-message-highlight t))
 
-(use-package minibuffer
- :ensure nil
- :defer t
+  (after 'window
+    (push `(,(rx bos "*Flycheck errors*" (0+ nonl) eos)
+             (display-buffer-reuse-mode-window display-buffer-at-bottom)
+             (dedicated . t)
+             (window-height . 0.2))
+      display-buffer-alist)))
 
- :custom
- (completion-auto-help nil))
+(config "Bookmarks"
+  (after 'bookmark
+    (bind-keys :map 'bookmark-bmenu-mode-map
+      ("C-p" . casual-bookmarks-tmenu))))
 
-(use-package simple
- :ensure nil
- :defer t
- :after files
+(config "Regular Expressions"
+  (after 're-builder
+    (bind-keys :map 'reb-mode-map ("C-p" . casual-re-builder-tmenu))
+    (bind-keys :map 'reb-lisp-mode-map ("C-p" . casual-re-builder-tmenu))))
 
- :hook
- (before-save-hook . delete-trailing-whitespace))
+(config "Symbol and Multiple Cursor Handling"
+  (packages 'symbol-overlay 'symbol-overlay-mc 'casual-symbol-overlay)
+  (after 'symbol-overlay
+    (bind-keys :map 'symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu))
+    (bind-keys :map 'symbol-overlay-map ("M-a" . symbol-overlay-mc-mark-all))))
 
-(use-package nerd-icons
- :ensure t
- :defer t
- :preface (package 'nerd-icons))
+(config "File Management"
+  (defun init/find-file-other-window ()
+    (interactive)
+    (cond
+      ((and (fboundp 'projectile-project-root) (projectile-project-root))
+        (other-window-prefix)
+        (projectile-find-file))
+      ((fboundp 'consult-buffer-other-window)
+        (consult-buffer-other-window))
+      ((fboundp 'find-file-other-window)
+        (call-interactively 'find-file-other-window))
+      (t
+        (call-interactively 'other-window))))
 
-(use-package casual-suite
- :ensure t
- :defer t
- :preface (package 'casual-suite))
+  (after 'window
+    (bind-key [remap other-window] #'init/find-file-other-window)))
 
-(use-package casual-symbol-overlay
- :ensure casual-suite
- :defer t
+(config "Scrolling"
+  (defun init/scroll-other-window ()
+    "Scroll up the other window in a split frame."
+    (interactive)
+    (scroll-other-window 1))
+  (defun init/scroll-other-window-down ()
+    "Scroll down the other window in a split frame."
+    (interactive)
+    (scroll-other-window-down 1))
 
- :config
- (symbol-overlay-mc-insert-into-casual-tmenu))
+  (after 'emacs
+    (setopt
+      scroll-conservatively 104
+      scroll-margin 1
+      hscroll-margin 1
+      hscroll-step 1
+      auto-hscroll-mode 'current-line
+      fast-but-imprecise-scrolling t))
 
-(use-package visual-replace
- :ensure t
- :defer t
- :preface (package 'visual-replace)
+  (bind-key "C-<f11>" #'init/scroll-other-window)
+  (bind-key "C-<f12>" #'init/scroll-other-window-down)
+  (bind-key "<mouse-4>" #'previous-line)
+  (bind-key "<mouse-5>" #'next-line))
 
- :bind
- ("M-%" . visual-replace-thing-at-point)
- ("M-^" . visual-replace-selected)
- ("M-*" . visual-replace))
+(config "Minibuffer"
+  (after 'minibuffer
+    (setopt
+      completion-auto-help nil
+      minibuffer-message-clear-timeout 4
+      read-file-name-completion-ignore-case t
+      completion-category-defaults nil
+      completion-category-overrides nil
+      completions-max-height 20
+      completions-format 'one-column
+      completions-detailed t
+      completions-group t
+      completion-cycle-threshold nil)
 
-(use-package isearch
- :ensure nil
- :defer t
+    (delete 'tags-completion-at-point-function completion-at-point-functions)
+    (delete 'emacs22 completion-styles))
 
- :bind
- (:map isearch-mode-map ("C-p" . casual-isearch-tmenu))
+  (after 'simple
+    (setopt
+      completion-auto-select nil
+      ;; Hide commands in M-x that do not work in the current mode
+      read-extended-command-predicate #'command-completion-default-include-p
+      suggest-key-bindings 10))
 
- :custom
- (isearch-allow-motion t)
- (isearch-motion-changes-direction t))
+  (after 'emacs
+    (setopt
+      completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      enable-recursive-minibuffers t)
 
-(use-package ibuffer
- :ensure nil
- :defer t
-
- :bind
- (:map ibuffer-mode-map
-  (("C-p" . casual-ibuffer-tmenu)
-   ("F"   . casual-ibuffer-filter-tmenu)
-   ("s"   . casual-ibuffer-sortby-tmenu))))
-
-(use-package re-builder
- :ensure nil
- :defer t
-
- :bind
- (:map reb-mode-map ("C-p" . casual-re-builder-tmenu))
- (:map reb-lisp-mode-map ("C-p" . casual-re-builder-tmenu)))
-
-(use-package bookmark
- :ensure nil
- :defer t
-
- :bind
- (:map bookmark-bmenu-mode-map ("C-p" . casual-bookmarks-tmenu)))
-
-(use-package symbol-overlay
- :ensure t
- :defer t
- :preface (package 'symbol-overlay)
-
- :bind
- (:map symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu)))
-
-(use-package symbol-overlay-mc
- :ensure t
- :defer t
- :preface (package 'symbol-overlay-mc)
-
- :bind
- (:map symbol-overlay-map ("M-a" . symbol-overlay-mc-mark-all)))
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :bind
- ("C-p" . casual-editkit-main-tmenu))
+    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)))
 
 (use-package consult
  :ensure t
  :defer t
- :preface (package 'consult)
+ :preface (packages 'consult)
 
  :preface
  (defun init/consult-grep-or-git-grep ()
@@ -352,56 +388,35 @@
 (use-package consult-register
  :ensure consult
  :defer t
- :preface (package 'consult)
+ :preface (packages 'consult)
  :config
  (advice-add 'consult-register :after #'init/recenter))
 
 (use-package consult-register
  :ensure consult
  :defer t
- :preface (package 'consult)
+ :preface (packages 'consult)
  :after register
  :bind
  ([remap jump-to-register] . consult-register)
  ([remap point-to-register] . consult-register-store))
 
-(use-package emacs
- :ensure nil
- :defer t
-
- :preface
- (defun init/find-file-other-window ()
-  (interactive)
-  (cond
-   ((and (fboundp 'projectile-project-root) (projectile-project-root))
-    (other-window-prefix)
-    (projectile-find-file))
-   ((fboundp 'consult-buffer-other-window)
-    (consult-buffer-other-window))
-   ((fboundp 'find-file-other-window)
-    (call-interactively 'find-file-other-window))
-   (t
-    (error "Cannot find any more other-window functions to run"))))
-
- :bind
- ([remap other-window] . init/find-file-other-window))
-
 (use-package embark-consult
  :ensure t
  :defer t
- :preface (package 'embark-consult))
+ :preface (packages 'embark-consult))
 
 (use-package consult-flycheck
  :ensure t
  :defer t
- :preface (package 'consult-flycheck)
+ :preface (packages 'consult-flycheck)
  :after flycheck
  :bind (:map flycheck-mode-map ("C-c ! a" . consult-flycheck)))
 
 (use-package vertico
  :ensure t
  :defer t
- :preface (package 'vertico)
+ :preface (packages 'vertico)
 
  :bind
  (:map vertico-map
@@ -424,42 +439,6 @@
 
  :hook
  (rfn-eshadow-update-overlay-hook . vertico-directory-tidy))
-
-;;; Scrolling
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- (scroll-conservatively 104)
- (scroll-margin 1)
- (hscroll-margin 1)
- (hscroll-step 1)
- (auto-hscroll-mode 'current-line)
- (fast-but-imprecise-scrolling t)
-
- :preface
- (defun init/scroll-other-window ()
-  "Scroll up the other window in a split frame."
-  (interactive)
-  (scroll-other-window 1))
- (defun init/scroll-other-window-down ()
-  "Scroll down the other window in a split frame."
-  (interactive)
-  (scroll-other-window-down 1))
-
- :bind
- (("C-<f11>" . init/scroll-other-window)
-  ("C-<f12>" . init/scroll-other-window-down)))
-
-(use-package simple
- :ensure nil
- :defer t
-
- :bind
- ("<mouse-4>" . previous-line)
- ("<mouse-5>" . next-line))
 
 ;;; Dynamic Expansion
 
@@ -492,129 +471,90 @@
  :defer t
  :diminish "Ab")
 
-;;; Completion
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- (completion-ignore-case t)
- (read-buffer-completion-ignore-case t))
-
-(use-package emacs
- :ensure nil
- :defer t
- :preface
- (defvar init/completion-system :corfu "Which completion system to use.")
-
+(config "In-buffer Completion"
+ (defvar *init/completion-system* :corfu "Which completion system to use.")
  (defun init/buffer-completion-mode ()
   "Activate in-buffer completion system."
   (cond
-   ((eq init/completion-system :company)
+   ((eq *init/completion-system* :company)
     (company-mode))
-   ((eq init/completion-system :corfu)
+   ((eq *init/completion-system* :corfu)
     (corfu-mode))
    (t (error "init.el: Unknown completion system requested")))))
 
-(use-package corfu
- :ensure t
- :defer t
- :preface (init/package 'corfu)
- :custom
- (corfu-preview-current nil)
- ;; (corfu-auto nil)
- ;; (corfu-auto-delay 0)
- ;; (corfu-quit-no-match t)
- (corfu-scroll-margin 5)
- ;; (corfu-max-width 50)
- (corfu-min-width 50)
- :config
- (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+(config "Corfu"
+  (packages 'corfu)
+  (packages 'nerd-icons-corfu)
 
-(use-package corfu-popupinfo
- :ensure corfu
- :defer t
- :preface (init/package 'corfu)
- :after corfu
- :hook corfu-mode-hook)
+ (after 'corfu
+  (setopt
+   corfu-preview-current nil
+   ;; corfu-auto nil
+   ;; corfu-auto-delay 0
+   ;; corfu-quit-no-match t
+   corfu-scroll-margin 5
+   ;; corfu-max-width 50
+   corfu-min-width 50)
 
-(use-package corfu-popupinfo
- :ensure corfu
- :defer t
- :preface (init/package 'corfu)
- :custom
- (corfu-popupinfo-delay '(1.25 . 0.5)))
+  ;; Show icons in corfu popups.
+  (declvars corfu-margin-formatters)
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
 
-(use-package corfu-history
- :ensure corfu
- :defer t
- :preface (init/package 'corfu)
- :after corfu
- :hook corfu-mode-hook)
+  (hook-globals
+   'corfu-mode-hook
+   #'corfu-popupinfo-mode
+   #'corfu-history-mode))
 
-(use-package corfu-history
- :ensure corfu
- :defer t
- :preface (init/package 'corfu)
- :after savehist
- :config
- (add-to-list 'savehist-additional-variables 'corfu-history))
+ (after 'corfu-popupinfo
+  (setopt
+   corfu-popupinfo-delay '(1.25 . 0.5)))
 
-(use-package nerd-icons-corfu
- :ensure t
- :defer t
- :preface (init/package 'nerd-icons-corfu))
+ (after 'corfu-history
+  (after 'savehist
+   (add-to-list 'savehist-additional-variables 'corfu-history))))
 
-(use-package company
- :ensure t
- :defer t
- :preface (init/package 'company)
- :diminish "Co"
- :commands company--active-p
- :hook prog-mode-hook
+(config "Company"
+  (packages 'company)
+  (packages 'company-posframe)
 
- :custom
- (company-idle-delay 0.7)
- (company-keywords-ignore-case t)
- (company-selection-wrap-around t)
- (company-tooltip-align-annotations t)
- (company-tooltip-minimum-width 40)
- (company-tooltip-maximum-width 80)
- (company-tooltip-limit 15)
- (company-tooltip-minimum 10)
- (company-tooltip-flip-when-above t)
- (company-tooltip-annotation-padding 3)
- (company-tooltip-width-grow-only t))
+ (autoloads "company" #'company--active-p)
+ (defun init/company-is-active (&rest _)
+  (or (company--active-p) (bound-and-true-p company-backend)))
 
-(use-package elisp-mode
- :ensure nil
- :defer t
- :config
- (setq-mode-local emacs-lisp-mode
-  company-backends '(company-capf
-                     company-keywords
-                     company-dabbrev-code
-                     company-files
-                     :separate)))
+ (after 'company
+  (diminish 'company-mode "Co")
 
-(use-package company-posframe
- :ensure t
- :defer t
- :preface (init/package 'company-posframe)
- :diminish
- :after company
- :hook company-mode-hook
- :config
- (nconc company-posframe-show-params '(:border-width 1))
- (nconc company-posframe-quickhelp-show-params '(:border-width 1))
- :custom
- (company-posframe-quickhelp-x-offset 2))
+  (setopt
+   company-idle-delay 0.7
+   company-keywords-ignore-case t
+   company-selection-wrap-around t
+   company-tooltip-align-annotations t
+   company-tooltip-minimum-width 40
+   company-tooltip-maximum-width 80
+   company-tooltip-limit 15
+   company-tooltip-minimum 10
+   company-tooltip-flip-when-above t
+   company-tooltip-annotation-padding 3
+   company-tooltip-width-grow-only t)
+
+  (hook-globals 'company-mode-hook #'company-posframe-mode))
+
+ (after 'company-posframe
+  (diminish 'company-posframe-mode)
+
+  (declvars
+   company-posframe-show-params
+   company-posframe-quickhelp-show-params)
+  (nconc company-posframe-show-params '(:border-width 1))
+  (nconc company-posframe-quickhelp-show-params '(:border-width 1))
+
+  (setopt
+   company-posframe-quickhelp-x-offset 2)))
 
 (use-package cape
  :ensure t
  :defer t
- :preface (package 'cape)
+ :preface (packages 'cape)
  :bind ("C-c p" . cape-prefix-map)
  :config
  (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
@@ -625,7 +565,7 @@
 (use-package flycheck
  :ensure t
  :defer t
- :preface (package 'flycheck)
+ :preface (packages 'flycheck)
 
  :functions flycheck-overlay-errors-at
 
@@ -656,11 +596,8 @@
     flycheck-errors)))
 
  (defun init/setup-flycheck-eldoc ()
-  (with-eval-after-load 'eldoc
-   (add-hook 'eldoc-documentation-functions #'init/flycheck-eldoc nil t)))
-
- :hook
- (flycheck-mode-hook . init/setup-flycheck-eldoc)
+  (after 'eldoc
+   (hook-local 'eldoc-documentation-functions #'init/flycheck-eldoc)))
 
  :bind
  (:map flycheck-mode-map
@@ -671,7 +608,7 @@
  (flycheck-checker-error-threshold nil)
  (flycheck-mode-line-prefix "Fc")
  (flycheck-check-syntax-automatically
-  '(idle-change new-line mode-enabled idle-buffer-switch))
+  '(idle-change mode-enabled))
  (flycheck-idle-change-delay 0.1)
  (flycheck-idle-buffer-switch-delay 0.1)
  (flycheck-display-errors-delay 0.1)
@@ -682,19 +619,6 @@
  (advice-add 'flycheck-next-error :after #'init/recenter)
  (advice-add 'flycheck-previous-error :after #'init/recenter)
  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
-
-(use-package company
- :ensure t
- :defer t
- :preface (init/package 'company)
- :after (company flycheck-posframe)
-
- :preface
- (defun init/company-is-active (&rest _)
-  (or (company--active-p) (bound-and-true-p company-backend)))
-
- :hook
- (flycheck-posframe-inhibit-functions . init/company-is-active))
 
 ;;; History and save-hist
 
@@ -776,23 +700,32 @@
  (split-width-threshold 130)
  (even-window-sizes 'width-only)
  ;; Skip *SPECIALS* when switching buffers.
- (switch-to-prev-buffer-skip-regexp '("\\`\\*.+\\*\\'"))
+ (switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
 
  :preface
  (defun init/disable-popup (regexp)
-  "Stop buffers that match REGEXP from popping up."
-  (add-to-list 'display-buffer-alist
-   `(,regexp (display-buffer-no-window) (allow-no-window . t))))
+   "Stop buffers that match REGEXP from popping up."
+   (push `(,regexp
+            (display-buffer-no-window)
+            (allow-no-window . t))
+     display-buffer-alist))
 
  :config
- (init/disable-popup "\\`\\*Compile-Log\\*.*\\'")
- (init/disable-popup "\\`\\*Native-compile-Log\\*.*\\'")
- (init/disable-popup "\\`\\*Async-native-compile-log\\*.*\\'")
- (init/disable-popup "\\`\\*Warnings\\*.*\\'")
+ (init/disable-popup (rx bos "*Compile-Log*" (0+ nonl) eos))
+ (init/disable-popup (rx bos "*Native-compile-Log*" (0+ nonl) eos))
+ (init/disable-popup (rx bos "*Async-native-compile-log*" (0+ nonl) eos))
+ (init/disable-popup (rx bos "*Warnings*" (0+ nonl) eos))
  (advice-add 'previous-buffer :after #'init/recenter)
  (advice-add 'next-buffer :after #'init/recenter)
  (advice-add 'split-window-below :after #'init/recenter)
- (advice-add 'switch-to-buffer :after #'init/recenter)
+  (advice-add 'switch-to-buffer :after #'init/recenter)
+
+  (push `(,(rx bos "*Help*" (0+ nonl) eos)
+           (display-buffer-reuse-mode-window display-buffer-in-side-window)
+           (side . right)
+           (dedicated . t)
+           (window-width . 80))
+    display-buffer-alist)
 
  :bind
  (("<f12>"       . delete-other-windows)
@@ -808,30 +741,30 @@
 
 ;;; General Programming
 
-(use-package prog-mode
- :ensure nil
- :defer t
+;; (use-package prog-mode
+;;  :ensure nil
+;;  :defer t
 
- :preface
- (defun init/prog-capfs ()
-  (let ((capfs (list (quote #'cape-file) (quote #'cape-dabbrev))))
-   (when (bound-and-true-p yas-minor-mode)
-    (push (quote #'yasnippet-capf) capfs))
-   (when (bound-and-true-p lsp-mode)
-    (push (quote #'lsp-completion-at-point) capfs))
-   (apply 'cape-wrap-super capfs)))
+;;  :preface
+;;  (defun init/prog-capfs ()
+;;   (let ((capfs (list (quote #'cape-file) (quote #'cape-dabbrev))))
+;;    (when (bound-and-true-p yas-minor-mode)
+;;     (push (quote #'yasnippet-capf) capfs))
+;;    (when (bound-and-true-p lsp-mode)
+;;     (push (quote #'lsp-completion-at-point) capfs))
+;;    (apply 'cape-wrap-super capfs)))
 
- (defun init/setup-prog-capfs ()
-  (setq-local completion-at-point-functions
-   (list #'init/prog-capfs)))
+;;  (defun init/setup-prog-capfs ()
+;;   (setq-local completion-at-point-functions
+;;    (list #'init/prog-capfs)))
 
- :hook
- (prog-mode-hook . init/setup-prog-capfs))
+;;  :hook
+;;  (prog-mode-hook . init/setup-prog-capfs))
 
 (use-package devdocs
  :ensure t
  :defer t
- :preface (package 'devdocs)
+ :preface (packages 'devdocs)
 
  :bind
  ("C-h D" . devdocs-lookup)
@@ -856,23 +789,30 @@
  (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
  (electric-pair-preserve-balance nil))
 
-(use-package eldoc
- :ensure nil
- :defer t
- :diminish "Ed"
+(config "ElDoc"
+ (packages 'eldoc-mouse)
 
- :custom
- (eldoc-documentation-strategy 'eldoc-documentation-compose)
- (eldoc-idle-delay 0.1))
+ (after 'eldoc
+  (diminish 'eldoc-mode "Ed")
+  (setopt
+   eldoc-documentation-strategy 'eldoc-documentation-compose
+   eldoc-idle-delay 0.1)
+  ;; (remove-hook 'eldoc-display-functions #'eldoc-display-in-echo-area)
 
-(use-package eldoc-mouse
- :ensure t
- :defer t
- :diminish "Em"
- :preface (init/package 'eldoc-mouse)
- :bind (:map eldoc-mouse-mode-map
-        ("<f1> <f1>" . eldoc-mouse-pop-doc-at-cursor))
- :hook eldoc-mode-hook)
+  (hook-globals 'eldoc-mode-hook #'eldoc-mouse-mode))
+
+ (after 'eldoc-mouse
+  (diminish 'eldoc-mouse-mode "Em")
+  (declvars eldoc-mouse-mode-map)
+  (bind-keys
+   :map eldoc-mouse-mode-map
+   ("<f1> <f1>" . eldoc-mouse-pop-doc-at-cursor))
+
+  (hook-progn 'eldoc-mouse-mode-hook
+   (after 'lsp-mode
+    (declvars eldoc-mouse-eldoc-documentation-functions)
+    (autoloads "lsp-mode" 'lsp-eldoc-function)
+    (add-hook 'eldoc-mouse-eldoc-documentation-functions #'lsp-eldoc-function)))))
 
 (use-package subword
  :ensure nil
@@ -882,7 +822,7 @@
 (use-package display-fill-column-indicator
  :ensure nil
  :defer t
- :preface (package 'display-fill-column-indicator)
+ :preface (packages 'display-fill-column-indicator)
  :after prog-mode
  :hook prog-mode-hook)
 
@@ -895,7 +835,7 @@
 (use-package diff-hl
  :ensure t
  :defer t
- :preface (package 'diff-hl)
+ :preface (packages 'diff-hl)
  :after prog-mode
  :hook prog-mode-hook)
 
@@ -922,14 +862,14 @@
 (use-package flycheck
  :ensure t
  :defer t
- :preface (package 'flycheck)
+ :preface (packages 'flycheck)
  :after prog-mode
  :hook prog-mode-hook)
 
 (use-package yasnippet
  :ensure t
  :defer t
- :preface (package 'yasnippet)
+ :preface (packages 'yasnippet)
  :after prog-mode
  :hook (prog-mode-hook . yas-minor-mode-on))
 
@@ -954,7 +894,7 @@
 (use-package jinx
  :ensure t
  :defer t
- :preface (package 'jinx)
+ :preface (packages 'jinx)
  :after prog-mode
  :hook prog-mode-hook)
 
@@ -967,7 +907,7 @@
 (use-package deadgrep
  :ensure t
  :defer t
- :preface (package 'deadgrep)
+ :preface (packages 'deadgrep)
  :after prog-mode
 
  :bind
@@ -976,24 +916,24 @@
 (use-package wgrep
  :ensure t
  :defer t
- :preface (package 'wgrep))
+ :preface (packages 'wgrep))
 
 (use-package wgrep-deadgrep
  :ensure t
  :defer t
- :preface (package 'wgrep-deadgrep)
+ :preface (packages 'wgrep-deadgrep)
  :after deadgrep)
 
 (use-package sideline
  :ensure t
  :defer t
- :preface (package 'sideline)
+ :preface (packages 'sideline)
  :diminish "Si")
 
 (use-package sideline-blame
  :ensure t
  :defer t
- :preface (package 'sideline-blame)
+ :preface (packages 'sideline-blame)
  :after sideline
 
  :custom
@@ -1014,7 +954,7 @@
 (use-package xref
  :ensure nil
  :defer t
- :preface (package 'consult)
+ :preface (packages 'consult)
  :custom
  (xref-show-xrefs-function #'consult-xref)
  (xref-show-definitions-function #'consult-xref))
@@ -1023,7 +963,7 @@
  :ensure t
  :defer t
  :diminish "Ec"
- :preface (package 'editorconfig))
+ :preface (packages 'editorconfig))
 
 ;;; Configuration Files
 
@@ -1081,8 +1021,7 @@
  :ensure t
  :defer t
 
- :preface
- (package 'meson-mode))
+ :preface (packages 'meson-mode))
 
 (use-package symbol-overlay
  :ensure t
@@ -1093,7 +1032,7 @@
 (use-package lsp-meson
  :ensure lsp-mode
  :defer t
- :preface (package 'lsp-mode)
+ :preface (packages 'lsp-mode)
  :after meson-mode
 
  :hook (meson-mode-hook . lsp)
@@ -1104,7 +1043,7 @@
 (use-package lsp-meson
  :ensure lsp-mode
  :defer t
- :preface (package 'lsp-mode)
+ :preface (packages 'lsp-mode)
  :after (meson-mode lsp-completion)
 
  :init
@@ -1132,7 +1071,7 @@
 (use-package blamer
  :ensure t
  :defer t
- :preface (package 'blamer)
+ :preface (packages 'blamer)
 
  :custom
  ;; (blamer-idle-time 0)
@@ -1186,7 +1125,7 @@
 (use-package magit
  :ensure t
  :defer t
- :preface (package 'magit)
+ :preface (packages 'magit)
  :after files
  :commands magit-after-save-refresh-status
 
@@ -1201,7 +1140,7 @@
 (use-package magit-diff
  :ensure magit
  :defer t
- :preface (package 'magit)
+ :preface (packages 'magit)
  :preface
  (defun init/magit-load-nerd-icons (&rest args)
   (if (require 'nerd-icons nil t)
@@ -1223,7 +1162,7 @@
 (use-package diff-hl
  :ensure t
  :defer t
- :preface (package 'diff-hl)
+ :preface (packages 'diff-hl)
 
  :custom
  (diff-hl-flydiff-delay 1)
@@ -1263,7 +1202,7 @@
 (use-package speedrect
  :ensure t
  :defer t
- :preface (package 'speedrect)
+ :preface (packages 'speedrect)
 
  :init
  (speedrect-mode))
@@ -1271,7 +1210,7 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
- :preface (package 'symbol-overlay)
+ :preface (packages 'symbol-overlay)
  :diminish "So"
 
  :bind
@@ -1307,7 +1246,7 @@
 (use-package crux
  :ensure t
  :defer t
- :preface (package 'crux)
+ :preface (packages 'crux)
 
  :bind
  ([remap keyboard-quit] . crux-keyboard-quit-dwim))
@@ -1402,12 +1341,29 @@
    (list #'init/elisp-capfs)))
 
  :hook
- (emacs-lisp-mode-hook . init/setup-elisp-capfs))
+ (emacs-lisp-mode-hook . init/setup-elisp-capfs)
+ (emacs-lisp-mode-hook . init/buffer-completion-mode)
+
+ :config
+ (hook-progn 'emacs-lisp-mode-hook
+  (after 'flycheck
+   (hook-local 'flycheck-mode-hook #'init/setup-flycheck-eldoc))))
+
+(use-package elisp-mode
+ :ensure nil
+ :defer t
+ :config
+ (setq-mode-local emacs-lisp-mode
+  company-backends '((company-capf
+                      company-yasnippet
+                      company-keywords
+                      company-dabbrev-code
+                      company-files))))
 
 (use-package symbol-overlay
  :ensure t
  :defer t
- :preface (package 'symbol-overlay)
+ :preface (packages 'symbol-overlay)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
@@ -1420,33 +1376,33 @@
 (use-package highlight-defined
  :ensure t
  :defer t
- :preface (package 'highlight-defined)
+ :preface (packages 'highlight-defined)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package highlight-quoted
  :ensure t
  :defer t
- :preface (package 'highlight-quoted)
+ :preface (packages 'highlight-quoted)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package eros
  :ensure t
  :defer t
- :preface (package 'eros)
+ :preface (packages 'eros)
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
 
 (use-package suggest
  :ensure t
  :defer t
- :preface (package 'suggest))
+ :preface (packages 'suggest))
 
 (use-package ipretty
  :ensure t
  :defer t
- :preface (package 'ipretty)
+ :preface (packages 'ipretty)
  :after elisp-mode
  :hook (emacs-lisp-mode-hook . (lambda () (ipretty-mode t))))
 
@@ -1507,7 +1463,7 @@
 (use-package hl-line
  :ensure t
  :defer t
- :preface (package 'hl-line)
+ :preface (packages 'hl-line)
  :after dired
  :hook dired-mode-hook)
 
@@ -1532,9 +1488,14 @@
 (use-package nerd-icons-dired
  :ensure t
  :defer t
- :preface (package 'nerd-icons-dired)
+ :preface (packages 'nerd-icons-dired)
  :diminish
  :hook (dired-mode-hook . nerd-icons-dired-mode))
+
+(config "Text"
+  (packages 'jinx)
+  (after 'text-mode
+    (add-hook 'text-mode-hook #'jinx-mode)))
 
 ;;; Search
 
@@ -1553,21 +1514,21 @@
 (use-package markdown-mode
  :ensure t
  :defer t
- :preface (package 'markdown-mode)
+ :preface (packages 'markdown-mode)
  :config
  (setq-mode-local markdown-mode fill-column 79))
 
 (use-package display-fill-column-indicator
  :ensure t
  :defer t
- :preface (package 'display-fill-column-indicator)
+ :preface (packages 'display-fill-column-indicator)
  :after markdown-mode
  :hook markdown-mode-hook)
 
 (use-package hl-line
  :ensure t
  :defer t
- :preface (package 'hl-line)
+ :preface (packages 'hl-line)
  :after markdown-mode
  :hook markdown-mode-hook)
 
@@ -1576,26 +1537,26 @@
 (use-package sed-mode
  :ensure t
  :defer t
- :preface (package 'sed-mode))
+ :preface (packages 'sed-mode))
 
 ;;; Po Translations
 
 (use-package po-mode
  :ensure t
  :defer t
- :preface (package 'po-mode))
+ :preface (packages 'po-mode))
 
 ;;; TOML
 
 (use-package toml-mode
  :ensure t
  :defer t
- :preface (package 'toml-mode))
+ :preface (packages 'toml-mode))
 
 (use-package eldoc-toml
  :ensure t
  :defer t
- :preface (package 'eldoc-toml)
+ :preface (packages 'eldoc-toml)
  :diminish
  :after (eldoc toml-mode)
  :hook toml-mode-hook)
@@ -1610,26 +1571,26 @@
 (use-package json-mode
  :ensure t
  :defer t
- :preface (package 'json-mode))
+ :preface (packages 'json-mode))
 
 (use-package indent-bars
  :ensure t
  :defer t
- :preface (package 'indent-bars)
+ :preface (packages 'indent-bars)
  :after json-mode
  :hook json-mode-hook)
 
 (use-package indent-bars
  :ensure t
  :defer t
- :preface (package 'indent-bars)
+ :preface (packages 'indent-bars)
  :after json-ts-mode
  :hook json-ts-mode-hook)
 
 (use-package tree-sitter
  :ensure t
  :defer t
- :preface (package 'tree-sitter)
+ :preface (packages 'tree-sitter)
  :diminish "Ts"
  :after json-mode
  :hook json-mode-hook)
@@ -1639,7 +1600,7 @@
 (use-package jinx
  :ensure t
  :defer t
- :preface (package 'jinx)
+ :preface (packages 'jinx)
  :diminish "Jx"
 
  :bind
@@ -1652,14 +1613,14 @@
 (use-package speedrect
  :ensure t
  :demand
- :preface (package 'speedrect)
+ :preface (packages 'speedrect)
  :diminish "Sr"
  :config (speedrect-mode))
 
 (use-package vundo
  :ensure t
  :defer t
- :preface (package 'vundo)
+ :preface (packages 'vundo)
  :bind ("C-x u" . vundo)
  :custom
  (vundo-glyph-alist vundo-unicode-symbols))
@@ -1674,7 +1635,7 @@
 (use-package which-key
  :ensure t
  :defer t
- :preface (package 'which-key)
+ :preface (packages 'which-key)
  :diminish
 
  :custom
@@ -1690,7 +1651,7 @@
 (use-package nerd-icons-completion
  :ensure t
  :defer t
- :preface (package 'nerd-icons-completion))
+ :preface (packages 'nerd-icons-completion))
 
 (use-package emacs
  :ensure nil
@@ -1711,7 +1672,7 @@
 (use-package marginalia
  :ensure t
  :defer t
- :preface (package 'marginalia)
+ :preface (packages 'marginalia)
 
  :preface
  (defun init/marginalia-mode ()
@@ -1725,7 +1686,7 @@
 (use-package embark
  :ensure t
  :defer t
- :preface (package 'embark)
+ :preface (packages 'embark)
 
  :bind
  (("C-." . embark-act)
@@ -1744,7 +1705,7 @@
 (use-package hotfuzz
  :ensure t
  :defer t
- :preface (package 'hotfuzz)
+ :preface (packages 'hotfuzz)
  :after minibuffer
 
  :init
@@ -1753,7 +1714,7 @@
 (use-package orderless
  :ensure t
  :defer t
- :preface (package 'orderless)
+ :preface (packages 'orderless)
 
  :config
  (push 'orderless-initialism orderless-matching-styles)
@@ -1762,73 +1723,16 @@
 (use-package orderless
  :ensure t
  :defer t
- :preface (package 'orderless)
+ :preface (packages 'orderless)
  :after minibuffer
 
  :init
  (push 'orderless completion-styles))
 
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- (enable-recursive-minibuffers t)
-
- :hook
- (minibuffer-setup-hook . cursor-intangible-mode))
-
-(use-package minibuffer
- :ensure nil
- :defer t
-
- :config
- (delete 'tags-completion-at-point-function completion-at-point-functions)
- (delete 'emacs22 completion-styles)
-
- :custom
- (completion-category-defaults nil)
- (completion-category-overrides nil)
- ;; (minibuffer-electric-default-mode t)
- (minibuffer-message-clear-timeout 4)
- (completions-max-height 20)
- (read-file-name-completion-ignore-case t)
- (completions-format 'one-column)
- (completions-detailed t)
- (completions-group t)
- (completion-cycle-threshold nil))
-
-(use-package map-ynp
- :ensure nil
- :defer t
-
- :custom
- (read-answer-short t))
-
-(use-package ctrlf
- :ensure t
- :defer t
- :preface (package 'ctrlf)
-
- :custom
- (ctrlf-default-search-style 'fuzzy)
- (ctrlf-auto-recenter t)
-
- :init
- (ctrlf-mode))
-
-(use-package transient
- :ensure t
- :defer t
- :preface (package 'transient)
-
- :custom
- (transient-default-level 7))
-
 (use-package multiple-cursors
  :ensure t
  :defer t
- :preface (package 'multiple-cursors))
+ :preface (packages 'multiple-cursors))
 
 (use-package mc-edit-lines
  :ensure multiple-cursors
@@ -1856,13 +1760,13 @@
 (use-package volatile-highlights
  :ensure t
  :defer t
- :preface (package 'volatile-highlights)
+ :preface (packages 'volatile-highlights)
  :diminish)
 
 (use-package volatile-highlights
  :ensure volatile-highlights
  :defer t
- :preface (package 'volatile-highlights)
+ :preface (packages 'volatile-highlights)
  :diminish
  :after hledger-mode
 
@@ -1872,7 +1776,7 @@
 (use-package volatile-highlights
  :ensure volatile-highlights
  :defer t
- :preface (package 'volatile-highlights)
+ :preface (packages 'volatile-highlights)
  :diminish
  :after prog-mode
 
@@ -1907,7 +1811,7 @@
 (use-package tree-sitter
  :ensure t
  :defer t
- :preface (package 'tree-sitter)
+ :preface (packages 'tree-sitter)
  :diminish "Ts")
 
 (use-package tree-sitter-hl
@@ -1920,7 +1824,7 @@
 (use-package tree-sitter-langs
  :ensure t
  :defer t
- :preface (package 'tree-sitter-langs)
+ :preface (packages 'tree-sitter-langs)
 
  :hook
  (tree-sitter-mode-hook .
@@ -1964,7 +1868,7 @@
 (use-package dape
  :ensure t
  :defer t
- :preface (package 'dape)
+ :preface (packages 'dape)
 
  :hook
  (dape-stopped-hook . dape-breakpoint-save)
@@ -1986,7 +1890,7 @@
 (use-package yaml-mode
  :ensure t
  :defer t
- :preface (package 'yaml-mode)
+ :preface (packages 'yaml-mode)
 
  :bind
  (:map yaml-mode-map
@@ -2007,7 +1911,7 @@
 (use-package indent-bars
  :ensure t
  :defer t
- :preface (package 'indent-bars)
+ :preface (packages 'indent-bars)
  :after yaml-mode
  :hook yaml-mode-hook)
 
@@ -2016,31 +1920,31 @@
 (use-package llvm-ts-mode
  :ensure t
  :defer t
- :preface (package 'llvm-ts-mode)
+ :preface (packages 'llvm-ts-mode)
  :mode (rx ".ll" eos))
 
 (use-package demangle-mode
  :ensure t
  :defer t
- :preface (package 'demangle-mode)
+ :preface (packages 'demangle-mode)
  :after llvm-ts-mode
  :hook llvm-ts-mode-hook)
 
 (use-package autodisass-llvm-bitcode
  :ensure t
  :defer t
- :preface (package 'autodisass-llvm-bitcode)
+ :preface (packages 'autodisass-llvm-bitcode)
  :mode (rx ".bc" eos))
 
 (use-package demangle-mode
  :ensure t
  :defer t
- :preface (package 'demangle-mode))
+ :preface (packages 'demangle-mode))
 
 (use-package yaml-mode
  :ensure t
  :defer t
- :preface (package 'yaml-mode)
+ :preface (packages 'yaml-mode)
 
  :mode (rx ".clang-format" eos)
  :mode (rx ".clang-tidy" eos))
@@ -2100,7 +2004,7 @@
 (use-package editorconfig
  :ensure t
  :defer t
- :preface (package 'editorconfig)
+ :preface (packages 'editorconfig)
  :diminish "Ec"
  :after cc-mode
  :hook
@@ -2128,22 +2032,22 @@
 (use-package lsp-mode
  :ensure t
  :defer t
- :preface (package 'lsp-mode)
+ :preface (packages 'lsp-mode)
  :after cc-mode
  :hook (c-mode-common-hook . lsp))
 
-(use-package lsp-completion
- :ensure lsp-mode
- :defer t
- :preface (package 'lsp-mode)
- :config
- (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
- (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
+;; (use-package lsp-completion
+;;  :ensure lsp-mode
+;;  :defer t
+;;  :preface (packages 'lsp-mode)
+;;  :config
+;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
+;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
 
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
- :preface (package 'lsp-mode)
+ :preface (packages 'lsp-mode)
 
  :config
  (add-to-list 'lsp-clients-clangd-args "--enable-config")
@@ -2189,7 +2093,7 @@
 (use-package uv-mode
  :ensure t
  :defer t
- :preface (package 'uv-mode)
+ :preface (packages 'uv-mode)
  :after python
  :hook (python-base-mode-hook . uv-mode-auto-activate-hook))
 
@@ -2225,7 +2129,7 @@
 (use-package indent-bars
  :ensure t
  :defer t
- :preface (package 'indent-bars)
+ :preface (packages 'indent-bars)
  :after python
  :hook python-base-mode-hook
 
@@ -2238,7 +2142,7 @@
 (use-package projectile
  :ensure t
  :defer t
- :preface (package 'projectile)
+ :preface (packages 'projectile)
  :diminish "Pr"
 
  :commands
@@ -2260,14 +2164,14 @@
 (use-package consult-projectile
  :ensure t
  :defer t
- :preface (package 'consult-projectile)
+ :preface (packages 'consult-projectile)
  :after projectile
  :bind ("C-x P" . consult-projectile))
 
 (use-package treemacs-projectile
  :ensure t
  :defer t
- :preface (package 'treemacs-projectile)
+ :preface (packages 'treemacs-projectile)
  :after (treemacs projectile))
 
 ;;; Snippets
@@ -2275,7 +2179,7 @@
 (use-package yasnippet
  :ensure t
  :defer t
- :preface (package 'yasnippet)
+ :preface (packages 'yasnippet)
  :diminish (yas-minor-mode . "Ys")
 
  :init
@@ -2287,7 +2191,7 @@
 (use-package yasnippet-snippets
  :ensure t
  :defer t
- :preface (package 'yasnippet-snippets)
+ :preface (packages 'yasnippet-snippets)
  :after yasnippet
 
  :preface
@@ -2304,7 +2208,7 @@
 (use-package yasnippet-capf
  :ensure t
  :defer t
- :preface (package 'yasnippet-capf)
+ :preface (packages 'yasnippet-capf)
  :custom
  (yasnippet-capf-lookup-by 'name)
  :config
@@ -2315,7 +2219,7 @@
 (use-package hledger-mode
  :ensure t
  :defer t
- :preface (package 'hledger-mode)
+ :preface (packages 'hledger-mode)
  :mode (rx ".journal" eos)
  :mode (rx ".ledger" eos)
  :mode (rx ".hledger" eos)
@@ -2405,7 +2309,7 @@
 (use-package company
  :ensure t
  :defer t
- :preface (package 'company)
+ :preface (packages 'company)
  :config
  (setq-mode-local hledger-mode
   company-backends '((hledger-company
@@ -2415,7 +2319,7 @@
 (use-package flycheck-hledger
  :ensure t
  :defer t
- :preface (package 'flycheck-hledger)
+ :preface (packages 'flycheck-hledger)
  :after hledger-mode
 
  :hook
@@ -2434,35 +2338,35 @@
 (use-package symbol-overlay
  :ensure t
  :defer t
- :preface (package 'symbol-overlay)
+ :preface (packages 'symbol-overlay)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package yasnippet
  :ensure t
  :defer t
- :preface (package 'yasnippet)
+ :preface (packages 'yasnippet)
  :after hledger-mode
  :hook (hledger-mode-hook . yas-minor-mode-on))
 
 (use-package flycheck
  :ensure t
  :defer t
- :preface (package 'flycheck)
+ :preface (packages 'flycheck)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package display-fill-column-indicator
  :ensure t
  :defer t
- :preface (package 'display-fill-column-indicator)
+ :preface (packages 'display-fill-column-indicator)
  :after hledger-mode
  :hook hledger-mode-hook)
 
 (use-package hl-line
  :ensure t
  :defer t
- :preface (package 'hl-line)
+ :preface (packages 'hl-line)
  :after hledger-mode
  :hook hledger-mode-hook)
 
@@ -2471,7 +2375,7 @@
 (use-package web-mode
  :ensure t
  :defer t
- :preface (package 'web-mode)
+ :preface (packages 'web-mode)
  :mode (rx ".html" eos)
  :mode (rx ".css" eos)
  :mode (rx ".js" eos)
@@ -2491,13 +2395,13 @@
 (use-package company
  :ensure t
  :defer t
- :preface (package 'company)
+ :preface (packages 'company)
  :hook web-mode-hook)
 
 (use-package company-web
  :ensure t
  :defer nil
- :preface (package 'company-web)
+ :preface (packages 'company-web)
  :after (company web-mode)
 
  :config
@@ -2509,7 +2413,7 @@
  :ensure t
  :defer t
  :diminish "Em"
- :preface (package 'emmet-mode)
+ :preface (packages 'emmet-mode)
  :hook web-mode-hook
 
  :custom
@@ -2520,17 +2424,17 @@
 (use-package dockerfile-mode
  :ensure t
  :defer t
- :preface (package 'dockerfile-mode))
+ :preface (packages 'dockerfile-mode))
 
 (use-package docker-compose-mode
  :ensure t
  :defer t
- :preface (package 'docker-compose-mode))
+ :preface (packages 'docker-compose-mode))
 
 (use-package docker
  :ensure t
  :defer t
- :preface (package 'docker)
+ :preface (packages 'docker)
  :bind ("C-c D" . docker))
 
 ;;; Archlinux PKGBUILDs
@@ -2538,102 +2442,116 @@
 (use-package pkgbuild-mode
  :ensure t
  :defer t
- :preface (package 'pkgbuild-mode)
+ :preface (packages 'pkgbuild-mode)
  :mode (rx bos "PKGBUILD" eos))
 
 ;;; Rust
 
-(use-package rust-mode
- :ensure t
- :defer t
- :preface (init/package 'rust-mode)
+(config "Rust Programming"
+ (packages 'rust-mode)
+ (packages 'lsp-mode)
 
- :bind
- (:map rust-mode-map
-  ("<f5>" . rust-dbg-wrap-or-unwrap)
-  ("<f6>" . lsp-rust-analyzer-expand-macro)
-  ("<f7>" . lsp-rust-analyzer-join-lines))
+ (autoloads
+  "lsp-rust"
+  #'lsp-rust-analyzer-expand-macro
+  #'lsp-rust-analyzer-join-lines)
 
- :custom
- (rust-indent-offset 2)
- (rust-load-optional-libraries nil)
- (rust-format-on-save t)
+ (after 'rust-mode
+  (setopt
+   rust-indent-offset 2
+   rust-load-optional-libraries nil
+   rust-format-on-save t)
 
- :config
- (setq-mode-local rust-mode fill-column 110)
+  (hook-progn 'rust-mode-hook (electric-quote-local-mode -1))
+  (hook-globals
+   'rust-mode-hook
+   #'electric-pair-local-mode
+   #'init/buffer-completion-mode
+   #'lsp
+   #'subword-mode)
 
- :hook
- (rust-mode-hook . (lambda () (electric-quote-local-mode -1))))
+  (declvars rust-mode-map)
+  (bind-keys
+   :map rust-mode-map
+   ("<f5>" . rust-dbg-wrap-or-unwrap)
+   ("<f6>" . lsp-rust-analyzer-expand-macro)
+   ("<f7>" . lsp-rust-analyzer-join-lines))
 
-(use-package rust-mode
- :ensure t
- :defer t
- :preface (init/package 'rust-mode)
- :after newcomment
- :config
- (setq-mode-local rust-mode comment-fill-column 100))
+  (after 'emacs
+   (setq-mode-local rust-mode fill-column 110))
 
-(use-package rust-mode
- :ensure t
- :defer t
- :preface (init/package 'rust-mode)
- :after corfu
- :config
- (setq-mode-local rust-mode
-  corfu-auto t
-  corfu-auto-delay 0.4
-  corfu-auto-prefix 1))
+  (after 'newcomment
+   (setq-mode-local rust-mode comment-fill-column 100))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :after rust-mode
- :hook (rust-mode-hook . lsp))
+  (after 'company
+   (setq-mode-local rust-mode
+    company-backends '((company-capf
+                        company-yasnippet
+                        company-files))))
 
-(use-package subword
- :ensure nil
- :defer t
- :after rust-mode
- :hook rust-mode-hook)
+  (after 'corfu
+   (setq-mode-local rust-mode
+    corfu-auto t
+    corfu-auto-delay 0.4
+    corfu-auto-prefix 1
+    corfu-auto-trigger ".&"))
 
-(use-package lsp-rust
- :ensure lsp-mode
- :defer t
+  (after 'lsp-rust
+   (setq-mode-local rust-mode
+    ;; lsp-rust-analyzer-max-inlay-hint-length 50
+    ;; lsp-rust-unstable-features t
+    lsp-rust-analyzer-cargo-run-build-scripts t
+    lsp-rust-analyzer-checkonsave-features "all"
+    lsp-rust-analyzer-cargo-load-out-dirs-from-check t
+    lsp-rust-analyzer-proc-macro-enable t
+    lsp-rust-racer-completion nil
+    lsp-rust-build-bin t
+    lsp-rust-build-lib t
+    lsp-rust-clippy-preference "on"
+    lsp-rust-analyzer-display-chaining-hints t
+    lsp-rust-analyzer-display-parameter-hints t
+    lsp-rust-analyzer-display-closure-return-type-hints t
+    lsp-rust-analyzer-display-lifetime-elision-hints-enable "always"
+    lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t
+    lsp-rust-analyzer-binding-mode-hints t
+    lsp-rust-analyzer-closure-capture-hints t
+    lsp-rust-analyzer-closure-return-type-hints "always"
+    lsp-rust-analyzer-discriminants-hints "fieldless"
+    lsp-rust-analyzer-expression-adjustment-hints "reborrow"
+    lsp-rust-analyzer-implicit-drops t
+    lsp-rust-analyzer-display-reborrow-hints "mutable"
+    lsp-rust-all-features t
+    lsp-rust-all-targets t
+    lsp-rust-full-docs t
+    lsp-rust-analyzer-cargo-watch-command "clippy"))
 
- :custom
- ;; (lsp-rust-analyzer-max-inlay-hint-length 50)
- ;; (lsp-rust-unstable-features t)
- (lsp-rust-analyzer-cargo-run-build-scripts t)
- (lsp-rust-analyzer-checkonsave-features "all")
- (lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
- (lsp-rust-analyzer-proc-macro-enable t)
- (lsp-rust-racer-completion nil)
- (lsp-rust-build-bin t)
- (lsp-rust-build-lib t)
- (lsp-rust-clippy-preference "on")
- (lsp-rust-analyzer-display-chaining-hints t)
- (lsp-rust-analyzer-display-parameter-hints t)
- (lsp-rust-analyzer-display-closure-return-type-hints t)
- (lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
- (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
- (lsp-rust-analyzer-binding-mode-hints t)
- (lsp-rust-analyzer-closure-capture-hints t)
- (lsp-rust-analyzer-closure-return-type-hints "always")
- (lsp-rust-analyzer-discriminants-hints "fieldless")
- (lsp-rust-analyzer-expression-adjustment-hints "reborrow")
- (lsp-rust-analyzer-implicit-drops t)
- (lsp-rust-analyzer-display-reborrow-hints "mutable")
- (lsp-rust-all-features t)
- (lsp-rust-all-targets t)
- (lsp-rust-full-docs t)
- (lsp-rust-analyzer-cargo-watch-command "clippy"))
+  (after 'lsp-mode
+   (setq-mode-local rust-mode
+    lsp-format-buffer-on-save t))))
 
 ;;; LSP
 
+(config "LSP Mode Settings"
+ (packages 'lsp-mode)
+
+ (after 'lsp-mode
+  (setopt
+   ;; lsp-signature-auto-activate t
+   lsp-signature-render-documentation t
+   lsp-eldoc-render-all t
+   lsp-eldoc-enable-hover t)
+
+ (after 'lsp-completion
+  (setopt
+   ;; Use company-capf in case of company, otherwise corfu will take care of things.
+   lsp-completion-provider (if (eq *init/completion-system* :corfu) :none :capf)
+   lsp-completion-show-detail t
+   lsp-completion-show-kind t))))
+
 (use-package lsp-mode
  :ensure t
  :defer t
- :preface (package 'lsp-mode)
+ :preface (packages 'lsp-mode)
  :diminish "Ls"
 
  :init
@@ -2652,9 +2570,21 @@
   ("<f8>"  . lsp-inlay-hints-mode)
   ([remap er/expand-region] . lsp-extend-selection))
 
+ ;; :preface
+ ;; (defun init/lsp-capfs ()
+ ;;  (cape-wrap-super
+ ;;   #'cape-file
+ ;;   #'cape-dabbrev
+ ;;   #'yasnippet-capf
+ ;;   #'lsp-completion-at-point))
+
+ ;; (defun init/setup-lsp-capfs ()
+ ;;  (setq-local completion-at-point-functions
+ ;;   (list #'init/lsp-capfs)))
+
  :hook
  (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t)))
- (lsp-mode-hook . init/setup-prog-capfs)
+ ;; (lsp-mode-hook . init/setup-lsp-capfs)
 
  :custom
  (lsp-progress-prefix "  Progress: ")
@@ -2668,10 +2598,6 @@
  (lsp-enable-indentation t)
  (lsp-before-save-edits nil)
  (lsp-auto-configure t)
- ;; (lsp-signature-auto-activate t)
- ;; (lsp-signature-render-documentation nil)
- ;; (lsp-eldoc-enable-hover nil)
- ;; (lsp-eldoc-render-all nil)
  (lsp-modeline-code-actions-enable nil)
  (lsp-modeline-diagnostics-enable t)
  (lsp-log-io nil)
@@ -2679,18 +2605,6 @@
  ;; (lsp-enable-imenu nil)
  (lsp-use-plists t)
  (lsp-auto-execute-action t))
-
-(use-package lsp-completion
- :ensure lsp-mode
- :defer t
- :custom
- (lsp-completion-provider :none)
- (lsp-completion-show-detail t)
- (lsp-completion-show-kind t)
- :config
- (setq-mode-local rust-mode
-  lsp-completion-mode nil
-  lsp-completion-enable nil))
 
 (use-package lsp-mode
  :ensure t
@@ -2736,7 +2650,7 @@
  :ensure lsp-ui
  :defer t
  :after lsp-mode
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -2748,7 +2662,7 @@
 (use-package lsp-ui-imenu
  :ensure lsp-ui
  :defer t
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :custom
  (lsp-ui-imenu-auto-refresh t)
@@ -2759,7 +2673,7 @@
 (use-package consult-lsp
  :ensure t
  :defer t
- :preface (package 'consult-lsp)
+ :preface (packages 'consult-lsp)
  :after lsp-mode
 
  :bind
@@ -2770,7 +2684,7 @@
 (use-package lsp-ui-flycheck
  :ensure lsp-ui
  :defer t
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -2779,7 +2693,7 @@
 (use-package lsp-ui
  :ensure t
  :defer t
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -2788,7 +2702,7 @@
 (use-package lsp-ui-doc
  :ensure lsp-ui
  :defer t
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :custom
  (lsp-ui-doc-enable t)
@@ -2803,7 +2717,7 @@
 (use-package lsp-ui-peek
  :ensure lsp-ui
  :defer t
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :custom
  (lsp-ui-peek-list-width 40)
@@ -2812,7 +2726,7 @@
 (use-package lsp-ui-sideline
  :ensure lsp-ui
  :defer t
- :preface (package 'lsp-ui)
+ :preface (packages 'lsp-ui)
 
  :custom
  (lsp-ui-sideline-enable nil))
@@ -2822,7 +2736,7 @@
 (use-package treemacs
  :ensure t
  :defer t
- :preface (package 'treemacs)
+ :preface (packages 'treemacs)
 
  :bind
  ("<f9>" . treemacs-select-window))
@@ -2893,7 +2807,7 @@
 (use-package lsp-treemacs
  :ensure t
  :defer t
- :preface (package 'lsp-treemacs)
+ :preface (packages 'lsp-treemacs)
  :after lsp-mode
 
  :preface
@@ -2933,13 +2847,13 @@
 (use-package treemacs-magit
  :ensure t
  :demand
- :preface (package 'treemacs-magit)
+ :preface (packages 'treemacs-magit)
  :after (treemacs magit))
 
 (use-package treemacs-nerd-icons
  :ensure t
  :demand
- :preface (package 'treemacs-nerd-icons)
+ :preface (packages 'treemacs-nerd-icons)
  :after treemacs
 
  :config
@@ -2950,7 +2864,7 @@
 (use-package easysession
  :ensure t
  :defer t
- :preface (package 'easysession)
+ :preface (packages 'easysession)
  :custom
  (easysession-save-mode-lighter-show-session-name t)
  :bind
