@@ -119,11 +119,6 @@
     (setopt
       indent-tabs-mode nil)))
 
-(config "Spell Checking"
-  (package 'jinx
-    (after 'text-mode
-      (add-hook 'text-mode-hook #'jinx-mode))))
-
 (config "Window Movement"
   (builtin 'windmove
     (windmove-default-keybindings)
@@ -146,7 +141,7 @@
       remote-file-name-inhibit-locks t)))
 
 (config "Tramp"
-  (builtin 'tramp-sh
+  (after 'tramp-sh
     (setopt
       tramp-use-scp-direct-remote-copying t
       tramp-copy-size-limit (* 1024 1024)))
@@ -156,105 +151,71 @@
       ;; Read .dir-locals.el over TRAMP.
       enable-remote-dir-locals t)))
 
-(config "UI"
-  (builtin 'tooltip
-    (setopt
-      tooltip-use-echo-area t))
-
-  (builtin 'display-line-numbers
-    (setopt
-      display-line-numbers-grow-only t
-      display-line-numbers-width-start t)))
-
 (config "Warnings"
   (after 'warnings
     (setopt warning-minimum-level :emergency)
     (add-to-list 'warning-suppress-types 'defvaralias)))
 
-;;; Help
+(config "Help"
+  (after 'help
+    (setopt
+      help-window-select t
+      help-window-keep-selected t
+      help-enable-completion-autoload nil
+      help-enable-autoload nil
+      help-enable-symbol-autoload nil))
 
-(use-package help
- :ensure nil
- :defer t
+  (after 'help-mode
+    (advice-add 'help-button-action :after #'init/recenter)
+    (advice-add 'help-function-def--button-function :after #'init/recenter))
 
- :custom
- (help-window-select t)
- (help-window-keep-selected t)
- (help-enable-completion-autoload nil)
- (help-enable-autoload nil)
- (help-enable-symbol-autoload nil))
+  (package 'casual
+    (after 'info
+      (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))))
 
-(use-package help-mode
- :ensure nil
- :defer t
+(config "User Interface"
+  (after 'tooltip
+    (setopt
+      tooltip-use-echo-area t))
 
- :config
- ;; Recenter after pressing on links to emacs source code.
- (advice-add 'help-button-action :after #'init/recenter)
- (advice-add 'help-function-def--button-function :after #'init/recenter))
+  (after 'display-line-numbers
+    (setopt
+      display-line-numbers-grow-only t
+      display-line-numbers-width-start t)))
 
-(use-package info
- :ensure nil
- :defer t
+(config "User Experience"
+  (after 'emacs
+    (setopt
+      delete-by-moving-to-trash t))
 
- :bind
- (:map Info-mode-map ("C-p" . casual-info-tmenu)))
+  (after 'files
+    (advice-add 'find-file :after #'init/recenter)
+    (advice-add 'find-file-literally :after #'init/recenter)
+    (advice-add 'find-file-other-window :after #'init/recenter)
+    (setopt
+      confirm-kill-processes nil))
 
-;;; UX
+  (after 'button
+    (advice-add 'push-button :after #'init/recenter))
 
-(use-package emacs
- :ensure nil
- :defer t
+  (after 'mouse
+    (setopt
+      mouse-yank-at-point t
+      mouse-1-click-follows-link 'double))
 
- :custom
- (delete-by-moving-to-trash t))
-
-(use-package files
- :ensure nil
- :defer t
-
- :config
- (advice-add 'find-file :after #'init/recenter)
- (advice-add 'find-file-literally :after #'init/recenter)
- (advice-add 'find-file-other-window :after #'init/recenter)
-
- :custom
- (confirm-kill-processes nil))
-
-(use-package button
- :ensure nil
- :defer t
-
- :config
- (advice-add 'push-button :after #'init/recenter))
-
-(use-package mouse
- :ensure nil
- :defer t
-
- :custom
- (mouse-yank-at-point t)
- (mouse-1-click-follows-link 'double))
-
-(use-package simple
- :ensure nil
- :defer t
-
- :config
- ;; Recenter after using goto-line.
- (advice-add 'goto-line :after #'init/recenter)
-
- :custom
- ;; Hide commands in M-x that do not work in the current mode
- (read-extended-command-predicate #'command-completion-default-include-p)
- (undo-limit (* 1024 1024))
- (suggest-key-bindings 10)
- (save-interprogram-paste-before-kill t)
- (backward-delete-char-untabify-method 'hungry)
- ;; Recenter after jump to next error.
- (next-error-recenter '(4))
- (next-error-message-highlight t)
- (completion-auto-select nil))
+  (after 'simple
+    (advice-add 'goto-line :after #'init/recenter)
+    (setopt
+      ;; Hide commands in M-x that do not work in the current mode
+      read-extended-command-predicate #'command-completion-default-include-p
+      undo-limit (* 1024 1024)
+      suggest-key-bindings 10
+      save-interprogram-paste-before-kill t
+      backward-delete-char-untabify-method 'hungry
+      ;; Recenter after jump to next error.
+      next-error-recenter '(4)
+      next-error-message-highlight t
+      completion-auto-select nil)))
 
 (use-package minibuffer
  :ensure nil
