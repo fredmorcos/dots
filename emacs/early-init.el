@@ -36,7 +36,8 @@
 (config "Profiling"
   (when (not (eq *init/emacs-profiling* :disabled))
     (profiler-start 'cpu)
-    (after 'emacs                       ; Provided by startup.el.
+    ;; startup.el
+    (after 'emacs
       (autoloads "profiler" 'profiler-report)
       (add-hook 'after-init-hook 'profiler-report))))
 
@@ -80,17 +81,9 @@
          (fullscreen . maximized)
          (font . "Monospace-15"))))
 
-  (after 'menu-bar
-    (setopt
-      menu-bar-mode nil))
-
-  (after 'tool-bar
-    (setopt
-      tool-bar-mode nil))
-
-  (after 'scroll-bar
-    (setopt
-      scroll-bar-mode nil))
+  (after 'menu-bar   (setopt menu-bar-mode nil))
+  (after 'tool-bar   (setopt tool-bar-mode nil))
+  (after 'scroll-bar (setopt scroll-bar-mode nil))
 
   (after 'simple
     (setopt
@@ -109,7 +102,8 @@
       blink-cursor-mode nil)))
 
 (config "User Experience"
-  (after 'emacs                         ; Provided by startup.el.
+  ;; startup.el
+  (after 'emacs
     (setopt
       inhibit-startup-screen t
       inhibit-startup-message t
@@ -148,7 +142,8 @@
       ;; Only use Git as version control.
       vc-handled-backends '(Git)))
 
-  (after 'emacs                         ; Provided by startup.el.
+  ;; startup.el
+  (after 'emacs
     (after 'term/pgtk-win
       ;; Disable input contexts (for Windows).
       (remove-hook 'after-init-hook #'pgtk-use-im-context-handler)))

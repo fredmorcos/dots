@@ -8,10 +8,6 @@
   "Create a config section with NAME and BODY."
   `(progn ,@body))
 
-(defmacro builtin (_name &rest body)
-  "Create a section for a builtin package NAME and run BODY."
-  `(progn ,@body))
-
 ;;; Lazy Loading
 
 (defalias 'after #'with-eval-after-load)
@@ -36,11 +32,12 @@
 
 ;;; Packages
 
-(defmacro package (pkg &rest body)
-  "Install PKG and run BODY."
+(defmacro packages (&rest pkgs)
+  "Install PKGS."
   `(progn
-     (package-setup ,pkg)
-     ,@body))
+     ,@(mapcar #'(lambda (pkg)
+                   `(package-setup ,pkg))
+         pkgs)))
 
 (defun package-setup (pkg)
   "Install PKG and add it to list of selected packages."
@@ -122,12 +119,6 @@
 (defmacro im/dim (mode &optional text)
   "Diminish MODE to TEXT or nothing."
   `(im/dim-helper ',mode ,text))
-
-;; Popup buffers.
-
-(defmacro im/disable-popup (regexp)
-  "Stop buffers that match REGEXP from popping up."
-  `(push (cons ,regexp (cons #'display-buffer-no-window nil)) display-buffer-alist))
 
 ;; Modes.
 
