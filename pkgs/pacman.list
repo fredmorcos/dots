@@ -307,7 +307,6 @@ python-service-identity
 python-setuptools-rust
 python-symengine
 python-sympy
-python-tabulate
 python-trio
 python-typogrify
 python-ukkonen
@@ -316,7 +315,6 @@ python-uv
 python-virtualenv
 python-volume_key
 python-watchdog
-python-wcwidth
 python-webcolors
 python-websockets
 python-xattr
