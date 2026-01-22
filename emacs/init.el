@@ -1310,7 +1310,7 @@
  :defer t
 
  :custom
- (lisp-indent-offset 2)
+ (lisp-indent-offset 1)
  (lisp-indent-function #'common-lisp-indent-function)
 
  :preface
