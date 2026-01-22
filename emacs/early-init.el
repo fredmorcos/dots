@@ -7,37 +7,31 @@
  (require 'init-macros))
 
 (config "Configuration Options"
- (defvar *init/use-package-statistics* :disabled)
- (defvar *init/emacs-debugging* :disabled)
- (defvar *init/emacs-profiling* :disabled))
+ (defvar *init/use-package-statistics* :disabled "Whether to enable use-package stats")
+ (defvar *init/emacs-debugging* :disabled "Enable debugging startup elisp")
+ (defvar *init/emacs-profiling* :disabled "Enable profiling startup"))
 
-(config "Use Packages Settings"
- (after 'use-package-core
-  (setopt
-   use-package-expand-minimally t
-   use-package-hook-name-suffix nil
-   use-package-always-defer t)
+(config "Use Package"
+ (custom 'use-package-core
+  use-package-expand-minimally t
+  use-package-hook-name-suffix nil
+  use-package-always-defer t)
 
-  (when (not (eq *init/use-package-statistics* :disabled))
-   (setopt
-    use-package-compute-statistics t
-    use-package-verbose t)))
+ (when (not (eq *init/use-package-statistics* :disabled))
+  (custom 'use-package-core
+   use-package-compute-statistics t
+   use-package-verbose t)))
 
- (after 'use-package-ensure
-  (setopt
-   use-package-always-ensure t)))
-
-(config "Debugging and Profiling Emacs"
- (when (not (eq *init/emacs-debugging* :disabled))
-  (after 'emacs
-   (setopt debug-on-error t)))
+(config "Debugging and Profiling"
+ (when  (not (eq *init/emacs-debugging* :disabled))
+  (custom 'emacs debug-on-error t))
 
  (when (not (eq *init/emacs-profiling* :disabled))
-  (add-hook 'after-init-hook 'profiler-report)
+  (hook 'after-init-hook 'emacs #'profiler-report 'profiler)
   (profiler-start 'cpu)))
 
 (config "Garbage Collection"
- (setopt
+ (custom 'emacs
   ;; A big contributor to startup time is garbage collection. Increase the thresholds for
   ;; GC to run to 100MB or 80% of memory consumption.
   gc-cons-threshold (* 100 1024 1024)
@@ -47,12 +41,10 @@
  (run-with-idle-timer 5 t #'garbage-collect))
 
 (config "Customization File"
- (after 'cus-edit
-  (setopt
-   custom-file (make-temp-file "emacs-custom-"))))
+ (custom 'cus-edit custom-file (make-temp-file "emacs-custom-")))
 
 (config "Render Performance"
- (setopt
+ (custom 'emacs
   ;; Resizing the Emacs frame can be an expensive part of changing the font. By inhibiting
   ;; this, we easily halve startup times with fonts that are larger than the system
   ;; default.
@@ -62,7 +54,7 @@
   redisplay-skip-initial-frame t))
 
 (config "User Interface"
- (setopt
+ (custom 'emacs
   frame-resize-pixelwise t
   frame-title-format "%b - emacs")
 
@@ -71,22 +63,20 @@
     (fullscreen . maximized)
     (font . "Monospace-15")))
 
- (after 'menu-bar   (setopt menu-bar-mode nil))
- (after 'tool-bar   (setopt tool-bar-mode nil))
- (after 'scroll-bar (setopt scroll-bar-mode nil))
+ (custom 'menu-bar menu-bar-mode nil)
+ (custom 'tool-bar tool-bar-mode nil)
+ (custom 'scroll-bar scroll-bar-mode nil)
 
- (after 'simple
-  (setopt
-   line-number-mode t
-   column-number-mode t
-   size-indication-mode t))
+ (custom 'simple
+  line-number-mode t
+  column-number-mode t
+  size-indication-mode t)
 
- (after 'frame
-  (setopt
-   blink-cursor-mode nil))
+ (custom 'frame
+  blink-cursor-mode nil)
 
- ;; bindings.el
- (setopt
+ (custom 'emacs
+  ;; bindings.el
   column-number-indicator-zero-based nil
   mode-line-position-column-format '(" C%C")
   mode-line-compact 'long))
@@ -97,8 +87,8 @@
  (face mode-line-inactive :box "#e6e6e6"))
 
 (config "User Experience"
- ;; startup.el
- (setopt
+ (custom 'emacs
+  ;; startup.el
   inhibit-startup-screen t
   inhibit-startup-message t
   inhibit-startup-buffer-menu t
@@ -107,7 +97,7 @@
   initial-scratch-message nil
   initial-major-mode 'fundamental-mode)
 
- (setopt
+ (custom 'emacs
   ;; Avoid graphical dialog boxes
   use-dialog-box nil
   ;; Respond to yes/no questions using Y/N
@@ -117,14 +107,13 @@
  (fset 'display-startup-echo-area-message 'ignore))
 
 (config "Native Compilation"
- (after 'comp
-  (setopt
-   ;; Silence native compilation warnings.
-   native-comp-async-report-warnings-errors 'silent
-   native-comp-async-query-on-exit t)))
+ (custom 'comp
+  ;; Silence native compilation warnings.
+  native-comp-async-report-warnings-errors 'silent
+  native-comp-async-query-on-exit t))
 
 (config "Performance"
- (setopt
+ (custom 'emacs
   ;; This slows down normal operation.
   auto-window-vscroll nil
 
@@ -149,20 +138,18 @@
    (remove-hook 'find-file-hook #'vc-refresh-state))))
 
 (config "Packages"
- (after 'url-vars
-  (setopt
-   ;; Use this when unsetting any proxies for localhost.
-   ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
-   url-privacy-level 'paranoid))
+ (custom 'url-vars
+  ;; Use this when unsetting any proxies for localhost.
+  ;; url-proxy-services '(("no_proxy" . "127.0.0.1"))
+  url-privacy-level 'paranoid)
+
+ (custom 'package
+  ;; Highest number gets priority (what is not mentioned has priority 0).
+  package-archive-priorities '(("gnu" . 3) ("melpa" . 2) ("nongnu" . 1))
+  package-native-compile t)
 
  (after 'package
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  (setopt
-   ;; Highest number gets priority (what is not mentioned has priority 0).
-   package-archive-priorities '(("gnu" . 3)
-                                ("melpa" . 2)
-                                ("nongnu" . 1))
-   package-native-compile t)))
+  (push '("melpa" . "https://melpa.org/packages/") package-archives)))
 
 (provide 'early-init)
 ;;; early-init.el ends here
