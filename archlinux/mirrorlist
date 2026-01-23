@@ -8,7 +8,6 @@
 # Retrieved:  2025-10-17 16:55:56 UTC
 # Last Check: 2025-10-17 16:07:25 UTC
 
-Server = https://at.arch.niranjan.co/$repo/os/$arch
 Server = https://de.arch.mirror.kescher.at/$repo/os/$arch
 Server = https://nl.arch.niranjan.co/$repo/os/$arch
 Server = https://al.arch.niranjan.co/$repo/os/$arch
