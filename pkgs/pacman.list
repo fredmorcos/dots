@@ -305,8 +305,6 @@ python-rjsmin
 python-ruamel-yaml
 python-service-identity
 python-setuptools-rust
-python-symengine
-python-sympy
 python-trio
 python-typogrify
 python-ukkonen
