@@ -30,19 +30,6 @@
  "Set FACE properties to PROPS."
  `(custom-set-faces '(,face ((t ,@props)))))
 
-;;; Lazy Loading
-
-(defalias 'after #'with-eval-after-load)
-
-(defmacro autoloads (pkg &rest funcs)
- "Create autoloads for FUNCS from PKG."
- `(progn
-   ,@(mapcar #'(lambda (func)
-                `(progn
-                  (autoload ,func ,pkg)
-                  (eval-when-compile (declare-function ,func ,pkg))))
-      funcs)))
-
 ;; Declarations
 
 (defmacro declvars (&rest vars)
@@ -56,6 +43,19 @@
  "Declare FUNC from PKG."
  `(eval-when-compile
    (declare-function ,func ,pkg)))
+
+;;; Lazy Loading
+
+(defalias 'after #'with-eval-after-load)
+
+(defmacro autoloads (pkg int &rest funcs)
+ "Create autoloads for INT (interactive) FUNCS from PKG."
+ `(progn
+   ,@(mapcar #'(lambda (func)
+                `(progn
+                  (autoload ,func (symbol-name ,pkg) nil ,int)
+                  (declfunc ,func ,pkg)))
+      funcs)))
 
 ;;; Packages
 
@@ -79,23 +79,6 @@
  (after 'package
   (declvars package-selected-packages)
   (add-to-list 'package-selected-packages pkg)))
-
-;;; Buffers and Windows
-
-;; (defmacro make-buffer-name (name)
-;;  "Create a buffer NAME's regular expression."
-;;  `(rx bos ,name (0+ nonl) eos))
-
-;; (defmacro window (name &rest constraints)
-;;  "Apply CONSTRAINTS to buffer window that matches NAME."
-;;  (list 'after ''window
-;;   (list 'push
-
-;;    (append (list (list 'make-buffer-name name)) constraints)
-
-;;    'display-buffer-alist)))
-
-;; (window "*Flycheck errors*" (dedicated . t) (window-height . 0.2))
 
 ;; Hooks.
 (defmacro hook-globals (hook &rest funcs)

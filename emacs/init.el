@@ -10,8 +10,7 @@
  (defvar *init/completion-system* :corfu "Which completion system to use."))
 
 (config "Quality of Life"
- (autoloads
-  "qol"
+ (autoloads 'qol nil
   'qol/insert-pair
   'qol/insert-pair-curly
   'qol/insert-pair-parens
@@ -24,7 +23,7 @@
   'qol/replace-escapes))
 
 (config "Mode Local Variables"
- (autoloads "mode-local" 'setq-mode-local))
+ (autoloads 'mode-local nil 'setq-mode-local))
 
 (config "Recentering Advice"
  (eval-and-compile
@@ -114,11 +113,70 @@
 
 (config "Window Movement and Management"
  (windmove-default-keybindings)
- (windmove-delete-default-keybindings))
+ (windmove-delete-default-keybindings)
 
-(config "Buffer Movement"
+ (autoloads 'winner t
+  'winner-undo
+  'winner-redo)
+
+ (declvars winner-mode-map)
+
+ (after 'winner
+  (unbind-key "C-c <left>" winner-mode-map)
+  (unbind-key "C-c <right>" winner-mode-map)
+  (bind-key "C-x w u" #'winner-undo winner-mode-map)
+  (bind-key "C-x w r" #'winner-redo winner-mode-map))
+
+ (winner-mode)
+
+ (custom 'window
+  switch-to-buffer-in-dedicated-window 'pop
+  ;; switch-to-buffer-obey-display-actions t
+  split-height-threshold 160
+  split-width-threshold 130
+  even-window-sizes 'width-only
+  ;; Skip *SPECIALS* when switching buffers.
+  switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
+
+ (after 'window
+  (advice-add 'split-window-below :after #'init/recenter)
+
+  (push `(,(rx bos "*Help*" (0+ nonl) eos)
+          (display-buffer-reuse-mode-window display-buffer-in-side-window)
+          (side . right)
+          (dedicated . nil)
+          (window-width . 80))
+   display-buffer-alist))
+
+ (bind-key "<f12>" #'delete-other-windows)
+
+ (custom 'emacs resize-mini-windows t))
+
+(config "Buffer Management"
  (packages 'buffer-move)
- (bind-key "C-x m" #'buf-move))
+ (bind-key "C-x m" #'buf-move)
+
+ (after 'ibuffer
+  (bind-keys :map 'ibuffer-mode-map
+   ("C-p" . casual-ibuffer-tmenu)
+   ("F"   . casual-ibuffer-filter-tmenu)
+   ("s"   . casual-ibuffer-sortby-tmenu)))
+
+ (defun init/disable-popup (regexp)
+  "Stop buffers that match REGEXP from popping up."
+  (push `(,regexp
+          (display-buffer-no-window)
+          (allow-no-window . t))
+   display-buffer-alist))
+
+ (after 'window
+  (init/disable-popup (rx bos "*Compile-Log*" (0+ nonl) eos))
+  (init/disable-popup (rx bos "*Native-compile-Log*" (0+ nonl) eos))
+  (init/disable-popup (rx bos "*Async-native-compile-log*" (0+ nonl) eos))
+  (init/disable-popup (rx bos "*Warnings*" (0+ nonl) eos))
+  (advice-add 'previous-buffer :after #'init/recenter)
+  (advice-add 'next-buffer :after #'init/recenter)
+  (advice-add 'switch-to-buffer :after #'init/recenter)))
 
 (config "Backups and Autosaves"
  (custom 'files
@@ -207,13 +265,6 @@
   ctrlf-auto-recenter t)
 
  (ctrlf-mode))
-
-(config "Buffer Management"
- (after 'ibuffer
-  (bind-keys :map 'ibuffer-mode-map
-   ("C-p" . casual-ibuffer-tmenu)
-   ("F"   . casual-ibuffer-filter-tmenu)
-   ("s"   . casual-ibuffer-sortby-tmenu))))
 
 (config "Regular Expressions"
  (after 're-builder
@@ -482,7 +533,7 @@
  (declvars flycheck-mode)
  (declfunc flycheck-next-error 'flycheck)
  (declfunc flycheck-previous-error 'flycheck)
- (autoloads "flycheck"
+ (autoloads 'flycheck nil
   'flycheck-overlay-errors-at
   'flycheck-error-level
   'flycheck-error-message
@@ -533,124 +584,49 @@
   flycheck-idle-buffer-switch-delay 0.1
   flycheck-display-errors-delay 0.1))
 
-;;; History and save-hist
+(config "History"
+ (custom 'emacs
+  history-delete-duplicates t
+  history-length 150)
 
-(use-package emacs
- :ensure nil
- :defer t
+ (custom 'saveplace
+  save-place-abbreviate-file-names t)
 
- :custom
- (history-delete-duplicates t)
- (history-length 150))
-
-(use-package saveplace
- :ensure nil
- :defer t
-
- :custom
- (save-place-abbreviate-file-names t)
-
- :preface
  (defun init/activate-save-place-mode (&rest _)
-  (unless save-place-mode (save-place-mode))))
+  (unless save-place-mode (save-place-mode)))
 
-(use-package files
- :ensure nil
- :defer t
+ (after 'files
+  (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
 
- :config
- (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
+ (savehist-mode)
 
-(use-package savehist
- :ensure nil
- :defer t
-
- :init
- (savehist-mode))
-
-(use-package recentf
- :ensure nil
- :defer t
- :commands (recentf-load-list)
- :config (recentf-mode)
-
- :preface
- (defvar init/recentf-loaded-p nil)
- (defun init/recentf-load-list (&rest _)
-  (unless init/recentf-loaded-p
-   (recentf-load-list)
-   (setq init/recentf-loaded-p t)))
-
- :custom
- (recentf-max-menu-items 50)
- (recentf-max-saved-items 100)
- (recentf-exclude `(,(no-littering-expand-var-file-name "")
+ (custom 'recentf
+  recentf-max-menu-items 50
+  recentf-max-saved-items 100
+  recentf-exclude `(,(no-littering-expand-var-file-name "")
                     ,(no-littering-expand-etc-file-name "")
                     ,@native-comp-eln-load-path
                     "~/.cache"
                     "~/.config/emacs/var"
                     "~/.config/emacs/elpa"
                     "/usr/share/emacs"
-                    "/run/media")))
+                    "/run/media"))
+
+ (autoloads 'recentf nil 'recentf-load-list)
+
+ (defvar init/recentf-loaded-p nil)
+ (defun init/recentf-load-list (&rest _)
+  (unless init/recentf-loaded-p
+   (recentf-load-list)
+   (setq init/recentf-loaded-p t)))
+
+ (after 'consult
+  (advice-add #'consult-buffer :before #'init/recentf-load-list))
+
+ (after 'recentf
+  (recentf-mode)))
 
 ;;; Windows
-
-(use-package winner
- :ensure nil
- :defer t
-
- :init
- (winner-mode))
-
-(use-package window
- :ensure nil
- :defer t
-
- :custom
- (switch-to-buffer-in-dedicated-window 'pop)
- ;; (switch-to-buffer-obey-display-actions t)
- (split-height-threshold 160)
- (split-width-threshold 130)
- (even-window-sizes 'width-only)
- ;; Skip *SPECIALS* when switching buffers.
- (switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
-
- :preface
- (defun init/disable-popup (regexp)
-   "Stop buffers that match REGEXP from popping up."
-   (push `(,regexp
-            (display-buffer-no-window)
-            (allow-no-window . t))
-     display-buffer-alist))
-
- :config
- (init/disable-popup (rx bos "*Compile-Log*" (0+ nonl) eos))
- (init/disable-popup (rx bos "*Native-compile-Log*" (0+ nonl) eos))
- (init/disable-popup (rx bos "*Async-native-compile-log*" (0+ nonl) eos))
- (init/disable-popup (rx bos "*Warnings*" (0+ nonl) eos))
- (advice-add 'previous-buffer :after #'init/recenter)
- (advice-add 'next-buffer :after #'init/recenter)
- (advice-add 'split-window-below :after #'init/recenter)
-  (advice-add 'switch-to-buffer :after #'init/recenter)
-
-  (push `(,(rx bos "*Help*" (0+ nonl) eos)
-           (display-buffer-reuse-mode-window display-buffer-in-side-window)
-           (side . right)
-           (dedicated . nil)
-           (window-width . 80))
-    display-buffer-alist)
-
- :bind
- (("<f12>"       . delete-other-windows)
-  ("M-S-<right>" . next-buffer)
-  ("M-S-<left>"  . previous-buffer)))
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :custom
- (resize-mini-windows t))
 
 ;;; General Programming
 
@@ -703,7 +679,7 @@
  (electric-pair-preserve-balance nil))
 
 (config "ElDoc"
- (packages 'eldoc-mouse)
+ ;; (packages 'eldoc-mouse)
 
  (after 'eldoc
   (diminish 'eldoc-mode "Ed")
@@ -712,20 +688,22 @@
    eldoc-idle-delay 0.1)
   ;; (remove-hook 'eldoc-display-functions #'eldoc-display-in-echo-area)
 
-  (hook-globals 'eldoc-mode-hook #'eldoc-mouse-mode))
+  ;; (hook-globals 'eldoc-mode-hook #'eldoc-mouse-mode))
+  )
 
- (after 'eldoc-mouse
-  (diminish 'eldoc-mouse-mode "Em")
-  (declvars eldoc-mouse-mode-map)
-  (bind-keys
-   :map eldoc-mouse-mode-map
-   ("<f1> <f1>" . eldoc-mouse-pop-doc-at-cursor))
+ ;; (after 'eldoc-mouse
+ ;;  (diminish 'eldoc-mouse-mode "Em")
+ ;;  (declvars eldoc-mouse-mode-map)
+ ;;  (bind-keys
+ ;;   :map eldoc-mouse-mode-map
+ ;;   ("<f1> <f1>" . eldoc-mouse-pop-doc-at-cursor))
 
-  (hook-progn 'eldoc-mouse-mode-hook
-   (after 'lsp-mode
-    (declvars eldoc-mouse-eldoc-documentation-functions)
-    (autoloads "lsp-mode" 'lsp-eldoc-function)
-    (add-hook 'eldoc-mouse-eldoc-documentation-functions #'lsp-eldoc-function)))))
+ ;;  (hook-progn 'eldoc-mouse-mode-hook
+ ;;   (after 'lsp-mode
+ ;;    (declvars eldoc-mouse-eldoc-documentation-functions)
+ ;;    (autoloads 'lsp-mode nil 'lsp-eldoc-function)
+ ;;    (add-hook 'eldoc-mouse-eldoc-documentation-functions #'lsp-eldoc-function)))))
+ )
 
 (use-package subword
  :ensure nil
@@ -735,7 +713,6 @@
 (use-package display-fill-column-indicator
  :ensure nil
  :defer t
- :preface (packages 'display-fill-column-indicator)
  :after prog-mode
  :hook prog-mode-hook)
 
@@ -2364,8 +2341,7 @@
  (packages 'rust-mode)
  (packages 'lsp-mode)
 
- (autoloads
-  "lsp-rust"
+ (autoloads 'lsp-rust nil
   #'lsp-rust-analyzer-expand-macro
   #'lsp-rust-analyzer-join-lines)
 

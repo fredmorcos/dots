@@ -17,16 +17,16 @@
   use-package-hook-name-suffix nil
   use-package-always-defer t)
 
- (when (not (eq *init/use-package-statistics* :disabled))
+ (unless (eq *init/use-package-statistics* :disabled)
   (custom 'use-package-core
    use-package-compute-statistics t
    use-package-verbose t)))
 
 (config "Debugging and Profiling"
- (when  (not (eq *init/emacs-debugging* :disabled))
+ (unless (eq *init/emacs-debugging* :disabled)
   (custom 'emacs debug-on-error t))
 
- (when (not (eq *init/emacs-profiling* :disabled))
+ (unless (eq *init/emacs-profiling* :disabled)
   (hook 'after-init-hook 'emacs #'profiler-report 'profiler)
   (profiler-start 'cpu)))
 
@@ -75,8 +75,8 @@
  (custom 'frame
   blink-cursor-mode nil)
 
+ ;; bindings.el
  (custom 'emacs
-  ;; bindings.el
   column-number-indicator-zero-based nil
   mode-line-position-column-format '(" C%C")
   mode-line-compact 'long))
@@ -87,8 +87,8 @@
  (face mode-line-inactive :box "#e6e6e6"))
 
 (config "User Experience"
+ ;; startup.el
  (custom 'emacs
-  ;; startup.el
   inhibit-startup-screen t
   inhibit-startup-message t
   inhibit-startup-buffer-menu t
