@@ -524,7 +524,7 @@
  (packages 'flycheck 'consult-flycheck)
 
  (after 'window
-  (push `(,(buffer-rx "*Flycheck errors*")
+  (push `(,(rx bos "*Flycheck errors*" eos)
           (display-buffer-reuse-mode-window display-buffer-at-bottom)
           (dedicated . t)
           (window-height . 0.15))
