@@ -356,8 +356,7 @@
  (after 'consult
   (declfunc consult-narrow-help 'consult)
   (bind-keys :map 'consult-narrow-map
-   ("C-?" . consult-narrow-help))
-  (advice-add #'consult-buffer :before #'init/recentf-load-list))
+   ("C-?" . consult-narrow-help)))
 
  (custom 'consult
   consult-preview-key "M-."
@@ -474,7 +473,7 @@
  (packages 'flycheck 'consult-flycheck)
 
  (after 'window
-  (push `(,(rx bos "*Flycheck errors*" (0+ nonl) eos)
+  (push `(,(buffer-rx "*Flycheck errors*")
           (display-buffer-reuse-mode-window display-buffer-at-bottom)
           (dedicated . t)
           (window-height . 0.15))
