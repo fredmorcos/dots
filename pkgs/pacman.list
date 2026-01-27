@@ -1,4 +1,5 @@
 7zip
+actionlint
 alsa-firmware
 amd-ucode
 android-tools
@@ -159,7 +160,6 @@ libblockdev-lvm
 libblockdev-nvdimm
 libdvdcss
 libdwarf
-libgnome-keyring
 libmp4v2
 libmythes
 libnma
@@ -338,7 +338,6 @@ soundconverter
 sox
 starship
 strace
-subdl
 syncthing
 system-config-printer
 tcpdump
