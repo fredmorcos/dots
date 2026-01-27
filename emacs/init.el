@@ -85,8 +85,7 @@
 
  (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
 
- (after 'speedrect
-  (diminish 'speedrect-mode "Sr"))
+ (after 'speedrect (diminish 'speedrect-mode "Sr"))
  (speedrect-mode))
 
 (config "Filling Text"
@@ -231,7 +230,8 @@
  (after 'info
   (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))
 
- (after 'transient (setopt transient-default-level 7)))
+ (after 'transient (setopt transient-default-level 7))
+ (after 'woman (setopt woman-fill-column 100)))
 
 (config "User Interface"
  (packages 'nerd-icons)
@@ -270,7 +270,11 @@
  (after 'isearch
   (setopt
    isearch-allow-motion t
-   isearch-motion-changes-direction t))
+   isearch-motion-changes-direction t
+   isearch-lazy-count t
+   isearch-lazy-highlight t
+   lazy-count-prefix-format "(%s/%s) "
+   search-whitespace-regexp ".*?"))
 
  (bind-key "C-p" #'casual-isearch-tmenu)
 
@@ -334,8 +338,7 @@
  (bind-key "<mouse-5>" #'next-line))
 
 (config "Dynamic Expansion"
- (after 'abbrev
-  (diminish 'abbrev-mode "Ab"))
+ (after 'abbrev (diminish 'abbrev-mode "Ab"))
 
  (after 'dabbrev
   ;; Replace dabbrev-expand with hippie-expand
@@ -631,8 +634,7 @@
 
 (config "TOML"
  (packages 'toml-mode 'eldoc-toml)
- (after 'eldoc-toml
-  (diminish 'eldoc-toml))
+ (after 'eldoc-toml (diminish 'eldoc-toml))
  (after 'toml-mode
   (add-hook 'toml-mode-hook #'eldoc-toml-mode)))
 
@@ -698,7 +700,7 @@
   (add-hook 'css-mode-hook #'init/css-setup-comments)))
 
 (config "General Programming"
- (packages 'jinx)
+ (packages 'jinx 'devdocs 'editorconfig)
 
  (after 'eldoc
   (diminish 'eldoc-mode "Ed")
@@ -708,9 +710,33 @@
    eldoc-documentation-strategy 'eldoc-documentation-compose
    eldoc-idle-delay 0.1))
 
+ (after 'editorconfig (diminish 'editorconfig "Ec"))
+
  (after 'prog-mode
   (add-hook 'prog-mode-hook #'eldoc-mode)
-  (add-hook 'prog-mode-hook #'jinx-mode)))
+  (add-hook 'prog-mode-hook #'jinx-mode)
+  (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode)
+  (add-hook 'prog-mode-hook #'flycheck-mode)
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+  (add-hook 'prog-mode-hook #'whitespace-mode)
+  (add-hook 'prog-mode-hook #'editorconfig-mode)
+  (bind-key "C-h D" #'devdocs-lookup))
+
+ (declvar devdocs-current-docs)
+ (declvar python-mode)
+ (declvar rust-mode)
+ (declvar c-mode)
+ (declvar dockerfile-mode)
+ (declvar emacs-lisp-mode)
+ (declvar makefile-mode)
+ (setq-mode-local python-mode devdocs-current-docs '("python~3.13"))
+ (setq-mode-local rust-mode devdocs-current-docs "rust")
+ (setq-mode-local c-mode devdocs-current-docs "c")
+ (setq-mode-local dockerfile-mode devdocs-current-docs "docker")
+ (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp")
+ (setq-mode-local makefile-mode devdocs-current-docs "gnu_make"))
 
 ;;; General Programming
 
@@ -734,26 +760,6 @@
 ;;  :hook
 ;;  (prog-mode-hook . init/setup-prog-capfs))
 
-(use-package devdocs
- :ensure t
- :defer t
- :preface (packages 'devdocs)
-
- :bind
- ("C-h D" . devdocs-lookup)
-
- :preface
- (defmacro init/devdocs-set (mode doc)
-  `(setq-mode-local ,mode devdocs-current-docs '(,doc)))
-
- :config
- (init/devdocs-set python-mode "python~3.13")
- (init/devdocs-set rust-mode "rust")
- (init/devdocs-set c-mode "c")
- (init/devdocs-set dockerfile-mode "docker")
- (init/devdocs-set emacs-lisp-mode "elisp")
- (init/devdocs-set makefile-mode "gnu_make"))
-
 (use-package elec-pair
  :ensure nil
  :defer t
@@ -766,18 +772,6 @@
  :ensure nil
  :defer t
  :diminish "Sw")
-
-(use-package display-fill-column-indicator
- :ensure nil
- :defer t
- :after prog-mode
- :hook prog-mode-hook)
-
-(use-package goto-addr
- :ensure nil
- :defer t
- :after prog-mode
- :hook (prog-mode-hook . goto-address-prog-mode))
 
 (use-package diff-hl
  :ensure t
@@ -792,13 +786,6 @@
  :after prog-mode
  :hook (prog-mode-hook . show-paren-mode))
 
-(use-package flycheck
- :ensure t
- :defer t
- :preface (packages 'flycheck)
- :after prog-mode
- :hook prog-mode-hook)
-
 (use-package yasnippet
  :ensure t
  :defer t
@@ -812,23 +799,7 @@
  :after prog-mode
  :hook prog-mode-hook)
 
-(use-package hl-line
- :ensure nil
- :defer t
- :after prog-mode
- :hook prog-mode-hook)
-
-(use-package bug-reference
- :ensure nil
- :defer t
- :after prog-mode
- :hook (prog-mode-hook . bug-reference-prog-mode))
-
-(use-package whitespace
- :ensure nil
- :defer t
- :after prog-mode
- :hook prog-mode-hook)
+;; TODO enable hl-line-mode & display-line-numbers-mode & whitespace-mode in yaml-mode toml-mode json-mode hledger-mode
 
 (use-package deadgrep
  :ensure t
@@ -884,12 +855,6 @@
  :custom
  (xref-show-xrefs-function #'consult-xref)
  (xref-show-definitions-function #'consult-xref))
-
-(use-package editorconfig
- :ensure t
- :defer t
- :diminish "Ec"
- :preface (packages 'editorconfig))
 
 ;;; Configuration Files
 
@@ -1125,14 +1090,6 @@
 
 ;;; General Features
 
-(use-package speedrect
- :ensure t
- :defer t
- :preface (packages 'speedrect)
-
- :init
- (speedrect-mode))
-
 (use-package symbol-overlay
  :ensure t
  :defer t
@@ -1186,13 +1143,6 @@
  :custom
  (dictionary-server "dict.org")
  (dictionary-use-single-buffer t))
-
-(use-package woman
- :ensure nil
- :defer t
-
- :custom
- (woman-fill-column 100))
 
 ;;; Whitespace
 
@@ -1412,18 +1362,6 @@
  :preface (packages 'nerd-icons-dired)
  :diminish
  :hook (dired-mode-hook . nerd-icons-dired-mode))
-
-;;; Search
-
-(use-package isearch
- :ensure nil
- :defer t
-
- :custom
- (isearch-lazy-count t)
- (isearch-lazy-highlight t)
- (lazy-count-prefix-format "(%s/%s) ")
- (search-whitespace-regexp ".*?"))
 
 ;;; JSON
 
