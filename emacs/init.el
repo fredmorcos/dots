@@ -585,7 +585,27 @@
 
  (after 'recentf (recentf-mode)))
 
+(config "Session Management"
+ (packages 'easysession)
+ (after 'easysession (setopt easysession-save-mode-lighter-show-session-name t))
+ (bind-key "C-c u" #'easysession-save)
+ (bind-key "C-c U" #'easysession-load))
+
+(config "Spell Checking"
+ (packages 'jinx)
+ (after 'jinx
+  (diminish 'jinx-mode "Jx")
+  (bind-key "M-$"   #'jinx-correct   'jinx-mode-map)
+  (bind-key "C-M-$" #'jinx-languages 'jinx-mode-map)))
+
+(config "Text"
+ (packages 'jinx)
+ (after 'text-mode
+  (add-hook 'text-mode-hook #'jinx-mode)))
+
 (config "General Programming"
+ (packages 'jinx)
+
  (after 'eldoc
   (diminish 'eldoc-mode "Ed")
   (after 'flycheck (eldoc-add-command-completions "flycheck-"))
@@ -595,7 +615,8 @@
    eldoc-idle-delay 0.1))
 
  (after 'prog-mode
-  (add-hook 'prog-mode-hook #'eldoc-mode)))
+  (add-hook 'prog-mode-hook #'eldoc-mode)
+  (add-hook 'prog-mode-hook #'jinx-mode)))
 
 ;;; General Programming
 
@@ -708,13 +729,6 @@
  :defer t
  :after prog-mode
  :hook (prog-mode-hook . bug-reference-prog-mode))
-
-(use-package jinx
- :ensure t
- :defer t
- :preface (packages 'jinx)
- :after prog-mode
- :hook prog-mode-hook)
 
 (use-package whitespace
  :ensure nil
@@ -1305,11 +1319,6 @@
  :diminish
  :hook (dired-mode-hook . nerd-icons-dired-mode))
 
-(config "Text"
-  (packages 'jinx)
-  (after 'text-mode
-    (add-hook 'text-mode-hook #'jinx-mode)))
-
 ;;; Search
 
 (use-package isearch
@@ -1407,19 +1416,6 @@
  :diminish "Ts"
  :after json-mode
  :hook json-mode-hook)
-
-;;; Spell Checking
-
-(use-package jinx
- :ensure t
- :defer t
- :preface (packages 'jinx)
- :diminish "Jx"
-
- :bind
- (:map jinx-mode-map
-  ("M-$"   . jinx-correct)
-  ("C-M-$" . jinx-languages)))
 
 ;;; Emacs Tools
 
@@ -2669,18 +2665,6 @@
 
  :config
  (treemacs-load-theme "nerd-icons"))
-
-;;; Sessions
-
-(use-package easysession
- :ensure t
- :defer t
- :preface (packages 'easysession)
- :custom
- (easysession-save-mode-lighter-show-session-name t)
- :bind
- ("C-c u" . easysession-save)
- ("C-c U" . easysession-switch-to))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
