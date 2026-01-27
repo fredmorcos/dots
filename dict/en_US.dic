@@ -16,3 +16,5 @@ melpa
 nongnu
 autoloads
 flycheck
+archlinux
+PKGBUILDs
