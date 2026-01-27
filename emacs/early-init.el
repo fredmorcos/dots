@@ -131,7 +131,13 @@
    bidi-inhibit-bpa t
 
    ;; Only use Git as version control.
-   vc-handled-backends '(Git)))
+   vc-handled-backends '(Git)
+
+   ;; Increase process output read buffer.
+   read-process-output-max (* 10 1024 1024)))
+
+ ;; Improve LSP performance.
+ (setenv "LSP_USE_PLISTS" "true")
 
  (after 'term/pgtk-win
   ;; Disable input contexts (for Windows).
