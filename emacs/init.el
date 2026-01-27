@@ -84,7 +84,6 @@
   (add-hook 'before-save-hook #'delete-trailing-whitespace))
 
  (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
- (after 'emacs (setopt undo-limit (* 1024 1024)))
 
  (after 'speedrect
   (diminish 'speedrect-mode "Sr"))
@@ -108,7 +107,8 @@
  (packages 'vundo)
  (bind-key "C-x u" #'vundo)
  (after 'vundo
-  (setopt vundo-glyph-alist vundo-unicode-symbols)))
+  (setopt vundo-glyph-alist vundo-unicode-symbols))
+ (after 'emacs (setopt undo-limit (* 1024 1024))))
 
 (config "Kill Ring"
  (after 'simple (setopt save-interprogram-paste-before-kill t)))
