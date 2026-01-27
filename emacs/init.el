@@ -10,20 +10,19 @@
  (defvar *init/completion-system* :corfu "Which completion system to use."))
 
 (config "Quality of Life"
- (autoloads 'qol nil
-  'qol/insert-pair
-  'qol/insert-pair-curly
-  'qol/insert-pair-parens
-  'qol/insert-pair-quote
-  'qol/insert-pair-double-quotes
-  'qol/insert-pair-backtick
-  'qol/generate-password
-  'qol/insert-buffer-name
-  'qol/get-trimmed-line-string
-  'qol/replace-escapes))
+ (autoload 'qol/insert-pair               "qol")
+ (autoload 'qol/insert-pair-curly         "qol")
+ (autoload 'qol/insert-pair-parens        "qol")
+ (autoload 'qol/insert-pair-quote         "qol")
+ (autoload 'qol/insert-pair-double-quotes "qol")
+ (autoload 'qol/insert-pair-backtick      "qol")
+ (autoload 'qol/get-trimmed-line-string   "qol")
+ (autoload 'qol/insert-buffer-name        "qol" nil t)
+ (autoload 'qol/replace-escapes           "qol" nil t)
+ (autoload 'qol/generate-password         "qol" nil t))
 
 (config "Mode Local Variables"
- (autoloads 'mode-local nil 'setq-mode-local))
+ (autoload 'setq-mode-local "mode-local"))
 
 (config "Recentering Advice"
  (eval-and-compile
@@ -80,12 +79,12 @@
    require-final-newline 'visit-save
    ;; File contents.
    coding-system-for-read 'utf-8-unix
-   coding-system-for-write 'utf-8-unix))
+   coding-system-for-write 'utf-8-unix)
+
+  (add-hook 'before-save-hook #'delete-trailing-whitespace))
 
  (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
- (after 'emacs (setopt undo-limit (* 1024 1024)))
-
- (hook 'before-save-hook 'files #'delete-trailing-whitespace 'simple))
+ (after 'emacs (setopt undo-limit (* 1024 1024))))
 
 (config "Filling Text"
  (packages 'unfill)
@@ -116,17 +115,14 @@
  (windmove-default-keybindings)
  (windmove-delete-default-keybindings)
 
- (autoloads 'winner t
-  'winner-undo
-  'winner-redo)
-
- (declvars winner-mode-map)
+ (autoload 'winner-undo "winner" nil t)
+ (autoload 'winner-redo "winner" nil t)
 
  (after 'winner
-  (unbind-key "C-c <left>" winner-mode-map)
-  (unbind-key "C-c <right>" winner-mode-map)
-  (bind-key "C-x w u" #'winner-undo winner-mode-map)
-  (bind-key "C-x w r" #'winner-redo winner-mode-map))
+  (unbind-key "C-c <left>" 'winner-mode-map)
+  (unbind-key "C-c <right>" 'winner-mode-map)
+  (bind-key "C-x w u" #'winner-undo 'winner-mode-map)
+  (bind-key "C-x w r" #'winner-redo 'winner-mode-map))
 
  (winner-mode)
 
@@ -352,7 +348,6 @@
                                       try-complete-lisp-symbol-partially))))
 
 (config "Minibuffer"
-
  (after 'minibuffer
   (delete 'tags-completion-at-point-function completion-at-point-functions)
   (delete 'emacs22 completion-styles)
@@ -379,9 +374,9 @@
   (setopt
    completion-ignore-case t
    read-buffer-completion-ignore-case t
-   enable-recursive-minibuffers t))
+   enable-recursive-minibuffers t)
 
- (hook 'minibuffer-setup-hook 'emacs #'cursor-intangible-mode 'cursor-sensor))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)))
 
 (config "Minibuffer Completion"
  (packages 'vertico 'consult)
@@ -401,16 +396,8 @@
 
  (vertico-mode)
 
- (hook
-  'rfn-eshadow-update-overlay-hook 'rfn-eshadow
-  #'vertico-directory-tidy 'vertico-directory)
-
- (defun init/consult-grep-or-git-grep ()
-  "Run grep in non-project buffers and git-grep in project buffers."
-  (interactive)
-  (if (and (fboundp 'projectile-project-root) (projectile-project-root))
-   (consult-git-grep)
-   (consult-grep)))
+ (after 'rfn-eshadow
+  (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy))
 
  (after 'window
   (bind-key [remap switch-to-buffer] #'consult-buffer))
@@ -419,12 +406,17 @@
   (bind-key [remap imenu] #'consult-imenu))
 
  (after 'consult
-  (declfunc consult-narrow-help 'consult)
-  (bind-keys :map 'consult-narrow-map
-   ("C-?" . consult-narrow-help))
+  (bind-key "C-?" 'consult-narrow-help 'consult-narrow-map)
   (setopt
    consult-preview-key "M-."
    consult-project-function (lambda (_) (projectile-project-root))))
+
+ (defun init/consult-grep-or-git-grep ()
+  "Run grep in non-project buffers and git-grep in project buffers."
+  (interactive)
+  (if (and (fboundp 'projectile-project-root) (projectile-project-root))
+   (consult-git-grep)
+   (consult-grep)))
 
  (bind-key "M-Y" #'consult-yank-pop)
  (bind-key "M-g I" #'consult-imenu-multi)
@@ -465,7 +457,7 @@
  (config "Corfu"
   ;; Show icons in corfu popups.
   (after 'corfu
-   (declvars corfu-margin-formatters)
+   (declvar corfu-margin-formatters)
    (push #'nerd-icons-corfu-formatter corfu-margin-formatters)
    (setopt
     corfu-preview-current nil
@@ -474,21 +466,21 @@
     ;; corfu-quit-no-match t
     corfu-scroll-margin 5
     ;; corfu-max-width 50
-    corfu-min-width 50))
+    corfu-min-width 50)
 
-  (hook 'corfu-mode-hook 'corfu #'corfu-popupinfo-mode 'corfu-popupinfo)
-  (hook 'corfu-mode-hook 'corfu #'corfu-history-mode 'corfu-history)
+   (add-hook 'corfu-mode-hook #'corfu-popupinfo-mode)
+   (add-hook 'corfu-mode-hook #'corfu-history-mode))
 
   (after 'corfu-popupinfo (setopt corfu-popupinfo-delay '(1.25 . 0.5)))
 
   (after 'corfu-history
    (after 'savehist
-    (declvars savehist-additional-variables)
+    (defvar savehist-additional-variables)
     (push 'corfu-history savehist-additional-variables))))
 
  (config "Company"
   (defun init/company-is-active (&rest _)
-   (declfunc company--active-p 'company)
+   (declfun company--active-p 'company)
    (or (company--active-p) (bound-and-true-p company-backend)))
 
   (after 'company
@@ -504,19 +496,16 @@
     company-tooltip-minimum 10
     company-tooltip-flip-when-above t
     company-tooltip-annotation-padding 3
-    company-tooltip-width-grow-only t))
-
-  (hook 'company-mode-hook 'company #'company-posframe-mode 'company-posframe)
+    company-tooltip-width-grow-only t)
+   (add-hook 'company-mode-hook #'company-posframe-mode))
 
   (after 'company-posframe
    (diminish 'company-posframe-mode)
-
-   (declvars company-posframe-show-params company-posframe-quickhelp-show-params)
+   (declvar company-posframe-show-params)
+   (declvar company-posframe-quickhelp-show-params)
    (nconc company-posframe-show-params '(:border-width 1))
    (nconc company-posframe-quickhelp-show-params '(:border-width 1))
-
-   (setopt
-    company-posframe-quickhelp-x-offset 2)))
+   (setopt company-posframe-quickhelp-x-offset 2)))
 
  (config "Cape"
   (bind-key "C-c p" #'cape-prefix-map)
@@ -541,59 +530,19 @@
           (window-height . 0.15))
    display-buffer-alist))
 
- (declvars flycheck-mode)
- (declfunc flycheck-next-error 'flycheck)
- (declfunc flycheck-previous-error 'flycheck)
- (autoloads 'flycheck nil
-  'flycheck-overlay-errors-at
-  'flycheck-error-level
-  'flycheck-error-message
-  'flycheck-error-id
-  'flycheck-error-group)
-
- (defun init/flycheck-eldoc (callback &rest _ignored)
-  "Print flycheck messages at point by calling CALLBACK."
-  (when-let ((flycheck-errors (and flycheck-mode (flycheck-overlay-errors-at (point)))))
-   (mapc
-    (lambda (err)
-     (funcall callback
-      (format "%s: %s"
-       (let ((level (flycheck-error-level err)))
-        (pcase level
-         ('info (propertize "I" 'face 'flycheck-error-list-info))
-         ('error (propertize "E" 'face 'flycheck-error-list-error))
-         ('warning (propertize "W" 'face 'flycheck-error-list-warning))
-         (_ level)))
-       (flycheck-error-message err))
-      :thing (or
-              (flycheck-error-id err)
-              (flycheck-error-group err))
-      :face 'font-lock-doc-face))
-    flycheck-errors)))
-
- (defun init/setup-flycheck-eldoc ()
-  (after 'eldoc
-   (hook-local 'eldoc-documentation-functions #'init/flycheck-eldoc)))
-
  (after 'flycheck
-  (bind-keys :map 'flycheck-mode-map
-   ("C-c ! L" . consult-flycheck)
-   ("M-n" . flycheck-next-error)
-   ("M-p" . flycheck-previous-error))
-
+  (bind-key "C-c ! L" #'consult-flycheck 'flycheck-mode-map)
+  (bind-key "M-n" 'flycheck-next-error 'flycheck-mode-map)
+  (bind-key "M-p" 'flycheck-previous-error 'flycheck-mode-map)
   (advice-add 'flycheck-next-error :after #'init/recenter)
   (advice-add 'flycheck-previous-error :after #'init/recenter)
   (advice-add 'flycheck-error-list-goto-error :after #'init/recenter)
 
   (setopt
-   ;; flycheck-display-errors-function nil
-   ;; flycheck-help-echo-function nil
+   flycheck-help-echo-function nil
    flycheck-checker-error-threshold nil
    flycheck-mode-line-prefix "Fc"
-   flycheck-check-syntax-automatically '(idle-change mode-enabled)
-   flycheck-idle-change-delay 0.1
-   flycheck-idle-buffer-switch-delay 0.1
-   flycheck-display-errors-delay 0.1)))
+   flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line))))
 
 (config "History"
  (after 'emacs
@@ -624,8 +573,7 @@
                      "/usr/share/emacs"
                      "/run/media")))
 
- (autoloads 'recentf nil 'recentf-load-list)
-
+ (autoload 'recentf-load-list "recentf")
  (defvar init/recentf-loaded-p nil)
  (defun init/recentf-load-list (&rest _)
   (unless init/recentf-loaded-p
@@ -646,7 +594,8 @@
    eldoc-documentation-strategy 'eldoc-documentation-compose
    eldoc-idle-delay 0.1))
 
- (hook 'prog-mode-hook 'prog-mode #'eldoc-mode 'eldoc))
+ (after 'prog-mode
+  (add-hook 'prog-mode-hook #'eldoc-mode)))
 
 ;;; General Programming
 
@@ -1211,12 +1160,7 @@
 
  :hook
  (emacs-lisp-mode-hook . init/setup-elisp-capfs)
- (emacs-lisp-mode-hook . init/buffer-completion-mode)
-
- :config
- (hook-progn 'emacs-lisp-mode-hook
-  (after 'flycheck
-   (hook-local 'flycheck-mode-hook #'init/setup-flycheck-eldoc))))
+ (emacs-lisp-mode-hook . init/buffer-completion-mode))
 
 (use-package elisp-mode
  :ensure nil
@@ -2320,9 +2264,8 @@
  (packages 'rust-mode)
  (packages 'lsp-mode)
 
- (autoloads 'lsp-rust nil
-  #'lsp-rust-analyzer-expand-macro
-  #'lsp-rust-analyzer-join-lines)
+ (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
+ (autoload 'lsp-rust-analyzer-join-lines   "lsp-rust")
 
  (after 'rust-mode
   (setopt
@@ -2338,7 +2281,7 @@
    #'lsp
    #'subword-mode)
 
-  (declvars rust-mode-map)
+  (declvar rust-mode-map)
   (bind-keys
    :map rust-mode-map
    ("<f5>" . rust-dbg-wrap-or-unwrap)

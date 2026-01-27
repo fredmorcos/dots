@@ -8,16 +8,6 @@
  "Create a config section with NAME and BODY."
  `(progn ,@body))
 
-;;; Hooks
-
-(defmacro hook (hook-var hook-pkg func func-pkg &optional depth local)
- "Add a hook FUNC of FUNC-PKG to HOOK-VAR in HOOK-PKG."
- `(progn
-   (eval-and-compile
-    (autoload ,func (symbol-name ,func-pkg)))
-   (after ,hook-pkg
-    (add-hook ,hook-var ,func ,depth ,local))))
-
 ;;; Faces.
 
 (defmacro face (face &rest props)
@@ -26,30 +16,17 @@
 
 ;; Declarations
 
-(defmacro declvars (&rest vars)
- "Declare the variables VARS."
- `(eval-when-compile
-   ,@(mapcar #'(lambda (var)
-                `(defvar ,var))
-      vars)))
+(defmacro declvar (var)
+ "Declare the variable VAR."
+ `(eval-when-compile (defvar ,var)))
 
-(defmacro declfunc (func pkg)
+(defmacro declfun (func pkg)
  "Declare FUNC from PKG."
- `(eval-when-compile
-   (declare-function ,func ,pkg)))
+ `(eval-when-compile (declare-function ,func ,pkg)))
 
 ;;; Lazy Loading
 
 (defalias 'after #'with-eval-after-load)
-
-(defmacro autoloads (pkg int &rest funcs)
- "Create autoloads for INT (interactive) FUNCS from PKG."
- `(progn
-   ,@(mapcar #'(lambda (func)
-                `(progn
-                  (autoload ,func (symbol-name ,pkg) nil ,int)
-                  (declfunc ,func ,pkg)))
-      funcs)))
 
 ;;; Packages
 
@@ -66,12 +43,12 @@
  (when (not (package-installed-p pkg))
   (when (not *init/packages-refreshed*)
    (message "+++ Refreshing package repositories")
-   (package-refresh-contents)
+   (package-refresh-contents t)
    (setq *init/packages-refreshed* t))
   (message "+++ Installing %s..." pkg)
   (package-install pkg))
  (after 'package
-  (declvars package-selected-packages)
+  (declvar package-selected-packages)
   (add-to-list 'package-selected-packages pkg)))
 
 ;; Hooks.

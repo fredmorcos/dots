@@ -29,7 +29,7 @@
   (after 'emacs (setopt debug-on-error t)))
 
  (unless (eq *init/emacs-profiling* :disabled)
-  (hook 'after-init-hook 'emacs #'profiler-report 'profiler)
+  (add-hook 'after-init-hook 'profiler-report)
   (profiler-start 'cpu)))
 
 (config "Garbage Collection"
