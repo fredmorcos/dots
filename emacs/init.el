@@ -54,8 +54,7 @@
 
 (config "Modeline"
  (packages 'diminish)
- (custom 'uniquify
-  uniquify-buffer-name-style 'forward))
+ (after 'uniquify (setopt uniquify-buffer-name-style 'forward)))
 
 (config "Moving in Text"
  (packages 'move-text 'mwim)
@@ -75,15 +74,16 @@
  (bind-key "C-p" #'casual-editkit-main-tmenu)
  (bind-key "C-c d" #'duplicate-dwim)
 
- (custom 'files
-  mode-require-final-newline 'visit-save
-  require-final-newline 'visit-save
-  ;; File contents.
-  coding-system-for-read 'utf-8-unix
-  coding-system-for-write 'utf-8-unix)
+ (after 'files
+  (setopt
+   mode-require-final-newline 'visit-save
+   require-final-newline 'visit-save
+   ;; File contents.
+   coding-system-for-read 'utf-8-unix
+   coding-system-for-write 'utf-8-unix))
 
- (custom 'simple backward-delete-char-untabify-method 'hungry)
- (custom 'emacs undo-limit (* 1024 1024))
+ (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
+ (after 'emacs (setopt undo-limit (* 1024 1024)))
 
  (hook 'before-save-hook 'files #'delete-trailing-whitespace 'simple))
 
@@ -93,23 +93,24 @@
   (bind-key [remap fill-paragraph] #'unfill-toggle))
 
  ;; fill.el
- (custom 'emacs
-  colon-double-space t
-  default-justification 'left)
+ (after 'emacs
+  (setopt
+   colon-double-space t
+   default-justification 'left))
 
- (custom 'emacs fill-column 90)
- (custom 'newcomment comment-fill-column 80))
+ (after 'emacs (setopt fill-column 90))
+ (after 'newcomment (setopt comment-fill-column 80)))
 
 (config "Kill Ring"
- (custom 'simple
-  save-interprogram-paste-before-kill t))
+ (after 'simple (setopt save-interprogram-paste-before-kill t)))
 
 (config "Indentation"
- (custom 'indent
-  tab-always-indent 'complete
-  tab-first-completion 'word-or-paren-or-punct)
+ (after 'indent
+  (setopt
+   tab-always-indent 'complete
+   tab-first-completion 'word-or-paren-or-punct))
 
- (custom 'simple indent-tabs-mode nil))
+ (after 'simple (setopt indent-tabs-mode nil)))
 
 (config "Window Movement and Management"
  (windmove-default-keybindings)
@@ -129,16 +130,16 @@
 
  (winner-mode)
 
- (custom 'window
-  switch-to-buffer-in-dedicated-window 'pop
-  ;; switch-to-buffer-obey-display-actions t
-  split-height-threshold 160
-  split-width-threshold 130
-  even-window-sizes 'width-only
-  ;; Skip *SPECIALS* when switching buffers.
-  switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
-
  (after 'window
+  (setopt
+   switch-to-buffer-in-dedicated-window 'pop
+   ;; switch-to-buffer-obey-display-actions t
+   split-height-threshold 160
+   split-width-threshold 130
+   even-window-sizes 'width-only
+   ;; Skip *SPECIALS* when switching buffers.
+   switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
+
   (advice-add 'split-window-below :after #'init/recenter)
 
   (push `(,(rx bos "*Help*" (0+ nonl) eos)
@@ -150,7 +151,7 @@
 
  (bind-key "<f12>" #'delete-other-windows)
 
- (custom 'emacs resize-mini-windows t))
+ (after 'emacs (setopt resize-mini-windows t)))
 
 (config "Buffer Management"
  (packages 'buffer-move)
@@ -179,39 +180,43 @@
   (advice-add 'switch-to-buffer :after #'init/recenter)))
 
 (config "Backups and Autosaves"
- (custom 'files
-  auto-save-default t
-  backup-inhibited nil
-  make-backup-files t
-  ;; Prefer the newest version of a file.
-  load-prefer-newer t
-  delete-old-versions t
-  remote-file-name-inhibit-auto-save-visited t
-  remote-file-name-inhibit-locks t))
+ (after 'files
+  (setopt
+   auto-save-default t
+   backup-inhibited nil
+   make-backup-files t
+   ;; Prefer the newest version of a file.
+   load-prefer-newer t
+   delete-old-versions t
+   remote-file-name-inhibit-auto-save-visited t
+   remote-file-name-inhibit-locks t)))
 
 (config "Tramp"
- (custom 'tramp-sh
-  tramp-use-scp-direct-remote-copying t
-  tramp-copy-size-limit (* 1024 1024))
+ (after 'tramp-sh
+  (setopt
+   tramp-use-scp-direct-remote-copying t
+   tramp-copy-size-limit (* 1024 1024)))
 
- (custom 'files
-  ;; Read .dir-locals.el over TRAMP.
-  enable-remote-dir-locals t))
+ (after 'files
+  (setopt
+   ;; Read .dir-locals.el over TRAMP.
+   enable-remote-dir-locals t)))
 
 (config "Warnings"
- (custom 'warnings warning-minimum-level :emergency)
  (after 'warnings
-  (push 'defvaralias warning-suppress-types)))
+  (push 'defvaralias warning-suppress-types))
+ (setopt warning-minimum-level :emergency))
 
 (config "Help"
  (packages 'casual 'casual-suite 'transient)
 
- (custom 'help
-  help-window-select t
-  help-window-keep-selected t
-  help-enable-completion-autoload nil
-  help-enable-autoload nil
-  help-enable-symbol-autoload nil)
+ (after 'help
+  (setopt
+   help-window-select t
+   help-window-keep-selected t
+   help-enable-completion-autoload nil
+   help-enable-autoload nil
+   help-enable-symbol-autoload nil))
 
  (after 'help-mode
   (advice-add 'help-button-action :after #'init/recenter)
@@ -220,18 +225,19 @@
  (after 'info
   (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))
 
- (custom 'transient transient-default-level 7))
+ (after 'transient (setopt transient-default-level 7)))
 
 (config "User Interface"
  (packages 'nerd-icons)
- (custom 'tooltip tooltip-use-echo-area t)
- (custom 'display-line-numbers
-  display-line-numbers-grow-only t
-  display-line-numbers-width-start t))
+ (after 'tooltip (setopt tooltip-use-echo-area t))
+ (after 'display-line-numbers
+  (setopt
+   display-line-numbers-grow-only t
+   display-line-numbers-width-start t)))
 
 (config "User Experience"
- (custom 'emacs delete-by-moving-to-trash t)
- (custom 'files confirm-kill-processes nil)
+ (after 'emacs (setopt delete-by-moving-to-trash t))
+ (after 'files (setopt confirm-kill-processes nil))
 
  (after 'files
   (advice-add 'find-file :after #'init/recenter)
@@ -241,11 +247,12 @@
  (after 'button (advice-add 'push-button :after #'init/recenter))
  (after 'simple (advice-add 'goto-line :after #'init/recenter))
 
- (custom 'mouse
-  mouse-yank-at-point t
-  mouse-1-click-follows-link 'double)
+ (after 'mouse
+  (setopt
+   mouse-yank-at-point t
+   mouse-1-click-follows-link 'double))
 
- (custom 'map-ynp read-answer-short t))
+ (after 'map-ynp (setopt read-answer-short t)))
 
 (config "Search & Replace"
  (packages 'visual-replace 'casual 'ctrlf)
@@ -254,15 +261,17 @@
  (bind-key "M-^" #'visual-replace-selected)
  (bind-key "M-*" #'visual-replace)
 
- (custom 'isearch
-  isearch-allow-motion t
-  isearch-motion-changes-direction t)
+ (after 'isearch
+  (setopt
+   isearch-allow-motion t
+   isearch-motion-changes-direction t))
 
  (bind-key "C-p" #'casual-isearch-tmenu)
 
- (custom 'ctrlf
-  ctrlf-default-search-style 'fuzzy
-  ctrlf-auto-recenter t)
+ (after 'ctrlf
+  (setopt
+   ctrlf-default-search-style 'fuzzy
+   ctrlf-auto-recenter t))
 
  (ctrlf-mode))
 
@@ -304,13 +313,14 @@
   (interactive)
   (scroll-other-window-down 1))
 
- (custom 'emacs
-  scroll-conservatively 104
-  scroll-margin 1
-  hscroll-margin 1
-  hscroll-step 1
-  auto-hscroll-mode 'current-line
-  fast-but-imprecise-scrolling t)
+ (after 'emacs
+  (setopt
+   scroll-conservatively 104
+   scroll-margin 1
+   hscroll-margin 1
+   hscroll-step 1
+   auto-hscroll-mode 'current-line
+   fast-but-imprecise-scrolling t))
 
  (bind-key "C-<f11>" #'init/scroll-other-window)
  (bind-key "C-<f12>" #'init/scroll-other-window-down)
@@ -325,48 +335,51 @@
   ;; Replace dabbrev-expand with hippie-expand
   (bind-key [remap dabbrev-expand] #'hippie-expand))
 
- (custom 'hippie-expand
-  hippie-expand-try-functions-list '(try-expand-dabbrev
-                                     try-expand-dabbrev-visible
-                                     try-expand-line
-                                     try-expand-dabbrev-all-buffers
-                                     try-expand-line-all-buffers
-                                     try-expand-dabbrev-from-kill
-                                     try-expand-all-abbrevs
-                                     try-complete-file-name
-                                     try-complete-file-name-partially
-                                     try-expand-list
-                                     try-expand-list-all-buffers
-                                     try-complete-lisp-symbol
-                                     try-complete-lisp-symbol-partially)))
+ (after 'hippie-expand
+  (setopt
+   hippie-expand-try-functions-list '(try-expand-dabbrev
+                                      try-expand-dabbrev-visible
+                                      try-expand-line
+                                      try-expand-dabbrev-all-buffers
+                                      try-expand-line-all-buffers
+                                      try-expand-dabbrev-from-kill
+                                      try-expand-all-abbrevs
+                                      try-complete-file-name
+                                      try-complete-file-name-partially
+                                      try-expand-list
+                                      try-expand-list-all-buffers
+                                      try-complete-lisp-symbol
+                                      try-complete-lisp-symbol-partially))))
 
 (config "Minibuffer"
- (custom 'minibuffer
-  completion-auto-help nil
-  minibuffer-message-clear-timeout 4
-  read-file-name-completion-ignore-case t
-  completion-category-defaults nil
-  completion-category-overrides nil
-  completions-max-height 20
-  completions-format 'one-column
-  completions-detailed t
-  completions-group t
-  completion-cycle-threshold nil)
 
  (after 'minibuffer
   (delete 'tags-completion-at-point-function completion-at-point-functions)
-  (delete 'emacs22 completion-styles))
+  (delete 'emacs22 completion-styles)
+  (setopt
+   completion-auto-help nil
+   minibuffer-message-clear-timeout 4
+   read-file-name-completion-ignore-case t
+   completion-category-defaults nil
+   completion-category-overrides nil
+   completions-max-height 20
+   completions-format 'one-column
+   completions-detailed t
+   completions-group t
+   completion-cycle-threshold nil))
 
- (custom 'simple
-  completion-auto-select nil
-  ;; Hide commands in M-x that do not work in the current mode
-  read-extended-command-predicate #'command-completion-default-include-p
-  suggest-key-bindings 10)
+ (after 'simple
+  (setopt
+   completion-auto-select nil
+   ;; Hide commands in M-x that do not work in the current mode
+   read-extended-command-predicate #'command-completion-default-include-p
+   suggest-key-bindings 10))
 
- (custom 'emacs
-  completion-ignore-case t
-  read-buffer-completion-ignore-case t
-  enable-recursive-minibuffers t)
+ (after 'emacs
+  (setopt
+   completion-ignore-case t
+   read-buffer-completion-ignore-case t
+   enable-recursive-minibuffers t))
 
  (hook 'minibuffer-setup-hook 'emacs #'cursor-intangible-mode 'cursor-sensor))
 
@@ -381,9 +394,10 @@
    ("DEL" . vertico-directory-delete-char)
    ("M-DEL" . vertico-directory-delete-word)))
 
- (custom 'vertico
-  vertico-cycle t
-  vertico-resize nil)
+ (after 'vertico
+  (setopt
+   vertico-cycle t
+   vertico-resize nil))
 
  (vertico-mode)
 
@@ -407,11 +421,10 @@
  (after 'consult
   (declfunc consult-narrow-help 'consult)
   (bind-keys :map 'consult-narrow-map
-   ("C-?" . consult-narrow-help)))
-
- (custom 'consult
-  consult-preview-key "M-."
-  consult-project-function (lambda (_) (projectile-project-root)))
+   ("C-?" . consult-narrow-help))
+  (setopt
+   consult-preview-key "M-."
+   consult-project-function (lambda (_) (projectile-project-root))))
 
  (bind-key "M-Y" #'consult-yank-pop)
  (bind-key "M-g I" #'consult-imenu-multi)
@@ -450,25 +463,23 @@
  (packages 'corfu 'nerd-icons-corfu 'company 'company-posframe 'cape)
 
  (config "Corfu"
-  (custom 'corfu
-   corfu-preview-current nil
-   ;; corfu-auto nil
-   ;; corfu-auto-delay 0
-   ;; corfu-quit-no-match t
-   corfu-scroll-margin 5
-   ;; corfu-max-width 50
-   corfu-min-width 50)
-
   ;; Show icons in corfu popups.
   (after 'corfu
    (declvars corfu-margin-formatters)
-   (push #'nerd-icons-corfu-formatter corfu-margin-formatters))
+   (push #'nerd-icons-corfu-formatter corfu-margin-formatters)
+   (setopt
+    corfu-preview-current nil
+    ;; corfu-auto nil
+    ;; corfu-auto-delay 0
+    ;; corfu-quit-no-match t
+    corfu-scroll-margin 5
+    ;; corfu-max-width 50
+    corfu-min-width 50))
 
   (hook 'corfu-mode-hook 'corfu #'corfu-popupinfo-mode 'corfu-popupinfo)
   (hook 'corfu-mode-hook 'corfu #'corfu-history-mode 'corfu-history)
 
-  (custom 'corfu-popupinfo
-   corfu-popupinfo-delay '(1.25 . 0.5))
+  (after 'corfu-popupinfo (setopt corfu-popupinfo-delay '(1.25 . 0.5)))
 
   (after 'corfu-history
    (after 'savehist
@@ -481,20 +492,19 @@
    (or (company--active-p) (bound-and-true-p company-backend)))
 
   (after 'company
-   (diminish 'company-mode "Co"))
-
-  (custom 'company
-   company-idle-delay 0.7
-   company-keywords-ignore-case t
-   company-selection-wrap-around t
-   company-tooltip-align-annotations t
-   company-tooltip-minimum-width 40
-   company-tooltip-maximum-width 80
-   company-tooltip-limit 15
-   company-tooltip-minimum 10
-   company-tooltip-flip-when-above t
-   company-tooltip-annotation-padding 3
-   company-tooltip-width-grow-only t)
+   (diminish 'company-mode "Co")
+   (setopt
+    company-idle-delay 0.7
+    company-keywords-ignore-case t
+    company-selection-wrap-around t
+    company-tooltip-align-annotations t
+    company-tooltip-minimum-width 40
+    company-tooltip-maximum-width 80
+    company-tooltip-limit 15
+    company-tooltip-minimum 10
+    company-tooltip-flip-when-above t
+    company-tooltip-annotation-padding 3
+    company-tooltip-width-grow-only t))
 
   (hook 'company-mode-hook 'company #'company-posframe-mode 'company-posframe)
 
@@ -503,10 +513,10 @@
 
    (declvars company-posframe-show-params company-posframe-quickhelp-show-params)
    (nconc company-posframe-show-params '(:border-width 1))
-   (nconc company-posframe-quickhelp-show-params '(:border-width 1)))
+   (nconc company-posframe-quickhelp-show-params '(:border-width 1))
 
-  (custom 'company-posframe
-   company-posframe-quickhelp-x-offset 2))
+   (setopt
+    company-posframe-quickhelp-x-offset 2)))
 
  (config "Cape"
   (bind-key "C-c p" #'cape-prefix-map)
@@ -516,10 +526,11 @@
    (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))))
 
 (config "Syntax Checkers and Error Lists"
- (custom 'simple
-  ;; Recenter after jump to next error.
-  next-error-recenter '(4)
-  next-error-message-highlight t)
+ (after 'simple
+  (setopt
+   ;; Recenter after jump to next error.
+   next-error-recenter '(4)
+   next-error-message-highlight t))
 
  (packages 'flycheck 'consult-flycheck)
 
@@ -572,25 +583,25 @@
 
   (advice-add 'flycheck-next-error :after #'init/recenter)
   (advice-add 'flycheck-previous-error :after #'init/recenter)
-  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter))
+  (advice-add 'flycheck-error-list-goto-error :after #'init/recenter)
 
- (custom 'flycheck
-  ;; flycheck-display-errors-function nil
-  ;; flycheck-help-echo-function nil
-  flycheck-checker-error-threshold nil
-  flycheck-mode-line-prefix "Fc"
-  flycheck-check-syntax-automatically '(idle-change mode-enabled)
-  flycheck-idle-change-delay 0.1
-  flycheck-idle-buffer-switch-delay 0.1
-  flycheck-display-errors-delay 0.1))
+  (setopt
+   ;; flycheck-display-errors-function nil
+   ;; flycheck-help-echo-function nil
+   flycheck-checker-error-threshold nil
+   flycheck-mode-line-prefix "Fc"
+   flycheck-check-syntax-automatically '(idle-change mode-enabled)
+   flycheck-idle-change-delay 0.1
+   flycheck-idle-buffer-switch-delay 0.1
+   flycheck-display-errors-delay 0.1)))
 
 (config "History"
- (custom 'emacs
-  history-delete-duplicates t
-  history-length 150)
+ (after 'emacs
+  (setopt
+   history-delete-duplicates t
+   history-length 150))
 
- (custom 'saveplace
-  save-place-abbreviate-file-names t)
+ (after 'saveplace (setopt save-place-abbreviate-file-names t))
 
  (defun init/activate-save-place-mode (&rest _)
   (unless save-place-mode (save-place-mode)))
@@ -600,17 +611,18 @@
 
  (savehist-mode)
 
- (custom 'recentf
-  recentf-max-menu-items 50
-  recentf-max-saved-items 100
-  recentf-exclude `(,(no-littering-expand-var-file-name "")
-                    ,(no-littering-expand-etc-file-name "")
-                    ,@native-comp-eln-load-path
-                    "~/.cache"
-                    "~/.config/emacs/var"
-                    "~/.config/emacs/elpa"
-                    "/usr/share/emacs"
-                    "/run/media"))
+ (after 'recentf
+  (setopt
+   recentf-max-menu-items 50
+   recentf-max-saved-items 100
+   recentf-exclude `(,(no-littering-expand-var-file-name "")
+                     ,(no-littering-expand-etc-file-name "")
+                     ,@native-comp-eln-load-path
+                     "~/.cache"
+                     "~/.config/emacs/var"
+                     "~/.config/emacs/elpa"
+                     "/usr/share/emacs"
+                     "/run/media")))
 
  (autoloads 'recentf nil 'recentf-load-list)
 
@@ -623,10 +635,18 @@
  (after 'consult
   (advice-add #'consult-buffer :before #'init/recentf-load-list))
 
- (after 'recentf
-  (recentf-mode)))
+ (after 'recentf (recentf-mode)))
 
-;;; Windows
+(config "General Programming"
+ (after 'eldoc
+  (diminish 'eldoc-mode "Ed")
+  (after 'flycheck (eldoc-add-command-completions "flycheck-"))
+  (after 'mwim (eldoc-add-command-completions "mwim-"))
+  (setopt
+   eldoc-documentation-strategy 'eldoc-documentation-compose
+   eldoc-idle-delay 0.1))
+
+ (hook 'prog-mode-hook 'prog-mode #'eldoc-mode 'eldoc))
 
 ;;; General Programming
 
@@ -678,33 +698,6 @@
  (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
  (electric-pair-preserve-balance nil))
 
-(config "ElDoc"
- ;; (packages 'eldoc-mouse)
-
- (after 'eldoc
-  (diminish 'eldoc-mode "Ed")
-  (setopt
-   eldoc-documentation-strategy 'eldoc-documentation-compose
-   eldoc-idle-delay 0.1)
-  ;; (remove-hook 'eldoc-display-functions #'eldoc-display-in-echo-area)
-
-  ;; (hook-globals 'eldoc-mode-hook #'eldoc-mouse-mode))
-  )
-
- ;; (after 'eldoc-mouse
- ;;  (diminish 'eldoc-mouse-mode "Em")
- ;;  (declvars eldoc-mouse-mode-map)
- ;;  (bind-keys
- ;;   :map eldoc-mouse-mode-map
- ;;   ("<f1> <f1>" . eldoc-mouse-pop-doc-at-cursor))
-
- ;;  (hook-progn 'eldoc-mouse-mode-hook
- ;;   (after 'lsp-mode
- ;;    (declvars eldoc-mouse-eldoc-documentation-functions)
- ;;    (autoloads 'lsp-mode nil 'lsp-eldoc-function)
- ;;    (add-hook 'eldoc-mouse-eldoc-documentation-functions #'lsp-eldoc-function)))))
- )
-
 (use-package subword
  :ensure nil
  :defer t
@@ -728,20 +721,6 @@
  :preface (packages 'diff-hl)
  :after prog-mode
  :hook prog-mode-hook)
-
-(use-package eldoc
- :ensure nil
- :defer t
- :after prog-mode
- :hook prog-mode-hook)
-
-(use-package eldoc
- :ensure nil
- :defer t
- :after flycheck
- :config
- (eldoc-add-command-completions "flycheck-")
- (eldoc-add-command-completions "mwim-"))
 
 (use-package paren
  :ensure nil
@@ -2757,7 +2736,7 @@
  :custom
  (easysession-save-mode-lighter-show-session-name t)
  :bind
- ("C-c u" . easysession-save-as)
+ ("C-c u" . easysession-save)
  ("C-c U" . easysession-switch-to))
 
 ;; Print startup stats.

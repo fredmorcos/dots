@@ -8,12 +8,6 @@
  "Create a config section with NAME and BODY."
  `(progn ,@body))
 
-;;; Customization
-
-(defmacro custom (pkg &rest opts)
- "Set options OPTS after PKG is loaded."
- `(after ,pkg (setopt ,@opts)))
-
 ;;; Hooks
 
 (defmacro hook (hook-var hook-pkg func func-pkg &optional depth local)
