@@ -69,7 +69,7 @@
  (bind-key "M-\"" #'surround-insert))
 
 (config "Editing Text"
- (packages 'casual)
+ (packages 'casual 'speedrect)
  (bind-key "C-p" #'casual-editkit-main-tmenu)
  (bind-key "C-c d" #'duplicate-dwim)
 
@@ -84,7 +84,11 @@
   (add-hook 'before-save-hook #'delete-trailing-whitespace))
 
  (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
- (after 'emacs (setopt undo-limit (* 1024 1024))))
+ (after 'emacs (setopt undo-limit (* 1024 1024)))
+
+ (after 'speedrect
+  (diminish 'speedrect-mode "Sr"))
+ (speedrect-mode))
 
 (config "Filling Text"
  (packages 'unfill)
@@ -99,6 +103,12 @@
 
  (after 'emacs (setopt fill-column 90))
  (after 'newcomment (setopt comment-fill-column 80)))
+
+(config "Undo & Redo"
+ (packages 'vundo)
+ (bind-key "C-x u" #'vundo)
+ (after 'vundo
+  (setopt vundo-glyph-alist vundo-unicode-symbols)))
 
 (config "Kill Ring"
  (after 'simple (setopt save-interprogram-paste-before-kill t)))
@@ -432,7 +442,9 @@
 
  (after 'register
   (bind-key [remap jump-to-register] #'consult-register)
-  (bind-key [remap point-to-register] #'consult-register-store)))
+  (bind-key [remap point-to-register] #'consult-register-store)
+  (setopt
+   register-use-preview t)))
 
 (config "Bookmarks"
  (after 'bookmark
@@ -602,6 +614,88 @@
  (packages 'jinx)
  (after 'text-mode
   (add-hook 'text-mode-hook #'jinx-mode)))
+
+(config "Translation Files"
+ (packages 'po-mode))
+
+(config "Sed Files"
+ (packages 'sed-mode))
+
+(config "Markdown"
+ (packages 'markdown-mode)
+ (after 'markdown-mode
+  (declvar markdown-mode)
+  (setq-mode-local markdown-mode fill-column 79)
+  (add-hook 'markdown-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'markdown-mode-hook #'hl-line-mode)))
+
+(config "TOML"
+ (packages 'toml-mode 'eldoc-toml)
+ (after 'eldoc-toml
+  (diminish 'eldoc-toml))
+ (after 'toml-mode
+  (add-hook 'toml-mode-hook #'eldoc-toml-mode)))
+
+(config "YAML"
+ (packages 'yaml-mode)
+ (after 'yaml-mode
+  (bind-key "C-c p" #'qol/generate-password 'yaml-mode-map)
+  (add-hook 'yaml-mode-hook #'indent-bars-mode)
+  (add-hook 'yaml-mode-hook #'tree-sitter-mode)
+  (add-hook 'yaml-mode-hook #'flycheck-mode)))
+
+(config "LLVM"
+ (packages 'llvm-ts-mode 'demangle-mode 'autodisass-llvm-bitcode)
+ (mode (rx ".ll" eos) 'llvm-ts-mode)
+ (mode (rx ".bc" eos) 'autodisass-llvm-bitcode)
+ (mode (rx bos ".clang-format") 'yaml-mode)
+ (mode (rx bos ".clang-tidy") 'yaml-mode)
+ (after 'llvm-ts-mode
+  (add-hook 'llvm-ts-mode-hook #'demangle-mode)))
+
+(config "Archlinux PKGBUILDs"
+ (packages 'pkgbuild-mode)
+ (mode (rx bos "PKGBUILD" eos) 'pkgbuild-mode))
+
+(config "Docker"
+ (packages 'dockerfile-mode 'docker-compose-mode 'docker)
+ (bind-key "C-c D" #'docker))
+
+(config "Web Development"
+ (packages 'web-mode 'company 'company-web 'emmet-mode)
+
+ (mode (rx ".html" eos) 'web-mode)
+ (mode (rx ".css" eos) 'web-mode)
+ (mode (rx ".js" eos) 'web-mode)
+
+ (after 'web-mode
+  (setopt
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-enable-current-column-highlight t
+   web-mode-enable-current-element-highlight t
+   web-mode-auto-close-style 3
+   web-mode-enable-auto-expanding t)
+  (declvar web-mode)
+  (declvar company-backends)
+  (setq-mode-local web-mode tab-width 2)
+  (add-hook 'web-mode-hook #'company-mode)
+  (add-hook 'web-mode-hook #'emmet-mode)
+  (after 'company
+   (setq-mode-local web-mode company-backends '((company-css company-web-html)))))
+
+ (after 'emmet-mode
+  (diminish 'emmet-mode "Em")
+  (setopt emmet-indentation 2))
+
+ (defun init/css-setup-comments ()
+  "Setup C-style /* ... */ comments."
+  (with-eval-after-load 'newcomment
+   (setq-local comment-style 'extra-line)))
+
+ (after 'css-mode
+  (add-hook 'css-mode-hook #'init/css-setup-comments)))
 
 (config "General Programming"
  (packages 'jinx)
@@ -1331,58 +1425,6 @@
  (lazy-count-prefix-format "(%s/%s) ")
  (search-whitespace-regexp ".*?"))
 
-;;; Markdown
-
-(use-package markdown-mode
- :ensure t
- :defer t
- :preface (packages 'markdown-mode)
- :config
- (setq-mode-local markdown-mode fill-column 79))
-
-(use-package display-fill-column-indicator
- :ensure t
- :defer t
- :preface (packages 'display-fill-column-indicator)
- :after markdown-mode
- :hook markdown-mode-hook)
-
-(use-package hl-line
- :ensure t
- :defer t
- :preface (packages 'hl-line)
- :after markdown-mode
- :hook markdown-mode-hook)
-
-;;; Sed
-
-(use-package sed-mode
- :ensure t
- :defer t
- :preface (packages 'sed-mode))
-
-;;; Po Translations
-
-(use-package po-mode
- :ensure t
- :defer t
- :preface (packages 'po-mode))
-
-;;; TOML
-
-(use-package toml-mode
- :ensure t
- :defer t
- :preface (packages 'toml-mode))
-
-(use-package eldoc-toml
- :ensure t
- :defer t
- :preface (packages 'eldoc-toml)
- :diminish
- :after (eldoc toml-mode)
- :hook toml-mode-hook)
-
 ;;; JSON
 
   ;; TODO
@@ -1394,13 +1436,6 @@
  :ensure t
  :defer t
  :preface (packages 'json-mode))
-
-(use-package indent-bars
- :ensure t
- :defer t
- :preface (packages 'indent-bars)
- :after json-mode
- :hook json-mode-hook)
 
 (use-package indent-bars
  :ensure t
@@ -1418,28 +1453,6 @@
  :hook json-mode-hook)
 
 ;;; Emacs Tools
-
-(use-package speedrect
- :ensure t
- :demand
- :preface (packages 'speedrect)
- :diminish "Sr"
- :config (speedrect-mode))
-
-(use-package vundo
- :ensure t
- :defer t
- :preface (packages 'vundo)
- :bind ("C-x u" . vundo)
- :custom
- (vundo-glyph-alist vundo-unicode-symbols))
-
-(use-package register
- :ensure nil
- :defer t
-
- :custom
- (register-use-preview t))
 
 (use-package which-key
  :ensure t
@@ -1693,85 +1706,6 @@
  (dape-cwd-fn 'projectile-project-root)
  (dape-default-breakpoints-file
   (no-littering-expand-var-file-name "dape-breakpoints")))
-
-;;; YAML
-
-(use-package yaml-mode
- :ensure t
- :defer t
- :preface (packages 'yaml-mode)
-
- :bind
- (:map yaml-mode-map
-  ("C-c p" . qol/generate-password)))
-
-(use-package flycheck
- :ensure t
- :defer t
- :after yaml-mode
- :hook yaml-mode-hook)
-
-(use-package tree-sitter
- :ensure t
- :defer t
- :after yaml-mode
- :hook yaml-mode-hook)
-
-(use-package indent-bars
- :ensure t
- :defer t
- :preface (packages 'indent-bars)
- :after yaml-mode
- :hook yaml-mode-hook)
-
-;;; LLVM
-
-(use-package llvm-ts-mode
- :ensure t
- :defer t
- :preface (packages 'llvm-ts-mode)
- :mode (rx ".ll" eos))
-
-(use-package demangle-mode
- :ensure t
- :defer t
- :preface (packages 'demangle-mode)
- :after llvm-ts-mode
- :hook llvm-ts-mode-hook)
-
-(use-package autodisass-llvm-bitcode
- :ensure t
- :defer t
- :preface (packages 'autodisass-llvm-bitcode)
- :mode (rx ".bc" eos))
-
-(use-package demangle-mode
- :ensure t
- :defer t
- :preface (packages 'demangle-mode))
-
-(use-package yaml-mode
- :ensure t
- :defer t
- :preface (packages 'yaml-mode)
-
- :mode (rx ".clang-format" eos)
- :mode (rx ".clang-tidy" eos))
-
-;;; CSS
-
-(use-package css-mode
- :ensure nil
- :defer t
-
- :preface
- (defun init/css-setup-comments ()
-  "Setup C-style /* ... */ comments."
-  (with-eval-after-load 'newcomment
-   (setq-local comment-style 'extra-line)))
-
- :hook
- (css-mode-hook . init/css-setup-comments))
 
 ;;; C and C++ Programming
 
@@ -2178,81 +2112,6 @@
  :preface (packages 'hl-line)
  :after hledger-mode
  :hook hledger-mode-hook)
-
-;;; Web Development
-
-(use-package web-mode
- :ensure t
- :defer t
- :preface (packages 'web-mode)
- :mode (rx ".html" eos)
- :mode (rx ".css" eos)
- :mode (rx ".js" eos)
-
- :custom
- (web-mode-markup-indent-offset 2)
- (web-mode-css-indent-offset 2)
- (web-mode-code-indent-offset 2)
- (web-mode-enable-current-column-highlight t)
- (web-mode-enable-current-element-highlight t)
- (web-mode-auto-close-style 3)
- (web-mode-enable-auto-expanding t)
-
- :config
- (setq-mode-local web-mode tab-width 2))
-
-(use-package company
- :ensure t
- :defer t
- :preface (packages 'company)
- :hook web-mode-hook)
-
-(use-package company-web
- :ensure t
- :defer nil
- :preface (packages 'company-web)
- :after (company web-mode)
-
- :config
- (setq-mode-local web-mode
-  company-backends '((company-css
-                      company-web-html))))
-
-(use-package emmet-mode
- :ensure t
- :defer t
- :diminish "Em"
- :preface (packages 'emmet-mode)
- :hook web-mode-hook
-
- :custom
- (emmet-indentation 2))
-
-;;; Docker
-
-(use-package dockerfile-mode
- :ensure t
- :defer t
- :preface (packages 'dockerfile-mode))
-
-(use-package docker-compose-mode
- :ensure t
- :defer t
- :preface (packages 'docker-compose-mode))
-
-(use-package docker
- :ensure t
- :defer t
- :preface (packages 'docker)
- :bind ("C-c D" . docker))
-
-;;; Archlinux PKGBUILDs
-
-(use-package pkgbuild-mode
- :ensure t
- :defer t
- :preface (packages 'pkgbuild-mode)
- :mode (rx bos "PKGBUILD" eos))
 
 ;;; Rust
 
