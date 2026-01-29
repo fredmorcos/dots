@@ -5,3 +5,5 @@ if &diff
   :map pp dp
   :map oo do
 endif
+
+set diffopt+=algorithm:histogram
