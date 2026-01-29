@@ -69,9 +69,12 @@
  (bind-key "M-\"" #'surround-insert))
 
 (config "Editing Text"
- (packages 'casual 'speedrect)
+ (packages 'casual 'speedrect 'volatile-highlights 'multiple-cursors)
+
  (bind-key "C-p" #'casual-editkit-main-tmenu)
  (bind-key "C-c d" #'duplicate-dwim)
+
+ (after 'volatile-highlights (diminish 'volatile-highlights))
 
  (after 'files
   (setopt
@@ -361,9 +364,13 @@
                                       try-complete-lisp-symbol-partially))))
 
 (config "Minibuffer"
+ (packages 'hotfuzz 'orderless)
+
  (after 'minibuffer
   (delete 'tags-completion-at-point-function completion-at-point-functions)
   (delete 'emacs22 completion-styles)
+  (push 'hotfuzz completion-styles)
+  (push 'orderless completion-styles)
   (setopt
    completion-auto-help nil
    minibuffer-message-clear-timeout 4
@@ -375,6 +382,11 @@
    completions-detailed t
    completions-group t
    completion-cycle-threshold nil))
+
+ (declvar orderless-matching-styles)
+ (after 'orderless
+  (push 'orderless-initialism orderless-matching-styles)
+  (push 'orderless-prefixes orderless-matching-styles))
 
  (after 'simple
   (setopt
@@ -700,7 +712,7 @@
   (add-hook 'css-mode-hook #'init/css-setup-comments)))
 
 (config "General Programming"
- (packages 'jinx 'devdocs 'editorconfig)
+ (packages 'jinx 'devdocs 'editorconfig 'lsp-mode)
 
  (after 'eldoc
   (diminish 'eldoc-mode "Ed")
@@ -722,6 +734,7 @@
   (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
   (add-hook 'prog-mode-hook #'whitespace-mode)
   (add-hook 'prog-mode-hook #'editorconfig-mode)
+  (add-hook 'prog-mode-hook #'volatile-highlights-mode)
   (bind-key "C-h D" #'devdocs-lookup))
 
  (declvar devdocs-current-docs)
@@ -736,7 +749,147 @@
  (setq-mode-local c-mode devdocs-current-docs "c")
  (setq-mode-local dockerfile-mode devdocs-current-docs "docker")
  (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp")
- (setq-mode-local makefile-mode devdocs-current-docs "gnu_make"))
+ (setq-mode-local makefile-mode devdocs-current-docs "gnu_make")
+
+ (after 'lsp-mode
+  (setopt
+   lsp-before-save-edits nil))
+
+ (after 'lsp-semantic-tokens
+  (setopt
+   lsp-semantic-tokens-enable t)))
+
+(config "Emacs Lisp"
+ (packages 'eros 'suggest 'ipretty 'highlight-quoted 'highlight-defined)
+
+ (after 'elisp-mode
+  (setopt
+   lisp-indent-offset 1
+   lisp-indent-function #'common-lisp-indent-function)
+  (advice-add 'elisp-completion-at-point :around #'cape-wrap-case-fold)
+  (advice-add 'elisp-completion-at-point :around #'cape-wrap-nonexclusive)
+  (bind-key "<f6>" #'init/emacs-lisp-expand-current-macro-call 'emacs-lisp-mode-map)
+  (add-hook 'emacs-lisp-mode-hook #'init/setup-elisp-capfs)
+  (add-hook 'emacs-lisp-mode-hook #'init/buffer-completion-mode)
+  (add-hook 'emacs-lisp-mode-hook #'eros-mode)
+  (add-hook 'emacs-lisp-mode-hook #'(lambda () (ipretty-mode t)))
+  (add-hook 'emacs-lisp-mode-hook #'highlight-defined-mode)
+  (add-hook 'emacs-lisp-mode-hook #'highlight-quoted-mode))
+
+ (defun init/emacs-lisp-expand-current-macro-call ()
+  "Expand the current macro expression."
+  (interactive)
+  (beginning-of-defun)
+  (emacs-lisp-macroexpand))
+
+ (defun init/elisp-capfs ()
+  (cape-wrap-super
+   'elisp-completion-at-point
+   #'yasnippet-capf
+   #'cape-file
+   #'cape-dabbrev))
+
+ (defun init/setup-elisp-capfs ()
+  (setq-local completion-at-point-functions
+   (list #'init/elisp-capfs)))
+
+ (after 'company
+  (setq-mode-local emacs-lisp-mode
+   company-backends '((company-capf
+                       company-yasnippet
+                       company-keywords
+                       company-dabbrev-code
+                       company-files)))))
+
+(config "HLedger"
+ (packages 'hledger-mode 'flycheck-hledger)
+
+ (mode (rx ".journal" eos) 'hledger-mode)
+ (mode (rx ".ledger" eos) 'hledger-mode)
+ (mode (rx ".hledger" eos) 'hledger-mode)
+
+ (defvar init/hledger-currency-string "EUR")
+
+ (defun init/hledger-move-amount-to-column ()
+  "Move the amount or the point to the valid column."
+  (interactive)
+  (let ((amount-marker (concat " " init/hledger-currency-string " "))
+        (original-pos (point)))
+   (end-of-line)
+   (when (search-backward amount-marker (pos-bol) t)
+    (right-char))
+   (let ((text (buffer-substring (point) (pos-eol)))
+         (difference (- (current-column) 64)))
+    (delete-region (point) (pos-eol))
+    (if (> difference 0)
+     (progn
+      (left-char difference)
+      (insert text))
+     (progn
+      (insert-char ?\s (abs difference))
+      (insert text)))
+    (unless (string-blank-p text)
+     (goto-char original-pos)))))
+
+ (defun init/hledger-find-next-unaligned ()
+  "Find the next unaligned amount in a non-comment line."
+  (interactive)
+  (let ((amount-marker (concat " " init/hledger-currency-string " ")))
+   (catch 'found
+    (while (search-forward amount-marker nil t)
+     (left-char (- (length amount-marker) 1))
+     (when (not (or
+                 (= (current-column) 64)
+                 (looking-back ";.*" (line-beginning-position))))
+      (throw 'found t))))))
+
+ (after 'hledger-mode
+  (bind-key "C-c >" #'init/hledger-move-amount-to-column 'hledger-mode-map)
+  (bind-key "C-c x" #'init/hledger-find-next-unaligned 'hledger-mode-map)
+  (bind-key "C-c +" 'hledger-increment-entry-date 'hledger-mode-map)
+  (setopt
+   hledger-invalidate-completions '(on-save on-idle)
+   hledger-refresh-completions-idle-delay 5
+   hledger-currency-string "")
+  (declvar hledger-mode)
+  (setq-mode-local hledger-mode
+   tab-width 1
+   fill-column 100
+   comment-fill-column 100)
+  (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
+  (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
+  (add-hook 'hledger-mode-hook #'flycheck-mode)
+  (add-hook 'hledger-mode-hook #'init/hledger-setup-flycheck)
+  (add-hook 'hledger-mode-hook #'init/buffer-completion-mode)
+  (add-hook 'hledger-mode-hook #'init/setup-hledger-capfs)
+  (add-hook 'hledger-mode-hook #'init/hledger-maybe-setup-company nil t)
+  (add-hook 'hledger-mode-hook #'volatile-highlights-mode))
+
+ (defun init/hledger-setup-flycheck ()
+  (require 'flycheck-hledger))
+
+ (defun init/hledger-setup-company ()
+  (setq-mode-local hledger-mode
+   company-backends '((hledger-company company-yasnippet))
+   completion-at-point-functions nil))
+
+ (defun init/hledger-maybe-setup-company ()
+  (after 'company
+   (add-hook 'company-mode-hook #'init/hledger-setup-company nil t)))
+
+ (defun init/hledger-capfs ()
+  (cape-wrap-super 'hledger-completion-at-point #'cape-dabbrev #'yasnippet-capf))
+
+ (defun init/setup-hledger-capfs ()
+  (setq-local completion-at-point-functions (list #'init/hledger-capfs)))
+
+ (after 'hledger-core
+  (setopt
+   hledger-currency-string ""
+   hledger-comments-column 1
+   hledger-jfile "~/Documents/Expenses/Expenses.ledger"))
+
+ (after 'flycheck-hledger (setopt flycheck-hledger-checks '("commodities"))))
 
 ;;; General Programming
 
@@ -1181,56 +1334,6 @@
 
 ;;; Emacs Lisp
 
-(use-package elisp-mode
- :ensure nil
- :defer t
-
- :custom
- (lisp-indent-offset 1)
- (lisp-indent-function #'common-lisp-indent-function)
-
- :preface
- (defun init/emacs-lisp-expand-current-macro-call ()
-  "Expand the current macro expression."
-  (interactive)
-  (beginning-of-defun)
-  (emacs-lisp-macroexpand))
-
- :bind
- (:map emacs-lisp-mode-map
-  ("<f6>" . init/emacs-lisp-expand-current-macro-call))
-
- :config
- (advice-add 'elisp-completion-at-point :around #'cape-wrap-case-fold)
- (advice-add 'elisp-completion-at-point :around #'cape-wrap-nonexclusive)
-
- :preface
- (defun init/elisp-capfs ()
-  (cape-wrap-super
-   'elisp-completion-at-point
-   #'yasnippet-capf
-   #'cape-file
-   #'cape-dabbrev))
-
- (defun init/setup-elisp-capfs ()
-  (setq-local completion-at-point-functions
-   (list #'init/elisp-capfs)))
-
- :hook
- (emacs-lisp-mode-hook . init/setup-elisp-capfs)
- (emacs-lisp-mode-hook . init/buffer-completion-mode))
-
-(use-package elisp-mode
- :ensure nil
- :defer t
- :config
- (setq-mode-local emacs-lisp-mode
-  company-backends '((company-capf
-                      company-yasnippet
-                      company-keywords
-                      company-dabbrev-code
-                      company-files))))
-
 (use-package symbol-overlay
  :ensure t
  :defer t
@@ -1243,39 +1346,6 @@
  :defer t
  :after elisp-mode
  :hook emacs-lisp-mode-hook)
-
-(use-package highlight-defined
- :ensure t
- :defer t
- :preface (packages 'highlight-defined)
- :after elisp-mode
- :hook emacs-lisp-mode-hook)
-
-(use-package highlight-quoted
- :ensure t
- :defer t
- :preface (packages 'highlight-quoted)
- :after elisp-mode
- :hook emacs-lisp-mode-hook)
-
-(use-package eros
- :ensure t
- :defer t
- :preface (packages 'eros)
- :after elisp-mode
- :hook emacs-lisp-mode-hook)
-
-(use-package suggest
- :ensure t
- :defer t
- :preface (packages 'suggest))
-
-(use-package ipretty
- :ensure t
- :defer t
- :preface (packages 'ipretty)
- :after elisp-mode
- :hook (emacs-lisp-mode-hook . (lambda () (ipretty-mode t))))
 
 ;;; Shell Scripting
 
@@ -1462,33 +1532,6 @@
  (embark-mixed-indicator-both t)
  (embark-mixed-indicator-delay 0))
 
-(use-package hotfuzz
- :ensure t
- :defer t
- :preface (packages 'hotfuzz)
- :after minibuffer
-
- :init
- (push 'hotfuzz completion-styles))
-
-(use-package orderless
- :ensure t
- :defer t
- :preface (packages 'orderless)
-
- :config
- (push 'orderless-initialism orderless-matching-styles)
- (push 'orderless-prefixes orderless-matching-styles))
-
-(use-package orderless
- :ensure t
- :defer t
- :preface (packages 'orderless)
- :after minibuffer
-
- :init
- (push 'orderless completion-styles))
-
 (use-package multiple-cursors
  :ensure t
  :defer t
@@ -1516,32 +1559,6 @@
 
  :custom
  (mc/always-run-for-all t))
-
-(use-package volatile-highlights
- :ensure t
- :defer t
- :preface (packages 'volatile-highlights)
- :diminish)
-
-(use-package volatile-highlights
- :ensure volatile-highlights
- :defer t
- :preface (packages 'volatile-highlights)
- :diminish
- :after hledger-mode
-
- :hook
- (hledger-mode-hook . volatile-highlights-mode))
-
-(use-package volatile-highlights
- :ensure volatile-highlights
- :defer t
- :preface (packages 'volatile-highlights)
- :diminish
- :after prog-mode
-
- :hook
- (prog-mode-hook . volatile-highlights-mode))
 
 ;;; Syntax Highlighting
 
@@ -1897,118 +1914,11 @@
 
 ;;; Ledger
 
-(use-package hledger-mode
- :ensure t
- :defer t
- :preface (packages 'hledger-mode)
- :mode (rx ".journal" eos)
- :mode (rx ".ledger" eos)
- :mode (rx ".hledger" eos)
-
- :preface
- (defvar init/hledger-currency-string "EUR")
-
- (defun init/hledger-move-amount-to-column ()
-  "Move the amount or the point to the valid column."
-  (interactive)
-  (let ((amount-marker (concat " " init/hledger-currency-string " "))
-        (original-pos (point)))
-   (end-of-line)
-   (when (search-backward amount-marker (pos-bol) t)
-    (right-char))
-   (let ((text (buffer-substring (point) (pos-eol)))
-         (difference (- (current-column) 64)))
-    (delete-region (point) (pos-eol))
-    (if (> difference 0)
-     (progn
-      (left-char difference)
-      (insert text))
-     (progn
-      (insert-char ?\s (abs difference))
-      (insert text)))
-    (unless (string-blank-p text)
-     (goto-char original-pos)))))
-
- (defun init/hledger-find-next-unaligned ()
-  "Find the next unaligned amount in a non-comment line."
-  (interactive)
-  (let ((amount-marker (concat " " init/hledger-currency-string " ")))
-   (catch 'found
-    (while (search-forward amount-marker nil t)
-     (left-char (- (length amount-marker) 1))
-     (when (not (or
-                 (= (current-column) 64)
-                 (looking-back ";.*" (line-beginning-position))))
-      (throw 'found t))))))
-
- :bind
- (:map hledger-mode-map
-  ("C-c >" . init/hledger-move-amount-to-column)
-  ("C-c x" . init/hledger-find-next-unaligned)
-  ("C-c +" . hledger-increment-entry-date))
-
- :custom
- (hledger-invalidate-completions '(on-save on-idle))
- (hledger-refresh-completions-idle-delay 5)
- (hledger-currency-string "")
-
- :config
- (setq-mode-local hledger-mode
-  tab-width 1
-  fill-column 100
-  comment-fill-column 100)
-
- (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
- (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
-
- :preface
- (defun init/hledger-capfs ()
-  ; 'hledger-completion-at-point
-  (cape-wrap-super #'cape-dabbrev #'yasnippet-capf))
-
- (defun init/setup-hledger-capfs ()
-  (setq-local completion-at-point-functions (list #'init/hledger-capfs)))
-
- :hook
- (hledger-mode-hook . init/setup-hledger-capfs)
- (hledger-mode-hook . init/buffer-completion-mode))
-
-(use-package hledger-core
- :ensure hledger-mode
- :defer t
- :custom
- (hledger-currency-string "")
- (hledger-comments-column 1)
- (hledger-jfile "~/Documents/Expenses/Expenses.ledger"))
-
 (use-package elec-pair
  :ensure nil
  :defer t
  :after hledger-mode
  :hook (hledger-mode-hook . electric-pair-local-mode))
-
-(use-package company
- :ensure t
- :defer t
- :preface (packages 'company)
- :config
- (setq-mode-local hledger-mode
-  company-backends '((hledger-company
-                      company-yasnippet))
-  completion-at-point-functions nil))
-
-(use-package flycheck-hledger
- :ensure t
- :defer t
- :preface (packages 'flycheck-hledger)
- :after hledger-mode
-
- :hook
- (hledger-mode-hook .
-  (lambda ()
-   (require 'flycheck-hledger)
-   ;; TODO Also add "accounts".
-   (setopt flycheck-hledger-checks '("commodities")))))
 
 (use-package whitespace
  :ensure nil
@@ -2029,13 +1939,6 @@
  :preface (packages 'yasnippet)
  :after hledger-mode
  :hook (hledger-mode-hook . yas-minor-mode-on))
-
-(use-package flycheck
- :ensure t
- :defer t
- :preface (packages 'flycheck)
- :after hledger-mode
- :hook hledger-mode-hook)
 
 (use-package display-fill-column-indicator
  :ensure t
@@ -2157,11 +2060,6 @@
  :defer t
  :preface (packages 'lsp-mode)
  :diminish "Ls"
-
- :init
- ;; Improvements to LSP performance.
- (setenv "LSP_USE_PLISTS" "true")
- (setq-default read-process-output-max (* 10 1024 1024))
 
  :config
  ;; Unmark after formatting.
