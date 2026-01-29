@@ -74,7 +74,7 @@
  (bind-key "C-p" #'casual-editkit-main-tmenu)
  (bind-key "C-c d" #'duplicate-dwim)
 
- (after 'volatile-highlights (diminish 'volatile-highlights))
+ (after 'volatile-highlights (diminish 'volatile-highlights-mode))
 
  (after 'files
   (setopt
@@ -757,7 +757,19 @@
 
  (after 'lsp-semantic-tokens
   (setopt
-   lsp-semantic-tokens-enable t)))
+   lsp-semantic-tokens-enable t))
+
+ (after 'elec-pair
+  (setopt
+   electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
+   electric-pair-preserve-balance nil)))
+
+(config "Configuration Files"
+ (after 'conf-mode
+  (add-hook 'conf-mode-hook #'electric-pair-local-mode)
+  (add-hook 'conf-desktop-mode-hook #'electric-pair-local-mode)
+  (add-hook 'conf-mode-hook #'electric-layout-local-mode)
+  (add-hook 'conf-desktop-mode-hook #'electric-layout-local-mode)))
 
 (config "Emacs Lisp"
  (packages 'eros 'suggest 'ipretty 'highlight-quoted 'highlight-defined)
@@ -863,7 +875,8 @@
   (add-hook 'hledger-mode-hook #'init/buffer-completion-mode)
   (add-hook 'hledger-mode-hook #'init/setup-hledger-capfs)
   (add-hook 'hledger-mode-hook #'init/hledger-maybe-setup-company nil t)
-  (add-hook 'hledger-mode-hook #'volatile-highlights-mode))
+  (add-hook 'hledger-mode-hook #'volatile-highlights-mode)
+  (add-hook 'hledger-mode-hook #'electric-pair-local-mode))
 
  (defun init/hledger-setup-flycheck ()
   (require 'flycheck-hledger))
@@ -912,14 +925,6 @@
 
 ;;  :hook
 ;;  (prog-mode-hook . init/setup-prog-capfs))
-
-(use-package elec-pair
- :ensure nil
- :defer t
-
- :custom
- (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
- (electric-pair-preserve-balance nil))
 
 (use-package subword
  :ensure nil
@@ -1022,18 +1027,6 @@
  :defer t
  :after conf-mode
  :hook ((conf-mode-hook conf-desktop-mode-hook) . show-paren-mode))
-
-(use-package elec-pair
- :ensure nil
- :defer t
- :after conf-mode
- :hook ((conf-mode-hook conf-desktop-mode-hook) . electric-pair-local-mode))
-
-(use-package electric
- :ensure nil
- :defer t
- :after conf-mode
- :hook ((conf-mode-hook conf-desktop-mode-hook) . electric-layout-local-mode))
 
 (use-package display-line-numbers
  :ensure nil
@@ -1699,15 +1692,6 @@
  ;; Unmark region even when c-indent-line-or-region doesn't indent anything.
  (advice-add 'c-indent-line-or-region :after #'keyboard-quit))
 
-(use-package editorconfig
- :ensure t
- :defer t
- :preface (packages 'editorconfig)
- :diminish "Ec"
- :after cc-mode
- :hook
- (c-mode-hook . editorconfig-mode))
-
 (use-package cc-vars
  :ensure nil
  :defer t
@@ -1914,12 +1898,6 @@
 
 ;;; Ledger
 
-(use-package elec-pair
- :ensure nil
- :defer t
- :after hledger-mode
- :hook (hledger-mode-hook . electric-pair-local-mode))
-
 (use-package whitespace
  :ensure nil
  :defer t
@@ -2096,9 +2074,7 @@
  (lsp-keymap-prefix "C-c")
  (lsp-idle-delay 0.1)
  (lsp-file-watch-threshold nil)
- (lsp-enable-semantic-highlighting t)
  (lsp-enable-indentation t)
- (lsp-before-save-edits nil)
  (lsp-auto-configure t)
  (lsp-modeline-code-actions-enable nil)
  (lsp-modeline-diagnostics-enable t)
