@@ -15,6 +15,9 @@
 [color]
   ui = true
 
+[column]
+  ui = auto
+
 [core]
   pager = delta
 
@@ -44,6 +47,7 @@
   prune = true
   pruneTags = true
   all = true
+  writeCommitGraph = true
 
 [status]
   showUntrackedFiles = all
@@ -68,8 +72,7 @@
 
 # Reuse Recoded Resolutions: The enabled option will make sure it records the before and
 # after states of rebase conflicts and the autoupdate will automatically re-apply the
-# resolutions if it sees them again. I wrote about this at some length over here, so I
-# won’t bore you with the recap any further.
+# resolutions if it sees them again.
 # [rerere]
 #   enabled = true
 #   autoupdate = true
@@ -99,3 +102,7 @@
 # [remote "origin"]
 #   fetch = +refs/heads/*:refs/remotes/origin/*
 #   fetch = +refs/pull/*/head:refs/pull/origin/*
+
+[alias]
+  blame-func=blame -w -C -C -C --color-lines -L
+  log-func=log -w -C -C -C -L
