@@ -375,7 +375,6 @@ xf86-input-evdev
 yamllint
 yapf
 yt-dlp
-yt-dlp-ejs
 yubikey-personalization-gui
 zip
 zram-generator
