@@ -576,7 +576,7 @@
           (display-buffer-reuse-mode-window display-buffer-in-side-window)
           (mode . flycheck-errors-list-mode)
           (side . bottom)
-          (slot . 1)
+          (slot . 0)
           (dedicated . t)
           (window-height . 0.15)
           (post-command-select-window . t)
