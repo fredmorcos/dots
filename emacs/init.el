@@ -463,6 +463,11 @@
 (config "Embark"
  (packages 'embark 'embark-consult))
 
+(config "Window Faces"
+ (autoload 'face-remap-remove-relative "face-remap")
+ (defface init/dedicated-mode-line '((t :height 0.2)) "Dedicated Window Modeline Face")
+ (defvar-local init/dedicated-mode-line-cookie nil))
+
 (config "In-buffer Completion"
  (defun init/buffer-completion-mode ()
   "Activate in-buffer completion system."
@@ -544,25 +549,21 @@
    next-error-recenter '(4)
    next-error-message-highlight t))
 
- (defface init/flycheck-errors-mode-line '((t :height 0.2)) "Flycheck errors modeline")
- (defface init/flycheck-errors-text '((t :height 0.8)) "Flycheck errors text")
- (defvar-local init/flycheck-errors-mode-line-cookie nil)
- (defvar-local init/flycheck-errors-text-cookie nil)
-
  (defun init/delete-ancillary-window (window)
   (unless (eq window (selected-window))
    (delete-window window)))
 
- (autoload 'face-remap-remove-relative "face-remap")
+ (defface init/flycheck-errors-text '((t :height 0.8)) "Flycheck errors text")
+ (defvar-local init/flycheck-errors-text-cookie nil)
 
  (defun init/setup-flycheck-errors-window (window)
   (with-current-buffer (window-buffer window)
    (add-hook 'window-selection-change-functions #'init/delete-ancillary-window nil t))
   (with-selected-window window
-   (face-remap-remove-relative init/flycheck-errors-mode-line-cookie)
+   (face-remap-remove-relative init/dedicated-mode-line-cookie)
    (face-remap-remove-relative init/flycheck-errors-text-cookie)
-   (setq init/flycheck-errors-mode-line-cookie
-    (face-remap-add-relative 'mode-line-active 'init/flycheck-errors-mode-line))
+   (setq init/dedicated-mode-line-cookie
+    (face-remap-add-relative 'mode-line-active 'init/dedicated-mode-line))
    (setq init/flycheck-errors-text-cookie
     (face-remap-add-relative 'default 'init/flycheck-errors-text))
    (bind-key [remap keyboard-quit]
@@ -584,7 +585,18 @@
           (body-function . init/setup-flycheck-errors-window))
    display-buffer-alist))
 
+ (autoload 'flycheck-error-list-make-last-column "flycheck")
+
  (after 'flycheck
+  (defconst flycheck-error-list-format
+   `[("File" 10)
+     ("Line" 5 flycheck-error-list-entry-< :right-align nil)
+     ("Col" 5 nil :right-align nil)
+     ("Level" 8 flycheck-error-list-entry-level-<)
+     ("ID" 10 t)
+     (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
+   "Table format for the error list.")
+
   (bind-key "C-c ! L" #'consult-flycheck 'flycheck-mode-map)
   (bind-key "M-n" 'flycheck-next-error 'flycheck-mode-map)
   (bind-key "M-p" 'flycheck-previous-error 'flycheck-mode-map)
@@ -739,7 +751,8 @@
   (add-hook 'css-mode-hook #'init/css-setup-comments)))
 
 (config "General Programming"
- (packages 'jinx 'devdocs 'editorconfig 'lsp-mode)
+ (packages 'jinx 'devdocs 'editorconfig 'lsp-mode 'diff-hl 'yasnippet
+  'sideline 'sideline-blame)
 
  (after 'eldoc
   (diminish 'eldoc-mode "Ed")
@@ -747,7 +760,30 @@
   (after 'mwim (eldoc-add-command-completions "mwim-"))
   (setopt
    eldoc-documentation-strategy 'eldoc-documentation-compose
-   eldoc-idle-delay 0.1))
+   eldoc-echo-area-use-multiline-p nil
+   eldoc-echo-area-prefer-doc-buffer t))
+
+ (defun init/setup-eldoc-window (window)
+  (with-selected-window window
+   (bind-key [remap keyboard-quit]
+    #'(lambda ()
+       (interactive)
+       (delete-window window))
+    'special-mode-map)))
+
+ (after 'window
+  (push `(,(rx bos "*eldoc" (1+ nonl) "*" eos)
+          (display-buffer-reuse-mode-window display-buffer-in-side-window)
+          (mode . special-mode)
+          (side . right)
+          (slot . 1)
+          (dedicated . t)
+          (window-parameters . ((mode-line-format . "")))
+          (body-function . init/setup-eldoc-window))
+   display-buffer-alist))
+
+ (after 'prog-mode
+  (bind-key "C-x D" #'eldoc 'prog-mode-map))
 
  (after 'editorconfig (diminish 'editorconfig "Ec"))
 
@@ -762,6 +798,10 @@
   (add-hook 'prog-mode-hook #'whitespace-mode)
   (add-hook 'prog-mode-hook #'editorconfig-mode)
   (add-hook 'prog-mode-hook #'volatile-highlights-mode)
+  (add-hook 'prog-mode-hook #'diff-hl-mode)
+  (add-hook 'prog-mode-hook #'show-paren-mode)
+  (add-hook 'prog-mode-hook #'yas-minor-mode-on)
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
   (bind-key "C-h D" #'devdocs-lookup))
 
  (declvar devdocs-current-docs)
@@ -789,14 +829,52 @@
  (after 'elec-pair
   (setopt
    electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
-   electric-pair-preserve-balance nil)))
+   electric-pair-preserve-balance nil))
+
+ (after 'subword
+  (diminish 'subword-mode "Sw"))
+
+ (after 'xref
+  (add-hook 'xref-after-return-hook #'recenter)
+  (setopt
+   xref-show-xrefs-function #'consult-xref
+   xref-show-definitions-function #'consult-xref))
+
+ (after 'sideline
+  (diminish 'sideline-mode "Si")
+  (setopt
+   sideline-backends-right '(sideline-blame)))
+
+ (after 'sideline-blame (setopt sideline-blame-commit-format "- %s")))
+
+(config "Grepping"
+ (packages 'deadgrep 'wgrep 'wgrep-deadgrep)
+ (bind-key "M-F" #'deadgrep))
 
 (config "Configuration Files"
+ (packages 'diff-hl 'jinx)
  (after 'conf-mode
   (add-hook 'conf-mode-hook #'electric-pair-local-mode)
   (add-hook 'conf-desktop-mode-hook #'electric-pair-local-mode)
   (add-hook 'conf-mode-hook #'electric-layout-local-mode)
-  (add-hook 'conf-desktop-mode-hook #'electric-layout-local-mode)))
+  (add-hook 'conf-desktop-mode-hook #'electric-layout-local-mode)
+  (add-hook 'conf-mode-hook #'diff-hl-mode)
+  (add-hook 'conf-desktop-mode-hook #'diff-hl-mode)
+  (add-hook 'conf-mode-hook #'show-paren-mode)
+  (add-hook 'conf-desktop-mode-hook #'show-paren-mode)
+  (add-hook 'conf-mode-hook #'display-line-numbers-mode)
+  (add-hook 'conf-desktop-mode-hook #'display-line-numbers-mode)
+  (add-hook 'conf-mode-hook #'hl-line-mode)
+  (add-hook 'conf-desktop-mode-hook #'hl-line-mode)
+  (add-hook 'conf-mode-hook #'jinx-mode)
+  (add-hook 'conf-desktop-mode-hook #'jinx-mode)
+  (add-hook 'conf-mode-hook #'whitespace-mode)
+  (add-hook 'conf-desktop-mode-hook #'whitespace-mode)))
+
+(config "Meson"
+ (packages 'meson-mode 'symbol-overlay)
+ (after 'meson-mode
+  (add-hook 'meson-mode-hook #'symbol-overlay-mode)))
 
 (config "Emacs Lisp"
  (packages 'eros 'suggest 'ipretty 'highlight-quoted 'highlight-defined)
@@ -953,145 +1031,9 @@
 ;;  :hook
 ;;  (prog-mode-hook . init/setup-prog-capfs))
 
-(use-package subword
- :ensure nil
- :defer t
- :diminish "Sw")
-
-(use-package diff-hl
- :ensure t
- :defer t
- :preface (packages 'diff-hl)
- :after prog-mode
- :hook prog-mode-hook)
-
-(use-package paren
- :ensure nil
- :defer t
- :after prog-mode
- :hook (prog-mode-hook . show-paren-mode))
-
-(use-package yasnippet
- :ensure t
- :defer t
- :preface (packages 'yasnippet)
- :after prog-mode
- :hook (prog-mode-hook . yas-minor-mode-on))
-
-(use-package display-line-numbers
- :ensure nil
- :defer t
- :after prog-mode
- :hook prog-mode-hook)
-
 ;; TODO enable hl-line-mode & display-line-numbers-mode & whitespace-mode in yaml-mode toml-mode json-mode hledger-mode
 
-(use-package deadgrep
- :ensure t
- :defer t
- :preface (packages 'deadgrep)
- :after prog-mode
-
- :bind
- (:map prog-mode-map ("M-F" . deadgrep)))
-
-(use-package wgrep
- :ensure t
- :defer t
- :preface (packages 'wgrep))
-
-(use-package wgrep-deadgrep
- :ensure t
- :defer t
- :preface (packages 'wgrep-deadgrep)
- :after deadgrep)
-
-(use-package sideline
- :ensure t
- :defer t
- :preface (packages 'sideline)
- :diminish "Si")
-
-(use-package sideline-blame
- :ensure t
- :defer t
- :preface (packages 'sideline-blame)
- :after sideline
-
- :custom
- (sideline-backends-right '(sideline-blame))
- (sideline-blame-commit-format "- %s"))
-
-(use-package xref
- :ensure nil
- :defer t
- :commands xref-push-marker-stack)
-
-(use-package emacs
- :ensure nil
- :defer t
- :after xref
- :hook (xref-after-return-hook . recenter))
-
-(use-package xref
- :ensure nil
- :defer t
- :preface (packages 'consult)
- :custom
- (xref-show-xrefs-function #'consult-xref)
- (xref-show-definitions-function #'consult-xref))
-
-;;; Configuration Files
-
-(use-package diff-hl
- :ensure t
- :defer t
- :after conf-mode
- :hook (conf-mode-hook conf-desktop-mode-hook))
-
-(use-package paren
- :ensure nil
- :defer t
- :after conf-mode
- :hook ((conf-mode-hook conf-desktop-mode-hook) . show-paren-mode))
-
-(use-package display-line-numbers
- :ensure nil
- :defer t
- :after conf-mode
- :hook (conf-mode-hook conf-desktop-mode-hook))
-
-(use-package hl-line
- :ensure nil
- :defer t
- :after conf-mode
- :hook (conf-mode-hook conf-desktop-mode-hook))
-
-(use-package jinx
- :ensure t
- :defer t
- :after conf-mode
- :hook (conf-mode-hook conf-desktop-mode-hook))
-
-(use-package whitespace
- :ensure nil
- :defer t
- :after conf-mode
- :hook (conf-mode-hook conf-desktop-mode-hook))
-
 ;;; Meson
-
-(use-package meson-mode
- :ensure t
- :defer t
-
- :preface (packages 'meson-mode))
-
-(use-package symbol-overlay
- :ensure t
- :defer t
- :after meson-mode
- :hook meson-mode-hook)
 
 (use-package lsp-meson
  :ensure lsp-mode
