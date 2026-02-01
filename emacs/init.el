@@ -125,6 +125,7 @@
 
 (config "Window Movement and Management"
  (windmove-default-keybindings)
+ (windmove-swap-states-default-keybindings)
  (windmove-delete-default-keybindings)
 
  (autoload 'winner-undo "winner" nil t)
@@ -148,14 +149,7 @@
    ;; Skip *SPECIALS* when switching buffers.
    switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
 
-  (advice-add 'split-window-below :after #'init/recenter)
-
-  (push `(,(rx bos "*Help*" (0+ nonl) eos)
-          (display-buffer-reuse-mode-window display-buffer-in-side-window)
-          (side . right)
-          (dedicated . nil)
-          (window-width . 80))
-   display-buffer-alist))
+  (advice-add 'split-window-below :after #'init/recenter))
 
  (bind-key "<f12>" #'delete-other-windows)
 
@@ -542,19 +536,52 @@
    (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))))
 
 (config "Syntax Checkers and Error Lists"
+ (packages 'flycheck 'consult-flycheck)
+
  (after 'simple
   (setopt
    ;; Recenter after jump to next error.
    next-error-recenter '(4)
    next-error-message-highlight t))
 
- (packages 'flycheck 'consult-flycheck)
+ (defface init/flycheck-errors-mode-line '((t :height 0.2)) "Flycheck errors modeline")
+ (defface init/flycheck-errors-text '((t :height 0.8)) "Flycheck errors text")
+ (defvar-local init/flycheck-errors-mode-line-cookie nil)
+ (defvar-local init/flycheck-errors-text-cookie nil)
+
+ (defun init/delete-ancillary-window (window)
+  (unless (eq window (selected-window))
+   (delete-window window)))
+
+ (autoload 'face-remap-remove-relative "face-remap")
+
+ (defun init/setup-flycheck-errors-window (window)
+  (with-current-buffer (window-buffer window)
+   (add-hook 'window-selection-change-functions #'init/delete-ancillary-window nil t))
+  (with-selected-window window
+   (face-remap-remove-relative init/flycheck-errors-mode-line-cookie)
+   (face-remap-remove-relative init/flycheck-errors-text-cookie)
+   (setq init/flycheck-errors-mode-line-cookie
+    (face-remap-add-relative 'mode-line-active 'init/flycheck-errors-mode-line))
+   (setq init/flycheck-errors-text-cookie
+    (face-remap-add-relative 'default 'init/flycheck-errors-text))
+   (bind-key [remap keyboard-quit]
+    #'(lambda ()
+       (interactive)
+       (delete-window window))
+    'flycheck-error-list-mode-map)))
 
  (after 'window
   (push `(,(rx bos "*Flycheck errors*" eos)
-          (display-buffer-reuse-mode-window display-buffer-at-bottom)
+          (display-buffer-reuse-mode-window display-buffer-in-side-window)
+          (mode . flycheck-errors-list-mode)
+          (side . bottom)
+          (slot . 1)
           (dedicated . t)
-          (window-height . 0.15))
+          (window-height . 0.15)
+          (post-command-select-window . t)
+          (window-parameters . ((mode-line-format . "")))
+          (body-function . init/setup-flycheck-errors-window))
    display-buffer-alist))
 
  (after 'flycheck
