@@ -10,7 +10,7 @@
  (defvar *init/completion-system* :corfu "Which completion system to use."))
 
 (config "Quality of Life"
- (packages 'crux)
+ (package 'crux)
  (bind-key [remap keyboard-quit] #'crux-keyboard-quit-dwim)
 
  (autoload 'qol/insert-pair               "qol")
@@ -50,7 +50,7 @@
  (put 'scroll-right     'disabled t))
 
 (config "Clean Configuration Files"
- (packages 'no-littering)
+ (package 'no-littering)
  (eval-and-compile (require 'no-littering))
  (no-littering-theme-backups))
 
@@ -61,10 +61,13 @@
    dictionary-use-single-buffer t)))
 
 (config "Navigating Text"
- (packages 'move-text 'mwim)
+ (package 'move-text)
  (move-text-default-bindings)
+
+ (package 'mwim)
  (bind-key [remap move-beginning-of-line] #'mwim-beginning-of-code-or-line-or-comment)
  (bind-key [remap move-end-of-line] #'mwim-end-of-code-or-line)
+
  (after 'paren
   (setopt
    show-paren-when-point-in-periphery t
@@ -74,7 +77,9 @@
    show-paren-context-when-offscreen 'overlay)))
 
 (config "Grepping"
- (packages 'deadgrep 'wgrep 'wgrep-deadgrep)
+ (package 'deadgrep)
+ (package 'wgrep)
+ (package 'wgrep-deadgrep)
  (bind-key "M-F" #'deadgrep))
 
 (config "Scrolling"
@@ -103,20 +108,20 @@
 
 (config "Selecting Text"
  (cua-selection-mode t)
- (packages 'expand-region 'surround)
+ (package 'expand-region)
  (bind-key "C-=" #'er/expand-region)
+ (package 'surround)
  (bind-key "M-'" #'surround-mark-inner)
  (bind-key "M-\"" #'surround-insert))
 
 (config "Editing Text"
- (packages 'casual 'speedrect 'volatile-highlights)
-
  (after 'text-mode
   (add-hook 'text-mode-hook #'jinx-mode))
 
  (bind-key "C-p" #'casual-editkit-main-tmenu)
  (bind-key "C-c d" #'duplicate-dwim)
 
+ (package 'volatile-highlights)
  (after 'volatile-highlights (diminish 'volatile-highlights-mode))
 
  (after 'files
@@ -131,6 +136,7 @@
 
  (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
 
+ (package 'speedrect)
  (after 'speedrect (diminish 'speedrect-mode "Sr"))
  (speedrect-mode)
 
@@ -163,8 +169,7 @@
    buffer-auto-revert-by-notification t)))
 
 (config "Search & Replace"
- (packages 'visual-replace 'casual 'ctrlf)
-
+ (package 'visual-replace)
  (bind-key "M-%" #'visual-replace-thing-at-point)
  (bind-key "M-^" #'visual-replace-selected)
  (bind-key "M-*" #'visual-replace)
@@ -180,22 +185,22 @@
 
  (bind-key "C-p" #'casual-isearch-tmenu)
 
+ (package 'ctrlf)
  (after 'ctrlf
   (setopt
    ctrlf-default-search-style 'fuzzy
    ctrlf-auto-recenter t))
-
  (ctrlf-mode))
 
 (config "Undo & Redo"
- (packages 'vundo)
+ (package 'vundo)
  (bind-key "C-x u" #'vundo)
  (after 'vundo
   (setopt vundo-glyph-alist vundo-unicode-symbols))
  (after 'emacs (setopt undo-limit (* 1024 1024))))
 
 (config "Filling Text"
- (packages 'unfill)
+ (package 'unfill)
  (after 'fill
   (bind-key [remap fill-paragraph] #'unfill-toggle))
 
@@ -252,7 +257,7 @@
  (after 'emacs (setopt resize-mini-windows t)))
 
 (config "Buffer Management"
- (packages 'buffer-move)
+ (package 'buffer-move)
  (bind-key "C-x m" #'buf-move)
 
  (after 'ibuffer
@@ -293,7 +298,8 @@
  (setopt warning-minimum-level :emergency))
 
 (config "Help"
- (packages 'casual 'casual-suite 'transient)
+ (package 'casual)
+ (package 'casual-suite)
 
  (after 'help
   (setopt
@@ -310,11 +316,12 @@
  (after 'info
   (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))
 
+ (package 'transient)
  (after 'transient (setopt transient-default-level 7))
  (after 'woman (setopt woman-fill-column 100)))
 
 (config "User Interface"
- (packages 'nerd-icons)
+ (package 'nerd-icons)
  (after 'tooltip (setopt tooltip-use-echo-area t))
  (after 'display-line-numbers
   (setopt
@@ -322,7 +329,7 @@
    display-line-numbers-width-start t)))
 
 (config "Modeline"
- (packages 'diminish)
+ (package 'diminish)
  (after 'uniquify (setopt uniquify-buffer-name-style 'forward)))
 
 (config "User Experience"
@@ -350,7 +357,9 @@
   (bind-key "C-p" #'casual-re-builder-tmenu 'reb-lisp-mode-map)))
 
 (config "Symbol handling and Multiple Cursors"
- (packages 'symbol-overlay 'symbol-overlay-mc 'casual-symbol-overlay 'multiple-cursors)
+ (package 'symbol-overlay)
+ (package 'symbol-overlay-mc)
+ (package 'casual-symbol-overlay)
  (after 'symbol-overlay
   (diminish 'symbol-overlay-mode "So")
   (setopt symbol-overlay-idle-time 0.1)
@@ -358,6 +367,8 @@
   (bind-key "M-a" #'symbol-overlay-mc-mark-all 'symbol-overlay-mode-map)
   (bind-key "M->" #'symbol-overlay-jump-next 'symbol-overlay-mode-map)
   (bind-key "M-<" #'symbol-overlay-jump-prev 'symbol-overlay-mode-map))
+
+ (package 'multiple-cursors)
  (bind-key "C-c C-v"       #'mc/edit-lines)
  (bind-key "C->"           #'mc/mark-next-like-this)
  (bind-key "C-<"           #'mc/mark-previous-like-this)
@@ -417,8 +428,8 @@
                                       try-expand-list-all-buffers))))
 
 (config "Minibuffer"
- (packages 'hotfuzz 'orderless 'marginalia)
-
+ (package 'hotfuzz)
+ (package 'orderless)
  (after 'minibuffer
   (delete 'tags-completion-at-point-function completion-at-point-functions)
   (delete 'emacs22 completion-styles)
@@ -456,6 +467,8 @@
 
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode))
 
+ (package 'marginalia)
+ (package 'nerd-icons-completion)
  (after 'marginalia
   (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
@@ -470,20 +483,16 @@
   (bind-key "M-A" #'marginalia-cycle 'completion-list-mode-map)))
 
 (config "Minibuffer Completion"
- (packages 'vertico 'consult)
-
+ (package 'vertico)
  (after 'vertico
   (bind-key "M-RET" #'minibuffer-force-complete-and-exit 'vertico-map)
   (bind-key "M-TAB" #'minibuffer-complete 'vertico-map)
   (bind-key "RET" #'vertico-directory-enter 'vertico-map)
   (bind-key "DEL" #'vertico-directory-delete-char 'vertico-map)
-  (bind-key "M-DEL" #'vertico-directory-delete-word 'vertico-map))
-
- (after 'vertico
+  (bind-key "M-DEL" #'vertico-directory-delete-word 'vertico-map)
   (setopt
    vertico-cycle t
    vertico-resize nil))
-
  (vertico-mode)
 
  (after 'rfn-eshadow
@@ -495,6 +504,7 @@
  (after 'imenu
   (bind-key [remap imenu] #'consult-imenu))
 
+ (package 'consult)
  (after 'consult
   (bind-key "C-?" 'consult-narrow-help 'consult-narrow-map)
   (setopt
@@ -515,8 +525,6 @@
  (bind-key "M-D" #'consult-fd))
 
 (config "Registers"
- (packages 'consult)
-
  (after 'consult-register
   (advice-add #'consult-register :after #'init/recenter))
 
@@ -572,13 +580,13 @@
  (after 'recentf (recentf-mode)))
 
 (config "Session Management"
- (packages 'easysession)
+ (package 'easysession)
  (after 'easysession (setopt easysession-save-mode-lighter-show-session-name t))
  (bind-key "C-c u" #'easysession-save)
  (bind-key "C-c U" #'easysession-load))
 
 (config "Spell Checking"
- (packages 'jinx)
+ (package 'jinx)
  (after 'jinx
   (diminish 'jinx-mode "Jx")
   (bind-key "M-$"   #'jinx-correct   'jinx-mode-map)
@@ -590,8 +598,7 @@
  (defvar-local init/dedicated-mode-line-cookie nil))
 
 (config "Utilities"
- (packages 'which-key 'embark 'embark-consult 'nerd-icons-completion)
-
+ (package 'which-key)
  (after 'which-key
   (diminish 'which-key-mode)
   (setopt
@@ -602,6 +609,8 @@
    which-key-max-display-columns nil))
  (which-key-mode)
 
+ (package 'embark)
+ (package 'embark-consult)
  (after 'embark
   (setopt
    prefix-help-command #'embark-prefix-help-command
@@ -625,11 +634,11 @@
     (corfu-mode))
    (t (error "init.el: Unknown completion system requested"))))
 
- (packages 'corfu 'nerd-icons-corfu 'company 'company-posframe 'cape)
-
  (config "Corfu"
-  ;; Show icons in corfu popups.
+  (package 'corfu)
+  (package 'nerd-icons-corfu)
   (after 'corfu
+   ;; Show icons in corfu popups.
    (declvar corfu-margin-formatters)
    (push #'nerd-icons-corfu-formatter corfu-margin-formatters)
    (setopt
@@ -640,18 +649,16 @@
     corfu-scroll-margin 5
     ;; corfu-max-width 50
     corfu-min-width 50)
-
    (add-hook 'corfu-mode-hook #'corfu-popupinfo-mode)
    (add-hook 'corfu-mode-hook #'corfu-history-mode))
-
   (after 'corfu-popupinfo (setopt corfu-popupinfo-delay '(1.25 . 0.5)))
-
   (after 'corfu-history
    (after 'savehist
     (defvar savehist-additional-variables)
     (push 'corfu-history savehist-additional-variables))))
 
  (config "Company"
+  (package 'company)
   (defun init/company-is-active (&rest _)
    (declfun company--active-p 'company)
    (or (company--active-p) (bound-and-true-p company-backend)))
@@ -672,6 +679,7 @@
     company-tooltip-width-grow-only t)
    (add-hook 'company-mode-hook #'company-posframe-mode))
 
+  (package'company-posframe)
   (after 'company-posframe
    (diminish 'company-posframe-mode)
    (declvar company-posframe-show-params)
@@ -681,6 +689,7 @@
    (setopt company-posframe-quickhelp-x-offset 2)))
 
  (config "Cape"
+  (package 'cape)
   (bind-key "C-c p" #'cape-prefix-map)
 
   (after 'cape
@@ -688,7 +697,8 @@
    (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))))
 
 (config "Syntax Highlighting"
- (packages 'tree-sitter 'tree-sitter-langs)
+ (package 'tree-sitter)
+ (package 'tree-sitter-langs)
 
  (defun init/tree-sitter-langs-install-grammars ()
   (tree-sitter-langs-install-grammars t))
@@ -721,8 +731,6 @@
    jit-lock-antiblink-grace nil)))
 
 (config "Syntax Checkers and Error Lists"
- (packages 'flycheck 'consult-flycheck)
-
  (after 'simple
   (setopt
    ;; Recenter after jump to next error.
@@ -765,8 +773,9 @@
           (body-function . init/setup-flycheck-errors-window))
    display-buffer-alist))
 
+ (package 'flycheck)
+ (package 'consult-flycheck)
  (autoload 'flycheck-error-list-make-last-column "flycheck")
-
  (after 'flycheck
   (defconst flycheck-error-list-format
    `[("File" 20)
@@ -791,7 +800,8 @@
    flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line))))
 
 (config "Snippets"
- (packages 'yasnippet 'yasnippet-snippets)
+ (package 'yasnippet)
+ (package 'yasnippet-snippets)
 
  (defvar *init/yasnippet-snippets-initialized* nil)
  (defun init/initialize-yasnippet-snippets ()
@@ -808,7 +818,7 @@
  (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
 
 (config "Dired"
- (packages 'nerd-icons-dired)
+ (package 'nerd-icons-dired)
 
  (after 'dired-async (diminish 'dired-async-mode "As"))
 
@@ -838,8 +848,9 @@
    dired-dwim-target t)))
 
 (config "Project Management"
- (packages 'projectile)
- (after 'projectile-mode
+ (package 'projectile)
+ (autoload 'projectile-project-root "projectile")
+ (after 'projectile
   (diminish 'projectile-mode "Pr")
   (setopt
    ;; projectile-indexing-method 'hybrid
@@ -855,7 +866,6 @@
   (add-hook 'after-init-hook #'projectile-mode)))
 
 (config "Version Control"
- (packages 'magit 'blamer 'diff-hl)
 
  (after 'vc (setopt vc-make-backup-files t))
 
@@ -866,6 +876,7 @@
    ediff-split-window-function #'split-window-horizontally
    ediff-window-setup-function #'ediff-setup-windows-plain))
 
+ (package 'blamer)
  (after 'blamer
   (setopt
    ;; blamer-idle-time 0
@@ -873,10 +884,11 @@
    blamer-datetime-formatter "%s"
    blamer-max-commit-message-length 60))
 
+ (package 'magit)
+ (bind-key "C-x g" #'magit-status)
+
  (after 'magit-process
   (add-hook 'magit-process-mode-hook #'goto-address-mode))
-
- (bind-key "C-x g" #'magit-status)
 
  (defun init/disable-line-numbers ()
   "Disable display-line-numbers-mode."
@@ -924,6 +936,7 @@
    magit-revision-show-gravatars t
    magit-revision-fill-summary-line fill-column))
 
+ (package 'diff-hl)
  (after 'diff-hl
   (setopt
    diff-hl-flydiff-delay 1
@@ -933,9 +946,6 @@
   (add-hook 'diff-hl-mode-hook #'diff-hl-show-hunk-mouse-mode)))
 
 (config "General Programming"
- (packages 'devdocs 'editorconfig 'lsp-mode 'yasnippet
-  'sideline 'sideline-blame)
-
  (after 'eldoc
   (diminish 'eldoc-mode "Ed")
   (after 'flycheck (eldoc-add-command-completions "flycheck-"))
@@ -967,6 +977,7 @@
  (after 'prog-mode
   (bind-key "C-x D" #'eldoc 'prog-mode-map))
 
+ (package 'editorconfig)
  (after 'editorconfig (diminish 'editorconfig "Ec"))
 
  (after 'prog-mode
@@ -987,6 +998,7 @@
   (bind-key "C-h D" #'devdocs-lookup)
   (bind-key "C-c b" #'blamer-mode))
 
+ (package 'devdocs)
  (declvar devdocs-current-docs)
  (declvar python-mode)
  (declvar rust-mode)
@@ -1001,14 +1013,6 @@
  (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp")
  (setq-mode-local makefile-mode devdocs-current-docs "gnu_make")
 
- (after 'lsp-mode
-  (setopt
-   lsp-before-save-edits nil))
-
- (after 'lsp-semantic-tokens
-  (setopt
-   lsp-semantic-tokens-enable t))
-
  (after 'elec-pair
   (setopt
    electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
@@ -1022,18 +1026,37 @@
    xref-show-xrefs-function #'consult-xref
    xref-show-definitions-function #'consult-xref))
 
+ (package 'sideline)
+ (package 'sideline-blame)
  (after 'sideline
   (diminish 'sideline-mode "Si")
   (setopt
    sideline-backends-right '(sideline-blame)))
 
- (after 'sideline-blame (setopt sideline-blame-commit-format "- %s")))
+ (after 'sideline-blame (setopt sideline-blame-commit-format "- %s"))
+
+ (package 'indent-bars)
+ (after 'indent-bars
+  (setopt
+   indent-bars-treesit-support t
+   indent-bars-width-frac 0.1)))
+
+(config "LSP"
+ (package 'lsp-mode)
+
+ (after 'lsp-mode
+  (setopt
+   lsp-before-save-edits nil))
+
+ (after 'lsp-semantic-tokens
+  (setopt
+   lsp-semantic-tokens-enable t)))
 
 (config "Translation Files"
- (packages 'po-mode))
+ (package 'po-mode))
 
 (config "Sed Files"
- (packages 'sed-mode))
+ (package 'sed-mode))
 
 (config "Configuration Files"
  (after 'conf-mode
@@ -1055,7 +1078,7 @@
   (add-hook 'conf-desktop-mode-hook #'whitespace-mode)))
 
 (config "Markdown"
- (packages 'markdown-mode)
+ (package 'markdown-mode)
  (after 'markdown-mode
   (declvar markdown-mode)
   (setq-mode-local markdown-mode fill-column 79)
@@ -1063,7 +1086,7 @@
   (add-hook 'markdown-mode-hook #'hl-line-mode)))
 
 (config "JSON"
- (packages 'json-mode)
+ (package 'json-mode)
  (after 'json-mode
   (add-hook 'json-mode-hook #'indent-bars-mode)
   (add-hook 'json-mode-hook #'tree-sitter-mode)
@@ -1073,17 +1096,18 @@
   (add-hook 'json-mode-hook #'whitespace-mode)))
 
 (config "TOML"
- (packages 'toml-mode 'eldoc-toml)
- (after 'eldoc-toml (diminish 'eldoc-toml))
+ (package 'toml-mode)
  (after 'toml-mode
   (add-hook 'toml-mode-hook #'eldoc-toml-mode)
   (add-hook 'toml-mode-hook #'hl-line-mode)
   (add-hook 'toml-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'toml-mode-hook #'display-line-numbers-mode)
-  (add-hook 'toml-mode-hook #'whitespace-mode)))
+  (add-hook 'toml-mode-hook #'whitespace-mode))
+ (package 'eldoc-toml)
+ (after 'eldoc-toml (diminish 'eldoc-toml)))
 
 (config "YAML"
- (packages 'yaml-mode)
+ (package 'yaml-mode)
  (after 'yaml-mode
   (bind-key "C-c p" #'qol/generate-password 'yaml-mode-map)
   (add-hook 'yaml-mode-hook #'indent-bars-mode)
@@ -1095,7 +1119,9 @@
   (add-hook 'yaml-mode-hook #'whitespace-mode)))
 
 (config "LLVM"
- (packages 'llvm-ts-mode 'demangle-mode 'autodisass-llvm-bitcode)
+ (package 'llvm-ts-mode)
+ (package 'demangle-mode)
+ (package 'autodisass-llvm-bitcode)
  (mode (rx ".ll" eos) #'llvm-ts-mode)
  (mode (rx bos ".clang-format") #'yaml-mode)
  (mode (rx bos ".clang-tidy") #'yaml-mode)
@@ -1104,11 +1130,13 @@
   (add-hook 'llvm-ts-mode-hook #'demangle-mode)))
 
 (config "Archlinux PKGBUILDs"
- (packages 'pkgbuild-mode)
+ (package 'pkgbuild-mode)
  (mode (rx bos "PKGBUILD" eos) #'pkgbuild-mode))
 
 (config "Docker"
- (packages 'dockerfile-mode 'docker-compose-mode 'docker)
+ (package 'dockerfile-mode)
+ (package 'docker-compose-mode)
+ (package 'docker)
  (bind-key "C-c D" #'docker))
 
 (config "Makefiles"
@@ -1116,7 +1144,7 @@
   (add-hook 'makefile-mode-hook #'whitespace-mode)))
 
 (config "Web Development"
- (packages 'web-mode 'company 'company-web 'emmet-mode)
+ (package 'web-mode)
 
  (mode (rx ".html" eos) #'web-mode)
  (mode (rx ".css" eos) #'web-mode)
@@ -1136,9 +1164,12 @@
   (setq-mode-local web-mode tab-width 2)
   (add-hook 'web-mode-hook #'company-mode)
   (add-hook 'web-mode-hook #'emmet-mode)
+
+  (package 'company-web)
   (after 'company
    (setq-mode-local web-mode company-backends '((company-css company-web-html)))))
 
+ (package 'emmet-mode)
  (after 'emmet-mode
   (diminish 'emmet-mode "Em")
   (setopt emmet-indentation 2))
@@ -1152,7 +1183,7 @@
   (add-hook 'css-mode-hook #'init/css-setup-comments)))
 
 (config "Meson"
- (packages 'meson-mode 'symbol-overlay)
+ (package 'meson-mode)
  (after 'meson-mode
   (add-hook 'meson-mode-hook #'symbol-overlay-mode)))
 
@@ -1172,7 +1203,11 @@
    sh-indentation 2)))
 
 (config "Emacs Lisp"
- (packages 'eros 'suggest 'ipretty 'highlight-quoted 'highlight-defined)
+ (package 'eros)
+ (package 'suggest)
+ (package 'ipretty)
+ (package 'highlight-quoted)
+ (package 'highlight-defined)
 
  (after 'elisp-mode
   (setopt
@@ -1216,7 +1251,7 @@
                        company-files)))))
 
 (config "HLedger"
- (packages 'hledger-mode 'flycheck-hledger)
+ (package 'hledger-mode)
 
  (mode (rx ".journal" eos) #'hledger-mode)
  (mode (rx ".ledger" eos) #'hledger-mode)
@@ -1285,6 +1320,7 @@
   (add-hook 'hledger-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'hledger-mode-hook #'hl-line-mode))
 
+ (package 'flycheck-hledger)
  (defun init/hledger-setup-flycheck ()
   (require 'flycheck-hledger))
 
@@ -1310,6 +1346,14 @@
    hledger-jfile "~/Documents/Expenses/Expenses.ledger"))
 
  (after 'flycheck-hledger (setopt flycheck-hledger-checks '("commodities"))))
+
+(config "Python"
+ (package 'uv-mode)
+
+ (after 'python
+  (setq-mode-local python-mode fill-column 79)
+  (add-hook 'python-base-mode-hook #'uv-mode-auto-activate-hook)
+  (add-hook 'python-base-mode-hook #'indent-bars-mode)))
 
 ;;; General Programming
 
@@ -1338,7 +1382,7 @@
 (use-package lsp-meson
  :ensure lsp-mode
  :defer t
- :preface (packages 'lsp-mode)
+ :preface (package 'lsp-mode)
  :after meson-mode
 
  :hook (meson-mode-hook . lsp)
@@ -1349,7 +1393,7 @@
 (use-package lsp-meson
  :ensure lsp-mode
  :defer t
- :preface (packages 'lsp-mode)
+ :preface (package 'lsp-mode)
  :after (meson-mode lsp-completion)
 
  :init
@@ -1390,7 +1434,7 @@
 (use-package dape
  :ensure t
  :defer t
- :preface (packages 'dape)
+ :preface (package 'dape)
 
  :hook
  (dape-stopped-hook . dape-breakpoint-save)
@@ -1466,14 +1510,14 @@
 (use-package lsp-mode
  :ensure t
  :defer t
- :preface (packages 'lsp-mode)
+ :preface (package 'lsp-mode)
  :after cc-mode
  :hook (c-mode-common-hook . lsp))
 
 ;; (use-package lsp-completion
 ;;  :ensure lsp-mode
 ;;  :defer t
-;;  :preface (packages 'lsp-mode)
+;;  :preface (package 'lsp-mode)
 ;;  :config
 ;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
 ;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
@@ -1481,7 +1525,7 @@
 (use-package lsp-clangd
  :ensure lsp-mode
  :defer t
- :preface (packages 'lsp-mode)
+ :preface (package 'lsp-mode)
 
  :config
  (add-to-list 'lsp-clients-clangd-args "--enable-config")
@@ -1516,21 +1560,6 @@
 
 ;;; Python
 
-(use-package python
- :ensure nil
- :defer t
-
- :config
- (setq-mode-local python-mode fill-column 79)
- (setq-mode-local python-ts-mode fill-column 79))
-
-(use-package uv-mode
- :ensure t
- :defer t
- :preface (packages 'uv-mode)
- :after python
- :hook (python-base-mode-hook . uv-mode-auto-activate-hook))
-
 (use-package lsp-mode
  :ensure t
  :defer t
@@ -1560,23 +1589,12 @@
  (lsp-pylsp-plugins-ruff-preview t)
  (lsp-pylsp-plugins-yapf-enabled t))
 
-(use-package indent-bars
- :ensure t
- :defer t
- :preface (packages 'indent-bars)
- :after python
- :hook python-base-mode-hook
-
- :custom
- (indent-bars-treesit-support t)
- (indent-bars-width-frac 0.1))
-
 ;;; Project Management
 
 (use-package treemacs-projectile
  :ensure t
  :defer t
- :preface (packages 'treemacs-projectile)
+ :preface (package 'treemacs-projectile)
  :after (treemacs projectile))
 
 ;;; Snippets
@@ -1584,7 +1602,7 @@
 (use-package yasnippet-capf
  :ensure t
  :defer t
- :preface (packages 'yasnippet-capf)
+ :preface (package 'yasnippet-capf)
  :custom
  (yasnippet-capf-lookup-by 'name)
  :config
@@ -1593,8 +1611,8 @@
 ;;; Rust
 
 (config "Rust Programming"
- (packages 'rust-mode)
- (packages 'lsp-mode)
+ (package 'rust-mode)
+ (package 'lsp-mode)
 
  (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
  (autoload 'lsp-rust-analyzer-join-lines   "lsp-rust")
@@ -1675,7 +1693,7 @@
 ;;; LSP
 
 (config "LSP Mode Settings"
- (packages 'lsp-mode)
+ (package 'lsp-mode)
 
  (after 'lsp-mode
   (setopt
@@ -1694,7 +1712,7 @@
 (use-package lsp-mode
  :ensure t
  :defer t
- :preface (packages 'lsp-mode)
+ :preface (package 'lsp-mode)
  :diminish "Ls"
 
  :config
@@ -1786,7 +1804,7 @@
  :ensure lsp-ui
  :defer t
  :after lsp-mode
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -1798,7 +1816,7 @@
 (use-package lsp-ui-imenu
  :ensure lsp-ui
  :defer t
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :custom
  (lsp-ui-imenu-auto-refresh t)
@@ -1809,7 +1827,7 @@
 (use-package consult-lsp
  :ensure t
  :defer t
- :preface (packages 'consult-lsp)
+ :preface (package 'consult-lsp)
  :after lsp-mode
 
  :bind
@@ -1820,7 +1838,7 @@
 (use-package lsp-ui-flycheck
  :ensure lsp-ui
  :defer t
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -1829,7 +1847,7 @@
 (use-package lsp-ui
  :ensure t
  :defer t
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :bind
  (:map lsp-mode-map
@@ -1838,7 +1856,7 @@
 (use-package lsp-ui-doc
  :ensure lsp-ui
  :defer t
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :custom
  (lsp-ui-doc-enable t)
@@ -1853,7 +1871,7 @@
 (use-package lsp-ui-peek
  :ensure lsp-ui
  :defer t
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :custom
  (lsp-ui-peek-list-width 40)
@@ -1862,7 +1880,7 @@
 (use-package lsp-ui-sideline
  :ensure lsp-ui
  :defer t
- :preface (packages 'lsp-ui)
+ :preface (package 'lsp-ui)
 
  :custom
  (lsp-ui-sideline-enable nil))
@@ -1872,7 +1890,7 @@
 (use-package treemacs
  :ensure t
  :defer t
- :preface (packages 'treemacs)
+ :preface (package 'treemacs)
 
  :bind
  ("<f9>" . treemacs-select-window))
@@ -1943,7 +1961,7 @@
 (use-package lsp-treemacs
  :ensure t
  :defer t
- :preface (packages 'lsp-treemacs)
+ :preface (package 'lsp-treemacs)
  :after lsp-mode
 
  :preface
@@ -1983,13 +2001,13 @@
 (use-package treemacs-magit
  :ensure t
  :demand
- :preface (packages 'treemacs-magit)
+ :preface (package 'treemacs-magit)
  :after (treemacs magit))
 
 (use-package treemacs-nerd-icons
  :ensure t
  :demand
- :preface (packages 'treemacs-nerd-icons)
+ :preface (package 'treemacs-nerd-icons)
  :after treemacs
 
  :config

@@ -36,14 +36,7 @@
 
 ;;; Packages
 
-(defmacro packages (&rest pkgs)
- "Install PKGS."
- `(progn
-   ,@(mapcar #'(lambda (pkg)
-                `(package-setup ,pkg))
-      pkgs)))
-
-(defun package-setup (pkg)
+(defun package (pkg)
  "Install PKG and add it to list of selected packages."
  (unless (package-installed-p pkg)
   (declvar package-archive-contents)
