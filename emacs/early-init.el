@@ -161,6 +161,7 @@
 
  (after 'package
   (setopt
+   package-install-upgrade-built-in t
    ;; Highest number gets priority (what is not mentioned has priority 0).
    package-archive-priorities '(("gnu" . 3) ("melpa" . 2) ("nongnu" . 1))
    package-native-compile t))

@@ -990,7 +990,7 @@
   (bind-key "C-x D" #'eldoc 'prog-mode-map))
 
  (package 'editorconfig)
- (after 'editorconfig (diminish 'editorconfig "Ec"))
+ (after 'editorconfig (diminish 'editorconfig-mode "Ec"))
 
  (after 'prog-mode
   (add-hook 'prog-mode-hook #'eldoc-mode)
