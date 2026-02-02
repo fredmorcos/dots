@@ -213,6 +213,17 @@
  (after 'emacs (setopt fill-column 90))
  (after 'newcomment (setopt comment-fill-column 80)))
 
+(config "Commenting"
+ (package 'comment-dwim-2)
+ (after 'newcomment
+  (bind-key [remap comment-dwim] #'comment-dwim-2)))
+
+(config "Capitalizing"
+ (after 'emacs
+  (bind-key [remap capitalize-word] #'capitalize-dwim)
+  (bind-key [remap downcase-word] #'downcase-dwim)
+  (bind-key [remap upcase-word] #'upcase-dwim)))
+
 (config "Kill Ring"
  (after 'simple (setopt save-interprogram-paste-before-kill t)))
 
@@ -927,7 +938,7 @@
  (defun init/magit-load-nerd-icons (&rest args)
   (if (require 'nerd-icons nil t)
    (apply args)
-   (package-setup 'nerd-icons)))
+   (package 'nerd-icons)))
 
  (after 'magit-diff
   (advice-add 'magit-format-file-nerd-icons :around #'init/magit-load-nerd-icons)
