@@ -1193,7 +1193,10 @@
 
 (config "Archlinux PKGBUILDs"
  (package 'pkgbuild-mode)
- (mode (rx bos "PKGBUILD" eos) #'pkgbuild-mode))
+ (mode (rx bos "PKGBUILD" eos) #'pkgbuild-mode)
+ (after 'tree-sitter-langs
+  (declvar tree-sitter-major-mode-language-table)
+  (puthash 'pkgbuild-mode 'bash tree-sitter-major-mode-language-table)))
 
 (config "Docker"
  (package 'dockerfile-mode)
