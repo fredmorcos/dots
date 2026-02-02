@@ -720,9 +720,10 @@
   (add-hook 'tree-sitter-mode-hook #'init/tree-sitter-langs-install-grammars))
  (after 'tree-sitter-hl
   (face tree-sitter-hl-face:property :inherit font-lock-keyword-face))
- (after 'tree-sitter-langs
+ (after 'tree-sitter-langs-build
   (declvar tree-sitter-langs-grammar-dir)
-  (setopt tree-sitter-langs-git-dir (file-name-concat tree-sitter-langs-grammar-dir "git")))
+  (setopt tree-sitter-langs-git-dir
+   (file-name-concat tree-sitter-langs-grammar-dir "git")))
 
  (after 'treesit
   (setopt
@@ -1050,7 +1051,56 @@
  (after 'indent-bars
   (setopt
    indent-bars-treesit-support t
-   indent-bars-width-frac 0.1)))
+   indent-bars-width-frac 0.1))
+
+ (after 'files
+  (setopt
+   safe-local-variable-values
+   '((comment-style . multi-line)
+     (backward-delete-char-untabify-method . nil)
+     (electric-indent-inhibit . nil)
+     (lsp-enable-indentation . nil)
+     (lsp-enable-on-type-formatting . nil)
+     (lsp-enable-semantic-highlighting . nil)))))
+
+(config "Debugging"
+ (autoload 'debugger-quit "debug")
+ (after 'debug
+  (bind-key "C-g" #'debugger-quit 'debugger-mode-map))
+
+ (defun init/make-selected-window-dedicated ()
+  (set-window-dedicated-p (selected-window) t))
+
+ (after 'gdb-mi
+  (setopt
+   gdb-many-windows t
+   gdb-use-separate-io-buffer t)
+  (advice-add 'gdb-setup-windows :after #'init/make-selected-window-dedicated))
+
+ (after 'gud
+  (add-hook 'gud-mode-hook #'gud-tooltip-mode)
+  (setopt gdb-restore-window-configuration-after-quit t))
+
+ (package 'dape)
+ (autoload 'dape-breakpoint-global-mode "dape")
+ (autoload 'dape-breakpoint-load "dape")
+ (autoload 'dape-breakpoint-save "dape")
+ (autoload 'dape-info "dape")
+ (after 'dape
+  (add-hook 'dape-stopped-hook #'dape-breakpoint-save)
+  (add-hook 'dape-breakpoint-global-mode-hook #'dape-breakpoint-load)
+  (add-hook 'dape-start-hook #'save-some-buffers)
+  (add-hook 'dape-start-hook #'dape-info)
+  (add-hook 'dape-display-source-hook #'pulse-momentary-highlight-one-line)
+  (setopt
+   dape-buffer-window-arrangement 'right
+   dape-inlay-hints t
+   dape-cwd-fn 'projectile-project-root
+   dape-default-breakpoints-file
+    (no-littering-expand-var-file-name "dape-breakpoints")))
+
+ (after 'lsp-mode
+  (add-hook 'lsp-mode-hook #'dape-breakpoint-global-mode)))
 
 (config "LSP"
  (package 'lsp-mode)
@@ -1134,8 +1184,9 @@
  (package 'demangle-mode)
  (package 'autodisass-llvm-bitcode)
  (mode (rx ".ll" eos) #'llvm-ts-mode)
- (mode (rx bos ".clang-format") #'yaml-mode)
- (mode (rx bos ".clang-tidy") #'yaml-mode)
+ (mode (rx ".clang-format" eos) #'yaml-mode)
+ (mode (rx ".clang-tidy" eos) #'yaml-mode)
+ (mode (rx ".clangd" eos) #'yaml-mode)
  (require 'autodisass-llvm-bitcode)
  (after 'llvm-ts-mode
   (add-hook 'llvm-ts-mode-hook #'demangle-mode)))
@@ -1196,10 +1247,12 @@
 (config "Meson"
  (package 'meson-mode)
  (after 'meson-mode
-  (add-hook 'meson-mode-hook #'symbol-overlay-mode)))
+  (add-hook 'meson-mode-hook #'symbol-overlay-mode)
+  (add-hook 'meson-mode-hook #'lsp))
+ (after 'lsp-meson (setopt lsp-meson-server-executable '("mesonlsp" "--full"))))
 
 (config "Shell Scripting"
- (mode (rx bos ".bashrc.user" eos) #'sh-mode)
+ (mode (rx ".bashrc.user" eos) #'sh-mode)
 
  (defun init/make-file-executable ()
   "Makes the file executable on save."
@@ -1364,118 +1417,30 @@
  (after 'python
   (setq-mode-local python-mode fill-column 79)
   (add-hook 'python-base-mode-hook #'uv-mode-auto-activate-hook)
-  (add-hook 'python-base-mode-hook #'indent-bars-mode)))
+  (add-hook 'python-base-mode-hook #'indent-bars-mode)
+  (add-hook 'python-base-mode-hook #'lsp))
 
-;;; General Programming
-
-;; (use-package prog-mode
-;;  :ensure nil
-;;  :defer t
-
-;;  :preface
-;;  (defun init/prog-capfs ()
-;;   (let ((capfs (list (quote #'cape-file) (quote #'cape-dabbrev))))
-;;    (when (bound-and-true-p yas-minor-mode)
-;;     (push (quote #'yasnippet-capf) capfs))
-;;    (when (bound-and-true-p lsp-mode)
-;;     (push (quote #'lsp-completion-at-point) capfs))
-;;    (apply 'cape-wrap-super capfs)))
-
-;;  (defun init/setup-prog-capfs ()
-;;   (setq-local completion-at-point-functions
-;;    (list #'init/prog-capfs)))
-
-;;  :hook
-;;  (prog-mode-hook . init/setup-prog-capfs))
-
-;;; Meson
-
-(use-package lsp-meson
- :ensure lsp-mode
- :defer t
- :preface (package 'lsp-mode)
- :after meson-mode
-
- :hook (meson-mode-hook . lsp)
-
- :custom
- (lsp-meson-server-executable '("mesonlsp" "--full")))
-
-(use-package lsp-meson
- :ensure lsp-mode
- :defer t
- :preface (package 'lsp-mode)
- :after (meson-mode lsp-completion)
-
- :init
- (setq-mode-local meson-mode lsp-completion-mode nil)
- (setq-mode-local meson-mode lsp-completion-enable nil))
-
-;;; Debuggers
-
-(use-package debug
- :ensure nil
- :defer t
-
- :bind
- (:map debugger-mode-map ("C-g" . debugger-quit)))
-
-(use-package gdb-mi
- :ensure nil
- :defer t
-
- :custom
- (gdb-many-windows t)
- (gdb-use-separate-io-buffer t)
-
- :config
- (advice-add 'gdb-setup-windows :after
-  (lambda () (set-window-dedicated-p (selected-window) t))))
-
-(use-package gud
- :ensure nil
- :defer t
-
- :hook
- (gud-mode-hook . gud-tooltip-mode)
-
- :custom
- (gdb-restore-window-configuration-after-quit t))
-
-(use-package dape
- :ensure t
- :defer t
- :preface (package 'dape)
-
- :hook
- (dape-stopped-hook . dape-breakpoint-save)
- (dape-breakpoint-global-mode-hook . dape-breakpoint-load)
- (lsp-mode-hook . dape-breakpoint-global-mode)
- (dape-start-hook . save-some-buffers)
- (dape-start-hook . dape-info)
- (dape-display-source-hook . pulse-momentary-highlight-one-line)
-
- :custom
- (dape-buffer-window-arrangement 'right)
- (dape-inlay-hints t)
- (dape-cwd-fn 'projectile-project-root)
- (dape-default-breakpoints-file
-  (no-littering-expand-var-file-name "dape-breakpoints")))
+ (after 'lsp-pylsp
+  (setopt
+   lsp-pylsp-plugins-autopep8-enabled t
+   lsp-pylsp-plugins-black-enabled t
+   lsp-pylsp-plugins-isort-enabled t
+   lsp-pylsp-plugins-jedi-completion-fuzzy t
+   lsp-pylsp-plugins-mypy-dmypy t
+   lsp-pylsp-plugins-mypy-enabled t
+   lsp-pylsp-plugins-mypy-report-progress t
+   lsp-pylsp-plugins-pycodestyle-enabled t
+   lsp-pylsp-plugins-pyflakes-enabled t
+   lsp-pylsp-plugins-pylint-enabled t
+   lsp-pylsp-plugins-rope-autoimport-code-actions-enabled t
+   lsp-pylsp-plugins-rope-autoimport-completions-enabled t
+   lsp-pylsp-plugins-rope-autoimport-enabled t
+   lsp-pylsp-plugins-rope-completion-enabled t
+   lsp-pylsp-plugins-ruff-enabled t
+   lsp-pylsp-plugins-ruff-preview t
+   lsp-pylsp-plugins-yapf-enabled t)))
 
 ;;; C and C++ Programming
-
-(use-package files
- :ensure nil
- :defer t
-
- :custom
- (safe-local-variable-values
-  '((comment-style . multi-line)
-    (backward-delete-char-untabify-method . nil)
-    (electric-indent-inhibit . nil)
-    (lsp-enable-indentation . nil)
-    (lsp-enable-on-type-formatting . nil)
-    (lsp-enable-semantic-highlighting . nil))))
 
 (use-package cc-mode
  :ensure nil
@@ -1568,37 +1533,6 @@
 
  :bind
  (:map c-mode-base-map ("<f2>" . lsp-clangd-find-other-file)))
-
-;;; Python
-
-(use-package lsp-mode
- :ensure t
- :defer t
- :after python
- :hook (python-base-mode-hook . lsp))
-
-(use-package lsp-pylsp
- :ensure lsp-mode
- :defer t
- :after (python lsp-mode)
- :custom
- (lsp-pylsp-plugins-autopep8-enabled t)
- (lsp-pylsp-plugins-black-enabled t)
- (lsp-pylsp-plugins-isort-enabled t)
- (lsp-pylsp-plugins-jedi-completion-fuzzy t)
- (lsp-pylsp-plugins-mypy-dmypy t)
- (lsp-pylsp-plugins-mypy-enabled t)
- (lsp-pylsp-plugins-mypy-report-progress t)
- (lsp-pylsp-plugins-pycodestyle-enabled t)
- (lsp-pylsp-plugins-pyflakes-enabled t)
- (lsp-pylsp-plugins-pylint-enabled t)
- (lsp-pylsp-plugins-rope-autoimport-code-actions-enabled t)
- (lsp-pylsp-plugins-rope-autoimport-completions-enabled t)
- (lsp-pylsp-plugins-rope-autoimport-enabled t)
- (lsp-pylsp-plugins-rope-completion-enabled t)
- (lsp-pylsp-plugins-ruff-enabled t)
- (lsp-pylsp-plugins-ruff-preview t)
- (lsp-pylsp-plugins-yapf-enabled t))
 
 ;;; Project Management
 
