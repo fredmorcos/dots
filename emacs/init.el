@@ -613,7 +613,7 @@
  (bind-key "C-h B" #'embark-bindings)
  (bind-key "C-'" #'embark-collect 'minibuffer-local-map)
  (bind-key "C-x E" #'embark-export 'minibuffer-local-map)
- (bind-key "C-x B" #'embark-become 'minibuffer-local-map)
+ (bind-key "C-x B" #'embark-become 'minibuffer-local-map))
 
 (config "In-buffer Completion"
  (defun init/buffer-completion-mode ()
