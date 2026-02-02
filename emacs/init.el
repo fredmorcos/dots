@@ -1106,6 +1106,7 @@
  (package 'lsp-mode)
 
  (after 'lsp-mode
+  (diminish 'lsp-mode "Ls")
   (setopt
    lsp-before-save-edits nil))
 
@@ -1442,6 +1443,10 @@
    lsp-pylsp-plugins-ruff-enabled t
    lsp-pylsp-plugins-ruff-preview t
    lsp-pylsp-plugins-yapf-enabled t)))
+
+(config "Rust"
+ (package 'rust-mode)
+ (package 'rustic))
 
 ;;; C and C++ Programming
 
