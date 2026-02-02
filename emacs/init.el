@@ -10,6 +10,9 @@
  (defvar *init/completion-system* :corfu "Which completion system to use."))
 
 (config "Quality of Life"
+ (packages 'crux)
+ (bind-key [remap keyboard-quit] #'crux-keyboard-quit-dwim)
+
  (autoload 'qol/insert-pair               "qol")
  (autoload 'qol/insert-pair-curly         "qol")
  (autoload 'qol/insert-pair-parens        "qol")
@@ -51,15 +54,52 @@
  (eval-and-compile (require 'no-littering))
  (no-littering-theme-backups))
 
-(config "Modeline"
- (packages 'diminish)
- (after 'uniquify (setopt uniquify-buffer-name-style 'forward)))
+(config "Dictionary"
+ (after 'dictionary
+  (setopt
+   dictionary-server "dict.org"
+   dictionary-use-single-buffer t)))
 
-(config "Moving in Text"
+(config "Navigating Text"
  (packages 'move-text 'mwim)
  (move-text-default-bindings)
  (bind-key [remap move-beginning-of-line] #'mwim-beginning-of-code-or-line-or-comment)
- (bind-key [remap move-end-of-line] #'mwim-end-of-code-or-line))
+ (bind-key [remap move-end-of-line] #'mwim-end-of-code-or-line)
+ (after 'paren
+  (setopt
+   show-paren-when-point-in-periphery t
+   show-paren-when-point-inside-paren t
+   show-paren-style 'mixed
+   show-paren-highlight-openparen t
+   show-paren-context-when-offscreen 'overlay)))
+
+(config "Grepping"
+ (packages 'deadgrep 'wgrep 'wgrep-deadgrep)
+ (bind-key "M-F" #'deadgrep))
+
+(config "Scrolling"
+ (defun init/scroll-other-window ()
+  "Scroll up the other window in a split frame."
+  (interactive)
+  (scroll-other-window 1))
+ (defun init/scroll-other-window-down ()
+  "Scroll down the other window in a split frame."
+  (interactive)
+  (scroll-other-window-down 1))
+
+ (after 'emacs
+  (setopt
+   scroll-conservatively 104
+   scroll-margin 1
+   hscroll-margin 1
+   hscroll-step 1
+   auto-hscroll-mode 'current-line
+   fast-but-imprecise-scrolling t))
+
+ (bind-key "C-<f11>" #'init/scroll-other-window)
+ (bind-key "C-<f12>" #'init/scroll-other-window-down)
+ (bind-key "<mouse-4>" #'previous-line)
+ (bind-key "<mouse-5>" #'next-line))
 
 (config "Selecting Text"
  (cua-selection-mode t)
@@ -69,7 +109,10 @@
  (bind-key "M-\"" #'surround-insert))
 
 (config "Editing Text"
- (packages 'casual 'speedrect 'volatile-highlights 'multiple-cursors)
+ (packages 'casual 'speedrect 'volatile-highlights)
+
+ (after 'text-mode
+  (add-hook 'text-mode-hook #'jinx-mode))
 
  (bind-key "C-p" #'casual-editkit-main-tmenu)
  (bind-key "C-c d" #'duplicate-dwim)
@@ -89,7 +132,67 @@
  (after 'simple (setopt backward-delete-char-untabify-method 'hungry))
 
  (after 'speedrect (diminish 'speedrect-mode "Sr"))
- (speedrect-mode))
+ (speedrect-mode)
+
+ (after 'whitespace
+  (diminish 'whitespace-mode "Ws")
+  (setopt
+   whitespace-line-column fill-column
+   show-trailing-whitespace nil
+   whitespace-action '(cleanup auto-cleanup)
+   ;; whitespace-style
+   ;; '(face
+   ;;   trailing
+   ;;   tabs
+   ;;   spaces
+   ;;   lines-tail
+   ;;   missing-newline-at-eof
+   ;;   empty
+   ;;   space-after-tab
+   ;;   space-before-tab
+   ;;   tab-mark)
+   whitespace-style nil)
+  (face whitespace-tab :foreground "lavender" :background "white smoke"))
+
+ (after 'autorevert
+  (diminish 'autorevert-mode "Ar")
+  (setopt
+   auto-revert-mode-text " Ar"
+   auto-revert-interval 1
+   auto-revert-avoid-polling t
+   buffer-auto-revert-by-notification t)))
+
+(config "Search & Replace"
+ (packages 'visual-replace 'casual 'ctrlf)
+
+ (bind-key "M-%" #'visual-replace-thing-at-point)
+ (bind-key "M-^" #'visual-replace-selected)
+ (bind-key "M-*" #'visual-replace)
+
+ (after 'isearch
+  (setopt
+   isearch-allow-motion t
+   isearch-motion-changes-direction t
+   isearch-lazy-count t
+   isearch-lazy-highlight t
+   lazy-count-prefix-format "(%s/%s) "
+   search-whitespace-regexp ".*?"))
+
+ (bind-key "C-p" #'casual-isearch-tmenu)
+
+ (after 'ctrlf
+  (setopt
+   ctrlf-default-search-style 'fuzzy
+   ctrlf-auto-recenter t))
+
+ (ctrlf-mode))
+
+(config "Undo & Redo"
+ (packages 'vundo)
+ (bind-key "C-x u" #'vundo)
+ (after 'vundo
+  (setopt vundo-glyph-alist vundo-unicode-symbols))
+ (after 'emacs (setopt undo-limit (* 1024 1024))))
 
 (config "Filling Text"
  (packages 'unfill)
@@ -104,13 +207,6 @@
 
  (after 'emacs (setopt fill-column 90))
  (after 'newcomment (setopt comment-fill-column 80)))
-
-(config "Undo & Redo"
- (packages 'vundo)
- (bind-key "C-x u" #'vundo)
- (after 'vundo
-  (setopt vundo-glyph-alist vundo-unicode-symbols))
- (after 'emacs (setopt undo-limit (* 1024 1024))))
 
 (config "Kill Ring"
  (after 'simple (setopt save-interprogram-paste-before-kill t)))
@@ -160,10 +256,9 @@
  (bind-key "C-x m" #'buf-move)
 
  (after 'ibuffer
-  (bind-keys :map 'ibuffer-mode-map
-   ("C-p" . casual-ibuffer-tmenu)
-   ("F"   . casual-ibuffer-filter-tmenu)
-   ("s"   . casual-ibuffer-sortby-tmenu)))
+  (bind-key "C-p" #'casual-ibuffer-tmenu 'ibuffer-mode-map)
+  (bind-key "F"   #'casual-ibuffer-filter-tmenu 'ibuffer-mode-map)
+  (bind-key "s"   #'casual-ibuffer-sortby-tmenu 'ibuffer-mode-map))
 
  (defun init/disable-popup (regexp)
   "Stop buffers that match REGEXP from popping up."
@@ -180,18 +275,6 @@
   (advice-add 'previous-buffer :after #'init/recenter)
   (advice-add 'next-buffer :after #'init/recenter)
   (advice-add 'switch-to-buffer :after #'init/recenter)))
-
-(config "Backups and Autosaves"
- (after 'files
-  (setopt
-   auto-save-default t
-   backup-inhibited nil
-   make-backup-files t
-   ;; Prefer the newest version of a file.
-   load-prefer-newer t
-   delete-old-versions t
-   remote-file-name-inhibit-auto-save-visited t
-   remote-file-name-inhibit-locks t)))
 
 (config "Tramp"
  (after 'tramp-sh
@@ -238,6 +321,10 @@
    display-line-numbers-grow-only t
    display-line-numbers-width-start t)))
 
+(config "Modeline"
+ (packages 'diminish)
+ (after 'uniquify (setopt uniquify-buffer-name-style 'forward)))
+
 (config "User Experience"
  (after 'emacs (setopt delete-by-moving-to-trash t))
  (after 'files (setopt confirm-kill-processes nil))
@@ -257,41 +344,25 @@
 
  (after 'map-ynp (setopt read-answer-short t)))
 
-(config "Search & Replace"
- (packages 'visual-replace 'casual 'ctrlf)
-
- (bind-key "M-%" #'visual-replace-thing-at-point)
- (bind-key "M-^" #'visual-replace-selected)
- (bind-key "M-*" #'visual-replace)
-
- (after 'isearch
-  (setopt
-   isearch-allow-motion t
-   isearch-motion-changes-direction t
-   isearch-lazy-count t
-   isearch-lazy-highlight t
-   lazy-count-prefix-format "(%s/%s) "
-   search-whitespace-regexp ".*?"))
-
- (bind-key "C-p" #'casual-isearch-tmenu)
-
- (after 'ctrlf
-  (setopt
-   ctrlf-default-search-style 'fuzzy
-   ctrlf-auto-recenter t))
-
- (ctrlf-mode))
-
 (config "Regular Expressions"
  (after 're-builder
-  (bind-keys :map 'reb-mode-map ("C-p" . casual-re-builder-tmenu))
-  (bind-keys :map 'reb-lisp-mode-map ("C-p" . casual-re-builder-tmenu))))
+  (bind-key "C-p" #'casual-re-builder-tmenu 'reb-mode-map)
+  (bind-key "C-p" #'casual-re-builder-tmenu 'reb-lisp-mode-map)))
 
 (config "Symbol handling and Multiple Cursors"
- (packages 'symbol-overlay 'symbol-overlay-mc 'casual-symbol-overlay)
+ (packages 'symbol-overlay 'symbol-overlay-mc 'casual-symbol-overlay 'multiple-cursors)
  (after 'symbol-overlay
-  (bind-keys :map 'symbol-overlay-map ("C-p" . casual-symbol-overlay-tmenu))
-  (bind-keys :map 'symbol-overlay-map ("M-a" . symbol-overlay-mc-mark-all))))
+  (diminish 'symbol-overlay-mode "So")
+  (setopt symbol-overlay-idle-time 0.1)
+  (bind-key "C-p" #'casual-symbol-overlay-tmenu 'symbol-overlay-mode-map)
+  (bind-key "M-a" #'symbol-overlay-mc-mark-all 'symbol-overlay-mode-map)
+  (bind-key "M->" #'symbol-overlay-jump-next 'symbol-overlay-mode-map)
+  (bind-key "M-<" #'symbol-overlay-jump-prev 'symbol-overlay-mode-map))
+ (bind-key "C-c C-v"       #'mc/edit-lines)
+ (bind-key "C->"           #'mc/mark-next-like-this)
+ (bind-key "C-<"           #'mc/mark-previous-like-this)
+ (bind-key "C-S-<mouse-1>" #'mc/toggle-cursor-on-click)
+ (after 'multiple-cursors-core (setopt mc/always-run-for-all t)))
 
 (config "File Management"
  (defun init/find-file-other-window ()
@@ -310,29 +381,17 @@
  (after 'window
   (bind-key [remap other-window] #'init/find-file-other-window)))
 
-(config "Scrolling"
- (defun init/scroll-other-window ()
-  "Scroll up the other window in a split frame."
-  (interactive)
-  (scroll-other-window 1))
- (defun init/scroll-other-window-down ()
-  "Scroll down the other window in a split frame."
-  (interactive)
-  (scroll-other-window-down 1))
-
- (after 'emacs
+(config "Backups and Autosaves"
+ (after 'files
   (setopt
-   scroll-conservatively 104
-   scroll-margin 1
-   hscroll-margin 1
-   hscroll-step 1
-   auto-hscroll-mode 'current-line
-   fast-but-imprecise-scrolling t))
-
- (bind-key "C-<f11>" #'init/scroll-other-window)
- (bind-key "C-<f12>" #'init/scroll-other-window-down)
- (bind-key "<mouse-4>" #'previous-line)
- (bind-key "<mouse-5>" #'next-line))
+   auto-save-default t
+   backup-inhibited nil
+   make-backup-files t
+   ;; Prefer the newest version of a file.
+   load-prefer-newer t
+   delete-old-versions t
+   remote-file-name-inhibit-auto-save-visited t
+   remote-file-name-inhibit-locks t)))
 
 (config "Dynamic Expansion"
  (after 'abbrev (diminish 'abbrev-mode "Ab"))
@@ -341,24 +400,24 @@
   ;; Replace dabbrev-expand with hippie-expand
   (bind-key [remap dabbrev-expand] #'hippie-expand))
 
- (after 'hippie-expand
+ (after 'hippie-exp
   (setopt
-   hippie-expand-try-functions-list '(try-expand-dabbrev
-                                      try-expand-dabbrev-visible
-                                      try-expand-line
-                                      try-expand-dabbrev-all-buffers
-                                      try-expand-line-all-buffers
-                                      try-expand-dabbrev-from-kill
-                                      try-expand-all-abbrevs
+   hippie-expand-try-functions-list '(try-complete-file-name-partially
                                       try-complete-file-name
-                                      try-complete-file-name-partially
+                                      try-expand-all-abbrevs
                                       try-expand-list
-                                      try-expand-list-all-buffers
+                                      try-expand-line
+                                      try-expand-line-all-buffers
+                                      try-expand-dabbrev-visible
+                                      try-expand-dabbrev
+                                      try-expand-dabbrev-all-buffers
+                                      try-expand-dabbrev-from-kill
+                                      try-complete-lisp-symbol-partially
                                       try-complete-lisp-symbol
-                                      try-complete-lisp-symbol-partially))))
+                                      try-expand-list-all-buffers))))
 
 (config "Minibuffer"
- (packages 'hotfuzz 'orderless)
+ (packages 'hotfuzz 'orderless 'marginalia)
 
  (after 'minibuffer
   (delete 'tags-completion-at-point-function completion-at-point-functions)
@@ -395,18 +454,30 @@
    read-buffer-completion-ignore-case t
    enable-recursive-minibuffers t)
 
-  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode))
+
+ (after 'marginalia
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+ (defun init/marginalia-mode ()
+  (unless (bound-and-true-p marginalia-mode)
+   (marginalia-mode)))
+
+ (after 'emacs
+  (add-hook 'minibuffer-setup-hook #'init/marginalia-mode)
+  (bind-key "M-A" #'marginalia-cycle 'minibuffer-local-map))
+ (after 'simple
+  (bind-key "M-A" #'marginalia-cycle 'completion-list-mode-map)))
 
 (config "Minibuffer Completion"
  (packages 'vertico 'consult)
 
  (after 'vertico
-  (bind-keys :map 'vertico-map
-   ("M-RET" . minibuffer-force-complete-and-exit)
-   ("M-TAB" . minibuffer-complete)
-   ("RET" . vertico-directory-enter)
-   ("DEL" . vertico-directory-delete-char)
-   ("M-DEL" . vertico-directory-delete-word)))
+  (bind-key "M-RET" #'minibuffer-force-complete-and-exit 'vertico-map)
+  (bind-key "M-TAB" #'minibuffer-complete 'vertico-map)
+  (bind-key "RET" #'vertico-directory-enter 'vertico-map)
+  (bind-key "DEL" #'vertico-directory-delete-char 'vertico-map)
+  (bind-key "M-DEL" #'vertico-directory-delete-word 'vertico-map))
 
  (after 'vertico
   (setopt
@@ -457,16 +528,92 @@
 
 (config "Bookmarks"
  (after 'bookmark
-  (bind-keys :map 'bookmark-bmenu-mode-map
-   ("C-p" . casual-bookmarks-tmenu))))
+  (bind-key "C-p" #'casual-bookmarks-tmenu 'bookmark-bmenu-mode-map)))
 
-(config "Embark"
- (packages 'embark 'embark-consult))
+(config "History"
+ (after 'emacs
+  (setopt
+   history-delete-duplicates t
+   history-length 150))
+
+ (after 'saveplace (setopt save-place-abbreviate-file-names t))
+
+ (defun init/activate-save-place-mode (&rest _)
+  (unless save-place-mode (save-place-mode)))
+
+ (after 'files
+  (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
+
+ (savehist-mode)
+
+ (after 'recentf
+  (setopt
+   recentf-max-menu-items 50
+   recentf-max-saved-items 100
+   recentf-exclude `(,(no-littering-expand-var-file-name "")
+                     ,(no-littering-expand-etc-file-name "")
+                     ,@native-comp-eln-load-path
+                     "~/.cache"
+                     "~/.config/emacs/var"
+                     "~/.config/emacs/elpa"
+                     "/usr/share/emacs"
+                     "/run/media")))
+
+ (autoload 'recentf-load-list "recentf")
+ (defvar init/recentf-loaded-p nil)
+ (defun init/recentf-load-list (&rest _)
+  (unless init/recentf-loaded-p
+   (recentf-load-list)
+   (setq init/recentf-loaded-p t)))
+
+ (after 'consult
+  (advice-add #'consult-buffer :before #'init/recentf-load-list))
+
+ (after 'recentf (recentf-mode)))
+
+(config "Session Management"
+ (packages 'easysession)
+ (after 'easysession (setopt easysession-save-mode-lighter-show-session-name t))
+ (bind-key "C-c u" #'easysession-save)
+ (bind-key "C-c U" #'easysession-load))
+
+(config "Spell Checking"
+ (packages 'jinx)
+ (after 'jinx
+  (diminish 'jinx-mode "Jx")
+  (bind-key "M-$"   #'jinx-correct   'jinx-mode-map)
+  (bind-key "C-M-$" #'jinx-languages 'jinx-mode-map)))
 
 (config "Window Faces"
  (autoload 'face-remap-remove-relative "face-remap")
  (defface init/dedicated-mode-line '((t :height 0.2)) "Dedicated Window Modeline Face")
  (defvar-local init/dedicated-mode-line-cookie nil))
+
+(config "Utilities"
+ (packages 'which-key 'embark 'embark-consult 'nerd-icons-completion)
+
+ (after 'which-key
+  (diminish 'which-key-mode)
+  (setopt
+   ;; which-key-idle-delay 0.5
+   which-key-show-docstrings nil
+   which-key-add-column-padding 3
+   which-key-max-description-length nil
+   which-key-max-display-columns nil))
+ (which-key-mode)
+
+ (after 'embark
+  (setopt
+   prefix-help-command #'embark-prefix-help-command
+   embark-mixed-indicator-both t
+   embark-mixed-indicator-delay 0))
+
+ (bind-key "C-." #'embark-act)
+ (bind-key "C-;" #'embark-dwim)
+ (bind-key "C-h B" #'embark-bindings)
+ (bind-key "C-'" #'embark-collect 'minibuffer-local-map)
+ (bind-key "C-x E" #'embark-export 'minibuffer-local-map)
+ (bind-key "C-x B" #'embark-become 'minibuffer-local-map)
 
 (config "In-buffer Completion"
  (defun init/buffer-completion-mode ()
@@ -540,6 +687,39 @@
    (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
    (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))))
 
+(config "Syntax Highlighting"
+ (packages 'tree-sitter 'tree-sitter-langs)
+
+ (defun init/tree-sitter-langs-install-grammars ()
+  (tree-sitter-langs-install-grammars t))
+
+ (after 'tree-sitter
+  (diminish 'tree-sitter-mode "Ts")
+  (add-hook 'tree-sitter-mode-hook #'tree-sitter-hl-mode)
+  (add-hook 'tree-sitter-mode-hook #'init/tree-sitter-langs-install-grammars))
+ (after 'tree-sitter-hl
+  (face tree-sitter-hl-face:property :inherit font-lock-keyword-face))
+ (after 'tree-sitter-langs
+  (declvar tree-sitter-langs-grammar-dir)
+  (setopt tree-sitter-langs-git-dir (file-name-concat tree-sitter-langs-grammar-dir "git")))
+
+ (after 'treesit
+  (setopt
+   treesit-language-source-alist
+   '((bash   . ("https://github.com/tree-sitter/tree-sitter-bash"))
+     (c      . ("https://github.com/tree-sitter/tree-sitter-c"))
+     (cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+     (json   . ("https://github.com/tree-sitter/tree-sitter-json.git"))
+     (toml   . ("https://github.com/ikatyang/tree-sitter-toml.git"))
+     (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git")))))
+
+ (after 'jit-lock
+  (setopt
+   jit-lock-stealth-time 0.1
+   ;; A little more than what can fit on the screen.
+   jit-lock-chunk-size 4000
+   jit-lock-antiblink-grace nil)))
+
 (config "Syntax Checkers and Error Lists"
  (packages 'flycheck 'consult-flycheck)
 
@@ -589,11 +769,11 @@
 
  (after 'flycheck
   (defconst flycheck-error-list-format
-   `[("File" 10)
+   `[("File" 20)
      ("Line" 5 flycheck-error-list-entry-< :right-align nil)
      ("Col" 5 nil :right-align nil)
      ("Level" 8 flycheck-error-list-entry-level-<)
-     ("ID" 10 t)
+     ("ID" 32 t)
      (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
    "Table format for the error list.")
 
@@ -610,148 +790,150 @@
    flycheck-mode-line-prefix "Fc"
    flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line))))
 
-(config "History"
+(config "Snippets"
+ (packages 'yasnippet 'yasnippet-snippets)
+
+ (defvar *init/yasnippet-snippets-initialized* nil)
+ (defun init/initialize-yasnippet-snippets ()
+  "Initialize yasnippet snippets if they have not already been."
+  (unless *init/yasnippet-snippets-initialized*
+   (yasnippet-snippets-initialize)
+   (setq *init/yasnippet-snippets-initialized* t)))
+
+ (after 'yasnippet
+  (diminish 'yas-minor-mode "Ys")
+  (declvar yas-minor-mode-map)
+  (unbind-key "TAB" yas-minor-mode-map)
+  (add-hook 'yas-minor-mode-hook #'init/initialize-yasnippet-snippets))
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
+
+(config "Dired"
+ (packages 'nerd-icons-dired)
+
+ (after 'dired-async (diminish 'dired-async-mode "As"))
+
+ (defun init/dired-setup ()
+  "Setup dired requires."
+  (require 'dired-x)
+  (require 'wdired)
+  (require 'image-dired))
+
+ (autoload 'dired-hide-details-mode "dired")
+ (after 'dired
+  (add-hook 'dired-mode-hook #'diff-hl-dired-mode)
+  (add-hook 'dired-mode-hook #'init/dired-setup)
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode)
+  (add-hook 'dired-mode-hook #'hl-line-mode)
+  (add-hook 'dired-mode-hook #'context-menu-mode)
+  (add-hook 'dired-mode-hook #'dired-async-mode)
+  (add-hook 'dired-mode-hook #'auto-revert-mode)
+  (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
+  (bind-key "C-p" #'casual-dired-tmenu 'dired-mode-map)
+  (setopt
+   dired-mouse-drag-files t
+   dired-listing-switches "-l -h --group-directories-first"
+   dired-hide-details-hide-symlink-targets nil
+   dired-recursive-copies 'always
+   dired-recursive-deletes 'always
+   dired-dwim-target t)))
+
+(config "Project Management"
+ (packages 'projectile)
+ (after 'projectile-mode
+  (diminish 'projectile-mode "Pr")
+  (setopt
+   ;; projectile-indexing-method 'hybrid
+   ;; projectile-require-project-root nil
+   projectile-project-search-path '(("~/Workspace" . 3))
+   projectile-sort-order 'recently-active
+   projectile-auto-cleanup-known-projects t
+   projectile-enable-caching nil
+   projectile-auto-discover t))
+ (bind-key "C-x p" 'projectile-command-map)
  (after 'emacs
+  ;; startup.el
+  (add-hook 'after-init-hook #'projectile-mode)))
+
+(config "Version Control"
+ (packages 'magit 'blamer 'diff-hl)
+
+ (after 'vc (setopt vc-make-backup-files t))
+
+ (autoload 'ediff-setup-windows-plain "ediff-wind")
+ (after 'ediff-wind
   (setopt
-   history-delete-duplicates t
-   history-length 150))
+   ;; ediff-split-window-function #'split-window-right
+   ediff-split-window-function #'split-window-horizontally
+   ediff-window-setup-function #'ediff-setup-windows-plain))
 
- (after 'saveplace (setopt save-place-abbreviate-file-names t))
-
- (defun init/activate-save-place-mode (&rest _)
-  (unless save-place-mode (save-place-mode)))
-
- (after 'files
-  (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
-
- (savehist-mode)
-
- (after 'recentf
+ (after 'blamer
   (setopt
-   recentf-max-menu-items 50
-   recentf-max-saved-items 100
-   recentf-exclude `(,(no-littering-expand-var-file-name "")
-                     ,(no-littering-expand-etc-file-name "")
-                     ,@native-comp-eln-load-path
-                     "~/.cache"
-                     "~/.config/emacs/var"
-                     "~/.config/emacs/elpa"
-                     "/usr/share/emacs"
-                     "/run/media")))
+   ;; blamer-idle-time 0
+   blamer-commit-formatter ": %s"
+   blamer-datetime-formatter "%s"
+   blamer-max-commit-message-length 60))
 
- (autoload 'recentf-load-list "recentf")
- (defvar init/recentf-loaded-p nil)
- (defun init/recentf-load-list (&rest _)
-  (unless init/recentf-loaded-p
-   (recentf-load-list)
-   (setq init/recentf-loaded-p t)))
+ (after 'magit-process
+  (add-hook 'magit-process-mode-hook #'goto-address-mode))
 
- (after 'consult
-  (advice-add #'consult-buffer :before #'init/recentf-load-list))
+ (bind-key "C-x g" #'magit-status)
 
- (after 'recentf (recentf-mode)))
+ (defun init/disable-line-numbers ()
+  "Disable display-line-numbers-mode."
+  (display-line-numbers-mode -1))
 
-(config "Session Management"
- (packages 'easysession)
- (after 'easysession (setopt easysession-save-mode-lighter-show-session-name t))
- (bind-key "C-c u" #'easysession-save)
- (bind-key "C-c U" #'easysession-load))
-
-(config "Spell Checking"
- (packages 'jinx)
- (after 'jinx
-  (diminish 'jinx-mode "Jx")
-  (bind-key "M-$"   #'jinx-correct   'jinx-mode-map)
-  (bind-key "C-M-$" #'jinx-languages 'jinx-mode-map)))
-
-(config "Text"
- (packages 'jinx)
- (after 'text-mode
-  (add-hook 'text-mode-hook #'jinx-mode)))
-
-(config "Translation Files"
- (packages 'po-mode))
-
-(config "Sed Files"
- (packages 'sed-mode))
-
-(config "Markdown"
- (packages 'markdown-mode)
- (after 'markdown-mode
-  (declvar markdown-mode)
-  (setq-mode-local markdown-mode fill-column 79)
-  (add-hook 'markdown-mode-hook #'display-fill-column-indicator-mode)
-  (add-hook 'markdown-mode-hook #'hl-line-mode)))
-
-(config "TOML"
- (packages 'toml-mode 'eldoc-toml)
- (after 'eldoc-toml (diminish 'eldoc-toml))
- (after 'toml-mode
-  (add-hook 'toml-mode-hook #'eldoc-toml-mode)))
-
-(config "YAML"
- (packages 'yaml-mode)
- (after 'yaml-mode
-  (bind-key "C-c p" #'qol/generate-password 'yaml-mode-map)
-  (add-hook 'yaml-mode-hook #'indent-bars-mode)
-  (add-hook 'yaml-mode-hook #'tree-sitter-mode)
-  (add-hook 'yaml-mode-hook #'flycheck-mode)))
-
-(config "LLVM"
- (packages 'llvm-ts-mode 'demangle-mode 'autodisass-llvm-bitcode)
- (mode (rx ".ll" eos) 'llvm-ts-mode)
- (mode (rx ".bc" eos) 'autodisass-llvm-bitcode)
- (mode (rx bos ".clang-format") 'yaml-mode)
- (mode (rx bos ".clang-tidy") 'yaml-mode)
- (after 'llvm-ts-mode
-  (add-hook 'llvm-ts-mode-hook #'demangle-mode)))
-
-(config "Archlinux PKGBUILDs"
- (packages 'pkgbuild-mode)
- (mode (rx bos "PKGBUILD" eos) 'pkgbuild-mode))
-
-(config "Docker"
- (packages 'dockerfile-mode 'docker-compose-mode 'docker)
- (bind-key "C-c D" #'docker))
-
-(config "Web Development"
- (packages 'web-mode 'company 'company-web 'emmet-mode)
-
- (mode (rx ".html" eos) 'web-mode)
- (mode (rx ".css" eos) 'web-mode)
- (mode (rx ".js" eos) 'web-mode)
-
- (after 'web-mode
+ (autoload 'magit-format-file-nerd-icons "magit-diff")
+ (autoload 'magit-restore-window-configuration "magit-mode")
+ (autoload 'magit-display-buffer-fullframe-status-v1 "magit-mode")
+ (autoload 'diff-hl-magit-post-refresh "diff-hl")
+ (after 'magit-mode
+  (add-hook 'magit-mode-hook #'init/disable-line-numbers)
+  (add-hook 'magit-mode-hook #'init/magit-after-save-refresh-status)
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
   (setopt
-   web-mode-markup-indent-offset 2
-   web-mode-css-indent-offset 2
-   web-mode-code-indent-offset 2
-   web-mode-enable-current-column-highlight t
-   web-mode-enable-current-element-highlight t
-   web-mode-auto-close-style 3
-   web-mode-enable-auto-expanding t)
-  (declvar web-mode)
-  (declvar company-backends)
-  (setq-mode-local web-mode tab-width 2)
-  (add-hook 'web-mode-hook #'company-mode)
-  (add-hook 'web-mode-hook #'emmet-mode)
-  (after 'company
-   (setq-mode-local web-mode company-backends '((company-css company-web-html)))))
+   magit-log-section-commit-count 20
+   ;; magit-auto-revert-tracked-only nil
+   ;; magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
+   magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
+   magit-bury-buffer-function #'magit-restore-window-configuration
+   magit-repository-directories '(("~/Workspace" . 3))
+   magit-format-file-function #'magit-format-file-nerd-icons))
 
- (after 'emmet-mode
-  (diminish 'emmet-mode "Em")
-  (setopt emmet-indentation 2))
+ (autoload 'magit-insert-worktrees "magit-worktree")
+ (autoload 'magit-insert-xref-buttons "magit-worktree")
+ (autoload 'magit-insert-local-branches "magit-worktree")
+ (after 'magit-status
+  (add-hook 'magit-status-sections-hook #'magit-insert-worktrees)
+  (add-hook 'magit-status-sections-hook #'magit-insert-xref-buttons)
+  (add-hook 'magit-status-sections-hook #'magit-insert-local-branches))
 
- (defun init/css-setup-comments ()
-  "Setup C-style /* ... */ comments."
-  (with-eval-after-load 'newcomment
-   (setq-local comment-style 'extra-line)))
+ (autoload 'magit-after-save-refresh-status "magit-mode")
+ (defun init/magit-after-save-refresh-status ()
+  "Refresh magit after save."
+  (add-hook 'after-save-hook #'magit-after-save-refresh-status nil t))
 
- (after 'css-mode
-  (add-hook 'css-mode-hook #'init/css-setup-comments)))
+ (defun init/magit-load-nerd-icons (&rest args)
+  (if (require 'nerd-icons nil t)
+   (apply args)
+   (package-setup 'nerd-icons)))
+
+ (after 'magit-diff
+  (advice-add 'magit-format-file-nerd-icons :around #'init/magit-load-nerd-icons)
+  (advice-add 'magit-diff-visit-file :after #'init/recenter)
+  (setopt
+   magit-revision-show-gravatars t
+   magit-revision-fill-summary-line fill-column))
+
+ (after 'diff-hl
+  (setopt
+   diff-hl-flydiff-delay 1
+   diff-hl-draw-borders nil
+   diff-hl-update-async t)
+  (add-hook 'diff-hl-mode-hook #'diff-hl-flydiff-mode)
+  (add-hook 'diff-hl-mode-hook #'diff-hl-show-hunk-mouse-mode)))
 
 (config "General Programming"
- (packages 'jinx 'devdocs 'editorconfig 'lsp-mode 'diff-hl 'yasnippet
+ (packages 'devdocs 'editorconfig 'lsp-mode 'yasnippet
   'sideline 'sideline-blame)
 
  (after 'eldoc
@@ -800,9 +982,10 @@
   (add-hook 'prog-mode-hook #'volatile-highlights-mode)
   (add-hook 'prog-mode-hook #'diff-hl-mode)
   (add-hook 'prog-mode-hook #'show-paren-mode)
-  (add-hook 'prog-mode-hook #'yas-minor-mode-on)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-  (bind-key "C-h D" #'devdocs-lookup))
+  (bind-key "C-h D" #'devdocs-lookup)
+  (bind-key "C-c b" #'blamer-mode))
 
  (declvar devdocs-current-docs)
  (declvar python-mode)
@@ -831,8 +1014,7 @@
    electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit
    electric-pair-preserve-balance nil))
 
- (after 'subword
-  (diminish 'subword-mode "Sw"))
+ (after 'subword (diminish 'subword-mode "Sw"))
 
  (after 'xref
   (add-hook 'xref-after-return-hook #'recenter)
@@ -847,12 +1029,13 @@
 
  (after 'sideline-blame (setopt sideline-blame-commit-format "- %s")))
 
-(config "Grepping"
- (packages 'deadgrep 'wgrep 'wgrep-deadgrep)
- (bind-key "M-F" #'deadgrep))
+(config "Translation Files"
+ (packages 'po-mode))
+
+(config "Sed Files"
+ (packages 'sed-mode))
 
 (config "Configuration Files"
- (packages 'diff-hl 'jinx)
  (after 'conf-mode
   (add-hook 'conf-mode-hook #'electric-pair-local-mode)
   (add-hook 'conf-desktop-mode-hook #'electric-pair-local-mode)
@@ -871,10 +1054,122 @@
   (add-hook 'conf-mode-hook #'whitespace-mode)
   (add-hook 'conf-desktop-mode-hook #'whitespace-mode)))
 
+(config "Markdown"
+ (packages 'markdown-mode)
+ (after 'markdown-mode
+  (declvar markdown-mode)
+  (setq-mode-local markdown-mode fill-column 79)
+  (add-hook 'markdown-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'markdown-mode-hook #'hl-line-mode)))
+
+(config "JSON"
+ (packages 'json-mode)
+ (after 'json-mode
+  (add-hook 'json-mode-hook #'indent-bars-mode)
+  (add-hook 'json-mode-hook #'tree-sitter-mode)
+  (add-hook 'json-mode-hook #'hl-line-mode)
+  (add-hook 'json-mode-hook #'display-line-numbers-mode)
+  (add-hook 'json-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'json-mode-hook #'whitespace-mode)))
+
+(config "TOML"
+ (packages 'toml-mode 'eldoc-toml)
+ (after 'eldoc-toml (diminish 'eldoc-toml))
+ (after 'toml-mode
+  (add-hook 'toml-mode-hook #'eldoc-toml-mode)
+  (add-hook 'toml-mode-hook #'hl-line-mode)
+  (add-hook 'toml-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'toml-mode-hook #'display-line-numbers-mode)
+  (add-hook 'toml-mode-hook #'whitespace-mode)))
+
+(config "YAML"
+ (packages 'yaml-mode)
+ (after 'yaml-mode
+  (bind-key "C-c p" #'qol/generate-password 'yaml-mode-map)
+  (add-hook 'yaml-mode-hook #'indent-bars-mode)
+  (add-hook 'yaml-mode-hook #'tree-sitter-mode)
+  (add-hook 'yaml-mode-hook #'flycheck-mode)
+  (add-hook 'yaml-mode-hook #'hl-line-mode)
+  (add-hook 'yaml-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'yaml-mode-hook #'display-line-numbers-mode)
+  (add-hook 'yaml-mode-hook #'whitespace-mode)))
+
+(config "LLVM"
+ (packages 'llvm-ts-mode 'demangle-mode 'autodisass-llvm-bitcode)
+ (mode (rx ".ll" eos) #'llvm-ts-mode)
+ (mode (rx bos ".clang-format") #'yaml-mode)
+ (mode (rx bos ".clang-tidy") #'yaml-mode)
+ (require 'autodisass-llvm-bitcode)
+ (after 'llvm-ts-mode
+  (add-hook 'llvm-ts-mode-hook #'demangle-mode)))
+
+(config "Archlinux PKGBUILDs"
+ (packages 'pkgbuild-mode)
+ (mode (rx bos "PKGBUILD" eos) #'pkgbuild-mode))
+
+(config "Docker"
+ (packages 'dockerfile-mode 'docker-compose-mode 'docker)
+ (bind-key "C-c D" #'docker))
+
+(config "Makefiles"
+ (after 'make-mode
+  (add-hook 'makefile-mode-hook #'whitespace-mode)))
+
+(config "Web Development"
+ (packages 'web-mode 'company 'company-web 'emmet-mode)
+
+ (mode (rx ".html" eos) #'web-mode)
+ (mode (rx ".css" eos) #'web-mode)
+ (mode (rx ".js" eos) #'web-mode)
+
+ (after 'web-mode
+  (setopt
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-enable-current-column-highlight t
+   web-mode-enable-current-element-highlight t
+   web-mode-auto-close-style 3
+   web-mode-enable-auto-expanding t)
+  (declvar web-mode)
+  (declvar company-backends)
+  (setq-mode-local web-mode tab-width 2)
+  (add-hook 'web-mode-hook #'company-mode)
+  (add-hook 'web-mode-hook #'emmet-mode)
+  (after 'company
+   (setq-mode-local web-mode company-backends '((company-css company-web-html)))))
+
+ (after 'emmet-mode
+  (diminish 'emmet-mode "Em")
+  (setopt emmet-indentation 2))
+
+ (defun init/css-setup-comments ()
+  "Setup C-style /* ... */ comments."
+  (with-eval-after-load 'newcomment
+   (setq-local comment-style 'extra-line)))
+
+ (after 'css-mode
+  (add-hook 'css-mode-hook #'init/css-setup-comments)))
+
 (config "Meson"
  (packages 'meson-mode 'symbol-overlay)
  (after 'meson-mode
   (add-hook 'meson-mode-hook #'symbol-overlay-mode)))
+
+(config "Shell Scripting"
+ (mode (rx bos ".bashrc.user" eos) #'sh-mode)
+
+ (defun init/make-file-executable ()
+  "Makes the file executable on save."
+  (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p nil t))
+
+ (after 'sh-script
+  (add-hook 'sh-mode-hook #'init/make-file-executable)
+  (add-hook 'sh-mode-hook #'tree-sitter-mode)
+  (add-hook 'bash-ts-mode-hook #'init/make-file-executable)
+  (setopt
+   sh-basic-offset 2
+   sh-indentation 2)))
 
 (config "Emacs Lisp"
  (packages 'eros 'suggest 'ipretty 'highlight-quoted 'highlight-defined)
@@ -891,7 +1186,9 @@
   (add-hook 'emacs-lisp-mode-hook #'eros-mode)
   (add-hook 'emacs-lisp-mode-hook #'(lambda () (ipretty-mode t)))
   (add-hook 'emacs-lisp-mode-hook #'highlight-defined-mode)
-  (add-hook 'emacs-lisp-mode-hook #'highlight-quoted-mode))
+  (add-hook 'emacs-lisp-mode-hook #'highlight-quoted-mode)
+  (add-hook 'emacs-lisp-mode-hook #'symbol-overlay-mode)
+  (add-hook 'emacs-lisp-mode-hook #'whitespace-mode))
 
  (defun init/emacs-lisp-expand-current-macro-call ()
   "Expand the current macro expression."
@@ -921,9 +1218,9 @@
 (config "HLedger"
  (packages 'hledger-mode 'flycheck-hledger)
 
- (mode (rx ".journal" eos) 'hledger-mode)
- (mode (rx ".ledger" eos) 'hledger-mode)
- (mode (rx ".hledger" eos) 'hledger-mode)
+ (mode (rx ".journal" eos) #'hledger-mode)
+ (mode (rx ".ledger" eos) #'hledger-mode)
+ (mode (rx ".hledger" eos) #'hledger-mode)
 
  (defvar init/hledger-currency-string "EUR")
 
@@ -981,7 +1278,12 @@
   (add-hook 'hledger-mode-hook #'init/setup-hledger-capfs)
   (add-hook 'hledger-mode-hook #'init/hledger-maybe-setup-company nil t)
   (add-hook 'hledger-mode-hook #'volatile-highlights-mode)
-  (add-hook 'hledger-mode-hook #'electric-pair-local-mode))
+  (add-hook 'hledger-mode-hook #'electric-pair-local-mode)
+  (add-hook 'hledger-mode-hook #'whitespace-mode)
+  (add-hook 'hledger-mode-hook #'symbol-overlay-mode)
+  (add-hook 'hledger-mode-hook #'yas-minor-mode)
+  (add-hook 'hledger-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'hledger-mode-hook #'hl-line-mode))
 
  (defun init/hledger-setup-flycheck ()
   (require 'flycheck-hledger))
@@ -1031,8 +1333,6 @@
 ;;  :hook
 ;;  (prog-mode-hook . init/setup-prog-capfs))
 
-;; TODO enable hl-line-mode & display-line-numbers-mode & whitespace-mode in yaml-mode toml-mode json-mode hledger-mode
-
 ;;; Meson
 
 (use-package lsp-meson
@@ -1055,523 +1355,6 @@
  :init
  (setq-mode-local meson-mode lsp-completion-mode nil)
  (setq-mode-local meson-mode lsp-completion-enable nil))
-
-;;; Version Control
-
-(use-package vc
- :ensure nil
- :defer t
-
- :custom
- (vc-make-backup-files t))
-
-(use-package ediff-wind
- :ensure nil
- :defer t
-
- :custom
- ;; (ediff-split-window-function #'split-window-right)
- (ediff-split-window-function #'split-window-horizontally)
- (ediff-window-setup-function #'ediff-setup-windows-plain))
-
-(use-package blamer
- :ensure t
- :defer t
- :preface (packages 'blamer)
-
- :custom
- ;; (blamer-idle-time 0)
- (blamer-commit-formatter ": %s")
- (blamer-datetime-formatter "%s")
- (blamer-max-commit-message-length 60)
-
- :bind
- (:map prog-mode-map
-  ("C-c b" . blamer-mode)))
-
-(use-package goto-addr
- :ensure nil
- :defer t
- :after magit-process
- :hook (magit-process-mode-hook . goto-address-mode))
-
-(use-package magit
- :ensure t
- :defer t
-
- :bind
- ("C-x g" . magit-status)
-
- :preface
- (defun init/disable-line-numbers ()
-  "Disable display-line-numbers-mode."
-  (display-line-numbers-mode -1))
-
- :hook
- (magit-mode-hook . init/disable-line-numbers)
-
- :custom
- (magit-log-section-commit-count 20)
- ;; (magit-auto-revert-tracked-only nil)
- ;; (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
- (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
- (magit-bury-buffer-function #'magit-restore-window-configuration)
- (magit-repository-directories '(("~/Workspace" . 3)))
- (magit-format-file-function #'magit-format-file-nerd-icons))
-
-(use-package magit-status
- :ensure magit
- :defer t
- :after magit
- :config
- (add-hook 'magit-status-sections-hook 'magit-insert-worktrees t)
- (add-hook 'magit-status-sections-hook 'magit-insert-xref-buttons t)
- (add-hook 'magit-status-sections-hook 'magit-insert-local-branches t))
-
-(use-package magit
- :ensure t
- :defer t
- :preface (packages 'magit)
- :after files
- :commands magit-after-save-refresh-status
-
- :preface
- (defun init/magit-after-save-refresh-status ()
-  "Refresh magit after save."
-  (add-hook 'after-save-hook #'magit-after-save-refresh-status 0 t))
-
- :hook
- (magit-mode-hook . init/magit-after-save-refresh-status))
-
-(use-package magit-diff
- :ensure magit
- :defer t
- :preface (packages 'magit)
- :preface
- (defun init/magit-load-nerd-icons (&rest args)
-  (if (require 'nerd-icons nil t)
-   (apply args)
-   (message "Installing the `nerd-icons' package...")
-   (unless (package-installed-p 'nerd-icons)
-    (unless package-archive-contents
-     (package-refresh-contents))
-    (package-install 'nerd-icons))))
-
- :custom
- (magit-revision-show-gravatars t)
- (magit-revision-fill-summary-line fill-column)
-
- :config
- (advice-add 'magit-diff-visit-file :after #'init/recenter)
- (advice-add 'magit-format-file-nerd-icons :around #'init/magit-load-nerd-icons))
-
-(use-package diff-hl
- :ensure t
- :defer t
- :preface (packages 'diff-hl)
-
- :custom
- (diff-hl-flydiff-delay 1)
- (diff-hl-draw-borders nil)
- (diff-hl-update-async t))
-
-(use-package diff-hl
- :ensure t
- :defer t
- :after magit-mode
- :hook
- (magit-post-refresh-hook . diff-hl-magit-post-refresh))
-
-(use-package diff-hl-flydiff
- :ensure diff-hl
- :defer t
- :after diff-hl
- :hook
- (diff-hl-mode-hook . diff-hl-flydiff-mode))
-
-(use-package diff-hl-show-hunk
- :ensure diff-hl
- :defer t
- :after diff-hl
- :hook
- (diff-hl-mode-hook . diff-hl-show-hunk-mouse-mode))
-
-(use-package diff-hl-dired
- :ensure diff-hl
- :defer t
- :after dired
- :hook
- (dired-mode-hook . diff-hl-dired-mode))
-
-;;; General Features
-
-(use-package symbol-overlay
- :ensure t
- :defer t
- :preface (packages 'symbol-overlay)
- :diminish "So"
-
- :bind
- (:map symbol-overlay-map
-  ("M->" . symbol-overlay-jump-next)
-  ("M-<" . symbol-overlay-jump-prev))
-
- :custom
- (symbol-overlay-idle-time 0.1))
-
-(use-package paren
- :ensure nil
- :defer t
-
- :custom
- (show-paren-when-point-in-periphery t)
- (show-paren-when-point-inside-paren t)
- (show-paren-style 'mixed)
- (show-paren-highlight-openparen t)
- (show-paren-context-when-offscreen 'overlay))
-
-(use-package autorevert
- :ensure nil
- :defer t
- :diminish "Ar"
-
- :custom
- (auto-revert-mode-text " Ar")
- (auto-revert-interval 1)
- (auto-revert-avoid-polling t)
- (buffer-auto-revert-by-notification t))
-
-(use-package crux
- :ensure t
- :defer t
- :preface (packages 'crux)
-
- :bind
- ([remap keyboard-quit] . crux-keyboard-quit-dwim))
-
-;;; Various
-
-(use-package dictionary
- :ensure nil
- :defer t
-
- :custom
- (dictionary-server "dict.org")
- (dictionary-use-single-buffer t))
-
-;;; Whitespace
-
-(use-package whitespace
- :ensure nil
- :defer t
- :diminish "Ws"
-
- :custom
- (whitespace-line-column fill-column)
- (show-trailing-whitespace nil)
- (whitespace-action '(cleanup auto-cleanup))
- ;; (whitespace-style
- ;;  '(face
- ;;    trailing
- ;;    tabs
- ;;    spaces
- ;;    lines-tail
- ;;    missing-newline-at-eof
- ;;    empty
- ;;    space-after-tab
- ;;    space-before-tab
- ;;    tab-mark))
- (whitespace-style nil)
-
- :custom-face
- (whitespace-tab ((t (:foreground "lavender" :background "white smoke")))))
-
-;;; Makefiles
-
-(use-package whitespace
- :ensure nil
- :defer t
- :after make-mode
- :hook makefile-mode-hook)
-
-;;; Emacs Lisp
-
-(use-package symbol-overlay
- :ensure t
- :defer t
- :preface (packages 'symbol-overlay)
- :after elisp-mode
- :hook emacs-lisp-mode-hook)
-
-(use-package whitespace
- :ensure nil
- :defer t
- :after elisp-mode
- :hook emacs-lisp-mode-hook)
-
-;;; Shell Scripting
-
-(use-package sh-script
- :ensure nil
- :defer t
- :mode (rx bos ".bashrc.user" eos)
-
- :custom
- (sh-basic-offset 2)
- (sh-indentation 2)
-
- :preface
- (defun init/make-file-executable ()
-  "Makes the file executable on save."
-  (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p 0 t))
-
- :hook
- (sh-mode-hook . init/make-file-executable)
- (bash-ts-mode-hook . init/make-file-executable))
-
-;;; Dired
-
-(use-package dired-async
- :ensure nil
- :defer t
- :diminish "As")
-
-(use-package dired
- :ensure nil
- :defer t
-
- :custom
- (dired-mouse-drag-files t)
- (dired-listing-switches "-l -h --group-directories-first")
- (dired-hide-details-hide-symlink-targets nil)
- (dired-recursive-copies 'always)
- (dired-recursive-deletes 'always)
- (dired-dwim-target t)
-
- :bind
- (:map dired-mode-map
-  ("C-p" . casual-dired-tmenu))
-
- :preface
- (defun init/dired-setup ()
-  "Setup dired requires."
-  (require 'dired-x)
-  (require 'wdired)
-  (require 'image-dired))
-
- :hook
- (dired-mode-hook . init/dired-setup)
- (dired-mode-hook . dired-hide-details-mode))
-
-(use-package hl-line
- :ensure t
- :defer t
- :preface (packages 'hl-line)
- :after dired
- :hook dired-mode-hook)
-
-(use-package mouse
- :ensure nil
- :defer t
- :after dired
- :hook (dired-mode-hook . context-menu-mode))
-
-(use-package dired-async
- :ensure nil
- :defer t
- :after dired
- :hook dired-mode-hook)
-
-(use-package autorevert
- :ensure nil
- :defer t
- :after dired
- :hook (dired-mode-hook . auto-revert-mode))
-
-(use-package nerd-icons-dired
- :ensure t
- :defer t
- :preface (packages 'nerd-icons-dired)
- :diminish
- :hook (dired-mode-hook . nerd-icons-dired-mode))
-
-;;; JSON
-
-  ;; TODO
-  ;; Add a call to push this in JSON mode
-  ;;  (major-mode-remap-alist
-  ;; '((json-mode . json-ts-mode))))
-
-(use-package json-mode
- :ensure t
- :defer t
- :preface (packages 'json-mode))
-
-(use-package indent-bars
- :ensure t
- :defer t
- :preface (packages 'indent-bars)
- :after json-ts-mode
- :hook json-ts-mode-hook)
-
-(use-package tree-sitter
- :ensure t
- :defer t
- :preface (packages 'tree-sitter)
- :diminish "Ts"
- :after json-mode
- :hook json-mode-hook)
-
-;;; Emacs Tools
-
-(use-package which-key
- :ensure t
- :defer t
- :preface (packages 'which-key)
- :diminish
-
- :custom
- ;; (which-key-idle-delay 0.5)
- (which-key-show-docstrings nil)
- (which-key-add-column-padding 3)
- (which-key-max-description-length nil)
- (which-key-max-display-columns nil)
-
- :init
- (which-key-mode))
-
-(use-package nerd-icons-completion
- :ensure t
- :defer t
- :preface (packages 'nerd-icons-completion))
-
-(use-package emacs
- :ensure nil
- :defer t
-
- :bind
- (:map minibuffer-local-map
-  ("M-A" . marginalia-cycle)))
-
-(use-package simple
- :ensure nil
- :defer t
-
- :bind
- (:map completion-list-mode-map
-  ("M-A" . marginalia-cycle)))
-
-(use-package marginalia
- :ensure t
- :defer t
- :preface (packages 'marginalia)
-
- :preface
- (defun init/marginalia-mode ()
-  (unless (bound-and-true-p marginalia-mode)
-   (marginalia-mode)))
-
- :hook
- (marginalia-mode-hook . nerd-icons-completion-marginalia-setup)
- (minibuffer-setup-hook . init/marginalia-mode))
-
-(use-package embark
- :ensure t
- :defer t
- :preface (packages 'embark)
-
- :bind
- (("C-." . embark-act)
-  ("C-;" . embark-dwim)
-  ("C-h B" . embark-bindings)
-  :map minibuffer-local-map
-  ("C-'" . embark-collect)
-  ("C-x E" . embark-export)
-  ("C-x B" . embark-become))
-
- :custom
- (prefix-help-command #'embark-prefix-help-command)
- (embark-mixed-indicator-both t)
- (embark-mixed-indicator-delay 0))
-
-(use-package multiple-cursors
- :ensure t
- :defer t
- :preface (packages 'multiple-cursors))
-
-(use-package mc-edit-lines
- :ensure multiple-cursors
- :defer t
-
- :bind
- ("C-c C-v" . mc/edit-lines))
-
-(use-package mc-mark-more
- :ensure multiple-cursors
- :defer t
-
- :bind
- ("C->"           . mc/mark-next-like-this)
- ("C-<"           . mc/mark-previous-like-this)
- ("C-S-<mouse-1>" . mc/toggle-cursor-on-click))
-
-(use-package multiple-cursors-core
- :ensure multiple-cursors
- :defer t
-
- :custom
- (mc/always-run-for-all t))
-
-;;; Syntax Highlighting
-
-(use-package jit-lock
- :ensure nil
- :defer t
-
- :custom
- (jit-lock-stealth-time 0.1)
- ;; A little more than what can fit on the screen.
- (jit-lock-chunk-size 4000)
- (jit-lock-antiblink-grace nil))
-
-(use-package treesit
- :ensure nil
- :defer t
-
- :custom
- (treesit-language-source-alist
-  '((bash   . ("https://github.com/tree-sitter/tree-sitter-bash"))
-    (c      . ("https://github.com/tree-sitter/tree-sitter-c"))
-    (cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp"))
-    (json   . ("https://github.com/tree-sitter/tree-sitter-json.git"))
-    (toml   . ("https://github.com/ikatyang/tree-sitter-toml.git"))
-    (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git")))))
-
-(use-package tree-sitter
- :ensure t
- :defer t
- :preface (packages 'tree-sitter)
- :diminish "Ts")
-
-(use-package tree-sitter-hl
- :ensure tree-sitter
- :defer t
- :hook tree-sitter-mode-hook
- :custom-face
- (tree-sitter-hl-face:property ((t (:inherit font-lock-keyword-face)))))
-
-(use-package tree-sitter-langs
- :ensure t
- :defer t
- :preface (packages 'tree-sitter-langs)
-
- :hook
- (tree-sitter-mode-hook .
-  (lambda ()
-   (tree-sitter-langs-install-grammars t)))
-
- :custom
- (tree-sitter-langs-git-dir (file-name-concat tree-sitter-langs-grammar-dir "git")))
 
 ;;; Debuggers
 
@@ -1790,35 +1573,6 @@
 
 ;;; Project Management
 
-(use-package projectile
- :ensure t
- :defer t
- :preface (packages 'projectile)
- :diminish "Pr"
-
- :commands
- projectile-project-root
-
- :bind-keymap ("C-x p" . projectile-command-map)
-
- :custom
- (projectile-project-search-path '(("~/Workspace" . 3)))
- (projectile-sort-order 'recently-active)
- (projectile-auto-cleanup-known-projects t)
- (projectile-enable-caching nil)
- (projectile-auto-discover t)
- ; (projectile-indexing-method 'hybrid)
- ; (projectile-require-project-root nil)
-
- :hook (after-init-hook . projectile-mode))
-
-(use-package consult-projectile
- :ensure t
- :defer t
- :preface (packages 'consult-projectile)
- :after projectile
- :bind ("C-x P" . consult-projectile))
-
 (use-package treemacs-projectile
  :ensure t
  :defer t
@@ -1826,35 +1580,6 @@
  :after (treemacs projectile))
 
 ;;; Snippets
-
-(use-package yasnippet
- :ensure t
- :defer t
- :preface (packages 'yasnippet)
- :diminish (yas-minor-mode . "Ys")
-
- :init
- (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
-
- :config
- (unbind-key "TAB" yas-minor-mode-map))
-
-(use-package yasnippet-snippets
- :ensure t
- :defer t
- :preface (packages 'yasnippet-snippets)
- :after yasnippet
-
- :preface
- (defvar *init/yasnippet-snippets-initialized* nil)
- (defun init/initialize-yasnippet-snippets ()
-  "Initialize yasnippet snippets if they have not already been."
-  (unless *init/yasnippet-snippets-initialized*
-   (yasnippet-snippets-initialize)
-   (setq *init/yasnippet-snippets-initialized* t)))
-
- :hook
- (yas-minor-mode-hook . init/initialize-yasnippet-snippets))
 
 (use-package yasnippet-capf
  :ensure t
@@ -1864,42 +1589,6 @@
  (yasnippet-capf-lookup-by 'name)
  :config
  (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive))
-
-;;; Ledger
-
-(use-package whitespace
- :ensure nil
- :defer t
- :after hledger-mode
- :hook hledger-mode-hook)
-
-(use-package symbol-overlay
- :ensure t
- :defer t
- :preface (packages 'symbol-overlay)
- :after hledger-mode
- :hook hledger-mode-hook)
-
-(use-package yasnippet
- :ensure t
- :defer t
- :preface (packages 'yasnippet)
- :after hledger-mode
- :hook (hledger-mode-hook . yas-minor-mode-on))
-
-(use-package display-fill-column-indicator
- :ensure t
- :defer t
- :preface (packages 'display-fill-column-indicator)
- :after hledger-mode
- :hook hledger-mode-hook)
-
-(use-package hl-line
- :ensure t
- :defer t
- :preface (packages 'hl-line)
- :after hledger-mode
- :hook hledger-mode-hook)
 
 ;;; Rust
 
