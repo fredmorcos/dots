@@ -458,8 +458,8 @@
    completions-group t
    completion-cycle-threshold nil))
 
- (declvar orderless-matching-styles)
  (after 'orderless
+  (declvar orderless-matching-styles)
   (push 'orderless-initialism orderless-matching-styles)
   (push 'orderless-prefixes orderless-matching-styles))
 
@@ -654,8 +654,10 @@
    (push #'nerd-icons-corfu-formatter corfu-margin-formatters)
    (setopt
     corfu-preview-current nil
-    ;; corfu-auto nil
-    ;; corfu-auto-delay 0
+    corfu-auto t
+    ;; corfu-auto-delay 0.4
+    corfu-auto-prefix 1
+    corfu-auto-trigger ".&"
     ;; corfu-quit-no-match t
     corfu-scroll-margin 5
     ;; corfu-max-width 50
@@ -1011,19 +1013,20 @@
   (bind-key "C-c b" #'blamer-mode))
 
  (package 'devdocs)
- (declvar devdocs-current-docs)
- (declvar python-mode)
- (declvar rust-mode)
- (declvar c-mode)
- (declvar dockerfile-mode)
- (declvar emacs-lisp-mode)
- (declvar makefile-mode)
- (setq-mode-local python-mode devdocs-current-docs '("python~3.13"))
- (setq-mode-local rust-mode devdocs-current-docs "rust")
- (setq-mode-local c-mode devdocs-current-docs "c")
- (setq-mode-local dockerfile-mode devdocs-current-docs "docker")
- (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp")
- (setq-mode-local makefile-mode devdocs-current-docs "gnu_make")
+ (after 'devdocs
+  (declvar devdocs-current-docs)
+  (declvar python-mode)
+  (declvar rust-mode)
+  (declvar c-mode)
+  (declvar dockerfile-mode)
+  (declvar emacs-lisp-mode)
+  (declvar makefile-mode)
+  (setq-mode-local python-mode devdocs-current-docs '("python~3.13"))
+  (setq-mode-local rust-mode devdocs-current-docs "rust")
+  (setq-mode-local c-mode devdocs-current-docs "c")
+  (setq-mode-local dockerfile-mode devdocs-current-docs "docker")
+  (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp")
+  (setq-mode-local makefile-mode devdocs-current-docs "gnu_make"))
 
  (after 'elec-pair
   (setopt
@@ -1226,13 +1229,13 @@
    web-mode-auto-close-style 3
    web-mode-enable-auto-expanding t)
   (declvar web-mode)
-  (declvar company-backends)
   (setq-mode-local web-mode tab-width 2)
   (add-hook 'web-mode-hook #'company-mode)
   (add-hook 'web-mode-hook #'emmet-mode)
 
   (package 'company-web)
   (after 'company
+   (declvar company-backends)
    (setq-mode-local web-mode company-backends '((company-css company-web-html)))))
 
  (package 'emmet-mode)
@@ -1303,8 +1306,8 @@
   (cape-wrap-super
    'elisp-completion-at-point
    #'yasnippet-capf
-   #'cape-file
-   #'cape-dabbrev))
+   ;; #'cape-dabbrev
+   #'cape-file))
 
  (defun init/setup-elisp-capfs ()
   (setq-local completion-at-point-functions
@@ -1402,7 +1405,10 @@
    (add-hook 'company-mode-hook #'init/hledger-setup-company nil t)))
 
  (defun init/hledger-capfs ()
-  (cape-wrap-super 'hledger-completion-at-point #'cape-dabbrev #'yasnippet-capf))
+  (cape-wrap-super
+   'hledger-completion-at-point
+   ;; #'cape-dabbrev
+   #'yasnippet-capf))
 
  (defun init/setup-hledger-capfs ()
   (setq-local completion-at-point-functions (list #'init/hledger-capfs)))
@@ -1448,55 +1454,54 @@
  (package 'rust-mode)
  (package 'rustic))
 
-;;; C and C++ Programming
+(config "C/C++"
+ (autoload 'lsp-clangd-find-other-file "lsp-clangd")
 
-(use-package cc-mode
- :ensure nil
- :defer t
+ (after 'cc-mode
+  (setopt c-doc-comment-style '((c-mode    . gtkdoc) (c++-mode  . doxygen)))
+  (bind-key "<f2>" #'lsp-clangd-find-other-file)
+  (bind-key "(" #'nil 'c-mode-base-map))
 
- :bind
- (:map c-mode-base-map
-  ("(" . nil))
+ (after 'cc-cmds
+  ;; Unmark region even when c-indent-line-or-region doesn't indent anything.
+  (advice-add 'c-indent-line-or-region :after #'keyboard-quit))
 
- :custom
- (c-doc-comment-style
-  '((java-mode . javadoc)
-    (c-mode    . gtkdoc)
-    (c++-mode  . doxygen))))
-
-(use-package cc-cmds
- :ensure nil
- :defer t
-
- :config
- ;; Unmark region even when c-indent-line-or-region doesn't indent anything.
- (advice-add 'c-indent-line-or-region :after #'keyboard-quit))
-
-(use-package cc-vars
- :ensure nil
- :defer t
-
- :custom
- (c-mark-wrong-style-of-comment t)
- (c-default-style '((other . "user")))
- (c-basic-offset 2)
- (c-tab-always-indent 'complete)
-
- :preface
  (defun init/cc-setup-comments ()
   "Setup C-style /* ... */ comments."
   (with-eval-after-load 'newcomment
    (setq-local comment-style 'extra-line)))
 
- :hook
- (c-mode-common-hook . init/cc-setup-comments))
+ (after 'cc-vars
+  (setopt
+   c-mark-wrong-style-of-comment t
+   c-default-style '((other . "user"))
+   c-basic-offset 2
+   c-tab-always-indent 'complete)
+  (add-hook 'c-mode-common-hook #'init/cc-setup-comments)
+  (add-hook 'c-mode-common-hook #'lsp))
 
-(use-package lsp-mode
- :ensure t
- :defer t
- :preface (package 'lsp-mode)
- :after cc-mode
- :hook (c-mode-common-hook . lsp))
+ (after 'lsp-clangd
+  (declvar lsp-clients-clangd-args)
+  (push "--enable-config" lsp-clients-clangd-args)
+  (push "--all-scopes-completion=0" lsp-clients-clangd-args)
+  (push "--query-driver=/**/*" lsp-clients-clangd-args)
+  (push "--all-scopes-completion" lsp-clients-clangd-args)
+  (push "--log=error" lsp-clients-clangd-args)
+  (push "--background-index=0" lsp-clients-clangd-args)
+  (push "--clang-tidy" lsp-clients-clangd-args)
+  (push "--completion-style=detailed" lsp-clients-clangd-args)
+  (push "--function-arg-placeholders" lsp-clients-clangd-args)
+  (push "--header-insertion=never" lsp-clients-clangd-args)
+  ;; This sometimes breaks LSP completion.
+  (push "--header-insertion-decorators=0" lsp-clients-clangd-args)
+  (push "--limit-references=0" lsp-clients-clangd-args)
+  (push "--limit-results=0" lsp-clients-clangd-args)
+  (push "--rename-file-limit=0" lsp-clients-clangd-args)
+  (push "-j=16" lsp-clients-clangd-args)
+  (push "--malloc-trim" lsp-clients-clangd-args)
+  (push "--pch-storage=memory" lsp-clients-clangd-args)))
+
+;;; C and C++ Programming
 
 ;; (use-package lsp-completion
 ;;  :ensure lsp-mode
@@ -1505,42 +1510,6 @@
 ;;  :config
 ;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
 ;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
-
-(use-package lsp-clangd
- :ensure lsp-mode
- :defer t
- :preface (package 'lsp-mode)
-
- :config
- (add-to-list 'lsp-clients-clangd-args "--enable-config")
- (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
- (add-to-list 'lsp-clients-clangd-args "--query-driver=/**/*")
- (add-to-list 'lsp-clients-clangd-args "--all-scopes-completion")
- (add-to-list 'lsp-clients-clangd-args "--log=error")
- (add-to-list 'lsp-clients-clangd-args "--background-index")
- (add-to-list 'lsp-clients-clangd-args "--clang-tidy")
- (add-to-list 'lsp-clients-clangd-args "--completion-style=detailed")
- (add-to-list 'lsp-clients-clangd-args "--function-arg-placeholders")
- (add-to-list 'lsp-clients-clangd-args "--header-insertion=never")
- ;; This sometimes breaks LSP completion.
- (add-to-list 'lsp-clients-clangd-args "--header-insertion-decorators=0")
- (add-to-list 'lsp-clients-clangd-args "--limit-references=0")
- (add-to-list 'lsp-clients-clangd-args "--limit-results=0")
- (add-to-list 'lsp-clients-clangd-args "--rename-file-limit=0")
- (add-to-list 'lsp-clients-clangd-args "-j=16")
- (add-to-list 'lsp-clients-clangd-args "--malloc-trim")
- (add-to-list 'lsp-clients-clangd-args "--pch-storage=memory"))
-
-(use-package lsp-clangd
- :ensure lsp-mode
- :defer t
- :after cc-mode
-
- :commands
- lsp-clangd-find-other-file
-
- :bind
- (:map c-mode-base-map ("<f2>" . lsp-clangd-find-other-file)))
 
 ;;; Project Management
 
