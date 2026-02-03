@@ -1,0 +1,11 @@
+[Unit]
+Description=Resume Wifi
+
+[Service]
+Type=simple
+ExecStart=bash -c 'echo "0000:c0:00.0" > /sys/bus/pci/drivers/mt7925e/bind'
+
+[Install]
+WantedBy=suspend.target
+WantedBy=hibernate.target
+WantedBy=hybrid-sleep.target

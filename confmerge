@@ -222,6 +222,9 @@ cmerge vpn/ox-resume.service           $SYSD/system/ox-resume.service
 cmerge vpn/dovecot-net.positive        /etc/dnssec-trust-anchors.d/dovecot-net.positive
 cmerge vpn/open-xchange.negative       /etc/dnssec-trust-anchors.d/open-xchange.negative
 
+cmerge wifi/mt-resume.service          $SYSD/system/wifi-mt-resume.service
+cmerge wifi/mt-suspend.service         $SYSD/system/wifi-mt-suspend.service
+
 if [ -f /etc/os-release ]; then
   if grep -i "archlinux" /etc/os-release 1>/dev/null 2>&1 ; then
     pkgs_tmp_file=$(mktemp)

@@ -1,0 +1,10 @@
+[Unit]
+Description=Suspend Wifi
+Before=sleep.target
+
+[Service]
+Type=simple
+ExecStart=bash -c 'echo "0000:c0:00.0" > /sys/bus/pci/drivers/mt7925e/unbind'
+
+[Install]
+WantedBy=sleep.target
