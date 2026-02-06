@@ -795,7 +795,7 @@
    `[("File" 20)
      ("Line" 5 flycheck-error-list-entry-< :right-align nil)
      ("Col" 5 nil :right-align nil)
-     ("Level" 8 flycheck-error-list-entry-level-<)
+     ("Level" 16 flycheck-error-list-entry-level-<)
      ("ID" 32 t)
      (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
    "Table format for the error list.")
@@ -1113,9 +1113,53 @@
   (setopt
    lsp-before-save-edits nil))
 
+ (after 'lsp-lens
+  (diminish 'lsp-lens-mode "Lns"))
+
  (after 'lsp-semantic-tokens
   (setopt
-   lsp-semantic-tokens-enable t)))
+   lsp-semantic-tokens-enable t))
+
+ ;; Improve LSP performance by trying to parse elisp objects from emacs-lsp-booster.
+ (defun lsp-booster--advice-json-parse (old-fn &rest args)
+  "Try to parse bytecode instead of json."
+  (or
+   (when (equal (following-char) ?#)
+    (let ((bytecode (read (current-buffer))))
+     (when (byte-code-function-p bytecode)
+      (funcall bytecode))))
+   (apply old-fn args)))
+
+ (after 'lsp-mode
+  (advice-add (if (progn (require 'json)
+                   (fboundp 'json-parse-buffer))
+               'json-parse-buffer
+               'json-read)
+   :around #'lsp-booster--advice-json-parse))
+
+ ;; Improve LSP performance by using emacs-lsp-booster.
+ (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+  "Prepend emacs-lsp-booster command to lsp CMD."
+  (let ((orig-result (funcall old-fn cmd test?)))
+   ;; for check lsp-server-present?
+   (if (and (not test?)
+        ;; see lsp-resolve-final-command, it would add extra shell wrapper
+        (not (file-remote-p default-directory))
+        (declvar lsp-use-plists)
+        lsp-use-plists
+        ;; native json-rpc
+        (not (functionp 'json-rpc-connection))
+        (executable-find "emacs-lsp-booster"))
+    (progn
+     ;; resolve command from exec-path (in case not found in $PATH)
+     (when-let ((command-from-exec-path (executable-find (car orig-result))))
+      (setcar orig-result command-from-exec-path))
+     (message "Using emacs-lsp-booster for %s!" orig-result)
+     (cons "emacs-lsp-booster" orig-result))
+    orig-result)))
+
+ (after 'lsp-mode
+  (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)))
 
 (config "Translation Files"
  (package 'po-mode))

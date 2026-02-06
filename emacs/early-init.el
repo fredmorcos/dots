@@ -138,6 +138,8 @@
 
  ;; Improve LSP performance.
  (setenv "LSP_USE_PLISTS" "true")
+ (autoload 'jsonrpc--log-event "jsonrpc")
+ (after 'jsonrpc (fset #'jsonrpc--log-event #'ignore))
 
  (after 'term/pgtk-win
   ;; Disable input contexts (for Windows).

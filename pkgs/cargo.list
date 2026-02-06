@@ -2,6 +2,7 @@ cargo-careful
 cargo-criterion
 cargo-deadlinks
 cargo-demangle
+emacs-lsp-booster
 goran
 rustfilt
 suckit
