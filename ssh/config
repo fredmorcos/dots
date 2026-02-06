@@ -5,5 +5,15 @@ Host dc-ubuntu24
   IdentityFile ~/.ssh/id_rsa
   Compression no
 
+Host gitlab-dovecot
+  User fred.morcos
+  HostName git.dovecot.net
+  IdentityFile ~/.ssh/id_ed25519.pub
+
+Host gitlab-ox
+  User fred.morcos
+  HostName gitlab.com/openxchange
+  IdentityFile ~/.ssh/id_ed25519.pub
+
 Host rpi
   User root
