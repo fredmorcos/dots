@@ -11,7 +11,7 @@
 
 (config "Quality of Life"
  (package 'crux)
- (bind-key [remap keyboard-quit] #'crux-keyboard-quit-dwim)
+ (define-key global-map [remap keyboard-quit] #'crux-keyboard-quit-dwim)
 
  (autoload 'qol/insert-pair               "qol")
  (autoload 'qol/insert-pair-curly         "qol")
@@ -65,8 +65,10 @@
  (move-text-default-bindings)
 
  (package 'mwim)
- (bind-key [remap move-beginning-of-line] #'mwim-beginning-of-code-or-line-or-comment)
- (bind-key [remap move-end-of-line] #'mwim-end-of-code-or-line)
+ (define-key global-map
+  [remap move-beginning-of-line] #'mwim-beginning-of-code-or-line-or-comment)
+ (define-key global-map
+  [remap move-end-of-line] #'mwim-end-of-code-or-line)
 
  (after 'paren
   (setopt
@@ -80,7 +82,7 @@
  (package 'deadgrep)
  (package 'wgrep)
  (package 'wgrep-deadgrep)
- (bind-key "M-F" #'deadgrep))
+ (define-key global-map (kbd "M-F") #'deadgrep))
 
 (config "Scrolling"
  (defun init/scroll-other-window ()
@@ -101,25 +103,27 @@
    auto-hscroll-mode 'current-line
    fast-but-imprecise-scrolling t))
 
- (bind-key "C-<f11>" #'init/scroll-other-window)
- (bind-key "C-<f12>" #'init/scroll-other-window-down)
- (bind-key "<mouse-4>" #'previous-line)
- (bind-key "<mouse-5>" #'next-line))
+ (define-key global-map (kbd "C-<f11>") #'init/scroll-other-window)
+ (define-key global-map (kbd "C-<f12>") #'init/scroll-other-window-down)
+ (define-key global-map (kbd "<mouse-4>") #'previous-line)
+ (define-key global-map (kbd "<mouse-5>") #'next-line))
 
 (config "Selecting Text"
  (cua-selection-mode t)
+
  (package 'expand-region)
- (bind-key "C-=" #'er/expand-region)
+ (define-key global-map (kbd "C-=") #'er/expand-region)
+
  (package 'surround)
- (bind-key "M-'" #'surround-mark-inner)
- (bind-key "M-\"" #'surround-insert))
+ (define-key global-map (kbd "M-'") #'surround-mark-inner)
+ (define-key global-map (kbd "M-\"") #'surround-insert))
 
 (config "Editing Text"
  (after 'text-mode
   (add-hook 'text-mode-hook #'jinx-mode))
 
- (bind-key "C-p" #'casual-editkit-main-tmenu)
- (bind-key "C-c d" #'duplicate-dwim)
+ (define-key global-map (kbd "C-p") #'casual-editkit-main-tmenu)
+ (define-key global-map (kbd "C-c d") #'duplicate-dwim)
 
  (package 'volatile-highlights)
  (after 'volatile-highlights (diminish 'volatile-highlights-mode))
@@ -146,17 +150,6 @@
    whitespace-line-column fill-column
    show-trailing-whitespace nil
    whitespace-action '(cleanup auto-cleanup)
-   ;; whitespace-style
-   ;; '(face
-   ;;   trailing
-   ;;   tabs
-   ;;   spaces
-   ;;   lines-tail
-   ;;   missing-newline-at-eof
-   ;;   empty
-   ;;   space-after-tab
-   ;;   space-before-tab
-   ;;   tab-mark)
    whitespace-style nil)
   (face whitespace-tab :foreground "lavender" :background "white smoke"))
 
@@ -170,9 +163,9 @@
 
 (config "Search & Replace"
  (package 'visual-replace)
- (bind-key "M-%" #'visual-replace-thing-at-point)
- (bind-key "M-^" #'visual-replace-selected)
- (bind-key "M-*" #'visual-replace)
+ (define-key global-map (kbd "M-%") #'visual-replace-thing-at-point)
+ (define-key global-map (kbd "M-^") #'visual-replace-selected)
+ (define-key global-map (kbd "M-*") #'visual-replace)
 
  (after 'isearch
   (setopt
@@ -183,7 +176,7 @@
    lazy-count-prefix-format "(%s/%s) "
    search-whitespace-regexp ".*?"))
 
- (bind-key "C-p" #'casual-isearch-tmenu)
+ (define-key global-map (kbd "C-p") #'casual-isearch-tmenu)
 
  (package 'ctrlf)
  (after 'ctrlf
@@ -194,7 +187,7 @@
 
 (config "Undo & Redo"
  (package 'vundo)
- (bind-key "C-x u" #'vundo)
+ (define-key global-map (kbd "C-x u") #'vundo)
  (after 'vundo
   (setopt vundo-glyph-alist vundo-unicode-symbols))
  (after 'emacs (setopt undo-limit (* 1024 1024))))
@@ -202,7 +195,7 @@
 (config "Filling Text"
  (package 'unfill)
  (after 'fill
-  (bind-key [remap fill-paragraph] #'unfill-toggle))
+  (define-key global-map [remap fill-paragraph] #'unfill-toggle))
 
  ;; fill.el
  (after 'emacs
@@ -213,16 +206,11 @@
  (after 'emacs (setopt fill-column 90))
  (after 'newcomment (setopt comment-fill-column 80)))
 
-(config "Commenting"
- (package 'comment-dwim-2)
- (after 'newcomment
-  (bind-key [remap comment-dwim] #'comment-dwim-2)))
-
 (config "Capitalizing"
  (after 'emacs
-  (bind-key [remap capitalize-word] #'capitalize-dwim)
-  (bind-key [remap downcase-word] #'downcase-dwim)
-  (bind-key [remap upcase-word] #'upcase-dwim)))
+  (define-key global-map [remap capitalize-word] #'capitalize-dwim)
+  (define-key global-map [remap downcase-word] #'downcase-dwim)
+  (define-key global-map [remap upcase-word] #'upcase-dwim)))
 
 (config "Kill Ring"
  (after 'simple (setopt save-interprogram-paste-before-kill t)))
@@ -244,10 +232,11 @@
  (autoload 'winner-redo "winner" nil t)
 
  (after 'winner
-  (unbind-key "C-c <left>" 'winner-mode-map)
-  (unbind-key "C-c <right>" 'winner-mode-map)
-  (bind-key "C-x w u" #'winner-undo 'winner-mode-map)
-  (bind-key "C-x w r" #'winner-redo 'winner-mode-map))
+  (declvar winner-mode-map)
+  (define-key winner-mode-map (kbd "C-c <left>") nil t)
+  (define-key winner-mode-map (kbd "C-c <right>") nil t)
+  (define-key winner-mode-map (kbd "C-x w u") #'winner-undo)
+  (define-key winner-mode-map (kbd "C-x w r") #'winner-redo))
 
  (winner-mode)
 
@@ -263,18 +252,19 @@
 
   (advice-add 'split-window-below :after #'init/recenter))
 
- (bind-key "<f12>" #'delete-other-windows)
+ (define-key global-map (kbd "<f12>") #'delete-other-windows)
 
  (after 'emacs (setopt resize-mini-windows t)))
 
 (config "Buffer Management"
  (package 'buffer-move)
- (bind-key "C-x m" #'buf-move)
+ (define-key global-map (kbd "C-x m") #'buf-move)
 
  (after 'ibuffer
-  (bind-key "C-p" #'casual-ibuffer-tmenu 'ibuffer-mode-map)
-  (bind-key "F"   #'casual-ibuffer-filter-tmenu 'ibuffer-mode-map)
-  (bind-key "s"   #'casual-ibuffer-sortby-tmenu 'ibuffer-mode-map))
+  (declvar ibuffer-mode-map)
+  (define-key ibuffer-mode-map (kbd "C-p") #'casual-ibuffer-tmenu)
+  (define-key ibuffer-mode-map (kbd "F") #'casual-ibuffer-filter-tmenu)
+  (define-key ibuffer-mode-map (kbd "s") #'casual-ibuffer-sortby-tmenu))
 
  (defun init/disable-popup (regexp)
   "Stop buffers that match REGEXP from popping up."
@@ -325,7 +315,7 @@
   (advice-add 'help-function-def--button-function :after #'init/recenter))
 
  (after 'info
-  (bind-key "C-p" #'casual-info-tmenu 'Info-mode-map))
+  (define-key Info-mode-map (kbd "C-p") #'casual-info-tmenu))
 
  (package 'transient)
  (after 'transient (setopt transient-default-level 7))
@@ -364,8 +354,10 @@
 
 (config "Regular Expressions"
  (after 're-builder
-  (bind-key "C-p" #'casual-re-builder-tmenu 'reb-mode-map)
-  (bind-key "C-p" #'casual-re-builder-tmenu 'reb-lisp-mode-map)))
+  (declvar reb-mode-map)
+  (declvar reb-lisp-mode-map)
+  (define-key reb-mode-map (kbd "C-p") #'casual-re-builder-tmenu)
+  (define-key reb-lisp-mode-map (kbd "C-p") #'casual-re-builder-tmenu)))
 
 (config "Symbol handling and Multiple Cursors"
  (package 'symbol-overlay)
@@ -374,16 +366,17 @@
  (after 'symbol-overlay
   (diminish 'symbol-overlay-mode "So")
   (setopt symbol-overlay-idle-time 0.1)
-  (bind-key "C-p" #'casual-symbol-overlay-tmenu 'symbol-overlay-mode-map)
-  (bind-key "M-a" #'symbol-overlay-mc-mark-all 'symbol-overlay-mode-map)
-  (bind-key "M->" #'symbol-overlay-jump-next 'symbol-overlay-mode-map)
-  (bind-key "M-<" #'symbol-overlay-jump-prev 'symbol-overlay-mode-map))
+  (declvar symbol-overlay-mode-map)
+  (define-key symbol-overlay-mode-map (kbd "C-p") #'casual-symbol-overlay-tmenu)
+  (define-key symbol-overlay-mode-map (kbd "M-a") #'symbol-overlay-mc-mark-all)
+  (define-key symbol-overlay-mode-map (kbd "M->") #'symbol-overlay-jump-next)
+  (define-key symbol-overlay-mode-map (kbd "M-<") #'symbol-overlay-jump-prev))
 
  (package 'multiple-cursors)
- (bind-key "C-c C-v"       #'mc/edit-lines)
- (bind-key "C->"           #'mc/mark-next-like-this)
- (bind-key "C-<"           #'mc/mark-previous-like-this)
- (bind-key "C-S-<mouse-1>" #'mc/toggle-cursor-on-click)
+ (define-key global-map (kbd "C-c C-v") #'mc/edit-lines)
+ (define-key global-map (kbd "C->") #'mc/mark-next-like-this)
+ (define-key global-map (kbd "C-<") #'mc/mark-previous-like-this)
+ (define-key global-map (kbd "C-S-<mouse-1>") #'mc/toggle-cursor-on-click)
  (after 'multiple-cursors-core (setopt mc/always-run-for-all t)))
 
 (config "File Management"
@@ -401,7 +394,7 @@
     (call-interactively 'other-window))))
 
  (after 'window
-  (bind-key [remap other-window] #'init/find-file-other-window)))
+  (define-key global-map [remap other-window] #'init/find-file-other-window)))
 
 (config "Backups and Autosaves"
  (after 'files
@@ -420,7 +413,7 @@
 
  (after 'dabbrev
   ;; Replace dabbrev-expand with hippie-expand
-  (bind-key [remap dabbrev-expand] #'hippie-expand))
+  (define-key global-map [remap dabbrev-expand] #'hippie-expand))
 
  (after 'hippie-exp
   (setopt
@@ -489,18 +482,19 @@
 
  (after 'emacs
   (add-hook 'minibuffer-setup-hook #'init/marginalia-mode)
-  (bind-key "M-A" #'marginalia-cycle 'minibuffer-local-map))
+  (define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle))
  (after 'simple
-  (bind-key "M-A" #'marginalia-cycle 'completion-list-mode-map)))
+  (define-key completion-list-mode-map (kbd "M-A") #'marginalia-cycle)))
 
 (config "Minibuffer Completion"
  (package 'vertico)
  (after 'vertico
-  (bind-key "M-RET" #'minibuffer-force-complete-and-exit 'vertico-map)
-  (bind-key "M-TAB" #'minibuffer-complete 'vertico-map)
-  (bind-key "RET" #'vertico-directory-enter 'vertico-map)
-  (bind-key "DEL" #'vertico-directory-delete-char 'vertico-map)
-  (bind-key "M-DEL" #'vertico-directory-delete-word 'vertico-map)
+  (declvar vertico-map)
+  (define-key vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+  (define-key vertico-map "M-TAB" #'minibuffer-complete)
+  (define-key vertico-map "RET" #'vertico-directory-enter)
+  (define-key vertico-map "DEL" #'vertico-directory-delete-char)
+  (define-key vertico-map "M-DEL" #'vertico-directory-delete-word)
   (setopt
    vertico-cycle t
    vertico-resize nil))
@@ -510,14 +504,15 @@
   (add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy))
 
  (after 'window
-  (bind-key [remap switch-to-buffer] #'consult-buffer))
+  (define-key global-map [remap switch-to-buffer] #'consult-buffer))
 
  (after 'imenu
-  (bind-key [remap imenu] #'consult-imenu))
+  (define-key global-map [remap imenu] #'consult-imenu))
 
  (package 'consult)
  (after 'consult
-  (bind-key "C-?" 'consult-narrow-help 'consult-narrow-map)
+  (declvar consult-narrow-map)
+  (define-key consult-narrow-map (kbd "C-?") 'consult-narrow-help)
   (setopt
    consult-preview-key "M-."
    consult-project-function (lambda (_) (projectile-project-root))))
@@ -529,25 +524,26 @@
    (consult-git-grep)
    (consult-grep)))
 
- (bind-key "M-Y" #'consult-yank-pop)
- (bind-key "M-g I" #'consult-imenu-multi)
- (bind-key "C-x S" #'consult-line)
- (bind-key "M-G" #'init/consult-grep-or-git-grep)
- (bind-key "M-D" #'consult-fd))
+ (define-key global-map (kbd "M-Y") #'consult-yank-pop)
+ (define-key global-map (kbd "M-g I") #'consult-imenu-multi)
+ (define-key global-map (kbd "C-x S") #'consult-line)
+ (define-key global-map (kbd "M-G") #'init/consult-grep-or-git-grep)
+ (define-key global-map (kbd "M-D") #'consult-fd))
 
 (config "Registers"
  (after 'consult-register
   (advice-add #'consult-register :after #'init/recenter))
 
  (after 'register
-  (bind-key [remap jump-to-register] #'consult-register)
-  (bind-key [remap point-to-register] #'consult-register-store)
+  (define-key global-map [remap jump-to-register] #'consult-register)
+  (define-key global-map [remap point-to-register] #'consult-register-store)
   (setopt
    register-use-preview t)))
 
 (config "Bookmarks"
  (after 'bookmark
-  (bind-key "C-p" #'casual-bookmarks-tmenu 'bookmark-bmenu-mode-map)))
+  (declvar bookmark-bmenu-mode-map)
+  (define-key bookmark-bmenu-mode-map (kbd "C-p") #'casual-bookmarks-tmenu)))
 
 (config "History"
  (after 'emacs
@@ -593,15 +589,16 @@
 (config "Session Management"
  (package 'easysession)
  (after 'easysession (setopt easysession-save-mode-lighter-show-session-name t))
- (bind-key "C-c u" #'easysession-save)
- (bind-key "C-c U" #'easysession-load))
+ (define-key global-map (kbd "C-c u") #'easysession-save)
+ (define-key global-map (kbd "C-c U") #'easysession-load))
 
 (config "Spell Checking"
  (package 'jinx)
  (after 'jinx
   (diminish 'jinx-mode "Jx")
-  (bind-key "M-$"   #'jinx-correct   'jinx-mode-map)
-  (bind-key "C-M-$" #'jinx-languages 'jinx-mode-map)))
+  (declvar jinx-mode-map)
+  (define-key jinx-mode-map (kbd "M-$") #'jinx-correct)
+  (define-key jinx-mode-map (kbd "C-M-$") #'jinx-languages)))
 
 (config "Window Faces"
  (autoload 'face-remap-remove-relative "face-remap")
@@ -628,12 +625,13 @@
    embark-mixed-indicator-both t
    embark-mixed-indicator-delay 0))
 
- (bind-key "C-." #'embark-act)
- (bind-key "C-;" #'embark-dwim)
- (bind-key "C-h B" #'embark-bindings)
- (bind-key "C-'" #'embark-collect 'minibuffer-local-map)
- (bind-key "C-x E" #'embark-export 'minibuffer-local-map)
- (bind-key "C-x B" #'embark-become 'minibuffer-local-map))
+ (define-key global-map (kbd "C-.") #'embark-act)
+ (define-key global-map (kbd "C-;") #'embark-dwim)
+ (define-key global-map (kbd "C-h B") #'embark-bindings)
+
+ (define-key minibuffer-local-map (kbd "C-'") #'embark-collect)
+ (define-key minibuffer-local-map (kbd "C-x E") #'embark-export)
+ (define-key minibuffer-local-map (kbd "C-x B") #'embark-become))
 
 (config "In-buffer Completion"
  (defun init/buffer-completion-mode ()
@@ -655,7 +653,7 @@
    (setopt
     corfu-preview-current nil
     corfu-auto t
-    ;; corfu-auto-delay 0.4
+    corfu-auto-delay 0.4
     corfu-auto-prefix 1
     corfu-auto-trigger ".&"
     ;; corfu-quit-no-match t
@@ -703,7 +701,7 @@
 
  (config "Cape"
   (package 'cape)
-  (bind-key "C-c p" #'cape-prefix-map)
+  (define-key global-map (kbd "C-c p") #'cape-prefix-map)
 
   (after 'cape
    (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
@@ -768,11 +766,9 @@
     (face-remap-add-relative 'mode-line-active 'init/dedicated-mode-line))
    (setq init/flycheck-errors-text-cookie
     (face-remap-add-relative 'default 'init/flycheck-errors-text))
-   (bind-key [remap keyboard-quit]
-    #'(lambda ()
-       (interactive)
-       (delete-window window))
-    'flycheck-error-list-mode-map)))
+   (declvar flycheck-error-list-mode-map)
+   (define-key flycheck-error-list-mode-map [remap keyboard-quit]
+    #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
   (push `(,(rx bos "*Flycheck errors*" eos)
@@ -800,9 +796,11 @@
      (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
    "Table format for the error list.")
 
-  (bind-key "C-c ! L" #'consult-flycheck 'flycheck-mode-map)
-  (bind-key "M-n" 'flycheck-next-error 'flycheck-mode-map)
-  (bind-key "M-p" 'flycheck-previous-error 'flycheck-mode-map)
+  (declvar flycheck-mode-map)
+  (define-key flycheck-mode-map (kbd "C-c ! L") #'consult-flycheck)
+  (define-key flycheck-mode-map (kbd "M-n") 'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "M-p") 'flycheck-previous-error)
+
   (advice-add 'flycheck-next-error :after #'init/recenter)
   (advice-add 'flycheck-previous-error :after #'init/recenter)
   (advice-add 'flycheck-error-list-goto-error :after #'init/recenter)
@@ -827,7 +825,7 @@
  (after 'yasnippet
   (diminish 'yas-minor-mode "Ys")
   (declvar yas-minor-mode-map)
-  (unbind-key "TAB" yas-minor-mode-map)
+  (define-key yas-minor-mode-map (kbd "TAB") nil t)
   (add-hook 'yas-minor-mode-hook #'init/initialize-yasnippet-snippets))
  (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
 
@@ -852,7 +850,8 @@
   (add-hook 'dired-mode-hook #'dired-async-mode)
   (add-hook 'dired-mode-hook #'auto-revert-mode)
   (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
-  (bind-key "C-p" #'casual-dired-tmenu 'dired-mode-map)
+  (declvar dired-mode-map)
+  (define-key dired-mode-map (kbd "C-p") #'casual-dired-tmenu)
   (setopt
    dired-mouse-drag-files t
    dired-listing-switches "-l -h --group-directories-first"
@@ -874,7 +873,7 @@
    projectile-auto-cleanup-known-projects t
    projectile-enable-caching nil
    projectile-auto-discover t))
- (bind-key "C-x p" 'projectile-command-map)
+ (define-key global-map (kbd "C-x p") 'projectile-command-map)
  (after 'emacs
   ;; startup.el
   (add-hook 'after-init-hook #'projectile-mode)))
@@ -899,7 +898,7 @@
    blamer-max-commit-message-length 60))
 
  (package 'magit)
- (bind-key "C-x g" #'magit-status)
+ (define-key global-map (kbd "C-x g") #'magit-status)
 
  (after 'magit-process
   (add-hook 'magit-process-mode-hook #'goto-address-mode))
@@ -971,11 +970,8 @@
 
  (defun init/setup-eldoc-window (window)
   (with-selected-window window
-   (bind-key [remap keyboard-quit]
-    #'(lambda ()
-       (interactive)
-       (delete-window window))
-    'special-mode-map)))
+   (define-key special-mode-map [remap keyboard-quit]
+    #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
   (push `(,(rx bos "*eldoc" (1+ nonl) "*" eos)
@@ -989,7 +985,7 @@
    display-buffer-alist))
 
  (after 'prog-mode
-  (bind-key "C-x D" #'eldoc 'prog-mode-map))
+  (define-key prog-mode-map (kbd "C-x D") #'eldoc 'prog-mode-map))
 
  (package 'editorconfig)
  (after 'editorconfig (diminish 'editorconfig-mode "Ec"))
@@ -1009,8 +1005,8 @@
   (add-hook 'prog-mode-hook #'show-paren-mode)
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-  (bind-key "C-h D" #'devdocs-lookup)
-  (bind-key "C-c b" #'blamer-mode))
+  (define-key global-map (kbd "C-h D") #'devdocs-lookup)
+  (define-key global-map (kbd "C-c b") #'blamer-mode))
 
  (package 'devdocs)
  (after 'devdocs
@@ -1069,7 +1065,8 @@
 (config "Debugging"
  (autoload 'debugger-quit "debug")
  (after 'debug
-  (bind-key "C-g" #'debugger-quit 'debugger-mode-map))
+  (declvar debugger-mode-map)
+  (define-key debugger-mode-map (kbd"C-g") #'debugger-quit))
 
  (defun init/make-selected-window-dedicated ()
   (set-window-dedicated-p (selected-window) t))
@@ -1218,7 +1215,8 @@
 (config "YAML"
  (package 'yaml-mode)
  (after 'yaml-mode
-  (bind-key "C-c p" #'qol/generate-password 'yaml-mode-map)
+  (declvar yaml-mode-map)
+  (define-key yaml-mode-map (kbd "C-c p") #'qol/generate-password)
   (add-hook 'yaml-mode-hook #'indent-bars-mode)
   (add-hook 'yaml-mode-hook #'tree-sitter-mode)
   (add-hook 'yaml-mode-hook #'flycheck-mode)
@@ -1250,7 +1248,7 @@
  (package 'dockerfile-mode)
  (package 'docker-compose-mode)
  (package 'docker)
- (bind-key "C-c D" #'docker))
+ (define-key global-map (kbd "C-c D") #'docker))
 
 (config "Makefiles"
  (after 'make-mode
@@ -1330,7 +1328,8 @@
    lisp-indent-function #'common-lisp-indent-function)
   (advice-add 'elisp-completion-at-point :around #'cape-wrap-case-fold)
   (advice-add 'elisp-completion-at-point :around #'cape-wrap-nonexclusive)
-  (bind-key "<f6>" #'init/emacs-lisp-expand-current-macro-call 'emacs-lisp-mode-map)
+  (define-key emacs-lisp-mode-map
+   (kbd "<f6>") #'init/emacs-lisp-expand-current-macro-call)
   (add-hook 'emacs-lisp-mode-hook #'init/setup-elisp-capfs)
   (add-hook 'emacs-lisp-mode-hook #'init/buffer-completion-mode)
   (add-hook 'emacs-lisp-mode-hook #'eros-mode)
@@ -1408,20 +1407,24 @@
       (throw 'found t))))))
 
  (after 'hledger-mode
-  (bind-key "C-c >" #'init/hledger-move-amount-to-column 'hledger-mode-map)
-  (bind-key "C-c x" #'init/hledger-find-next-unaligned 'hledger-mode-map)
-  (bind-key "C-c +" 'hledger-increment-entry-date 'hledger-mode-map)
+  (define-key hledger-mode-map (kbd "C-c >") #'init/hledger-move-amount-to-column)
+  (define-key hledger-mode-map (kbd "C-c x") #'init/hledger-find-next-unaligned)
+  (define-key hledger-mode-map (kbd "C-c +") 'hledger-increment-entry-date)
+
   (setopt
    hledger-invalidate-completions '(on-save on-idle)
    hledger-refresh-completions-idle-delay 5
    hledger-currency-string "")
+
   (declvar hledger-mode)
   (setq-mode-local hledger-mode
    tab-width 1
    fill-column 100
    comment-fill-column 100)
+
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
+
   (add-hook 'hledger-mode-hook #'flycheck-mode)
   (add-hook 'hledger-mode-hook #'init/hledger-setup-flycheck)
   (add-hook 'hledger-mode-hook #'init/buffer-completion-mode)
@@ -1503,8 +1506,9 @@
 
  (after 'cc-mode
   (setopt c-doc-comment-style '((c-mode    . gtkdoc) (c++-mode  . doxygen)))
-  (bind-key "<f2>" #'lsp-clangd-find-other-file)
-  (bind-key "(" #'nil 'c-mode-base-map))
+  (declvar c-mode-base-map)
+  (define-key c-mode-base-map (kbd "<f2>") #'lsp-clangd-find-other-file)
+  (define-key c-mode-base-map (kbd "(") #'nil t))
 
  (after 'cc-cmds
   ;; Unmark region even when c-indent-line-or-region doesn't indent anything.
@@ -1598,11 +1602,9 @@
    #'subword-mode)
 
   (declvar rust-mode-map)
-  (bind-keys
-   :map rust-mode-map
-   ("<f5>" . rust-dbg-wrap-or-unwrap)
-   ("<f6>" . lsp-rust-analyzer-expand-macro)
-   ("<f7>" . lsp-rust-analyzer-join-lines))
+  (define-key rust-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
+  (define-key rust-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
+  (define-key rust-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
 
   (after 'emacs
    (setq-mode-local rust-mode fill-column 110))
