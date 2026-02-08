@@ -600,10 +600,15 @@
   (define-key jinx-mode-map (kbd "M-$") #'jinx-correct)
   (define-key jinx-mode-map (kbd "C-M-$") #'jinx-languages)))
 
-(config "Window Faces"
+(config "Ancillary Windows"
  (autoload 'face-remap-remove-relative "face-remap")
- (defface init/dedicated-mode-line '((t :height 0.2)) "Dedicated Window Modeline Face")
- (defvar-local init/dedicated-mode-line-cookie nil))
+
+ (defface init/dedicated-text '((t :height 0.8)) "Dedicated Window Errors Text")
+ (defvar-local init/dedicated-text-cookie nil)
+
+ (defun init/delete-ancillary-window (window)
+  (unless (eq window (selected-window))
+   (delete-window window))))
 
 (config "Utilities"
  (package 'which-key)
@@ -749,25 +754,17 @@
    next-error-recenter '(4)
    next-error-message-highlight t))
 
- (defun init/delete-ancillary-window (window)
-  (unless (eq window (selected-window))
-   (delete-window window)))
-
- (defface init/flycheck-errors-text '((t :height 0.8)) "Flycheck errors text")
- (defvar-local init/flycheck-errors-text-cookie nil)
-
  (defun init/setup-flycheck-errors-window (window)
   (with-current-buffer (window-buffer window)
    (add-hook 'window-selection-change-functions #'init/delete-ancillary-window nil t))
   (with-selected-window window
-   (face-remap-remove-relative init/dedicated-mode-line-cookie)
-   (face-remap-remove-relative init/flycheck-errors-text-cookie)
-   (setq init/dedicated-mode-line-cookie
-    (face-remap-add-relative 'mode-line-active 'init/dedicated-mode-line))
-   (setq init/flycheck-errors-text-cookie
-    (face-remap-add-relative 'default 'init/flycheck-errors-text))
+   (face-remap-remove-relative init/dedicated-text-cookie)
+   (setq init/dedicated-text-cookie
+    (face-remap-add-relative 'default 'init/dedicated-text))
    (declvar flycheck-error-list-mode-map)
    (define-key flycheck-error-list-mode-map [remap keyboard-quit]
+    #'(lambda () (interactive) (delete-window window)))
+   (define-key flycheck-error-list-mode-map (kbd "<f1>")
     #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
@@ -797,6 +794,7 @@
    "Table format for the error list.")
 
   (declvar flycheck-mode-map)
+  (define-key flycheck-mode-map (kbd "<f1>") 'flycheck-list-errors)
   (define-key flycheck-mode-map (kbd "C-c ! L") #'consult-flycheck)
   (define-key flycheck-mode-map (kbd "M-n") 'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") 'flycheck-previous-error)
@@ -1108,7 +1106,12 @@
  (after 'lsp-mode
   (diminish 'lsp-mode "Ls")
   (setopt
-   lsp-before-save-edits nil))
+   lsp-before-save-edits nil)
+
+  (after 'files
+   (add-hook 'lsp-after-open-hook
+    #'(lambda ()
+       (run-hooks 'after-save-hook)))))
 
  (after 'lsp-lens
   (diminish 'lsp-lens-mode "Lns"))
@@ -1499,7 +1502,38 @@
 
 (config "Rust"
  (package 'rust-mode)
- (package 'rustic))
+ (package 'rustic)
+ (after 'rustic
+  (declvar rustic-mode-map)
+  (define-key rustic-mode-map (kbd "<f5>") #'rustic-compile))
+
+ (defun init/setup-rustic-compilation-window (window)
+  (with-current-buffer (window-buffer window)
+   (add-hook 'compilation-finish-functions
+    #'(lambda (buffer _)
+       (with-current-buffer buffer
+        (goto-char (point-min))) nil t))
+   (add-hook 'window-selection-change-functions #'init/delete-ancillary-window nil t))
+  (with-selected-window window
+   (face-remap-remove-relative init/dedicated-text-cookie)
+   (setq init/dedicated-text-cookie
+    (face-remap-add-relative 'default 'init/dedicated-text))
+   (declvar rustic-compilation-mode-map)
+   (define-key rustic-compilation-mode-map [remap keyboard-quit]
+    #'(lambda () (interactive) (delete-window window)))
+   (define-key rustic-compilation-mode-map (kbd "<f5>")
+    #'(lambda () (interactive) (delete-window window)))))
+
+ (after 'window
+  (push `(,(rx bos "*rustic-compilation*" eos)
+          (display-buffer-reuse-mode-window display-buffer-in-side-window)
+          (mode . rustic-compilation-mode)
+          (dedicated . t)
+          (window-height . 0.30)
+          (post-command-select-window . t)
+          (window-parameters . ((mode-line-format . "Compilation")))
+          (body-function . init/setup-rustic-compilation-window))
+   display-buffer-alist)))
 
 (config "C/C++"
  (autoload 'lsp-clangd-find-other-file "lsp-clangd")
