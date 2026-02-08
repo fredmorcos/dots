@@ -776,7 +776,7 @@
           (dedicated . t)
           (window-height . 0.15)
           (post-command-select-window . t)
-          (window-parameters . ((mode-line-format . "")))
+          (window-parameters . ((mode-line-format . "Errors")))
           (body-function . init/setup-flycheck-errors-window))
    display-buffer-alist))
 
