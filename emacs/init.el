@@ -601,11 +601,6 @@
   (define-key jinx-mode-map (kbd "C-M-$") #'jinx-languages)))
 
 (config "Ancillary Windows"
- (autoload 'face-remap-remove-relative "face-remap")
-
- (defface init/dedicated-text '((t :height 0.8)) "Dedicated Window Errors Text")
- (defvar-local init/dedicated-text-cookie nil)
-
  (defun init/delete-ancillary-window (window)
   (unless (eq window (selected-window))
    (delete-window window))))
@@ -758,13 +753,10 @@
   (with-current-buffer (window-buffer window)
    (add-hook 'window-selection-change-functions #'init/delete-ancillary-window nil t))
   (with-selected-window window
-   (face-remap-remove-relative init/dedicated-text-cookie)
-   (setq init/dedicated-text-cookie
-    (face-remap-add-relative 'default 'init/dedicated-text))
    (declvar flycheck-error-list-mode-map)
    (define-key flycheck-error-list-mode-map [remap keyboard-quit]
     #'(lambda () (interactive) (delete-window window)))
-   (define-key flycheck-error-list-mode-map (kbd "<f1>")
+   (define-key flycheck-error-list-mode-map (kbd "<f2>")
     #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
@@ -784,17 +776,8 @@
  (package 'consult-flycheck)
  (autoload 'flycheck-error-list-make-last-column "flycheck")
  (after 'flycheck
-  (defconst flycheck-error-list-format
-   `[("File" 20)
-     ("Line" 5 flycheck-error-list-entry-< :right-align nil)
-     ("Col" 5 nil :right-align nil)
-     ("Level" 16 flycheck-error-list-entry-level-<)
-     ("ID" 32 t)
-     (,(flycheck-error-list-make-last-column "Message" 'Checker) 0 t)]
-   "Table format for the error list.")
-
   (declvar flycheck-mode-map)
-  (define-key flycheck-mode-map (kbd "<f1>") 'flycheck-list-errors)
+  (define-key flycheck-mode-map (kbd "<f2>") 'flycheck-list-errors)
   (define-key flycheck-mode-map (kbd "C-c ! L") #'consult-flycheck)
   (define-key flycheck-mode-map (kbd "M-n") 'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") 'flycheck-previous-error)
@@ -1103,15 +1086,29 @@
 (config "LSP"
  (package 'lsp-mode)
 
+ (autoload 'lsp-ui-sideline-enable "lsp-ui-sideline")
+
+ (defun init/toggle-lsp-inlay-hints ()
+  (interactive)
+  (declvar lsp-inlay-hint-enable)
+  (setq-local *init/lsp-inlay-hint-enable* (not lsp-inlay-hint-enable))
+  (setopt lsp-inlay-hint-enable *init/lsp-inlay-hint-enable*)
+  (lsp-ui-sideline-enable *init/lsp-inlay-hint-enable*))
+
  (after 'lsp-mode
   (diminish 'lsp-mode "Ls")
   (setopt
-   lsp-before-save-edits nil)
+   lsp-before-save-edits nil
+   lsp-inlay-hints-mode t
+   lsp-inlay-hint-enable nil)
 
   (after 'files
    (add-hook 'lsp-after-open-hook
     #'(lambda ()
-       (run-hooks 'after-save-hook)))))
+       (run-hooks 'after-save-hook))))
+
+  (declvar lsp-mode-map)
+  (define-key lsp-mode-map (kbd "<f8>") #'init/toggle-lsp-inlay-hints))
 
  (after 'lsp-lens
   (diminish 'lsp-lens-mode "Lns"))
@@ -1503,21 +1500,39 @@
 (config "Rust"
  (package 'rust-mode)
  (package 'rustic)
+
+ (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
+ (autoload 'lsp-rust-analyzer-join-lines   "lsp-rust")
+
+ (defun init/disable-electric-quote-mode ()
+  (electric-quote-local-mode -1))
+
  (after 'rustic
   (declvar rustic-mode-map)
-  (define-key rustic-mode-map (kbd "<f5>") #'rustic-compile))
+  (define-key rustic-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
+  (define-key rustic-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
+  (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
+
+  (add-hook 'rustic-mode-hook #'init/disable-electric-quote-mode)
+  (add-hook 'rustic-mode-hook #'electric-pair-local-mode)
+  (add-hook 'rustic-mode-hook #'subword-mode)
+
+  (setopt rustic-indent-offset 2))
+
+ (declvar rustic-mode)
+ (after 'emacs (setq-mode-local rustic-mode fill-column 110))
+ (after 'newcomment (setq-mode-local rustic-mode comment-fill-column 100))
+
+ (defun init/rustic-compilation-beginning-of-buffer (buffer _)
+  (with-current-buffer buffer (goto-char (point-min))))
 
  (defun init/setup-rustic-compilation-window (window)
   (with-current-buffer (window-buffer window)
    (add-hook 'compilation-finish-functions
-    #'(lambda (buffer _)
-       (with-current-buffer buffer
-        (goto-char (point-min))) nil t))
-   (add-hook 'window-selection-change-functions #'init/delete-ancillary-window nil t))
+    #'init/rustic-compilation-beginning-of-buffer nil t)
+   (add-hook 'window-selection-change-functions
+    #'init/delete-ancillary-window nil t))
   (with-selected-window window
-   (face-remap-remove-relative init/dedicated-text-cookie)
-   (setq init/dedicated-text-cookie
-    (face-remap-add-relative 'default 'init/dedicated-text))
    (declvar rustic-compilation-mode-map)
    (define-key rustic-compilation-mode-map [remap keyboard-quit]
     #'(lambda () (interactive) (delete-window window)))
@@ -1525,10 +1540,9 @@
     #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
-  (push `(,(rx bos "*rustic-compilation*" eos)
-          (display-buffer-reuse-mode-window display-buffer-in-side-window)
+  (push `(,(rx bos "*" (or "rustic-compilation" "cargo-test" "cargo-clippy") "*" eos)
+          (display-buffer-reuse-window display-buffer-below-selected)
           (mode . rustic-compilation-mode)
-          (dedicated . t)
           (window-height . 0.30)
           (post-command-select-window . t)
           (window-parameters . ((mode-line-format . "Compilation")))
@@ -1615,11 +1629,6 @@
 ;;; Rust
 
 (config "Rust Programming"
- (package 'rust-mode)
- (package 'lsp-mode)
-
- (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
- (autoload 'lsp-rust-analyzer-join-lines   "lsp-rust")
 
  (after 'rust-mode
   (setopt
