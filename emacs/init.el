@@ -490,11 +490,11 @@
  (package 'vertico)
  (after 'vertico
   (declvar vertico-map)
-  (define-key vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-  (define-key vertico-map "M-TAB" #'minibuffer-complete)
-  (define-key vertico-map "RET" #'vertico-directory-enter)
-  (define-key vertico-map "DEL" #'vertico-directory-delete-char)
-  (define-key vertico-map "M-DEL" #'vertico-directory-delete-word)
+  (define-key vertico-map (kbd "M-RET") #'minibuffer-force-complete-and-exit)
+  (define-key vertico-map (kbd "M-TAB") #'minibuffer-complete)
+  (define-key vertico-map (kbd "RET") #'vertico-directory-enter)
+  (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-char)
+  (define-key vertico-map (kbd "M-DEL") #'vertico-directory-delete-word)
   (setopt
    vertico-cycle t
    vertico-resize nil))
