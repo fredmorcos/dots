@@ -654,7 +654,7 @@
     corfu-preview-current nil
     corfu-auto t
     corfu-auto-delay 0.4
-    corfu-auto-prefix 1
+    corfu-auto-prefix 3
     corfu-auto-trigger ".&"
     ;; corfu-quit-no-match t
     corfu-scroll-margin 5
@@ -1088,6 +1088,9 @@
 
  (autoload 'lsp-ui-sideline-enable "lsp-ui-sideline")
  (autoload 'lsp-inlay-hints-mode "lsp-mode")
+ (autoload 'lsp-describe-thing-at-point "lsp-mode")
+ (autoload 'lsp-extend-selection "lsp-mode")
+ (autoload 'lsp-execute-code-action "lsp-mode")
 
  (defun init/toggle-lsp-inlay-hints ()
   (interactive)
@@ -1110,7 +1113,10 @@
        (run-hooks 'after-save-hook))))
 
   (declvar lsp-mode-map)
-  (define-key lsp-mode-map (kbd "<f8>") #'init/toggle-lsp-inlay-hints))
+  (define-key lsp-mode-map (kbd "<f1>") #'lsp-describe-thing-at-point)
+  (define-key lsp-mode-map (kbd "<f8>") #'init/toggle-lsp-inlay-hints)
+  (define-key lsp-mode-map [remap er/expand-region] #'lsp-extend-selection)
+  (define-key lsp-mode-map (kbd "M-RET") #'lsp-execute-code-action))
 
  (after 'lsp-lens
   (diminish 'lsp-lens-mode "Lns"))
@@ -1510,7 +1516,7 @@
  (package 'rustic)
 
  (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
- (autoload 'lsp-rust-analyzer-join-lines   "lsp-rust")
+ (autoload 'lsp-rust-analyzer-join-lines "lsp-rust")
 
  (defun init/disable-electric-quote-mode ()
   (electric-quote-local-mode -1))
@@ -1525,11 +1531,41 @@
   (add-hook 'rustic-mode-hook #'electric-pair-local-mode)
   (add-hook 'rustic-mode-hook #'subword-mode)
 
-  (setopt rustic-indent-offset 2))
+  (setopt rustic-indent-offset 2)
 
- (declvar rustic-mode)
- (after 'emacs (setq-mode-local rustic-mode fill-column 110))
- (after 'newcomment (setq-mode-local rustic-mode comment-fill-column 100))
+  (declvar rustic-mode)
+  (after 'emacs (setq-mode-local rustic-mode fill-column 110))
+  (after 'newcomment (setq-mode-local rustic-mode comment-fill-column 100)))
+
+ (after 'lsp-rust
+  (setopt
+   lsp-rust-build-bin t
+   lsp-rust-build-lib t
+   lsp-rust-all-features t
+   lsp-rust-full-docs t
+   lsp-rust-analyzer-cargo-watch-command "clippy"
+   lsp-rust-racer-completion nil
+   lsp-rust-clippy-preference "on"
+   lsp-rust-analyzer-checkonsave-features "all"
+   lsp-rust-analyzer-assist-prefer-self t
+   lsp-rust-analyzer-binding-mode-hints t
+   lsp-rust-analyzer-closure-capture-hints t
+   lsp-rust-analyzer-closure-return-type-hints "with-block"
+   lsp-rust-analyzer-completion-term-search-enable t
+   lsp-rust-analyzer-discriminants-hints "fieldless"
+   lsp-rust-analyzer-display-chaining-hints t
+   lsp-rust-analyzer-display-closure-return-type-hints t
+   lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip-trivial"
+   lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t
+   lsp-rust-analyzer-display-parameter-hints t
+   lsp-rust-analyzer-display-reborrow-hints "mutable"
+   lsp-rust-analyzer-expression-adjustment-hints "reborrow"
+   lsp-rust-analyzer-implicit-drops t
+   lsp-rust-analyzer-import-enforce-granularity t
+   lsp-rust-analyzer-lens-references-adt-enable t
+   lsp-rust-analyzer-lens-references-enum-variant-enable t
+   lsp-rust-analyzer-lens-references-method-enable t
+   lsp-rust-analyzer-lens-references-trait-enable t))
 
  (defun init/rustic-compilation-beginning-of-buffer (buffer _)
   (with-current-buffer buffer (goto-char (point-min))))
@@ -1638,47 +1674,9 @@
  :config
  (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive))
 
-;;; Rust
-
-(config "Rust Programming"
-  (after 'lsp-rust
-   (setq-mode-local rust-mode
-    ;; lsp-rust-analyzer-max-inlay-hint-length 50
-    ;; lsp-rust-unstable-features t
-    lsp-rust-analyzer-cargo-run-build-scripts t
-    lsp-rust-analyzer-checkonsave-features "all"
-    lsp-rust-analyzer-cargo-load-out-dirs-from-check t
-    lsp-rust-analyzer-proc-macro-enable t
-    lsp-rust-racer-completion nil
-    lsp-rust-build-bin t
-    lsp-rust-build-lib t
-    lsp-rust-clippy-preference "on"
-    lsp-rust-analyzer-display-chaining-hints t
-    lsp-rust-analyzer-display-parameter-hints t
-    lsp-rust-analyzer-display-closure-return-type-hints t
-    lsp-rust-analyzer-display-lifetime-elision-hints-enable "always"
-    lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t
-    lsp-rust-analyzer-binding-mode-hints t
-    lsp-rust-analyzer-closure-capture-hints t
-    lsp-rust-analyzer-closure-return-type-hints "always"
-    lsp-rust-analyzer-discriminants-hints "fieldless"
-    lsp-rust-analyzer-expression-adjustment-hints "reborrow"
-    lsp-rust-analyzer-implicit-drops t
-    lsp-rust-analyzer-display-reborrow-hints "mutable"
-    lsp-rust-all-features t
-    lsp-rust-all-targets t
-    lsp-rust-full-docs t
-    lsp-rust-analyzer-cargo-watch-command "clippy"))
-
-  (after 'lsp-mode
-   (setq-mode-local rust-mode
-    lsp-format-buffer-on-save t))))
-
 ;;; LSP
 
 (config "LSP Mode Settings"
- (package 'lsp-mode)
-
  (after 'lsp-mode
   (setopt
    ;; lsp-signature-auto-activate t
@@ -1697,18 +1695,10 @@
  :ensure t
  :defer t
  :preface (package 'lsp-mode)
- :diminish "Ls"
 
  :config
  ;; Unmark after formatting.
  (advice-add 'lsp-format-region :after #'keyboard-quit)
-
- :bind
- (:map lsp-mode-map
-  ("C-c h" . lsp-describe-thing-at-point)
-  ("M-RET" . lsp-execute-code-action)
-  ("<f8>"  . lsp-inlay-hints-mode)
-  ([remap er/expand-region] . lsp-extend-selection))
 
  ;; :preface
  ;; (defun init/lsp-capfs ()
