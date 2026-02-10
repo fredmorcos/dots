@@ -2,6 +2,7 @@ cargo-careful
 cargo-criterion
 cargo-deadlinks
 cargo-demangle
+crates-lsp
 emacs-lsp-booster
 goran
 rustfilt
