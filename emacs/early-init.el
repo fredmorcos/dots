@@ -88,8 +88,8 @@
 
 (config "Theme"
  (load-theme 'modus-operandi)
- (face mode-line :box "#c8c8c8")
- (face mode-line-inactive :box "#e6e6e6"))
+ (set-face-attribute 'mode-line nil :box "#c8c8c8")
+ (set-face-attribute 'mode-line-inactive nil :box "#e6e6e6"))
 
 (config "User Experience"
  ;; startup.el

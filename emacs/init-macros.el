@@ -8,12 +8,6 @@
  "Create a config section with NAME and BODY."
  `(progn ,@body))
 
-;;; Faces.
-
-(defmacro face (face &rest props)
- "Set FACE properties to PROPS."
- `(custom-set-faces '(,face ((t ,@props)))))
-
 ;; Declarations
 
 (defmacro declvar (var)

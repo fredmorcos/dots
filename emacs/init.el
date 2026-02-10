@@ -151,7 +151,9 @@
    show-trailing-whitespace nil
    whitespace-action '(cleanup auto-cleanup)
    whitespace-style nil)
-  (face whitespace-tab :foreground "lavender" :background "white smoke"))
+  (set-face-attribute 'whitespace-tab nil
+   :foreground "lavender"
+   :background "white smoke"))
 
  (after 'autorevert
   (diminish 'autorevert-mode "Ar")
@@ -719,7 +721,8 @@
   (add-hook 'tree-sitter-mode-hook #'tree-sitter-hl-mode)
   (add-hook 'tree-sitter-mode-hook #'init/tree-sitter-langs-install-grammars))
  (after 'tree-sitter-hl
-  (face tree-sitter-hl-face:property :inherit font-lock-keyword-face))
+  (set-face-attribute 'tree-sitter-hl-face:property nil
+   :inherit font-lock-keyword-face))
  (after 'tree-sitter-langs-build
   (declvar tree-sitter-langs-grammar-dir)
   (setopt tree-sitter-langs-git-dir
@@ -1092,13 +1095,20 @@
  (autoload 'lsp-extend-selection "lsp-mode")
  (autoload 'lsp-execute-code-action "lsp-mode")
 
- (defun init/toggle-lsp-inlay-hints ()
+ (defun init/toggle-lsp-metas ()
+  ;; Toggle meta stuff from LSP like lens and inlay hints.
   (interactive)
   (declvar lsp-inlay-hint-enable)
   (setq-local *init/lsp-inlay-hint-enable* (not lsp-inlay-hint-enable))
+  (if *init/lsp-inlay-hint-enable*
+   (lsp-lens-show)
+   (lsp-lens-hide))
   (setopt lsp-inlay-hint-enable *init/lsp-inlay-hint-enable*)
   (lsp-inlay-hints-mode (if *init/lsp-inlay-hint-enable* 1 -1))
   (lsp-ui-sideline-enable (not *init/lsp-inlay-hint-enable*)))
+
+ (defun init/run-after-save-hooks ()
+  (after 'files (run-hooks 'after-save-hook)))
 
  (after 'lsp-mode
   (diminish 'lsp-mode "Ls")
@@ -1107,19 +1117,25 @@
    lsp-inlay-hints-mode t
    lsp-inlay-hint-enable nil)
 
-  (after 'files
-   (add-hook 'lsp-after-open-hook
-    #'(lambda ()
-       (run-hooks 'after-save-hook))))
+  (set-face-attribute 'lsp-inlay-hint-face nil
+   :background (face-attribute 'default :background)
+   :foreground "Gray70")
+
+  (add-hook 'lsp-mode-hook #'init/run-after-save-hooks)
+  (add-hook 'lsp-mode-hook #'lsp-lens-hide)
 
   (declvar lsp-mode-map)
   (define-key lsp-mode-map (kbd "<f1>") #'lsp-describe-thing-at-point)
-  (define-key lsp-mode-map (kbd "<f8>") #'init/toggle-lsp-inlay-hints)
+  (define-key lsp-mode-map (kbd "<f8>") #'init/toggle-lsp-metas)
   (define-key lsp-mode-map [remap er/expand-region] #'lsp-extend-selection)
   (define-key lsp-mode-map (kbd "M-RET") #'lsp-execute-code-action))
 
  (after 'lsp-lens
-  (diminish 'lsp-lens-mode "Lns"))
+  (diminish 'lsp-lens-mode "Lns")
+
+  (set-face-attribute 'lsp-lens-face nil
+   :background (face-attribute 'default :background)
+   :foreground "Gray70"))
 
  (after 'lsp-semantic-tokens
   (setopt
