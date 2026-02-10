@@ -1087,13 +1087,15 @@
  (package 'lsp-mode)
 
  (autoload 'lsp-ui-sideline-enable "lsp-ui-sideline")
+ (autoload 'lsp-inlay-hints-mode "lsp-mode")
 
  (defun init/toggle-lsp-inlay-hints ()
   (interactive)
   (declvar lsp-inlay-hint-enable)
   (setq-local *init/lsp-inlay-hint-enable* (not lsp-inlay-hint-enable))
   (setopt lsp-inlay-hint-enable *init/lsp-inlay-hint-enable*)
-  (lsp-ui-sideline-enable *init/lsp-inlay-hint-enable*))
+  (lsp-inlay-hints-mode (if *init/lsp-inlay-hint-enable* 1 -1))
+  (lsp-ui-sideline-enable (not *init/lsp-inlay-hint-enable*)))
 
  (after 'lsp-mode
   (diminish 'lsp-mode "Ls")
@@ -1629,45 +1631,6 @@
 ;;; Rust
 
 (config "Rust Programming"
-
- (after 'rust-mode
-  (setopt
-   rust-indent-offset 2
-   rust-load-optional-libraries nil
-   rust-format-on-save t)
-
-  (hook-progn 'rust-mode-hook (electric-quote-local-mode -1))
-  (hook-globals
-   'rust-mode-hook
-   #'electric-pair-local-mode
-   #'init/buffer-completion-mode
-   #'lsp
-   #'subword-mode)
-
-  (declvar rust-mode-map)
-  (define-key rust-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
-  (define-key rust-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
-  (define-key rust-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
-
-  (after 'emacs
-   (setq-mode-local rust-mode fill-column 110))
-
-  (after 'newcomment
-   (setq-mode-local rust-mode comment-fill-column 100))
-
-  (after 'company
-   (setq-mode-local rust-mode
-    company-backends '((company-capf
-                        company-yasnippet
-                        company-files))))
-
-  (after 'corfu
-   (setq-mode-local rust-mode
-    corfu-auto t
-    corfu-auto-delay 0.4
-    corfu-auto-prefix 1
-    corfu-auto-trigger ".&"))
-
   (after 'lsp-rust
    (setq-mode-local rust-mode
     ;; lsp-rust-analyzer-max-inlay-hint-length 50
