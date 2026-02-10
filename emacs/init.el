@@ -1204,15 +1204,21 @@
   (add-hook 'json-mode-hook #'whitespace-mode)))
 
 (config "TOML"
+ (defun init/maybe-enable-toml-lsp ()
+  (when (and (fboundp 'projectile-project-root) (projectile-project-root))
+   (lsp)))
+
  (package 'toml-mode)
  (after 'toml-mode
   (add-hook 'toml-mode-hook #'eldoc-toml-mode)
   (add-hook 'toml-mode-hook #'hl-line-mode)
   (add-hook 'toml-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'toml-mode-hook #'display-line-numbers-mode)
-  (add-hook 'toml-mode-hook #'whitespace-mode))
+  (add-hook 'toml-mode-hook #'whitespace-mode)
+  (add-hook 'toml-mode-hook #'init/maybe-enable-toml-lsp))
  (package 'eldoc-toml)
- (after 'eldoc-toml (diminish 'eldoc-toml)))
+ (after 'eldoc-toml
+  (diminish 'eldoc-toml-mode "Ed-TOML")))
 
 (config "YAML"
  (package 'yaml-mode)
@@ -1542,7 +1548,11 @@
     #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
-  (push `(,(rx bos "*" (or "rustic-compilation" "cargo-test" "cargo-clippy") "*" eos)
+  (push `(,(rx bos "*" (or
+                        "rustic-compilation"
+                        "cargo-test"
+                        "cargo-clippy"
+                        "cargo-run") "*" eos)
           (display-buffer-reuse-window display-buffer-below-selected)
           (mode . rustic-compilation-mode)
           (window-height . 0.30)
