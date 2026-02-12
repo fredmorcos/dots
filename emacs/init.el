@@ -576,10 +576,12 @@
                      "/run/media")))
 
  (autoload 'recentf-load-list "recentf")
+ (autoload 'recentf-cleanup "recentf")
  (defvar init/recentf-loaded-p nil)
  (defun init/recentf-load-list (&rest _)
   (unless init/recentf-loaded-p
    (recentf-load-list)
+   (recentf-cleanup)
    (setq init/recentf-loaded-p t)))
 
  (after 'consult
@@ -1110,6 +1112,8 @@
  (autoload 'lsp-ui-peek-find-implementation "lsp-ui-peek")
  (autoload 'lsp-ui-find-workspace-symbol "lsp-ui")
  (autoload 'lsp-ui-flycheck-list "lsp-ui-flycheck")
+ (autoload 'lsp-find-definition "lsp-mode")
+ (autoload 'lsp-find-type-definition "lsp-mode")
 
  (defun init/toggle-lsp-metas ()
   ;; Toggle meta stuff from LSP like lens and inlay hints.
@@ -1145,6 +1149,8 @@
   (define-key lsp-mode-map (kbd "C-c n r") #'lsp-ui-peek-find-references)
   (define-key lsp-mode-map (kbd "C-c n i") #'lsp-ui-peek-find-implementation)
   (define-key lsp-mode-map (kbd "C-c n s") #'lsp-ui-find-workspace-symbol)
+  (define-key lsp-mode-map (kbd "C-c n D") #'lsp-find-definition)
+  (define-key lsp-mode-map (kbd "C-c n T") #'lsp-find-type-definition)
   (define-key lsp-mode-map (kbd "C-c e l") #'lsp-ui-flycheck-list)
   (define-key lsp-mode-map (kbd "C-c e d") #'consult-lsp-diagnostics)
   (define-key lsp-mode-map (kbd "C-c i s") #'consult-lsp-symbols))
@@ -1344,7 +1350,7 @@
  (package 'yaml-mode)
  (after 'yaml-mode
   (declvar yaml-mode-map)
-  (define-key yaml-mode-map (kbd "C-c p") #'qol/generate-password)
+  (define-key yaml-mode-map (kbd "C-c P") #'qol/generate-password)
   (add-hook 'yaml-mode-hook #'indent-bars-mode)
   (add-hook 'yaml-mode-hook #'tree-sitter-mode)
   (add-hook 'yaml-mode-hook #'flycheck-mode)
@@ -1632,6 +1638,12 @@
  (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
  (autoload 'lsp-rust-analyzer-join-lines "lsp-rust")
  (autoload 'lsp-rust-analyzer-open-cargo-toml "lsp-rust")
+ (autoload 'lsp-rust-analyzer-related-tests "lsp-rust")
+ (autoload 'lsp-rust-analyzer-open-external-docs "lsp-rust")
+ (autoload 'rustic-format-dwim "rustic-rustfmt")
+ (autoload 'rustic-cargo-add-missing-dependencies "rustic-cargo")
+ (autoload 'rust-toggle-mutability "rust-utils")
+ (autoload 'rust-promote-module-into-dir "rust-utils")
 
  (defun init/disable-electric-quote-mode ()
   (electric-quote-local-mode -1))
@@ -1642,6 +1654,14 @@
   (define-key rustic-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
   (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
   (define-key rustic-mode-map (kbd "<f10>") #'lsp-rust-analyzer-open-cargo-toml)
+  (define-key rustic-mode-map (kbd "<f11>") #'rust-toggle-mutability)
+  (define-key rustic-mode-map (kbd "C-c i t") #'lsp-rust-analyzer-related-tests)
+  (define-key rustic-mode-map (kbd "C-c h d") #'lsp-rust-analyzer-open-external-docs)
+  (define-key rustic-mode-map (kbd "C-c C-c F") #'rustic-format-dwim)
+  (define-key rustic-mode-map (kbd "C-c C-c T") #'rustic-cargo-test-dwim)
+  (define-key rustic-mode-map (kbd "C-c C-c D") #'rustic-cargo-add-missing-dependencies)
+  (define-key rustic-mode-map (kbd "C-c C-c S") #'rustic-cargo-spellcheck)
+  (define-key rustic-mode-map (kbd "C-c m d") #'rust-promote-module-into-dir)
 
   (add-hook 'rustic-mode-hook #'init/disable-electric-quote-mode)
   (add-hook 'rustic-mode-hook #'electric-pair-local-mode)
