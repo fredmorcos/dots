@@ -307,7 +307,6 @@ python-setuptools-rust
 python-trio
 python-typogrify
 python-ukkonen
-python-unicodedata2
 python-virtualenv
 python-volume_key
 python-watchdog
