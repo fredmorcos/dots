@@ -759,7 +759,7 @@
    (declvar flycheck-error-list-mode-map)
    (define-key flycheck-error-list-mode-map [remap keyboard-quit]
     #'(lambda () (interactive) (delete-window window)))
-   (define-key flycheck-error-list-mode-map (kbd "<f2>")
+   (define-key flycheck-error-list-mode-map (kbd "<f9>")
     #'(lambda () (interactive) (delete-window window)))))
 
  (after 'window
@@ -778,12 +778,15 @@
  (package 'flycheck)
  (package 'consult-flycheck)
  (autoload 'flycheck-error-list-make-last-column "flycheck")
+ (autoload 'flycheck-list-errors "flycheck")
+ (autoload 'flycheck-next-error "flycheck")
+ (autoload 'flycheck-previous-error "flycheck")
  (after 'flycheck
   (declvar flycheck-mode-map)
-  (define-key flycheck-mode-map (kbd "<f2>") 'flycheck-list-errors)
-  (define-key flycheck-mode-map (kbd "C-c ! L") #'consult-flycheck)
-  (define-key flycheck-mode-map (kbd "M-n") 'flycheck-next-error)
-  (define-key flycheck-mode-map (kbd "M-p") 'flycheck-previous-error)
+  (define-key flycheck-mode-map (kbd "<f9>") #'flycheck-list-errors)
+  (define-key flycheck-mode-map (kbd "C-c f l") #'consult-flycheck)
+  (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
 
   (advice-add 'flycheck-next-error :after #'init/recenter)
   (advice-add 'flycheck-previous-error :after #'init/recenter)
@@ -1088,24 +1091,30 @@
 
 (config "LSP"
  (package 'lsp-mode)
+ (package 'consult-lsp)
 
  (autoload 'lsp-ui-sideline-enable "lsp-ui-sideline")
  (autoload 'lsp-inlay-hints-mode "lsp-mode")
  (autoload 'lsp-describe-thing-at-point "lsp-mode")
  (autoload 'lsp-extend-selection "lsp-mode")
  (autoload 'lsp-execute-code-action "lsp-mode")
+ (autoload 'lsp-rename "lsp-mode")
+ (autoload 'lsp-enable-which-key-integration "lsp-mode")
+ (autoload 'lsp-ui-peek-find-definitions "lsp-ui-peek")
+ (autoload 'lsp-ui-peek-find-references "lsp-ui-peek")
+ (autoload 'lsp-ui-peek-find-implementation "lsp-ui-peek")
+ (autoload 'lsp-ui-find-workspace-symbol "lsp-ui")
+ (autoload 'lsp-ui-flycheck-list "lsp-ui-flycheck")
 
  (defun init/toggle-lsp-metas ()
   ;; Toggle meta stuff from LSP like lens and inlay hints.
   (interactive)
   (declvar lsp-inlay-hint-enable)
-  (setq-local *init/lsp-inlay-hint-enable* (not lsp-inlay-hint-enable))
-  (if *init/lsp-inlay-hint-enable*
-   (lsp-lens-show)
-   (lsp-lens-hide))
-  (setopt lsp-inlay-hint-enable *init/lsp-inlay-hint-enable*)
-  (lsp-inlay-hints-mode (if *init/lsp-inlay-hint-enable* 1 -1))
-  (lsp-ui-sideline-enable (not *init/lsp-inlay-hint-enable*)))
+  (setq-local *init/lsp-inlay-hint-enabled* lsp-inlay-hint-enable)
+  (if *init/lsp-inlay-hint-enabled* (lsp-lens-hide) (lsp-lens-show))
+  (setopt lsp-inlay-hint-enable (not *init/lsp-inlay-hint-enabled*))
+  (lsp-inlay-hints-mode (if lsp-inlay-hint-enable 1 -1))
+  (lsp-ui-sideline-enable (not lsp-inlay-hint-enable)))
 
  (defun init/run-after-save-hooks ()
   (after 'files (run-hooks 'after-save-hook)))
@@ -1115,7 +1124,10 @@
   (setopt
    lsp-before-save-edits nil
    lsp-inlay-hints-mode t
-   lsp-inlay-hint-enable nil)
+   lsp-inlay-hint-enable nil
+   lsp-eldoc-render-all t
+   lsp-restart 'auto-restart
+   lsp-keep-workspace-alive nil)
 
   (set-face-attribute 'lsp-inlay-hint-face nil
    :background (face-attribute 'default :background)
@@ -1126,9 +1138,28 @@
 
   (declvar lsp-mode-map)
   (define-key lsp-mode-map (kbd "<f1>") #'lsp-describe-thing-at-point)
+  (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
   (define-key lsp-mode-map (kbd "<f8>") #'init/toggle-lsp-metas)
   (define-key lsp-mode-map [remap er/expand-region] #'lsp-extend-selection)
-  (define-key lsp-mode-map (kbd "M-RET") #'lsp-execute-code-action))
+  (define-key lsp-mode-map (kbd "M-RET") #'lsp-execute-code-action)
+  (define-key lsp-mode-map (kbd "C-c n d") #'lsp-ui-peek-find-definitions)
+  (define-key lsp-mode-map (kbd "C-c n r") #'lsp-ui-peek-find-references)
+  (define-key lsp-mode-map (kbd "C-c n i") #'lsp-ui-peek-find-implementation)
+  (define-key lsp-mode-map (kbd "C-c n s") #'lsp-ui-find-workspace-symbol)
+  (define-key lsp-mode-map (kbd "C-c e l") #'lsp-ui-flycheck-list)
+  (define-key lsp-mode-map (kbd "C-c e d") #'consult-lsp-diagnostics)
+  (define-key lsp-mode-map (kbd "C-c i s") #'consult-lsp-symbols))
+
+ (after 'lsp-ui-peek
+  (setopt
+   lsp-ui-peek-list-width 40
+   lsp-ui-peek-always-show t))
+
+ (after 'lsp-ui-imenu
+  (setopt
+   lsp-ui-imenu-auto-refresh t
+   lsp-ui-imenu-buffer-position 'left
+   lsp-ui-imenu-window-fix-width t))
 
  (after 'lsp-lens
   (diminish 'lsp-lens-mode "Lns")
@@ -1136,10 +1167,6 @@
   (set-face-attribute 'lsp-lens-face nil
    :background (face-attribute 'default :background)
    :foreground "Gray70"))
-
- (after 'lsp-semantic-tokens
-  (setopt
-   lsp-semantic-tokens-enable t))
 
  ;; Improve LSP performance by trying to parse elisp objects from emacs-lsp-booster.
  (defun lsp-booster--advice-json-parse (old-fn &rest args)
@@ -1180,7 +1207,60 @@
     orig-result)))
 
  (after 'lsp-mode
-  (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)))
+  (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command))
+
+ (package 'lsp-treemacs)
+
+ (defun init/lsp-treemacs-call-hierarchy ()
+  "Show the outgoing call hierarchy of symbol at point."
+  (interactive)
+  (lsp-treemacs-call-hierarchy t))
+ (defun init/lsp-treemacs-implementations ()
+  "Show the implementations for the symbol at point and auto-select the window."
+  (interactive)
+  (lsp-treemacs-implementations t))
+ (defun init/lsp-treemacs-references ()
+  "Show the references for the symbol at point and auto-select the window."
+  (interactive)
+  (lsp-treemacs-references t))
+ (defun init/lsp-treemacs-type-hierarchy ()
+  "Show the full type hierarchy for the symbol at point."
+  (interactive)
+  (lsp-treemacs-type-hierarchy 2))
+
+ (after 'lsp-mode
+  (define-key lsp-mode-map (kbd "C-c t e") #'lsp-treemacs-errors-list)
+  (define-key lsp-mode-map (kbd "C-c t s") #'lsp-treemacs-symbols)
+
+  (define-key lsp-mode-map (kbd "C-c t i") #'lsp-treemacs-implementations)
+  (define-key lsp-mode-map (kbd "C-c t I") #'init/lsp-treemacs-implementations)
+
+  (define-key lsp-mode-map (kbd "C-c t c") #'lsp-treemacs-call-hierarchy)
+  (define-key lsp-mode-map (kbd "C-c t C") #'init/lsp-treemacs-call-hierarchy)
+
+  (define-key lsp-mode-map (kbd "C-c t f") #'lsp-treemacs-references)
+  (define-key lsp-mode-map (kbd "C-c t F") #'init/lsp-treemacs-references)
+
+  (define-key lsp-mode-map (kbd "C-c t t") #'lsp-treemacs-type-hierarchy)
+  (define-key lsp-mode-map (kbd "C-c t T") #'init/lsp-treemacs-type-hierarchy)
+
+  (add-hook 'lsp-mode-hook #'lsp-treemacs-sync-mode))
+
+ (after 'lsp-treemacs
+  (setopt lsp-treemacs-error-list-expand-depth 10))
+
+ (after 'which-key
+  (after 'lsp
+   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
+
+ (after 'lsp-icons (setopt lsp-headerline-breadcrumb-icons-enable nil))
+ (after 'lsp-headerline (setopt lsp-headerline-arrow "▶"))
+ (after 'lsp-semantic-tokens (setopt lsp-semantic-tokens-enable t))
+
+ (after 'lsp-completion
+  (setopt
+   ;; Use company-capf in case of company, otherwise corfu will take care of things.
+   lsp-completion-provider (if (eq *init/completion-system* :corfu) :none :capf))))
 
 (config "Translation Files"
  (package 'po-mode))
@@ -1619,7 +1699,7 @@
  (after 'cc-mode
   (setopt c-doc-comment-style '((c-mode    . gtkdoc) (c++-mode  . doxygen)))
   (declvar c-mode-base-map)
-  (define-key c-mode-base-map (kbd "<f2>") #'lsp-clangd-find-other-file)
+  (define-key c-mode-base-map (kbd "<f5>") #'lsp-clangd-find-other-file)
   (define-key c-mode-base-map (kbd "(") #'nil t))
 
  (after 'cc-cmds
@@ -1671,14 +1751,6 @@
 ;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
 ;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
 
-;;; Project Management
-
-(use-package treemacs-projectile
- :ensure t
- :defer t
- :preface (package 'treemacs-projectile)
- :after (treemacs projectile))
-
 ;;; Snippets
 
 (use-package yasnippet-capf
@@ -1691,21 +1763,6 @@
  (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive))
 
 ;;; LSP
-
-(config "LSP Mode Settings"
- (after 'lsp-mode
-  (setopt
-   ;; lsp-signature-auto-activate t
-   lsp-signature-render-documentation t
-   lsp-eldoc-render-all t
-   lsp-eldoc-enable-hover t)
-
- (after 'lsp-completion
-  (setopt
-   ;; Use company-capf in case of company, otherwise corfu will take care of things.
-   lsp-completion-provider (if (eq *init/completion-system* :corfu) :none :capf)
-   lsp-completion-show-detail t
-   lsp-completion-show-kind t))))
 
 (use-package lsp-mode
  :ensure t
@@ -1731,117 +1788,7 @@
  :hook
  (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t)))
  ;; (lsp-mode-hook . init/setup-lsp-capfs)
-
- :custom
- (lsp-progress-prefix "  Progress: ")
- (lsp-headerline-breadcrumb-enable t)
- (lsp-restart 'auto-restart)
- (lsp-enable-snippet t)
- (lsp-keymap-prefix "C-c")
- (lsp-idle-delay 0.1)
- (lsp-file-watch-threshold nil)
- (lsp-enable-indentation t)
- (lsp-auto-configure t)
- (lsp-modeline-code-actions-enable nil)
- (lsp-modeline-diagnostics-enable t)
- (lsp-log-io nil)
- (lsp-keep-workspace-alive nil)
- ;; (lsp-enable-imenu nil)
- (lsp-use-plists t)
- (lsp-auto-execute-action t))
-
-(use-package lsp-mode
- :ensure t
- :defer t
- :after which-key
-
- :hook
- (lsp-mode-hook . lsp-enable-which-key-integration))
-
-(use-package lsp-lens
- :ensure lsp-mode
- :defer t
- :diminish
-
- :custom
- (lsp-lens-mode nil)
- (lsp-lens-enable nil))
-
-(use-package lsp-icons
- :ensure lsp-mode
- :defer t
-
- :custom
- (lsp-headerline-breadcrumb-icons-enable t))
-
-(use-package lsp-headerline
- :ensure lsp-mode
- :defer t
-
- :custom
- (lsp-headerline-arrow "▶"))
-
-(use-package lsp-semantic-tokens
- :ensure lsp-mode
- :defer t
-
- :custom
- (lsp-semantic-tokens-apply-modifiers t)
- (lsp-semantic-tokens-enable-multiline-token-support t)
- (lsp-semantic-tokens-enable t))
-
-(use-package lsp-ui-peek
- :ensure lsp-ui
- :defer t
- :after lsp-mode
- :preface (package 'lsp-ui)
-
- :bind
- (:map lsp-mode-map
-  ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-  ([remap xref-find-references] . lsp-ui-peek-find-references)
-  ("M-I" . lsp-ui-peek-find-implementation)
-  ("C-c D" . lsp-ui-doc-show)))
-
-(use-package lsp-ui-imenu
- :ensure lsp-ui
- :defer t
- :preface (package 'lsp-ui)
-
- :custom
- (lsp-ui-imenu-auto-refresh t)
- (lsp-ui-imenu-auto-refresh-delay 0.1)
- (lsp-ui-imenu-buffer-position 'left)
- (lsp-ui-imenu-window-fix-width t))
-
-(use-package consult-lsp
- :ensure t
- :defer t
- :preface (package 'consult-lsp)
- :after lsp-mode
-
- :bind
- (:map lsp-mode-map
-  ("C-c ! d" . consult-lsp-diagnostics)
-  ("C-c s s" . consult-lsp-symbols)))
-
-(use-package lsp-ui-flycheck
- :ensure lsp-ui
- :defer t
- :preface (package 'lsp-ui)
-
- :bind
- (:map lsp-mode-map
-  ("C-c ! L" . lsp-ui-flycheck-list)))
-
-(use-package lsp-ui
- :ensure t
- :defer t
- :preface (package 'lsp-ui)
-
- :bind
- (:map lsp-mode-map
-  ("C-c s S" . lsp-ui-find-workspace-symbol)))
+ )
 
 (use-package lsp-ui-doc
  :ensure lsp-ui
@@ -1858,15 +1805,6 @@
  (lsp-ui-doc-max-height 30)
  (lsp-ui-doc-use-webkit t))
 
-(use-package lsp-ui-peek
- :ensure lsp-ui
- :defer t
- :preface (package 'lsp-ui)
-
- :custom
- (lsp-ui-peek-list-width 40)
- (lsp-ui-peek-always-show t))
-
 (use-package lsp-ui-sideline
  :ensure lsp-ui
  :defer t
@@ -1874,134 +1812,6 @@
 
  :custom
  (lsp-ui-sideline-enable nil))
-
-;;; Treemacs
-
-(use-package treemacs
- :ensure t
- :defer t
- :preface (package 'treemacs)
-
- :bind
- ("<f9>" . treemacs-select-window))
-
-(use-package treemacs-themes
- :ensure treemacs
- :defer t
-
- :commands
- treemacs-load-theme)
-
-(use-package treemacs-customization
- :ensure treemacs
- :defer t
-
- :custom
- ;; (treemacs-tag-follow-delay 0.1)
- ;; (treemacs-indent-guide-mode t)
- (treemacs-select-when-already-in-treemacs 'move-back)
- (treemacs-width 40)
- (treemacs-indentation 1))
-
-(use-package treemacs-interface
- :ensure treemacs
- :defer t
- :after treemacs
-
- :bind
- ("<f12>" . treemacs-delete-other-windows))
-
-(use-package treemacs-mode
- :ensure treemacs
- :defer t
-
- :hook
- (treemacs-mode-hook . treemacs-fringe-indicator-mode)
- (treemacs-mode-hook . treemacs-filewatch-mode))
-
-(use-package treemacs-async
- :ensure treemacs
- :defer t
- :after treemacs-mode
- :hook
- (treemacs-mode-hook . (lambda () (treemacs-git-mode 'deferred))))
-
-(use-package treemacs-git-commit-diff-mode
- :ensure treemacs
- :defer t
- :after treemacs-mode
- :hook treemacs-mode-hook)
-
-(use-package treemacs-tag-follow-mode
- :ensure treemacs
- :defer t
- :after treemacs-mode
- :hook treemacs-mode-hook)
-
-(use-package treemacs-async
- :ensure treemacs
- :defer t
- :commands treemacs-git-mode)
-
-(use-package treemacs-git-commit-diff-mode
- :ensure treemacs
- :defer t
- :commands treemacs-git-commit-diff-mode)
-
-(use-package lsp-treemacs
- :ensure t
- :defer t
- :preface (package 'lsp-treemacs)
- :after lsp-mode
-
- :preface
- (defun init/lsp-treemacs-call-hierarchy ()
-  "Show the outgoing call hierarchy of symbol at point."
-  (interactive)
-  (lsp-treemacs-call-hierarchy t))
- (defun init/lsp-treemacs-implementations ()
-  "Show the implementations for the symbol at point and auto-select the window."
-  (interactive)
-  (lsp-treemacs-implementations t))
- (defun init/lsp-treemacs-references ()
-  "Show the references for the symbol at point and auto-select the window."
-  (interactive)
-  (lsp-treemacs-references t))
- (defun init/lsp-treemacs-type-hierarchy ()
-  "Show the full type hierarchy for the symbol at point."
-  (interactive)
-  (lsp-treemacs-type-hierarchy 2))
-
- :bind
- (:map lsp-mode-map
-  ("C-c t e" . lsp-treemacs-errors-list)
-  ("C-c t s" . lsp-treemacs-symbols)
-  ("C-c t c" . lsp-treemacs-call-hierarchy)
-  ("C-c t i" . lsp-treemacs-implementations)
-  ("C-c t f" . lsp-treemacs-references)
-  ("C-c t t" . init/lsp-treemacs-type-hierarchy)
-  ("C-c t C" . init/lsp-treemacs-call-hierarchy)
-  ("C-c t T" . init/lsp-treemacs-type-hierarchy)
-  ("C-c t I" . init/lsp-treemacs-implementations)
-  ("C-c t F" . init/lsp-treemacs-references))
-
- :hook
- (lsp-mode-hook . lsp-treemacs-sync-mode))
-
-(use-package treemacs-magit
- :ensure t
- :demand
- :preface (package 'treemacs-magit)
- :after (treemacs magit))
-
-(use-package treemacs-nerd-icons
- :ensure t
- :demand
- :preface (package 'treemacs-nerd-icons)
- :after treemacs
-
- :config
- (treemacs-load-theme "nerd-icons"))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
