@@ -437,7 +437,6 @@
  (package 'hotfuzz)
  (package 'orderless)
  (after 'minibuffer
-  (delete 'tags-completion-at-point-function completion-at-point-functions)
   (delete 'emacs22 completion-styles)
   (push 'hotfuzz completion-styles)
   (push 'orderless completion-styles)
@@ -801,6 +800,7 @@
 (config "Snippets"
  (package 'yasnippet)
  (package 'yasnippet-snippets)
+ (package 'yasnippet-capf)
 
  (defvar *init/yasnippet-snippets-initialized* nil)
  (defun init/initialize-yasnippet-snippets ()
@@ -814,7 +814,12 @@
   (declvar yas-minor-mode-map)
   (define-key yas-minor-mode-map (kbd "TAB") nil t)
   (add-hook 'yas-minor-mode-hook #'init/initialize-yasnippet-snippets))
- (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
+
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
+
+ (after 'yasnippet-capf
+  (setopt yasnippet-capf-lookup-by 'name)
+  (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive)))
 
 (config "Dired"
  (package 'nerd-icons-dired)
@@ -1116,9 +1121,6 @@
   (lsp-inlay-hints-mode (if lsp-inlay-hint-enable 1 -1))
   (lsp-ui-sideline-enable (not lsp-inlay-hint-enable)))
 
- (defun init/run-after-save-hooks ()
-  (after 'files (run-hooks 'after-save-hook)))
-
  (after 'lsp-mode
   (diminish 'lsp-mode "Ls")
   (setopt
@@ -1133,9 +1135,6 @@
    :background (face-attribute 'default :background)
    :foreground "Gray70")
 
-  (add-hook 'lsp-mode-hook #'init/run-after-save-hooks)
-  (add-hook 'lsp-mode-hook #'lsp-lens-hide)
-
   (declvar lsp-mode-map)
   (define-key lsp-mode-map (kbd "<f1>") #'lsp-describe-thing-at-point)
   (define-key lsp-mode-map (kbd "<f2>") #'lsp-rename)
@@ -1149,6 +1148,22 @@
   (define-key lsp-mode-map (kbd "C-c e l") #'lsp-ui-flycheck-list)
   (define-key lsp-mode-map (kbd "C-c e d") #'consult-lsp-diagnostics)
   (define-key lsp-mode-map (kbd "C-c i s") #'consult-lsp-symbols))
+
+ (defun init/lsp-capfs ()
+  (cape-wrap-super
+   #'cape-file
+   ;; #'cape-dabbrev
+   #'yasnippet-capf
+   #'lsp-completion-at-point))
+
+ (defun init/setup-lsp-capfs ()
+  (setq-local completion-at-point-functions
+   (list #'init/lsp-capfs #'lsp-completion-at-point)))
+
+ (after 'lsp-completion
+  (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
+  (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive)
+  (add-hook 'lsp-completion-mode-hook #'init/setup-lsp-capfs))
 
  (after 'lsp-ui-peek
   (setopt
@@ -1250,7 +1265,7 @@
   (setopt lsp-treemacs-error-list-expand-depth 10))
 
  (after 'which-key
-  (after 'lsp
+  (after 'lsp-mode
    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)))
 
  (after 'lsp-icons (setopt lsp-headerline-breadcrumb-icons-enable nil))
@@ -1260,7 +1275,10 @@
  (after 'lsp-completion
   (setopt
    ;; Use company-capf in case of company, otherwise corfu will take care of things.
-   lsp-completion-provider (if (eq *init/completion-system* :corfu) :none :capf))))
+   lsp-completion-provider (if (eq *init/completion-system* :corfu) :none :capf)))
+
+ (after 'lsp-mode
+  (add-hook 'lsp-mode-hook #'init/buffer-completion-mode)))
 
 (config "Translation Files"
  (package 'po-mode))
@@ -1613,6 +1631,7 @@
 
  (autoload 'lsp-rust-analyzer-expand-macro "lsp-rust")
  (autoload 'lsp-rust-analyzer-join-lines "lsp-rust")
+ (autoload 'lsp-rust-analyzer-open-cargo-toml "lsp-rust")
 
  (defun init/disable-electric-quote-mode ()
   (electric-quote-local-mode -1))
@@ -1622,6 +1641,7 @@
   (define-key rustic-mode-map (kbd "<f5>") #'rust-dbg-wrap-or-unwrap)
   (define-key rustic-mode-map (kbd "<f6>") #'lsp-rust-analyzer-expand-macro)
   (define-key rustic-mode-map (kbd "<f7>") #'lsp-rust-analyzer-join-lines)
+  (define-key rustic-mode-map (kbd "<f10>") #'lsp-rust-analyzer-open-cargo-toml)
 
   (add-hook 'rustic-mode-hook #'init/disable-electric-quote-mode)
   (add-hook 'rustic-mode-hook #'electric-pair-local-mode)
@@ -1741,27 +1761,6 @@
   (push "--malloc-trim" lsp-clients-clangd-args)
   (push "--pch-storage=memory" lsp-clients-clangd-args)))
 
-;;; C and C++ Programming
-
-;; (use-package lsp-completion
-;;  :ensure lsp-mode
-;;  :defer t
-;;  :preface (package 'lsp-mode)
-;;  :config
-;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-case-fold)
-;;  (advice-add #'lsp-completion-at-point :around #'cape-wrap-nonexclusive))
-
-;;; Snippets
-
-(use-package yasnippet-capf
- :ensure t
- :defer t
- :preface (package 'yasnippet-capf)
- :custom
- (yasnippet-capf-lookup-by 'name)
- :config
- (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive))
-
 ;;; LSP
 
 (use-package lsp-mode
@@ -1773,22 +1772,8 @@
  ;; Unmark after formatting.
  (advice-add 'lsp-format-region :after #'keyboard-quit)
 
- ;; :preface
- ;; (defun init/lsp-capfs ()
- ;;  (cape-wrap-super
- ;;   #'cape-file
- ;;   #'cape-dabbrev
- ;;   #'yasnippet-capf
- ;;   #'lsp-completion-at-point))
-
- ;; (defun init/setup-lsp-capfs ()
- ;;  (setq-local completion-at-point-functions
- ;;   (list #'init/lsp-capfs)))
-
  :hook
- (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t)))
- ;; (lsp-mode-hook . init/setup-lsp-capfs)
- )
+ (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t))))
 
 (use-package lsp-ui-doc
  :ensure lsp-ui
@@ -1804,14 +1789,6 @@
  (lsp-ui-doc-include-signature t)
  (lsp-ui-doc-max-height 30)
  (lsp-ui-doc-use-webkit t))
-
-(use-package lsp-ui-sideline
- :ensure lsp-ui
- :defer t
- :preface (package 'lsp-ui)
-
- :custom
- (lsp-ui-sideline-enable nil))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
