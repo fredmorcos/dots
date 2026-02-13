@@ -633,6 +633,7 @@
  (define-key global-map (kbd "C-h B") #'embark-bindings)
 
  (define-key minibuffer-local-map (kbd "C-'") #'embark-collect)
+ (define-key minibuffer-local-map (kbd "C-,") #'embark-live)
  (define-key minibuffer-local-map (kbd "C-x E") #'embark-export)
  (define-key minibuffer-local-map (kbd "C-x B") #'embark-become))
 
