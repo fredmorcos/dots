@@ -91,7 +91,6 @@ efibootmgr
 efitools
 emacs-wayland
 epiphany
-ethtool
 exfatprogs
 eza
 fd
@@ -124,7 +123,6 @@ gst-plugin-gtk
 gst-plugin-libcamera
 gst-plugins-bad
 gst-plugin-va
-gstreamer-vaapi
 gucharmap
 gvfs-mtp
 handlr-regex
