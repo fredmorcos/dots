@@ -1045,8 +1045,9 @@
  (after 'indent-bars
   (setopt
    indent-bars-treesit-support t
-   indent-bars-width-frac 0.1))
+   indent-bars-width-frac 0.1)))
 
+(config "Dir Locals"
  (after 'files
   (setopt
    safe-local-variable-values
@@ -1134,7 +1135,8 @@
    lsp-inlay-hint-enable nil
    lsp-eldoc-render-all t
    lsp-restart 'auto-restart
-   lsp-keep-workspace-alive nil)
+   lsp-keep-workspace-alive nil
+   lsp-enable-relative-indentation t)
 
   (set-face-attribute 'lsp-inlay-hint-face nil
    :background (face-attribute 'default :background)
@@ -1781,35 +1783,6 @@
   (push "-j=16" lsp-clients-clangd-args)
   (push "--malloc-trim" lsp-clients-clangd-args)
   (push "--pch-storage=memory" lsp-clients-clangd-args)))
-
-;;; LSP
-
-(use-package lsp-mode
- :ensure t
- :defer t
- :preface (package 'lsp-mode)
-
- :config
- ;; Unmark after formatting.
- (advice-add 'lsp-format-region :after #'keyboard-quit)
-
- :hook
- (lsp-mode-hook . (lambda () (setq-local lsp-enable-relative-indentation t))))
-
-(use-package lsp-ui-doc
- :ensure lsp-ui
- :defer t
- :preface (package 'lsp-ui)
-
- :custom
- (lsp-ui-doc-enable t)
- (lsp-ui-doc-show-with-cursor t)
- (lsp-ui-doc-show-with-mouse t)
- (lsp-ui-doc-alignment 'frame)
- (lsp-ui-doc-header t)
- (lsp-ui-doc-include-signature t)
- (lsp-ui-doc-max-height 30)
- (lsp-ui-doc-use-webkit t))
 
 ;; Print startup stats.
 (message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
