@@ -121,8 +121,8 @@ grcov
 gst-libav
 gst-plugin-gtk
 gst-plugin-libcamera
-gst-plugins-bad
 gst-plugin-va
+gst-plugins-bad
 gucharmap
 gvfs-mtp
 handlr-regex
