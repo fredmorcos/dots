@@ -109,7 +109,7 @@ show-weekdate=true
 [org/gnome/shell]
 enabled-extensions=@as []
 disable-user-extensions=true
-favorite-apps=['org.gnome.Nautilus.desktop', 'torbrowser.desktop', 'protonvpn.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Podcasts.desktop', 'simple-scan.desktop', 'ca.desrt.dconf-editor.desktop', 'com.valvesoftware.Steam.desktop', 'com.github.tchx84.Flatseal.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Settings.desktop']
+favorite-apps=['org.gnome.Nautilus.desktop', 'torbrowser.desktop', 'proton.vpn.app.gtk.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Podcasts.desktop', 'simple-scan.desktop', 'ca.desrt.dconf-editor.desktop', 'com.valvesoftware.Steam.desktop', 'com.github.tchx84.Flatseal.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Settings.desktop']
 
 # Window switcher
 [org/gnome/shell/window-switcher]
