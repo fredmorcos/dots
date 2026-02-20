@@ -105,7 +105,6 @@ foot-terminfo
 fprintd
 fzf
 gcovr
-gdb
 gdm
 git-delta
 gnome-calculator
@@ -149,6 +148,7 @@ irqbalance
 ispell
 iwd
 kcov
+lazarus-qt6
 lesspipe
 lhasa
 libblockdev-dm
@@ -304,7 +304,6 @@ python-service-identity
 python-setuptools-rust
 python-trio
 python-typogrify
-python-ukkonen
 python-virtualenv
 python-volume_key
 python-watchdog
