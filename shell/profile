@@ -57,6 +57,8 @@ export ELECTRON_OZONE_PLATFORM_HINT="auto"   # Electron
 
 # Flatpak
 export FLATPAK_TTY_PROGRESS=1
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share"
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share"
 
 # Other options:
 # export XAUTHORITY="$XDG_CONFIG_HOME/Xauthority"
