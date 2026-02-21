@@ -110,19 +110,15 @@ git-delta
 gnome-calculator
 gnome-control-center
 gnome-disk-utility
-gnome-firmware
-gnome-font-viewer
 gnome-podcasts
 gnome-tweaks
 gptfdisk
 graphicsmagick
 grcov
 gst-libav
-gst-plugin-gtk
 gst-plugin-libcamera
 gst-plugin-va
 gst-plugins-bad
-gucharmap
 gvfs-mtp
 handlr-regex
 haveged
@@ -158,7 +154,6 @@ libdvdcss
 libdwarf
 libmp4v2
 libmythes
-libnma
 libofa
 libopenraw
 libraw
@@ -259,7 +254,6 @@ python-hsluv
 python-html2text
 python-html5lib
 python-installer
-python-keyrings-alt
 python-keystone
 python-langdetect
 python-linkify-it-py
@@ -267,7 +261,6 @@ python-lz4
 python-micawber
 python-mpd2
 python-netifaces2
-python-notify2
 python-objgraph
 python-olefile
 python-openpyxl
@@ -364,7 +357,6 @@ wireless-regdb
 wireless_tools
 wl-clipboard
 woff2-font-awesome
-xarchiver
 xf86-input-evdev
 yamllint
 yapf

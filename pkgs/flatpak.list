@@ -9,7 +9,6 @@ org.dune3d.dune3d
 org.fooyin.fooyin
 org.freecad.FreeCAD
 org.gimp.GIMP
-org.kde.kate
 org.kde.okular
 org.libreoffice.LibreOffice
 org.signal.Signal
