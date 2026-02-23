@@ -98,7 +98,7 @@ backup_home() {
 
   cmd "$HOME/.cache/authenticator/"           "$1/Configs/cache-authenticator/"
   cmd "$HOME/.cache/gnome-podcasts/"          "$1/Configs/cache-gnome-podcasts/"
-  cmd "$HOME/.cache/transmission/"            "$1/Configs/cache-transmission/"
+  cmd "$HOME/.cache/transmission-qt/"         "$1/Configs/cache-transmission-qt/"
 }
 
 if [ "$HOSTNAME" == "axon" ]; then
