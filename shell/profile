@@ -60,6 +60,9 @@ export FLATPAK_TTY_PROGRESS=1
 export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share"
 export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share"
 
+# Signal
+export SIGNAL_PASSWORD_STORE=gnome-libsecret
+
 # Other options:
 # export XAUTHORITY="$XDG_CONFIG_HOME/Xauthority"
 # export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
