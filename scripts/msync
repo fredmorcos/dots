@@ -62,7 +62,7 @@ cmd $HOME/.ssh/
 
 cmd $HOME/.config/MusicBrainz/
 cmd $HOME/.config/beets/
-cmd $HOME/.config/protonvpn/
+cmd $HOME/.config/Proton/
 cmd $HOME/.config/transmission/
 cmd $HOME/.config/yt-dlp/
 
@@ -73,6 +73,7 @@ cmd $HOME/.local/share/keyrings/
 
 cmd $HOME/.cache/authenticator/
 cmd $HOME/.cache/gnome-podcasts/
+cmd $HOME/.cache/Proton/
 cmd $HOME/.cache/transmission-qt/
 
 cmd $HOME/Workspace/

@@ -85,6 +85,7 @@ backup_home() {
 
   cmd "$HOME/.config/MusicBrainz/"            "$1/Configs/config-MusicBrainz/"
   cmd "$HOME/.config/beets/"                  "$1/Configs/config-beets/"
+  cmd "$HOME/.config/Proton/"                 "$1/Configs/config-Proton/"
   cmd "$HOME/.config/emacs/"                  "$1/Configs/config-emacs/"
   cmd "$HOME/.config/transmission/"           "$1/Configs/config-transmission/"
   cmd "$HOME/.config/yt-dlp/"                 "$1/Configs/config-yt-dlp/"
@@ -98,6 +99,7 @@ backup_home() {
 
   cmd "$HOME/.cache/authenticator/"           "$1/Configs/cache-authenticator/"
   cmd "$HOME/.cache/gnome-podcasts/"          "$1/Configs/cache-gnome-podcasts/"
+  cmd "$HOME/.cache/Proton/"                  "$1/Configs/cache-Proton/"
   cmd "$HOME/.cache/transmission-qt/"         "$1/Configs/cache-transmission-qt/"
 }
 
