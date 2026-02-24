@@ -73,6 +73,6 @@ cmd $HOME/.local/share/keyrings/
 
 cmd $HOME/.cache/authenticator/
 cmd $HOME/.cache/gnome-podcasts/
-cmd $HOME/.cache/transmission/
+cmd $HOME/.cache/transmission-qt/
 
 cmd $HOME/Workspace/
