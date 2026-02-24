@@ -329,7 +329,17 @@
  (after 'display-line-numbers
   (setopt
    display-line-numbers-grow-only t
-   display-line-numbers-width-start t)))
+   display-line-numbers-width-start t))
+
+ (defun init/pulse-line (&rest _)
+  "Pulse the current line."
+  (pulse-momentary-highlight-one-line (point)))
+
+ (after 'window
+  (advice-add #'scroll-up-command :after #'init/pulse-line)
+  (advice-add #'scroll-down-command :after #'init/pulse-line)
+  (advice-add #'recenter-top-bottom :after #'init/pulse-line)
+  (advice-add #'other-window :after #'init/pulse-line)))
 
 (config "Modeline"
  (package 'diminish)
