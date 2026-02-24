@@ -13,7 +13,7 @@ set print pretty on
 
 define print_strarray
    set $size = $arg0->arr.buffer->used / $arg0->arr.element_size
-   set $start = $arg0->v->[0][0][0]
+   set $start = $arg0->v[0][0]
    set $idx = 0
    while $idx < $size
      print str_c($start)
