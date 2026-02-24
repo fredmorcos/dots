@@ -1,4 +1,5 @@
-set history save
+set history save on
+set history expansion on
 set history filename ~/.config/gdb/history
 
 set debuginfod enabled on
@@ -7,6 +8,19 @@ set breakpoint pending on
 
 set print array on
 set print pretty on
+
+# Dovecot
+
+define print_strarray
+   set $size = $arg0->arr.buffer->used / $arg0->arr.element_size
+   set $start = $arg0->v->[0][0][0]
+   set $idx = 0
+   while $idx < $size
+     print str_c($start)
+     set $start = $start + 1
+     set $idx = $idx + 1
+   end
+end
 
 # set pagination off
 # set disable-randomization
@@ -76,7 +90,7 @@ set print pretty on
 # rbreak              # regex breakpoint (ie, mylist_*)
 # command             # commands to be executed when breakpoint is hit
 # silent              # suppress output when running commands
-# save breakpoints    # save breakpoits to a gdb script
+# save breakpoints    # save breakpoints to a gdb script
 # save history
 # info line foo.c:42  # show $pc for line
 # info line * $pc     # show line begin/end for current $pc
