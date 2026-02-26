@@ -1110,6 +1110,7 @@
 
 (config "LSP"
  (package 'lsp-mode)
+ (package 'lsp-ui)
  (package 'consult-lsp)
 
  (autoload 'lsp-ui-sideline-enable "lsp-ui-sideline")
