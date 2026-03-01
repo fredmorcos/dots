@@ -125,6 +125,7 @@ num-workspaces=8
 [org/gnome/desktop/sound]
 allow-volume-above-100-percent=true
 event-sounds=false
+theme-name='__custom'
 
 # Shell Shortcuts
 [org/gnome/shell/keybindings]
