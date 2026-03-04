@@ -863,7 +863,8 @@
    dired-hide-details-hide-symlink-targets nil
    dired-recursive-copies 'always
    dired-recursive-deletes 'always
-   dired-dwim-target t)))
+   dired-dwim-target t
+   dired-kill-when-opening-new-dired-buffer t)))
 
 (config "Project Management"
  (package 'projectile)
@@ -1069,6 +1070,9 @@
      (lsp-enable-semantic-highlighting . nil)))))
 
 (config "Debugging"
+ (mode (rx "gdbinit" eos) #'gdb-script-mode)
+ (mode (rx "gdbearlyinit" eos) #'gdb-script-mode)
+
  (autoload 'debugger-quit "debug")
  (after 'debug
   (declvar debugger-mode-map)
@@ -1447,6 +1451,9 @@
   (add-hook 'meson-mode-hook #'symbol-overlay-mode)
   (add-hook 'meson-mode-hook #'lsp))
  (after 'lsp-meson (setopt lsp-meson-server-executable '("mesonlsp" "--full"))))
+
+(config "Sieve"
+ (mode (rx ".svtest" eos) #'sieve-mode))
 
 (config "Shell Scripting"
  (mode (rx ".bashrc.user" eos) #'sh-mode)
