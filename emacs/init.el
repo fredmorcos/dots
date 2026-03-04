@@ -145,7 +145,7 @@
  (declvar expreg-functions)
  (after 'text-mode
   (add-hook 'text-mode-hook
-   (lambda () (add-to-list 'expreg-functions #'expreg--sentence))))
+   (lambda () (after 'expreg (add-to-list 'expreg-functions #'expreg--sentence)))))
 
  (package 'surround)
  (define-key global-map (kbd "M-'") #'surround-mark-inner)
