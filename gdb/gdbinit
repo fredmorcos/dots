@@ -12,14 +12,25 @@ set print pretty on
 # Dovecot
 
 define print_strarray
-   set $size = $arg0->arr.buffer->used / $arg0->arr.element_size
-   set $start = $arg0->v[0][0]
-   set $idx = 0
-   while $idx < $size
-     print str_c($start)
-     set $start = $start + 1
-     set $idx = $idx + 1
-   end
+  set $size = $arg0->arr.buffer->used / $arg0->arr.element_size
+  set $start = $arg0->v[0][0]
+  set $idx = 0
+  while $idx < $size
+    print str_c($start)
+    set $start = $start + 1
+    set $idx = $idx + 1
+  end
+end
+
+define print_array
+  set $size = $arg0->arr.buffer->used / $arg0->arr.element_size
+  set $start = $arg0->v[0]
+  set $idx = 0
+  while $idx < $size
+    printf "[%d]: ", $idx
+    print $start[$idx]
+    set $idx = $idx + 1
+  end
 end
 
 # set pagination off
