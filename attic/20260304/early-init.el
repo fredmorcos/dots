@@ -7,8 +7,22 @@
  (require 'init-macros))
 
 (config "Configuration Options"
+ (defvar *init/use-package-statistics* :disabled "Whether to enable use-package stats")
  (defvar *init/emacs-debugging* :disabled "Enable debugging startup elisp")
  (defvar *init/emacs-profiling* :disabled "Enable profiling startup"))
+
+(config "Use Package"
+ (after 'use-package-core
+  (setopt
+   use-package-expand-minimally t
+   use-package-hook-name-suffix nil
+   use-package-always-defer t))
+
+ (unless (eq *init/use-package-statistics* :disabled)
+  (after 'use-package-core
+   (setopt
+    use-package-compute-statistics t
+    use-package-verbose t))))
 
 (config "Debugging and Profiling"
  (unless (eq *init/emacs-debugging* :disabled)
