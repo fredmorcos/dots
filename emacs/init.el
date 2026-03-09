@@ -846,7 +846,7 @@
 (config "Snippets"
  (package 'yasnippet)
  (package 'yasnippet-snippets)
- (package 'yasnippet-capf)
+ (package 'consult-yasnippet)
 
  (defvar *init/yasnippet-snippets-initialized* nil)
  (defun init/initialize-yasnippet-snippets ()
@@ -858,14 +858,11 @@
  (after 'yasnippet
   (diminish 'yas-minor-mode "Ys")
   (declvar yas-minor-mode-map)
+  (define-key yas-minor-mode-map (kbd "C-c S") #'consult-yasnippet)
   (define-key yas-minor-mode-map (kbd "TAB") nil t)
   (add-hook 'yas-minor-mode-hook #'init/initialize-yasnippet-snippets))
 
- (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets")
-
- (after 'yasnippet-capf
-  (setopt yasnippet-capf-lookup-by 'name)
-  (advice-add 'yasnippet-capf :around #'cape-wrap-nonexclusive)))
+ (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
 
 (config "Dired"
  (package 'nerd-icons-dired)
@@ -1216,11 +1213,7 @@
   (define-key lsp-mode-map (kbd "C-c i s") #'consult-lsp-symbols))
 
  (defun init/lsp-capfs ()
-  (cape-wrap-super
-   #'cape-file
-   ;; #'cape-dabbrev
-   #'yasnippet-capf
-   #'lsp-completion-at-point))
+  (cape-wrap-super #'lsp-completion-at-point #'cape-file))
 
  (defun init/setup-lsp-capfs ()
   (setq-local completion-at-point-functions
@@ -1543,11 +1536,7 @@
   (emacs-lisp-macroexpand))
 
  (defun init/elisp-capfs ()
-  (cape-wrap-super
-   'elisp-completion-at-point
-   #'yasnippet-capf
-   ;; #'cape-dabbrev
-   #'cape-file))
+  (cape-wrap-super 'elisp-completion-at-point #'cape-file))
 
  (defun init/setup-elisp-capfs ()
   (setq-local completion-at-point-functions
@@ -1556,9 +1545,8 @@
  (after 'company
   (setq-mode-local emacs-lisp-mode
    company-backends '((company-capf
-                       company-yasnippet
-                       company-keywords
                        company-dabbrev-code
+                       company-keywords
                        company-files)))))
 
 (config "HLedger"
@@ -1641,7 +1629,7 @@
 
  (defun init/hledger-setup-company ()
   (setq-mode-local hledger-mode
-   company-backends '((hledger-company company-yasnippet))
+   company-backends '(hledger-company)
    completion-at-point-functions nil))
 
  (defun init/hledger-maybe-setup-company ()
@@ -1649,10 +1637,7 @@
    (add-hook 'company-mode-hook #'init/hledger-setup-company nil t)))
 
  (defun init/hledger-capfs ()
-  (cape-wrap-super
-   'hledger-completion-at-point
-   ;; #'cape-dabbrev
-   #'yasnippet-capf))
+  (cape-wrap-super 'hledger-completion-at-point))
 
  (defun init/setup-hledger-capfs ()
   (setq-local completion-at-point-functions (list #'init/hledger-capfs)))
