@@ -13,12 +13,10 @@
  (package 'window-tool-bar)
  (package 'verilog-mode)
  (package 'use-package)
- (package 'tramp)
  (package 'track-changes)
  (package 'svg)
  (package 'soap-client)
  (package 'so-long)
- (package 'python)
  (package 'peg)
  (package 'org)
  (package 'ntlm)
@@ -318,6 +316,8 @@
   (advice-add 'switch-to-buffer :after #'init/recenter)))
 
 (config "Tramp"
+ (package 'tramp)
+
  (after 'tramp-sh
   (setopt
    tramp-use-scp-direct-remote-copying t
@@ -1651,6 +1651,7 @@
  (after 'flycheck-hledger (setopt flycheck-hledger-checks '("commodities"))))
 
 (config "Python"
+ (package 'python)
  (package 'uv-mode)
 
  (after 'python
