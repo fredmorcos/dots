@@ -212,7 +212,6 @@ papers
 papirus-icon-theme
 paru
 pdfarranger
-picard
 pigz
 pipewire-alsa
 pipewire-libcamera
@@ -234,6 +233,7 @@ python-beaker
 python-brotli
 python-brotlicffi
 python-defusedxml
+python-discid
 python-discogs-client
 python-docker
 python-dogpile.cache
@@ -325,7 +325,6 @@ tcpdump
 tealdeer
 time
 tmux
-torbrowser-launcher
 traceroute
 transmission-qt
 tree
