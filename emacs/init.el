@@ -227,7 +227,7 @@
 
 (config "Filling Text"
  (package 'unfill)
- (after 'fill
+ (after 'emacs
   (define-key global-map [remap fill-paragraph] #'unfill-toggle))
 
  ;; fill.el
