@@ -245,7 +245,6 @@ python-ecdsa
 python-email-validator
 python-fastimport
 python-faust-cchardet
-python-flake8-docstrings
 python-flake8-isort
 python-fs
 python-genshi
@@ -282,7 +281,6 @@ python-pyphen
 python-pypng
 python-pyserial
 python-pystache
-python-pystemmer
 python-pytest-isort
 python-pyudev
 python-pyxattr
