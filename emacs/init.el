@@ -132,7 +132,7 @@
 (config "Selecting Text"
  (cua-selection-mode t)
 
- ;; (package 'expand-region)
+ (package 'expand-region)
  ;; (define-key global-map (kbd "C-=") #'er/expand-region)
  ;; (define-key global-map (kbd "C--") #'er/contract-region)
 
