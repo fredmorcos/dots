@@ -1,0 +1,124 @@
+(use-package emacs
+ :ensure nil
+ :defer t
+ :after xref
+ :hook (xref-after-return . recenter)
+ ;; :commands xref-push-marker-stack
+ ;; :config
+ ;; (add-hook 'xref-after-return-hook #'recenter)
+ )
+
+(use-package orderless
+  :ensure t
+  :demand t
+  :after minibuffer
+  :config
+  ;; Remember to check my `completion-styles' and the
+  ;; `completion-category-overrides'.
+  (setq orderless-matching-styles '(orderless-prefixes orderless-regexp))
+  (setq orderless-smart-case nil)
+
+  ;; SPC should never complete: use it for `orderless' groups.
+  ;; The `?' is a regexp construct.
+  :bind ( :map minibuffer-local-completion-map
+          ("SPC" . nil)
+          ("?" . nil)))
+
+(defvar jljfkjflkjf-minibuffer-local-completion-map nil)
+
+(use-package emacs
+  :ensure nil
+  :bind ( :map jljfkjflkjf-minibuffer-local-completion-map
+          ("C-x C-d" . pulsar-pulse-line)))
+
+
+
+
+(setq test-args '(:after PACKAGE (one . two)))
+(:after PACKAGE (one . two))
+
+(car test-args)
+:after
+
+(cadr test-args)
+PACKAGE
+
+(caddr test-args)
+(one . two)
+
+
+(use-package pulsar
+  :hook (magit-post-refresh-hook . recenter))
+
+(use-package pulsar
+  :hook-after
+  (magit . (magit-post-refresh-hook . recenter))
+  (dired . ((dired-mode-hook . recenter)
+            (dired-mode-hook . pulsar-pulse-line)))
+  :hook
+  (after-init-hook . recenter))
+
+
+(defun use-package-normalize/:hook (name keyword args)
+  (use-package-as-one (symbol-name keyword) args
+    #'(lambda (label arg)
+        (unless (or (use-package-non-nil-symbolp arg) (consp arg))
+          (use-package-error
+           (concat label " a <symbol> or (<symbol or list of symbols> . <symbol or function>)"
+                   " or list of these")))
+        (use-package-normalize-pairs
+         #'(lambda (k)
+             (or (use-package-non-nil-symbolp k)
+                 (and k (let ((every t))
+                          (while (and every k)
+                            (if (and (consp k)
+                                     (use-package-non-nil-symbolp (car k)))
+                                (setq k (cdr k))
+                              (setq every nil)))
+                          every))))
+         #'use-package-recognize-function
+         (if (string-suffix-p "-mode" (symbol-name name))
+             name
+           (intern (concat (symbol-name name) "-mode")))
+         label arg))))
+
+
+
+(defun use-package-handler/:hook (name _keyword args rest state)
+  "Generate use-package custom keyword code."
+  (use-package-concat
+   (use-package-process-keywords name rest state)
+
+   (if-let* ((first (car args))
+             (_ (consp first))
+             (_ (eq (car first) :prot)))
+       (progn
+         (setq package (cdr first))
+         (setq hooks (cdr args)))
+     (progn
+       (setq package nil)
+       (setq hooks args)))
+
+   (cl-mapcan
+    #'(lambda (def)
+        (let ((syms (car def))
+              (fun (cdr def))
+              (output (when fun
+                        (mapcar
+                         #'(lambda (sym)
+                             (let ((symname (symbol-name sym)))
+                               (if (and (boundp sym)
+                                        ;; Mode variables are usually bound, but
+                                        ;; their hooks are named FOO-mode-hook.
+                                        (not (string-suffix-p "-mode" symname)))
+                                   `(add-hook (quote ,sym) (function ,fun))
+                                 `(add-hook
+                                   (quote ,(intern
+                                            (concat symname use-package-hook-name-suffix)))
+                                   (function ,fun)))))
+                         (use-package-hook-handler-normalize-mode-symbols syms)))))
+          (if package
+              `(with-eval-after-load ',package
+                 ,@output)
+            output)))
+    (use-package-normalize-commands hooks))))

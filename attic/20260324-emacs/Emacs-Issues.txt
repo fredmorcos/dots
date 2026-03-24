@@ -1,0 +1,46 @@
+Emacs:
+
+- Recenter on C-x 2
+
+- How in-buffer completion with company (or corfu) interacts with the TAB key and
+  indentation. Company also never seems to go away when I need it to.
+
+- Why is corfu-popupinfo activated in hledger-mode without corfu mode being activated?
+
+- I would like to understand icons & emojis and the relationship to fonts in Emacs.
+
+- I would like to reach a setup where things popup in places where I want them to,
+  e.g. definitions, call/type hierarchy, etc..
+
+- Eldoc is frustrating, how can I combine flycheck messages with eldoc messages in an
+  ergonomic way?
+
+- How flycheck-posframe sometimes shows up as an empty box even though there is a warning
+  or error at point.
+
+- DONE Formatting regions with LSP is broken.
+
+- DONE How C-mode and whitespace-mode and LSP conflict with each other when it comes to
+  providing the correct indentation - at work we use tabs for indentation and spaces for
+  alignment. But in my private projects I always want to use spaces only.
+
+- DONE Is there a way to bring back windows after I have selected C-x 1?
+
+- DONE Why is xref activated in hledger-mode?
+
+- DONE Why does add-hook not work with xref-after-return-hook and xref-after-jump-hook and
+  I need add-to-list instead?
+
+- DONE Why hledger-mode never seems to put the transaction's amount at the correct
+  column. I added some custom functions to my init and I call them when I need to align
+  it, but they sometimes don't work correctly - due to my lack of detailed understanding
+  of core Emacs design decisions and bad Elisp skills.
+
+- DONE Re-centering does not work when opening new files even with my advice.
+
+- DONE Switching to the async buffer after installing a package is broken because of my
+  advice to recenter when visiting buffers.
+
+Linux:
+
+- Text in Gtk apps and in the browser don't support emojis.

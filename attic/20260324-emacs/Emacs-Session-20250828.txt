@@ -1,0 +1,43 @@
+(setq whitespace-style
+        '(face
+          tabs
+          spaces
+          newline
+          tab-mark
+          space-mark
+          newline-mark
+          trailing
+          missing-newline-at-eof
+          space-after-tab::tab
+          space-after-tab::space
+          space-before-tab::tab
+          space-before-tab::space))
+
+
+
+
+regex: ;.+EUR
+
+
+(let ((lines nil))
+  (save-excursion
+    (while (re-search-forward "EUR" nil t)
+      (unless (looking-back ";.+" (line-beginning-position))
+        (push (line-number-at-pos) lines)))
+    (nreverse lines)))
+
+
+(defun test ()
+  (interactive)
+  (catch 'found
+    (while (re-search-forward "EUR" nil t)
+      (unless (looking-back ";.+" (line-beginning-position))
+        (throw 'found t)))))
+
+
+commodity EUR
+
+2025-08-28 * Foo
+ ; I paid EUR -5 for food.
+ Assets:Cash                                  EUR -5     ; EUR -4
+ Expenses:Food

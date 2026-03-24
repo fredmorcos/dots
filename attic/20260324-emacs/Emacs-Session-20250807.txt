@@ -1,0 +1,89 @@
+(setq fred/async-buffer (seq-find (lambda (e) (string-match-p "\\*Async" (buffer-name e))) (buffer-list)))
+#<buffer *Async-native-compile-log*>
+
+#<buffer *Async-native-compile-log*>
+
+(window-live-p (seq-find (lambda (e) (string-match-p "\\*Async" (buffer-name e))) (buffer-list)))
+nil
+
+(buffer-live-p fred/async-buffer)
+t
+
+(switch-to-buffer fred/async-buffer)
+#<buffer *Async-native-compile-log*>
+
+(consult-buffer)
+nil
+
+
+(switch-to-buffer "*scratch")
+#<buffer *scratch>
+
+(switch-to-buffer "*scratch*")
+#<buffer *scratch*>
+
+
+(current-buffer)
+#<buffer *scratch*>
+
+(get-buffer-window (current-buffer))
+#<window 70 on *scratch*>
+
+(message "%S" (current-buffer))
+
+(when (window-live-p (get-buffer-window (current-buffer)))
+  (recenter))
+
+
+(get-buffer "*Help*")
+#<buffer *Help*>
+
+(seq-filter
+ (lambda (buffer)
+   (with-current-buffer buffer
+     (derived-mode-p 'lisp-interaction-mode)))
+ (buffer-list))
+(#<buffer *scratch*> #<buffer *scratch for frame ‘dotfiles’*> #<buffer *scratch for frame ‘coach.org /home/prot/Documents/org/’*>)
+
+(delq nil
+      (mapcar
+       (lambda (buffer)
+         (with-current-buffer buffer
+           (when (derived-mode-p 'lisp-interaction-mode)
+             (buffer-name buffer))))
+       (buffer-list)))
+("*scratch*" "*scratch for frame ‘dotfiles’*" "*scratch for frame ‘coach.org /home/prot/Documents/org/’*")
+
+("*scratch*" nil nil nil nil nil nil nil nil nil nil nil nil "*scratch for frame ‘dotfiles’*" nil nil nil nil nil nil nil nil nil nil nil nil "*scratch for frame ‘coach.org /home/prot/Documents/org/’*" nil nil nil nil)
+
+
+(setq test-buffers '("*scratch*" "*scratch for frame ‘dotfiles’*" "*scratch for frame ‘coach.org /home/prot/Documents/org/’*"))
+
+(seq-find
+ (lambda (string)
+   (string-match-p "org" string))
+ test-buffers)
+
+(with-current-buffer (get-buffer "*scratch for frame ‘coach.org /home/prot/Documents/org/’*")
+  (recenter))
+
+(let ((buffer (get-buffer "prot-emacs.org")))
+  (with-current-buffer buffer
+    (save-window-excursion
+      (with-selected-window (display-buffer buffer)
+        (recenter)))))
+
+
+
+(with-selected-window (get-buffer-window (get-buffer "prot-emacs.org"))
+  (recenter))
+
+
+(let ((buffer (switch-to-buffer (get-buffer "prot-emacs.org"))))
+  (message "My current buffer: %s" buffer))
+
+(let ((buffer (get-buffer "prot-emacs.org")))
+  (with-current-buffer buffer
+    (save-window-excursion
+      (with-selected-window (display-buffer buffer)
+        (recenter)))))

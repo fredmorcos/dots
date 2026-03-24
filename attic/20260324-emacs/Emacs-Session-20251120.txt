@@ -1,0 +1,114 @@
+(setq corfu-preview-current nil)
+    (setq corfu-min-width 20)
+
+    (setq corfu-popupinfo-delay '(1.25 . 0.5))
+    (corfu-popupinfo-mode 1) ; shows documentation after `corfu-popupinfo-delay'
+
+    (global-corfu-mode 1)
+
+    ;; I also have (setq tab-always-indent 'complete) for TAB to complete
+    ;; when it does not need to perform an indentation change.
+    (define-key corfu-map (kbd "<tab>") #'corfu-complete)
+
+    ;; Sort by input history (no need to modify `corfu-sort-function').
+    (with-eval-after-load 'savehist
+      (corfu-history-mode 1)
+     (add-to-list 'savehist-additional-variables 'corfu-history))
+
+
+
+
+
+#+begin_example emacs-lisp
+(prot-emacs-hook
+  text-mode-hook
+  test-fn-1)
+;; => (add-hook 'text-mode-hook #'test-fn-1)
+
+(prot-emacs-hook
+  text-mode-hook
+  (test-fn-1 test-fn-2))
+;; => (progn
+;; =>   (add-hook 'text-mode-hook #'test-fn-1)
+;; =>   (add-hook 'text-mode-hook #'test-fn-2))
+
+(prot-emacs-hook
+  (text-mode-hook prog-mode-hook)
+  test-fn-1)
+;; => (progn
+;; =>   (add-hook 'text-mode-hook #'test-fn-1)
+;; =>   (add-hook 'prog-mode-hook #'test-fn-1))
+
+(prot-emacs-hook
+  (text-mode-hook prog-mode-hook)
+  (test-fn-1 test-fn-2))
+;; => (progn
+;; =>   (add-hook 'text-mode-hook #'test-fn-1)
+;; =>   (add-hook 'text-mode-hook #'test-fn-2)
+;; =>   (add-hook 'prog-mode-hook #'test-fn-1)
+;; =>   (add-hook 'prog-mode-hook #'test-fn-2))
+
+(prot-emacs-hook
+  (text-mode-hook prog-mode-hook)
+  (test-fn-1 test-fn-2)
+  nil
+  denote)
+;; => (with-eval-after-load 'denote
+;; =>   (add-hook 'text-mode-hook #'test-fn-1)
+;; =>   (add-hook 'text-mode-hook #'test-fn-2)
+;; =>   (add-hook 'prog-mode-hook #'test-fn-1)
+;; =>   (add-hook 'prog-mode-hook #'test-fn-2))
+
+(prot-emacs-hook
+  (text-mode-hook prog-mode-hook)
+  (test-fn-1 test-fn-2)
+  :remove-them
+  denote)
+;; => (with-eval-after-load 'denote
+;; =>   (remove-hook 'text-mode-hook #'test-fn-1)
+;; =>   (remove-hook 'text-mode-hook #'test-fn-2)
+;; =>   (remove-hook 'prog-mode-hook #'test-fn-1)
+;; =>   (remove-hook 'prog-mode-hook #'test-fn-2))
+#+end_example
+
+And here is the macro:
+
+#+begin_src emacs-lisp :tangle "init.el"
+(defmacro prot-emacs-hook (hooks functions &optional remove after)
+  "For each HOOKS `add-hook' the FUNCTIONS.
+With optional REMOVE as non-nil, then `remove-hook' the FUNCTIONS from
+HOOKS.
+
+With optional AFTER as the unquoted symbol of a feature, do so after the
+given feature is available."
+  (declare (indent 0))
+  (cond
+   ((symbolp hooks)
+    (setq hooks (list hooks)))
+   ((not (proper-list-p hooks))
+    (error "The hooks are not a list: `%S'" hooks)))
+  (cond
+   ((symbolp functions)
+    (setq functions (list functions)))
+   ((not (proper-list-p functions))
+    (error "The functions are not a list: `%S'" functions)))
+  (let* ((fn (if remove 'remove-hook 'add-hook))
+         (body (mapcar
+                (lambda (h)
+                  (mapcar
+                   (lambda (f) `(,fn ',h #',f))
+                   functions))
+                hooks))
+         (hooks nil))
+    (dolist (element body)
+      (dolist (hook element)
+        (push hook hooks)))
+    (setq hooks (nreverse hooks))
+    (cond
+     (after
+      `(with-eval-after-load ',after ,@hooks))
+     ((length> hooks 1)
+      `(progn ,@hooks))
+     (t
+      (car hooks)))))
+#+end_src

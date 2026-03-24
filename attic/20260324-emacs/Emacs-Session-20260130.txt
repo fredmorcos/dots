@@ -1,0 +1,219 @@
+Protesilaos says:(setq window-combination-resize t)
+
+(defface test-small '((t :height 0.8))
+  "Test.")
+
+(defun test-remap-window (window)
+  (with-selected-window window
+    (setq test-remap-cookie
+          (face-remap-add-relative 'default 'test-small))))
+
+(face-remap-remove-relative test-remap-cookie)
+
+(setq display-buffer-alist
+      '(("\\*Help\\*"
+         (display-buffer-at-bottom)
+         (body-function . test-remap-window))))
+
+Protesilaos says:(defvar-local test-remap-cookie nil)
+
+(defface test-small '((t :height 0.8))
+  "Test.")
+
+(defvar-local test-remap-cookie nil)
+
+(defun test-remap-window (window)
+  (with-selected-window window
+    (setq test-remap-cookie
+          (face-remap-add-relative 'default 'test-small))))
+
+;; (face-remap-remove-relative test-remap-cookie)
+
+(setq display-buffer-alist
+      '(("\\*Help\\*"
+         (display-buffer-at-bottom)
+         (body-function . test-remap-window))))
+
+
+(defface test-small '((t :height 0.8))
+  "Test.")
+
+(defvar-local test-remap-cookie nil)
+
+(require 'face-remap)
+
+(defun test-remap-window (window)
+  (with-selected-window window
+    (face-remap-remove-relative test-remap-cookie)
+    (setq test-remap-cookie
+          (face-remap-add-relative 'default 'test-small))
+    (let ((fit-window-to-buffer-horizontally t))
+      (fit-window-to-buffer))))
+
+;; (face-remap-remove-relative test-remap-cookie)
+
+(setq display-buffer-alist
+      '(("\\*Help\\*"
+         (display-buffer-reuse-mode-window display-buffer-in-direction)
+         (mode . help-mode)
+         (direction . right)
+         (dedicated . nil)
+         (window . main)
+         (body-function . test-remap-window))))
+
+
+
+
+(setq display-buffer-alist
+      '(("\\*Help\\*"
+         (display-buffer-reuse-mode-window display-buffer-in-direction)
+         (mode . help-mode)
+         (direction . right)
+         (dedicated . nil)
+         (window . main)
+         (window-parameters . ((no-delete-other-windows . t)
+                               (mode-line-format . none)))
+         (body-function . test-remap-window))))
+
+
+
+
+(defun test-delete-ancillary-window (window)
+  (unless (eq window (selected-window))
+    (delete-window window)))
+
+ (defun test-close-window (window)
+   (set-window-parameter window 'my-ancillary t)
+   (add-hook 'window-state-change-functions #'test-delete-ancillary-window nil t))
+
+(setq display-buffer-alist
+      '(("\\*Help\\*"
+         (display-buffer-reuse-mode-window display-buffer-in-direction)
+         (mode . help-mode)
+         (direction . right)
+         (dedicated . nil)
+         (window . main)
+         ;; (window-parameters . ((no-delete-other-windows . t)
+         ;;                       (mode-line-format . none)))
+         (body-function . test-close-window))))
+
+
+
+
+
+
+
+
+
+
+
+((or . ((derived-mode . occur-mode)
+                  (derived-mode . grep-mode)
+                  (derived-mode . Buffer-menu-mode)
+                  (derived-mode . log-view-mode)
+                  (derived-mode . help-mode) ; See the hooks for `visual-line-mode'
+                  "\\*\\(|Buffer List\\|Occur\\|vc-change-log\\|eldoc.*\\).*"
+                  "\\*\\vc-\\(incoming\\|outgoing\\|git : \\).*"))
+           (prot-window-display-buffer-below-or-pop)
+           (body-function . prot-window-select-fit-size))
+
+
+
+
+
+
+
+
+
+ ;; (after 'emacs (setopt window-combination-resize t))
+ ;; (autoload 'face-remap-remove-relative "face-remap")
+ ;; (defface small-text '((t :height 0.8)) "Test." :group 'faces)
+ ;; (defvar-local small-text nil)
+ ;; (defun window-text-small (window)
+ ;;  (with-selected-window window
+ ;;   (face-remap-remove-relative small-text)
+ ;;   (setq small-text (face-remap-add-relative 'default 'small-text))
+ ;;   (let ((fit-window-to-buffer-horizontally t))
+ ;;    (fit-window-to-buffer))))
+
+ (defface test-small '((t :height 0.8))
+  "Test.")
+
+ (defvar-local test-remap-cookie nil)
+
+ (require 'face-remap)
+
+ (defun test-remap-window (window)
+  (with-selected-window window
+   (face-remap-remove-relative test-remap-cookie)
+   (setq test-remap-cookie
+    (face-remap-add-relative 'default 'test-small))
+   (let ((fit-window-to-buffer-horizontally t))
+    (fit-window-to-buffer))))
+
+ ;; (face-remap-remove-relative test-remap-cookie)
+
+ (setq display-buffer-alist
+  '(("\\*Help\\*"
+     (display-buffer-reuse-mode-window display-buffer-in-direction)
+     (mode . help-mode)
+     (direction . right)
+     (dedicated . nil)
+     (window . main)
+     (body-function . test-remap-window))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ;; (push `(,(rx bos "*Help*" (0+ nonl) eos)
+  ;;         (display-buffer-reuse-mode-window display-buffer-in-side-window)
+  ;;         (side . right)
+  ;;         (dedicated . nil)
+  ;;         (window-width . 80))
+  ;;  display-buffer-alist))
+
+  ;; (push `(,(rx bos "*Help*" (0+ nonl) eos)
+  ;;         (display-buffer-reuse-mode-window)
+  ;;         (dedicated . nil)
+
+  ;;         ;; (window-width . 75)
+  ;;         (body-function . window-text-small))
+  ;;  display-buffer-alist)
+
+  ;; (defface test-small '((t :height 0.8)) "Test.")
+
+  ;; (defun window-smaller-text (window)
+  ;;  (with-selected-window window
+  ;;   (face-remap-add-relative 'default 'test-small)
+  ;;   (fit-window-to-buffer)))
+
+  ;; (push `(,(rx bos "*Help*" (0+ nonl) eos)
+  ;;         (display-buffer-in-direction)
+  ;;         (window . root)
+  ;;         (direction . right)
+  ;;         (dedicated . nil)
+  ;;         (window-width . 75)
+  ;;         (body-function . window-smaller-text))
+  ;;  display-buffer-alist)
+
+  ;; (push `(,(rx bos "*Help*" (0+ nonl) eos)
+  ;;         ;; (display-buffer-reuse-mode-window display-buffer-in-direction)
+  ;;         (display-buffer-in-direction)
+  ;;         (window . main)
+  ;;         (direction . right)
+  ;;         (dedicated . nil)
+  ;;         ;; (window-width . 80))
+  ;;         )
+  ;;  display-buffer-alist))
+  )
