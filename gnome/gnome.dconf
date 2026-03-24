@@ -122,7 +122,7 @@ automatic-location=true
 
 # Caffeine Shell Extension
 [/org/gnome/shell/extensions/caffeine]
-enable-mpris=true
+enable-mpris=false
 show-timer=false
 show-notifications=false
 
