@@ -72,5 +72,22 @@
     (line-beginning-position)
     (line-end-position)))))
 
+(defun qol/relative-buffer-file-name ()
+ "Get buffer filename relative to project, or absolute filename otherwise."
+ (let ((root (when (fboundp 'projectile-project-root) (projectile-project-root)))
+       (buffer-name (buffer-file-name)))
+  (if root
+   (file-relative-name buffer-name root)
+   buffer-name)))
+
+(defun qol/yank-position ()
+ "Copy current file:line."
+ (interactive)
+ (let* ((buffer-name (qol/relative-buffer-file-name))
+        (line (number-to-string (line-number-at-pos)))
+        (pos (concat buffer-name ":" line)))
+  (kill-new pos)
+  (message "%s copied" pos)))
+
 (provide 'qol)
 ;;; qol.el ends here
