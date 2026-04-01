@@ -192,7 +192,27 @@
    auto-revert-mode-text " Ar"
    auto-revert-interval 1
    auto-revert-avoid-polling t
-   buffer-auto-revert-by-notification t)))
+   buffer-auto-revert-by-notification t))
+
+ (config "Filling Text"
+  (package 'unfill)
+  (after 'emacs
+   (define-key global-map [remap fill-paragraph] #'unfill-toggle))
+
+  ;; fill.el
+  (after 'emacs
+   (setopt
+    colon-double-space t
+    default-justification 'left))
+
+  (after 'emacs (setopt fill-column 90))
+  (after 'newcomment (setopt comment-fill-column 80)))
+
+ (config "Capitalizing"
+  (after 'emacs
+   (define-key global-map [remap capitalize-word] #'capitalize-dwim)
+   (define-key global-map [remap downcase-word] #'downcase-dwim)
+   (define-key global-map [remap upcase-word] #'upcase-dwim))))
 
 (config "Search & Replace"
  (package 'visual-replace)
@@ -224,26 +244,6 @@
  (after 'vundo
   (setopt vundo-glyph-alist vundo-unicode-symbols))
  (after 'emacs (setopt undo-limit (* 1024 1024))))
-
-(config "Filling Text"
- (package 'unfill)
- (after 'emacs
-  (define-key global-map [remap fill-paragraph] #'unfill-toggle))
-
- ;; fill.el
- (after 'emacs
-  (setopt
-   colon-double-space t
-   default-justification 'left))
-
- (after 'emacs (setopt fill-column 90))
- (after 'newcomment (setopt comment-fill-column 80)))
-
-(config "Capitalizing"
- (after 'emacs
-  (define-key global-map [remap capitalize-word] #'capitalize-dwim)
-  (define-key global-map [remap downcase-word] #'downcase-dwim)
-  (define-key global-map [remap upcase-word] #'upcase-dwim)))
 
 (config "Kill Ring"
  (after 'simple (setopt save-interprogram-paste-before-kill t)))
