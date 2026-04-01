@@ -107,24 +107,9 @@ show-weekdate=true
 
 # Shell Apps and Extensions
 [org/gnome/shell]
-enabled-extensions=['places-menu@gnome-shell-extensions.gcampax.github.com', 'weatheroclock@CleoMenezesJr.github.io', 'caffeine@patapon.info']
-disable-user-extensions=false
+enabled-extensions=@as []
+disable-user-extensions=true
 favorite-apps=['org.gnome.Nautilus.desktop', 'org.torproject.torbrowser-launcher.desktop', 'proton.vpn.app.gtk.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Podcasts.desktop', 'ca.desrt.dconf-editor.desktop', 'com.valvesoftware.Steam.desktop', 'com.github.tchx84.Flatseal.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.Settings.desktop']
-
-# Weather Shell Extension
-[/org/gnome/shell/extensions/weather-oclock]
-weather-after-clock=true
-
-# Weather App
-[/org/gnome/shell/weather]
-locations=[<(uint32 2, <('Vienna', 'LOWW', true, [(0.83979426423570236, 0.2891428852314914)], [(0.84124869946126679, 0.28565222672750273)])>)>]
-automatic-location=true
-
-# Caffeine Shell Extension
-[/org/gnome/shell/extensions/caffeine]
-enable-mpris=false
-show-timer=false
-show-notifications=false
 
 # Window switcher
 [org/gnome/shell/window-switcher]
