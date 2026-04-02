@@ -83,7 +83,6 @@ devtools
 dialog
 dnsmasq
 docker
-docker-buildx
 docker-credential-secretservice-bin
 easy-rsa
 ed
@@ -150,7 +149,6 @@ lesspipe
 lhasa
 libblockdev-dm
 libblockdev-lvm
-libblockdev-nvdimm
 libdvdcss
 libdwarf
 libmp4v2
@@ -186,7 +184,6 @@ mesa-demos
 mesa-utils
 meson
 mkinitcpio-utils
-mold
 mpv
 mtools
 mtr
@@ -237,7 +234,6 @@ python-discid
 python-discogs-client
 python-docker
 python-dogpile.cache
-python-ecdsa
 python-email-validator
 python-fastimport
 python-faust-cchardet
@@ -276,7 +272,6 @@ python-pyphen
 python-pypng
 python-pyserial
 python-pystache
-python-pytest-isort
 python-pyudev
 python-pyxattr
 python-rcssmin
