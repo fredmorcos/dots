@@ -1062,12 +1062,12 @@
   (declvar dockerfile-mode)
   (declvar emacs-lisp-mode)
   (declvar makefile-mode)
-  (setq-mode-local python-mode devdocs-current-docs '("python~3.13"))
-  (setq-mode-local rust-mode devdocs-current-docs "rust")
-  (setq-mode-local c-mode devdocs-current-docs "c")
-  (setq-mode-local dockerfile-mode devdocs-current-docs "docker")
-  (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp")
-  (setq-mode-local makefile-mode devdocs-current-docs "gnu_make"))
+  (after 'python (setq-mode-local python-mode devdocs-current-docs '("python~3.13")))
+  (after 'rust-mode (setq-mode-local rust-mode devdocs-current-docs "rust"))
+  (after 'cc-mode (setq-mode-local c-mode devdocs-current-docs "c"))
+  (after 'dockerfile-mode (setq-mode-local dockerfile-mode devdocs-current-docs "docker"))
+  (after 'elisp-mode (setq-mode-local emacs-lisp-mode devdocs-current-docs "elisp"))
+  (after 'make-mode (setq-mode-local makefile-mode devdocs-current-docs "gnu_make")))
 
  (after 'elec-pair
   (setopt
@@ -1368,7 +1368,7 @@
  (package 'markdown-mode)
  (after 'markdown-mode
   (declvar markdown-mode)
-  (setq-mode-local markdown-mode fill-column 79)
+  (after 'emacs (setq-mode-local markdown-mode fill-column 79))
   (add-hook 'markdown-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'markdown-mode-hook #'hl-line-mode)))
 
@@ -1460,7 +1460,7 @@
    web-mode-auto-close-style 3
    web-mode-enable-auto-expanding t)
   (declvar web-mode)
-  (setq-mode-local web-mode tab-width 2)
+  (after 'emacs (setq-mode-local web-mode tab-width 2))
   (add-hook 'web-mode-hook #'company-mode)
   (add-hook 'web-mode-hook #'emmet-mode)
 
@@ -1527,7 +1527,14 @@
   (add-hook 'emacs-lisp-mode-hook #'highlight-defined-mode)
   (add-hook 'emacs-lisp-mode-hook #'highlight-quoted-mode)
   (add-hook 'emacs-lisp-mode-hook #'symbol-overlay-mode)
-  (add-hook 'emacs-lisp-mode-hook #'whitespace-mode))
+  (add-hook 'emacs-lisp-mode-hook #'whitespace-mode)
+
+  (after 'company
+   (setq-mode-local emacs-lisp-mode
+    company-backends '((company-capf
+                        company-dabbrev-code
+                        company-keywords
+                        company-files)))))
 
  (defun init/emacs-lisp-expand-current-macro-call ()
   "Expand the current macro expression."
@@ -1540,14 +1547,7 @@
 
  (defun init/setup-elisp-capfs ()
   (setq-local completion-at-point-functions
-   (list #'init/elisp-capfs)))
-
- (after 'company
-  (setq-mode-local emacs-lisp-mode
-   company-backends '((company-capf
-                       company-dabbrev-code
-                       company-keywords
-                       company-files)))))
+   (list #'init/elisp-capfs))))
 
 (config "HLedger"
  (package 'hledger-mode)
@@ -1602,10 +1602,11 @@
    hledger-currency-string "")
 
   (declvar hledger-mode)
-  (setq-mode-local hledger-mode
-   tab-width 1
-   fill-column 100
-   comment-fill-column 100)
+  (after 'emacs (setq-mode-local hledger-mode tab-width 1 fill-column 100))
+  (after 'newcomment (setq-mode-local hledger-mode comment-fill-column 100))
+  (after 'corfu
+   (declvar corfu-auto)
+   (setq-mode-local hledger-mode corfu-auto nil))
 
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
@@ -1655,7 +1656,7 @@
  (package 'uv-mode)
 
  (after 'python
-  (setq-mode-local python-mode fill-column 79)
+  (after 'emacs (setq-mode-local python-mode fill-column 79))
   (add-hook 'python-base-mode-hook #'uv-mode-auto-activate-hook)
   (add-hook 'python-base-mode-hook #'indent-bars-mode)
   (add-hook 'python-base-mode-hook #'lsp))
