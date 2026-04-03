@@ -12,6 +12,7 @@ CMD=("rsync"
      "--archive"
      "--executability"
      "--delete"
+     "--delete-excluded"
      '--exclude=__pycache__'
      '--exclude=.mypy_cache'
      '--exclude=emacs/elpa/'
