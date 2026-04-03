@@ -12,6 +12,10 @@ disabled=['org.gnome.Epiphany.desktop', 'org.gnome.Lollypop.desktop', 'org.gnome
 enabled=@as []
 disable-external=false
 
+# Power
+[org/gnome/desktop/session]
+idle-delay=0
+
 # Privacy
 [org/gnome/desktop/privacy]
 remember-recent-files=false
