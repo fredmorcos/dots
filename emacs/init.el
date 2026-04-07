@@ -97,7 +97,10 @@
    show-paren-when-point-inside-paren t
    show-paren-style 'mixed
    show-paren-highlight-openparen t
-   show-paren-context-when-offscreen 'overlay)))
+   show-paren-context-when-offscreen 'overlay))
+
+ (after 'ffap (setopt ffap-machine-p-known 'reject))
+ (after 'simple (setopt set-mark-command-repeat-pop t)))
 
 (config "Grepping"
  (package 'deadgrep)
@@ -246,7 +249,10 @@
  (after 'emacs (setopt undo-limit (* 1024 1024))))
 
 (config "Kill Ring"
- (after 'simple (setopt save-interprogram-paste-before-kill t)))
+ (after 'simple
+  (setopt
+   save-interprogram-paste-before-kill t
+   kill-do-not-save-duplicates t)))
 
 (config "Indentation"
  (after 'indent
@@ -264,6 +270,7 @@
  (autoload 'winner-undo "winner" nil t)
  (autoload 'winner-redo "winner" nil t)
 
+ (winner-mode)
  (after 'winner
   (declvar winner-mode-map)
   (define-key winner-mode-map (kbd "C-c <left>") nil t)
@@ -271,9 +278,17 @@
   (define-key winner-mode-map (kbd "C-x w u") #'winner-undo)
   (define-key winner-mode-map (kbd "C-x w r") #'winner-redo))
 
- (winner-mode)
+ (defun init/toggle-delete-other-windows ()
+  "Delete other windows in frame if any, or restore previous window config."
+  (interactive)
+  (if (and winner-mode
+       (equal (selected-window) (next-window)))
+   (winner-undo)
+   (delete-other-windows)))
 
  (after 'window
+  (define-key global-map [remap delete-other-windows] #'init/toggle-delete-other-windows)
+
   (setopt
    switch-to-buffer-in-dedicated-window 'pop
    ;; switch-to-buffer-obey-display-actions t
@@ -287,7 +302,10 @@
 
  (define-key global-map (kbd "<f12>") #'delete-other-windows)
 
- (after 'emacs (setopt resize-mini-windows t)))
+ (after 'emacs
+  (setopt
+   resize-mini-windows t
+   window-combination-resize t)))
 
 (config "Buffer Management"
  (package 'buffer-move)
@@ -399,6 +417,7 @@
 
 (config "Regular Expressions"
  (after 're-builder
+  (setopt reb-re-syntax 'string)
   (declvar reb-mode-map)
   (declvar reb-lisp-mode-map)
   (define-key reb-mode-map (kbd "C-p") #'casual-re-builder-tmenu)
@@ -604,6 +623,13 @@
   (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
 
  (savehist-mode)
+ (after 'savehist
+  (defvar savehist-additional-variables)
+  (after 'isearch
+   (push 'search-ring savehist-additional-variables)
+   (push 'regexp-search-ring savehist-additional-variables))
+  (after 'simple
+   (push 'kill-ring savehist-additional-variables)))
 
  (after 'recentf
   (setopt

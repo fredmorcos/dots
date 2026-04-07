@@ -39,9 +39,13 @@
    ;; inhibiting this, we easily halve startup times with fonts that are larger than the
    ;; system default.
    frame-inhibit-implied-resize t
+
    ;; Skip re-display.
    redisplay-skip-fontification-on-input t
-   redisplay-skip-initial-frame t)))
+   redisplay-skip-initial-frame t
+
+   ;; Don't render a cursor in non-selected windows.
+   cursor-in-non-selected-windows nil)))
 
 (config "User Interface"
  (after 'emacs
@@ -112,7 +116,7 @@
    ;; This slows down normal operation.
    auto-window-vscroll nil
 
-   ;; Improve render performance at the expense of support for left-to-right languages.
+   ;; Improve render performance at the expense of support for right-to-left languages.
    bidi-paragraph-direction 'left-to-right
    bidi-inhibit-bpa t
 
