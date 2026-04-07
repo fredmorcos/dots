@@ -149,6 +149,8 @@ cmerge gnome/bookmarks                 ~/.config/gtk-3.0/bookmarks
 cmerge gnome/nautilus-date/NautilusDate.py ~/.local/share/nautilus-python/extensions/NautilusDate.py
 cmerge gnome/nautilus-date/pyproject.toml  ~/.local/share/nautilus-python/extensions/pyproject.toml
 
+cmerge gnome/gdm-custom.conf           /etc/gdm/custom.conf
+
 cmerge shell/bashrc                    ~/.bashrc
 cmerge shell/bashrc.user               ~/.bashrc.user
 cmerge shell/bash_profile              ~/.bash_profile
