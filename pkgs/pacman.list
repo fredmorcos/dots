@@ -83,6 +83,7 @@ devtools
 dialog
 dnsmasq
 docker
+docker-buildx
 docker-credential-secretservice-bin
 easy-rsa
 ed
