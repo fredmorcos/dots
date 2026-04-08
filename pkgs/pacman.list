@@ -106,6 +106,7 @@ fprintd
 fwupd
 fzf
 gcovr
+gdb
 gdm
 gimp
 git-delta
@@ -145,8 +146,6 @@ ipp-usb
 irqbalance
 ispell
 iwd
-kcov
-lazarus-qt6
 lesspipe
 lhasa
 lib32-harfbuzz
