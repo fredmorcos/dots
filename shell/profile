@@ -7,6 +7,12 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+# ASpell
+ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf;"
+ASPELL_CONF="$ASPELL_CONF personal $XDG_CONFIG_HOME/aspell/en.pws;"
+ASPELL_CONF="$ASPELL_CONF repl $XDG_CONFIG_HOME/aspell/en.prepl"
+export ASPELL_CONF
+
 # Applications
 export HISTFILE="$XDG_STATE_HOME/bash/bash_history"                      # Bash
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"                       # Inputrc

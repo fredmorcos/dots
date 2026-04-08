@@ -165,7 +165,7 @@ cmerge gdb/gdbearlyinit                ~/.config/gdb/gdbearlyinit
 cmerge gdb/gdbinit                     ~/.config/gdb/gdbinit
 
 cmerge dict/hunspell_en_US             ~/.hunspell_en_US
-cmerge dict/aspell.en.pws              ~/.aspell.en.pws
+cmerge dict/aspell.en.pws              ~/.config/aspell/en.pws
 cmerge dict/en_US.dic                  ~/.config/enchant/en_US.dic
 cmerge dict/en.dic                     ~/.config/enchant/en.dic
 
