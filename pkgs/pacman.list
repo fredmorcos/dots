@@ -107,6 +107,7 @@ fwupd
 fzf
 gcovr
 gdm
+gimp
 git-delta
 gnome-calculator
 gnome-control-center
@@ -148,6 +149,8 @@ kcov
 lazarus-qt6
 lesspipe
 lhasa
+lib32-harfbuzz
+lib32-vulkan-mesa-layers
 libblockdev-dm
 libblockdev-lvm
 libdvdcss
@@ -156,13 +159,14 @@ libmp4v2
 libmythes
 libofa
 libopenraw
-libraw
+libreoffice-fresh-ar
+libreoffice-fresh-de
+libreoffice-fresh-fr
 libultrahdr
 libva-utils
 libvdpau-va-gl
 libvoikko
 libwebp-utils
-libwmf
 libwpg
 linux
 linux-firmware
@@ -173,8 +177,6 @@ llvm
 logrotate
 loupe
 lrzip
-lsb-release
-lsof
 ltrace
 lzip
 lzop
@@ -199,6 +201,8 @@ noto-fonts-emoji
 ntfs-3g
 nuspell
 nvme-cli
+obs-studio
+obsidian
 openbsd-netcat
 opencl-mesa
 otf-commit-mono-nerd
@@ -209,6 +213,7 @@ papers
 papirus-icon-theme
 paru
 pdfarranger
+picard
 pigz
 pipewire-alsa
 pipewire-libcamera
@@ -230,7 +235,6 @@ python-beaker
 python-brotli
 python-brotlicffi
 python-defusedxml
-python-discid
 python-discogs-client
 python-docker
 python-dogpile.cache
@@ -303,12 +307,14 @@ sbctl
 seahorse
 shellcheck
 shfmt
+signal-desktop
 simple-scan
 smartmontools
 snapshot
 soundconverter
 sox
 starship
+steam
 strace
 syncthing
 system-config-printer
@@ -316,8 +322,10 @@ tcpdump
 tealdeer
 time
 tmux
+torbrowser-launcher
 traceroute
 transmission-qt
+trash-cli
 tree
 ttf-atkinson-hyperlegible
 udisks2-btrfs
@@ -330,9 +338,6 @@ valgrind
 video-trimmer
 vorbis-tools
 vulkan-extra-layers
-vulkan-intel
-vulkan-mesa-layers
-vulkan-radeon
 vulkan-tools
 wayland-utils
 webp-pixbuf-loader
