@@ -29,6 +29,7 @@ report-technical-problems=false
 idle-dim=false
 sleep-inactive-ac-type='nothing'
 power-button-action='nothing'
+ambient-enabled=false
 
 # Night-Light
 [org/gnome/settings-daemon/plugins/color]
