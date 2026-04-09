@@ -79,6 +79,7 @@ compsize
 cups-pdf
 cyme
 dconf-editor
+ddcutil
 devtools
 dialog
 dnsmasq
@@ -93,6 +94,7 @@ emacs-wayland
 epiphany
 exfatprogs
 eza
+fastfetch
 fd
 fdupes
 ffmpegthumbnailer
@@ -212,7 +214,6 @@ pacman-contrib
 pacrunner
 paper-clip
 papers
-papirus-icon-theme
 paru
 pdfarranger
 picard
