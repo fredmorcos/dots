@@ -138,8 +138,10 @@ hyphen-de
 hyphen-en
 hyphen-fr
 id3lib
+identity
 idle3-tools
 img2pdf
+impression
 inetutils
 iotop
 ipp-usb
@@ -200,6 +202,7 @@ noto-fonts-emoji
 ntfs-3g
 nuspell
 nvme-cli
+obfuscate
 obs-studio
 obsidian
 openbsd-netcat
@@ -208,6 +211,7 @@ otf-commit-mono-nerd
 paccat
 pacman-contrib
 pacrunner
+paper-clip
 papers
 papirus-icon-theme
 paru
@@ -315,6 +319,7 @@ sox
 starship
 steam
 strace
+switcheroo
 syncthing
 system-config-printer
 tcpdump
@@ -351,5 +356,4 @@ yamllint
 yapf
 yt-dlp
 yubikey-personalization-gui
-zip
 zram-generator
