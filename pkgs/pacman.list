@@ -240,7 +240,6 @@ python-brotlicffi
 python-defusedxml
 python-discogs-client
 python-docker
-python-dogpile.cache
 python-email-validator
 python-fastimport
 python-faust-cchardet
