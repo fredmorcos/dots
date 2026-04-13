@@ -1843,10 +1843,10 @@
   (push "--query-driver=/**/*" lsp-clients-clangd-args)
   (push "--all-scopes-completion" lsp-clients-clangd-args)
   (push "--log=error" lsp-clients-clangd-args)
-  (push "--background-index=0" lsp-clients-clangd-args)
+  (push "--background-index" lsp-clients-clangd-args)
   (push "--clang-tidy" lsp-clients-clangd-args)
   (push "--completion-style=detailed" lsp-clients-clangd-args)
-  (push "--function-arg-placeholders" lsp-clients-clangd-args)
+  (push "--function-arg-placeholders=1" lsp-clients-clangd-args)
   (push "--header-insertion=never" lsp-clients-clangd-args)
   ;; This sometimes breaks LSP completion.
   (push "--header-insertion-decorators=0" lsp-clients-clangd-args)
