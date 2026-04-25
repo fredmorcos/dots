@@ -7,4 +7,5 @@ set -o noglob
 
 echo "0000:c0:00.0" | sudo tee /sys/bus/pci/drivers/mt7925e/unbind
 echo "0000:c0:00.0" | sudo tee /sys/bus/pci/drivers/mt7925e/bind
+sleep 10
 systemctl --user restart syncthing.service
