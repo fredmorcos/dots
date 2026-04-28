@@ -483,14 +483,14 @@
   (setopt
    hippie-expand-try-functions-list '(try-complete-file-name-partially
                                       try-complete-file-name
-                                      try-expand-all-abbrevs
-                                      try-expand-list
                                       try-expand-line
                                       try-expand-line-all-buffers
                                       try-expand-dabbrev-visible
                                       try-expand-dabbrev
                                       try-expand-dabbrev-all-buffers
                                       try-expand-dabbrev-from-kill
+                                      try-expand-list
+                                      try-expand-all-abbrevs
                                       try-complete-lisp-symbol-partially
                                       try-complete-lisp-symbol
                                       try-expand-list-all-buffers))))
@@ -1628,11 +1628,23 @@
    hledger-currency-string "")
 
   (declvar hledger-mode)
-  (after 'emacs (setq-mode-local hledger-mode tab-width 1 fill-column 100))
-  (after 'newcomment (setq-mode-local hledger-mode comment-fill-column 100))
+  (after 'emacs
+   (setq-mode-local hledger-mode
+    tab-width 1
+    fill-column 100))
+  (after 'newcomment
+   (setq-mode-local hledger-mode
+    comment-fill-column 100))
   (after 'corfu
    (declvar corfu-auto)
-   (setq-mode-local hledger-mode corfu-auto nil))
+   (declvar corfu-auto-trigger)
+   (declvar corfu-auto-prefix)
+   (declvar corfu-auto-delay)
+   (setq-mode-local hledger-mode
+    corfu-auto nil
+    corfu-auto-trigger ""
+    corfu-auto-prefix 10
+    corfu-auto-delay 10))
 
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
