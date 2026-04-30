@@ -5,10 +5,13 @@ set -o errexit
 set -o nounset
 set -o noglob
 
+echo "Stop Syncthing"
+systemctl --user stop syncthing.service
 echo "Turn off wifi"
 echo "0000:c0:00.0" | sudo tee /sys/bus/pci/drivers/mt7925e/unbind > /dev/null
 sleep 1
 echo "Turn it back on"
 echo "0000:c0:00.0" | sudo tee /sys/bus/pci/drivers/mt7925e/bind > /dev/null
 sleep 10
-systemctl --user restart syncthing.service
+echo "Start Syncthing"
+systemctl --user start syncthing.service
