@@ -280,7 +280,6 @@ python-pyxattr
 python-rcssmin
 python-requests-oauthlib
 python-rjsmin
-python-ruamel-yaml
 python-service-identity
 python-setuptools-rust
 python-titlecase
