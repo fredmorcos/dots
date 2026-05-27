@@ -238,7 +238,6 @@ python-defusedxml
 python-discogs-client
 python-docker
 python-email-validator
-python-fastimport
 python-faust-cchardet
 python-flake8-isort
 python-fs
