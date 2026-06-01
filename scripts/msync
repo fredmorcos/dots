@@ -8,6 +8,7 @@ set -o noglob
 CMD=("rsync"
      "-hhh"
      "--verbose"
+     "--preallocate"
      "--info=progress2"
      "--archive"
      "--executability"
