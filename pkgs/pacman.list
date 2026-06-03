@@ -198,6 +198,7 @@ net-tools
 networkmanager
 noto-fonts-emoji
 ntfs-3g
+ntfsprogs
 nuspell
 nvme-cli
 obfuscate
