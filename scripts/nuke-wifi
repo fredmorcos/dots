@@ -8,10 +8,14 @@ set -o noglob
 echo "Stop Syncthing"
 systemctl --user stop syncthing.service
 echo "Turn off wifi"
+sudo systemctl stop NetworkManager.service
 echo "0000:c0:00.0" | sudo tee /sys/bus/pci/drivers/mt7925e/unbind > /dev/null
 sleep 1
 echo "Turn it back on"
 echo "0000:c0:00.0" | sudo tee /sys/bus/pci/drivers/mt7925e/bind > /dev/null
-sleep 10
+sudo systemctl start NetworkManager.service
+sleep 5
+sudo wpa_cli set tdls_disabled 1
+sleep 5
 echo "Start Syncthing"
 systemctl --user start syncthing.service
