@@ -26,7 +26,6 @@ DATA='/run/media/fred/Data'
 MEDIA='/run/media/fred/Media'
 
 if [ -d "$MEDIA" ]; then
-  cmd "$DATA/Media/Documentaries/"              "rpi:/media/A/Documentaries/"
   cmd "$DATA/Media/Franchises/"                 "rpi:/media/A/Franchises/"
   cmd "$DATA/Media/Movies/"                     "rpi:/media/A/Movies/"
   cmd "$DATA/Media/Movies (Arabic)/"            "rpi:/media/A/Movies (Arabic)/"
@@ -36,13 +35,14 @@ if [ -d "$MEDIA" ]; then
   cmd "$DATA/Media/Movies (Short)/"             "rpi:/media/A/Movies (Short)/"
   cmd "$DATA/Media/Movies (Unknown)/"           "rpi:/media/A/Movies (Unknown)/"
   cmd "$DATA/Media/Music Videos/"               "rpi:/media/A/Music Videos/"
-  cmd "$DATA/Media/Standups/"                   "rpi:/media/A/Standups/"
 
+  cmd "$MEDIA/Media/Documentaries/"             "rpi:/media/B/Documentaries/"
   cmd "$MEDIA/Media/Series/"                    "rpi:/media/B/Series/"
   cmd "$MEDIA/Media/Series (Good)/"             "rpi:/media/B/Series (Good)/"
   cmd "$MEDIA/Media/Series (History)/"          "rpi:/media/B/Series (History)/"
   cmd "$MEDIA/Media/Series (Nature)/"           "rpi:/media/B/Series (Nature)/"
   cmd "$MEDIA/Media/Series (Unknown)/"          "rpi:/media/B/Series (Unknown)/"
+  cmd "$MEDIA/Media/Standups/"                  "rpi:/media/B/Standups/"
 else
   printf ">>> %s is not mounted\n" "$MEDIA"
 fi
