@@ -31,9 +31,7 @@ if [ -d "$MEDIA" ]; then
   cmd "$DATA/Media/Movies (Arabic)/"            "rpi:/media/A/Movies (Arabic)/"
   cmd "$DATA/Media/Movies (Good)/"              "rpi:/media/A/Movies (Good)/"
   cmd "$DATA/Media/Movies (Old)/"               "rpi:/media/A/Movies (Old)/"
-  cmd "$DATA/Media/Movies (Romanian)/"          "rpi:/media/A/Movies (Romanian)/"
   cmd "$DATA/Media/Movies (Short)/"             "rpi:/media/A/Movies (Short)/"
-  cmd "$DATA/Media/Movies (Unknown)/"           "rpi:/media/A/Movies (Unknown)/"
 
   cmd "$MEDIA/Media/Documentaries/"             "rpi:/media/B/Documentaries/"
   cmd "$MEDIA/Media/Music Videos/"              "rpi:/media/B/Music Videos/"
