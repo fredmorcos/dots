@@ -207,6 +207,7 @@ obs-studio
 obsidian
 openbsd-netcat
 opencl-mesa
+opensnitch
 otf-commit-mono-nerd
 paccat
 pacman-contrib
@@ -267,17 +268,19 @@ python-priority
 python-pyacoustid
 python-pyalsa
 python-pyaml
+python-pyasn
 python-pycryptodome
 python-pygit2
-python-pyinotify
 python-pylast
 python-pymad
 python-pyphen
 python-pypng
+python-pyqt6
 python-pyserial
 python-pystache
 python-pyudev
 python-pyxattr
+python-qt-material
 python-rcssmin
 python-requests-oauthlib
 python-rjsmin
@@ -296,6 +299,7 @@ python-xlrd
 python-zeroconf
 python-zopfli
 python-zstandard
+qt6-wayland
 realtime-privileges
 reflector
 ripgrep-all
