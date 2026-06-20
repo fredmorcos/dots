@@ -237,6 +237,7 @@ python-babel
 python-beaker
 python-brotli
 python-brotlicffi
+python-curl_cffi
 python-defusedxml
 python-discogs-client
 python-docker
@@ -251,6 +252,7 @@ python-h2
 python-hsluv
 python-html2text
 python-html5lib
+python-httplib2
 python-installer
 python-keystone
 python-langdetect
