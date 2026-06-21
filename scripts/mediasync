@@ -26,21 +26,21 @@ DATA='/run/media/fred/Data'
 MEDIA='/run/media/fred/Media'
 
 if [ -d "$MEDIA" ]; then
-  cmd "$DATA/Media/Franchises/"                 "rpi:/media/A/Franchises/"
-  cmd "$DATA/Media/Movies/"                     "rpi:/media/A/Movies/"
-  cmd "$DATA/Media/Movies (Arabic)/"            "rpi:/media/A/Movies (Arabic)/"
-  cmd "$DATA/Media/Movies (Good)/"              "rpi:/media/A/Movies (Good)/"
-  cmd "$DATA/Media/Movies (Old)/"               "rpi:/media/A/Movies (Old)/"
-  cmd "$DATA/Media/Movies (Short)/"             "rpi:/media/A/Movies (Short)/"
+  cmd "$DATA/Media/Franchises/"                 "rpi:/var/media/Media-A/Franchises/"
+  cmd "$DATA/Media/Movies/"                     "rpi:/var/media/Media-A/Movies/"
+  cmd "$DATA/Media/Movies (Arabic)/"            "rpi:/var/media/Media-A/Movies (Arabic)/"
+  cmd "$DATA/Media/Movies (Good)/"              "rpi:/var/media/Media-A/Movies (Good)/"
+  cmd "$DATA/Media/Movies (Old)/"               "rpi:/var/media/Media-A/Movies (Old)/"
+  cmd "$DATA/Media/Movies (Short)/"             "rpi:/var/media/Media-A/Movies (Short)/"
 
-  cmd "$MEDIA/Media/Documentaries/"             "rpi:/media/B/Documentaries/"
-  cmd "$MEDIA/Media/Music Videos/"              "rpi:/media/B/Music Videos/"
-  cmd "$MEDIA/Media/Series/"                    "rpi:/media/B/Series/"
-  cmd "$MEDIA/Media/Series (Good)/"             "rpi:/media/B/Series (Good)/"
-  cmd "$MEDIA/Media/Series (History)/"          "rpi:/media/B/Series (History)/"
-  cmd "$MEDIA/Media/Series (Nature)/"           "rpi:/media/B/Series (Nature)/"
-  cmd "$MEDIA/Media/Series (Unknown)/"          "rpi:/media/B/Series (Unknown)/"
-  cmd "$MEDIA/Media/Standups/"                  "rpi:/media/B/Standups/"
+  cmd "$MEDIA/Media/Documentaries/"             "rpi:/var/media/Media-B/Documentaries/"
+  cmd "$MEDIA/Media/Music Videos/"              "rpi:/var/media/Media-B/Music Videos/"
+  cmd "$MEDIA/Media/Series/"                    "rpi:/var/media/Media-B/Series/"
+  cmd "$MEDIA/Media/Series (Good)/"             "rpi:/var/media/Media-B/Series (Good)/"
+  cmd "$MEDIA/Media/Series (History)/"          "rpi:/var/media/Media-B/Series (History)/"
+  cmd "$MEDIA/Media/Series (Nature)/"           "rpi:/var/media/Media-B/Series (Nature)/"
+  cmd "$MEDIA/Media/Series (Unknown)/"          "rpi:/var/media/Media-B/Series (Unknown)/"
+  cmd "$MEDIA/Media/Standups/"                  "rpi:/var/media/Media-B/Standups/"
 else
   printf ">>> %s is not mounted\n" "$MEDIA"
 fi
