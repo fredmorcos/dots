@@ -937,7 +937,14 @@
    projectile-sort-order 'recently-active
    projectile-auto-cleanup-known-projects t
    projectile-enable-caching nil
-   projectile-auto-discover t))
+   projectile-auto-discover t)
+
+  (declvar projectile-project-root-files)
+  (delete "meson.build" projectile-project-root-files)
+  (declvar projectile-project-root-files-bottom-up)
+  (delete "meson.build" projectile-project-root-files-bottom-up)
+  (declvar projectile-non-root-manifest-files)
+  (add-to-list 'projectile-non-root-manifest-files "meson.build"))
 
  (define-key global-map (kbd "C-x p") 'projectile-command-map)
 
