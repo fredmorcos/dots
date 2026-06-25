@@ -942,9 +942,7 @@
   (declvar projectile-project-root-files)
   (delete "meson.build" projectile-project-root-files)
   (declvar projectile-project-root-files-bottom-up)
-  (delete "meson.build" projectile-project-root-files-bottom-up)
-  (declvar projectile-non-root-manifest-files)
-  (add-to-list 'projectile-non-root-manifest-files "meson.build"))
+  (delete "meson.build" projectile-project-root-files-bottom-up))
 
  (define-key global-map (kbd "C-x p") 'projectile-command-map)
 
