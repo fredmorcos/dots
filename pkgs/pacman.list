@@ -104,6 +104,7 @@ flatpak-xdg-utils
 foot
 foot-terminfo
 fprintd
+freecad
 fwupd
 fzf
 gamemode
@@ -238,7 +239,6 @@ python-beaker
 python-brotli
 python-brotlicffi
 python-curl_cffi
-python-defusedxml
 python-discogs-client
 python-docker
 python-email-validator
