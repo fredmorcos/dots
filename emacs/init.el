@@ -289,6 +289,8 @@
  (after 'window
   (define-key global-map [remap delete-other-windows] #'init/toggle-delete-other-windows)
 
+  ;; (advice-add 'split-window-below :after #'init/recenter))
+
   (setopt
    switch-to-buffer-in-dedicated-window 'pop
    ;; switch-to-buffer-obey-display-actions t
@@ -296,9 +298,7 @@
    split-width-threshold 130
    even-window-sizes 'width-only
    ;; Skip *SPECIALS* when switching buffers.
-   switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos)))
-
-  (advice-add 'split-window-below :after #'init/recenter))
+   switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos))))
 
  (define-key global-map (kbd "<f12>") #'delete-other-windows)
 
@@ -502,6 +502,8 @@
   (delete 'emacs22 completion-styles)
   (push 'hotfuzz completion-styles)
   (push 'orderless completion-styles)
+  ;; (push 'initials completion-styles)
+  ;; (push 'substring completion-styles)
   (setopt
    completion-auto-help nil
    minibuffer-message-clear-timeout 4
@@ -730,6 +732,8 @@
     corfu-auto-prefix 3
     corfu-auto-trigger ".&"
     ;; corfu-quit-no-match t
+    corfu-quit-at-boundary t
+    corfu-on-exact-match 'insert
     corfu-scroll-margin 5
     ;; corfu-max-width 50
     corfu-min-width 50)
