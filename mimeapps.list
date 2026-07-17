@@ -1,5 +1,5 @@
 [Added Associations]
-application/epub+zip=com.github.johnfactotum.Foliate.desktop;
+application/epub+zip=com.github.johnfactotum.Foliate.desktop;org.gnome.Papers.desktop;
 application/json=emacs.desktop;
 application/pdf=org.gnome.Evince.desktop;org.gnome.Papers.Devel.desktop;org.gnome.Papers.desktop;
 application/postscript=org.gnome.Papers.desktop;
@@ -165,8 +165,9 @@ video/x-theora+ogg=mpv.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/mailto=org.mozilla.Thunderbird.desktop;emacs-mail.desktop;firefox.desktop;
+
 [Default Applications]
-application/epub+zip=com.github.johnfactotum.Foliate.desktop;
+application/epub+zip=org.gnome.Papers.desktop
 application/json=emacs.desktop;
 application/pdf=org.gnome.Papers.desktop;
 application/postscript=org.gnome.Papers.desktop;
