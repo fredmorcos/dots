@@ -109,6 +109,7 @@ show-battery-percentage=true
 # Shell Calendar
 [org/gnome/desktop/calendar]
 show-weekdate=true
+week-start-day='monday'
 
 # Shell Apps and Extensions
 [org/gnome/shell]
