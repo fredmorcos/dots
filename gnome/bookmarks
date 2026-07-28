@@ -1,5 +1,5 @@
 file:///home/fred/Documents Documents
 file:///home/fred/Downloads Downloads
 sftp://neuron/home/fred Laptop
-sftp://rpi/media/A Media-A
-sftp://rpi/media/B Media-B
+sftp://rpi/var/media/Media-A Media-A
+sftp://rpi/var/media/Media-B Media-B
