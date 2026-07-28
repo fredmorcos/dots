@@ -287,11 +287,12 @@
    (winner-undo)
    (delete-other-windows)))
 
+ (autoload #'delete-other-windows "window")
+ (define-key global-map (kbd "<f12>") #'delete-other-windows)
+
  (after 'window
   (define-key global-map [remap delete-other-windows] #'init/toggle-delete-other-windows)
-
   ;; (advice-add 'split-window-below :after #'init/recenter))
-
   (setopt
    switch-to-buffer-in-dedicated-window 'pop
    ;; switch-to-buffer-obey-display-actions t
@@ -300,8 +301,6 @@
    even-window-sizes 'width-only
    ;; Skip *SPECIALS* when switching buffers.
    switch-to-prev-buffer-skip-regexp `(,(rx bos "*" (1+ nonl) "*" eos))))
-
- (define-key global-map (kbd "<f12>") #'delete-other-windows)
 
  (after 'emacs
   (setopt
@@ -748,34 +747,41 @@
 
  (config "Company"
   (package 'company)
-  (defun init/company-is-active (&rest _)
-   (declfun company--active-p 'company)
-   (or (company--active-p) (bound-and-true-p company-backend)))
-
   (after 'company
    (diminish 'company-mode "Co")
+   (declfun company-complete-common "company")
+   (declvar company-active-map)
+   (define-key company-active-map (kbd "TAB") #'company-complete-common)
+   (define-key company-active-map [tab] #'company-complete-common)
+   (set-face-attribute 'company-tooltip nil :background "Gray98")
+   ;; (add-hook 'company-mode-hook #'company-posframe-mode)
    (setopt
-    company-idle-delay 0.7
+    company-idle-delay nil
     company-keywords-ignore-case t
     company-selection-wrap-around t
     company-tooltip-align-annotations t
     company-tooltip-minimum-width 40
     company-tooltip-maximum-width 80
-    company-tooltip-limit 15
-    company-tooltip-minimum 10
+    company-tooltip-limit 10
+    company-tooltip-minimum 7
     company-tooltip-flip-when-above t
     company-tooltip-annotation-padding 3
-    company-tooltip-width-grow-only t)
-   (add-hook 'company-mode-hook #'company-posframe-mode))
+    company-tooltip-width-grow-only t
+    company-transformers '(company-sort-by-occurrence
+                           company-sort-by-backend-importance
+                           company-sort-prefer-same-case-prefix)
+    company-frontends '(company-childframe-unless-just-one-frontend
+                        company-preview-if-just-one-frontend
+                        company-echo-metadata-frontend)))
 
-  (package'company-posframe)
-  (after 'company-posframe
-   (diminish 'company-posframe-mode)
-   (declvar company-posframe-show-params)
-   (declvar company-posframe-quickhelp-show-params)
-   (nconc company-posframe-show-params '(:border-width 1))
-   (nconc company-posframe-quickhelp-show-params '(:border-width 1))
-   (setopt company-posframe-quickhelp-x-offset 2))
+  ;; (package 'company-posframe)
+  ;; (after 'company-posframe
+  ;;  (diminish 'company-posframe-mode)
+  ;;  (declvar company-posframe-show-params)
+  ;;  (declvar company-posframe-quickhelp-show-params)
+  ;;  (nconc company-posframe-show-params '(:border-width 1))
+  ;;  (nconc company-posframe-quickhelp-show-params '(:border-width 1))
+  ;;  (setopt company-posframe-quickhelp-x-offset 2))
 
   (after 'company-dabbrev-code
    (setopt company-dabbrev-code-completion-styles t)))
@@ -894,6 +900,7 @@
   (declvar yas-minor-mode-map)
   (define-key yas-minor-mode-map (kbd "C-c S") #'consult-yasnippet)
   (define-key yas-minor-mode-map (kbd "TAB") nil t)
+  (define-key yas-minor-mode-map [tab] nil t)
   (add-hook 'yas-minor-mode-hook #'init/initialize-yasnippet-snippets))
 
  (add-to-list 'yas-snippet-dirs "~/Workspace/dots/emacs/snippets"))
@@ -1570,9 +1577,8 @@
 
   (after 'company
    (setq-mode-local emacs-lisp-mode
-    company-backends '((company-capf
-                        company-dabbrev-code
-                        company-keywords)
+    company-backends '((company-capf company-keywords)
+                       company-dabbrev-code
                        company-files))))
 
  (defun init/emacs-lisp-expand-current-macro-call ()
