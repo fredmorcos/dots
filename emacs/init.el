@@ -7,7 +7,7 @@
  (require 'init-macros))
 
 (config "Configuration options"
- (defvar *init/completion-system* :corfu "Which completion system to use."))
+ (defvar *init/completion-system* :company "Which completion system to use."))
 
 (config "Builtins"
  (package 'window-tool-bar)
@@ -255,7 +255,8 @@
    kill-do-not-save-duplicates t)))
 
 (config "Indentation"
- (after 'indent
+ ;; indent.el
+ (after 'emacs
   (setopt
    tab-always-indent 'complete
    tab-first-completion 'word-or-paren-or-punct))
@@ -774,7 +775,10 @@
    (declvar company-posframe-quickhelp-show-params)
    (nconc company-posframe-show-params '(:border-width 1))
    (nconc company-posframe-quickhelp-show-params '(:border-width 1))
-   (setopt company-posframe-quickhelp-x-offset 2)))
+   (setopt company-posframe-quickhelp-x-offset 2))
+
+  (after 'company-dabbrev-code
+   (setopt company-dabbrev-code-completion-styles t)))
 
  (config "Cape"
   (package 'cape)
@@ -1568,8 +1572,8 @@
    (setq-mode-local emacs-lisp-mode
     company-backends '((company-capf
                         company-dabbrev-code
-                        company-keywords
-                        company-files)))))
+                        company-keywords)
+                       company-files))))
 
  (defun init/emacs-lisp-expand-current-macro-call ()
   "Expand the current macro expression."
