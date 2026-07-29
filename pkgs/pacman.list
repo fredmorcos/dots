@@ -104,6 +104,7 @@ flatpak
 flatpak-xdg-utils
 foot
 foot-terminfo
+fooyin
 fprintd
 freecad
 fwupd
@@ -126,6 +127,7 @@ gst-plugin-libcamera
 gst-plugin-va
 gst-plugins-bad
 gvfs-mtp
+halloy
 handlr-regex
 haveged
 hddtemp
