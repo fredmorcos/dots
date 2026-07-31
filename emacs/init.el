@@ -409,9 +409,9 @@
 
 (config "User Experience"
  (after 'emacs (setopt delete-by-moving-to-trash t))
- (after 'files (setopt confirm-kill-processes nil))
 
  (after 'files
+  (setopt confirm-kill-processes nil)
   (advice-add 'find-file :after #'init/recenter)
   (advice-add 'find-file-literally :after #'init/recenter)
   (advice-add 'find-file-other-window :after #'init/recenter))
