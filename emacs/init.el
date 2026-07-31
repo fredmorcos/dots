@@ -487,19 +487,18 @@
  (after 'abbrev (diminish 'abbrev-mode "Ab"))
 
  (after 'dabbrev
-  ;; Replace dabbrev-expand with hippie-expand
   (define-key global-map [remap dabbrev-expand] #'hippie-expand))
 
  (after 'hippie-exp
   (setopt
    hippie-expand-try-functions-list '(try-complete-file-name-partially
                                       try-complete-file-name
-                                      try-expand-line
-                                      try-expand-line-all-buffers
                                       try-expand-dabbrev-visible
                                       try-expand-dabbrev
-                                      try-expand-dabbrev-all-buffers
+                                      try-expand-line
                                       try-expand-dabbrev-from-kill
+                                      try-expand-dabbrev-all-buffers
+                                      try-expand-line-all-buffers
                                       try-expand-list
                                       try-expand-all-abbrevs
                                       try-complete-lisp-symbol-partially
