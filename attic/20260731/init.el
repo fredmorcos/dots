@@ -235,21 +235,10 @@
  (define-key global-map (kbd "C-p") #'casual-isearch-tmenu)
 
  (package 'ctrlf)
- (autoload 'ctrlf-forward "ctrlf")
- (declvar ctrlf-default-search-style)
  (after 'ctrlf
   (setopt
    ctrlf-default-search-style 'fuzzy
-   ctrlf-auto-recenter t)
-
-  (defun ctrlf-forward-default (&optional arg)
-   (interactive "P")
-   (ctrlf-forward ctrlf-default-search-style
-    (null arg) (if (region-active-p)
-                (buffer-substring (region-beginning) (region-end))
-                nil)
-    nil t)))
-
+   ctrlf-auto-recenter t))
  (ctrlf-mode))
 
 (config "Undo & Redo"
@@ -627,9 +616,15 @@
    history-delete-duplicates t
    history-length 150))
 
- (after 'saveplace
-  (setopt save-place-abbreviate-file-names t))
+ (after 'saveplace (setopt save-place-abbreviate-file-names t))
 
+ (defun init/activate-save-place-mode (&rest _)
+  (unless save-place-mode (save-place-mode)))
+
+ (after 'files
+  (advice-add 'find-file-noselect :before #'init/activate-save-place-mode))
+
+ (savehist-mode)
  (after 'savehist
   (defvar savehist-additional-variables)
   (after 'isearch
@@ -640,8 +635,8 @@
 
  (after 'recentf
   (setopt
-   recentf-max-menu-items 5
-   recentf-max-saved-items 50
+   recentf-max-menu-items 50
+   recentf-max-saved-items 100
    recentf-exclude `(,(no-littering-expand-var-file-name "")
                      ,(no-littering-expand-etc-file-name "")
                      ,@native-comp-eln-load-path
@@ -651,11 +646,19 @@
                      "/usr/share/emacs"
                      "/run/media")))
 
- (make-thread
-  (lambda ()
-   (save-place-mode)
-   (savehist-mode)
-   (recentf-mode))))
+ (autoload 'recentf-load-list "recentf")
+ (autoload 'recentf-cleanup "recentf")
+ (defvar init/recentf-loaded-p nil)
+ (defun init/recentf-load-list (&rest _)
+  (unless init/recentf-loaded-p
+   (recentf-load-list)
+   (recentf-cleanup)
+   (setq init/recentf-loaded-p t)))
+
+ (after 'consult
+  (advice-add #'consult-buffer :before #'init/recentf-load-list))
+
+ (after 'recentf (recentf-mode)))
 
 (config "Session Management"
  (package 'easysession)
@@ -1886,8 +1889,7 @@
   (push "--pch-storage=memory" lsp-clients-clangd-args)))
 
 ;; Print startup stats.
-(message "Startup in %s (%d GC runs that took %fs)"
- (emacs-init-time) gcs-done gc-elapsed)
+(message "Startup in %s (%d GC runs that took %fs)" (emacs-init-time) gcs-done gc-elapsed)
 
 (provide 'init)
 ;;; init.el ends here
