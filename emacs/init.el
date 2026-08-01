@@ -852,7 +852,7 @@
           (dedicated . t)
           (window-height . 0.15)
           (post-command-select-window . t)
-          (window-parameters . ((mode-line-format . "Errors")))
+          ;; (window-parameters . ((mode-line-format . "Errors")))
           (body-function . init/setup-flycheck-errors-window))
    display-buffer-alist))
 
@@ -877,7 +877,9 @@
    flycheck-help-echo-function nil
    flycheck-checker-error-threshold nil
    flycheck-mode-line-prefix "Fc"
-   flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line))))
+   flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line))
+
+  (add-hook 'flycheck-mode-hook #'flycheck-annotate-mode)))
 
 (config "Snippets"
  (package 'yasnippet)
