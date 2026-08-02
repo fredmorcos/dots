@@ -293,6 +293,7 @@ python-setuptools-rust
 python-titlecase
 python-trio
 python-typogrify
+python-uv
 python-virtualenv
 python-volume_key
 python-watchdog
