@@ -877,7 +877,8 @@
    flycheck-help-echo-function nil
    flycheck-checker-error-threshold nil
    flycheck-mode-line-prefix "Fc"
-   flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line))
+   flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line)
+   flycheck-display-errors-delay 0.1)
 
   (add-hook 'flycheck-mode-hook #'flycheck-annotate-mode)))
 
