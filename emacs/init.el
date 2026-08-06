@@ -640,7 +640,7 @@
  (after 'recentf
   (setopt
    recentf-max-menu-items 5
-   recentf-max-saved-items 50
+   recentf-max-saved-items 100
    recentf-exclude `(,(no-littering-expand-var-file-name "")
                      ,(no-littering-expand-etc-file-name "")
                      ,@native-comp-eln-load-path
