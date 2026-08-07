@@ -136,17 +136,8 @@
  (cua-selection-mode t)
 
  (package 'expand-region)
- ;; (define-key global-map (kbd "C-=") #'er/expand-region)
- ;; (define-key global-map (kbd "C--") #'er/contract-region)
-
- (package 'expreg)
- (define-key global-map (kbd "C-=") #'expreg-expand)
- (define-key global-map (kbd "C--") #'expreg-contract)
- (autoload 'expreg--sentence "expreg")
- (declvar expreg-functions)
- (after 'text-mode
-  (add-hook 'text-mode-hook
-   (lambda () (after 'expreg (add-to-list 'expreg-functions #'expreg--sentence)))))
+ (define-key global-map (kbd "C-=") #'er/expand-region)
+ (define-key global-map (kbd "C--") #'er/contract-region)
 
  (package 'surround)
  (define-key global-map (kbd "M-'") #'surround-mark-inner)
