@@ -1671,7 +1671,7 @@
   (add-hook 'hledger-mode-hook #'init/hledger-setup-flycheck)
   (add-hook 'hledger-mode-hook #'init/buffer-completion-mode)
   (add-hook 'hledger-mode-hook #'init/setup-hledger-capfs)
-  (add-hook 'hledger-mode-hook #'init/hledger-maybe-setup-company nil t)
+  (add-hook 'hledger-mode-hook #'init/hledger-maybe-setup-company)
   (add-hook 'hledger-mode-hook #'volatile-highlights-mode)
   (add-hook 'hledger-mode-hook #'electric-pair-local-mode)
   (add-hook 'hledger-mode-hook #'whitespace-mode)
