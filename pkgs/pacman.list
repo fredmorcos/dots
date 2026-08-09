@@ -94,7 +94,6 @@ emacs-wayland
 epiphany
 exfatprogs
 eza
-fastfetch
 fd
 fdupes
 ffmpegthumbnailer
@@ -152,10 +151,9 @@ ipp-usb
 irqbalance
 ispell
 iwd
+lact
 lesspipe
 lhasa
-lib32-harfbuzz
-lib32-vulkan-mesa-layers
 libblockdev-dm
 libblockdev-lvm
 libdvdcss
@@ -181,6 +179,8 @@ llvm
 logrotate
 loupe
 lrzip
+lsb-release
+lsof
 ltrace
 lzip
 lzop
@@ -305,6 +305,7 @@ python-zeroconf
 python-zopfli
 python-zstandard
 qt6-wayland
+read-edid
 realtime-privileges
 reflector
 ripgrep-all
@@ -322,7 +323,6 @@ snapshot
 soundconverter
 sox
 starship
-steam
 strace
 switcheroo
 syncthing
@@ -347,7 +347,9 @@ valgrind
 video-trimmer
 vorbis-tools
 vulkan-extra-layers
-vulkan-tools
+vulkan-intel
+vulkan-mesa-layers
+vulkan-radeon
 wayland-utils
 webp-pixbuf-loader
 whois
