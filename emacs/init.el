@@ -136,8 +136,19 @@
  (cua-selection-mode t)
 
  (package 'expand-region)
- (define-key global-map (kbd "C-=") #'er/expand-region)
- (define-key global-map (kbd "C--") #'er/contract-region)
+ (defun init/setup-expand-region ()
+  (let ((current-mode-map (symbol-value (intern (format "%s-map" major-mode)))))
+   (define-key current-mode-map (kbd "C-=") #'er/expand-region)
+   (define-key current-mode-map (kbd "C--") #'er/contract-region)))
+
+ (package 'expreg)
+ (define-key global-map (kbd "C-=") #'expreg-expand)
+ (define-key global-map (kbd "C--") #'expreg-contract)
+ (autoload 'expreg--sentence "expreg")
+ (declvar expreg-functions)
+ (after 'text-mode
+  (add-hook 'text-mode-hook
+   (lambda () (after 'expreg (add-to-list 'expreg-functions #'expreg--sentence)))))
 
  (package 'surround)
  (define-key global-map (kbd "M-'") #'surround-mark-inner)
@@ -737,11 +748,16 @@
   (after 'company
    (diminish 'company-mode "Co")
    (declfun company-complete-common "company")
+   (declfun company-show-doc-buffer "company")
+   (declfun company-show-location "company")
    (declvar company-active-map)
    (define-key company-active-map (kbd "TAB") #'company-complete-common)
    (define-key company-active-map [tab] #'company-complete-common)
    (set-face-attribute 'company-tooltip nil :background "Gray98")
    ;; (add-hook 'company-mode-hook #'company-posframe-mode)
+   (define-key company-active-map (kbd "C-h") #'company-show-doc-buffer)
+   (define-key company-active-map (kbd "<f1>") #'company-show-doc-buffer)
+   (define-key company-active-map (kbd "C-w") #'company-show-location)
    (setopt
     company-idle-delay nil
     company-keywords-ignore-case t
@@ -807,7 +823,8 @@
      (cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp"))
      (json   . ("https://github.com/tree-sitter/tree-sitter-json.git"))
      (toml   . ("https://github.com/ikatyang/tree-sitter-toml.git"))
-     (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git")))))
+     (yaml   . ("https://github.com/ikatyang/tree-sitter-yaml.git"))
+     (meson  . ("https://github.com/tree-sitter-grammars/tree-sitter-meson.git")))))
 
  (after 'jit-lock
   (setopt
@@ -1518,8 +1535,15 @@
 (config "Meson"
  (package 'meson-mode)
  (after 'meson-mode
+  ;; (add-hook 'meson-mode-hook #'company-mode)
+  (add-hook 'meson-mode-hook #'init/setup-expand-region)
+  (add-hook 'meson-mode-hook #'tree-sitter-mode)
   (add-hook 'meson-mode-hook #'symbol-overlay-mode)
   (add-hook 'meson-mode-hook #'lsp))
+ (declvar meson-mode)
+ (after 'company
+  (declvar company-backends)
+  (setq-mode-local meson-mode company-backends '(company-capf company-files)))
  (after 'lsp-meson (setopt lsp-meson-server-executable '("mesonlsp" "--full"))))
 
 (config "Sieve"
