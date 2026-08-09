@@ -751,7 +751,6 @@
     company-tooltip-maximum-width 80
     company-tooltip-limit 10
     company-tooltip-minimum 7
-    company-tooltip-flip-when-above t
     company-tooltip-annotation-padding 3
     company-tooltip-width-grow-only t
     company-transformers '(company-sort-by-occurrence
