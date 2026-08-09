@@ -189,6 +189,7 @@ man-pages
 mesa-demos
 mesa-utils
 meson
+mesonlsp
 mkinitcpio-utils
 mpv
 mtools
