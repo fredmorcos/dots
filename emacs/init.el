@@ -771,19 +771,14 @@
     company-tooltip-width-grow-only t
     company-transformers '(company-sort-by-occurrence
                            company-sort-by-backend-importance
-                           company-sort-prefer-same-case-prefix)
-    company-frontends '(company-childframe-unless-just-one-frontend
-                        company-preview-if-just-one-frontend
-                        company-echo-metadata-frontend)))
+                           company-sort-prefer-same-case-prefix))
 
-  ;; (package 'company-posframe)
-  ;; (after 'company-posframe
-  ;;  (diminish 'company-posframe-mode)
-  ;;  (declvar company-posframe-show-params)
-  ;;  (declvar company-posframe-quickhelp-show-params)
-  ;;  (nconc company-posframe-show-params '(:border-width 1))
-  ;;  (nconc company-posframe-quickhelp-show-params '(:border-width 1))
-  ;;  (setopt company-posframe-quickhelp-x-offset 2))
+   ;; Circumvent the CAPF mechanism to avoid having to press TAB twice to get a completion
+   ;; even when there is no indentation happening.
+   (declvar company-mode-map)
+   (declfun company-indent-or-complete-common "company")
+   (define-key company-mode-map [remap indent-for-tab-command]
+    #'company-indent-or-complete-common))
 
   (after 'company-dabbrev-code
    (setopt company-dabbrev-code-completion-styles t)))
