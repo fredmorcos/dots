@@ -1,0 +1,205 @@
+================================================================================
+AMD RX 5700 XT — VRAM (MCLK) stuck at maximum 1750 MHz at idle
+Arch Linux / GNOME 50 / Wayland / 144 Hz display
+Session notes — 2026-08-09
+================================================================================
+
+--------------------------------------------------------------------------------
+PROBLEM
+--------------------------------------------------------------------------------
+LACT reports VRAM frequency pinned at 1750 MHz at all times, even while idle,
+with GPU performance level set to "automatic". Dropping the display refresh rate
+from 144 Hz to 60 Hz makes the VRAM clock drop to 200 MHz and behave dynamically
+again. Result: unnecessary heat and idle power draw.
+
+Enabling variable refresh rate (VRR) in GNOME Settings changes nothing.
+
+
+--------------------------------------------------------------------------------
+ROOT CAUSE
+--------------------------------------------------------------------------------
+Switching MCLK (VRAM clock) takes time, and the driver can only perform the
+switch during the display's VERTICAL BLANKING INTERVAL without causing visible
+flicker. If the vblank period at the current mode is too short, amdgpu gives up
+on dynamic memory clocking entirely and pins MCLK to its maximum DPM state.
+
+  - At 60 Hz the vblank is long enough in wall-clock terms -> downclocks to
+    200 MHz.
+  - At 144 Hz it is not -> MCLK locked at 1750 MHz.
+
+AMD's own driver engineers confirmed this is "expected behaviour" for the
+5700 XT at 144 Hz. It affects Navi through RDNA3, and it happens on Windows
+too. This is a hardware/driver limitation, NOT a GNOME or Arch bug.
+
+The trigger is usually that the monitor's EDID uses tight, non-standard timings
+at its top mode in order to stay within DisplayPort/HDMI bandwidth limits.
+
+FIX CONCEPT: feed the GPU a mode with a LONGER vertical blanking interval —
+specifically CVT reduced-blanking v1.2 (RB2) timings, which counterintuitively
+give MORE vblank lines than most native EDID timings.
+
+Why VRR does not help: it changes vblank dynamically but does not lengthen the
+MINIMUM vblank, which is what the driver actually needs.
+
+
+--------------------------------------------------------------------------------
+THE CATCH ON WAYLAND
+--------------------------------------------------------------------------------
+On Xorg this is trivial:
+
+    xrandr --newmode "MCLK-fix" <modeline>
+    xrandr --addmode DP-1 "MCLK-fix"
+    xrandr --output DP-1 --mode "MCLK-fix"
+
+On Wayland it is not. Mutter still has NO custom modeline support — it is an
+open feature request (GNOME/mutter issue #2856), unimplemented as of Mutter
+50.x. So on GNOME 50 the timing must be injected one level lower, via a CUSTOM
+EDID loaded by the kernel.
+
+
+--------------------------------------------------------------------------------
+STEP 0 — FREE SANITY CHECKS FIRST (two minutes, might just solve it)
+--------------------------------------------------------------------------------
+Monitor the memory clock live:
+
+    watch -n1 cat /sys/class/drm/card0/device/pp_dpm_mclk
+
+(use card1 etc. if card0 is not the AMD GPU; nvtop or mangohud also work)
+
+Then:
+
+  1. Try 120 Hz instead of 144 Hz. Many people find 120 Hz clocks down fine
+     while 144 does not. If 120 Hz is acceptable, you are done.
+
+  2. If a second monitor is connected, unplug it and retest. Multi-display
+     makes the vblank constraint much harder to satisfy.
+
+
+--------------------------------------------------------------------------------
+STEP 1 — COMPUTE A CVT-RB v1.2 MODELINE
+--------------------------------------------------------------------------------
+    curl -O https://raw.githubusercontent.com/kevinlekiller/cvt_modeline_calculator_12/master/cvt12.c
+    gcc cvt12.c -O2 -o cvt12 -lm
+    ./cvt12 2560 1440 144 -b        # substitute your resolution
+
+Precomputed for the two common cases:
+
+    1920x1080@144:
+      333.22 1920 1928 1960 2000 1080 1143 1151 1157 +hsync -vsync
+
+    2560x1440@144:
+      586.59 2560 2568 2600 2640 1440 1529 1537 1543 +hsync -vsync
+
+Note the vtotal: 1157 vs 1080 gives 77 vblank lines, versus the ~45 the monitor
+probably advertises. That extra blanking is the whole trick.
+
+
+--------------------------------------------------------------------------------
+STEP 2 — BUILD AN EDID FROM IT AND INSTALL IT (Wayland route)
+--------------------------------------------------------------------------------
+Reference walkthrough (best available):
+    https://gist.github.com/Filip62/c0f2d9426d5a817f1be608ca98f599cb
+
+Outline:
+
+  a) Generate a reference EDID from the modeline:
+
+       git clone https://github.com/akatrevorjay/edid-generator.git
+       cd edid-generator
+       # deps: zsh edid-decode-git automake dos2unix
+       zsh
+       ./modeline2edid - <<< 'Modeline "MCLK-fix" 333.22 1920 1928 1960 2000 1080 1143 1151 1157 +hsync -vsync'
+       make
+
+  b) Dump your monitor's current EDID:
+
+       ls /sys/class/drm/                       # find your connector
+       cp /sys/class/drm/card1-DP-1/edid edid.bin
+
+  c) Open edid.bin in wxEDID, find the DTD (Detailed Timing Descriptor)
+     matching your native resolution/refresh rate, switch to the
+     "DTD Constructor" tab, and change the values to match the generated
+     MCLK-fix EDID. Then Options -> Assemble EDID, File -> Save EDID binary.
+
+  d) Install it:
+
+       sudo mkdir -p /usr/lib/firmware/edid
+       sudo cp edid_modified.bin /usr/lib/firmware/edid/
+
+  e) Add to /etc/mkinitcpio.conf:
+
+       FILES=(/usr/lib/firmware/edid/edid_modified.bin)
+
+  f) Add the kernel parameter (adjust the connector name):
+
+       drm.edid_firmware=DP-1:edid/edid_modified.bin
+
+  g) Rebuild the initramfs and reboot:
+
+       sudo mkinitcpio -P
+       sudo reboot
+
+
+--------------------------------------------------------------------------------
+TWO WARNINGS
+--------------------------------------------------------------------------------
+1. HAVE A RECOVERY PLAN.
+   A bad EDID gives a distorted or blank screen at boot. Before rebooting, make
+   sure you know how to edit kernel parameters from your bootloader. Recovery
+   is simply removing the drm.edid_firmware= argument.
+
+2. WATCH THE BANDWIDTH CEILING.
+   Longer blanking raises the pixel clock, which may exceed what the cable/link
+   can carry. 2560x1440@144 with RB2 timings is ~586 MHz — right at the edge of
+   DP 1.4 HBR3 at 8bpc. If you hit link-training failures, drop the refresh
+   rate slightly: compute for 142 Hz instead of 144 Hz. This is exactly what
+   AMD's own Radeon Software workaround does on Windows, and 142 vs 144 Hz is
+   imperceptible.
+
+
+--------------------------------------------------------------------------------
+VERIFICATION
+--------------------------------------------------------------------------------
+    cat /sys/class/drm/card0/device/pp_dpm_mclk
+    nvtop
+    mangohud
+
+MCLK should now scale with actual GPU load instead of sitting at maximum.
+
+
+--------------------------------------------------------------------------------
+INFO STILL NEEDED FOR EXACT NUMBERS
+--------------------------------------------------------------------------------
+  1. Monitor's native resolution (2560x1440? 1920x1080?)
+  2. Connector and cable type: `ls /sys/class/drm/`, and DP or HDMI
+  3. Output of:
+       sudo cat /sys/class/drm/card*-DP-1/edid | edid-decode
+     (substitute your connector)
+
+With those, the exact modeline and the specific DTD byte edits can be worked
+out for this particular panel rather than generically.
+
+
+--------------------------------------------------------------------------------
+SOURCES
+--------------------------------------------------------------------------------
+Fix AMD GPU high idle power MCLK stuck for high refresh rates on Arch Linux
+Wayland & Xorg
+    https://gist.github.com/Filip62/c0f2d9426d5a817f1be608ca98f599cb
+
+AMD: RX 5700 XT stuck at 875 MHz mclk at 144 Hz
+    https://community.amd.com/t5/graphics/rx-5700-xt-stuck-at-875-hz-mclk-at-144-hz/td-p/140797
+
+guru3D: Solution for stuck VRAM mem at max clocks on AMD Navi10
+    https://forums.guru3d.com/threads/solution-for-stuck-vram-mem-at-max-clocks-on-amd-navi10.436340/
+
+Workaround: High idle power consumption with AMD GPUs
+    https://daichendt.one/blog/memory-frequency-amd-gpu/
+
+Arch forums: Wayland custom modeline / Radeon memory clock stuck problem
+    https://bbs.archlinux.org/viewtopic.php?id=305909
+
+GNOME/mutter #2856: Custom modeline support for Wayland
+    https://gitlab.gnome.org/GNOME/mutter/-/issues/2856
+
+================================================================================
