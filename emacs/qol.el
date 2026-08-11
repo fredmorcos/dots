@@ -80,7 +80,13 @@
    (file-relative-name buffer-name root)
    buffer-name)))
 
-(defun qol/yank-position ()
+(defun qol/active-region-contents ()
+ "Get contents of the active region, or NIL otherwise."
+ (if (region-active-p)
+  (buffer-substring-no-properties (region-beginning) (region-end))
+  nil))
+
+(defun qol/yank-location ()
  "Copy current file:line."
  (interactive)
  (let* ((buffer-name (qol/relative-buffer-file-name))
