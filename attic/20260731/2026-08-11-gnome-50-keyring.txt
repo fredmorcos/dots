@@ -1,0 +1,226 @@
+ ▐▛███▜▌   Claude Code v2.1.226
+▝▜█████▛▘  Opus 5 · Claude Team
+  ▘▘ ▝▝    ~/Workspace/dovecot/core-meson
+
+
+❯ I'm having an issue with the Gnome 50.4 keyring on archlinux. It was          
+  disappearing randomly so I set it up from scratch with a password that is the 
+  same as the LUKS disk encryption password. I have gdm autologin enabled. Yet  
+  there are two problems, 1) it still asks me to unlock the keyring on first    
+  use, and 2) there's a second keyring called "Login" which has been created    
+  with my user password which I've never entered to create a keyring. How can I 
+  have the keyring unlock automatically on autologin?                           
+
+● I'll check the actual state on this machine first, since the fix depends on
+  which keyrings exist and what the PAM stack looks like.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Web Search("gnome-keyring automatic unlock with GDM autologin login keyring
+            blank password")
+  ⎿  Did 1 search in 6s
+
+● Web Search("Arch Linux wiki GNOME/Keyring autologin pam_gnome_keyring login
+            keyring")
+  ⎿  Did 1 search in 8s
+
+● Fetch(https://wiki.archlinux.org/title/GNOME/Keyring)
+  ⎿  Received 2.2KB (200 OK)
+
+● Fetch(https://wiki.gnome.org/Projects/GnomeKeyring/Pam)
+  ⎿  Received 16.4KB (200 OK)
+
+● Fetch(https://wiki.archlinux.org/index.php?title=GNOME/Keyring&action=raw)
+  ⎿  Received 2.2KB (200 OK)
+
+● Web Search(""gdm" unlock gnome keyring "LUKS" password same as keyring
+            automatic unlock archwiki")
+  ⎿  Did 1 search in 7s
+
+● Fetch(http://web.archive.org/web/2026/https://wiki.archlinux.org/title/GNOME/K
+       eyring)
+  ⎿  Error: Claude Code is unable to fetch from web.archive.org
+
+● Web Search("gdm gnome-keyring unlock using LUKS passphrase kernel keyring
+            systemd-cryptsetup feature")
+  ⎿  Did 1 search in 9s
+
+● Fetch(https://forum.garudalinux.org/t/how-to-unlock-gnome-keyring-by-entering-
+       one-luks-passphrase-at-boot-and-autologin-gdm-enabled/26597)
+  ⎿  Received 0 bytes (403 Forbidden)
+
+● Web Search("gnome-shell lock screen unlock PAM service gdm-password
+            pam_gnome_keyring creates login keyring")
+  ⎿  Did 1 search in 7s
+
+● Fetch(https://wiki.archlinux.org/rest.php/v1/page/GNOME%2FKeyring)
+  ⎿  Received 2.2KB (200 OK)
+
+● Fetch(https://github.com/systemd/systemd/issues/17565)
+  ⎿  Received 260.1KB (200 OK)
+
+● Web Search(""sd-encrypt" OR "systemd hook" mkinitcpio gdm autologin keyring
+            luks passphrase "2.5 minutes" cryptsetup kernel keyring")
+  ⎿  Did 1 search in 7s
+● Fetch(https://jakesco.com/posts/unlock-keyring-at-boot/)
+  ⎿  Received 3.8KB (200 OK)
+
+● Web Search("gdm 48 49 keyring luks password kernel keyring autologin broken
+            2025 no longer works")
+  ⎿  Did 1 search in 7s
+
+● Fetch(https://discourse.gnome.org/t/is-the-keyring-auto-login-unlock-with-luks
+       -passphrase-is-broken-removed/13033)
+  ⎿  Received 40.6KB (200 OK)
+
+● Web Search("gdm gdm-session-worker kernel keyring "cryptsetup" PAM_AUTHTOK
+            autologin source code keyring password")
+  ⎿  Did 1 search in 7s
+
+● Fetch(https://manpages.ubuntu.com/manpages/noble/man8/pam_systemd_loadkey.8.ht
+       ml)
+  ⎿  Received 13.9KB (200 OK)
+
+● Fetch(https://gitlab.gnome.org/GNOME/gdm/-/raw/main/data/pam-arch/gdm-autologi
+       n.pam)
+  ⎿  Received 572 bytes (200 OK)
+
+● Fetch(https://gitlab.gnome.org/GNOME/gdm/-/raw/main/data/gdm.service.in)
+  ⎿  Received 1KB (200 OK)
+
+● Web Search("pam_gdm.so "KeyringMode=inherit" gdm.service luks keyring arch not
+            working troubleshooting keyctl show")
+  ⎿  Did 1 search in 8s
+
+  Recalled 1 memory, wrote 2 memories (ctrl+o to expand)
+
+● Researched from upstream docs since GNOME isn't on this machine — all commands
+  below are for you to run on the desktop.
+
+  Why you're seeing both problems
+
+  Only a keyring literally named login (~/.local/share/keyrings/login.keyring,
+  shown as Login in Seahorse) participates in PAM auto-unlock. Per the
+  gnome-keyring PAM docs: "Upon authenticating the user, the PAM module tries to
+  unlock the 'login' keyring with the password entered by the user", and "if 
+  the 'login' keyring does not exist it is created with the user's password."
+
+  That explains both symptoms:
+
+  1. The keyring you made by hand is invisible to PAM. No matter what password
+  it has, pam_gnome_keyring.so will never try to unlock it — hence the prompt on
+  first use.
+  2. You didn't create "Login" — PAM did. The first time any PAM stack handed
+  your account password to pam_gnome_keyring it created the login keyring
+  silently. On Arch that happens on a manual GDM login, a lock-screen unlock
+  (/etc/pam.d/gdm-password includes the module), or a tty login. Nothing you did
+  wrong.
+
+  Also: matching the keyring password to your LUKS passphrase only helps in one
+  specific configuration, described next. There's no generic "keyring reads the
+  LUKS password" feature.
+
+  The mechanism that actually gives you one password at boot
+
+  systemd-cryptsetup caches a successful LUKS passphrase in root's kernel
+  keyring under the key name cryptsetup, with a 2.5-minute expiry. GDM's
+  pam_gdm.so reads it and sets it as PAM_AUTHTOK, so pam_gnome_keyring further
+  down the stack unlocks the login keyring as if you'd typed it. Arch's
+  /etc/pam.d/gdm-autologin already ships the wiring:
+
+  auth       [success=ok default=1]      pam_gdm.so
+  auth       optional                    pam_gnome_keyring.so
+  ...
+  session    optional                    pam_gnome_keyring.so auto_start
+
+  Four conditions must all hold:
+
+  1. The initramfs must use systemd's cryptsetup, not the encrypt hook. This is
+  the most common reason it silently doesn't work — the old encrypt hook never
+  caches the passphrase. In /etc/mkinitcpio.conf:
+
+  HOOKS=(base systemd autodetect microcode modconf kms keyboard sd-vconsole
+  block sd-encrypt filesystems fsck)
+
+  (systemd replaces udev, sd-vconsole replaces consolefont keymap, sd-encrypt
+  replaces encrypt.) The kernel cmdline changes too —
+  rd.luks.name=<LUKS-partition-UUID>=root root=/dev/mapper/root instead of
+  cryptdevice=. Then sudo mkinitcpio -P. Keep a known-good boot entry, since a
+  wrong cmdline here means an unbootable system.
+
+  2. The password must be on the login keyring. In Seahorse (Passwords and 
+  Keys): right-click Login → Change Password (old = your account password, new =
+  your LUKS passphrase) → right-click → Set as default. Then either delete your
+  hand-made keyring, or move its items into Login. If you'd rather keep it,
+  unlock it once and tick "Automatically unlock this on login" — that stores its
+  password inside the login keyring.
+
+  3. Ideally make account password = LUKS passphrase = keyring password. GNOME's
+  Michael Catanzaro, on this exact question: "Your keyring password needs to 
+  match your user account password or it won't auto-unlock." If they diverge,
+  lock-screen unlocks stop unlocking the keyring and passwd changes desync it —
+  likely a factor in the "disappearing" keyring you saw. (If root ever reset
+  your password with passwd or /etc/shadow was edited directly, the keyring
+  can't be re-keyed and the prompt returns permanently.)
+
+  4. Type the LUKS passphrase right on the first try, and let autologin complete
+  inside 2.5 minutes. A retry at the LUKS prompt is not cached — that's
+  systemd#17565 (https://github.com/systemd/systemd/issues/17565), closed as
+  not-their-bug.
+
+  Verifying and debugging
+
+  sudo keyctl show @u          # within 2.5 min of boot: expect a "user: 
+  cryptsetup" key
+  journalctl -b -u gdm | grep -i -E 'keyring|pam_gdm'
+  grep -rn pam_gnome_keyring /etc/pam.d/
+
+  No cryptsetup key → condition 1 isn't in effect. Also watch for duplicate
+  pam_gnome_keyring.so lines: having them in /etc/pam.d/system-login and in
+  gdm-password/gdm-autologin (which include it) is a known Arch breakage; remove
+  the ones in system-login. Don't override KeyringMode= in gdm.service — it
+  ships KeyringMode=shared precisely so GDM can see root's user keyring.
+
+  If pam_gdm.so still misbehaves, systemd ≥ 255 has a generic replacement —
+  -auth optional pam_systemd_loadkey.so placed before pam_gnome_keyring in the
+  autologin stack (same cryptsetup key name, works for SDDM/KWallet too).
+
+  The fallback that always works
+
+  Give the Login keyring a blank password: Seahorse → right-click Login → Change
+  Password → leave the new password empty → accept the warning. It then unlocks
+  with no passphrase at all, regardless of initramfs setup. Cost: the keyring
+  file is stored unencrypted, so your secrets rest on LUKS plus file permissions
+  only. Since autologin already means anyone who powers on the laptop lands in
+  your unlocked session, that's nearly the same threat model you've already
+  accepted — I'd take this if the sd-encrypt migration isn't worth the risk to
+  you.
+
+  One expectation to set: Catanzaro also said GNOME's direction is
+  home-directory encryption, with full-disk LUKS becoming "a corner case that is
+  no longer important" — so the pam_gdm path is likely to stay fragile across
+  releases, while the blank-password route won't break.
+
+  Sources:
+  - Gnome Keyring: Automatic Unlocking / PAM — GNOME Wiki
+  (https://wiki.gnome.org/Projects(2f)GnomeKeyring(2f)Pam.html)
+  - GNOME/Keyring — ArchWiki (https://wiki.archlinux.org/title/GNOME/Keyring)
+  - gdm data/pam-arch/gdm-autologin.pam (https://gitlab.gnome.org/GNOME/gdm/-/ra
+  w/main/data/pam-arch/gdm-autologin.pam)
+  - pam_systemd_loadkey(8)
+  (https://manpages.ubuntu.com/manpages/noble/man8/pam_systemd_loadkey.8.html)
+  and systemd#29658 (https://github.com/systemd/systemd/issues/29658)
+  - Is the Keyring auto-login unlock with LUKS passphrase broken/removed? —
+  GNOME Discourse (https://discourse.gnome.org/t/is-the-keyring-auto-login-unloc
+  k-with-luks-passphrase-is-broken-removed/13033)
+  - systemd#17565 — passphrase not reused after a failed first attempt
+  (https://github.com/systemd/systemd/issues/17565)
+  - Unlock Gnome Keyring with Auto Login — jakesco.com
+  (https://jakesco.com/posts/unlock-keyring-at-boot/)
+
+  I also noted for future sessions that GNOME questions here concern a different
+  machine, so I'll research rather than inspect locally.
+
+✻ Sautéed for 15m 37s
+
+※ recap: Goal: make your GNOME login keyring unlock automatically under GDM autologin. I researched the fix and gave you the steps. Next: on the desktop, switch mkinitcpio to the systemd/sd-encrypt hooks, then set the Login keyring's password to your LUKS passphrase. (disable recaps in /config)
