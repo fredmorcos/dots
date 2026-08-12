@@ -41,6 +41,7 @@
  (autoload 'qol/insert-pair-double-quotes "qol")
  (autoload 'qol/insert-pair-backtick      "qol")
  (autoload 'qol/get-trimmed-line-string   "qol")
+ (autoload 'qol/active-region-contents    "qol")
  (autoload 'qol/insert-buffer-name        "qol" nil t)
  (autoload 'qol/replace-escapes           "qol" nil t)
  (autoload 'qol/generate-password         "qol" nil t))
@@ -155,11 +156,15 @@
  (define-key global-map (kbd "M-\"") #'surround-insert))
 
 (config "Editing Text"
+ (package 'crux)
+
  (after 'text-mode
   (add-hook 'text-mode-hook #'jinx-mode))
 
  (define-key global-map (kbd "C-p") #'casual-editkit-main-tmenu)
  (define-key global-map (kbd "C-c d") #'duplicate-dwim)
+ (define-key global-map (kbd "C-<backspace>") #'crux-kill-line-backwards)
+ (define-key global-map [remap kill-whole-line] #'crux-kill-whole-line)
 
  (package 'volatile-highlights)
  (after 'volatile-highlights (diminish 'volatile-highlights-mode))
@@ -247,9 +252,8 @@
   (defun ctrlf-forward-default (&optional arg)
    (interactive "P")
    (ctrlf-forward ctrlf-default-search-style
-    (null arg) (if (region-active-p)
-                (buffer-substring (region-beginning) (region-end))
-                nil)
+    (null arg)
+    (qol/active-region-contents)
     nil t)))
 
  (ctrlf-mode))
@@ -598,8 +602,8 @@
   "Run grep in non-project buffers and git-grep in project buffers."
   (interactive)
   (if (and (fboundp 'projectile-project-root) (projectile-project-root))
-   (consult-git-grep)
-   (consult-grep)))
+   (consult-git-grep (projectile-project-root) (qol/active-region-contents))
+   (consult-grep nil (qol/active-region-contents))))
 
  (define-key global-map (kbd "M-Y") #'consult-yank-pop)
  (define-key global-map (kbd "M-g I") #'consult-imenu-multi)
@@ -1619,7 +1623,7 @@
    (end-of-line)
    (when (search-backward amount-marker (pos-bol) t)
     (right-char))
-   (let ((text (buffer-substring (point) (pos-eol)))
+   (let ((text (buffer-substring-no-properties (point) (pos-eol)))
          (difference (- (current-column) 64)))
     (delete-region (point) (pos-eol))
     (if (> difference 0)
