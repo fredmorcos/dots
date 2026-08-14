@@ -186,6 +186,7 @@ lzip
 lzop
 man-db
 man-pages
+mbedtls
 mesa-demos
 mesa-utils
 meson
@@ -276,6 +277,7 @@ python-pyaml
 python-pyasn
 python-pycryptodome
 python-pygit2
+python-pygls
 python-pylast
 python-pymad
 python-pyphen
