@@ -260,6 +260,7 @@ python-httplib2
 python-installer
 python-keystone
 python-langdetect
+python-librosa
 python-linkify-it-py
 python-lz4
 python-mpd2
