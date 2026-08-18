@@ -914,6 +914,7 @@
  (package 'nerd-icons-dired)
 
  (after 'dired-async (diminish 'dired-async-mode "As"))
+ (after 'nerd-icons-dired (diminish 'nerd-icons-dired-mode))
 
  (defun init/dired-setup ()
   "Setup dired requires."
