@@ -38,7 +38,7 @@ export USE_SYMENGINE=1
 PATH="$HOME/Workspace/dots/scripts:$PATH"
 PATH="$HOME/.local/share/rust/cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
-PATH="/usr/lib/ccache/bin/:$PATH"
+PATH="/usr/lib/ccache/bin/:/usr/lib/ccache/:$PATH"
 LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
 export PATH LD_LIBRARY_PATH
 
@@ -77,3 +77,9 @@ export SIGNAL_PASSWORD_STORE=gnome-libsecret
 # export WGETRC="$XDG_CONFIG_HOME/wget/rc"
 # export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 # export GOPATH="$XDG_DATA_HOME/go"
+
+# Dovecot buildbot
+if [ -r "/bb/venv/tester/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  . /bb/venv/tester/bin/activate
+fi
