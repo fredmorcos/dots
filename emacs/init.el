@@ -478,10 +478,17 @@
   (define-key global-map [remap other-window] #'init/find-file-other-window)))
 
 (config "Backups and Autosaves"
+ (defun init/inhibit-some-backups (name)
+  "Disable backups for file called NAME."
+  (if (string-prefix-p (expand-file-name "~/Documents") name)
+   nil
+   (normal-backup-enable-predicate name)))
+
  (after 'files
   (setopt
    auto-save-default t
    backup-inhibited nil
+   backup-enable-predicate #'init/inhibit-some-backups
    make-backup-files t
    ;; Prefer the newest version of a file.
    load-prefer-newer t
