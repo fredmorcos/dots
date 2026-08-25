@@ -385,6 +385,7 @@
   (advice-add 'help-function-def--button-function :after #'init/recenter))
 
  (after 'info
+  (declvar Info-mode-map)
   (define-key Info-mode-map (kbd "C-p") #'casual-info-tmenu))
 
  (package 'transient)
@@ -393,7 +394,9 @@
 
 (config "User Interface"
  (package 'nerd-icons)
+
  (after 'tooltip (setopt tooltip-use-echo-area t))
+
  (after 'display-line-numbers
   (setopt
    display-line-numbers-grow-only t
@@ -815,7 +818,7 @@
   (add-hook 'tree-sitter-mode-hook #'init/tree-sitter-langs-install-grammars))
  (after 'tree-sitter-hl
   (set-face-attribute 'tree-sitter-hl-face:property nil
-   :inherit font-lock-keyword-face))
+   :inherit 'font-lock-keyword-face))
  (after 'tree-sitter-langs-build
   (declvar tree-sitter-langs-grammar-dir)
   (setopt tree-sitter-langs-git-dir
@@ -1581,7 +1584,8 @@
  (after 'elisp-mode
   (setopt
    lisp-indent-offset 1
-   lisp-indent-function #'common-lisp-indent-function)
+   lisp-indent-function #'common-lisp-indent-function
+   elisp-fontify-semantically t)
   (advice-add 'elisp-completion-at-point :around #'cape-wrap-case-fold)
   (advice-add 'elisp-completion-at-point :around #'cape-wrap-nonexclusive)
   (define-key emacs-lisp-mode-map
@@ -1594,6 +1598,7 @@
   (add-hook 'emacs-lisp-mode-hook #'highlight-quoted-mode)
   (add-hook 'emacs-lisp-mode-hook #'symbol-overlay-mode)
   (add-hook 'emacs-lisp-mode-hook #'whitespace-mode)
+  (add-hook 'emacs-lisp-mode-hook #'cursor-sensor-mode)
 
   (after 'company
    (setq-mode-local emacs-lisp-mode
