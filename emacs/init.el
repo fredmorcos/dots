@@ -285,10 +285,11 @@
  (windmove-swap-states-default-keybindings)
  (windmove-delete-default-keybindings)
 
- (autoload 'winner-undo "winner" nil t)
- (autoload 'winner-redo "winner" nil t)
+ (define-key global-map (kbd "C-x w <right>") #'window-layout-rotate-clockwise)
 
  (winner-mode)
+ (autoload 'winner-undo "winner" nil t)
+ (autoload 'winner-redo "winner" nil t)
  (after 'winner
   (declvar winner-mode-map)
   (define-key winner-mode-map (kbd "C-c <left>") nil t)
