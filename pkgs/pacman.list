@@ -99,8 +99,8 @@ fdupes
 ffmpegthumbnailer
 file-roller
 firefox
-flatpak
 flatpak-xdg-utils
+flatseal
 foot
 foot-terminfo
 fooyin
@@ -119,6 +119,7 @@ gnome-disk-utility
 gnome-podcasts
 gnome-tweaks
 gptfdisk
+gradia
 graphicsmagick
 grcov
 gst-libav
