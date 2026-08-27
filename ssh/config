@@ -18,8 +18,8 @@ Host gitlab-dovecot
   IdentityFile ~/.ssh/id_ed25519.pub
 
 Host gitlab-ox
-  User fred.morcos
-  HostName gitlab.com/openxchange
+  User git
+  HostName gitlab.com
   IdentityFile ~/.ssh/id_ed25519.pub
 
 Host rpi
