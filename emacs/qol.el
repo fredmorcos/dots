@@ -80,8 +80,8 @@
    (file-relative-name buffer-name root)
    buffer-name)))
 
-(defun qol/active-region-contents ()
- "Get contents of the active region, or NIL otherwise."
+(defun qol/region-contents ()
+ "Get region contents, or NIL otherwise."
  (if (region-active-p)
   (buffer-substring-no-properties (region-beginning) (region-end))
   nil))

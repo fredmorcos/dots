@@ -41,7 +41,7 @@
  (autoload 'qol/insert-pair-double-quotes "qol")
  (autoload 'qol/insert-pair-backtick      "qol")
  (autoload 'qol/get-trimmed-line-string   "qol")
- (autoload 'qol/active-region-contents    "qol")
+ (autoload 'qol/region-contents           "qol")
  (autoload 'qol/insert-buffer-name        "qol" nil t)
  (autoload 'qol/replace-escapes           "qol" nil t)
  (autoload 'qol/generate-password         "qol" nil t))
@@ -251,10 +251,12 @@
 
   (defun ctrlf-forward-default (&optional arg)
    (interactive "P")
-   (ctrlf-forward ctrlf-default-search-style
-    (null arg)
-    (qol/active-region-contents)
-    nil t)))
+   (let ((region-contents (qol/region-contents)))
+    (deactivate-mark)
+    (ctrlf-forward ctrlf-default-search-style
+     (null arg)
+     region-contents
+     nil t))))
 
  (ctrlf-mode))
 
@@ -613,8 +615,8 @@
   "Run grep in non-project buffers and git-grep in project buffers."
   (interactive)
   (if (and (fboundp 'projectile-project-root) (projectile-project-root))
-   (consult-git-grep (projectile-project-root) (qol/active-region-contents))
-   (consult-grep nil (qol/active-region-contents))))
+   (consult-git-grep (projectile-project-root) (qol/region-contents))
+   (consult-grep nil (qol/region-contents))))
 
  (define-key global-map (kbd "M-Y") #'consult-yank-pop)
  (define-key global-map (kbd "M-g I") #'consult-imenu-multi)
@@ -769,7 +771,6 @@
    (define-key company-active-map (kbd "TAB") #'company-complete-common)
    (define-key company-active-map [tab] #'company-complete-common)
    (set-face-attribute 'company-tooltip nil :background "Gray98")
-   ;; (add-hook 'company-mode-hook #'company-posframe-mode)
    (define-key company-active-map (kbd "C-h") #'company-show-doc-buffer)
    (define-key company-active-map (kbd "<f1>") #'company-show-doc-buffer)
    (define-key company-active-map (kbd "C-w") #'company-show-location)
@@ -793,7 +794,7 @@
    (declvar company-mode-map)
    (declfun company-indent-or-complete-common "company")
    (define-key company-mode-map [remap indent-for-tab-command]
-    #'company-indent-or-complete-common))
+    #'company-indent-or-complete-common)
 
   (after 'company-dabbrev-code
    (setopt company-dabbrev-code-completion-styles t)))
@@ -891,7 +892,6 @@
   (advice-add 'flycheck-error-list-goto-error :after #'init/recenter)
 
   (setopt
-   flycheck-help-echo-function nil
    flycheck-checker-error-threshold nil
    flycheck-mode-line-prefix "Fc"
    flycheck-check-syntax-automatically '(idle-change mode-enabled save new-line)
@@ -1808,23 +1808,23 @@
 
  (after 'lsp-rust
   (setopt
-   lsp-rust-build-bin t
+   lsp-rust-build-bin ""
    lsp-rust-build-lib t
    lsp-rust-all-features t
    lsp-rust-full-docs t
    lsp-rust-analyzer-cargo-watch-command "clippy"
    lsp-rust-racer-completion nil
    lsp-rust-clippy-preference "on"
-   lsp-rust-analyzer-checkonsave-features "all"
+   lsp-rust-analyzer-checkonsave-features '("all")
    lsp-rust-analyzer-assist-prefer-self t
    lsp-rust-analyzer-binding-mode-hints t
    lsp-rust-analyzer-closure-capture-hints t
-   lsp-rust-analyzer-closure-return-type-hints "with-block"
+   lsp-rust-analyzer-closure-return-type-hints "with_block"
    lsp-rust-analyzer-completion-term-search-enable t
    lsp-rust-analyzer-discriminants-hints "fieldless"
    lsp-rust-analyzer-display-chaining-hints t
    lsp-rust-analyzer-display-closure-return-type-hints t
-   lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip-trivial"
+   lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial"
    lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t
    lsp-rust-analyzer-display-parameter-hints t
    lsp-rust-analyzer-display-reborrow-hints "mutable"
