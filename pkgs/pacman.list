@@ -124,6 +124,7 @@ graphicsmagick
 grcov
 gst-libav
 gst-plugin-libcamera
+gst-plugin-svthevcenc
 gst-plugin-va
 gst-plugins-bad
 gvfs-mtp
@@ -213,6 +214,7 @@ obs-studio
 obsidian
 openbsd-netcat
 opencl-mesa
+openslide
 opensnitch
 otf-commit-mono-nerd
 paccat
