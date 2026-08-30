@@ -13,10 +13,9 @@
      `(setq start-time (current-time)))
    ,@body
    ,(unless (eq *init-benchmark* :disabled)
-     `(let* ((end-time (current-time))
-             (total-time (time-subtract end-time start-time))
-             (total-time-sec (time-to-seconds total-time)))
-       (message "[Init-Benchmark] %s took %.2f seconds" ,name total-time-sec)))))
+     `(let* ((total-time (float-time (time-since start-time))))
+       (unless (< total-time 0.01)
+        (message "[Init-Benchmark] %s took %.2f seconds" ,name total-time))))))
 
 ;; Declarations
 
