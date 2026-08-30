@@ -4,9 +4,19 @@
 
 ;;; Configuration Top-Level
 
-(defmacro config (_name &rest body)
+(defvar *init-benchmark* :disabled)
+
+(defmacro config (name &rest body)
  "Create a config section with NAME and BODY."
- `(progn ,@body))
+ `(progn
+   ,(unless (eq *init-benchmark* :disabled)
+     `(setq start-time (current-time)))
+   ,@body
+   ,(unless (eq *init-benchmark* :disabled)
+     `(let* ((end-time (current-time))
+             (total-time (time-subtract end-time start-time))
+             (total-time-sec (time-to-seconds total-time)))
+       (message "[Init-Benchmark] %s took %.2f seconds" ,name total-time-sec)))))
 
 ;; Declarations
 

@@ -1691,6 +1691,10 @@
     corfu-auto-prefix 10
     corfu-auto-delay 10))
 
+  (after 'flycheck
+   (defvar flycheck-idle-change-delay)
+   (setq-mode-local hledger-mode flycheck-idle-change-delay 1.0))
+
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-case-fold)
   (advice-add 'hledger-completion-at-point :around #'cape-wrap-nonexclusive)
 
