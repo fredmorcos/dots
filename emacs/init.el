@@ -1487,6 +1487,9 @@
  (after 'llvm-ts-mode
   (add-hook 'llvm-ts-mode-hook #'demangle-mode)))
 
+(config "Systemd"
+ (package 'journalctl-mode))
+
 (config "Archlinux PKGBUILDs"
  (package 'pkgbuild-mode)
  (mode (rx bos "PKGBUILD" eos) #'pkgbuild-mode)
