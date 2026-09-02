@@ -83,7 +83,11 @@
 (defun qol/region-contents ()
  "Get region contents, or NIL otherwise."
  (if (region-active-p)
-  (buffer-substring-no-properties (region-beginning) (region-end))
+  (let* ((begin (region-beginning))
+         (end (region-end))
+         (region-contents (buffer-substring-no-properties begin end)))
+   (deactivate-mark)
+   region-contents)
   nil))
 
 (defun qol/yank-location ()

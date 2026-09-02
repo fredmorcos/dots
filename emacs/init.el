@@ -251,12 +251,10 @@
 
   (defun ctrlf-forward-default (&optional arg)
    (interactive "P")
-   (let ((region-contents (qol/region-contents)))
-    (deactivate-mark)
-    (ctrlf-forward ctrlf-default-search-style
-     (null arg)
-     region-contents
-     nil t))))
+   (ctrlf-forward ctrlf-default-search-style
+    (null arg)
+    (qol/region-contents)
+    nil t)))
 
  (ctrlf-mode))
 
