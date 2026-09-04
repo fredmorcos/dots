@@ -144,6 +144,15 @@
    ;; Disable version control when opening files.
    (remove-hook 'find-file-hook #'vc-refresh-state))))
 
+(config "Network Security"
+ (after 'gnutls
+  (setopt
+   gnutls-verify-error t
+   gnutls-min-prime-bits 3072))
+ (after 'tls
+  (setopt
+   tls-checktrust t)))
+
 (config "Packages"
  (after 'url-vars
   (setopt
