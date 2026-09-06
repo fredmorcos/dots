@@ -803,7 +803,7 @@
 
   (after 'cape
    (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
-   (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))))
+   (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive)))))
 
 (config "Syntax Highlighting"
  (package 'tree-sitter)
