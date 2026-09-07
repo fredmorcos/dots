@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Apartment Expense
+# key: apt
+# --
+
+Expenses:Apartment:DC12:Top-3-44:${1:category}                 EUR ${2:amount}
+ (Assets:Apartment:DC12:Fred:Top-3-44:${1})                     EUR ${2}
+ Liabilities:Oliver:Apartment:DC12:Top-3-44:${1}                EUR ${2}
+ (Assets:Apartment:DC12:Oliver:Top-3-44:${1})                   EUR ${2}
