@@ -278,8 +278,13 @@
  ;; indent.el
  (after 'emacs
   (setopt
-   tab-always-indent 'complete
-   tab-first-completion 'word-or-paren-or-punct))
+   ;; tab-always-indent 'complete
+   ;; tab-first-completion 'word-or-paren-or-punct
+
+   ;; TAB indents and nothing else: in-buffer completion lives on C-M-i, see the
+   ;; "In-buffer Completion" section.  `tab-first-completion' is irrelevant while
+   ;; `tab-always-indent' is t, so it is gone.
+   tab-always-indent t))
 
  (after 'simple
   (setopt
@@ -782,8 +787,17 @@
    (declfun company-show-location "company")
 
    (declvar company-active-map)
+
+   ;; C-M-i again extends the common part.  TAB is dropped on purpose, in both forms
+   ;; company binds it in: company aborts on any command that is not its own, so TAB
+   ;; dismisses the popup and indents.
+   ;; (define-key company-active-map (kbd "C-M-i") #'company-complete-common)
+   ;; (define-key company-active-map (kbd "TAB") nil t)
+   ;; (define-key company-active-map [tab] nil t)
+
    (define-key company-active-map (kbd "TAB") #'company-complete-common)
    (define-key company-active-map [tab] #'company-complete-common)
+
    (set-face-attribute 'company-tooltip nil :background "Gray98")
    (define-key company-active-map (kbd "C-h") #'company-show-doc-buffer)
    (define-key company-active-map (kbd "<f1>") #'company-show-doc-buffer)
@@ -791,6 +805,7 @@
 
    (setopt
     company-idle-delay nil
+    company-require-match nil
     company-keywords-ignore-case t
     company-selection-wrap-around t
     company-tooltip-align-annotations t
@@ -804,12 +819,28 @@
                            company-sort-by-backend-importance
                            company-sort-prefer-same-case-prefix))
 
+   (declvar company-mode-map)
+
    ;; Circumvent the CAPF mechanism to avoid having to press TAB twice to get a completion
    ;; even when there is no indentation happening.
-   (declvar company-mode-map)
-   (declfun company-indent-or-complete-common "company")
-   (define-key company-mode-map [remap indent-for-tab-command]
-    #'company-indent-or-complete-common)
+   ;; (declfun company-indent-or-complete-common "company")
+   ;; (define-key company-mode-map [remap indent-for-tab-command]
+   ;;  #'company-indent-or-complete-common)
+
+   ;; Completion is triggered explicitly, never by TAB: `company-indent-or-complete-common'
+   ;; would complete whenever indentation turned out to be a no-op, which is exactly what
+   ;; happens on a closing paren.  The global C-M-i binding is not enough on its own since
+   ;; company leaves `completion-in-region-function' alone, so plain `completion-at-point'
+   ;; would open *Completions* instead of the company popup.
+   (declfun company-complete "company")
+   (define-key company-mode-map (kbd "C-M-i") #'company-complete)
+
+   ;; Company remaps both indent commands to `company-indent-for-tab-command', which only
+   ;; completes while `tab-always-indent' is `complete' and is therefore already inert.
+   ;; Drop the remaps anyway so that TAB reaches the major mode's own indent command:
+   ;; cc-mode's carries the region-unmarking advice and obeys `c-tab-always-indent'.
+   (define-key company-mode-map [remap indent-for-tab-command] nil t)
+   (define-key company-mode-map [remap c-indent-line-or-region] nil t)
 
    ;; Keep the inline flycheck annotations out of the way of the company completion popup:
    ;; the started hook runs before the frontend draws, and `company-cancel' hides the
