@@ -18,6 +18,19 @@
   (add-hook 'after-init-hook 'profiler-report)
   (profiler-start 'cpu)))
 
+(config "Customization Metadata"
+ ;; Every `setopt' calls `custom-load-symbol', which requires cus-start.el to pick up the
+ ;; customization metadata of the variables defined in C.  cus-start.el appends to
+ ;; `custom-delayed-init-variables' whenever `after-init-time' is nil, but startup.el has
+ ;; already set that variable to t by the time this file runs, so the load dies with a
+ ;; `wrong-type-argument' -- swallowed by `custom-load-symbol's own `ignore-errors' -- and
+ ;; never reaches its `provide'.  cus-start.el is then reloaded for every single variable
+ ;; that `setopt' touches, which costs over half of the startup time.  Load it once here
+ ;; with the list rebound; the delayed-init phase it wants to register for is over.
+ (with-demoted-errors "Preloading cus-start: %S"
+  (let ((custom-delayed-init-variables nil))
+   (require 'cus-start))))
+
 (config "Garbage Collection"
  (after 'emacs
   (setopt

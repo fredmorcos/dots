@@ -621,7 +621,13 @@
   (define-key consult-narrow-map (kbd "C-?") 'consult-narrow-help)
   (setopt
    consult-preview-key "M-."
-   consult-project-function (lambda (_) (projectile-project-root))))
+   consult-project-function (lambda (_) (projectile-project-root)))
+
+  (declvar consult-buffer-sources)
+
+  ;; consult-source-bookmark is very slow, remove it from the list of sources for
+  ;; consult. Use `list-bookmarks` instead when you need it.
+  (delq 'consult-source-bookmark consult-buffer-sources))
 
  (defun init/consult-grep-or-git-grep ()
   "Run grep in non-project buffers and git-grep in project buffers."
