@@ -6,6 +6,9 @@
  (push "~/Workspace/dots/emacs/" load-path)
  (require 'init-macros))
 
+(config "Versioning"
+ (defvar *init/new-emacs?* (not (string-version-lessp emacs-version "30.1"))))
+
 (config "Configuration options"
  (defvar *init/completion-system* :company "Which completion system to use."))
 
@@ -370,8 +373,9 @@
  (setopt warning-minimum-level :emergency))
 
 (config "Help"
- (package 'casual)
- (package 'casual-suite)
+ (when *init/new-emacs?*
+  (package 'casual)
+  (package 'casual-suite))
 
  (after 'help
   (setopt
@@ -447,7 +451,10 @@
 (config "Symbol handling and Multiple Cursors"
  (package 'symbol-overlay)
  (package 'symbol-overlay-mc)
- (package 'casual-symbol-overlay)
+
+ (when *init/new-emacs?*
+  (package 'casual-symbol-overlay))
+
  (after 'symbol-overlay
   (diminish 'symbol-overlay-mode "So")
   (setopt symbol-overlay-idle-time 0.1)
@@ -734,6 +741,7 @@
  (config "Corfu"
   (package 'corfu)
   (package 'nerd-icons-corfu)
+
   (after 'corfu
    ;; Show icons in corfu popups.
    (declvar corfu-margin-formatters)
@@ -751,7 +759,9 @@
     ;; corfu-max-width 50
     corfu-min-width 50)
    (add-hook 'corfu-mode-hook #'corfu-popupinfo-mode)
-   (add-hook 'corfu-mode-hook #'corfu-history-mode))
+   (add-hook 'corfu-mode-hook #'corfu-history-mode)
+   (add-hook 'completion-in-region-mode-hook #'init/corfu-sync-flycheck-annotations))
+
   (after 'corfu-popupinfo (setopt corfu-popupinfo-delay '(1.25 . 0.5)))
   (after 'corfu-history
    (after 'savehist
@@ -794,6 +804,13 @@
    (define-key company-mode-map [remap indent-for-tab-command]
     #'company-indent-or-complete-common)
 
+   ;; Keep the inline flycheck annotations out of the way of the company completion popup:
+   ;; the started hook runs before the frontend draws, and `company-cancel' hides the
+   ;; popup before the after-completion hook, which covers both outcomes and runs once the
+   ;; backend's `post-completion' has settled the text.
+   (add-hook 'company-completion-started-hook #'init/disable-flycheck-annotations)
+   (add-hook 'company-after-completion-hook #'init/enable-flycheck-annotations))
+
   (after 'company-dabbrev-code
    (setopt company-dabbrev-code-completion-styles t)))
 
@@ -803,7 +820,7 @@
 
   (after 'cape
    (advice-add 'cape-file :around #'cape-wrap-nonexclusive)
-   (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive)))))
+   (advice-add 'cape-dabbrev :around #'cape-wrap-nonexclusive))))
 
 (config "Syntax Highlighting"
  (package 'tree-sitter)
@@ -873,6 +890,39 @@
    display-buffer-alist))
 
  (package 'flycheck)
+ (declfun flycheck-annotate-mode "flycheck")
+
+ ;; Remember which buffer the annotations were suspended in, rather than just switching
+ ;; them back on: company runs its cancelled hook even when it never ran the started hook
+ ;; (a sole match aborts straight away), and corfu tears down in whichever buffer happens
+ ;; to be current.  So an unconditional re-enable annotates buffers that never asked for
+ ;; annotations, while a buffer-local flag strands the ones that did.  Only one popup is
+ ;; ever up, so one suspended buffer is enough.  Company's hooks pass an argument and
+ ;; corfu's pass none, hence the optional one both ignore.
+ (defvar *init/flycheck-annotations-suspended-buffer* nil)
+
+ (defun init/disable-flycheck-annotations (&optional _completion-state)
+  (unless *init/flycheck-annotations-suspended-buffer*
+   (when (bound-and-true-p flycheck-annotate-mode)
+    (setq *init/flycheck-annotations-suspended-buffer* (current-buffer))
+    (flycheck-annotate-mode -1))))
+
+ (defun init/enable-flycheck-annotations (&optional _completion-state)
+  (when-let* ((buffer *init/flycheck-annotations-suspended-buffer*))
+   (setq *init/flycheck-annotations-suspended-buffer* nil)
+   (when (buffer-live-p buffer)
+    (with-current-buffer buffer (flycheck-annotate-mode 1)))))
+
+ ;; Corfu has no completion-started/finished hooks, so drive it off the mode it actually
+ ;; toggles.  That mode is global and not corfu's alone, so only suspend for a corfu
+ ;; popup.  Resume unconditionally though, since the tear-down can run in a buffer where
+ ;; corfu was never enabled.
+ (defun init/corfu-sync-flycheck-annotations ()
+  (if completion-in-region-mode
+   (when (bound-and-true-p corfu-mode)
+    (init/disable-flycheck-annotations))
+   (init/enable-flycheck-annotations)))
+
  (package 'consult-flycheck)
  (autoload 'flycheck-error-list-make-last-column "flycheck")
  (autoload 'flycheck-list-errors "flycheck")
@@ -1497,7 +1547,6 @@
 
 (config "Docker"
  (package 'dockerfile-mode)
- (package 'docker-compose-mode)
  (package 'docker)
  (define-key global-map (kbd "C-c D") #'docker))
 
