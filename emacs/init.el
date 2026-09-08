@@ -1762,18 +1762,34 @@
   (define-key hledger-mode-map (kbd "C-c +") 'hledger-increment-entry-date)
 
   (setopt
-   hledger-invalidate-completions '(on-save on-idle)
+   hledger-invalidate-completions '(on-save)
    hledger-refresh-completions-idle-delay 5
    hledger-currency-string "")
 
+  (defvar *init/hledger-during-init* nil)
+
+  (advice-add 'hledger-mode-init :around
+   (lambda (fn &rest args)
+    (let ((*init/hledger-during-init* t))
+     (apply fn args))))
+
+  (advice-add 'hledger-update-accounts :around
+   (lambda (fn &rest args)
+    (if *init/hledger-during-init*
+     (run-with-idle-timer 1 nil 'hledger-update-accounts)
+     (apply fn args))))
+
   (declvar hledger-mode)
+
   (after 'emacs
    (setq-mode-local hledger-mode
     tab-width 1
     fill-column 100))
+
   (after 'newcomment
    (setq-mode-local hledger-mode
     comment-fill-column 100))
+
   (after 'corfu
    (declvar corfu-auto)
    (declvar corfu-auto-trigger)
