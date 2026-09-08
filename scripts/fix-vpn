@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o noglob
+
+sudo ip link set dev proton0 mtu 1380
+printf 'MTU set to '
+ip link show proton0 | grep -o 'mtu [0-9]*'
