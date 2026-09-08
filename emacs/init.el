@@ -281,7 +281,9 @@
    tab-always-indent 'complete
    tab-first-completion 'word-or-paren-or-punct))
 
- (after 'simple (setopt indent-tabs-mode nil)))
+ (after 'simple
+  (setopt
+   indent-tabs-mode nil)))
 
 (config "Window Movement and Management"
  (windmove-default-keybindings)
@@ -760,6 +762,8 @@
     corfu-min-width 50)
    (add-hook 'corfu-mode-hook #'corfu-popupinfo-mode)
    (add-hook 'corfu-mode-hook #'corfu-history-mode)
+
+   ;; Keep the inline flycheck annotations out of the way of the corfu popup.
    (add-hook 'completion-in-region-mode-hook #'init/corfu-sync-flycheck-annotations))
 
   (after 'corfu-popupinfo (setopt corfu-popupinfo-delay '(1.25 . 0.5)))
@@ -772,9 +776,11 @@
   (package 'company)
   (after 'company
    (diminish 'company-mode "Co")
+
    (declfun company-complete-common "company")
    (declfun company-show-doc-buffer "company")
    (declfun company-show-location "company")
+
    (declvar company-active-map)
    (define-key company-active-map (kbd "TAB") #'company-complete-common)
    (define-key company-active-map [tab] #'company-complete-common)
@@ -782,6 +788,7 @@
    (define-key company-active-map (kbd "C-h") #'company-show-doc-buffer)
    (define-key company-active-map (kbd "<f1>") #'company-show-doc-buffer)
    (define-key company-active-map (kbd "C-w") #'company-show-location)
+
    (setopt
     company-idle-delay nil
     company-keywords-ignore-case t
