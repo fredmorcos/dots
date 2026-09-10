@@ -42,7 +42,8 @@ cmerge () {
   if [ -f "$SRC" ]; then
     # common
     # echo "Status: Found $PSRC -> $DST"
-    SRC="$SRC"
+    # SRC="$SRC"
+    true
   elif [ -f "$HSRC" ]; then
     # host-specific
     # echo "Status: Found $PHSRC -> $DST"
@@ -115,22 +116,28 @@ papirus_applications["org.kde.massif-visualizer"]="apps/org.kde.massif-visualize
 
 for application in "${!papirus_applications[@]}"; do
   icon=${papirus_applications[$application]}
+  icon_file="/usr/share/icons/Papirus/64x64/$icon.svg"
 
   source1="/usr/share/applications/$application.desktop"
   source2="$HOME/.local/share/flatpak/exports/share/applications/$application.desktop"
   dest="$HOME/.local/share/applications/$application.desktop"
-  if [ ! -f "$dest" ]; then
-    if [ -f "$source1" ]; then
-      cp "$source1" "$dest"
-      printf "Icon=/usr/share/icons/Papirus/64x64/%s.svg" "$icon" >> "$dest"
-    elif [ -f "$source2" ]; then
-      cp "$source2" "$dest"
-      printf "Icon=/usr/share/icons/Papirus/64x64/%s.svg" "$icon" >> "$dest"
+  if [ -f "$icon_file" ]; then
+    if [ ! -f "$dest" ]; then
+      if [ -f "$source1" ]; then
+        cp "$source1" "$dest"
+        echo "Icon=$icon_file" >> "$dest"
+      elif [ -f "$source2" ]; then
+        cp "$source2" "$dest"
+        echo "Icon=$icon_file" >> "$dest"
+      else
+        echo "Skip: No sources were found for application $application"
+      fi
     else
-      echo "Skip: No sources were found for application $application"
+      echo "Skip: Destination found for application $application, not going to overwrite"
     fi
-  else
-    echo "Skip: Destination found for application $application, not going to overwrite"
+  elif [ -f "$dest" ]; then
+    echo "Del: Remove application entry for $application because it has no icon"
+    rm -f "$dest"
   fi
 done
 
