@@ -281,7 +281,7 @@
    ;; tab-always-indent 'complete
    ;; tab-first-completion 'word-or-paren-or-punct
 
-   ;; TAB indents and nothing else: in-buffer completion lives on C-M-i, see the
+   ;; TAB indents and nothing else: in-buffer completion lives on C-M-i and C-i, see the
    ;; "In-buffer Completion" section.  `tab-first-completion' is irrelevant while
    ;; `tab-always-indent' is t, so it is gone.
    tab-always-indent t))
@@ -794,10 +794,11 @@
 
    (declvar company-active-map)
 
-   ;; C-M-i again extends the common part.  TAB is dropped on purpose, in both forms
-   ;; company binds it in: company aborts on any command that is not its own, so TAB
+   ;; C-M-i and C-i again extend the common part.  TAB is dropped on purpose, in both
+   ;; forms company binds it in: company aborts on any command that is not its own, so TAB
    ;; dismisses the popup and indents.
    ;; (define-key company-active-map (kbd "C-M-i") #'company-complete-common)
+   ;; (define-key company-active-map (kbd "C-i")   #'company-complete-common)
    ;; (define-key company-active-map (kbd "TAB") nil t)
    ;; (define-key company-active-map [tab] nil t)
 
@@ -833,13 +834,15 @@
    ;; (define-key company-mode-map [remap indent-for-tab-command]
    ;;  #'company-indent-or-complete-common)
 
-   ;; Completion is triggered explicitly, never by TAB: `company-indent-or-complete-common'
-   ;; would complete whenever indentation turned out to be a no-op, which is exactly what
-   ;; happens on a closing paren.  The global C-M-i binding is not enough on its own since
-   ;; company leaves `completion-in-region-function' alone, so plain `completion-at-point'
-   ;; would open *Completions* instead of the company popup.
+   ;; Completion is triggered explicitly, never by TAB:
+   ;; `company-indent-or-complete-common' would complete whenever indentation turned out
+   ;; to be a no-op, which is exactly what happens on a closing paren.  The global C-M-i
+   ;; and C-i bindings are not enough on their own since company leaves
+   ;; `completion-in-region-function' alone, so plain `completion-at-point' would open
+   ;; *Completions* instead of the company popup.
    (declfun company-complete "company")
    (define-key company-mode-map (kbd "C-M-i") #'company-complete)
+   (define-key company-mode-map (kbd "C-i") #'company-complete)
 
    ;; Company remaps both indent commands to `company-indent-for-tab-command', which only
    ;; completes while `tab-always-indent' is `complete' and is therefore already inert.
