@@ -411,8 +411,11 @@
 
  (after 'display-line-numbers
   (setopt
-   display-line-numbers-grow-only t
-   display-line-numbers-width-start t))
+   ;; Leave it to nil to avoid recalculating the width before every command.
+   ;; display-line-numbers-grow-only t
+   ;; Leave it to nil to avoid calculating buffer size and speed up buffer loading.
+   ;; display-line-numbers-width-start t
+   display-line-numbers-width 4))
 
  (defun init/pulse-line (&rest _)
   "Pulse the current line."
@@ -621,7 +624,10 @@
   (define-key consult-narrow-map (kbd "C-?") 'consult-narrow-help)
   (setopt
    consult-preview-key "M-."
-   consult-project-function (lambda (_) (projectile-project-root)))
+   consult-project-function (lambda (_) (projectile-project-root))
+   consult-async-input-debounce 0.1
+   consult-async-input-throttle 0.2
+   consult-async-refresh-delay 0.1)
 
   (declvar consult-buffer-sources)
 
