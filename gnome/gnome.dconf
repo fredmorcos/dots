@@ -97,6 +97,7 @@ clock-show-weekday=true
 color-scheme='default'
 cursor-blink=false
 cursor-theme='capitaine-cursors'
+cursor-size=32
 document-font-name='Serif 14'
 enable-hot-corners=true
 font-antialiasing='rgba'
