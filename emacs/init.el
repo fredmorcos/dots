@@ -849,6 +849,8 @@
    (declfun company-complete "company")
    (define-key company-mode-map (kbd "C-M-i") #'company-complete)
    (define-key company-mode-map (kbd "C-i") #'company-complete)
+   (define-key company-mode-map (kbd "TAB") nil t)
+   (define-key company-mode-map [tab] nil t)
 
    ;; Company remaps both indent commands to `company-indent-for-tab-command', which only
    ;; completes while `tab-always-indent' is `complete' and is therefore already inert.
