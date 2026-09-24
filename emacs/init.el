@@ -1674,7 +1674,8 @@
 
  (after 'sh-script
   (add-hook 'sh-mode-hook #'init/make-file-executable)
-  (add-hook 'sh-mode-hook #'tree-sitter-mode)
+  ;; (add-hook 'sh-mode-hook #'tree-sitter-mode)
+  (add-hook 'sh-mode-hook #'lsp)
   (add-hook 'bash-ts-mode-hook #'init/make-file-executable)
   (setopt
    sh-basic-offset 2
