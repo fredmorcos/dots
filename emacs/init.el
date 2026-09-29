@@ -45,6 +45,7 @@
  (autoload 'qol/insert-pair-backtick      "qol")
  (autoload 'qol/get-trimmed-line-string   "qol")
  (autoload 'qol/region-contents           "qol")
+ (autoload 'qol/count-todos               "qol")
  (autoload 'qol/insert-buffer-name        "qol" nil t)
  (autoload 'qol/replace-escapes           "qol" nil t)
  (autoload 'qol/generate-password         "qol" nil t))
@@ -1793,10 +1794,18 @@
 
   (declvar hledger-mode)
 
+  (defun init/hledger-show-todos ()
+   "Return a modeline string with the number of TODOs."
+   (let ((todo-count (qol/count-todos)))
+    (if (> todo-count 0)
+     (format " [TODOs: %s] " (qol/count-todos))
+     "")))
+
   (after 'emacs
    (setq-mode-local hledger-mode
     tab-width 1
-    fill-column 100))
+    fill-column 100
+    mode-line-format (append mode-line-format '((:eval (init/hledger-show-todos))))))
 
   (after 'newcomment
    (setq-mode-local hledger-mode

@@ -99,5 +99,14 @@
   (kill-new pos)
   (message "%s copied" pos)))
 
+(defun qol/count-todos ()
+ "Count the number of TODOs in the current buffer."
+ (save-excursion
+  (goto-char (point-min))
+  (let ((count 0))
+   (while (search-forward "TODO" nil t)
+    (setq count (1+ count)))
+   count)))
+
 (provide 'qol)
 ;;; qol.el ends here
