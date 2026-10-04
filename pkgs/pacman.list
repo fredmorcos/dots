@@ -298,7 +298,6 @@ python-rjsmin
 python-service-identity
 python-setuptools-rust
 python-titlecase
-python-trio
 python-typogrify
 python-uv
 python-virtualenv
