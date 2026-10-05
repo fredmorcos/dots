@@ -141,6 +141,23 @@ for application in "${!papirus_applications[@]}"; do
   fi
 done
 
+# Disable some user services which are not needed.
+disable_services="rygel.service localsearch-3.service orca.service
+                  org.gnome.Shell.CalendarServer
+                  org.gnome.Shell.CalendarServer@0.service
+                  org.gnome.Shell.CalendarServer@1.service
+                  gnome-user-share-webdav.service"
+
+for service in $disable_services; do
+  destination="$HOME/.config/systemd/user/$service"
+  if [ -f "$destination" ] || [ -L "$destination" ]; then
+    echo "Skip: Service $service already hidden"
+  else
+    echo "Disable: Disabling service $service"
+    ln -s "/dev/null" "$destination"
+  fi
+done
+
 # Figure out the default Firefox profile
 FIREFOX_PROFILE=$(
   awk '/\[/{prefix=$0; next} $1{print prefix $0}' ~/.mozilla/firefox/profiles.ini |
