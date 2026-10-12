@@ -121,7 +121,6 @@ gnome-podcasts
 gnome-tweaks
 gptfdisk
 gradia
-graphicsmagick
 grcov
 gst-libav
 gst-plugin-libcamera
@@ -280,13 +279,11 @@ python-pyalsa
 python-pyaml
 python-pyasn
 python-pycryptodome
-python-pygit2
 python-pygls
 python-pylast
 python-pymad
 python-pyphen
 python-pypng
-python-pyqt6
 python-pyserial
 python-pystache
 python-pyudev
@@ -303,7 +300,6 @@ python-uv
 python-virtualenv
 python-volume_key
 python-watchdog
-python-webcolors
 python-websockets
 python-xattr
 python-xlrd
