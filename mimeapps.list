@@ -338,3 +338,4 @@ video/x-theora+ogg=mpv.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/mailto=firefox.desktop;
+image/vnd.adobe.photoshop=gimp.desktop
