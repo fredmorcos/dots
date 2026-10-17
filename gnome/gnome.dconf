@@ -166,7 +166,7 @@ home=['<Control><Alt>h']
 www=['<Control><Alt>w']
 calculator=['<Super>F1']
 logout=@as []
-custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/']
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
 custom-keybindings/custom0/binding='<Control><Alt>t'
 custom-keybindings/custom0/command='foot'
 custom-keybindings/custom0/name='Terminal'
@@ -182,6 +182,9 @@ custom-keybindings/custom4/name='Sound Settings'
 custom-keybindings/custom5/binding='<Control><Alt>n'
 custom-keybindings/custom5/command='obsidian'
 custom-keybindings/custom5/name='Obsidian'
+custom-keybindings/custom2/binding='<Control><Alt>h'
+custom-keybindings/custom2/command='nautilus -w'
+custom-keybindings/custom2/name='Home Folder'
 
 # File Chooser
 [org/gtk/gtk4/settings/file-chooser]
