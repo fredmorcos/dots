@@ -177,7 +177,6 @@ linux-firmware
 linux-tools-meta
 lld
 lldb
-llvm
 logrotate
 loupe
 lrzip
