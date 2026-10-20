@@ -162,10 +162,12 @@ toggle-maximized=['<Super>Up']
 # Shortcuts
 [org/gnome/settings-daemon/plugins/media-keys]
 volume-step=5
-home=['<Control><Alt>h']
+home=@as []
 www=['<Control><Alt>w']
 calculator=['<Super>F1']
 logout=@as []
+control-center=['<Control><Alt>s']
+help=@as []
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
 custom-keybindings/custom0/binding='<Control><Alt>t'
 custom-keybindings/custom0/command='foot'
