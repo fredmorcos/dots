@@ -156,6 +156,13 @@ iwd
 lact
 lesspipe
 lhasa
+lib32-harfbuzz
+lib32-libavtp
+lib32-libpulse
+lib32-libsamplerate
+lib32-pipewire-v4l2
+lib32-speexdsp
+lib32-vulkan-mesa-layers
 libblockdev-dm
 libblockdev-lvm
 libdvdcss
@@ -172,7 +179,6 @@ libvdpau-va-gl
 libvoikko
 libwebp-utils
 libwpg
-linux
 linux-firmware
 linux-tools-meta
 lld
@@ -180,8 +186,6 @@ lldb
 logrotate
 loupe
 lrzip
-lsb-release
-lsof
 ltrace
 lzip
 lzop
@@ -206,6 +210,7 @@ net-tools
 networkmanager
 noto-fonts-emoji
 ntfs-3g
+ntsync-autoload
 nuspell
 nvme-cli
 obfuscate
@@ -227,7 +232,6 @@ picard
 pigz
 pipewire-alsa
 pipewire-libcamera
-pipewire-v4l2
 pipewire-zeroconf
 pixz
 pkgfile
@@ -323,6 +327,7 @@ snapshot
 soundconverter
 sox
 starship
+steam
 strace
 switcheroo
 syncthing
@@ -348,9 +353,6 @@ valgrind
 video-trimmer
 vorbis-tools
 vulkan-extra-layers
-vulkan-intel
-vulkan-mesa-layers
-vulkan-radeon
 wayland-utils
 webp-pixbuf-loader
 whois
