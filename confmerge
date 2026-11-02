@@ -175,6 +175,8 @@ cmerge gnome/nautilus-date/pyproject.toml  ~/.local/share/nautilus-python/extens
 
 cmerge gnome/gdm-custom.conf           /etc/gdm/custom.conf
 
+cmerge syncthing/override.conf         ~/.config/systemd/user/syncthing.service.d/override.conf
+
 cmerge shell/bashrc                    ~/.bashrc
 cmerge shell/bashrc.user               ~/.bashrc.user
 cmerge shell/bash_profile              ~/.bash_profile
