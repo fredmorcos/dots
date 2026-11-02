@@ -219,6 +219,8 @@ cmerge irc/theme.toml                  ~/.config/halloy/themes/Latte.toml
 # cmerge loader/loader.conf              /boot/loader/loader.conf
 # cmerge loader/arch.conf                /boot/loader/entries/arch.conf
 
+cmerge opensnitchd/network_aliases.json /etc/opensnitchd/network_aliases.json
+
 cmerge polkit-mount.rules              /etc/polkit-1/rules.d/99-mount.rules
 
 cmerge archlinux/makepkg.conf          /etc/makepkg.conf
