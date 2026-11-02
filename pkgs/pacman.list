@@ -93,6 +93,7 @@ efibootmgr
 efitools
 emacs-wayland
 epiphany
+evolution-data-server
 exfatprogs
 eza
 fd
@@ -150,7 +151,6 @@ impression
 inetutils
 iotop
 ipp-usb
-irqbalance
 ispell
 iwd
 lact
@@ -209,6 +209,7 @@ neovim
 net-tools
 networkmanager
 noto-fonts-emoji
+nss-mdns
 ntfs-3g
 ntsync-autoload
 nuspell
@@ -349,6 +350,7 @@ ugrep
 unicode-emoji
 unrar
 upx
+usbguard
 valgrind
 video-trimmer
 vorbis-tools
