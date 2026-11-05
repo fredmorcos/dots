@@ -339,3 +339,4 @@ x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/mailto=firefox.desktop;
 image/vnd.adobe.photoshop=gimp.desktop
+x-scheme-handler/discord-1296840202995896363=discord-1296840202995896363.desktop
