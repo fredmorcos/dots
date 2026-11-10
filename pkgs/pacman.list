@@ -198,7 +198,6 @@ meson
 mesonlsp
 mkinitcpio-utils
 mpv
-mtools
 mtr
 mutt
 mythes-en
@@ -318,6 +317,7 @@ rust-analyzer
 rust-bindgen
 sane-airscan
 sbctl
+sbsigntools
 seahorse
 shellcheck
 shfmt
