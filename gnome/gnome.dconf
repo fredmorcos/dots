@@ -188,9 +188,14 @@ custom-keybindings/custom2/binding='<Control><Alt>h'
 custom-keybindings/custom2/command='nautilus -w'
 custom-keybindings/custom2/name='Home Folder'
 
+# Donation reminder
+[org/gnome/settings-daemon/plugins/housekeeping]
+donation-reminder-enabled=false
+
 # File Chooser
 [org/gtk/gtk4/settings/file-chooser]
 sort-directories-first=true
+free-size-gb-no-notify=5
 
 # Nautilus
 [org/gnome/nautilus]
